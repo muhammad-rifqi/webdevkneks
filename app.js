@@ -21,7 +21,7 @@ const con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "S#g=qGHo7i<t5",
-    database: "pdes"
+    database: "kneks"
 });
 
 
@@ -139,4 +139,4 @@ apps.get("/logout", (req, res) => {
     res.redirect("/");
 });
 
-apps.listen(5000);
+apps.listen(3001);
