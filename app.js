@@ -18,6 +18,8 @@ apps.use(
 apps.use(cors());
 apps.use(express.static('public'));
 
+//::::::::::::::: Start Of Routes ::::::::::::::::::::::::::::
+
 apps.get('/', (req, res) => {
     res.sendFile(path.resolve('./views/login.html'));
 })
@@ -25,6 +27,237 @@ apps.get('/', (req, res) => {
 apps.get('/dashboard', (req, res) => {
     res.sendFile(path.resolve('./views/dashboard.html'));
 })
+
+//::::::::::::::: Hot Issue ::::::::::::::::::::::::::::
+
+
+apps.get('/hi', (req, res) => {
+    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/list.html'));
+})
+
+apps.get('/hi_add', (req, res) => {
+    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/add.html'));
+})
+
+apps.get('/hi_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/edit.html'));
+})
+
+apps.get('/hic', (req, res) => {
+    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/list.html'));
+})
+
+apps.get('/hic_add', (req, res) => {
+    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/add.html'));
+})
+
+apps.get('/hic_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/edit.html'));
+})
+
+apps.get('/hisc', (req, res) => {
+    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/list.html'));
+})
+
+apps.get('/hisc_add', (req, res) => {
+    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/add.html'));
+})
+
+apps.get('/hisc_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/edit.html'));
+})
+
+//::::::::::::::: News ::::::::::::::::::::::::::::
+
+apps.get('/n', (req, res) => {
+    res.sendFile(path.resolve('./views/news_management/news/list.html'));
+})
+
+apps.get('/n_add', (req, res) => {
+    res.sendFile(path.resolve('./views/news_management/news/add.html'));
+})
+
+apps.get('/n_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/news_management/news/edit.html'));
+})
+
+apps.get('/nc', (req, res) => {
+    res.sendFile(path.resolve('./views/news_management/news_category/list.html'));
+})
+
+apps.get('/nc_add', (req, res) => {
+    res.sendFile(path.resolve('./views/news_management/news_category/add.html'));
+})
+
+apps.get('/nc_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/news_management/news_category/edit.html'));
+})
+
+//::::::::::::::: Profile ::::::::::::::::::::::::::::
+
+apps.get('/tk', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/tentang_kami/list.html'));
+})
+
+apps.get('/tk_add', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/tentang_kami/add.html'));
+})
+
+apps.get('/tk_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/tentang_kami/edit.html'));
+})
+
+apps.get('/s', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/struktur/list.html'));
+})
+
+apps.get('/s_add', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/struktur/add.html'));
+})
+
+apps.get('/s_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/struktur/edit.html'));
+})
+
+apps.get('/v', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/videos/list.html'));
+})
+
+apps.get('/v_add', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/videos/add.html'));
+})
+
+apps.get('/v_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/videos/edit.html'));
+})
+
+apps.get('/p', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/photos/list.html'));
+})
+
+apps.get('/p_add', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/photos/add.html'));
+})
+
+apps.get('/p_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/photos/edit.html'));
+})
+
+//::::::::::::::: Home Management ::::::::::::::::::::::::::::
+
+apps.get('/i', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/institution/list.html'));
+})
+
+apps.get('/i_add', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/institution/add.html'));
+})
+
+apps.get('/i_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/institution/edit.html'));
+})
+
+apps.get('/sm', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/social_media/list.html'));
+})
+
+apps.get('/sm_add', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/social_media/add.html'));
+})
+
+apps.get('/sm_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/social_media/edit.html'));
+})
+
+apps.get('/c', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/contacts/list.html'));
+})
+
+apps.get('/c_add', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/contacts/add.html'));
+})
+
+apps.get('/c_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/contacts/edit.html'));
+})
+
+apps.get('/b', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/banner/list.html'));
+})
+
+apps.get('/b_add', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/banner/add.html'));
+})
+
+apps.get('/b_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/banner/edit.html'));
+})
+
+apps.get('/s', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/scope/list.html'));
+})
+
+apps.get('/s_add', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/scope/add.html'));
+})
+
+apps.get('/s_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/scope/edit.html'));
+})
+
+apps.get('/m', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/maps/list.html'));
+})
+
+apps.get('/m_add', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/maps/add.html'));
+})
+
+apps.get('/m_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/maps/edit.html'));
+})
+
+//::::::::::::::: One Data Center ::::::::::::::::::::::::::::
+
+apps.get('/f', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/files/list.html'));
+})
+
+apps.get('/fc', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/files_category/list.html'));
+})
+
+apps.get('/a', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/agenda/list.html'));
+})
+
+apps.get('/p', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/pdes/list.html'));
+})
+
+apps.get('/pm', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/pdes_menu/list.html'));
+})
+
+apps.get('/ps', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/pdes_submenu/list.html'));
+})
+
+apps.get('/po', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/pdes_overview/list.html'));
+})
+
+//::::::::::::::: User Management ::::::::::::::::::::::::::::
+
+apps.get('/u', (req, res) => {
+    res.sendFile(path.resolve('./views/user_management/users/list.html'));
+})
+
+apps.get('/cp', (req, res) => {
+    res.sendFile(path.resolve('./views/user_management/change_pasword/list.html'));
+})
+
+//::::::::::::::: Api & Query DB ::::::::::::::::::::::::::::
 
 apps.get('/posts', db.posts)
 
@@ -35,5 +268,7 @@ apps.post('/do_login', db.api_login)
 apps.post('/act_login', db.do_login)
   
 apps.get("/logout", db.do_logout);
+
+//::::::::::::::: End Of Routes ::::::::::::::::::::::::::::
 
 apps.listen(3001);

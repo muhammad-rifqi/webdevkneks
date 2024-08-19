@@ -29,8 +29,8 @@ document.write(`<nav class="nxl-navigation">
                             <span class="nxl-mtext">News Management</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="">News</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">News Category</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/n">News</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/nc">News Category</a></li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
@@ -59,11 +59,20 @@ document.write(`<nav class="nxl-navigation">
                             <li class="nxl-item"><a class="nxl-link" href="">Maps</a></li>
                         </ul>
                     </li>
-                   <li class="nxl-item">
-                        <a href="#" class="nxl-link">
+                   <li class="nxl-item nxl-hasmenu">
+                        <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-book"></i></span>
-                            <span class="nxl-mtext">One Data Center </span></span>
+                            <span class="nxl-mtext">One Data Center</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
+                        <ul class="nxl-submenu">
+                            <li class="nxl-item"><a class="nxl-link" href="">Files</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="">Files Category</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="">Agenda</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="">PDES</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="">PDES Menu</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="">PDES SubMenu</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="">PDES Overview</a></li>
+                        </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">

@@ -6,7 +6,7 @@ const con = mysql.createConnection({
     user: "root",
     // password: "S#g=qGHo7i<t5",
     password: "",
-    database: "pdes"
+    database: "kneks"
 });
 
 const do_login = (req, res) => {
