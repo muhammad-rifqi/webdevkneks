@@ -73,7 +73,7 @@ const categories = (req, res) => {
 const posts = (req, res) => {
     con.connect(function (err) {
         if (err) throw err;
-        con.query("SELECT * FROM news ORDER BY id DESC", function (err, result) {
+        con.query("SELECT * FROM news ORDER BY id ASC", function (err, result) {
             if (err) throw err;
             res.status(200).json(result)
         });
