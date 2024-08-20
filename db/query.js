@@ -70,12 +70,80 @@ const categories = (req, res) => {
     });
 }
 
+
+const users = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM users', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+const news_categories = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM news_categories', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+
+const abouts = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM abouts', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+
+const structure = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  structure_assets', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+
 const posts = (req, res) => {
     con.connect(function (err) {
         if (err) throw err;
-        con.query("SELECT * FROM news ORDER BY id ASC", function (err, result) {
+        con.query("SELECT * FROM news ORDER BY id ASC limit 5", function (err, result) {
             if (err) throw err;
-            res.status(200).json(result)
+
+            let promises = result.map((item) => {
+                return new Promise((resolve, reject) => {
+                    con.query("SELECT * FROM news_categories WHERE id = ?", [item.category_id], (e, r) => {
+                        if (e) return reject(e);
+                        let detail = r[0]; 
+                        let row = {
+                            "id": item?.id,
+                            "title": item?.title,
+                            "title_en": item?.title_en,
+                            "news_datetime" : item?.news_datetime,
+                            "category_id" : item?.category_id,
+                            "detail": detail
+                        };
+                        resolve(row);
+                    });
+                });
+            });
+            Promise.all(promises)
+                .then((rows) => {
+                    res.status(200).json(rows);
+                })
+                .catch((error) => {
+                    res.status(500).json({ error: error.message });
+                });
         });
     });
 }
@@ -113,5 +181,9 @@ module.exports = {
     api_login,
     categories,
     posts,
-    menus
+    menus,
+    news_categories,
+    users,
+    abouts,
+    structure
 }

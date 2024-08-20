@@ -18,9 +18,9 @@ document.write(`<nav class="nxl-navigation">
                             <span class="nxl-mtext">Hot Issue Management</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="">Hot Issue</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">Hot Issue Category</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">Hot Issue Sub Category</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/hi">Hot Issue</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/hic">Hot Issue Category</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/hisc">Hot Issue Sub Category</a></li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
@@ -39,10 +39,10 @@ document.write(`<nav class="nxl-navigation">
                             <span class="nxl-mtext">Profile</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="">Tentang Kami</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">Struktur</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">Videos</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">Photos</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/tk">Tentang Kami</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/s">Struktur</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/v">Videos</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/ph">Photos</a></li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
@@ -51,12 +51,12 @@ document.write(`<nav class="nxl-navigation">
                             <span class="nxl-mtext">Home Management</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="">Institutions</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">Social Media</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">Contacts</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">Banners</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">Scope</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">Maps</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/i">Institutions</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/sc">Social Media</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/c">Contacts</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/b">Banners</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/b">Scope</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/m">Maps</a></li>
                         </ul>
                     </li>
                    <li class="nxl-item nxl-hasmenu">
@@ -65,13 +65,13 @@ document.write(`<nav class="nxl-navigation">
                             <span class="nxl-mtext">One Data Center</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="">Files</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">Files Category</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">Agenda</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">PDES</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">PDES Menu</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">PDES SubMenu</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">PDES Overview</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/f">Files</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/fc">Files Category</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/a">Agenda</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/p">PDES</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/pm">PDES Menu</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/ps">PDES SubMenu</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/po">PDES Overview</a></li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
@@ -80,8 +80,8 @@ document.write(`<nav class="nxl-navigation">
                             <span class="nxl-mtext">User Management</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="">Users</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="">Change password</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/u">Users</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/cp">Change password</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -131,15 +131,15 @@ apps.get('/v_edit', (req, res) => {
     res.sendFile(path.resolve('./views/profile/videos/edit.html'));
 })
 
-apps.get('/p', (req, res) => {
+apps.get('/ph', (req, res) => {
     res.sendFile(path.resolve('./views/profile/photos/list.html'));
 })
 
-apps.get('/p_add', (req, res) => {
+apps.get('/ph_add', (req, res) => {
     res.sendFile(path.resolve('./views/profile/photos/add.html'));
 })
 
-apps.get('/p_edit', (req, res) => {
+apps.get('/ph_edit', (req, res) => {
     res.sendFile(path.resolve('./views/profile/photos/edit.html'));
 })
 
@@ -259,13 +259,21 @@ apps.get('/cp', (req, res) => {
 
 //::::::::::::::: Api & Query DB ::::::::::::::::::::::::::::
 
-apps.get('/posts', db.posts)
+apps.get('/posts', db.posts);
 
-apps.get('/posts/type/:name', db.categories)
+apps.get('/posts/type/:name', db.categories);
 
-apps.post('/do_login', db.api_login)
+apps.get('/categories', db.news_categories);
 
-apps.post('/act_login', db.do_login)
+apps.get('/users', db.users);
+
+apps.get('/abouts', db.abouts);
+
+apps.get('/structure', db.structure);
+
+apps.post('/do_login', db.api_login);
+
+apps.post('/act_login', db.do_login);
   
 apps.get("/logout", db.do_logout);
 

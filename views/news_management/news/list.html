@@ -11,6 +11,7 @@
     <title>KNEKS BACKEND || Dashboard</title>
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
@@ -30,6 +31,9 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
+                        <p>
+                            <button class="btn btn-primary" onclick="window.location.href = '/n_add'"> Tambah Berita </button>
+                        </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
@@ -38,7 +42,7 @@
                                             <tr>
                                                 <th>Title</th>
                                                 <th>Title EN</th>
-                                                <th>Publish</th>
+                                                <th>Category</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -75,11 +79,11 @@
     <!-- DataTables -->
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script> -->
     
     <script src="/assets/js/theme-customizer-init.min.js"></script>
 
@@ -94,30 +98,29 @@
                 "columns": [
                     { "data": "title" },
                     { "data": "title_en" },
-                    { "data": "news_datetime" },
+                    { "data": "category_id" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<button class='edit-btn btn btn-warning' data-id='${row.id}'>Edit</button>
-                                    <button class='delete-btn btn btn-danger' data-id='${row.id}'>Delete</button>`;
+                            return `<p><button class='edit-btn btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Edit</button>
+                                    <button class='delete-btn btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button></p>`;
                         }
                     }
                 ],
                 lengthMenu: [10, 25, 50, 100 ], 
-                dom: 'Bfrtip',  // This enables the buttons to appear
-                buttons: [
-                    'copy',        // Copies the table data to clipboard
-                    'csv',         // Exports table data as CSV file
-                    'excel',       // Exports table data as Excel file
-                    'pdf',         // Exports table data as PDF file
-                    'print'        // Allows printing of the table
-                ],
+                // dom: 'Bfrtip',  
+                // buttons: [
+                //     'copy',        
+                //     'csv',         
+                //     'excel',       
+                //     'pdf',         
+                //     'print'        
+                // ],
             });
 
             // 3. Event Listener untuk Tombol Edit
             $('#news').on('click', '.edit-btn', function () {
                 var id = $(this).data('id');
-                // Aksi edit berdasarkan ID
                 alert('Edit data dengan ID: ' + id);
                 // Kamu bisa membuka modal atau redirect ke halaman edit dengan id ini
             });
@@ -125,7 +128,6 @@
             // 4. Event Listener untuk Tombol Hapus
             $('#news').on('click', '.delete-btn', function () {
                 var id = $(this).data('id');
-                // Aksi hapus berdasarkan ID
                 if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
                     alert('Hapus data dengan ID: ' + id);
                     // Kamu bisa memanggil API untuk menghapus data berdasarkan ID ini
