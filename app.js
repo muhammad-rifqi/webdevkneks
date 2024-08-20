@@ -254,7 +254,7 @@ apps.get('/u', (req, res) => {
 })
 
 apps.get('/cp', (req, res) => {
-    res.sendFile(path.resolve('./views/user_management/change_pasword/list.html'));
+    res.sendFile(path.resolve('./views/user_management/change_password/list.html'));
 })
 
 //::::::::::::::: Api & Query DB ::::::::::::::::::::::::::::
@@ -270,6 +270,12 @@ apps.get('/users', db.users);
 apps.get('/abouts', db.abouts);
 
 apps.get('/structure', db.structure);
+
+apps.get('/hotissue', db.hotissue);
+
+apps.get('/hotissuecategory', db.hotissuecategory);
+
+apps.get('/hotissuesubcategory', db.hotissuesubcategory);
 
 apps.post('/do_login', db.api_login);
 

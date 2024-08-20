@@ -32,7 +32,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/n_add'"> Tambah Berita </button>
+                            <button class="btn btn-primary" onclick="window.location.href = '/n_add'"> Tambah Berita
+                            </button>
                         </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
@@ -84,7 +85,7 @@
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script> -->
-    
+
     <script src="/assets/js/theme-customizer-init.min.js"></script>
 
     <script>
@@ -98,7 +99,12 @@
                 "columns": [
                     { "data": "title" },
                     { "data": "title_en" },
-                    { "data": "category_id" },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            return `${data?.detail?.title}`;
+                        }
+                    },
                     {
                         "data": null,
                         "render": function (data, type, row) {
@@ -107,7 +113,7 @@
                         }
                     }
                 ],
-                lengthMenu: [10, 25, 50, 100 ], 
+                lengthMenu: [10, 25, 50, 100],
                 // dom: 'Bfrtip',  
                 // buttons: [
                 //     'copy',        

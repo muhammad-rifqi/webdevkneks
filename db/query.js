@@ -113,11 +113,43 @@ const structure = (req, res) => {
     });
 }
 
+const hotissue = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  hot_issues', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+const hotissuecategory = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  hot_categories', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+
+const hotissuesubcategory = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  hot_subcategories', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+
 
 const posts = (req, res) => {
     con.connect(function (err) {
         if (err) throw err;
-        con.query("SELECT * FROM news ORDER BY id ASC limit 5", function (err, result) {
+        con.query("SELECT * FROM news ORDER BY id ASC", function (err, result) {
             if (err) throw err;
 
             let promises = result.map((item) => {
@@ -185,5 +217,8 @@ module.exports = {
     news_categories,
     users,
     abouts,
-    structure
+    structure,
+    hotissue,
+    hotissuecategory,
+    hotissuesubcategory
 }
