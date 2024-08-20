@@ -4,10 +4,11 @@ const md5 = require('md5');
 const con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    // password: "S#g=qGHo7i<t5",
-    password: "",
+    password: "S#g=qGHo7i<t5",
     database: "kneks"
 });
+
+// password: "",
 
 const do_login = (req, res) => {
     const email = req?.body?.email;
