@@ -1,6 +1,5 @@
 const mysql = require('mysql2');
 const md5 = require('md5');
-const helper = require('./helper');
 
 const con = mysql.createConnection({
     host: "localhost",
@@ -249,8 +248,8 @@ const pdes = (req, res) => {
                             "id" : listdata?.id,
                             "name" : listdata?.name,
                             "link" : listdata?.link,
-                            "menu_id" : helper?.convertIdWithName(listdata?.menu_id),
-                            "submenu_id" : helper?.convertIdWithSubName(listdata?.submenu_id),
+                            "menu_id" : listdata?.menu_id,
+                            "submenu_id" : listdata?.submenu_id,
                             "order" : listdata?.order,
                         }
                         array.push(ddd)
@@ -260,6 +259,37 @@ const pdes = (req, res) => {
         });
     });
 }
+
+const pdes_menu = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  syariah_menu', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+const pdes_submenu = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  syariah_submenu', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+const pdes_overview = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  syariah_overview', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
 
 const posts = (req, res) => {
     con.connect(function (err) {
@@ -318,4 +348,7 @@ module.exports = {
     files,
     files_category,
     pdes,
+    pdes_menu,
+    pdes_submenu,
+    pdes_overview,
 }

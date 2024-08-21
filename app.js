@@ -297,6 +297,12 @@ apps.get('/agenda', db.agendas);
 
 apps.get('/pdes', db.pdes);
 
+apps.get('/pdes_menu', db.pdes_menu);
+
+apps.get('/pdes_submenu', db.pdes_submenu);
+
+apps.get('/pdes_overview', db.pdes_overview);
+
 apps.post('/do_login', db.api_login);
 
 apps.post('/act_login', db.do_login);
