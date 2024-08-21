@@ -4,11 +4,11 @@ const md5 = require('md5');
 const con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "S#g=qGHo7i<t5",
+    password: "",
     database: "kneks"
 });
 
-// password: "",
+// password: "S#g=qGHo7i<t5",
 
 const do_login = (req, res) => {
     const email = req?.body?.email;
@@ -145,7 +145,65 @@ const hotissuesubcategory = (req, res) => {
     });
 }
 
+const institutions = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  institutions', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
 
+const sosmed = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  social_medias', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+const scopes = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  scopes', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+const maps = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  map', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+const contacts = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  contacts', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+const banners = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  banners', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
 
 const posts = (req, res) => {
     con.connect(function (err) {
@@ -221,5 +279,11 @@ module.exports = {
     structure,
     hotissue,
     hotissuecategory,
-    hotissuesubcategory
+    hotissuesubcategory,
+    institutions,
+    sosmed,
+    scopes,
+    maps,
+    contacts,
+    banners,
 }

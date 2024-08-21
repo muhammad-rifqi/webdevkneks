@@ -193,15 +193,15 @@ apps.get('/b_edit', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/banner/edit.html'));
 })
 
-apps.get('/s', (req, res) => {
+apps.get('/scp', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/scope/list.html'));
 })
 
-apps.get('/s_add', (req, res) => {
+apps.get('/scp_add', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/scope/add.html'));
 })
 
-apps.get('/s_edit', (req, res) => {
+apps.get('/scp_edit', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/scope/edit.html'));
 })
 
@@ -276,6 +276,18 @@ apps.get('/hotissue', db.hotissue);
 apps.get('/hotissuecategory', db.hotissuecategory);
 
 apps.get('/hotissuesubcategory', db.hotissuesubcategory);
+
+apps.get('/institutions', db.institutions);
+
+apps.get('/sosmed', db.sosmed);
+
+apps.get('/scopes', db.scopes);
+
+apps.get('/maps', db.maps);
+
+apps.get('/contacts', db.contacts);
+
+apps.get('/banners', db.banners);
 
 apps.post('/do_login', db.api_login);
 

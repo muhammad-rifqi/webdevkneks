@@ -52,10 +52,10 @@ document.write(`<nav class="nxl-navigation">
                         </a>
                         <ul class="nxl-submenu">
                             <li class="nxl-item"><a class="nxl-link" href="/i">Institutions</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/sc">Social Media</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/sm">Social Media</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/c">Contacts</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/b">Banners</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/b">Scope</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/scp">Scope</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/m">Maps</a></li>
                         </ul>
                     </li>
