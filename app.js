@@ -295,6 +295,8 @@ apps.get('/files_category', db.files_category);
 
 apps.get('/agenda', db.agendas);
 
+apps.get('/pdes', db.pdes);
+
 apps.post('/do_login', db.api_login);
 
 apps.post('/act_login', db.do_login);

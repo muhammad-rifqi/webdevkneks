@@ -1,5 +1,6 @@
 const mysql = require('mysql2');
 const md5 = require('md5');
+const helper = require('./helper');
 
 const con = mysql.createConnection({
     host: "localhost",
@@ -9,6 +10,7 @@ const con = mysql.createConnection({
 });
 
 // password: "S#g=qGHo7i<t5",
+
 
 const do_login = (req, res) => {
     const email = req?.body?.email;
@@ -236,6 +238,29 @@ const files_category = (req, res) => {
     });
 }
 
+const pdes = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  syariah', function (err, result) {
+            if (err) throw err;
+                const array = [];
+                result?.forEach((listdata)=>{
+                        const ddd = {
+                            "id" : listdata?.id,
+                            "name" : listdata?.name,
+                            "link" : listdata?.link,
+                            "menu_id" : helper?.convertIdWithName(listdata?.menu_id),
+                            "submenu_id" : helper?.convertIdWithSubName(listdata?.submenu_id),
+                            "order" : listdata?.order,
+                        }
+                        array.push(ddd)
+                })
+
+            res.status(200).json(array);
+        });
+    });
+}
+
 const posts = (req, res) => {
     con.connect(function (err) {
         if (err) throw err;
@@ -270,40 +295,12 @@ const posts = (req, res) => {
     });
 }
 
-const menus = (req, res) => {
-    const sql = `
-        SELECT menus.id as menu_id, menus.name as menu_name, submenus.id as submenu_id, submenus.name as submenu_name 
-        FROM menus 
-        LEFT JOIN submenus ON menus.id = submenus.menu_id
-    `;
-    db.query(sql, (err, results) => {
-        if (err) throw err;
-        const menus = results.reduce((acc, row) => {
-            const { menu_id, menu_name, submenu_id, submenu_name } = row;
-            const menu = acc.find(m => m.id === menu_id);
-            if (menu) {
-                menu.submenus.push({ id: submenu_id, name: submenu_name });
-            } else {
-                acc.push({
-                    id: menu_id,
-                    name: menu_name,
-                    submenus: submenu_id ? [{ id: submenu_id, name: submenu_name }] : []
-                });
-            }
-            return acc;
-        }, []);
-        res.send(menus);
-    });
-};
-
-
 module.exports = {
     do_login,
     do_logout,
     api_login,
     categories,
     posts,
-    menus,
     news_categories,
     users,
     abouts,
@@ -320,4 +317,5 @@ module.exports = {
     agendas,
     files,
     files_category,
+    pdes,
 }
