@@ -289,6 +289,12 @@ apps.get('/contacts', db.contacts);
 
 apps.get('/banners', db.banners);
 
+apps.get('/files', db.files);
+
+apps.get('/files_category', db.files_category);
+
+apps.get('/agenda', db.agendas);
+
 apps.post('/do_login', db.api_login);
 
 apps.post('/act_login', db.do_login);

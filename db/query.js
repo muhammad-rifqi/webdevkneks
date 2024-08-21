@@ -205,6 +205,37 @@ const banners = (req, res) => {
     });
 }
 
+
+const agendas = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  agendas', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+const files = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  reports', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+const files_category = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  report_categories', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
 const posts = (req, res) => {
     con.connect(function (err) {
         if (err) throw err;
@@ -286,4 +317,7 @@ module.exports = {
     maps,
     contacts,
     banners,
+    agendas,
+    files,
+    files_category,
 }
