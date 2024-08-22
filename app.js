@@ -18,6 +18,18 @@ apps.use(
 apps.use(cors());
 apps.use(express.static('public'));
 
+const multer  = require('multer')
+let storage = multer.diskStorage(
+  {
+      destination: './public/uploads/hot_issue/',
+      filename: function ( req, file, cb ) {
+          cb( null, file.originalname );
+      }
+  }
+);
+let hotissue_path = multer( { storage: storage } );
+
+
 //::::::::::::::: Start Of Routes ::::::::::::::::::::::::::::
 
 apps.get('/', (req, res) => {
@@ -29,7 +41,6 @@ apps.get('/dashboard', (req, res) => {
 })
 
 //::::::::::::::: Hot Issue ::::::::::::::::::::::::::::
-
 
 apps.get('/hi', (req, res) => {
     res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/list.html'));
@@ -272,6 +283,8 @@ apps.get('/abouts', db.abouts);
 apps.get('/structure', db.structure);
 
 apps.get('/hotissue', db.hotissue);
+
+apps.post('/inserthotissue', hotissue_path.single('photo'), db.inserthotissue);
 
 apps.get('/hotissuecategory', db.hotissuecategory);
 

@@ -4,12 +4,11 @@ const md5 = require('md5');
 const con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "S#g=qGHo7i<t5",
+    password: "",
     database: "kneks"
 });
 
 // password: "S#g=qGHo7i<t5",
-
 
 const do_login = (req, res) => {
     const email = req?.body?.email;
@@ -242,18 +241,18 @@ const pdes = (req, res) => {
         if (err) throw err;
         con.query('SELECT * FROM  syariah', function (err, result) {
             if (err) throw err;
-                const array = [];
-                result?.forEach((listdata)=>{
-                        const ddd = {
-                            "id" : listdata?.id,
-                            "name" : listdata?.name,
-                            "link" : listdata?.link,
-                            "menu_id" : listdata?.menu_id,
-                            "submenu_id" : listdata?.submenu_id,
-                            "order" : listdata?.order,
-                        }
-                        array.push(ddd)
-                })
+            const array = [];
+            result?.forEach((listdata) => {
+                const ddd = {
+                    "id": listdata?.id,
+                    "name": listdata?.name,
+                    "link": listdata?.link,
+                    "menu_id": listdata?.menu_id,
+                    "submenu_id": listdata?.submenu_id,
+                    "order": listdata?.order,
+                }
+                array.push(ddd)
+            })
 
             res.status(200).json(array);
         });
@@ -301,13 +300,13 @@ const posts = (req, res) => {
                 return new Promise((resolve, reject) => {
                     con.query("SELECT * FROM news_categories WHERE id = ?", [item.category_id], (e, r) => {
                         if (e) return reject(e);
-                        let detail = r[0]; 
+                        let detail = r[0];
                         let row = {
                             "id": item?.id,
                             "title": item?.title,
                             "title_en": item?.title_en,
-                            "news_datetime" : item?.news_datetime,
-                            "category_id" : item?.category_id,
+                            "news_datetime": item?.news_datetime,
+                            "category_id": item?.category_id,
                             "detail": detail
                         };
                         resolve(row);
@@ -324,6 +323,28 @@ const posts = (req, res) => {
         });
     });
 }
+
+
+const inserthotissue = (req, res) => {
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const hot_issue_datetime = date + ' ' + time;
+    const news_datetime = req.body.news_datetime.replace("T"," ");
+    con.connect(function (err) {
+        if (err) throw err;
+        const fileupload = "/uploads/hot_issue/" + req.file.originalname;
+        con.query("insert into hot_issues(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,hot_issue_datetime,created_at,updated_at,deleted_at,hot_subcategory_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id], function (err, result) {
+                if (err) throw err;
+                res.redirect('/hi');
+            });
+    });
+}
+
 
 module.exports = {
     do_login,
@@ -351,4 +372,5 @@ module.exports = {
     pdes_menu,
     pdes_submenu,
     pdes_overview,
+    inserthotissue,
 }
