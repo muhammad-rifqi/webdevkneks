@@ -333,14 +333,74 @@ const inserthotissue = (req, res) => {
     const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const hot_issue_datetime = date + ' ' + time;
-    const news_datetime = req.body.news_datetime.replace("T"," ");
+    const issue_datetime = req.body.issue_datetime.replace("T"," ");
     con.connect(function (err) {
         if (err) throw err;
         const fileupload = "/uploads/hot_issue/" + req.file.originalname;
         con.query("insert into hot_issues(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,hot_issue_datetime,created_at,updated_at,deleted_at,hot_subcategory_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
-            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id], function (err, result) {
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id], function (err, result) {
                 if (err) throw err;
                 res.redirect('/hi');
+            });
+    });
+}
+
+
+const inserthotissubcategory = (req, res) => {
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const hot_issue_datetime = date + ' ' + time;
+
+    con.connect(function (error) {
+        if (error) throw error;
+        con.query("insert into hot_subcategories(title,title_en,created_at,updated_at,hot_category_id) values(?,?,?,?,?)",
+            [req.body.title, req.body.title_en, hot_issue_datetime, hot_issue_datetime, req.body.hot_category_id], function (err, result) {
+                if (err) throw err;
+                res.redirect('/hisc');
+            });
+    });
+}
+
+const insertnews = (req, res) => {
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const timeupdate = date + ' ' + time;
+    const news_datetime = req.body.news_datetime.replace("T"," ");
+    con.connect(function (err) {
+        if (err) throw err;
+        const fileupload = "/uploads/news/" + req.file.originalname;
+        con.query("insert into news(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,news_datetime,created_at,updated_at,deleted_at,category_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id], function (err, result) {
+                if (err) throw err;
+                res.redirect('/n');
+            });
+    });
+}
+
+
+const insertnewscategory = (req, res) => {
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const cat_datetime = date + ' ' + time;
+
+    con.connect(function (error) {
+        if (error) throw error;
+        con.query("insert into news_categories(title,title_en,created_at,updated_at) values(?,?,?,?)",
+            [req.body.title, req.body.title_en, cat_datetime, cat_datetime], function (err, result) {
+                if (err) throw err;
+                res.redirect('/nc');
             });
     });
 }
@@ -373,4 +433,7 @@ module.exports = {
     pdes_submenu,
     pdes_overview,
     inserthotissue,
+    inserthotissubcategory,
+    insertnews,
+    insertnewscategory
 }

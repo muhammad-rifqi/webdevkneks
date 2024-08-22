@@ -18,16 +18,26 @@ apps.use(
 apps.use(cors());
 apps.use(express.static('public'));
 
-const multer  = require('multer')
+const multer = require('multer')
 let storage = multer.diskStorage(
-  {
-      destination: './public/uploads/hot_issue/',
-      filename: function ( req, file, cb ) {
-          cb( null, file.originalname );
-      }
-  }
+    {
+        destination: './public/uploads/hot_issue/',
+        filename: function (req, file, cb) {
+            cb(null, file.originalname);
+        }
+    }
 );
-let hotissue_path = multer( { storage: storage } );
+let hotissue_path = multer({ storage: storage });
+
+let storages = multer.diskStorage(
+    {
+        destination: './public/uploads/news/',
+        filename: function (req, file, cb) {
+            cb(null, file.originalname);
+        }
+    }
+);
+let news_path = multer({ storage: storages });
 
 
 //::::::::::::::: Start Of Routes ::::::::::::::::::::::::::::
@@ -272,6 +282,10 @@ apps.get('/cp', (req, res) => {
 
 apps.get('/posts', db.posts);
 
+apps.post('/insertnews', news_path.single('photo'), db.insertnews);
+
+apps.post('/insertnewscategory', db.insertnewscategory);
+
 apps.get('/posts/type/:name', db.categories);
 
 apps.get('/categories', db.news_categories);
@@ -289,6 +303,8 @@ apps.post('/inserthotissue', hotissue_path.single('photo'), db.inserthotissue);
 apps.get('/hotissuecategory', db.hotissuecategory);
 
 apps.get('/hotissuesubcategory', db.hotissuesubcategory);
+
+apps.post('/inserthotissubcategory', db.inserthotissubcategory);
 
 apps.get('/institutions', db.institutions);
 
@@ -319,7 +335,7 @@ apps.get('/pdes_overview', db.pdes_overview);
 apps.post('/do_login', db.api_login);
 
 apps.post('/act_login', db.do_login);
-  
+
 apps.get("/logout", db.do_logout);
 
 //::::::::::::::: End Of Routes ::::::::::::::::::::::::::::
