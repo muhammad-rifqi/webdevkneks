@@ -57,34 +57,46 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card stretch stretch-full">
-                            <div class="card-body lead-status">
-                                <div class="mb-5 d-flex align-items-center justify-content-between">
-                                    <h5 class="fw-bold mb-0 me-4">
-                                        <span class="d-block mb-2">Ubah Password :</span>
-                                        <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan ubah module ganti password di bawah</span>
-                                    </h5>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Password Lama</label>
-                                        <input class="form-control" type="password" name="old_password" required>
+                        <form action="/changespassword" method="post">
+                            <input type="hidden" name="id_user" value="" id="user_id">
+                            <div class="card stretch stretch-full">
+                                <div class="card-body lead-status">
+                                    <div class="mb-5 d-flex align-items-center justify-content-between">
+                                        <h5 class="fw-bold mb-0 me-4">
+                                            <span class="d-block mb-2">Ubah Password :</span>
+                                            <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan ubah
+                                                module ganti password di bawah</span>
+                                        </h5>
                                     </div>
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Password Baru</label>
-                                        <input class="form-control" type="password" name="new_password" required>
-                                    </div>
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Password Verify</label>
-                                        <input class="form-control" type="password" name="verify_password" required>
-                                    </div>
-                                    <div class="col-lg-12 mb-4 text-left">
-                                        <label class="form-label"></label>
-                                        <input class="btn btn-primary" type="button" value="Simpan">
+                                    <div class="row">
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Name</label>
+                                            <input class="form-control" type="text" value="" id="names" readonly>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Email </label>
+                                            <input class="form-control" type="text" value="" id="email" readonly>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Password Lama</label>
+                                            <input class="form-control" type="password" name="old_password" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Password Baru</label>
+                                            <input class="form-control" type="password" name="new_password" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Password Verify</label>
+                                            <input class="form-control" type="password" name="verify_password" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4 text-left">
+                                            <label class="form-label"></label>
+                                            <input class="btn btn-primary" type="submit" value="Simpan">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -121,6 +133,20 @@
     <!--! BEGIN: Theme Customizer  !-->
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <!--! END: Theme Customizer !-->
+
+
+    <script>
+        window.addEventListener("load", async () => {
+            await fetch('/updatepassword')
+                .then(response => response.json())
+                .then((data) => {
+                    document.getElementById("user_id").value = data[0]?.id;
+                    document.getElementById("names").value = data[0]?.name;
+                    document.getElementById("email").value = data[0]?.email;
+                })
+        })
+    </script>
+
 </body>
 
 </html>

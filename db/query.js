@@ -289,6 +289,16 @@ const pdes_overview = (req, res) => {
     });
 }
 
+const userroles = (req, res) => {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM  roles', function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
 
 const posts = (req, res) => {
     con.connect(function (err) {
@@ -447,6 +457,60 @@ const insertvideo = (req, res) => {
 }
 
 
+const insertusers = (req, res) => {
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const time_datetime = date + ' ' + time;
+    const pw = md5(req.body.password);
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query("insert into users(name,email,password,role_id,created_at,updated_at) values(?,?,?,?,?,?)",
+            [req.body.name, req.body.email, pw, req.body.role_id, time_datetime, time_datetime], function (err, result) {
+                if (err) throw err;
+                res.redirect('/u');
+            });
+    });
+
+}
+
+const updatepassword = (req, res) => {
+    const id_users = req.cookies.id;
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('SELECT * FROM users where id = ? ', [id_users], function (err, result) {
+            if (err) throw err;
+            res.status(200).json(result)
+        });
+    });
+}
+
+const changespassword = (req, res) => {
+    con.connect(function (error) {
+        if (error) throw error;
+        con.query('SELECT * FROM users where id = ? ', [req.body.id_user], function (err, result) {
+            if (err) throw err;
+            if (md5(req.body.old_password) == result[0]?.password) {
+                if (req.body.new_password == req.body.verify_password) {
+                    con.query("UPDATE users SET password=? WHERE id=? ", [md5(req.body.new_password), req.body.id_user], function (e, r) {
+                        if (e) throw e
+                        console.log('success');
+                        res.redirect('/cp');
+                    })
+                } else {
+                    console.log('new password and password confirm not match !'); 
+                }
+            } else {
+                console.log('password not match in database!'); 
+            }
+        });
+    });
+}
+
+
 module.exports = {
     do_login,
     do_logout,
@@ -478,5 +542,9 @@ module.exports = {
     insertnews,
     insertnewscategory,
     insertphoto,
-    insertvideo
+    insertvideo,
+    userroles,
+    insertusers,
+    updatepassword,
+    changespassword
 }

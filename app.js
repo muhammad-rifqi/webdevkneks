@@ -313,6 +313,14 @@ apps.get('/categories', db.news_categories);
 
 apps.get('/users', db.users);
 
+apps.get('/roles', db.userroles);
+
+apps.post('/insertusers', db.insertusers);
+
+apps.get('/updatepassword', db.updatepassword);
+
+apps.post('/changespassword', db.changespassword);
+
 apps.get('/abouts', db.abouts);
 
 apps.get('/structure', db.structure);
