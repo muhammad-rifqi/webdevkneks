@@ -495,10 +495,10 @@ const changespassword = (req, res) => {
             if (err) throw err;
             if (md5(req.body.old_password) == result[0]?.password) {
                 if (req.body.new_password == req.body.verify_password) {
-                    con.query("UPDATE users SET password=? WHERE id=? ", [md5(req.body.new_password), req.body.id_user], function (e, r) {
+                    con.query("UPDATE users SET name=? , password=? WHERE id=? ", [req.body.names , md5(req.body.new_password), req.body.id_user], function (e, r) {
                         if (e) throw e
                         console.log('success');
-                        res.redirect('/cp');
+                        res.redirect('/logout');
                     })
                 } else {
                     console.log('new password and password confirm not match !'); 
@@ -506,6 +506,17 @@ const changespassword = (req, res) => {
             } else {
                 console.log('password not match in database!'); 
             }
+        });
+    });
+}
+
+const deleteuser = (req, res) => {
+    const id_users = req.params.id;
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query('DELETE FROM users where id = ? ', [id_users], function (err, result) {
+            if (err) throw err;
+            res.redirect('/u');
         });
     });
 }
@@ -546,5 +557,6 @@ module.exports = {
     userroles,
     insertusers,
     updatepassword,
-    changespassword
+    changespassword,
+    deleteuser
 }

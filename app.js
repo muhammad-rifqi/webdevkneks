@@ -317,6 +317,8 @@ apps.get('/roles', db.userroles);
 
 apps.post('/insertusers', db.insertusers);
 
+apps.get('/deleteuser/:id' , db.deleteuser);
+
 apps.get('/updatepassword', db.updatepassword);
 
 apps.post('/changespassword', db.changespassword);
