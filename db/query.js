@@ -270,7 +270,7 @@ const userroles = async (req, res) => {
 const posts = (req, res) => {
     con.connect(function (err) {
         if (err) throw err;
-        con.query("SELECT * FROM news ORDER BY id ASC", function (err, result) {
+        con.query("SELECT * FROM news ORDER BY id DESC limit 50", function (err, result) {
             if (err) throw err;
 
             let promises = result.map((item) => {
