@@ -331,6 +331,8 @@ apps.get('/hotissue', db.hotissue);
 
 apps.post('/inserthotissue', hotissue_path.single('photo'), db.inserthotissue);
 
+apps.get('/deletehotissue/:id/:foto' , db.deletehotissue);
+
 apps.get('/hotissuecategory', db.hotissuecategory);
 
 apps.get('/hotissuesubcategory', db.hotissuesubcategory);

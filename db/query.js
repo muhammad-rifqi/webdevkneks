@@ -1,16 +1,7 @@
 const md5 = require('md5');
 const { executeQuery } = require('./config');
+const fs = require('fs');
 
-const mysql = require('mysql2');
-const con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "S#g=qGHo7i<t5",
-    database: "kneks"
-});
-
-
-// password: "S#g=qGHo7i<t5",
 
 const do_login = async (req, res) => {
     const email = req?.body?.email;
@@ -267,43 +258,35 @@ const userroles = async (req, res) => {
 }
 
 
-const posts = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query("SELECT * FROM news ORDER BY id ASC limit 50", function (err, result) {
-            if (err) throw err;
-
-            let promises = result.map((item) => {
-                return new Promise((resolve, reject) => {
-                    con.query("SELECT * FROM news_categories WHERE id = ?", [item.category_id], (e, r) => {
-                        if (e) return reject(e);
-                        let detail = r[0];
-                        let row = {
-                            "id": item?.id,
-                            "title": item?.title,
-                            "title_en": item?.title_en,
-                            "news_datetime": item?.news_datetime,
-                            "content": item?.content,
-                            "content_en": item?.content_en,
-                            "excerpt": item?.excerpt,
-                            "excerpt_en": item?.excerpt_en,
-                            "is_publish": item?.is_publish,
-                            "category_id": item?.category_id,
-                            "detail": detail
-                        };
-                        resolve(row);
-                    });
-                });
-            });
-            Promise.all(promises)
-                .then((rows) => {
-                    res.status(200).json(rows);
-                })
-                .catch((error) => {
-                    res.status(500).json({ error: error.message });
-                });
+const posts = async (req, res) => {
+    const result = await executeQuery("SELECT * FROM news ORDER BY id ASC limit 10");
+    let promises = result.map(async (item) => {
+        return new Promise(async (resolve, reject) => {
+            let r = await executeQuery("SELECT * FROM news_categories WHERE id = ?", [item.category_id]);
+            let detail = r[0];
+            let row = {
+                "id": item?.id,
+                "title": item?.title,
+                "title_en": item?.title_en,
+                "news_datetime": item?.news_datetime,
+                "content": item?.content,
+                "content_en": item?.content_en,
+                "excerpt": item?.excerpt,
+                "excerpt_en": item?.excerpt_en,
+                "is_publish": item?.is_publish,
+                "category_id": item?.category_id,
+                "detail": detail
+            };
+            resolve(row);
         });
     });
+    Promise.all(promises)
+        .then((rows) => {
+            res.status(200).json(rows);
+        })
+        .catch((error) => {
+            res.status(500).json({ error: error.message });
+        });
 }
 
 
@@ -366,7 +349,7 @@ const insertnews = async (req, res) => {
 }
 
 
-const insertnewscategory = (req, res) => {
+const insertnewscategory = async (req, res) => {
 
     const today = new Date();
     const month = (today.getMonth() + 1);
@@ -374,18 +357,18 @@ const insertnewscategory = (req, res) => {
     const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const cat_datetime = date + ' ' + time;
+    const sql = await executeQuery("insert into news_categories(title,title_en,created_at,updated_at) values(?,?,?,?)",
+        [req.body.title, req.body.title_en, cat_datetime, cat_datetime]);
+    if (sql) {
+        res.redirect('/nc');
+    } else {
+        console.log(sql)
+    }
 
-    con.connect(function (error) {
-        if (error) throw error;
-        con.query("insert into news_categories(title,title_en,created_at,updated_at) values(?,?,?,?)",
-            [req.body.title, req.body.title_en, cat_datetime, cat_datetime], function (err, result) {
-                if (err) throw err;
-                res.redirect('/nc');
-            });
-    });
+
 }
 
-const insertphoto = (req, res) => {
+const insertphoto = async (req, res) => {
 
     const today = new Date();
     const month = (today.getMonth() + 1);
@@ -394,19 +377,18 @@ const insertphoto = (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
     const photos_datetime = req.body.photo_datetime.replace("T", " ");
-    con.connect(function (err) {
-        if (err) throw err;
-        const photoupload = "/uploads/photo/" + req.file.originalname;
-        con.query("insert into news_photos(title,title_en,content,content_en,photo,news_datetime,created_at,updated_at,deleted_at) values(?,?,?,?,?,?,?,?,?)",
-            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photoupload, photos_datetime, time_datetime, time_datetime, null], function (err, result) {
-                if (err) throw err;
-                res.redirect('/ph');
-            });
-    });
+    const photoupload = "/uploads/photo/" + req.file.originalname;
+    const sql = await executeQuery("insert into news_photos(title,title_en,content,content_en,photo,news_datetime,created_at,updated_at,deleted_at) values(?,?,?,?,?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photoupload, photos_datetime, time_datetime, time_datetime, null])
+    if (sql) {
+        res.redirect('/ph');
+    } else {
+        console.log(sql)
+    }
 
 }
 
-const insertvideo = (req, res) => {
+const insertvideo = async (req, res) => {
 
     const today = new Date();
     const month = (today.getMonth() + 1);
@@ -415,19 +397,17 @@ const insertvideo = (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
     const videos_datetime = req.body.video_datetime.replace("T", " ");
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query("insert into news_videos(title,title_en,content,content_en,video,duration,news_datetime,created_at,updated_at,deleted_at) values(?,?,?,?,?,?,?,?,?,?)",
-            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.video, req.body.duration, videos_datetime, time_datetime, time_datetime, null], function (err, result) {
-                if (err) throw err;
-                res.redirect('/v');
-            });
-    });
-
+    const sql = await executeQuery("insert into news_videos(title,title_en,content,content_en,video,duration,news_datetime,created_at,updated_at,deleted_at) values(?,?,?,?,?,?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.video, req.body.duration, videos_datetime, time_datetime, time_datetime, null]);
+    if (sql) {
+        res.redirect('/v');
+    } else {
+        console.log(sql)
+    }
 }
 
 
-const insertusers = (req, res) => {
+const insertusers = async (req, res) => {
 
     const today = new Date();
     const month = (today.getMonth() + 1);
@@ -436,61 +416,74 @@ const insertusers = (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
     const pw = md5(req.body.password);
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query("insert into users(name,email,password,role_id,created_at,updated_at) values(?,?,?,?,?,?)",
-            [req.body.name, req.body.email, pw, req.body.role_id, time_datetime, time_datetime], function (err, result) {
-                if (err) throw err;
-                res.redirect('/u');
-            });
-    });
-
+    const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at) values(?,?,?,?,?,?)",
+        [req.body.name, req.body.email, pw, req.body.role_id, time_datetime, time_datetime]);
+    if (sql) {
+        res.redirect('/u');
+    } else {
+        console.log(sql)
+    }
 }
 
-const updatepassword = (req, res) => {
+const updatepassword = async (req, res) => {
     const id_users = req.cookies.id;
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM users where id = ? ', [id_users], function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+    const sql = await executeQuery('SELECT * FROM users where id = ? ', [id_users])
+    if (sql.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
-const changespassword = (req, res) => {
-    con.connect(function (error) {
-        if (error) throw error;
-        con.query('SELECT * FROM users where id = ? ', [req.body.id_user], function (err, result) {
-            if (err) throw err;
-            if (md5(req.body.old_password) == result[0]?.password) {
-                if (req.body.new_password == req.body.verify_password) {
-                    con.query("UPDATE users SET name=? , password=? WHERE id=? ", [req.body.names, md5(req.body.new_password), req.body.id_user], function (e, r) {
-                        if (e) throw e
-                        console.log('success');
-                        res.redirect('/logout');
-                    })
-                } else {
-                    console.log('new password and password confirm not match !');
-                }
+const changespassword = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM users where id = ? ', [req.body.id_user]);
+    if (md5(req.body.old_password) == sql[0]?.password) {
+        if (req.body.new_password == req.body.verify_password) {
+            await executeQuery("UPDATE users SET name=? , password=? WHERE id=? ", [req.body.names, md5(req.body.new_password), req.body.id_user]);
+            console.log('success');
+            res.redirect('/logout');
+        } else {
+            console.log('new password and password confirm not match !');
+        }
+    } else {
+        console.log('password not match in database!');
+    }
+}
+
+const deleteuser = async (req, res) => {
+    const id_users = req.params.id;
+    const sql = await executeQuery('DELETE FROM users where id = ? ', [id_users]);
+    if (sql) {
+        res.redirect('/u');
+    } else {
+        console.log(sql);
+    }
+}
+
+const deletehotissue = async (req, res) => {
+    const id_issue = req.params.id;
+    const foto_users = req.params.foto;
+    // const fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/hot_issue/' + foto_users; //sesuaikan saja!
+    const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/hot_issue/'+foto_users;
+
+    if (fs.existsSync(fileslinux)) {
+        fs.unlink(fileslinux, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM hot_issues where id = ? ', [id_issue]);
+            if (sql) {
+                res.redirect('/hi');
             } else {
-                console.log('password not match in database!');
+                console.log(sql);
             }
         });
-    });
-}
+    } else {
+        console.log("gagal");
+    }
 
-const deleteuser = (req, res) => {
-    const id_users = req.params.id;
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('DELETE FROM users where id = ? ', [id_users], function (err, result) {
-            if (err) throw err;
-            res.redirect('/u');
-        });
-    });
-}
 
+
+
+}
 
 module.exports = {
     do_login,
@@ -528,5 +521,6 @@ module.exports = {
     insertusers,
     updatepassword,
     changespassword,
-    deleteuser
+    deleteuser,
+    deletehotissue
 }
