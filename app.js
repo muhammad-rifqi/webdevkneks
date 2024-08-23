@@ -39,6 +39,15 @@ let storages = multer.diskStorage(
 );
 let news_path = multer({ storage: storages });
 
+let disks = multer.diskStorage(
+    {
+        destination: './public/uploads/photo/',
+        filename: function (req, file, cb) {
+            cb(null, file.originalname);
+        }
+    }
+);
+let photo_path = multer({ storage: disks });
 
 //::::::::::::::: Start Of Routes ::::::::::::::::::::::::::::
 
@@ -274,6 +283,14 @@ apps.get('/u', (req, res) => {
     res.sendFile(path.resolve('./views/user_management/users/list.html'));
 })
 
+apps.get('/u_add', (req, res) => {
+    res.sendFile(path.resolve('./views/user_management/users/add.html'));
+})
+
+apps.get('/u_edit', (req, res) => {
+    res.sendFile(path.resolve('./views/user_management/users/edit.html'));
+})
+
 apps.get('/cp', (req, res) => {
     res.sendFile(path.resolve('./views/user_management/change_password/list.html'));
 })
@@ -287,6 +304,10 @@ apps.post('/insertnews', news_path.single('photo'), db.insertnews);
 apps.post('/insertnewscategory', db.insertnewscategory);
 
 apps.get('/posts/type/:name', db.categories);
+
+apps.post('/insertphoto', photo_path.single('photo'), db.insertphoto);
+
+apps.post('/insertvideo',  db.insertvideo);
 
 apps.get('/categories', db.news_categories);
 

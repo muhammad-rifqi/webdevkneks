@@ -333,7 +333,7 @@ const inserthotissue = (req, res) => {
     const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const hot_issue_datetime = date + ' ' + time;
-    const issue_datetime = req.body.issue_datetime.replace("T"," ");
+    const issue_datetime = req.body.issue_datetime.replace("T", " ");
     con.connect(function (err) {
         if (err) throw err;
         const fileupload = "/uploads/hot_issue/" + req.file.originalname;
@@ -373,7 +373,7 @@ const insertnews = (req, res) => {
     const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const timeupdate = date + ' ' + time;
-    const news_datetime = req.body.news_datetime.replace("T"," ");
+    const news_datetime = req.body.news_datetime.replace("T", " ");
     con.connect(function (err) {
         if (err) throw err;
         const fileupload = "/uploads/news/" + req.file.originalname;
@@ -403,6 +403,47 @@ const insertnewscategory = (req, res) => {
                 res.redirect('/nc');
             });
     });
+}
+
+const insertphoto = (req, res) => {
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const time_datetime = date + ' ' + time;
+    const photos_datetime = req.body.photo_datetime.replace("T", " ");
+    con.connect(function (err) {
+        if (err) throw err;
+        const photoupload = "/uploads/photo/" + req.file.originalname;
+        con.query("insert into news_photos(title,title_en,content,content_en,photo,news_datetime,created_at,updated_at,deleted_at) values(?,?,?,?,?,?,?,?,?)",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photoupload, photos_datetime, time_datetime, time_datetime, null], function (err, result) {
+                if (err) throw err;
+                res.redirect('/ph');
+            });
+    });
+
+}
+
+const insertvideo = (req, res) => {
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const time_datetime = date + ' ' + time;
+    const videos_datetime = req.body.video_datetime.replace("T", " ");
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query("insert into news_videos(title,title_en,content,content_en,video,duration,news_datetime,created_at,updated_at,deleted_at) values(?,?,?,?,?,?,?,?,?,?)",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.video, req.body.duration, videos_datetime, time_datetime, time_datetime, null], function (err, result) {
+                if (err) throw err;
+                res.redirect('/v');
+            });
+    });
+
 }
 
 
@@ -435,5 +476,7 @@ module.exports = {
     inserthotissue,
     inserthotissubcategory,
     insertnews,
-    insertnewscategory
+    insertnewscategory,
+    insertphoto,
+    insertvideo
 }
