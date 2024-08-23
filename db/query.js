@@ -1,37 +1,31 @@
-const mysql = require('mysql2');
 const md5 = require('md5');
+const { executeQuery } = require('./config');
 
+const mysql = require('mysql2');
 const con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "S#g=qGHo7i<t5",
     database: "kneks"
 });
 
+
 // password: "S#g=qGHo7i<t5",
 
-const do_login = (req, res) => {
+const do_login = async (req, res) => {
     const email = req?.body?.email;
     const password = md5(req?.body?.password);
-    console.log(email, password)
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM users where email = ? AND password = ? ', [email, password], (error, results) => {
-            if (error) {
-                throw error
-            }
-            if (results?.length > 0) {
-                console.log(results)
-                const isLogin = true;
-                res.cookie("islogin", isLogin);
-                res.cookie("id", results[0]?.id);
-                res.cookie("name", results[0]?.name);
-                res.redirect("/dashboard");
-            } else {
-                res.redirect("/");
-            }
-        });
-    })
+    const sql = await executeQuery('SELECT * FROM users where email = ? AND password = ? ', [email, password])
+    if (sql?.length > 0) {
+        const isLogin = true;
+        res.cookie("islogin", isLogin);
+        res.cookie("id", sql[0]?.id);
+        res.cookie("name", sql[0]?.name);
+        res.redirect("/dashboard");
+    } else {
+        res.redirect("/");
+    }
+
 }
 
 const do_logout = (req, res) => {
@@ -41,262 +35,235 @@ const do_logout = (req, res) => {
     res.redirect("/");
 }
 
-const api_login = (req, res) => {
+const api_login = async (req, res) => {
     const email = req?.body?.email;
     const password = md5(req?.body?.password);
-
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM users where email = ? AND password = ? ', [email, password], (error, results) => {
-            if (error) {
-                throw error
-            }
-            if (results?.length > 0) {
-                res.status(200).json(results)
-            } else {
-                res.status(200).json({ "success": false })
-            }
-        });
-    })
+    const sql = await executeQuery('SELECT * FROM users where email = ? AND password = ? ', [email, password])
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
-const categories = (req, res) => {
+const categories = async (req, res) => {
     const names = req.params.name;
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM news_' + names + '', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+    const sql = await executeQuery('SELECT * FROM news_' + names + '')
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const users = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM users');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const news_categories = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM news_categories');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
 
-const users = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM users', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
-}
+const abouts = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM abouts');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 
-const news_categories = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM news_categories', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
 }
 
 
-const abouts = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM abouts', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const structure = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  structure_assets');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
+}
+
+const hotissue = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  hot_issues');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const hotissuecategory = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  hot_categories');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
 
-const structure = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  structure_assets', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const hotissuesubcategory = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  hot_subcategories');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
 }
 
-const hotissue = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  hot_issues', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const institutions = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  institutions');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
-const hotissuecategory = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  hot_categories', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const sosmed = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  social_medias');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
 }
 
-
-const hotissuesubcategory = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  hot_subcategories', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const scopes = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  scopes');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
-const institutions = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  institutions', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const maps = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  map')
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
 }
 
-const sosmed = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  social_medias', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const contacts = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  contacts');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
 }
 
-const scopes = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  scopes', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const banners = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  banners');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
-const maps = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  map', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const agendas = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  agendas');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
-const contacts = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  contacts', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const files = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  reports');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
-const banners = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  banners', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const files_category = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  report_categories');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
-
-const agendas = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  agendas', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
+const pdes = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  syariah')
+    const array = [];
+    sql?.forEach((listdata) => {
+        const ddd = {
+            "id": listdata?.id,
+            "name": listdata?.name,
+            "link": listdata?.link,
+            "menu_id": listdata?.menu_id,
+            "submenu_id": listdata?.submenu_id,
+            "order": listdata?.order,
+        }
+        array.push(ddd)
     });
+    if (array?.length > 0) {
+        res.status(200).json(array)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
-const files = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  reports', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const pdes_menu = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  syariah_menu');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
-const files_category = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  report_categories', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const pdes_submenu = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  syariah_submenu');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
-const pdes = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  syariah', function (err, result) {
-            if (err) throw err;
-            const array = [];
-            result?.forEach((listdata) => {
-                const ddd = {
-                    "id": listdata?.id,
-                    "name": listdata?.name,
-                    "link": listdata?.link,
-                    "menu_id": listdata?.menu_id,
-                    "submenu_id": listdata?.submenu_id,
-                    "order": listdata?.order,
-                }
-                array.push(ddd)
-            })
-
-            res.status(200).json(array);
-        });
-    });
+const pdes_overview = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  syariah_overview');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
-const pdes_menu = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  syariah_menu', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
-}
-
-const pdes_submenu = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  syariah_submenu', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
-}
-
-const pdes_overview = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  syariah_overview', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
-}
-
-const userroles = (req, res) => {
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query('SELECT * FROM  roles', function (err, result) {
-            if (err) throw err;
-            res.status(200).json(result)
-        });
-    });
+const userroles = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  roles');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
 
@@ -316,6 +283,11 @@ const posts = (req, res) => {
                             "title": item?.title,
                             "title_en": item?.title_en,
                             "news_datetime": item?.news_datetime,
+                            "content" : item?.content,
+                            "content_en" : item?.content_en,
+                            "excerpt" : item?.excerpt,
+                            "excerpt_en" :item?.excerpt_en,
+                            "is_publish" :item?.is_publish,
                             "category_id": item?.category_id,
                             "detail": detail
                         };
@@ -335,7 +307,7 @@ const posts = (req, res) => {
 }
 
 
-const inserthotissue = (req, res) => {
+const inserthotissue = async (req, res) => {
 
     const today = new Date();
     const month = (today.getMonth() + 1);
@@ -344,15 +316,15 @@ const inserthotissue = (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const hot_issue_datetime = date + ' ' + time;
     const issue_datetime = req.body.issue_datetime.replace("T", " ");
-    con.connect(function (err) {
-        if (err) throw err;
-        const fileupload = "/uploads/hot_issue/" + req.file.originalname;
-        con.query("insert into hot_issues(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,hot_issue_datetime,created_at,updated_at,deleted_at,hot_subcategory_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
-            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id], function (err, result) {
-                if (err) throw err;
-                res.redirect('/hi');
-            });
-    });
+    const fileupload = "/uploads/hot_issue/" + req.file.originalname;
+    const sql = await executeQuery("insert into hot_issues(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,hot_issue_datetime,created_at,updated_at,deleted_at,hot_subcategory_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id]);
+    if(sql){
+        res.redirect('/hi');
+    }else{
+        console.log(sql);
+    }
+        
 }
 
 
@@ -495,16 +467,16 @@ const changespassword = (req, res) => {
             if (err) throw err;
             if (md5(req.body.old_password) == result[0]?.password) {
                 if (req.body.new_password == req.body.verify_password) {
-                    con.query("UPDATE users SET name=? , password=? WHERE id=? ", [req.body.names , md5(req.body.new_password), req.body.id_user], function (e, r) {
+                    con.query("UPDATE users SET name=? , password=? WHERE id=? ", [req.body.names, md5(req.body.new_password), req.body.id_user], function (e, r) {
                         if (e) throw e
                         console.log('success');
                         res.redirect('/logout');
                     })
                 } else {
-                    console.log('new password and password confirm not match !'); 
+                    console.log('new password and password confirm not match !');
                 }
             } else {
-                console.log('password not match in database!'); 
+                console.log('password not match in database!');
             }
         });
     });
