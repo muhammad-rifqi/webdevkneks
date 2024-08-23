@@ -270,7 +270,7 @@ const userroles = async (req, res) => {
 const posts = (req, res) => {
     con.connect(function (err) {
         if (err) throw err;
-        con.query("SELECT * FROM news ORDER BY id DESC limit 50", function (err, result) {
+        con.query("SELECT * FROM news ORDER BY id ASC limit 50", function (err, result) {
             if (err) throw err;
 
             let promises = result.map((item) => {
@@ -283,11 +283,11 @@ const posts = (req, res) => {
                             "title": item?.title,
                             "title_en": item?.title_en,
                             "news_datetime": item?.news_datetime,
-                            "content" : item?.content,
-                            "content_en" : item?.content_en,
-                            "excerpt" : item?.excerpt,
-                            "excerpt_en" :item?.excerpt_en,
-                            "is_publish" :item?.is_publish,
+                            "content": item?.content,
+                            "content_en": item?.content_en,
+                            "excerpt": item?.excerpt,
+                            "excerpt_en": item?.excerpt_en,
+                            "is_publish": item?.is_publish,
                             "category_id": item?.category_id,
                             "detail": detail
                         };
@@ -319,16 +319,16 @@ const inserthotissue = async (req, res) => {
     const fileupload = "/uploads/hot_issue/" + req.file.originalname;
     const sql = await executeQuery("insert into hot_issues(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,hot_issue_datetime,created_at,updated_at,deleted_at,hot_subcategory_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id]);
-    if(sql){
+    if (sql) {
         res.redirect('/hi');
-    }else{
+    } else {
         console.log(sql);
     }
-        
+
 }
 
 
-const inserthotissubcategory = (req, res) => {
+const inserthotissubcategory = async (req, res) => {
 
     const today = new Date();
     const month = (today.getMonth() + 1);
@@ -336,18 +336,17 @@ const inserthotissubcategory = (req, res) => {
     const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const hot_issue_datetime = date + ' ' + time;
+    const sql = await executeQuery("insert into hot_subcategories(title,title_en,created_at,updated_at,hot_category_id) values(?,?,?,?,?)",
+        [req.body.title, req.body.title_en, hot_issue_datetime, hot_issue_datetime, req.body.hot_category_id])
+    if (sql) {
+        res.redirect('/hisc');
+    } else {
+        console.log(sql);
+    }
 
-    con.connect(function (error) {
-        if (error) throw error;
-        con.query("insert into hot_subcategories(title,title_en,created_at,updated_at,hot_category_id) values(?,?,?,?,?)",
-            [req.body.title, req.body.title_en, hot_issue_datetime, hot_issue_datetime, req.body.hot_category_id], function (err, result) {
-                if (err) throw err;
-                res.redirect('/hisc');
-            });
-    });
 }
 
-const insertnews = (req, res) => {
+const insertnews = async (req, res) => {
 
     const today = new Date();
     const month = (today.getMonth() + 1);
@@ -356,15 +355,14 @@ const insertnews = (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const timeupdate = date + ' ' + time;
     const news_datetime = req.body.news_datetime.replace("T", " ");
-    con.connect(function (err) {
-        if (err) throw err;
-        const fileupload = "/uploads/news/" + req.file.originalname;
-        con.query("insert into news(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,news_datetime,created_at,updated_at,deleted_at,category_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
-            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id], function (err, result) {
-                if (err) throw err;
-                res.redirect('/n');
-            });
-    });
+    const fileupload = "/uploads/news/" + req.file.originalname;
+    const sql = await executeQuery("insert into news(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,news_datetime,created_at,updated_at,deleted_at,category_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id]);
+    if (sql) {
+        res.redirect('/n');
+    } else {
+        console.log(sql);
+    }
 }
 
 
