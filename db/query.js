@@ -91,6 +91,16 @@ const hotissuecategory = async (req, res) => {
     }
 }
 
+const detailhotissuecategory = async (req, res) => {
+    const ppp = req.params.id;
+    const sql = await executeQuery('SELECT * FROM  hot_categories where id = ? ', [ppp]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 const deletehotissuecategory = async (req, res) => {
     const idcat = req.params.id;
     const sql = await executeQuery('DELETE FROM  hot_categories where id=?', [idcat]);
@@ -115,6 +125,17 @@ const deletehotissuesubcategory = async (req, res) => {
 
 const hotissuesubcategory = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  hot_subcategories');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
+}
+
+const detailhotissuesubcategory = async (req, res) => {
+    const id_sub = req.params.id;
+    const sql = await executeQuery('SELECT * FROM  hot_subcategories where id = ? ', [id_sub]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -334,7 +355,7 @@ const pdes_overview = async (req, res) => {
 //::::::::::::::::::::::::::::::End Of PDES :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of News:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const posts = async (req, res) => {
-    const result = await executeQuery("SELECT * FROM news ORDER BY id ASC");
+    const result = await executeQuery("SELECT * FROM news ORDER BY id ASC limit 100");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
             let r = await executeQuery("SELECT * FROM news_categories WHERE id = ?", [item.category_id]);
@@ -385,6 +406,15 @@ const news_categories = async (req, res) => {
     }
 }
 
+const detailnewscategory = async (req, res) => {
+    const id_cat = req.params.id;
+    const sql = await executeQuery('SELECT * FROM news_categories where id = ? ', [id_cat]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
 const insertnews = async (req, res) => {
     const today = new Date();
     const month = (today.getMonth() + 1);
@@ -535,6 +565,17 @@ const insertvideo = async (req, res) => {
         console.log(sql)
     }
 }
+
+const videodetail = async (req, res) => {
+    const id_vid = req.params.id;
+    const sql = await executeQuery('SELECT * FROM  news_videos where id=?', [id_vid]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 //::::::::::::::::::::::::::::::End Of Videos:::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Users:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const users = async (req, res) => {
@@ -623,16 +664,20 @@ module.exports = {
     updatenews,
     insertnews,
     insertnewscategory,
+    detailnewscategory,
     insertphoto,
     insertvideo,
+    videodetail,
     abouts,
     structure,
     hotissue,
     hotissue_detail,
     hotissuecategory,
+    detailhotissuecategory,
     hotissuesubcategory,
     deletehotissuecategory,
     deletehotissuesubcategory,
+    detailhotissuesubcategory,
     updatehotissue,
     deletehotissue,
     inserthotissue,

@@ -116,7 +116,7 @@ apps.get('/nc_add', (req, res) => {
     res.sendFile(path.resolve('./views/news_management/news_category/add.html'));
 })
 
-apps.get('/nc_edit', (req, res) => {
+apps.get('/nc_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/news_management/news_category/edit.html'));
 })
 
@@ -154,7 +154,7 @@ apps.get('/v_add', (req, res) => {
     res.sendFile(path.resolve('./views/profile/videos/add.html'));
 })
 
-apps.get('/v_edit', (req, res) => {
+apps.get('/v_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/profile/videos/edit.html'));
 })
 
@@ -314,7 +314,11 @@ apps.post('/insertphoto', photo_path.single('photo'), db.insertphoto);
 
 apps.post('/insertvideo',  db.insertvideo);
 
+apps.get('/videodetail/:id', db.videodetail);
+
 apps.get('/categories', db.news_categories);
+
+apps.get('/detailnewscategory/:id', db.detailnewscategory);
 
 apps.get('/users', db.users);
 
@@ -349,6 +353,10 @@ apps.get('/deletehotissuecategory/:id', db.deletehotissuecategory);
 apps.get('/deletehotissuesubcategory/:id', db.deletehotissuesubcategory);
 
 apps.get('/hotissuesubcategory', db.hotissuesubcategory);
+
+apps.get('/detailhotissuesubcategory/:id', db.detailhotissuesubcategory);
+
+apps.get('/detailhotissuecategory/:id', db.detailhotissuecategory);
 
 apps.post('/inserthotissubcategory', db.inserthotissubcategory);
 

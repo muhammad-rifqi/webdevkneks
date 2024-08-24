@@ -172,10 +172,10 @@
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    document.getElementById("val1").value = rows[0]?.excerpt;
-                    document.getElementById("val2").value = rows[0]?.excerpt_en;
+                    document.getElementById("val1").innerHTML = rows[0]?.excerpt;
+                    document.getElementById("val2").innerHTML = rows[0]?.excerpt_en;
                     document.getElementById("val3").innerHTML = rows[0]?.content;
-                    document.getElementById("val4").value = rows[0]?.content_en;
+                    document.getElementById("val4").innerHTML = rows[0]?.content_en;
                     hot_subcategory_id = rows[0]?.hot_subcategory_id;
                     if (rows?.is_publish == 1) {
                         document.getElementById("is_publish").setAttribute('checked', true);

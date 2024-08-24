@@ -19,8 +19,6 @@
     <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
-            new nicEditor({ maxHeight: 100 }).panelInstance('editor1');
-            new nicEditor({ maxHeight: 100 }).panelInstance('editor2');
             new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
             new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
         });
@@ -71,43 +69,23 @@
                                             <input class="form-control" type="text" name="title_en" id="title_en"
                                                 required>
                                         </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Sub Category</label>
-                                            <select class="form-control" name="category_id" id="catid" required>
-                                                <option value="0"> Choose </option>
-                                            </select>
-                                        </div>
+                    
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Content Indonesia</label>
-                                            <textarea class="form-control" name="content"
-                                                id="editor3"><p id="val3"></p></textarea>
+                                            <textarea class="form-control" name="description"
+                                                id="editor3" required><p id="val3"></p></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Content English</label>
-                                            <textarea class="form-control" name="content_en"
-                                                id="editor4"><p id="val4"></p></textarea>
+                                            <textarea class="form-control" name="description_en"
+                                                id="editor4" required><p id="val4"></p></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Photo Preview</label>
-                                            <p id="preview"></p>
-                                        </div>
-
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Photo</label>
-                                            <input class="form-control" name="photo" id="photo" type="file" required>
-                                        </div>
-
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Publish</label>
-                                            <input name="is_publish" id="is_publish" type="checkbox" value="1" required>
-                                            Publish
-                                        </div>
-
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tanggal Publish</label>
-                                            <input class="form-control" name="issue_datetime" id="issue_datetime"
-                                                type="datetime-local" required>
+                                            <label class="form-label">Category Hot Issue</label>
+                                            <select class="form-control" name="hot_category_id" id="hotcatid" required>
+                                                <option value="0"> Choose </option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -149,45 +127,37 @@
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script>
         window.addEventListener("load", async () => {
-            let hot_subcategory_id;
+            let hot_category_id;
             await getUrlById();
             await getCategoryHotIssue();
         })
 
         function getUrlById() {
             const URLS = new URL(window.location.href);
-            fetch('/hotissuedetail/' + URLS.pathname.split('/')[2])
+            fetch('/detailhotissuesubcategory/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    document.getElementById("val1").value = rows[0]?.excerpt;
-                    document.getElementById("val2").value = rows[0]?.excerpt_en;
-                    document.getElementById("val3").innerHTML = rows[0]?.content;
-                    document.getElementById("val4").value = rows[0]?.content_en;
-                    hot_subcategory_id = rows[0]?.hot_subcategory_id;
-                    if (rows?.is_publish == 1) {
-                        document.getElementById("is_publish").setAttribute('checked', true);
-                    } else {
-                        document.getElementById("is_publish").setAttribute('checked', false);
-                    }
-                    document.getElementById("issue_datetime").value = rows[0]?.hot_issue_datetime.split('.')[0];
-                    document.getElementById("preview").innerHTML = `<img src="https://webdev.kneks.go.id/storage/upload/${rows[0]?.image}" width="180"/>`;
+                    document.getElementById("val3").innerHTML = rows[0]?.description;
+                    document.getElementById("val4").innerHTML = rows[0]?.description_en;
+                    hot_category_id = rows[0]?.hot_category_id;
                 })
         }
 
         function getCategoryHotIssue() {
-            fetch('/hotissuesubcategory')
+            fetch('/hotissuecategory')
                 .then(response => response.json())
                 .then((data) => {
+                    // console.log(hot_category_id)
                     data.forEach(element => {
-                        const choosed = (element?.id == hot_subcategory_id) ? true : false ;
+                        const choosed = (element?.id == hot_category_id) ? true : false ;
                         const ddd = document.createElement('option')
                         ddd.value = `${element?.id}`;
                         ddd.text = `${element?.title}`;
                         ddd.selected = choosed
-                        document.getElementById("catid").append(ddd);
+                        document.getElementById("hotcatid").append(ddd);
                     });
                 })
         }
