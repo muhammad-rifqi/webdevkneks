@@ -19,31 +19,32 @@ apps.use(cors());
 apps.use(express.static('public'));
 
 const multer = require('multer')
+//:::::::::::::::::::::::::::
 let storage = multer.diskStorage(
     {
         destination: './public/uploads/hot_issue/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname);
+            cb(null, file.originalname.replace(" ",""));
         }
     }
 );
 let hotissue_path = multer({ storage: storage });
-
+//::::::::::::::::::::::
 let storages = multer.diskStorage(
     {
         destination: './public/uploads/news/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname);
+            cb(null, file.originalname.replace(" ",""));
         }
     }
 );
 let news_path = multer({ storage: storages });
-
+//:::::::::::::::::::
 let disks = multer.diskStorage(
     {
         destination: './public/uploads/photo/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname);
+            cb(null, file.originalname.replace(" ",""));
         }
     }
 );
@@ -107,7 +108,7 @@ apps.get('/n_add', (req, res) => {
     res.sendFile(path.resolve('./views/news_management/news/add.html'));
 })
 
-apps.get('/n_edit', (req, res) => {
+apps.get('/n_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/news_management/news/edit.html'));
 })
 
@@ -301,9 +302,16 @@ apps.get('/posts', db.posts);
 
 apps.post('/insertnews', news_path.single('photo'), db.insertnews);
 
+apps.get('/newsdetail/:id', db.newsdetail);
+
+apps.get('/deletenews/:id/:foto' , db.deletenews);
+
 apps.post('/insertnewscategory', db.insertnewscategory);
 
 apps.get('/posts/type/:name', db.categories);
+
+apps.get('/deletephoto/:id/:foto' , db.deletephoto);
+
 
 apps.post('/insertphoto', photo_path.single('photo'), db.insertphoto);
 

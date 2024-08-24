@@ -269,7 +269,7 @@ const userroles = async (req, res) => {
 
 
 const posts = async (req, res) => {
-    const result = await executeQuery("SELECT * FROM news ORDER BY id ASC limit 10");
+    const result = await executeQuery("SELECT * FROM news ORDER BY id ASC");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
             let r = await executeQuery("SELECT * FROM news_categories WHERE id = ?", [item.category_id]);
@@ -284,6 +284,7 @@ const posts = async (req, res) => {
                 "excerpt": item?.excerpt,
                 "excerpt_en": item?.excerpt_en,
                 "is_publish": item?.is_publish,
+                "image": item?.image,
                 "category_id": item?.category_id,
                 "detail": detail
             };
@@ -300,6 +301,17 @@ const posts = async (req, res) => {
 }
 
 
+const newsdetail = async (req, res) => {
+    const id_n = req.params.id;
+    const sql = await executeQuery('SELECT * FROM  news where id=?', [id_n]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+
 const inserthotissue = async (req, res) => {
 
     const today = new Date();
@@ -309,7 +321,7 @@ const inserthotissue = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const hot_issue_datetime = date + ' ' + time;
     const issue_datetime = req.body.issue_datetime.replace("T", " ");
-    const fileupload = "/uploads/hot_issue/" + req.file.originalname;
+    const fileupload = req.file.originalname.replace(" ","");
     const sql = await executeQuery("insert into hot_issues(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,hot_issue_datetime,created_at,updated_at,deleted_at,hot_subcategory_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id]);
     if (sql) {
@@ -348,7 +360,7 @@ const insertnews = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const timeupdate = date + ' ' + time;
     const news_datetime = req.body.news_datetime.replace("T", " ");
-    const fileupload = "/uploads/news/" + req.file.originalname;
+    const fileupload = req.file.originalname.replace(" ","");
     const sql = await executeQuery("insert into news(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,news_datetime,created_at,updated_at,deleted_at,category_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id]);
     if (sql) {
@@ -387,7 +399,7 @@ const insertphoto = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
     const photos_datetime = req.body.photo_datetime.replace("T", " ");
-    const photoupload = "/uploads/photo/" + req.file.originalname;
+    const photoupload = req.file.originalname.replace(" ","");
     const sql = await executeQuery("insert into news_photos(title,title_en,content,content_en,photo,news_datetime,created_at,updated_at,deleted_at) values(?,?,?,?,?,?,?,?,?)",
         [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photoupload, photos_datetime, time_datetime, time_datetime, null])
     if (sql) {
@@ -477,12 +489,12 @@ const updatehotissue = async (req, res )=>{
 
 const deletehotissue = async (req, res) => {
     const id_issue = req.params.id;
-    const foto_users = req.params.foto;
-    // const fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/hot_issue/' + foto_users; //sesuaikan saja!
-    const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/hot_issue/'+foto_users;
+    const foto_issue = req.params.foto;
+    const fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/hot_issue/' + foto_issue; //sesuaikan saja!
+    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/hot_issue/'+foto_users;
 
-    if (fs.existsSync(fileslinux)) {
-        fs.unlink(fileslinux, async function (err) {
+    if (fs.existsSync(fileswindows)) {
+        fs.unlink(fileswindows, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM hot_issues where id = ? ', [id_issue]);
             if (sql) {
@@ -492,12 +504,66 @@ const deletehotissue = async (req, res) => {
             }
         });
     } else {
-        console.log("gagal");
+        const sql = await executeQuery('DELETE FROM hot_issues where id = ? ', [id_issue]);
+        if (sql) {
+            res.redirect('/hi');
+        } else {
+            console.log(sql);
+        }
     }
+}
+
+const deletenews = async (req, res) => {
+    const id_news = req.params.id;
+    const foto_news = req.params.foto;
+    const fileswindow = 'D:/kneksbe/webdevkneks/public/uploads/news/'+foto_news; //sesuaikan saja!
+    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/news/'+foto_news;
+    if (fs.existsSync(fileswindow)) {
+        fs.unlink(fileswindow, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM news where id = ? ', [id_news]);
+            if (sql) {
+                res.redirect('/n');
+            } else {
+                console.log(sql);
+            }
+        });
+        console.log("ada")
+    } else {
+        const sql = await executeQuery('DELETE FROM news where id = ? ', [id_news]);
+        if (sql) {
+            res.redirect('/n');
+        } else {
+            console.log(sql);
+        }
+    }
+}
 
 
-
-
+const deletephoto = async (req, res) => {
+    const id_photo = req.params.id;
+    const foto_photo = req.params.foto;
+    const fileswindow = 'D:/kneksbe/webdevkneks/public/uploads/photo/'+foto_photo; //sesuaikan saja!
+    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/photo/'+foto_photo;
+    if (fs.existsSync(fileswindow)) {
+        fs.unlink(fileswindow, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM news_photos where id = ? ', [id_photo]);
+            if (sql) {
+                res.redirect('/ph');
+            } else {
+                console.log(sql);
+            }
+        });
+        console.log("ada")
+    } else {
+        const sql = await executeQuery('DELETE FROM news_photos where id = ? ', [id_photo]);
+        if (sql) {
+            res.redirect('/ph');
+        } else {
+            console.log(sql);
+        }
+    }
 }
 
 module.exports = {
@@ -539,5 +605,8 @@ module.exports = {
     deleteuser,
     updatehotissue,
     deletehotissue,
-    hotissue_detail
+    hotissue_detail,
+    newsdetail,
+    deletenews,
+    deletephoto
 }
