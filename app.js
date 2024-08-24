@@ -78,11 +78,7 @@ apps.get('/hic', (req, res) => {
     res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/list.html'));
 })
 
-apps.get('/hic_add', (req, res) => {
-    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/add.html'));
-})
-
-apps.get('/hic_edit', (req, res) => {
+apps.get('/hic_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/edit.html'));
 })
 
@@ -170,7 +166,7 @@ apps.get('/ph_add', (req, res) => {
     res.sendFile(path.resolve('./views/profile/photos/add.html'));
 })
 
-apps.get('/ph_edit', (req, res) => {
+apps.get('/ph_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/profile/photos/edit.html'));
 })
 
@@ -310,8 +306,9 @@ apps.post('/insertnewscategory', db.insertnewscategory);
 
 apps.get('/posts/type/:name', db.categories);
 
-apps.get('/deletephoto/:id/:foto' , db.deletephoto);
+apps.get('/photodetail/:id', db.photodetail);
 
+apps.get('/deletephoto/:id/:foto' , db.deletephoto);
 
 apps.post('/insertphoto', photo_path.single('photo'), db.insertphoto);
 
@@ -346,6 +343,8 @@ apps.get('/deletehotissue/:id/:foto' , db.deletehotissue);
 apps.get('/updatehotissue/:id/:foto' , db.updatehotissue);
 
 apps.get('/hotissuecategory', db.hotissuecategory);
+
+apps.get('/deletehotissuecategory', db.deletehotissuecategory);
 
 apps.get('/hotissuesubcategory', db.hotissuesubcategory);
 

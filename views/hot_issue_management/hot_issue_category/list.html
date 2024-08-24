@@ -115,19 +115,15 @@
                 // ],
             });
 
-            // 3. Event Listener untuk Tombol Edit
             $('#hotissue_category').on('click', '.edit-btn-hotissue_category', function () {
                 var id = $(this).data('id');
-                alert('Edit data dengan ID: ' + id);
-                // Kamu bisa membuka modal atau redirect ke halaman edit dengan id ini
+                window.location.href='/hic_edit/'+id;
             });
 
-            // 4. Event Listener untuk Tombol Hapus
             $('#hotissue_category').on('click', '.delete-btn-hotissue_category', function () {
                 var id = $(this).data('id');
                 if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    alert('Hapus data dengan ID: ' + id);
-                    // Kamu bisa memanggil API untuk menghapus data berdasarkan ID ini
+                    window.location.href='/deletehotissuecategory/'+id;
                 }
             });
         });

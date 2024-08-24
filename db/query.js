@@ -2,6 +2,7 @@ const md5 = require('md5');
 const { executeQuery } = require('./config');
 const fs = require('fs');
 
+//::::::::::::::::::::::::::::::Start Of LOGIN LOGOUT :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 const do_login = async (req, res) => {
     const email = req?.body?.email;
@@ -37,35 +38,8 @@ const api_login = async (req, res) => {
     }
 }
 
-const categories = async (req, res) => {
-    const names = req.params.name;
-    const sql = await executeQuery('SELECT * FROM news_' + names + '')
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const users = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM users');
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const news_categories = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM news_categories');
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-
+//::::::::::::::::::::::::::::::End Of Login :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of Abouts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const abouts = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM abouts');
     if (sql?.length > 0) {
@@ -75,8 +49,8 @@ const abouts = async (req, res) => {
     }
 
 }
-
-
+//::::::::::::::::::::::::::::::End Of Abouts :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const structure = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  structure_assets');
     if (sql?.length > 0) {
@@ -86,6 +60,8 @@ const structure = async (req, res) => {
     }
 
 }
+//::::::::::::::::::::::::::::::End Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of ISSUE :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 const hotissue = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  hot_issues');
@@ -126,6 +102,73 @@ const hotissuesubcategory = async (req, res) => {
 
 }
 
+const inserthotissue = async (req, res) => {
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const hot_issue_datetime = date + ' ' + time;
+    const issue_datetime = req.body.issue_datetime.replace("T", " ");
+    const fileupload = req.file.originalname.replace(" ", "");
+    const sql = await executeQuery("insert into hot_issues(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,hot_issue_datetime,created_at,updated_at,deleted_at,hot_subcategory_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id]);
+    if (sql) {
+        res.redirect('/hi');
+    } else {
+        console.log(sql);
+    }
+}
+
+const inserthotissubcategory = async (req, res) => {
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const hot_issue_datetime = date + ' ' + time;
+    const sql = await executeQuery("insert into hot_subcategories(title,title_en,created_at,updated_at,hot_category_id) values(?,?,?,?,?)",
+        [req.body.title, req.body.title_en, hot_issue_datetime, hot_issue_datetime, req.body.hot_category_id])
+    if (sql) {
+        res.redirect('/hisc');
+    } else {
+        console.log(sql);
+    }
+
+}
+
+const updatehotissue = async (req, res) => {
+    console.log("ok")
+}
+
+const deletehotissue = async (req, res) => {
+    const id_issue = req.params.id;
+    const foto_issue = req.params.foto;
+    const fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/hot_issue/' + foto_issue; //sesuaikan saja!
+    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/hot_issue/'+foto_users;
+
+    if (fs.existsSync(fileswindows)) {
+        fs.unlink(fileswindows, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM hot_issues where id = ? ', [id_issue]);
+            if (sql) {
+                res.redirect('/hi');
+            } else {
+                console.log(sql);
+            }
+        });
+    } else {
+        const sql = await executeQuery('DELETE FROM hot_issues where id = ? ', [id_issue]);
+        if (sql) {
+            res.redirect('/hi');
+        } else {
+            console.log(sql);
+        }
+    }
+}
+
+//::::::::::::::::::::::::::::::End Of ISSUE :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of institutions :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const institutions = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  institutions');
     if (sql?.length > 0) {
@@ -134,7 +177,8 @@ const institutions = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
-
+//::::::::::::::::::::::::::::::End Of institutions :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of Sosmed :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const sosmed = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  social_medias');
     if (sql?.length > 0) {
@@ -144,7 +188,8 @@ const sosmed = async (req, res) => {
     }
 
 }
-
+//::::::::::::::::::::::::::::::End Of Sosmed :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of Scope :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const scopes = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  scopes');
     if (sql?.length > 0) {
@@ -153,7 +198,8 @@ const scopes = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
-
+//::::::::::::::::::::::::::::::End Of Scope :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of Maps :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const maps = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  map')
     if (sql?.length > 0) {
@@ -163,7 +209,8 @@ const maps = async (req, res) => {
     }
 
 }
-
+//::::::::::::::::::::::::::::::End Of Maps :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of Contacts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const contacts = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  contacts');
     if (sql?.length > 0) {
@@ -173,7 +220,8 @@ const contacts = async (req, res) => {
     }
 
 }
-
+//::::::::::::::::::::::::::::::End Of Contacts :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of Banner :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const banners = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  banners');
     if (sql?.length > 0) {
@@ -182,7 +230,8 @@ const banners = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
-
+//::::::::::::::::::::::::::::::End Of Banner :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of Agenda :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const agendas = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  agendas');
     if (sql?.length > 0) {
@@ -191,7 +240,8 @@ const agendas = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
-
+//::::::::::::::::::::::::::::::End Of Agenda :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of FILES :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const files = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  reports');
     if (sql?.length > 0) {
@@ -209,6 +259,9 @@ const files_category = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
+
+//::::::::::::::::::::::::::::::End Of Files :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of PDES :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 const pdes = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  syariah')
@@ -257,17 +310,8 @@ const pdes_overview = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
-
-const userroles = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  roles');
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-
+//::::::::::::::::::::::::::::::End Of PDES :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of News:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const posts = async (req, res) => {
     const result = await executeQuery("SELECT * FROM news ORDER BY id ASC");
     let promises = result.map(async (item) => {
@@ -300,7 +344,6 @@ const posts = async (req, res) => {
         });
 }
 
-
 const newsdetail = async (req, res) => {
     const id_n = req.params.id;
     const sql = await executeQuery('SELECT * FROM  news where id=?', [id_n]);
@@ -312,47 +355,16 @@ const newsdetail = async (req, res) => {
 }
 
 
-const inserthotissue = async (req, res) => {
-
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const hot_issue_datetime = date + ' ' + time;
-    const issue_datetime = req.body.issue_datetime.replace("T", " ");
-    const fileupload = req.file.originalname.replace(" ","");
-    const sql = await executeQuery("insert into hot_issues(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,hot_issue_datetime,created_at,updated_at,deleted_at,hot_subcategory_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id]);
-    if (sql) {
-        res.redirect('/hi');
+const news_categories = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM news_categories');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
     } else {
-        console.log(sql);
+        res.status(200).json({ "success": false })
     }
-
-}
-
-
-const inserthotissubcategory = async (req, res) => {
-
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const hot_issue_datetime = date + ' ' + time;
-    const sql = await executeQuery("insert into hot_subcategories(title,title_en,created_at,updated_at,hot_category_id) values(?,?,?,?,?)",
-        [req.body.title, req.body.title_en, hot_issue_datetime, hot_issue_datetime, req.body.hot_category_id])
-    if (sql) {
-        res.redirect('/hisc');
-    } else {
-        console.log(sql);
-    }
-
 }
 
 const insertnews = async (req, res) => {
-
     const today = new Date();
     const month = (today.getMonth() + 1);
     const mmm = month.length < 2 ? "0" + month : month;
@@ -360,7 +372,7 @@ const insertnews = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const timeupdate = date + ' ' + time;
     const news_datetime = req.body.news_datetime.replace("T", " ");
-    const fileupload = req.file.originalname.replace(" ","");
+    const fileupload = req.file.originalname.replace(" ", "");
     const sql = await executeQuery("insert into news(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,news_datetime,created_at,updated_at,deleted_at,category_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id]);
     if (sql) {
@@ -370,9 +382,37 @@ const insertnews = async (req, res) => {
     }
 }
 
+const updatenews = async (req, res) => {
+    console.log("ok")
+}
+
+const deletenews = async (req, res) => {
+    const id_news = req.params.id;
+    const foto_news = req.params.foto;
+    const fileswindow = 'D:/kneksbe/webdevkneks/public/uploads/news/' + foto_news; //sesuaikan saja!
+    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/news/'+foto_news;
+    if (fs.existsSync(fileswindow)) {
+        fs.unlink(fileswindow, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM news where id = ? ', [id_news]);
+            if (sql) {
+                res.redirect('/n');
+            } else {
+                console.log(sql);
+            }
+        });
+        console.log("ada")
+    } else {
+        const sql = await executeQuery('DELETE FROM news where id = ? ', [id_news]);
+        if (sql) {
+            res.redirect('/n');
+        } else {
+            console.log(sql);
+        }
+    }
+}
 
 const insertnewscategory = async (req, res) => {
-
     const today = new Date();
     const month = (today.getMonth() + 1);
     const mmm = month.length < 2 ? "0" + month : month;
@@ -386,12 +426,20 @@ const insertnewscategory = async (req, res) => {
     } else {
         console.log(sql)
     }
-
-
+}
+//::::::::::::::::::::::::::::::End Of News:::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of Photos:::::::::::::::::::::::::::::::::::::::::::::::::::::
+const categories = async (req, res) => {
+    const names = req.params.name;
+    const sql = await executeQuery('SELECT * FROM news_' + names + '')
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
 }
 
 const insertphoto = async (req, res) => {
-
     const today = new Date();
     const month = (today.getMonth() + 1);
     const mmm = month.length < 2 ? "0" + month : month;
@@ -399,7 +447,7 @@ const insertphoto = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
     const photos_datetime = req.body.photo_datetime.replace("T", " ");
-    const photoupload = req.file.originalname.replace(" ","");
+    const photoupload = req.file.originalname.replace(" ", "");
     const sql = await executeQuery("insert into news_photos(title,title_en,content,content_en,photo,news_datetime,created_at,updated_at,deleted_at) values(?,?,?,?,?,?,?,?,?)",
         [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photoupload, photos_datetime, time_datetime, time_datetime, null])
     if (sql) {
@@ -407,11 +455,50 @@ const insertphoto = async (req, res) => {
     } else {
         console.log(sql)
     }
-
 }
 
-const insertvideo = async (req, res) => {
+const photodetail = async (req, res) => {
+    const id_ph = req.params.id;
+    const sql = await executeQuery('SELECT * FROM  news_photos where id=?', [id_ph]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
 
+const deletephoto = async (req, res) => {
+    const id_photo = req.params.id;
+    const foto_photo = req.params.foto;
+    const fileswindow = 'D:/kneksbe/webdevkneks/public/uploads/photo/' + foto_photo; //sesuaikan saja!
+    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/photo/'+foto_photo;
+    if (fs.existsSync(fileswindow)) {
+        fs.unlink(fileswindow, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM news_photos where id = ? ', [id_photo]);
+            if (sql) {
+                res.redirect('/ph');
+            } else {
+                console.log(sql);
+            }
+        });
+        console.log("ada")
+    } else {
+        const sql = await executeQuery('DELETE FROM news_photos where id = ? ', [id_photo]);
+        if (sql) {
+            res.redirect('/ph');
+        } else {
+            console.log(sql);
+        }
+    }
+}
+
+const updatephoto = async (req, res) => {
+    console.log("ok")
+}
+//::::::::::::::::::::::::::::::End Of Photos :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of Videos:::::::::::::::::::::::::::::::::::::::::::::::::::::
+const insertvideo = async (req, res) => {
     const today = new Date();
     const month = (today.getMonth() + 1);
     const mmm = month.length < 2 ? "0" + month : month;
@@ -427,10 +514,27 @@ const insertvideo = async (req, res) => {
         console.log(sql)
     }
 }
+//::::::::::::::::::::::::::::::End Of Videos:::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of Users:::::::::::::::::::::::::::::::::::::::::::::::::::::
+const users = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM users');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
 
+const userroles = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  roles');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
 
 const insertusers = async (req, res) => {
-
     const today = new Date();
     const month = (today.getMonth() + 1);
     const mmm = month.length < 2 ? "0" + month : month;
@@ -481,91 +585,8 @@ const deleteuser = async (req, res) => {
         console.log(sql);
     }
 }
-
-
-const updatehotissue = async (req, res )=>{
-        console.log("ok")
-}
-
-const deletehotissue = async (req, res) => {
-    const id_issue = req.params.id;
-    const foto_issue = req.params.foto;
-    const fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/hot_issue/' + foto_issue; //sesuaikan saja!
-    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/hot_issue/'+foto_users;
-
-    if (fs.existsSync(fileswindows)) {
-        fs.unlink(fileswindows, async function (err) {
-            if (err) return console.log(err);
-            const sql = await executeQuery('DELETE FROM hot_issues where id = ? ', [id_issue]);
-            if (sql) {
-                res.redirect('/hi');
-            } else {
-                console.log(sql);
-            }
-        });
-    } else {
-        const sql = await executeQuery('DELETE FROM hot_issues where id = ? ', [id_issue]);
-        if (sql) {
-            res.redirect('/hi');
-        } else {
-            console.log(sql);
-        }
-    }
-}
-
-const deletenews = async (req, res) => {
-    const id_news = req.params.id;
-    const foto_news = req.params.foto;
-    const fileswindow = 'D:/kneksbe/webdevkneks/public/uploads/news/'+foto_news; //sesuaikan saja!
-    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/news/'+foto_news;
-    if (fs.existsSync(fileswindow)) {
-        fs.unlink(fileswindow, async function (err) {
-            if (err) return console.log(err);
-            const sql = await executeQuery('DELETE FROM news where id = ? ', [id_news]);
-            if (sql) {
-                res.redirect('/n');
-            } else {
-                console.log(sql);
-            }
-        });
-        console.log("ada")
-    } else {
-        const sql = await executeQuery('DELETE FROM news where id = ? ', [id_news]);
-        if (sql) {
-            res.redirect('/n');
-        } else {
-            console.log(sql);
-        }
-    }
-}
-
-
-const deletephoto = async (req, res) => {
-    const id_photo = req.params.id;
-    const foto_photo = req.params.foto;
-    const fileswindow = 'D:/kneksbe/webdevkneks/public/uploads/photo/'+foto_photo; //sesuaikan saja!
-    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/photo/'+foto_photo;
-    if (fs.existsSync(fileswindow)) {
-        fs.unlink(fileswindow, async function (err) {
-            if (err) return console.log(err);
-            const sql = await executeQuery('DELETE FROM news_photos where id = ? ', [id_photo]);
-            if (sql) {
-                res.redirect('/ph');
-            } else {
-                console.log(sql);
-            }
-        });
-        console.log("ada")
-    } else {
-        const sql = await executeQuery('DELETE FROM news_photos where id = ? ', [id_photo]);
-        if (sql) {
-            res.redirect('/ph');
-        } else {
-            console.log(sql);
-        }
-    }
-}
-
+//::::::::::::::::::::::::::::::End Of Users:::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
 module.exports = {
     do_login,
     do_logout,
@@ -608,5 +629,9 @@ module.exports = {
     hotissue_detail,
     newsdetail,
     deletenews,
-    deletephoto
+    deletephoto,
+    updatephoto,
+    updatenews,
+    photodetail
 }
+//::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::

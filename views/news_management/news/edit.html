@@ -192,7 +192,7 @@
                 .then(response => response.json())
                 .then((data) => {
                     data.forEach(element => {
-                        const choosed = (element?.id ==category_id) ? true : false ;
+                        const choosed = (element?.id == category_id) ? true : false ;
                         const ddd = document.createElement('option')
                         ddd.value = `${element?.id}`;
                         ddd.text = `${element?.title}`;
