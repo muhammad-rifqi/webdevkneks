@@ -90,7 +90,7 @@ apps.get('/hisc_add', (req, res) => {
     res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/add.html'));
 })
 
-apps.get('/hisc_edit', (req, res) => {
+apps.get('/hisc_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/edit.html'));
 })
 
@@ -344,7 +344,9 @@ apps.get('/updatehotissue/:id/:foto' , db.updatehotissue);
 
 apps.get('/hotissuecategory', db.hotissuecategory);
 
-apps.get('/deletehotissuecategory', db.deletehotissuecategory);
+apps.get('/deletehotissuecategory/:id', db.deletehotissuecategory);
+
+apps.get('/deletehotissuesubcategory/:id', db.deletehotissuesubcategory);
 
 apps.get('/hotissuesubcategory', db.hotissuesubcategory);
 

@@ -91,6 +91,27 @@ const hotissuecategory = async (req, res) => {
     }
 }
 
+const deletehotissuecategory = async (req, res) => {
+    const idcat = req.params.id;
+    const sql = await executeQuery('DELETE FROM  hot_categories where id=?', [idcat]);
+    if (sql) {
+        res.redirect('/hic');
+    } else {
+        console.log(sql)
+        res.redirect('/hic');
+    }
+}
+
+const deletehotissuesubcategory = async (req, res) => {
+    const idsubcat = req.params.id;
+    const sql = await executeQuery('DELETE FROM  hot_subcategories where id=?', [idsubcat]);
+    if (sql) {
+        res.redirect('/hisc');
+    } else {
+        console.log(sql)
+        res.redirect('/hisc');
+    }
+}
 
 const hotissuesubcategory = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  hot_subcategories');
@@ -592,14 +613,30 @@ module.exports = {
     do_logout,
     api_login,
     categories,
+    photodetail,
+    deletephoto,
+    updatephoto,
     posts,
+    newsdetail,
     news_categories,
-    users,
+    deletenews,
+    updatenews,
+    insertnews,
+    insertnewscategory,
+    insertphoto,
+    insertvideo,
     abouts,
     structure,
     hotissue,
+    hotissue_detail,
     hotissuecategory,
     hotissuesubcategory,
+    deletehotissuecategory,
+    deletehotissuesubcategory,
+    updatehotissue,
+    deletehotissue,
+    inserthotissue,
+    inserthotissubcategory,
     institutions,
     sosmed,
     scopes,
@@ -613,25 +650,11 @@ module.exports = {
     pdes_menu,
     pdes_submenu,
     pdes_overview,
-    inserthotissue,
-    inserthotissubcategory,
-    insertnews,
-    insertnewscategory,
-    insertphoto,
-    insertvideo,
+    users,
     userroles,
     insertusers,
     updatepassword,
     changespassword,
     deleteuser,
-    updatehotissue,
-    deletehotissue,
-    hotissue_detail,
-    newsdetail,
-    deletenews,
-    deletephoto,
-    updatephoto,
-    updatenews,
-    photodetail
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::
