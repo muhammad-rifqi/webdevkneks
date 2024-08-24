@@ -127,7 +127,7 @@
             // 3. Event Listener untuk Tombol Edit
             $('#hotissue').on('click', '.edit-btn-hotissue', function () {
                 var id = $(this).data('id');
-                alert('Edit data dengan ID: ' + id);
+                window.location.href = '/hi_edit/'+id;
             });
 
             $('#hotissue').on('click', '.delete-btn-hotissue', function () {

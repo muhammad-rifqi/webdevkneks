@@ -69,7 +69,7 @@ apps.get('/hi_add', (req, res) => {
     res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/add.html'));
 })
 
-apps.get('/hi_edit', (req, res) => {
+apps.get('/hi_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/edit.html'));
 })
 
@@ -329,9 +329,13 @@ apps.get('/structure', db.structure);
 
 apps.get('/hotissue', db.hotissue);
 
+apps.get('/hotissuedetail/:id', db.hotissue_detail);
+
 apps.post('/inserthotissue', hotissue_path.single('photo'), db.inserthotissue);
 
 apps.get('/deletehotissue/:id/:foto' , db.deletehotissue);
+
+apps.get('/updatehotissue/:id/:foto' , db.updatehotissue);
 
 apps.get('/hotissuecategory', db.hotissuecategory);
 

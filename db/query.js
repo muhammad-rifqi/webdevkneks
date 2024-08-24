@@ -96,6 +96,16 @@ const hotissue = async (req, res) => {
     }
 }
 
+const hotissue_detail = async (req, res) => {
+    const id_h = req.params.id;
+    const sql = await executeQuery('SELECT * FROM  hot_issues where id=?', [id_h]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 const hotissuecategory = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  hot_categories');
     if (sql?.length > 0) {
@@ -460,6 +470,11 @@ const deleteuser = async (req, res) => {
     }
 }
 
+
+const updatehotissue = async (req, res )=>{
+        console.log("ok")
+}
+
 const deletehotissue = async (req, res) => {
     const id_issue = req.params.id;
     const foto_users = req.params.foto;
@@ -522,5 +537,7 @@ module.exports = {
     updatepassword,
     changespassword,
     deleteuser,
-    deletehotissue
+    updatehotissue,
+    deletehotissue,
+    hotissue_detail
 }
