@@ -17,14 +17,6 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
     <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
-    <script type="text/javascript">
-        bkLib.onDomLoaded(function () {
-            new nicEditor({ maxHeight: 100 }).panelInstance('editor1');
-            new nicEditor({ maxHeight: 100 }).panelInstance('editor2');
-            new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
-            new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
-        });
-    </script>
 </head>
 
 <body>
@@ -49,70 +41,45 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card stretch stretch-full">
-                            <div class="card-body lead-status">
-                                <div class="mb-5 d-flex align-items-center justify-content-between">
-                                    <h5 class="fw-bold mb-0 me-4">
-                                        <span class="d-block mb-2">Tambah Structure :</span>
-                                        <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan Tambah
-                                            Data Structure Di Bawah Ini</span>
-                                    </h5>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Title Indonesia</label>
-                                        <input class="form-control" type="text" name="title" required>
+                        <form action="/insertstructure" method="post" enctype="multipart/form-data">
+                            <div class="card stretch stretch-full">
+                                <div class="card-body lead-status">
+                                    <div class="mb-5 d-flex align-items-center justify-content-between">
+                                        <h5 class="fw-bold mb-0 me-4">
+                                            <span class="d-block mb-2">Tambah Structure :</span>
+                                            <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
+                                                Tambah
+                                                Data Structure Di Bawah Ini</span>
+                                        </h5>
                                     </div>
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Title English</label>
-                                        <input class="form-control" type="text" name="title_en" required>
-                                    </div>
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Kategori Berita</label>
-                                        <select class="form-control" name="category_id" id="" required>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Excerpt Indonesia</label>
-                                        <textarea class="form-control" name="excerpt" id="editor1"></textarea>
-                                    </div>
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Excerpt English</label>
-                                        <textarea class="form-control" name="excerpt_en" id="editor2"></textarea>
-                                    </div>
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Content Indonesia</label>
-                                        <textarea class="form-control" name="content" id="editor3"></textarea>
-                                    </div>
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Content English</label>
-                                        <textarea class="form-control" name="content_en" id="editor4"></textarea>
-                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Name</label>
+                                            <input class="form-control" type="text" name="name" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Position</label>
+                                            <input class="form-control" type="text" name="position" required>
+                                        </div>
 
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Photo</label>
-                                        <input class="form-control" name="photo" id="photo" type="file" required>
-                                    </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Photo</label>
+                                            <input class="form-control" name="photo" id="photo" type="file" required>
+                                        </div>
 
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Publish</label>
-                                        <input class="form-control" name="publish" id="publish" type="checkbox"
-                                            value="1" required> Publish
-                                    </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tag</label>
+                                            <input class="form-control" type="text" name="tag" required>
+                                        </div>
 
-                                    <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Tanggal Publish</label>
-                                        <input class="form-control" name="news_datetime" id="news_datetime"
-                                            type="datetime-local" required>
-                                    </div>
-
-                                    <div class="col-lg-12 mb-4 text-left">
-                                        <label class="form-label"></label>
-                                        <input class="btn btn-primary" type="button" value="Simpan">
+                                        <div class="col-lg-12 mb-4 text-left">
+                                            <label class="form-label"></label>
+                                            <input class="btn btn-primary" type="submit" value="Simpan">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -142,9 +109,6 @@
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
-
-
-
 </body>
 
 </html>

@@ -49,6 +49,16 @@ let disks = multer.diskStorage(
     }
 );
 let photo_path = multer({ storage: disks });
+//:::::::::::::::::::::::
+let drive = multer.diskStorage(
+    {
+        destination: './public/uploads/structure/',
+        filename: function (req, file, cb) {
+            cb(null, file.originalname.replace(" ",""));
+        }
+    }
+);
+let structure_path = multer({ storage: drive });
 
 //::::::::::::::: Start Of Routes ::::::::::::::::::::::::::::
 
@@ -138,7 +148,7 @@ apps.get('/s_add', (req, res) => {
     res.sendFile(path.resolve('./views/profile/struktur/add.html'));
 })
 
-apps.get('/s_edit', (req, res) => {
+apps.get('/s_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/profile/struktur/edit.html'));
 })
 
@@ -337,6 +347,12 @@ apps.get('/detailabouts/:id', db.detailabout);
 apps.get('/deleteabouts/:id', db.deleteabout);
 
 apps.get('/structure', db.structure);
+
+apps.get('/detailstructure/:id', db.detailstructure);
+
+apps.get('/deletestructure/:id/:foto', db.deletestructure);
+
+apps.post('/insertstructure', structure_path.single('photo'), db.inserstructure);
 
 apps.get('/hotissue', db.hotissue);
 

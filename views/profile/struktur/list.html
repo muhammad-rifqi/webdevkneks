@@ -109,7 +109,7 @@
                         "data": null,
                         "render": function (data, type, row) {
                             return `<p><button class='edit-btn-structure btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Edit</button>
-                                    <button class='delete-btn-structure btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button></p>`;
+                                    <button class='delete-btn-structure btn btn-danger' data-id='${row.id}' data-foto='${row.photo}' style="padding:2px; float: left; margin: 2px">Delete</button></p>`;
                         }
                     }
                 ],
@@ -127,16 +127,15 @@
             // 3. Event Listener untuk Tombol Edit
             $('#structure').on('click', '.edit-btn-structure', function () {
                 var id = $(this).data('id');
-                alert('Edit data dengan ID: ' + id);
-                // Kamu bisa membuka modal atau redirect ke halaman edit dengan id ini
+                window.location.href='/s_edit/'+id;
             });
 
             // 4. Event Listener untuk Tombol Hapus
             $('#structure').on('click', '.delete-btn-structure', function () {
                 var id = $(this).data('id');
+                var foto = $(this).data('foto');
                 if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    alert('Hapus data dengan ID: ' + id);
-                    // Kamu bisa memanggil API untuk menghapus data berdasarkan ID ini
+                    window.location.href='/deletestructure/'+id+'/'+foto;
                 }
             });
         });

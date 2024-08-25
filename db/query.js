@@ -82,6 +82,62 @@ const structure = async (req, res) => {
     }
 
 }
+
+const inserstructure = async (req, res) => {
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const times = date + ' ' + time;
+    const fileuploads = req.file.originalname.replace(" ", "");
+    const sql = await executeQuery("insert into structure_assets(name,position,photo,tag,created_at,updated_at) values(?,?,?,?,?,?)",
+        [req.body.name, req.body.position, fileuploads, req.body.tag, times, times]);
+    if (sql) {
+        res.redirect('/s');
+    } else {
+        console.log(sql);
+        res.redirect('/s');
+    }
+}
+
+const deletestructure = async (req, res) => {
+    const id_abouts = req.params.id;
+    const foto_abouts = req.params.foto;
+    const fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/structure/' + foto_abouts; //sesuaikan saja!
+    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/structure/'+foto_users;
+
+    if (fs.existsSync(fileswindows)) {
+        fs.unlink(fileswindows, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM  structure_assets where id=?', [id_abouts]);
+            if (sql) {
+                res.redirect('/s');
+            } else {
+                console.log(sql)
+                res.redirect('/s');
+            }
+        });
+    } else {
+        const sql = await executeQuery('DELETE FROM  structure_assets where id=?', [id_abouts]);
+        if (sql) {
+            res.redirect('/hi');
+        } else {
+            console.log(sql);
+        }
+    }
+
+}
+
+const detailstructure = async (req, res) => {
+    const id_abouts = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  structure_assets where id=?', [id_abouts]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
 //::::::::::::::::::::::::::::::End Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of ISSUE :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -181,6 +237,7 @@ const inserthotissue = async (req, res) => {
         res.redirect('/hi');
     } else {
         console.log(sql);
+        res.redirect('/hi');
     }
 }
 
@@ -197,6 +254,7 @@ const inserthotissubcategory = async (req, res) => {
         res.redirect('/hisc');
     } else {
         console.log(sql);
+        res.redirect('/hisc');
     }
 
 }
@@ -219,6 +277,7 @@ const deletehotissue = async (req, res) => {
                 res.redirect('/hi');
             } else {
                 console.log(sql);
+                res.redirect('/hi');
             }
         });
     } else {
@@ -227,6 +286,7 @@ const deletehotissue = async (req, res) => {
             res.redirect('/hi');
         } else {
             console.log(sql);
+            res.redirect('/hi');
         }
     }
 }
@@ -452,6 +512,7 @@ const insertnews = async (req, res) => {
         res.redirect('/n');
     } else {
         console.log(sql);
+        res.redirect('/n');
     }
 }
 
@@ -472,6 +533,7 @@ const deletenews = async (req, res) => {
                 res.redirect('/n');
             } else {
                 console.log(sql);
+                res.redirect('/n');
             }
         });
         console.log("ada")
@@ -481,6 +543,7 @@ const deletenews = async (req, res) => {
             res.redirect('/n');
         } else {
             console.log(sql);
+            res.redirect('/n');
         }
     }
 }
@@ -498,6 +561,7 @@ const insertnewscategory = async (req, res) => {
         res.redirect('/nc');
     } else {
         console.log(sql)
+        res.redirect('/nc');
     }
 }
 //::::::::::::::::::::::::::::::End Of News:::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -527,6 +591,7 @@ const insertphoto = async (req, res) => {
         res.redirect('/ph');
     } else {
         console.log(sql)
+        res.redirect('/ph');
     }
 }
 
@@ -552,6 +617,7 @@ const deletephoto = async (req, res) => {
             if (sql) {
                 res.redirect('/ph');
             } else {
+                res.redirect('/ph');
                 console.log(sql);
             }
         });
@@ -561,6 +627,7 @@ const deletephoto = async (req, res) => {
         if (sql) {
             res.redirect('/ph');
         } else {
+            res.redirect('/ph');
             console.log(sql);
         }
     }
@@ -585,6 +652,7 @@ const insertvideo = async (req, res) => {
         res.redirect('/v');
     } else {
         console.log(sql)
+        res.redirect('/v');
     }
 }
 
@@ -706,6 +774,9 @@ module.exports = {
     deleteabout,
     detailabout,
     structure,
+    deletestructure,
+    detailstructure,
+    inserstructure,
     hotissue,
     hotissue_detail,
     hotissuecategory,
