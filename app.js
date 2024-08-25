@@ -19,7 +19,7 @@ apps.use(cors());
 apps.use(express.static('public'));
 
 const multer = require('multer')
-//:::::::::::::::::::::::::::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 let storage = multer.diskStorage(
     {
         destination: './public/uploads/hot_issue/',
@@ -29,7 +29,7 @@ let storage = multer.diskStorage(
     }
 );
 let hotissue_path = multer({ storage: storage });
-//::::::::::::::::::::::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 let storages = multer.diskStorage(
     {
         destination: './public/uploads/news/',
@@ -39,7 +39,7 @@ let storages = multer.diskStorage(
     }
 );
 let news_path = multer({ storage: storages });
-//:::::::::::::::::::
+//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 let disks = multer.diskStorage(
     {
         destination: './public/uploads/photo/',
@@ -49,7 +49,7 @@ let disks = multer.diskStorage(
     }
 );
 let photo_path = multer({ storage: disks });
-//:::::::::::::::::::::::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 let drive = multer.diskStorage(
     {
         destination: './public/uploads/structure/',
@@ -59,6 +59,17 @@ let drive = multer.diskStorage(
     }
 );
 let structure_path = multer({ storage: drive });
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+let drives = multer.diskStorage(
+    {
+        destination: './public/uploads/filesupload/',
+        filename: function (req, file, cb) {
+            cb(null, file.originalname.replace(" ",""));
+        }
+    }
+);
+let files_path = multer({ storage: drives });
 
 //::::::::::::::: Start Of Routes :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -230,6 +241,14 @@ apps.get('/m_edit/:id', (req, res) => {
 
 apps.get('/f', (req, res) => {
     res.sendFile(path.resolve('./views/one_data_center/files/list.html'));
+})
+
+apps.get('/f_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/files/edit.html'));
+})
+
+apps.get('/f_add', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/files/add.html'));
 })
 
 apps.get('/fc', (req, res) => {
@@ -413,7 +432,13 @@ apps.get('/deletebanners/:id', db.deletebanner);
 
 apps.get('/files', db.files);
 
+apps.post('/insertfiles', files_path.single('file_data'), db.insertfileupload);
+
+apps.get('/deletefilesupload/:id/:file' , db.deletefileupload);
+
 apps.get('/files_category', db.files_category);
+
+apps.get('/filesdetails/:id', db.filesdetails);
 
 //::::::::::::::: Api & Query DB AGENDA ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

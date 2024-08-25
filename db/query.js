@@ -3,7 +3,7 @@ const { executeQuery } = require('./config');
 const fs = require('fs');
 
 let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
-let fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/';
+// let fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/';
 
 //::::::::::::::::::::::::::::::Start Of LOGIN LOGOUT :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -108,8 +108,8 @@ const deletestructure = async (req, res) => {
     const id_abouts = req.params.id;
     const foto_abouts = req.params.foto;
 
-    if (fs.existsSync(fileslinux+'structure/'+foto_abouts)) {
-        fs.unlink(fileslinux+'structure/'+foto_abouts, async function (err) {
+    if (fs.existsSync(fileswindows + 'structure/' + foto_abouts)) {
+        fs.unlink(fileswindows + 'structure/' + foto_abouts, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM  structure_assets where id=?', [id_abouts]);
             if (sql) {
@@ -268,8 +268,8 @@ const deletehotissue = async (req, res) => {
     const id_issue = req.params.id;
     const foto_issue = req.params.foto;
 
-    if (fs.existsSync(fileslinux+'hot_issue/'+foto_issue)) {
-        fs.unlink(fileslinux+'hot_issue/'+foto_issue, async function (err) {
+    if (fs.existsSync(fileswindows + 'hot_issue/' + foto_issue)) {
+        fs.unlink(fileswindows + 'hot_issue/' + foto_issue, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM hot_issues where id = ? ', [id_issue]);
             if (sql) {
@@ -458,8 +458,77 @@ const files = async (req, res) => {
     }
 }
 
+const filesdetails = async (req, res) => {
+    const id_files = req.params.id;
+    const sql = await executeQuery('SELECT * FROM  reports where id = ? ', [id_files]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const insertfileupload = async (req, res) => {
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const timeupdate = date + ' ' + time;
+    const file_date = req.body.date;
+    const fileuploads = req.file.originalname.replace(" ", "");
+    const sql = await executeQuery("insert into reports(title,title_en,content,content_en,file,is_publish,date,created_at,updated_at,report_category_id) values(?,?,?,?,?,?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.file_category_id]);
+    if (sql) {
+        res.redirect('/f');
+    } else {
+        console.log(sql);
+        res.redirect('/f');
+    }
+}
+
+
+const deletefileupload = async (req, res) => {
+
+    const id_files = req.params.id;
+    const file_upload = req.params.file;
+    if (fs.existsSync(fileswindows + 'filesupload/' + file_upload)) {
+        fs.unlink(fileswindows + 'filesupload/' + file_upload, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM reports where id = ? ', [id_files]);
+            if (sql) {
+                res.redirect('/f');
+            } else {
+                console.log(sql);
+                res.redirect('/f');
+            }
+        });
+        console.log("ada")
+    } else {
+        const sql = await executeQuery('DELETE FROM reports where id = ? ', [id_files]);
+        if (sql) {
+            res.redirect('/f');
+        } else {
+            console.log(sql);
+            res.redirect('/f');
+        }
+    }
+
+}
+
+
 const files_category = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  report_categories');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const files_category_details = async (req, res) => {
+    const id_files_category = req.params.id;
+    const sql = await executeQuery('SELECT * FROM  report_categories where id = ? ', [id_files_category]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -607,8 +676,8 @@ const updatenews = async (req, res) => {
 const deletenews = async (req, res) => {
     const id_news = req.params.id;
     const foto_news = req.params.foto;
-    if (fs.existsSync(fileslinux+'news/'+foto_news)) {
-        fs.unlink(fileslinux+'news/'+foto_news, async function (err) {
+    if (fs.existsSync(fileswindows + 'news/' + foto_news)) {
+        fs.unlink(fileswindows + 'news/' + foto_news, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM news where id = ? ', [id_news]);
             if (sql) {
@@ -690,8 +759,8 @@ const photodetail = async (req, res) => {
 const deletephoto = async (req, res) => {
     const id_photo = req.params.id;
     const foto_photo = req.params.foto;
-    if (fs.existsSync(fileslinux+'photo/'+foto_photo)) {
-        fs.unlink(fileslinux+'photo/'+foto_photo, async function (err) {
+    if (fs.existsSync(fileswindows + 'photo/' + foto_photo)) {
+        fs.unlink(fileswindows + 'photo/' + foto_photo, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM news_photos where id = ? ', [id_photo]);
             if (sql) {
@@ -885,7 +954,11 @@ module.exports = {
     detailbanner,
     agendas,
     files,
+    filesdetails,
+    insertfileupload,
+    deletefileupload,
     files_category,
+    files_category_details,
     pdes,
     pdes_menu,
     pdes_submenu,
