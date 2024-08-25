@@ -2,6 +2,9 @@ const md5 = require('md5');
 const { executeQuery } = require('./config');
 const fs = require('fs');
 
+let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
+let fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/';
+
 //::::::::::::::::::::::::::::::Start Of LOGIN LOGOUT :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 const do_login = async (req, res) => {
@@ -104,11 +107,9 @@ const inserstructure = async (req, res) => {
 const deletestructure = async (req, res) => {
     const id_abouts = req.params.id;
     const foto_abouts = req.params.foto;
-    const fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/structure/' + foto_abouts; //sesuaikan saja!
-    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/structure/'+foto_users;
 
-    if (fs.existsSync(fileswindows)) {
-        fs.unlink(fileswindows, async function (err) {
+    if (fs.existsSync(fileswindows+'structure/'+foto_abouts)) {
+        fs.unlink(fileswindows+'structure/'+foto_abouts, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM  structure_assets where id=?', [id_abouts]);
             if (sql) {
@@ -266,11 +267,9 @@ const updatehotissue = async (req, res) => {
 const deletehotissue = async (req, res) => {
     const id_issue = req.params.id;
     const foto_issue = req.params.foto;
-    const fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/hot_issue/' + foto_issue; //sesuaikan saja!
-    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/hot_issue/'+foto_users;
 
-    if (fs.existsSync(fileswindows)) {
-        fs.unlink(fileswindows, async function (err) {
+    if (fs.existsSync(fileswindows+'hot_issue/'+foto_issue)) {
+        fs.unlink(fileswindows+'hot_issue/'+foto_issue, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM hot_issues where id = ? ', [id_issue]);
             if (sql) {
@@ -607,10 +606,8 @@ const updatenews = async (req, res) => {
 const deletenews = async (req, res) => {
     const id_news = req.params.id;
     const foto_news = req.params.foto;
-    const fileswindow = 'D:/kneksbe/webdevkneks/public/uploads/news/' + foto_news; //sesuaikan saja!
-    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/news/'+foto_news;
-    if (fs.existsSync(fileswindow)) {
-        fs.unlink(fileswindow, async function (err) {
+    if (fs.existsSync(fileswindows+'news/'+foto_news)) {
+        fs.unlink(fileswindows+'news/'+foto_news, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM news where id = ? ', [id_news]);
             if (sql) {
@@ -692,10 +689,8 @@ const photodetail = async (req, res) => {
 const deletephoto = async (req, res) => {
     const id_photo = req.params.id;
     const foto_photo = req.params.foto;
-    const fileswindow = 'D:/kneksbe/webdevkneks/public/uploads/photo/' + foto_photo; //sesuaikan saja!
-    // const fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/photo/'+foto_photo;
-    if (fs.existsSync(fileswindow)) {
-        fs.unlink(fileswindow, async function (err) {
+    if (fs.existsSync(fileswindows+'photo/'+foto_photo)) {
+        fs.unlink(fileswindows+'photo/'+foto_photo, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM news_photos where id = ? ', [id_photo]);
             if (sql) {
