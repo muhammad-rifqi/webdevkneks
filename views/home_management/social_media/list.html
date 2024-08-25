@@ -31,9 +31,6 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/sm_add'"> Tambah sosmed </button>
-                        </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
@@ -121,16 +118,14 @@
             // 3. Event Listener untuk Tombol Edit
             $('#sosmed').on('click', '.edit-btn-sosmed', function () {
                 var id = $(this).data('id');
-                alert('Edit data dengan ID: ' + id);
-                // Kamu bisa membuka modal atau redirect ke halaman edit dengan id ini
+                window.location.href='/sm_edit/'+id;
             });
 
             // 4. Event Listener untuk Tombol Hapus
             $('#sosmed').on('click', '.delete-btn-sosmed', function () {
                 var id = $(this).data('id');
                 if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    alert('Hapus data dengan ID: ' + id);
-                    // Kamu bisa memanggil API untuk menghapus data berdasarkan ID ini
+                    window.location.href='/deletesosmed/'+id;
                 }
             });
         });

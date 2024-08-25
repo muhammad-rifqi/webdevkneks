@@ -301,6 +301,27 @@ const institutions = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
+
+const detailinstitutions = async (req, res) => {
+    const id_inst = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  institutions where id=?', [id_inst]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const deleteinstitution = async (req, res) => {
+    const id_inst = req.params.id;
+    const sql = await executeQuery('DELETE FROM  institutions where id = ? ', [id_inst]);
+    if (sql) {
+        res.redirect('/i');
+    } else {
+        console.log(sql);
+        res.redirect('/i');
+    }
+}
 //::::::::::::::::::::::::::::::End Of institutions :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Sosmed :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const sosmed = async (req, res) => {
@@ -311,6 +332,27 @@ const sosmed = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 
+}
+
+const detailsosmed = async (req, res) => {
+    const id_sosmed = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  social_medias where id=?', [id_sosmed]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const deletesosmed = async (req, res) => {
+    const id_sosmed = req.params.id;
+    const sql = await executeQuery('DELETE FROM  social_medias where id = ? ', [id_sosmed]);
+    if (sql) {
+        res.redirect('/sm');
+    } else {
+        console.log(sql);
+        res.redirect('/sm');
+    }
 }
 //::::::::::::::::::::::::::::::End Of Sosmed :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Scope :::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -790,7 +832,11 @@ module.exports = {
     inserthotissue,
     inserthotissubcategory,
     institutions,
+    detailinstitutions,
+    deleteinstitution,
     sosmed,
+    detailsosmed,
+    deletesosmed,
     scopes,
     maps,
     contacts,

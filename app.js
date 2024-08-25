@@ -144,10 +144,6 @@ apps.get('/s', (req, res) => {
     res.sendFile(path.resolve('./views/profile/struktur/list.html'));
 })
 
-apps.get('/s_add', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/struktur/add.html'));
-})
-
 apps.get('/s_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/profile/struktur/edit.html'));
 })
@@ -182,11 +178,7 @@ apps.get('/i', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/institution/list.html'));
 })
 
-apps.get('/i_add', (req, res) => {
-    res.sendFile(path.resolve('./views/home_management/institution/add.html'));
-})
-
-apps.get('/i_edit', (req, res) => {
+apps.get('/i_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/institution/edit.html'));
 })
 
@@ -194,11 +186,7 @@ apps.get('/sm', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/social_media/list.html'));
 })
 
-apps.get('/sm_add', (req, res) => {
-    res.sendFile(path.resolve('./views/home_management/social_media/add.html'));
-})
-
-apps.get('/sm_edit', (req, res) => {
+apps.get('/sm_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/social_media/edit.html'));
 })
 
@@ -206,11 +194,7 @@ apps.get('/c', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/contacts/list.html'));
 })
 
-apps.get('/c_add', (req, res) => {
-    res.sendFile(path.resolve('./views/home_management/contacts/add.html'));
-})
-
-apps.get('/c_edit', (req, res) => {
+apps.get('/c_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/contacts/edit.html'));
 })
 
@@ -380,7 +364,15 @@ apps.post('/inserthotissubcategory', db.inserthotissubcategory);
 
 apps.get('/institutions', db.institutions);
 
+apps.get('/detailinstitutions/:id', db.detailinstitutions);
+
+apps.get('/deleteinstitutions/:id', db.deleteinstitution);
+
 apps.get('/sosmed', db.sosmed);
+
+apps.get('/detailsosmed/:id', db.detailsosmed);
+
+apps.get('/deletesosmed/:id', db.deletesosmed);
 
 apps.get('/scopes', db.scopes);
 
