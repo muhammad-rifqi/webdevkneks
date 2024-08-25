@@ -202,11 +202,7 @@ apps.get('/b', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/banner/list.html'));
 })
 
-apps.get('/b_add', (req, res) => {
-    res.sendFile(path.resolve('./views/home_management/banner/add.html'));
-})
-
-apps.get('/b_edit', (req, res) => {
+apps.get('/b_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/banner/edit.html'));
 })
 
@@ -214,11 +210,7 @@ apps.get('/scp', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/scope/list.html'));
 })
 
-apps.get('/scp_add', (req, res) => {
-    res.sendFile(path.resolve('./views/home_management/scope/add.html'));
-})
-
-apps.get('/scp_edit', (req, res) => {
+apps.get('/scp_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/scope/edit.html'));
 })
 
@@ -226,11 +218,7 @@ apps.get('/m', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/maps/list.html'));
 })
 
-apps.get('/m_add', (req, res) => {
-    res.sendFile(path.resolve('./views/home_management/maps/add.html'));
-})
-
-apps.get('/m_edit', (req, res) => {
+apps.get('/m_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/maps/edit.html'));
 })
 
@@ -376,11 +364,19 @@ apps.get('/deletesosmed/:id', db.deletesosmed);
 
 apps.get('/scopes', db.scopes);
 
+apps.get('/detailscopes/:id', db.detailscopes);
+
+apps.get('/deletescopes/:id', db.deletescopes);
+
 apps.get('/maps', db.maps);
 
 apps.get('/contacts', db.contacts);
 
 apps.get('/banners', db.banners);
+
+apps.get('/detailbanners/:id', db.detailbanner);
+
+apps.get('/deletebanners/:id', db.deletebanner);
 
 apps.get('/files', db.files);
 

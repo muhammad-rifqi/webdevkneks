@@ -97,8 +97,7 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='edit-btn-maps btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Edit</button>
-                                    <button class='delete-btn-maps btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button></p>`;
+                            return `<p><button class='edit-btn-maps btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Edit</button></p>`;
                         }
                     }
                 ],
@@ -116,17 +115,7 @@
             // 3. Event Listener untuk Tombol Edit
             $('#maps').on('click', '.edit-btn-maps', function () {
                 var id = $(this).data('id');
-                alert('Edit data dengan ID: ' + id);
-                // Kamu bisa membuka modal atau redirect ke halaman edit dengan id ini
-            });
-
-            // 4. Event Listener untuk Tombol Hapus
-            $('#maps').on('click', '.delete-btn-maps', function () {
-                var id = $(this).data('id');
-                if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    alert('Hapus data dengan ID: ' + id);
-                    // Kamu bisa memanggil API untuk menghapus data berdasarkan ID ini
-                }
+                window.location.href='/m_edit/'+id;
             });
         });
     </script>

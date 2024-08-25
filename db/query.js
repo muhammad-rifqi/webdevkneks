@@ -364,6 +364,27 @@ const scopes = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
+
+const detailscopes = async (req, res) => {
+    const id_scopes = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  scopes where id=?', [id_scopes]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const deletescopes = async (req, res) => {
+    const id_scopes = req.params.id;
+    const sql = await executeQuery('DELETE FROM  scopes where id = ? ', [id_scopes]);
+    if (sql) {
+        res.redirect('/scp');
+    } else {
+        console.log(sql);
+        res.redirect('/scp');
+    }
+}
 //::::::::::::::::::::::::::::::End Of Scope :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Maps :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const maps = async (req, res) => {
@@ -394,6 +415,27 @@ const banners = async (req, res) => {
         res.status(200).json(sql)
     } else {
         res.status(200).json({ "success": false })
+    }
+}
+
+const detailbanner = async (req, res) => {
+    const id_banners = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  banners where id=?', [id_banners]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const deletebanner = async (req, res) => {
+    const id_banners = req.params.id;
+    const sql = await executeQuery('DELETE FROM  banners where id = ? ', [id_banners]);
+    if (sql) {
+        res.redirect('/b');
+    } else {
+        console.log(sql);
+        res.redirect('/b');
     }
 }
 //::::::::::::::::::::::::::::::End Of Banner :::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -838,9 +880,13 @@ module.exports = {
     detailsosmed,
     deletesosmed,
     scopes,
+    detailscopes,
+    deletescopes,
     maps,
     contacts,
     banners,
+    deletebanner,
+    detailbanner,
     agendas,
     files,
     files_category,
