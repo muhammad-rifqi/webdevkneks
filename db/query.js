@@ -49,6 +49,28 @@ const abouts = async (req, res) => {
     }
 
 }
+
+
+const deleteabout = async (req, res) => {
+    const id_abouts = req.params.id;
+    const sql = await executeQuery('DELETE FROM  abouts where id=?', [id_abouts]);
+    if (sql) {
+        res.redirect('/tk');
+    } else {
+        console.log(sql)
+        res.redirect('/tk');
+    }
+}
+
+const detailabout = async (req, res) => {
+    const id_abouts = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  abouts where id=?', [id_abouts]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
 //::::::::::::::::::::::::::::::End Of Abouts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const structure = async (req, res) => {
@@ -576,6 +598,17 @@ const videodetail = async (req, res) => {
     }
 }
 
+const deletevideo = async (req, res) => {
+    const id_video = req.params.id;
+    const sql = await executeQuery('DELETE FROM  news_videos where id=?', [id_video]);
+    if (sql) {
+        res.redirect('/v');
+    } else {
+        console.log(sql)
+        res.redirect('/v');
+    }
+}
+
 //::::::::::::::::::::::::::::::End Of Videos:::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Users:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const users = async (req, res) => {
@@ -668,7 +701,10 @@ module.exports = {
     insertphoto,
     insertvideo,
     videodetail,
+    deletevideo,
     abouts,
+    deleteabout,
+    detailabout,
     structure,
     hotissue,
     hotissue_detail,

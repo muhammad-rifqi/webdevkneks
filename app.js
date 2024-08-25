@@ -126,11 +126,7 @@ apps.get('/tk', (req, res) => {
     res.sendFile(path.resolve('./views/profile/tentang_kami/list.html'));
 })
 
-apps.get('/tk_add', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/tentang_kami/add.html'));
-})
-
-apps.get('/tk_edit', (req, res) => {
+apps.get('/tk_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/profile/tentang_kami/edit.html'));
 })
 
@@ -316,6 +312,8 @@ apps.post('/insertvideo',  db.insertvideo);
 
 apps.get('/videodetail/:id', db.videodetail);
 
+apps.get('/deletevideo/:id', db.deletevideo);
+
 apps.get('/categories', db.news_categories);
 
 apps.get('/detailnewscategory/:id', db.detailnewscategory);
@@ -333,6 +331,10 @@ apps.get('/updatepassword', db.updatepassword);
 apps.post('/changespassword', db.changespassword);
 
 apps.get('/abouts', db.abouts);
+
+apps.get('/detailabouts/:id', db.detailabout);
+
+apps.get('/deleteabouts/:id', db.deleteabout);
 
 apps.get('/structure', db.structure);
 
