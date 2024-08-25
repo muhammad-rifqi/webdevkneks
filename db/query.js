@@ -580,6 +580,7 @@ const detailnewscategory = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
+
 const insertnews = async (req, res) => {
     const today = new Date();
     const month = (today.getMonth() + 1);
