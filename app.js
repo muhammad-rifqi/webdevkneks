@@ -60,7 +60,7 @@ let drive = multer.diskStorage(
 );
 let structure_path = multer({ storage: drive });
 
-//::::::::::::::: Start Of Routes ::::::::::::::::::::::::::::
+//::::::::::::::: Start Of Routes :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/', (req, res) => {
     res.sendFile(path.resolve('./views/login.html'));
@@ -70,7 +70,7 @@ apps.get('/dashboard', (req, res) => {
     res.sendFile(path.resolve('./views/dashboard.html'));
 })
 
-//::::::::::::::: Hot Issue ::::::::::::::::::::::::::::
+//::::::::::::::: Hot Issue :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/hi', (req, res) => {
     res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/list.html'));
@@ -104,7 +104,7 @@ apps.get('/hisc_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/edit.html'));
 })
 
-//::::::::::::::: News ::::::::::::::::::::::::::::
+//::::::::::::::: News :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/n', (req, res) => {
     res.sendFile(path.resolve('./views/news_management/news/list.html'));
@@ -144,6 +144,10 @@ apps.get('/s', (req, res) => {
     res.sendFile(path.resolve('./views/profile/struktur/list.html'));
 })
 
+apps.get('/s_add', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/struktur/add.html'));
+})
+
 apps.get('/s_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/profile/struktur/edit.html'));
 })
@@ -172,7 +176,7 @@ apps.get('/ph_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/profile/photos/edit.html'));
 })
 
-//::::::::::::::: Home Management ::::::::::::::::::::::::::::
+//::::::::::::::: Home Management :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/i', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/institution/list.html'));
@@ -222,7 +226,7 @@ apps.get('/m_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/maps/edit.html'));
 })
 
-//::::::::::::::: One Data Center ::::::::::::::::::::::::::::
+//::::::::::::::: One Data Center ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/f', (req, res) => {
     res.sendFile(path.resolve('./views/one_data_center/files/list.html'));
@@ -270,7 +274,10 @@ apps.get('/cp', (req, res) => {
     res.sendFile(path.resolve('./views/user_management/change_password/list.html'));
 })
 
-//::::::::::::::: Api & Query DB ::::::::::::::::::::::::::::
+//::::::::::::::: Api & Query DB :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+//::::::::::::::: Api & Query DB NEWS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/posts', db.posts);
 
@@ -284,11 +291,19 @@ apps.post('/insertnewscategory', db.insertnewscategory);
 
 apps.get('/posts/type/:name', db.categories);
 
+apps.get('/categories', db.news_categories);
+
+apps.get('/detailnewscategory/:id', db.detailnewscategory);
+
+//::::::::::::::: Api & Query DB PHOTOS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 apps.get('/photodetail/:id', db.photodetail);
 
 apps.get('/deletephoto/:id/:foto' , db.deletephoto);
 
 apps.post('/insertphoto', photo_path.single('photo'), db.insertphoto);
+
+//::::::::::::::: Api & Query DB VIDEOS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.post('/insertvideo',  db.insertvideo);
 
@@ -296,9 +311,7 @@ apps.get('/videodetail/:id', db.videodetail);
 
 apps.get('/deletevideo/:id', db.deletevideo);
 
-apps.get('/categories', db.news_categories);
-
-apps.get('/detailnewscategory/:id', db.detailnewscategory);
+//::::::::::::::: Api & Query DB USERS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/users', db.users);
 
@@ -312,11 +325,15 @@ apps.get('/updatepassword', db.updatepassword);
 
 apps.post('/changespassword', db.changespassword);
 
+//::::::::::::::: Api & Query DB ABOUTS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 apps.get('/abouts', db.abouts);
 
 apps.get('/detailabouts/:id', db.detailabout);
 
 apps.get('/deleteabouts/:id', db.deleteabout);
+
+//::::::::::::::: Api & Query DB STRUCTURE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/structure', db.structure);
 
@@ -325,6 +342,8 @@ apps.get('/detailstructure/:id', db.detailstructure);
 apps.get('/deletestructure/:id/:foto', db.deletestructure);
 
 apps.post('/insertstructure', structure_path.single('photo'), db.inserstructure);
+
+//::::::::::::::: Api & Query DB HOT ISSUE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/hotissue', db.hotissue);
 
@@ -350,11 +369,15 @@ apps.get('/detailhotissuecategory/:id', db.detailhotissuecategory);
 
 apps.post('/inserthotissubcategory', db.inserthotissubcategory);
 
+//::::::::::::::: Api & Query DB INSTITUTION ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 apps.get('/institutions', db.institutions);
 
 apps.get('/detailinstitutions/:id', db.detailinstitutions);
 
 apps.get('/deleteinstitutions/:id', db.deleteinstitution);
+
+//::::::::::::::: Api & Query DB SOSMED ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/sosmed', db.sosmed);
 
@@ -362,15 +385,23 @@ apps.get('/detailsosmed/:id', db.detailsosmed);
 
 apps.get('/deletesosmed/:id', db.deletesosmed);
 
+//::::::::::::::: Api & Query DB SCOPES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 apps.get('/scopes', db.scopes);
 
 apps.get('/detailscopes/:id', db.detailscopes);
 
 apps.get('/deletescopes/:id', db.deletescopes);
 
+//::::::::::::::: Api & Query DB MAPS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 apps.get('/maps', db.maps);
 
+//::::::::::::::: Api & Query DB CONTACTS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 apps.get('/contacts', db.contacts);
+
+//::::::::::::::: Api & Query DB BANNERS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/banners', db.banners);
 
@@ -378,11 +409,17 @@ apps.get('/detailbanners/:id', db.detailbanner);
 
 apps.get('/deletebanners/:id', db.deletebanner);
 
+//::::::::::::::: Api & Query DB FILES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 apps.get('/files', db.files);
 
 apps.get('/files_category', db.files_category);
 
+//::::::::::::::: Api & Query DB AGENDA ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 apps.get('/agenda', db.agendas);
+
+//::::::::::::::: Api & Query DB PDES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/pdes', db.pdes);
 
@@ -392,12 +429,14 @@ apps.get('/pdes_submenu', db.pdes_submenu);
 
 apps.get('/pdes_overview', db.pdes_overview);
 
+//::::::::::::::: Api & Query DB AUTH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 apps.post('/do_login', db.api_login);
 
 apps.post('/act_login', db.do_login);
 
 apps.get("/logout", db.do_logout);
 
-//::::::::::::::: End Of Routes ::::::::::::::::::::::::::::
+//::::::::::::::: End Of Routes :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.listen(3001);

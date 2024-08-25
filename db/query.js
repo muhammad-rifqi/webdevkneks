@@ -108,8 +108,8 @@ const deletestructure = async (req, res) => {
     const id_abouts = req.params.id;
     const foto_abouts = req.params.foto;
 
-    if (fs.existsSync(fileswindows+'structure/'+foto_abouts)) {
-        fs.unlink(fileswindows+'structure/'+foto_abouts, async function (err) {
+    if (fs.existsSync(fileslinux+'structure/'+foto_abouts)) {
+        fs.unlink(fileslinux+'structure/'+foto_abouts, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM  structure_assets where id=?', [id_abouts]);
             if (sql) {
@@ -268,8 +268,8 @@ const deletehotissue = async (req, res) => {
     const id_issue = req.params.id;
     const foto_issue = req.params.foto;
 
-    if (fs.existsSync(fileswindows+'hot_issue/'+foto_issue)) {
-        fs.unlink(fileswindows+'hot_issue/'+foto_issue, async function (err) {
+    if (fs.existsSync(fileslinux+'hot_issue/'+foto_issue)) {
+        fs.unlink(fileslinux+'hot_issue/'+foto_issue, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM hot_issues where id = ? ', [id_issue]);
             if (sql) {
@@ -606,8 +606,8 @@ const updatenews = async (req, res) => {
 const deletenews = async (req, res) => {
     const id_news = req.params.id;
     const foto_news = req.params.foto;
-    if (fs.existsSync(fileswindows+'news/'+foto_news)) {
-        fs.unlink(fileswindows+'news/'+foto_news, async function (err) {
+    if (fs.existsSync(fileslinux+'news/'+foto_news)) {
+        fs.unlink(fileslinux+'news/'+foto_news, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM news where id = ? ', [id_news]);
             if (sql) {
@@ -689,8 +689,8 @@ const photodetail = async (req, res) => {
 const deletephoto = async (req, res) => {
     const id_photo = req.params.id;
     const foto_photo = req.params.foto;
-    if (fs.existsSync(fileswindows+'photo/'+foto_photo)) {
-        fs.unlink(fileswindows+'photo/'+foto_photo, async function (err) {
+    if (fs.existsSync(fileslinux+'photo/'+foto_photo)) {
+        fs.unlink(fileslinux+'photo/'+foto_photo, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM news_photos where id = ? ', [id_photo]);
             if (sql) {
