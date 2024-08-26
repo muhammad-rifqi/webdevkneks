@@ -450,7 +450,7 @@ const agendas = async (req, res) => {
 
 const agendadetails = async (req, res) => {
     const id_files = req.params.id;
-    const sql = await executeQuery('SELECT * FROM  reports where id = ? ', [id_files]);
+    const sql = await executeQuery('SELECT * FROM  agendas where id = ? ', [id_files]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -458,31 +458,32 @@ const agendadetails = async (req, res) => {
     }
 }
 
-const insertagendadetails = async (req, res) => {
+const insertagenda = async (req, res) => {
     const today = new Date();
     const month = (today.getMonth() + 1);
     const mmm = month.length < 2 ? "0" + month : month;
     const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
-    const sql = await executeQuery("insert into report_categories(title,title_en,report_categories.orders,created_at,updated_at) values(?,?,?,?,?)",
-        [req.body.title, req.body.title_en, req.body.order, time_datetime, time_datetime]);
+    const agenda_datetime = req.body.agenda_datetime.replace("T", " ");
+    const sql = await executeQuery("insert into agendas(title,title_en,url, agenda_datetime ,place,organizer, created_at, updated_at) values(?,?,?,?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.url, agenda_datetime, req.body.place, req.body.organizer, time_datetime, time_datetime]);
     if (sql) {
-        res.redirect('/fc');
+        res.redirect('/a');
     } else {
         console.log(sql)
-        res.redirect('/fc');
+        res.redirect('/a');
     }
 }
 
-const deleteagendadetails = async (req, res) => {
-    const id_files_category = req.params.id;
-        const sql = await executeQuery('DELETE FROM report_categories where id = ? ', [id_files_category]);
+const deleteagenda = async (req, res) => {
+    const id_agenda = req.params.id;
+        const sql = await executeQuery('DELETE FROM agendas where id = ? ', [id_agenda]);
         if (sql) {
-            res.redirect('/fc');
+            res.redirect('/a');
         } else {
             console.log(sql);
-            res.redirect('/fc');
+            res.redirect('/a');
         }
 }
 
@@ -1021,8 +1022,8 @@ module.exports = {
     detailbanner,
     agendas,
     agendadetails,
-    insertagendadetails,
-    deleteagendadetails,
+    insertagenda,
+    deleteagenda,
     files,
     filesdetails,
     insertfileupload,

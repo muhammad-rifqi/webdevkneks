@@ -267,6 +267,14 @@ apps.get('/a', (req, res) => {
     res.sendFile(path.resolve('./views/one_data_center/agenda/list.html'));
 })
 
+apps.get('/a_add', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/agenda/add.html'));
+})
+
+apps.get('/a_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/agenda/edit.html'));
+})
+
 apps.get('/p', (req, res) => {
     res.sendFile(path.resolve('./views/one_data_center/pdes/list.html'));
 })
@@ -457,6 +465,12 @@ apps.get('/deletefilecategory/:id' , db.deletefilecategorydetail);
 //::::::::::::::: Api & Query DB AGENDA ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/agenda', db.agendas);
+
+apps.post('/insertagenda', db.insertagenda);
+
+apps.get('/deleteagenda/:id', db.deleteagenda);
+
+apps.get('/agendadetails/:id', db.agendadetails);
 
 //::::::::::::::: Api & Query DB PDES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
