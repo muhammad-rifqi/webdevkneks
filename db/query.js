@@ -447,6 +447,45 @@ const agendas = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
+
+const agendadetails = async (req, res) => {
+    const id_files = req.params.id;
+    const sql = await executeQuery('SELECT * FROM  reports where id = ? ', [id_files]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const insertagendadetails = async (req, res) => {
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const time_datetime = date + ' ' + time;
+    const sql = await executeQuery("insert into report_categories(title,title_en,report_categories.orders,created_at,updated_at) values(?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.order, time_datetime, time_datetime]);
+    if (sql) {
+        res.redirect('/fc');
+    } else {
+        console.log(sql)
+        res.redirect('/fc');
+    }
+}
+
+const deleteagendadetails = async (req, res) => {
+    const id_files_category = req.params.id;
+        const sql = await executeQuery('DELETE FROM report_categories where id = ? ', [id_files_category]);
+        if (sql) {
+            res.redirect('/fc');
+        } else {
+            console.log(sql);
+            res.redirect('/fc');
+        }
+}
+
 //::::::::::::::::::::::::::::::End Of Agenda :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of FILES :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const files = async (req, res) => {
@@ -534,6 +573,34 @@ const files_category_details = async (req, res) => {
     } else {
         res.status(200).json({ "success": false })
     }
+}
+
+const insertfilecategorydetails = async (req, res) => {
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const time_datetime = date + ' ' + time;
+    const sql = await executeQuery("insert into report_categories(title,title_en,report_categories.orders,created_at,updated_at) values(?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.order, time_datetime, time_datetime]);
+    if (sql) {
+        res.redirect('/fc');
+    } else {
+        console.log(sql)
+        res.redirect('/fc');
+    }
+}
+
+const deletefilecategorydetail = async (req, res) => {
+    const id_files_category = req.params.id;
+        const sql = await executeQuery('DELETE FROM report_categories where id = ? ', [id_files_category]);
+        if (sql) {
+            res.redirect('/fc');
+        } else {
+            console.log(sql);
+            res.redirect('/fc');
+        }
 }
 
 //::::::::::::::::::::::::::::::End Of Files :::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -953,12 +1020,17 @@ module.exports = {
     deletebanner,
     detailbanner,
     agendas,
+    agendadetails,
+    insertagendadetails,
+    deleteagendadetails,
     files,
     filesdetails,
     insertfileupload,
     deletefileupload,
     files_category,
     files_category_details,
+    insertfilecategorydetails,
+    deletefilecategorydetail,
     pdes,
     pdes_menu,
     pdes_submenu,

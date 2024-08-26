@@ -255,6 +255,14 @@ apps.get('/fc', (req, res) => {
     res.sendFile(path.resolve('./views/one_data_center/files_category/list.html'));
 })
 
+apps.get('/fc_add', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/files_category/add.html'));
+})
+
+apps.get('/fc_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/files_category/edit.html'));
+})
+
 apps.get('/a', (req, res) => {
     res.sendFile(path.resolve('./views/one_data_center/agenda/list.html'));
 })
@@ -438,7 +446,13 @@ apps.get('/deletefilesupload/:id/:file' , db.deletefileupload);
 
 apps.get('/files_category', db.files_category);
 
+apps.get('/files_category_detail/:id', db.files_category_details);
+
 apps.get('/filesdetails/:id', db.filesdetails);
+
+apps.post('/insertfilescategory', db.insertfilecategorydetails);
+
+apps.get('/deletefilecategory/:id' , db.deletefilecategorydetail);
 
 //::::::::::::::: Api & Query DB AGENDA ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
