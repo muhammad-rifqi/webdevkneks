@@ -672,7 +672,7 @@ const posts = async (req, res) => {
                 "excerpt": item?.excerpt,
                 "excerpt_en": item?.excerpt_en,
                 "is_publish": item?.is_publish,
-                "image": item?.image,
+                "image": "https://webdev.kneks.go.id/storage/upload/"+item?.image,
                 "category_id": item?.category_id,
                 "detail": detail
             };
