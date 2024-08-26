@@ -318,6 +318,8 @@ apps.get('/posts', db.posts);
 
 apps.post('/insertnews', news_path.single('photo'), db.insertnews);
 
+apps.post('/updatenews', news_path.single('photo'), db.updatenews);
+
 apps.get('/newsdetail/:id', db.newsdetail);
 
 apps.get('/deletenews/:id/:foto' , db.deletenews);

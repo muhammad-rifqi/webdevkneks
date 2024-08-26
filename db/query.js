@@ -478,13 +478,13 @@ const insertagenda = async (req, res) => {
 
 const deleteagenda = async (req, res) => {
     const id_agenda = req.params.id;
-        const sql = await executeQuery('DELETE FROM agendas where id = ? ', [id_agenda]);
-        if (sql) {
-            res.redirect('/a');
-        } else {
-            console.log(sql);
-            res.redirect('/a');
-        }
+    const sql = await executeQuery('DELETE FROM agendas where id = ? ', [id_agenda]);
+    if (sql) {
+        res.redirect('/a');
+    } else {
+        console.log(sql);
+        res.redirect('/a');
+    }
 }
 
 //::::::::::::::::::::::::::::::End Of Agenda :::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -595,13 +595,13 @@ const insertfilecategorydetails = async (req, res) => {
 
 const deletefilecategorydetail = async (req, res) => {
     const id_files_category = req.params.id;
-        const sql = await executeQuery('DELETE FROM report_categories where id = ? ', [id_files_category]);
-        if (sql) {
-            res.redirect('/fc');
-        } else {
-            console.log(sql);
-            res.redirect('/fc');
-        }
+    const sql = await executeQuery('DELETE FROM report_categories where id = ? ', [id_files_category]);
+    if (sql) {
+        res.redirect('/fc');
+    } else {
+        console.log(sql);
+        res.redirect('/fc');
+    }
 }
 
 //::::::::::::::::::::::::::::::End Of Files :::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -657,7 +657,7 @@ const pdes_overview = async (req, res) => {
 //::::::::::::::::::::::::::::::End Of PDES :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of News:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const posts = async (req, res) => {
-    const result = await executeQuery("SELECT * FROM news ORDER BY id ASC limit 100");
+    const result = await executeQuery("SELECT * FROM news where id between 580 and 700 ORDER BY id ASC ");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
             let r = await executeQuery("SELECT * FROM news_categories WHERE id = ?", [item.category_id]);
@@ -672,7 +672,7 @@ const posts = async (req, res) => {
                 "excerpt": item?.excerpt,
                 "excerpt_en": item?.excerpt_en,
                 "is_publish": item?.is_publish,
-                "image": "https://webdev.kneks.go.id/storage/upload/"+item?.image,
+                "image": item?.image,
                 "category_id": item?.category_id,
                 "detail": detail
             };
@@ -738,7 +738,35 @@ const insertnews = async (req, res) => {
 }
 
 const updatenews = async (req, res) => {
-    console.log("ok")
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const timeupdate = date + ' ' + time;
+    const news_datetime = req.body.news_datetime.replace("T", " ");
+    if (!req.file || req.file == undefined || req.file == "") {
+        const sql = await executeQuery("UPDATE news set  title=?,title_en=?,excerpt=?,excerpt_en=?,content=?,content_en=?,is_publish=?,news_datetime=?,created_at=?,updated_at=?,deleted_at=?,category_id=? where id = ?",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.news_category_id, req.body.id]);
+        if (sql) {
+            res.redirect('/n');
+        } else {
+            console.log(sql);
+            res.redirect('/n');
+        }
+    } else {
+        const fileupload = req.file.originalname.replace(" ", "");
+        const sql = await executeQuery("UPDATE news set  title=?,title_en=?,excerpt=?,excerpt_en=?,content=?,content_en=?,image=?,is_publish=?,news_datetime=?,created_at=?,updated_at=?,deleted_at=?,category_id=? where id = ?",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.news_category_id, req.body.id]);
+        if (sql) {
+            res.redirect('/n');
+        } else {
+            console.log(sql);
+            res.redirect('/n');
+        }
+    }
+
 }
 
 const deletenews = async (req, res) => {

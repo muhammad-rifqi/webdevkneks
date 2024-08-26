@@ -49,7 +49,7 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/updatehotissue" method="post" enctype="multipart/form-data">
+                        <form action="/updatenews" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" id="id" value="">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
@@ -64,16 +64,15 @@
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Title Indonesia</label>
-                                            <input class="form-control" type="text" name="title" id="title" required>
+                                            <input class="form-control" type="text" name="title" id="title">
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Title English</label>
-                                            <input class="form-control" type="text" name="title_en" id="title_en"
-                                                required>
+                                            <input class="form-control" type="text" name="title_en" id="title_en">
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">News Category</label>
-                                            <select class="form-control" name="news_category_id" id="newscatid" required>
+                                            <select class="form-control" name="news_category_id" id="newscatid">
                                                 <option value="0"> Choose </option>
                                             </select>
                                         </div>
@@ -105,19 +104,19 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Photo</label>
-                                            <input class="form-control" name="photo" id="photo" type="file" required>
+                                            <input class="form-control" name="photo" id="photo" type="file">
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Publish</label>
-                                            <input name="is_publish" id="is_publish" type="checkbox" value="1" required>
+                                            <input name="is_publish" id="is_publish" type="checkbox" value="1">
                                             Publish
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Tanggal Publish</label>
                                             <input class="form-control" name="news_datetime" id="news_datetime"
-                                                type="datetime-local" required>
+                                                type="datetime-local">
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -176,7 +175,7 @@
                     document.getElementById("val2").innerHTML = rows[0]?.excerpt_en;
                     document.getElementById("val3").innerHTML = rows[0]?.content;
                     document.getElementById("val4").innerHTML = rows[0]?.content_en;
-                    hot_subcategory_id = rows[0]?.hot_subcategory_id;
+                    news_category_id = rows[0]?.category_id;
                     if (rows?.is_publish == 1) {
                         document.getElementById("is_publish").setAttribute('checked', true);
                     } else {
@@ -192,11 +191,16 @@
                 .then(response => response.json())
                 .then((data) => {
                     data.forEach(element => {
-                        const choosed = (element?.id == news_category_id) ? true : false ;
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
-                        ddd.text = `${element?.title}`;
-                        ddd.selected = choosed
+                        if (element?.id == news_category_id) {
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.title}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.title}`;
+                            ddd.selected = false;
+                        }
                         document.getElementById("newscatid").append(ddd);
                     });
                 })
