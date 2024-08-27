@@ -42,6 +42,32 @@ const api_login = async (req, res) => {
 }
 
 //::::::::::::::::::::::::::::::End Of Login :::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+//::::::::::::::::::::::::::::::Start Of Dashboard :::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+const dashboards = async (req, res)=> {
+
+    const news_mounts = await executeQuery('SELECT * FROM news');
+    const jumlah1 = news_mounts.length;
+    const videos_mounts = await executeQuery('SELECT * FROM news_videos');
+    const jumlah2 = videos_mounts.length;
+    const photos_mounts = await executeQuery('SELECT * FROM news_photos');
+    const jumlah3 = photos_mounts.length;
+    const files_mounts = await executeQuery('SELECT * FROM reports');
+    const jumlah4 = files_mounts.length;
+
+    const mounted = {
+        "news" : jumlah1,
+        "videos" : jumlah2,
+        "photos" : jumlah3,
+        "files" : jumlah4,
+    }
+
+    res.status(200).json(mounted)
+}
+
+//::::::::::::::::::::::::::::::End Of Dashboard :::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 //::::::::::::::::::::::::::::::Start Of Abouts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const abouts = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM abouts');
@@ -1027,6 +1053,7 @@ module.exports = {
     do_login,
     do_logout,
     api_login,
+    dashboards,
     categories,
     photodetail,
     deletephoto,
