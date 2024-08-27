@@ -879,7 +879,35 @@ const deletephoto = async (req, res) => {
 }
 
 const updatephoto = async (req, res) => {
-    console.log("ok")
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const timeupdate = date + ' ' + time;
+    const news_datetime = req.body.news_datetime.replace("T", " ");
+    if (!req.file || req.file == undefined || req.file == "") {
+        const sql = await executeQuery("UPDATE news_photos set  title=?,title_en=?,content=?,content_en=?,news_datetime=?,created_at=?,updated_at=?,deleted_at=? where id = ?",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, news_datetime, timeupdate, timeupdate, null, req.body.id]);
+        if (sql) {
+            res.redirect('/ph');
+        } else {
+            console.log(sql);
+            res.redirect('/ph');
+        }
+    } else {
+        const fileuploads = req.file.originalname.replace(" ", "");
+        const sql = await executeQuery("UPDATE news_photos set  title=?,title_en=?,content=?,content_en=?,photo=?, news_datetime=?,created_at=?,updated_at=?,deleted_at=? where id = ?",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, news_datetime, timeupdate, timeupdate, null, req.body.id]);
+        if (sql) {
+            res.redirect('/ph');
+        } else {
+            console.log(sql);
+            res.redirect('/ph');
+        }
+    }
+
 }
 //::::::::::::::::::::::::::::::End Of Photos :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Videos:::::::::::::::::::::::::::::::::::::::::::::::::::::

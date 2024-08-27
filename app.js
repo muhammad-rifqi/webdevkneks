@@ -340,6 +340,8 @@ apps.get('/deletephoto/:id/:foto' , db.deletephoto);
 
 apps.post('/insertphoto', photo_path.single('photo'), db.insertphoto);
 
+apps.post('/updatephoto', photo_path.single('photo'), db.updatephoto);
+
 //::::::::::::::: Api & Query DB VIDEOS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.post('/insertvideo',  db.insertvideo);
