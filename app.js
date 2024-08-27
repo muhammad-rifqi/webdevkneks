@@ -347,6 +347,8 @@ apps.post('/updatephoto', photo_path.single('photo'), db.updatephoto);
 
 apps.post('/insertvideo',  db.insertvideo);
 
+apps.post('/updatevideo',  db.updatevideos);
+
 apps.get('/videodetail/:id', db.videodetail);
 
 apps.get('/deletevideo/:id', db.deletevideo);

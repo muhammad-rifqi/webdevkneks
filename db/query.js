@@ -976,6 +976,24 @@ const deletevideo = async (req, res) => {
     }
 }
 
+const updatevideos = async (req, res) => {
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const time_datetime = date + ' ' + time;
+    const videos_datetime = req.body.video_datetime.replace("T", " ");
+    const sql = await executeQuery("update news_videos set title=?,title_en=?,content=?,content_en=?,video=?,duration=?,news_datetime=?,created_at=?,updated_at=? where id = ?",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.video, req.body.duration, videos_datetime, time_datetime, time_datetime, req.body.id]);
+    if (sql) {
+        res.redirect('/v');
+    } else {
+        console.log(sql)
+        res.redirect('/v');
+    }
+}
+
 //::::::::::::::::::::::::::::::End Of Videos:::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Users:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const users = async (req, res) => {
@@ -1068,6 +1086,7 @@ module.exports = {
     detailnewscategory,
     insertphoto,
     insertvideo,
+    updatevideos,
     videodetail,
     deletevideo,
     abouts,
