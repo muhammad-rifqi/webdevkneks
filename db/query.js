@@ -837,6 +837,23 @@ const insertnewscategory = async (req, res) => {
         res.redirect('/nc');
     }
 }
+
+const updatenewscategory = async (req, res) => {
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const time_datetime = date + ' ' + time;
+    const sql = await executeQuery("update news_categories set title=?,title_en=?,description=?,description_en=?,created_at=?,updated_at=? where id = ?",
+        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, time_datetime, time_datetime, req.body.id]);
+    if (sql) {
+        res.redirect('/nc');
+    } else {
+        console.log(sql)
+        res.redirect('/nc');
+    }
+}
 //::::::::::::::::::::::::::::::End Of News:::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Photos:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const categories = async (req, res) => {
@@ -1084,6 +1101,7 @@ module.exports = {
     insertnews,
     insertnewscategory,
     detailnewscategory,
+    updatenewscategory,
     insertphoto,
     insertvideo,
     updatevideos,

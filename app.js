@@ -327,6 +327,8 @@ apps.get('/deletenews/:id/:foto' , db.deletenews);
 
 apps.post('/insertnewscategory', db.insertnewscategory);
 
+apps.post('/updatenewscategory', db.updatenewscategory);
+
 apps.get('/posts/type/:name', db.categories);
 
 apps.get('/categories', db.news_categories);
