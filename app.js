@@ -397,7 +397,7 @@ apps.post('/inserthotissue', hotissue_path.single('photo'), db.inserthotissue);
 
 apps.get('/deletehotissue/:id/:foto' , db.deletehotissue);
 
-apps.get('/updatehotissue/:id/:foto' , db.updatehotissue);
+apps.post('/updatehotissue' , hotissue_path.single('photo'), db.updatehotissue);
 
 apps.get('/hotissuecategory', db.hotissuecategory);
 

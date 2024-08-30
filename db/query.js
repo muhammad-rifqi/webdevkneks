@@ -45,7 +45,7 @@ const api_login = async (req, res) => {
 
 //::::::::::::::::::::::::::::::Start Of Dashboard :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-const dashboards = async (req, res)=> {
+const dashboards = async (req, res) => {
 
     const news_mounts = await executeQuery('SELECT * FROM news');
     const jumlah1 = news_mounts.length;
@@ -57,10 +57,10 @@ const dashboards = async (req, res)=> {
     const jumlah4 = files_mounts.length;
 
     const mounted = {
-        "news" : jumlah1,
-        "videos" : jumlah2,
-        "photos" : jumlah3,
-        "files" : jumlah4,
+        "news": jumlah1,
+        "videos": jumlah2,
+        "photos": jumlah3,
+        "files": jumlah4,
     }
 
     res.status(200).json(mounted)
@@ -287,7 +287,35 @@ const inserthotissubcategory = async (req, res) => {
 }
 
 const updatehotissue = async (req, res) => {
-    console.log("ok")
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const hot_issue_datetime = date + ' ' + time;
+    const issue_datetime = req.body.issue_datetime.replace("T", " ");
+    if (!req.file || req.file == undefined || req.file == "") {
+        const sql = await executeQuery("update hot_issues set title=?,title_en=?,excerpt=?,excerpt_en=?,content=?,content_en=?,is_publish=?,hot_issue_datetime=?,created_at=?,updated_at=?,deleted_at=?,hot_subcategory_id=? where id = ?",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id, req.body.id]);
+        if (sql) {
+            res.redirect('/hi');
+        } else {
+            console.log(sql);
+            res.redirect('/hi');
+        }
+    } else {
+        const fileupload = req.file.originalname.replace(" ", "");
+        const sql = await executeQuery("update hot_issues  set title=?,title_en=?,excerpt=?,excerpt_en=?,content=?,content_en=?,image=?,is_publish=?,hot_issue_datetime=?,created_at=?,updated_at=?,deleted_at=?,hot_subcategory_id=? where id = ?",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id, req.body.id]);
+        if (sql) {
+            res.redirect('/hi');
+        } else {
+            console.log(sql);
+            res.redirect('/hi');
+        }
+    }
+
 }
 
 const deletehotissue = async (req, res) => {
