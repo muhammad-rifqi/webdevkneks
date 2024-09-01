@@ -387,6 +387,8 @@ apps.get('/deletestructure/:id/:foto', db.deletestructure);
 
 apps.post('/insertstructure', structure_path.single('photo'), db.inserstructure);
 
+apps.post('/updatestructure', structure_path.single('photo'), db.updatestructure);
+
 //::::::::::::::: Api & Query DB HOT ISSUE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/hotissue', db.hotissue);
@@ -458,6 +460,8 @@ apps.get('/deletebanners/:id', db.deletebanner);
 apps.get('/files', db.files);
 
 apps.post('/insertfiles', files_path.single('file_data'), db.insertfileupload);
+
+apps.post('/updatefileupload', files_path.single('file_data'), db.updatefileupload);
 
 apps.get('/deletefilesupload/:id/:file' , db.deletefileupload);
 

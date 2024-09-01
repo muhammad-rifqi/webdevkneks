@@ -165,6 +165,36 @@ const detailstructure = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
+
+const updatestructure = async (req,res) => {
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const times = date + ' ' + time;
+    if(!req.file || req.file == "" || req.file == undefined){
+        const sql = await executeQuery("update structure_assets set name=?,position=?,tag=?,created_at=?,updated_at=? where id = ?",
+            [req.body.name, req.body.position, req.body.tag, times, times,req.body.id]);
+        if (sql) {
+            res.redirect('/s');
+        } else {
+            console.log(sql);
+            res.redirect('/s');
+        }    
+    }else{
+        const fileuploads = req.file.originalname.replace(" ", "");
+        const sql = await executeQuery("update structure_assets set name=?,position=?,photo=?,tag=?,created_at=?,updated_at=? where id=?",
+            [req.body.name, req.body.position, fileuploads, req.body.tag, times, times, req.body.id]);
+        if (sql) {
+            res.redirect('/s');
+        } else {
+            console.log(sql);
+            res.redirect('/s');
+        }    
+    }    
+}
 //::::::::::::::::::::::::::::::End Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of ISSUE :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -581,6 +611,35 @@ const insertfileupload = async (req, res) => {
     }
 }
 
+const updatefileupload = async (req, res) => {
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const timeupdate = date + ' ' + time;
+    const file_date = req.body.date;
+    if(!req.file || req.file == undefined || req.file == ""){
+        const sql = await executeQuery("update reports set title=?,title_en=?,content=?,content_en=?,is_publish=?,date=?,created_at=?,updated_at=?,report_category_id=? where id = ?",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.file_category_id, req.body.id]);
+        if (sql) {
+            res.redirect('/f');
+        } else {
+            console.log(sql);
+            res.redirect('/f');
+        }    
+    }else{
+        const fileuploads = req.file.originalname.replace(" ", "");
+        const sql = await executeQuery("update reports set title=?,title_en=?,content=?,content_en=?,file=?,is_publish=?,date=?,created_at=?,updated_at=?,report_category_id=? where id = ?",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.file_category_id, req.body.id]);
+        if (sql) {
+            res.redirect('/f');
+        } else {
+            console.log(sql);
+            res.redirect('/f');
+        }    
+    }
+}
 
 const deletefileupload = async (req, res) => {
 
@@ -1142,6 +1201,7 @@ module.exports = {
     deletestructure,
     detailstructure,
     inserstructure,
+    updatestructure,
     hotissue,
     hotissue_detail,
     hotissuecategory,
@@ -1175,6 +1235,7 @@ module.exports = {
     files,
     filesdetails,
     insertfileupload,
+    updatefileupload,
     deletefileupload,
     files_category,
     files_category_details,

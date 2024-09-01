@@ -64,7 +64,7 @@
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Title Indonesia</label>
-                                            <input class="form-control" type="text" name="title" id="title" required>
+                                            <input class="form-control" type="text" name="title" id="title" >
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Title English</label>
@@ -73,29 +73,29 @@
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Sub Category</label>
-                                            <select class="form-control" name="category_id" id="catid" required>
+                                            <select class="form-control" name="category_id" id="catid" >
                                                 <option value="0"> Choose </option>
                                             </select>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Excerpt Indonesia</label>
                                             <textarea class="form-control" name="excerpt"
-                                                id="editor1"><p id="val1"></p></textarea>
+                                                id="editor1"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Excerpt English</label>
                                             <textarea class="form-control" name="excerpt_en"
-                                                id="editor2"><p id="val2"></p></textarea>
+                                                id="editor2"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Content Indonesia</label>
                                             <textarea class="form-control" name="content"
-                                                id="editor3"><p id="val3"></p></textarea>
+                                                id="editor3"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Content English</label>
                                             <textarea class="form-control" name="content_en"
-                                                id="editor4"><p id="val4"></p></textarea>
+                                                id="editor4"></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -105,19 +105,19 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Photo</label>
-                                            <input class="form-control" name="photo" id="photo" type="file" required>
+                                            <input class="form-control" name="photo" id="photo" type="file">
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Publish</label>
-                                            <input name="is_publish" id="is_publish" type="checkbox" value="1" required>
+                                            <input name="is_publish" id="is_publish" type="checkbox" value="1">
                                             Publish
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Tanggal Publish</label>
                                             <input class="form-control" name="issue_datetime" id="issue_datetime"
-                                                type="datetime-local" required>
+                                                type="datetime-local">
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -157,6 +157,7 @@
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         window.addEventListener("load", async () => {
             let hot_subcategory_id;
@@ -172,10 +173,14 @@
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    document.getElementById("val1").innerHTML = rows[0]?.excerpt;
-                    document.getElementById("val2").innerHTML = rows[0]?.excerpt_en;
-                    document.getElementById("val3").innerHTML = rows[0]?.content;
-                    document.getElementById("val4").innerHTML = rows[0]?.content_en;
+                    nicEditors.findEditor( "editor1" ).setContent( rows[0]?.excerpt );
+                    nicEditors.findEditor( "editor2" ).setContent( rows[0]?.excerpt_en );
+                    nicEditors.findEditor( "editor3" ).setContent( rows[0]?.content );
+                    nicEditors.findEditor( "editor4" ).setContent( rows[0]?.content_en );
+                    // document.getElementById("editor1").innerHTML = rows[0]?.excerpt;
+                    // document.getElementById("val2").innerHTML = rows[0]?.excerpt_en;
+                    // document.getElementById("val3").innerHTML = rows[0]?.content;
+                    // document.getElementById("val4").innerHTML = rows[0]?.content_en;
                     hot_subcategory_id = rows[0]?.hot_subcategory_id;
                     if (rows?.is_publish == 1) {
                         document.getElementById("is_publish").setAttribute('checked', true);
@@ -183,7 +188,7 @@
                         document.getElementById("is_publish").setAttribute('checked', false);
                     }
                     document.getElementById("issue_datetime").value = rows[0]?.hot_issue_datetime.split('.')[0];
-                    document.getElementById("preview").innerHTML = `<img src="https://webdev.kneks.go.id/storage/upload/${rows[0]?.image}" width="180"/>`;
+                    document.getElementById("preview").innerHTML = `<img src="https://webdev.rifhandi.com/uploads/hot_issue/${rows[0]?.image}" width="180"/>`;
                 })
         }
 

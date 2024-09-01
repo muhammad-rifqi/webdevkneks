@@ -79,12 +79,12 @@
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Content Indonesia</label>
                                             <textarea class="form-control" name="content"
-                                                id="editor3"><p id="val3"></p></textarea>
+                                                id="editor3"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Content English</label>
                                             <textarea class="form-control" name="content_en"
-                                                id="editor4"><p id="val4"></p></textarea>
+                                                id="editor4"></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -94,7 +94,7 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">File Upload</label>
-                                            <input class="form-control" name="fileupload" id="fileupload" type="file"
+                                            <input class="form-control" name="file_data" id="file_data" type="file" accept="application/pdf"
                                                 required>
                                         </div>
 
@@ -146,6 +146,7 @@
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         window.addEventListener("load", async () => {
             let file_category_id;
@@ -161,8 +162,10 @@
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    document.getElementById("val3").innerHTML = rows[0]?.content;
-                    document.getElementById("val4").innerHTML = rows[0]?.content_en;
+                    nicEditors.findEditor( "editor3" ).setContent( rows[0]?.content );
+                    nicEditors.findEditor( "editor4" ).setContent( rows[0]?.content_en );
+                    // document.getElementById("val3").innerHTML = rows[0]?.content;
+                    // document.getElementById("val4").innerHTML = rows[0]?.content_en;
                     file_category_id = rows[0]?.report_category_id;
                     if (rows?.is_publish == 1) {
                         document.getElementById("is_publish").setAttribute('checked', true);
@@ -170,7 +173,7 @@
                         document.getElementById("is_publish").setAttribute('checked', false);
                     }
                     document.getElementById("date").value = rows[0]?.date.split('.')[0];
-                    document.getElementById("previews").innerHTML = `https://webdev.kneks.go.id/storage/upload/${rows[0]?.file}`;
+                    document.getElementById("previews").innerHTML = `https://webdev.rifhandi.com/uploads/fileupload/${rows[0]?.file}`;
                 })
         }
 
