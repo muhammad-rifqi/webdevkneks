@@ -166,7 +166,7 @@ const detailstructure = async (req, res) => {
     }
 }
 
-const updatestructure = async (req,res) => {
+const updatestructure = async (req, res) => {
 
     const today = new Date();
     const month = (today.getMonth() + 1);
@@ -174,16 +174,16 @@ const updatestructure = async (req,res) => {
     const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const times = date + ' ' + time;
-    if(!req.file || req.file == "" || req.file == undefined){
+    if (!req.file || req.file == "" || req.file == undefined) {
         const sql = await executeQuery("update structure_assets set name=?,position=?,tag=?,created_at=?,updated_at=? where id = ?",
-            [req.body.name, req.body.position, req.body.tag, times, times,req.body.id]);
+            [req.body.name, req.body.position, req.body.tag, times, times, req.body.id]);
         if (sql) {
             res.redirect('/s');
         } else {
             console.log(sql);
             res.redirect('/s');
-        }    
-    }else{
+        }
+    } else {
         const fileuploads = req.file.originalname.replace(" ", "");
         const sql = await executeQuery("update structure_assets set name=?,position=?,photo=?,tag=?,created_at=?,updated_at=? where id=?",
             [req.body.name, req.body.position, fileuploads, req.body.tag, times, times, req.body.id]);
@@ -192,8 +192,8 @@ const updatestructure = async (req,res) => {
         } else {
             console.log(sql);
             res.redirect('/s');
-        }    
-    }    
+        }
+    }
 }
 //::::::::::::::::::::::::::::::End Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of ISSUE :::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -619,7 +619,7 @@ const updatefileupload = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const timeupdate = date + ' ' + time;
     const file_date = req.body.date;
-    if(!req.file || req.file == undefined || req.file == ""){
+    if (!req.file || req.file == undefined || req.file == "") {
         const sql = await executeQuery("update reports set title=?,title_en=?,content=?,content_en=?,is_publish=?,date=?,created_at=?,updated_at=?,report_category_id=? where id = ?",
             [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.file_category_id, req.body.id]);
         if (sql) {
@@ -627,8 +627,8 @@ const updatefileupload = async (req, res) => {
         } else {
             console.log(sql);
             res.redirect('/f');
-        }    
-    }else{
+        }
+    } else {
         const fileuploads = req.file.originalname.replace(" ", "");
         const sql = await executeQuery("update reports set title=?,title_en=?,content=?,content_en=?,file=?,is_publish=?,date=?,created_at=?,updated_at=?,report_category_id=? where id = ?",
             [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.file_category_id, req.body.id]);
@@ -637,7 +637,7 @@ const updatefileupload = async (req, res) => {
         } else {
             console.log(sql);
             res.redirect('/f');
-        }    
+        }
     }
 }
 
@@ -824,7 +824,7 @@ const news_categories_menu = async (req, res) => {
 
 const news_categories_date = async (req, res) => {
     const date_search = req.params.date;
-    const sql = await executeQuery('SELECT * FROM  news where news_datetime LIKE ?',  ['%' + date_search + '%']);
+    const sql = await executeQuery('SELECT * FROM  news where news_datetime LIKE ?', ['%' + date_search + '%']);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -832,6 +832,23 @@ const news_categories_date = async (req, res) => {
     }
 }
 
+const pagingnews = async (req, res) => {
+
+    var numPerPage = 10;
+    var skip = (req.query.page - 1) * numPerPage;
+
+    const rows = await executeQuery('SELECT * FROM news LIMIT ?, ?', [skip, numPerPage])
+    if (rows?.length > 0) {
+        res.status(200).json(rows)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
+    // const rows = await executeQuery('SELECT count(*) as numRows FROM news');
+    // var numRows = rows[0].numRows;
+    // var numPages = Math.ceil(numRows / numPerPage);
+
+}
 
 const news_categories = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM news_categories');
@@ -1206,6 +1223,7 @@ module.exports = {
     news_categories,
     news_categories_menu,
     news_categories_date,
+    pagingnews,
     deletenews,
     updatenews,
     insertnews,

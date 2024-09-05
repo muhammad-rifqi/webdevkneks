@@ -339,6 +339,7 @@ apps.get('/news/search/:date', db.news_categories_date);
 
 apps.get('/detailnewscategory/:id', db.detailnewscategory);
 
+apps.get('/api/newspaging', db.pagingnews);
 //::::::::::::::: Api & Query DB PHOTOS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/photodetail/:id', db.photodetail);
