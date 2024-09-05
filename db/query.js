@@ -812,6 +812,27 @@ const newsdetail = async (req, res) => {
 }
 
 
+const news_categories_menu = async (req, res) => {
+    const id_cnm = req.params.id;
+    const sql = await executeQuery('SELECT * FROM  news where category_id=?', [id_cnm]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const news_categories_date = async (req, res) => {
+    const date_search = req.params.date;
+    const sql = await executeQuery('SELECT * FROM  news where news_datetime LIKE ?',  ['%' + date_search + '%']);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+
 const news_categories = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM news_categories');
     if (sql?.length > 0) {
@@ -1183,6 +1204,8 @@ module.exports = {
     posts,
     newsdetail,
     news_categories,
+    news_categories_menu,
+    news_categories_date,
     deletenews,
     updatenews,
     insertnews,

@@ -333,6 +333,10 @@ apps.get('/posts/type/:name', db.categories);
 
 apps.get('/categories', db.news_categories);
 
+apps.get('/news_category/cat/:id', db.news_categories_menu);
+
+apps.get('/news/search/:date', db.news_categories_date);
+
 apps.get('/detailnewscategory/:id', db.detailnewscategory);
 
 //::::::::::::::: Api & Query DB PHOTOS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
