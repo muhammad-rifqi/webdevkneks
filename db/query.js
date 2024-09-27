@@ -533,8 +533,8 @@ const agendas = async (req, res) => {
 }
 
 const agendadetails = async (req, res) => {
-    const id_files = req.params.id;
-    const sql = await executeQuery('SELECT * FROM  agendas where id = ? ', [id_files]);
+    const id_agenda = req.params.id;
+    const sql = await executeQuery('SELECT * FROM  agendas where id = ? ', [id_agenda]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
