@@ -420,6 +420,8 @@ apps.get('/detailhotissuecategory/:id', db.detailhotissuecategory);
 
 apps.post('/inserthotissubcategory', db.inserthotissubcategory);
 
+apps.get('/direktorat', db.directorat);
+
 //::::::::::::::: Api & Query DB INSTITUTION ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/institutions', db.institutions);
