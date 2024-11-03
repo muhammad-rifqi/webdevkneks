@@ -317,6 +317,8 @@ apps.get('/dashboards', db.dashboards);
 
 apps.get('/posts', db.posts);
 
+apps.get('/search_posts', db.seacrh_posts);
+
 apps.post('/insertnews', news_path.single('photo'), db.insertnews);
 
 apps.post('/updatenews', news_path.single('photo'), db.updatenews);

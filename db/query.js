@@ -812,6 +812,38 @@ const posts = async (req, res) => {
         });
 }
 
+const seacrh_posts = async (req, res) => {
+    const result = await executeQuery("SELECT * FROM news where title LIKE '%"+req.query.cari+"%' or title_en LIKE '%"+req.query.cari+"%' ORDER BY id ASC ");
+    let promises = result.map(async (item) => {
+        return new Promise(async (resolve, reject) => {
+            let r = await executeQuery("SELECT * FROM news_categories WHERE id = ?", [item.category_id]);
+            let detail = r[0];
+            let row = {
+                "id": item?.id,
+                "title": item?.title,
+                "title_en": item?.title_en,
+                "news_datetime": item?.news_datetime,
+                "content": item?.content,
+                "content_en": item?.content_en,
+                "excerpt": item?.excerpt,
+                "excerpt_en": item?.excerpt_en,
+                "is_publish": item?.is_publish,
+                "image": item?.image,
+                "category_id": item?.category_id,
+                "detail": detail
+            };
+            resolve(row);
+        });
+    });
+    Promise.all(promises)
+        .then((rows) => {
+            res.status(200).json(rows);
+        })
+        .catch((error) => {
+            res.status(500).json({ error: error.message });
+        });
+}
+
 const newsdetail = async (req, res) => {
     const id_n = req.params.id;
     const sql = await executeQuery('SELECT * FROM  news where id=?', [id_n]);
@@ -1230,6 +1262,7 @@ module.exports = {
     deletephoto,
     updatephoto,
     posts,
+    seacrh_posts,
     newsdetail,
     news_categories,
     news_categories_menu,
