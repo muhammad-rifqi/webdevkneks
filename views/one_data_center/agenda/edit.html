@@ -80,6 +80,11 @@
                                             <input class="form-control" type="text" name="organizer" id="organizer"
                                                 required>
                                         </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Link</label>
+                                            <input class="form-control" type="text" name="link" id="link"
+                                                required>
+                                        </div>
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -133,6 +138,7 @@
                     document.getElementById("url").value = rows[0]?.url;
                     document.getElementById("place").value = rows[0]?.place;
                     document.getElementById("organizer").value = rows[0]?.organizer;
+                    document.getElementById("link").value = rows[0]?.link;
                     document.getElementById("agenda_datetime").value = rows[0]?.agenda_datetime.split('.')[0];
                 })
         }

@@ -561,8 +561,8 @@ const insertagenda = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
     const agenda_datetime = req.body.agenda_datetime.replace("T", " ");
-    const sql = await executeQuery("insert into agendas(title,title_en,url, agenda_datetime ,place,organizer, created_at, updated_at) values(?,?,?,?,?,?,?,?)",
-        [req.body.title, req.body.title_en, req.body.url, agenda_datetime, req.body.place, req.body.organizer, time_datetime, time_datetime]);
+    const sql = await executeQuery("insert into agendas(title,title_en,url, agenda_datetime ,place,organizer, link, created_at, updated_at) values(?,?,?,?,?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.url, agenda_datetime, req.body.place, req.body.organizer, req.body.link, time_datetime, time_datetime]);
     if (sql) {
         res.redirect('/a');
     } else {
