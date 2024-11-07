@@ -341,6 +341,8 @@ apps.get('/news/search/:date', db.news_categories_date);
 
 apps.get('/detailnewscategory/:id', db.detailnewscategory);
 
+apps.get('/deletenewscategory/:id', db.deletenewscategory);
+
 apps.get('/api/newspaging', db.pagingnews);
 //::::::::::::::: Api & Query DB PHOTOS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -381,6 +383,8 @@ apps.post('/changespassword', db.changespassword);
 apps.get('/abouts', db.abouts);
 
 apps.get('/detailabouts/:id', db.detailabout);
+
+apps.post('/updatetentangkami', db.updateabouts);
 
 apps.get('/deleteabouts/:id', db.deleteabout);
 
@@ -435,6 +439,8 @@ apps.get('/institutions', db.institutions);
 apps.get('/detailinstitutions/:id', db.detailinstitutions);
 
 apps.get('/deleteinstitutions/:id', db.deleteinstitution);
+
+apps.post('/updateinstitution', db.updateinstitution);
 
 //::::::::::::::: Api & Query DB SOSMED ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

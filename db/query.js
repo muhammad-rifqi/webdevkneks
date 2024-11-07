@@ -76,7 +76,6 @@ const abouts = async (req, res) => {
     } else {
         res.status(200).json({ "success": false })
     }
-
 }
 
 
@@ -100,6 +99,18 @@ const detailabout = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
+
+const updateabouts = async (req, res)=> {
+    const sql = await executeQuery('UPDATE abouts set title=? , title_en=?, tag=? , content=? , content_en=? where id=?', [req.body.title,req.body.title_en,req.body.tag,req.body.content,req.body.content_en,req.body.id]);
+    if (sql) {
+        res.redirect('/tk');
+    } else {
+        console.log(sql)
+        res.redirect('/tk');
+    }
+
+}
+
 //::::::::::::::::::::::::::::::End Of Abouts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const structure = async (req, res) => {
@@ -461,6 +472,17 @@ const deleteinstitution = async (req, res) => {
         res.redirect('/i');
     }
 }
+
+const updateinstitution = async (req, res) => {
+    const sql = await executeQuery('UPDATE institutions set tag=?, name=?, logo=?, link=?, `order`=? where id = ? ', [req.body.tag,req.body.name,req.body.logo,req.body.link,req.body.order,req.body.id]);
+    if (sql) {
+        res.redirect('/i');
+    } else {
+        console.log(sql);
+        res.redirect('/i');
+    }
+}
+
 //::::::::::::::::::::::::::::::End Of institutions :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Sosmed :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const sosmed = async (req, res) => {
@@ -1067,6 +1089,19 @@ const updatenewscategory = async (req, res) => {
         res.redirect('/nc');
     }
 }
+
+const deletenewscategory = async (req, res) => {
+    const id_news_cat = req.params.id;
+    const sql = await executeQuery('DELETE FROM news_categories where id = ? ', [id_news_cat]);
+    if (sql) {
+        res.redirect('/nc');
+    } else {
+        console.log(sql);
+        res.redirect('/nc');
+    }
+
+}
+
 //::::::::::::::::::::::::::::::End Of News:::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Photos:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const categories = async (req, res) => {
@@ -1319,6 +1354,7 @@ module.exports = {
     insertnewscategory,
     detailnewscategory,
     updatenewscategory,
+    deletenewscategory,
     insertphoto,
     insertvideo,
     updatevideos,
@@ -1327,6 +1363,7 @@ module.exports = {
     abouts,
     deleteabout,
     detailabout,
+    updateabouts,
     structure,
     deletestructure,
     detailstructure,
@@ -1350,6 +1387,7 @@ module.exports = {
     institutions,
     detailinstitutions,
     deleteinstitution,
+    updateinstitution,
     sosmed,
     detailsosmed,
     deletesosmed,
