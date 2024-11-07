@@ -246,6 +246,27 @@ const detailhotissuecategory = async (req, res) => {
     }
 }
 
+const updatehotissuecategory = async (req, res) => {
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const datetimes = date + ' ' + time;
+
+    const sql = await executeQuery("update hot_categories set title=?,title_en=?,description=?,description_en=?,created_at=?,updated_at=?,deleted_at=? where id = ?",
+        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, datetimes, datetimes, datetimes, req.body.id]);
+
+    if (sql) {
+        res.redirect('/hic');
+    } else {
+        console.log(sql)
+        res.redirect('/hic');
+    }
+
+}
+
 const deletehotissuecategory = async (req, res) => {
     const idcat = req.params.id;
     const sql = await executeQuery('DELETE FROM  hot_categories where id=?', [idcat]);
@@ -288,6 +309,30 @@ const detailhotissuesubcategory = async (req, res) => {
     }
 
 }
+
+
+const updatehotissuesubcategory = async (req, res) => {
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const datetimes = date + ' ' + time;
+
+    const sql = await executeQuery("update hot_subcategories set title=?,title_en=?,description=?,description_en=?,created_at=?,updated_at=?,deleted_at=? where id = ?",
+        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, datetimes, datetimes, datetimes, req.body.id]);
+
+    if (sql) {
+        res.redirect('/hic');
+    } else {
+        console.log(sql)
+        res.redirect('/hic');
+    }
+
+
+}
+
 
 const inserthotissue = async (req, res) => {
     const today = new Date();
@@ -813,7 +858,7 @@ const posts = async (req, res) => {
 }
 
 const seacrh_posts = async (req, res) => {
-    const result = await executeQuery("SELECT * FROM news where title LIKE '%"+req.query.cari+"%' or title_en LIKE '%"+req.query.cari+"%' ORDER BY id ASC ");
+    const result = await executeQuery("SELECT * FROM news where title LIKE '%" + req.query.cari + "%' or title_en LIKE '%" + req.query.cari + "%' ORDER BY id ASC ");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
             let r = await executeQuery("SELECT * FROM news_categories WHERE id = ?", [item.category_id]);
@@ -1290,6 +1335,7 @@ module.exports = {
     hotissue,
     hotissue_detail,
     hotissuecategory,
+    updatehotissuecategory,
     detailhotissuecategory,
     hotissuesubcategory,
     deletehotissuecategory,
@@ -1299,6 +1345,7 @@ module.exports = {
     deletehotissue,
     inserthotissue,
     inserthotissubcategory,
+    updatehotissuesubcategory,
     directorat,
     institutions,
     detailinstitutions,

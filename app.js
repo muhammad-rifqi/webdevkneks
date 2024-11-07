@@ -410,6 +410,8 @@ apps.post('/updatehotissue' , hotissue_path.single('photo'), db.updatehotissue);
 
 apps.get('/hotissuecategory', db.hotissuecategory);
 
+apps.post('/updatehotissuecategory', db.updatehotissuecategory);
+
 apps.get('/deletehotissuecategory/:id', db.deletehotissuecategory);
 
 apps.get('/deletehotissuesubcategory/:id', db.deletehotissuesubcategory);
@@ -421,6 +423,8 @@ apps.get('/detailhotissuesubcategory/:id', db.detailhotissuesubcategory);
 apps.get('/detailhotissuecategory/:id', db.detailhotissuecategory);
 
 apps.post('/inserthotissubcategory', db.inserthotissubcategory);
+
+apps.post('/updatehotissuesubcategory', db.updatehotissuesubcategory);
 
 apps.get('/direktorat', db.directorat);
 
