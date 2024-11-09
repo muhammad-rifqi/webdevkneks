@@ -100,8 +100,8 @@ const detailabout = async (req, res) => {
     }
 }
 
-const updateabouts = async (req, res)=> {
-    const sql = await executeQuery('UPDATE abouts set title=? , title_en=?, tag=? , content=? , content_en=? where id=?', [req.body.title,req.body.title_en,req.body.tag,req.body.content,req.body.content_en,req.body.id]);
+const updateabouts = async (req, res) => {
+    const sql = await executeQuery('UPDATE abouts set title=? , title_en=?, tag=? , content=? , content_en=? where id=?', [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.id]);
     if (sql) {
         res.redirect('/tk');
     } else {
@@ -474,7 +474,7 @@ const deleteinstitution = async (req, res) => {
 }
 
 const updateinstitution = async (req, res) => {
-    const sql = await executeQuery('UPDATE institutions set tag=?, name=?, logo=?, link=?, `order`=? where id = ? ', [req.body.tag,req.body.name,req.body.logo,req.body.link,req.body.order,req.body.id]);
+    const sql = await executeQuery('UPDATE institutions set tag=?, name=?, logo=?, link=?, `order`=? where id = ? ', [req.body.tag, req.body.name, req.body.logo, req.body.link, req.body.order, req.body.id]);
     if (sql) {
         res.redirect('/i');
     } else {
@@ -515,6 +515,17 @@ const deletesosmed = async (req, res) => {
         res.redirect('/sm');
     }
 }
+
+const updatesosmed = async (req, res) => {
+    const id_sosmed = req.body.id;
+    const sql = await executeQuery('UPDATE social_medias set name=? , logo=?, link=? where id = ? ', [req.body.name, req.body.logo, req.body.link, id_sosmed]);
+    if (sql) {
+        res.redirect('/sm');
+    } else {
+        console.log(sql);
+        res.redirect('/sm');
+    }
+}
 //::::::::::::::::::::::::::::::End Of Sosmed :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Scope :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const scopes = async (req, res) => {
@@ -546,6 +557,28 @@ const deletescopes = async (req, res) => {
         res.redirect('/scp');
     }
 }
+
+const updatescopes = async (req, res) => {
+    const id_scopes = req.body.id;
+
+    if (req.body.images != "" || req.body.images != undefined || !req.body.images) {
+        const sql = await executeQuery('UPDATE scopes set title=?, icon=?, title_en=?, description=?, description_en=?, image=? where  id = ? ', [req.body.title, req.body.images, req.body.title_en, req.body.description, req.body.description_en, req.body.images, id_scopes]);
+        if (sql) {
+            res.redirect('/scp');
+        } else {
+            console.log(sql);
+            res.redirect('/scp');
+        }
+    } else {
+        const sql = await executeQuery('UPDATE scopes set title=?, title_en=?, description=?, description_en=? where  id = ? ', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, id_scopes]);
+        if (sql) {
+            res.redirect('/scp');
+        } else {
+            console.log(sql);
+            res.redirect('/scp');
+        }
+    }
+}
 //::::::::::::::::::::::::::::::End Of Scope :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Maps :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const maps = async (req, res) => {
@@ -556,6 +589,16 @@ const maps = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 
+}
+
+const updatemaps = async (req, res) => {
+    const sql = await executeQuery('UPDATE map set embed=? where id=?', [req.body.embed, req.body.id]);
+    if (sql) {
+        res.redirect('/m');
+    } else {
+        console.log(sql);
+        res.redirect('/m');
+    }
 }
 //::::::::::::::::::::::::::::::End Of Maps :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Contacts :::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -568,6 +611,17 @@ const contacts = async (req, res) => {
     }
 
 }
+
+const updatecontacts = async (req, res) => {
+    const sql = await executeQuery('UPDATE contacts set address_building=?, address=?, phone_number=?, fax_number=?, email=? where id=?', [req.body.address_building, req.body.address, req.body.phone_number, req.body.fax_number, req.body.email, req.body.id]);
+    if (sql) {
+        res.redirect('/c');
+    } else {
+        console.log(sql);
+        res.redirect('/c');
+    }
+}
+
 //::::::::::::::::::::::::::::::End Of Contacts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Banner :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const banners = async (req, res) => {
@@ -597,6 +651,28 @@ const deletebanner = async (req, res) => {
     } else {
         console.log(sql);
         res.redirect('/b');
+    }
+}
+
+const updatebanners = async (req, res) => {
+    const id_banners = req.body.id;
+
+    if (req.body.images != "" || req.body.images != undefined || !req.body.images) {
+        const sql = await executeQuery('UPDATE banners set title=?, title_en=?, content=?, content_en=?, image=? where  id = ? ', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, req.body.images, id_banners]);
+        if (sql) {
+            res.redirect('/b');
+        } else {
+            console.log(sql);
+            res.redirect('/b');
+        }
+    } else {
+        const sql = await executeQuery('UPDATE banners set title=?, title_en=?, content=?, content_en=? where  id = ? ', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, id_banners]);
+        if (sql) {
+            res.redirect('/b');
+        } else {
+            console.log(sql);
+            res.redirect('/b');
+        }
     }
 }
 //::::::::::::::::::::::::::::::End Of Banner :::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -787,6 +863,17 @@ const insertfilecategorydetails = async (req, res) => {
 const deletefilecategorydetail = async (req, res) => {
     const id_files_category = req.params.id;
     const sql = await executeQuery('DELETE FROM report_categories where id = ? ', [id_files_category]);
+    if (sql) {
+        res.redirect('/fc');
+    } else {
+        console.log(sql);
+        res.redirect('/fc');
+    }
+}
+
+const updatefilescategory = async (req, res) => {
+    const id_files_category = req.body.id;
+    const sql = await executeQuery('UPDATE report_categories set title=?, title_en=?, orders=? where id = ? ', [req.body.title, req.body.title_en, req.body.orders, id_files_category]);
     if (sql) {
         res.redirect('/fc');
     } else {
@@ -1391,14 +1478,19 @@ module.exports = {
     sosmed,
     detailsosmed,
     deletesosmed,
+    updatesosmed,
     scopes,
     detailscopes,
     deletescopes,
+    updatescopes,
     maps,
+    updatemaps,
     contacts,
+    updatecontacts,
     banners,
     deletebanner,
     detailbanner,
+    updatebanners,
     agendas,
     agendadetails,
     insertagenda,
@@ -1410,6 +1502,7 @@ module.exports = {
     deletefileupload,
     files_category,
     files_category_details,
+    updatefilescategory,
     insertfilecategorydetails,
     deletefilecategorydetail,
     pdes,

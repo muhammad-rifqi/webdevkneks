@@ -450,6 +450,8 @@ apps.get('/detailsosmed/:id', db.detailsosmed);
 
 apps.get('/deletesosmed/:id', db.deletesosmed);
 
+apps.post('/updatesosmed', db.updatesosmed);
+
 //::::::::::::::: Api & Query DB SCOPES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/scopes', db.scopes);
@@ -458,13 +460,17 @@ apps.get('/detailscopes/:id', db.detailscopes);
 
 apps.get('/deletescopes/:id', db.deletescopes);
 
+apps.post('/updatescopes', db.updatescopes);
 //::::::::::::::: Api & Query DB MAPS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/maps', db.maps);
 
+apps.post('/updatemaps', db.updatemaps);
 //::::::::::::::: Api & Query DB CONTACTS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/contacts', db.contacts);
+
+apps.post('/updatecontacts', db.updatecontacts);
 
 //::::::::::::::: Api & Query DB BANNERS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -474,6 +480,7 @@ apps.get('/detailbanners/:id', db.detailbanner);
 
 apps.get('/deletebanners/:id', db.deletebanner);
 
+apps.post('/updatebanner', db.updatebanners);
 //::::::::::::::: Api & Query DB FILES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/files', db.files);
@@ -487,6 +494,8 @@ apps.get('/deletefilesupload/:id/:file' , db.deletefileupload);
 apps.get('/files_category', db.files_category);
 
 apps.get('/files_category_detail/:id', db.files_category_details);
+
+apps.post('/updatefilescategory', db.updatefilescategory);
 
 apps.get('/filesdetails/:id', db.filesdetails);
 
