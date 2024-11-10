@@ -622,6 +622,15 @@ const updatecontacts = async (req, res) => {
     }
 }
 
+const questbook = async (req, res)=>{
+    const sql = await executeQuery('INSERT into questbook (name,email,phone_number,subjek,pesan) values(?,?,?,?,?)', [req.body.name,req.body.email,req.body.phone_number,req.body.subjek,req.body.pesan]);
+    if (sql) {
+        res.status(200).json({ "success": true })
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 //::::::::::::::::::::::::::::::End Of Contacts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Banner :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const banners = async (req, res) => {
@@ -1487,6 +1496,7 @@ module.exports = {
     updatemaps,
     contacts,
     updatecontacts,
+    questbook,
     banners,
     deletebanner,
     detailbanner,

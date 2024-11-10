@@ -472,6 +472,7 @@ apps.get('/contacts', db.contacts);
 
 apps.post('/updatecontacts', db.updatecontacts);
 
+apps.post('/questbook', db.questbook);
 //::::::::::::::: Api & Query DB BANNERS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/banners', db.banners);
