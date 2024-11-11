@@ -474,12 +474,23 @@ const deleteinstitution = async (req, res) => {
 }
 
 const updateinstitution = async (req, res) => {
-    const sql = await executeQuery('UPDATE institutions set tag=?, name=?, logo=?, link=?, `order`=? where id = ? ', [req.body.tag, req.body.name, req.body.logo, req.body.link, req.body.order, req.body.id]);
-    if (sql) {
-        res.redirect('/i');
+
+    if (req.body.logo != "" || req.body.logo == undefined || !req.body.logo) {
+        const sql = await executeQuery('UPDATE institutions set tag=?, name=?, logo=?, link=?, `order`=? where id = ? ', [req.body.tag, req.body.name, req.body.logo, req.body.link, req.body.order, req.body.id]);
+        if (sql) {
+            res.redirect('/i');
+        } else {
+            console.log(sql);
+            res.redirect('/i');
+        }
     } else {
-        console.log(sql);
-        res.redirect('/i');
+        const sql = await executeQuery('UPDATE institutions set tag=?, name=?, link=?, `order`=? where id = ? ', [req.body.tag, req.body.name, req.body.link, req.body.order, req.body.id]);
+        if (sql) {
+            res.redirect('/i');
+        } else {
+            console.log(sql);
+            res.redirect('/i');
+        }
     }
 }
 
@@ -622,8 +633,8 @@ const updatecontacts = async (req, res) => {
     }
 }
 
-const questbook = async (req, res)=>{
-    const sql = await executeQuery('INSERT into questbook (name,email,phone_number,subjek,pesan) values(?,?,?,?,?)', [req.body.name,req.body.email,req.body.phone_number,req.body.subjek,req.body.pesan]);
+const questbook = async (req, res) => {
+    const sql = await executeQuery('INSERT into questbook (name,email,phone_number,subjek,pesan) values(?,?,?,?,?)', [req.body.name, req.body.email, req.body.phone_number, req.body.subjek, req.body.pesan]);
     if (sql) {
         res.status(200).json({ "success": true })
     } else {
