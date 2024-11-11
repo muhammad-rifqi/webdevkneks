@@ -745,6 +745,25 @@ const deleteagenda = async (req, res) => {
     }
 }
 
+const updateagenda = async (req, res) => {
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const agendadatetime = date + ' ' + time;
+
+    const sql = await executeQuery("update agendas set title=?, title_en=?, url=?, agenda_datetime=?, place=?, organizer=?, link=?, created_at=?, updated_at=? where id = ?",
+        [req.body.title, req.body.title_en, req.body.url, req.body.agenda_datetime, req.body.place, req.body.organizer, req.body.link, agendadatetime, agendadatetime, req.body.id]);
+    if (sql) {
+        res.redirect('/a');
+    } else {
+        console.log(sql);
+        res.redirect('/a');
+    }
+}
+
 //::::::::::::::::::::::::::::::End Of Agenda :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of FILES :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const files = async (req, res) => {
@@ -1516,6 +1535,7 @@ module.exports = {
     agendadetails,
     insertagenda,
     deleteagenda,
+    updateagenda,
     files,
     filesdetails,
     insertfileupload,
