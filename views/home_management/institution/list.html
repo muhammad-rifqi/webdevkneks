@@ -87,7 +87,8 @@
 
     <script>
         $(document).ready(function () {
-            // 2. Inisialisasi DataTable
+            // 2. Inisialisasi DataTable.
+            //https://webdev.kneks.go.id/storage/upload/
             $('#institutions').DataTable({
                 "ajax": {
                     "url": "/institutions",
@@ -100,7 +101,7 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<img src="https://webdev.kneks.go.id/storage/upload/${data?.logo}" width="80px">`;
+                            return `<img src="${data?.logo}" width="80px">`;
                         }
                     },
                     {
