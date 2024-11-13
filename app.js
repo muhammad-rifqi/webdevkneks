@@ -537,17 +537,25 @@ apps.get('/pdes', db.pdes);
 
 apps.get('/pdes_detail/:id', db.pdes_detail);
 
+apps.post('/updatepdes', db.updatepdes);
+
 apps.get('/pdes_menu', db.pdes_menu);
 
 apps.get('/pdes_menu_detail/:id', db.pdes_menu_detail);
+
+apps.post('/updatepdesmenu', db.updatepdesmenu);
 
 apps.get('/pdes_submenu', db.pdes_submenu);
 
 apps.get('/pdes_submenu_detail/:id', db.pdes_submenu_detail);
 
+apps.post('/updatepdessubmenu', db.updatepdessubmenu);
+
 apps.get('/pdes_overview', db.pdes_overview);
 
 apps.get('/pdes_overview_detail/:id', db.pdes_overview_detail);
+
+apps.post('/updatepdesoverview', db.updatepdesoverview);
 
 //::::::::::::::: Api & Query DB AUTH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

@@ -956,6 +956,17 @@ const pdes_detail = async (req, res) => {
     }
 }
 
+const updatepdes = async (req, res) => {
+    const sql = await executeQuery("update syariah set name = ? , link =? where id = ?",
+        [req.body.name, req.body.link, req.body.id]);
+    if (sql) {
+        res.redirect('/p');
+    } else {
+        console.log(sql)
+        res.redirect('/p');
+    }
+}
+
 const pdes_menu = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  syariah_menu');
     if (sql?.length > 0) {
@@ -972,6 +983,17 @@ const pdes_menu_detail = async (req, res) => {
         res.status(200).json(listdata)
     } else {
         res.status(200).json({ "success": false })
+    }
+}
+
+const updatepdesmenu = async (req, res) => {
+    const sql = await executeQuery("update syariah_menu set name = ? where id = ?",
+        [req.body.name, req.body.id]);
+    if (sql) {
+        res.redirect('/pm');
+    } else {
+        console.log(sql)
+        res.redirect('/pm');
     }
 }
 
@@ -994,6 +1016,18 @@ const pdes_submenu_detail = async (req, res) => {
     }
 }
 
+const updatepdessubmenu = async (req, res) => {
+    const sql = await executeQuery("update syariah_submenu set name = ? where id = ?",
+        [req.body.name, req.body.id]);
+    if (sql) {
+        res.redirect('/ps');
+    } else {
+        console.log(sql)
+        res.redirect('/ps');
+    }
+}
+
+
 const pdes_overview = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  syariah_overview');
     if (sql?.length > 0) {
@@ -1010,6 +1044,17 @@ const pdes_overview_detail = async (req, res) => {
         res.status(200).json(sql)
     } else {
         res.status(200).json({ "success": false })
+    }
+}
+
+const updatepdesoverview = async (req, res) => {
+    const sql = await executeQuery("update syariah_overview set title = ? , link = ? where id = ?",
+        [req.body.title, req.body.link, req.body.id]);
+    if (sql) {
+        res.redirect('/po');
+    } else {
+        console.log(sql)
+        res.redirect('/po');
     }
 }
 
@@ -1590,12 +1635,16 @@ module.exports = {
     deletefilecategorydetail,
     pdes,
     pdes_detail,
+    updatepdes,
     pdes_menu,
+    updatepdesmenu,
     pdes_menu_detail,
     pdes_submenu,
+    updatepdessubmenu,
     pdes_submenu_detail,
     pdes_overview,
     pdes_overview_detail,
+    updatepdesoverview,
     users,
     userroles,
     insertusers,
