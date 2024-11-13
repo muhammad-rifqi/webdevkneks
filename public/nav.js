@@ -42,7 +42,7 @@ document.write(`<nav class="nxl-navigation">
                             <li class="nxl-item"><a class="nxl-link" href="/tk">Tentang Kami</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/s">Struktur</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/v">Videos</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/ph">Photos</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/ph">Galeri Foto</a></li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
@@ -62,7 +62,7 @@ document.write(`<nav class="nxl-navigation">
                    <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-book"></i></span>
-                            <span class="nxl-mtext">One Data Center</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                            <span class="nxl-mtext">E-pustaka</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
                             <li class="nxl-item"><a class="nxl-link" href="/f">Files</a></li>
