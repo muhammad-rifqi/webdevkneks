@@ -279,16 +279,32 @@ apps.get('/p', (req, res) => {
     res.sendFile(path.resolve('./views/one_data_center/pdes/list.html'));
 })
 
+apps.get('/p_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/pdes/edit.html'));
+})
+
 apps.get('/pm', (req, res) => {
     res.sendFile(path.resolve('./views/one_data_center/pdes_menu/list.html'));
+})
+
+apps.get('/pm_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/pdes_menu/edit.html'));
 })
 
 apps.get('/ps', (req, res) => {
     res.sendFile(path.resolve('./views/one_data_center/pdes_submenu/list.html'));
 })
 
+apps.get('/ps_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/pdes_submenu/edit.html'));
+})
+
 apps.get('/po', (req, res) => {
     res.sendFile(path.resolve('./views/one_data_center/pdes_overview/list.html'));
+})
+
+apps.get('/po_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/one_data_center/pdes_overview/edit.html'));
 })
 
 //::::::::::::::: User Management ::::::::::::::::::::::::::::
@@ -519,11 +535,19 @@ apps.post('/updateagenda', db.updateagenda);
 
 apps.get('/pdes', db.pdes);
 
+apps.get('/pdes_detail/:id', db.pdes_detail);
+
 apps.get('/pdes_menu', db.pdes_menu);
+
+apps.get('/pdes_menu_detail/:id', db.pdes_menu_detail);
 
 apps.get('/pdes_submenu', db.pdes_submenu);
 
+apps.get('/pdes_submenu_detail/:id', db.pdes_submenu_detail);
+
 apps.get('/pdes_overview', db.pdes_overview);
+
+apps.get('/pdes_overview_detail/:id', db.pdes_overview_detail);
 
 //::::::::::::::: Api & Query DB AUTH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

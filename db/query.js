@@ -945,10 +945,31 @@ const pdes = async (req, res) => {
     }
 }
 
+
+const pdes_detail = async (req, res) => {
+    const id_pdes = req.params.id;
+    const listdata = await executeQuery('SELECT * FROM  syariah where id = ? ', [id_pdes]);
+    if (listdata?.length > 0) {
+        res.status(200).json(listdata)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 const pdes_menu = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  syariah_menu');
     if (sql?.length > 0) {
         res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const pdes_menu_detail = async (req, res) => {
+    const id_pdes_menu = req.params.id;
+    const listdata = await executeQuery('SELECT * FROM  syariah_menu where id = ? ', [id_pdes_menu]);
+    if (listdata?.length > 0) {
+        res.status(200).json(listdata)
     } else {
         res.status(200).json({ "success": false })
     }
@@ -963,6 +984,16 @@ const pdes_submenu = async (req, res) => {
     }
 }
 
+const pdes_submenu_detail = async (req, res) => {
+    const id_pdes_submenu = req.params.id;
+    const listdata = await executeQuery('SELECT * FROM  syariah_submenu where id = ? ', [id_pdes_submenu]);
+    if (listdata?.length > 0) {
+        res.status(200).json(listdata)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 const pdes_overview = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  syariah_overview');
     if (sql?.length > 0) {
@@ -971,6 +1002,17 @@ const pdes_overview = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
+
+const pdes_overview_detail = async (req, res) => {
+    const id_pdes_overview = req.params.id;
+    const sql = await executeQuery('SELECT * FROM  syariah_overview where id = ? ', [id_pdes_overview]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 //::::::::::::::::::::::::::::::End Of PDES :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of News:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const posts = async (req, res) => {
@@ -1547,9 +1589,13 @@ module.exports = {
     insertfilecategorydetails,
     deletefilecategorydetail,
     pdes,
+    pdes_detail,
     pdes_menu,
+    pdes_menu_detail,
     pdes_submenu,
+    pdes_submenu_detail,
     pdes_overview,
+    pdes_overview_detail,
     users,
     userroles,
     insertusers,
