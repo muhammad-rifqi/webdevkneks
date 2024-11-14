@@ -724,8 +724,8 @@ const insertagenda = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
     const agenda_datetime = req.body.agenda_datetime.replace("T", " ");
-    const sql = await executeQuery("insert into agendas(title,title_en,url, agenda_datetime ,place,organizer, link, created_at, updated_at) values(?,?,?,?,?,?,?,?,?)",
-        [req.body.title, req.body.title_en, req.body.url, agenda_datetime, req.body.place, req.body.organizer, req.body.link, time_datetime, time_datetime]);
+    const sql = await executeQuery("insert into agendas(title,title_en,url, agenda_datetime ,place,organizer, link, project , description, agenda_endtime, manager, contributor, indicator, impact, opening, participants, area, loc,priority_participants,kbli, age, gender, province, created_at, updated_at) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.url, agenda_datetime, req.body.place, req.body.organizer, req.body.link, req.body.project, req.body.description, req.body.agenda_endtime, req.body.manager, req.body.contributor, req.body.indicator, req.body.impact, req.body.opening, req.body.participants, req.body.area, req.body.loc, req.body.priority_participants, req.body.kbli, req.body.age, req.body.gender, req.body.province, time_datetime, time_datetime]);
     if (sql) {
         res.redirect('/a');
     } else {
@@ -754,8 +754,8 @@ const updateagenda = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const agendadatetime = date + ' ' + time;
 
-    const sql = await executeQuery("update agendas set title=?, title_en=?, url=?, agenda_datetime=?, place=?, organizer=?, link=?, created_at=?, updated_at=? where id = ?",
-        [req.body.title, req.body.title_en, req.body.url, req.body.agenda_datetime, req.body.place, req.body.organizer, req.body.link, agendadatetime, agendadatetime, req.body.id]);
+    const sql = await executeQuery("update agendas set title=?, title_en=?, url=?, agenda_datetime=?, place=?, organizer=?, link=?, project=? , description=?, agenda_endtime=?, manager=?, contributor=?, indicator=?, impact=?, opening=?, participants=?, area=?, loc=?,priority_participants=?,kbli=?, age=?, gender=?, province=?, created_at=?, updated_at=? where id = ?",
+        [req.body.title, req.body.title_en, req.body.url, req.body.agenda_datetime, req.body.place, req.body.organizer, req.body.link, req.body.project, req.body.description, req.body.agenda_endtime, req.body.manager, req.body.contributor, req.body.indicator, req.body.impact, req.body.opening, req.body.participants, req.body.area, req.body.loc, req.body.priority_participants, req.body.kbli, req.body.age, req.body.gender, req.body.province, agendadatetime, agendadatetime, req.body.id]);
     if (sql) {
         res.redirect('/a');
     } else {
@@ -1093,7 +1093,9 @@ const posts = async (req, res) => {
 }
 
 const seacrh_posts = async (req, res) => {
-    const result = await executeQuery("SELECT * FROM news where title LIKE '%" + req.query.cari + "%' or title_en LIKE '%" + req.query.cari + "%' ORDER BY id ASC ");
+    const result = await executeQuery("SELECT * FROM news where title LIKE '%" + req.query.cari + "%' or title_en LIKE '%" + req.query.cari + "%' ORDER BY id ASC limit 5 ");
+    const photos = await executeQuery("SELECT * FROM news_photos where title LIKE '%" + req.query.cari + "%' or title_en LIKE '%" + req.query.cari + "%' ORDER BY id ASC limit 5");
+    const videos = await executeQuery("SELECT * FROM news_videos where title LIKE '%" + req.query.cari + "%' or title_en LIKE '%" + req.query.cari + "%' ORDER BY id ASC limit 5 ");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
             let r = await executeQuery("SELECT * FROM news_categories WHERE id = ?", [item.category_id]);
@@ -1110,6 +1112,8 @@ const seacrh_posts = async (req, res) => {
                 "is_publish": item?.is_publish,
                 "image": item?.image,
                 "category_id": item?.category_id,
+                "photos" : photos,
+                "videos" : videos,
                 "detail": detail
             };
             resolve(row);
