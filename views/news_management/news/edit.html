@@ -187,7 +187,7 @@
                         document.getElementById("is_publish").setAttribute('checked', false);
                     }
                     document.getElementById("news_datetime").value = rows[0]?.news_datetime.split('.')[0];
-                    document.getElementById("preview").innerHTML = `<img src="https://webdev.rifhandi.com/uploads/news/${rows[0]?.image}" width="180"/>`;
+                    document.getElementById("preview").innerHTML = `<img src="${rows[0]?.image}" width="180"/>`;
                 })
         }
 
