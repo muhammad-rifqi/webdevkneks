@@ -173,7 +173,7 @@
                         document.getElementById("is_publish").setAttribute('checked', false);
                     }
                     document.getElementById("date").value = rows[0]?.date.split('.')[0];
-                    document.getElementById("previews").innerHTML = `https://webdev.rifhandi.com/uploads/fileupload/${rows[0]?.file}`;
+                    document.getElementById("previews").innerHTML = `${rows[0]?.file}`;
                 })
         }
 
