@@ -130,9 +130,9 @@ const inserstructure = async (req, res) => {
     const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const times = date + ' ' + time;
-    const fileuploads = req.file.originalname.replace(" ", "");
-    const sql = await executeQuery("insert into structure_assets(name,position,photo,tag,created_at,updated_at) values(?,?,?,?,?,?)",
-        [req.body.name, req.body.position, fileuploads, req.body.tag, times, times]);
+    const fileuploads = "https://webdev.rifhandi.com/uploads/structure/"+req.file.originalname.replace(" ", "");
+    const sql = await executeQuery("insert into structure_assets(name,position,photo,tag,description=?,created_at,updated_at) values(?,?,?,?,?,?,?)",
+        [req.body.name, req.body.position, fileuploads, req.body.tag, req.body.description, times, times]);
     if (sql) {
         res.redirect('/s');
     } else {
@@ -186,8 +186,8 @@ const updatestructure = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const times = date + ' ' + time;
     if (!req.file || req.file == "" || req.file == undefined) {
-        const sql = await executeQuery("update structure_assets set name=?,position=?,tag=?,created_at=?,updated_at=? where id = ?",
-            [req.body.name, req.body.position, req.body.tag, times, times, req.body.id]);
+        const sql = await executeQuery("update structure_assets set name=?,position=?,tag=?,description=?,created_at=?,updated_at=? where id = ?",
+            [req.body.name, req.body.position, req.body.tag, req.body.description, times, times, req.body.id]);
         if (sql) {
             res.redirect('/s');
         } else {
@@ -195,9 +195,9 @@ const updatestructure = async (req, res) => {
             res.redirect('/s');
         }
     } else {
-        const fileuploads = req.file.originalname.replace(" ", "");
-        const sql = await executeQuery("update structure_assets set name=?,position=?,photo=?,tag=?,created_at=?,updated_at=? where id=?",
-            [req.body.name, req.body.position, fileuploads, req.body.tag, times, times, req.body.id]);
+        const fileuploads = "https://webdev.rifhandi.com/uploads/structure/"+req.file.originalname.replace(" ", "");
+        const sql = await executeQuery("update structure_assets set name=?,position=?,photo=?,tag=?, description=?, created_at=?,updated_at=? where id=?",
+            [req.body.name, req.body.position, fileuploads, req.body.tag, req.body.description, times, times, req.body.id]);
         if (sql) {
             res.redirect('/s');
         } else {

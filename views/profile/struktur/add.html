@@ -17,6 +17,11 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
     <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript">
+        bkLib.onDomLoaded(function () {
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor1');
+        });
+    </script>
 </head>
 
 <body>
@@ -70,6 +75,11 @@
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Tag</label>
                                             <input class="form-control" type="text" name="tag" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Descritpion</label>
+                                            <textarea class="form-control" name="description" id="editor1"></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
