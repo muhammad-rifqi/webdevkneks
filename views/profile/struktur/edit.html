@@ -141,7 +141,7 @@
                     document.getElementById("position").value = rows[0]?.position;
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.photo}" width="180">`;
                     document.getElementById("tag").value = rows[0]?.tag;
-                    nicEditors.findEditor( "editor1" ).setContent( rows[0]?.excerpt );
+                    nicEditors.findEditor( "editor1" ).setContent( rows[0]?.description );
                 })
         }
 

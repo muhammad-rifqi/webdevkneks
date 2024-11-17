@@ -190,6 +190,7 @@ const updatestructure = async (req, res) => {
             [req.body.name, req.body.position, req.body.tag, req.body.description, times, times, req.body.id]);
         if (sql) {
             res.redirect('/s');
+            console.log(sql);
         } else {
             console.log(sql);
             res.redirect('/s');
@@ -200,6 +201,7 @@ const updatestructure = async (req, res) => {
             [req.body.name, req.body.position, fileuploads, req.body.tag, req.body.description, times, times, req.body.id]);
         if (sql) {
             res.redirect('/s');
+            console.log(sql);
         } else {
             console.log(sql);
             res.redirect('/s');
