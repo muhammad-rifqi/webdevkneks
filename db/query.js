@@ -116,7 +116,23 @@ const updateabouts = async (req, res) => {
 const structure = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  structure_assets');
     if (sql?.length > 0) {
-        res.status(200).json(sql)
+        const array = [];
+        sql?.forEach((items, index)=>{
+            const bbb = {
+                "id": items?.id,
+                "name": items?.name,
+                "position": items?.position,
+                "photo": items?.photo,
+                "pht": items?.photo?.split('/')[5],
+                "tag": items?.tag,
+                "description": items?.description,
+                "created_at": items?.created_at,
+                "updated_at": items?.updated_at,
+                "deleted_at": items?.deleted_at,
+            };
+            array.push(bbb);
+        })
+        res.status(200).json(array)
     } else {
         res.status(200).json({ "success": false })
     }
@@ -770,8 +786,27 @@ const updateagenda = async (req, res) => {
 //::::::::::::::::::::::::::::::Start Of FILES :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const files = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  reports');
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
+    if (sql?.length > 0) {  
+        const array = [];
+        sql?.forEach((items, index)=>{
+            const bbb = {
+                "id": items?.id,
+                "title": items?.title,
+                "date": items?.date,
+                "file": items?.file,
+                "content": items?.content,
+                "is_publish": items?.is_publish,
+                "created_at": items?.created_at,
+                "updated_at": items?.updated_at,
+                "deleted_at": items?.deleted_at,
+                "report_category_id": items?.report_category_id,
+                "title_en" : items?.title_en,
+                "content_en" : items?.content_en,
+                "fl" : items?.file?.split('/')[5]
+            };
+            array.push(bbb);
+        })
+        res.status(200).json(array)
     } else {
         res.status(200).json({ "success": false })
     }
@@ -1328,7 +1363,46 @@ const categories = async (req, res) => {
     const names = req.params.name;
     const sql = await executeQuery('SELECT * FROM news_' + names + '')
     if (sql?.length > 0) {
-        res.status(200).json(sql)
+        if(names == 'photos'){
+            const array = [];
+            sql?.forEach((items, index)=>{
+                const bbb = {
+                    "id": items?.id,
+                    "title": items?.title,
+                    "photo": items?.photo,
+                    "content": items?.content,
+                    "created_at": items?.created_at,
+                    "updated_at": items?.updated_at,
+                    "deleted_at": items?.deleted_at,
+                    "news_datetime": items?.news_datetime,
+                    "title_en": items?.title_en,
+                    "content_en": items?.content_en,
+                    "ph" : items?.photo?.split('/')[5]
+                };
+                array.push(bbb);
+            })
+            res.status(200).json(array)
+        }else{
+            const array = [];
+            sql?.forEach((items, index)=>{
+                const bbb = {
+                    "id": items?.id,
+                    "title": items?.title,
+                    "video": items?.video,
+                    "duration": items?.duration,
+                    "content": items?.content,
+                    "created_at": items?.created_at,
+                    "updated_at": items?.updated_at,
+                    "deleted_at": items?.news_datetime,
+                    "news_datetime": items?.news_datetime,
+                    "title_en": items?.title_en,
+                    "content_en" : items?.content_en
+                };
+                array.push(bbb);
+            })
+            res.status(200).json(array)
+        }
+       
     } else {
         res.status(200).json({ "success": false })
     }
