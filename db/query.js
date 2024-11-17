@@ -1079,6 +1079,7 @@ const posts = async (req, res) => {
                 "excerpt_en": item?.excerpt_en,
                 "is_publish": item?.is_publish,
                 "image": item?.image,
+                "img" : item?.image?.split('/')[5],
                 "category_id": item?.category_id,
                 "detail": detail
             };
