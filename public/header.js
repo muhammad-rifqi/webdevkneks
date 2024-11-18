@@ -72,7 +72,7 @@ document.write(`<header class="nxl-header">
                                     <img src="/assets/images/avatar/1.png" alt="user-image" class="img-fluid user-avtar" />
                                     <div>
                                         <h6 class="text-dark mb-0">Administrator</h6>
-                                        <span class="fs-12 fw-medium text-muted" id="name"></span>
+                                        <span class="fs-12 fw-medium text-muted" id="nama"></span>
                                     </div>
                                 </div>
                             </div>
@@ -91,12 +91,12 @@ document.write(`<header class="nxl-header">
     <!--! [End] Header !-->
     <!--! ================================================================ !-->`);
 
-    
-    let cookie = {};
+
+    let cookies = {};
     var a = document.cookie.split(";");
     for (var i = 0; i < a.length; i++) {
-      var b = a[i].split("=");
-      var [key, value] = b;
-      cookie[key.trim()] = value;
+        var b = a[i].split("=");
+        var [key, value] = b;
+        cookies[key.trim()] = value;
     }
-    document.getElementById("name").innerText = cookie["name"];
+    document.getElementById("nama").innerText = cookies["name"];

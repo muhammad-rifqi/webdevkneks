@@ -16,6 +16,7 @@ const do_login = async (req, res) => {
         res.cookie("islogin", isLogin);
         res.cookie("id", sql[0]?.id);
         res.cookie("name", sql[0]?.name);
+        res.cookie("roles_id", sql[0]?.role_id);
         res.redirect("/dashboard");
     } else {
         res.redirect("/");
@@ -27,6 +28,7 @@ const do_logout = (req, res) => {
     res.clearCookie("islogin");
     res.clearCookie("name");
     res.clearCookie("id");
+    res.clearCookie("roles_id");
     res.redirect("/");
 }
 
