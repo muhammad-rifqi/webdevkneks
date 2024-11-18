@@ -727,7 +727,7 @@ const agendas = async (req, res) => {
 }
 
 const search_agenda = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM  agendas where title LIKE '%" + req.query.cari + "%'");
+    const sql = await executeQuery("SELECT * FROM  agendas where organizer LIKE '%" + req.query.cari + "%'");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
