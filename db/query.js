@@ -1150,17 +1150,19 @@ const seacrh_posts = async (req, res) => {
             let r = await executeQuery("SELECT * FROM news_categories WHERE id = ?", [item.category_id]);
             let detail = r[0];
             let row = {
-                "id": item?.id,
-                "title": item?.title,
-                "title_en": item?.title_en,
-                "news_datetime": item?.news_datetime,
-                "content": item?.content,
-                "content_en": item?.content_en,
-                "excerpt": item?.excerpt,
-                "excerpt_en": item?.excerpt_en,
-                "is_publish": item?.is_publish,
-                "image": item?.image,
-                "category_id": item?.category_id,
+                "news": {
+                    "id": item?.id,
+                    "title": item?.title,
+                    "title_en": item?.title_en,
+                    "news_datetime": item?.news_datetime,
+                    "content": item?.content,
+                    "content_en": item?.content_en,
+                    "excerpt": item?.excerpt,
+                    "excerpt_en": item?.excerpt_en,
+                    "is_publish": item?.is_publish,
+                    "image": item?.image,
+                    "category_id": item?.category_id,
+                },
                 "photos": photos,
                 "videos": videos,
                 "detail": detail
