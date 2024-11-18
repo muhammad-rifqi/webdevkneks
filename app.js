@@ -531,6 +531,9 @@ apps.get('/deleteagenda/:id', db.deleteagenda);
 apps.get('/agendadetails/:id', db.agendadetails);
 
 apps.post('/updateagenda', db.updateagenda);
+
+apps.get('/search_agenda', db.search_agenda);
+
 //::::::::::::::: Api & Query DB PDES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/pdes', db.pdes);
