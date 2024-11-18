@@ -119,7 +119,7 @@ const structure = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  structure_assets');
     if (sql?.length > 0) {
         const array = [];
-        sql?.forEach((items, index)=>{
+        sql?.forEach((items, index) => {
             const bbb = {
                 "id": items?.id,
                 "name": items?.name,
@@ -148,7 +148,7 @@ const inserstructure = async (req, res) => {
     const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const times = date + ' ' + time;
-    const fileuploads = "https://webdev.rifhandi.com/uploads/structure/"+req.file.originalname.replace(" ", "");
+    const fileuploads = "https://webdev.rifhandi.com/uploads/structure/" + req.file.originalname.replace(" ", "");
     const sql = await executeQuery("insert into structure_assets(name,position,photo,tag,description=?,created_at,updated_at) values(?,?,?,?,?,?,?)",
         [req.body.name, req.body.position, fileuploads, req.body.tag, req.body.description, times, times]);
     if (sql) {
@@ -214,7 +214,7 @@ const updatestructure = async (req, res) => {
             res.redirect('/s');
         }
     } else {
-        const fileuploads = "https://webdev.rifhandi.com/uploads/structure/"+req.file.originalname.replace(" ", "");
+        const fileuploads = "https://webdev.rifhandi.com/uploads/structure/" + req.file.originalname.replace(" ", "");
         const sql = await executeQuery("update structure_assets set name=?,position=?,photo=?,tag=?, description=?, created_at=?,updated_at=? where id=?",
             [req.body.name, req.body.position, fileuploads, req.body.tag, req.body.description, times, times, req.body.id]);
         if (sql) {
@@ -727,7 +727,7 @@ const agendas = async (req, res) => {
 }
 
 const search_agenda = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  agendas where title LIKE '%req.query.cari%'');
+    const sql = await executeQuery("SELECT * FROM  agendas where title LIKE '%" + req.query.cari + "%'");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -797,9 +797,9 @@ const updateagenda = async (req, res) => {
 //::::::::::::::::::::::::::::::Start Of FILES :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const files = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  reports');
-    if (sql?.length > 0) {  
+    if (sql?.length > 0) {
         const array = [];
-        sql?.forEach((items, index)=>{
+        sql?.forEach((items, index) => {
             const bbb = {
                 "id": items?.id,
                 "title": items?.title,
@@ -811,9 +811,9 @@ const files = async (req, res) => {
                 "updated_at": items?.updated_at,
                 "deleted_at": items?.deleted_at,
                 "report_category_id": items?.report_category_id,
-                "title_en" : items?.title_en,
-                "content_en" : items?.content_en,
-                "fl" : items?.file?.split('/')[5]
+                "title_en": items?.title_en,
+                "content_en": items?.content_en,
+                "fl": items?.file?.split('/')[5]
             };
             array.push(bbb);
         })
@@ -841,7 +841,7 @@ const insertfileupload = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const timeupdate = date + ' ' + time;
     const file_date = req.body.date;
-    const fileuploads = "https://webdev.rifhandi.com/uploads/filesupload/"+req.file.originalname.replace(" ", "");
+    const fileuploads = "https://webdev.rifhandi.com/uploads/filesupload/" + req.file.originalname.replace(" ", "");
     const sql = await executeQuery("insert into reports(title,title_en,content,content_en,file,is_publish,date,created_at,updated_at,report_category_id) values(?,?,?,?,?,?,?,?,?,?)",
         [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.file_category_id]);
     if (sql) {
@@ -870,7 +870,7 @@ const updatefileupload = async (req, res) => {
             res.redirect('/f');
         }
     } else {
-        const fileuploads = "https://webdev.rifhandi.com/uploads/filesupload/"+req.file.originalname.replace(" ", "");
+        const fileuploads = "https://webdev.rifhandi.com/uploads/filesupload/" + req.file.originalname.replace(" ", "");
         const sql = await executeQuery("update reports set title=?,title_en=?,content=?,content_en=?,file=?,is_publish=?,date=?,created_at=?,updated_at=?,report_category_id=? where id = ?",
             [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.file_category_id, req.body.id]);
         if (sql) {
@@ -1125,7 +1125,7 @@ const posts = async (req, res) => {
                 "excerpt_en": item?.excerpt_en,
                 "is_publish": item?.is_publish,
                 "image": item?.image,
-                "img" : item?.image?.split('/')[5],
+                "img": item?.image?.split('/')[5],
                 "category_id": item?.category_id,
                 "detail": detail
             };
@@ -1161,8 +1161,8 @@ const seacrh_posts = async (req, res) => {
                 "is_publish": item?.is_publish,
                 "image": item?.image,
                 "category_id": item?.category_id,
-                "photos" : photos,
-                "videos" : videos,
+                "photos": photos,
+                "videos": videos,
                 "detail": detail
             };
             resolve(row);
@@ -1253,7 +1253,7 @@ const insertnews = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const timeupdate = date + ' ' + time;
     const news_datetime = req.body.news_datetime.replace("T", " ");
-    const fileupload = "https://webdev.rifhandi.com/uploads/news/"+req.file.originalname.replace(" ", "");
+    const fileupload = "https://webdev.rifhandi.com/uploads/news/" + req.file.originalname.replace(" ", "");
     const sql = await executeQuery("insert into news(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,news_datetime,created_at,updated_at,deleted_at,category_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id]);
     if (sql) {
@@ -1283,7 +1283,7 @@ const updatenews = async (req, res) => {
             res.redirect('/n');
         }
     } else {
-        const fileupload = "https://webdev.rifhandi.com/uploads/news/"+req.file.originalname.replace(" ", "");
+        const fileupload = "https://webdev.rifhandi.com/uploads/news/" + req.file.originalname.replace(" ", "");
         const sql = await executeQuery("UPDATE news set  title=?,title_en=?,excerpt=?,excerpt_en=?,content=?,content_en=?,image=?,is_publish=?,news_datetime=?,created_at=?,updated_at=?,deleted_at=?,category_id=? where id = ?",
             [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.news_category_id, req.body.id]);
         if (sql) {
@@ -1374,9 +1374,9 @@ const categories = async (req, res) => {
     const names = req.params.name;
     const sql = await executeQuery('SELECT * FROM news_' + names + '')
     if (sql?.length > 0) {
-        if(names == 'photos'){
+        if (names == 'photos') {
             const array = [];
-            sql?.forEach((items, index)=>{
+            sql?.forEach((items, index) => {
                 const bbb = {
                     "id": items?.id,
                     "title": items?.title,
@@ -1388,14 +1388,14 @@ const categories = async (req, res) => {
                     "news_datetime": items?.news_datetime,
                     "title_en": items?.title_en,
                     "content_en": items?.content_en,
-                    "ph" : items?.photo?.split('/')[5]
+                    "ph": items?.photo?.split('/')[5]
                 };
                 array.push(bbb);
             })
             res.status(200).json(array)
-        }else{
+        } else {
             const array = [];
-            sql?.forEach((items, index)=>{
+            sql?.forEach((items, index) => {
                 const bbb = {
                     "id": items?.id,
                     "title": items?.title,
@@ -1407,13 +1407,13 @@ const categories = async (req, res) => {
                     "deleted_at": items?.news_datetime,
                     "news_datetime": items?.news_datetime,
                     "title_en": items?.title_en,
-                    "content_en" : items?.content_en
+                    "content_en": items?.content_en
                 };
                 array.push(bbb);
             })
             res.status(200).json(array)
         }
-       
+
     } else {
         res.status(200).json({ "success": false })
     }
@@ -1426,7 +1426,7 @@ const insertphoto = async (req, res) => {
     const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
-    const photos_datetime = "https://webdev.rifhandi.com/uploads/photo/"+req.body.photo_datetime.replace("T", " ");
+    const photos_datetime = "https://webdev.rifhandi.com/uploads/photo/" + req.body.photo_datetime.replace("T", " ");
     const photoupload = req.file.originalname.replace(" ", "");
     const sql = await executeQuery("insert into news_photos(title,title_en,content,content_en,photo,news_datetime,created_at,updated_at,deleted_at) values(?,?,?,?,?,?,?,?,?)",
         [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photoupload, photos_datetime, time_datetime, time_datetime, null])
@@ -1493,7 +1493,7 @@ const updatephoto = async (req, res) => {
             res.redirect('/ph');
         }
     } else {
-        const fileuploads = "https://webdev.rifhandi.com/uploads/photo/"+req.file.originalname.replace(" ", "");
+        const fileuploads = "https://webdev.rifhandi.com/uploads/photo/" + req.file.originalname.replace(" ", "");
         const sql = await executeQuery("UPDATE news_photos set  title=?,title_en=?,content=?,content_en=?,photo=?, news_datetime=?,created_at=?,updated_at=?,deleted_at=? where id = ?",
             [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, news_datetime, timeupdate, timeupdate, null, req.body.id]);
         if (sql) {
