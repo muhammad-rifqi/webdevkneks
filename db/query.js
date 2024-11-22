@@ -248,6 +248,17 @@ const directorat = async (req, res) => {
     }
 }
 
+
+const directorat_path = async (req, res) => {
+    const id_hot_cat = req.params.id;
+    const sql = await executeQuery('SELECT * FROM `hot_issues` where hot_issue_category = ? ', [id_hot_cat]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 const hotissue_detail = async (req, res) => {
     const id_h = req.params.id;
     const sql = await executeQuery('SELECT * FROM  hot_issues where id=?', [id_h]);
@@ -374,8 +385,8 @@ const inserthotissue = async (req, res) => {
     const hot_issue_datetime = date + ' ' + time;
     const issue_datetime = req.body.issue_datetime.replace("T", " ");
     const fileupload = req.file.originalname.replace(" ", "");
-    const sql = await executeQuery("insert into hot_issues(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,hot_issue_datetime,created_at,updated_at,deleted_at,hot_subcategory_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id]);
+    const sql = await executeQuery("insert into hot_issues(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,hot_issue_datetime,created_at,updated_at,deleted_at,hot_subcategory_id,hot_issue_category) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id, req.body.hot_category_id]);
     if (sql) {
         res.redirect('/hi');
     } else {
@@ -413,8 +424,8 @@ const updatehotissue = async (req, res) => {
     const hot_issue_datetime = date + ' ' + time;
     const issue_datetime = req.body.issue_datetime.replace("T", " ");
     if (!req.file || req.file == undefined || req.file == "") {
-        const sql = await executeQuery("update hot_issues set title=?,title_en=?,excerpt=?,excerpt_en=?,content=?,content_en=?,is_publish=?,hot_issue_datetime=?,created_at=?,updated_at=?,deleted_at=?,hot_subcategory_id=? where id = ?",
-            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id, req.body.id]);
+        const sql = await executeQuery("update hot_issues set title=?,title_en=?,excerpt=?,excerpt_en=?,content=?,content_en=?,is_publish=?,hot_issue_datetime=?,created_at=?,updated_at=?,deleted_at=?,hot_subcategory_id=?,hot_issue_category=? where id = ?",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id, req.body.hot_category_id, req.body.id]);
         if (sql) {
             res.redirect('/hi');
         } else {
@@ -423,8 +434,8 @@ const updatehotissue = async (req, res) => {
         }
     } else {
         const fileupload = req.file.originalname.replace(" ", "");
-        const sql = await executeQuery("update hot_issues  set title=?,title_en=?,excerpt=?,excerpt_en=?,content=?,content_en=?,image=?,is_publish=?,hot_issue_datetime=?,created_at=?,updated_at=?,deleted_at=?,hot_subcategory_id=? where id = ?",
-            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id, req.body.id]);
+        const sql = await executeQuery("update hot_issues  set title=?,title_en=?,excerpt=?,excerpt_en=?,content=?,content_en=?,image=?,is_publish=?,hot_issue_datetime=?,created_at=?,updated_at=?,deleted_at=?,hot_subcategory_id=?,hot_issue_category=? where id = ?",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id, req.body.hot_category_id, req.body.id]);
         if (sql) {
             res.redirect('/hi');
         } else {
@@ -1169,7 +1180,7 @@ const seacrh_posts = async (req, res) => {
     Promise.all(promises)
         .then((rows) => {
             res.status(200).json({
-                "news": rows, 
+                "news": rows,
                 "photos": photos,
                 "videos": videos,
             });
@@ -1691,6 +1702,7 @@ module.exports = {
     inserthotissubcategory,
     updatehotissuesubcategory,
     directorat,
+    directorat_path,
     institutions,
     detailinstitutions,
     deleteinstitution,

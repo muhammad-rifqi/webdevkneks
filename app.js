@@ -420,6 +420,10 @@ apps.post('/updatestructure', structure_path.single('photo'), db.updatestructure
 
 apps.get('/hotissue', db.hotissue);
 
+apps.get('/directorat', db.directorat);
+
+apps.get('/directorat_path/:id', db.directorat_path);
+
 apps.get('/hotissuedetail/:id', db.hotissue_detail);
 
 apps.post('/inserthotissue', hotissue_path.single('photo'), db.inserthotissue);

@@ -70,9 +70,15 @@
                                             <input class="form-control" type="text" name="title_en" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Hot Category</label>
+                                            <select class="form-control" name="hot_category_id" id="hotcatid" required>
+                                                <option value="0"> Choose </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
                                             <label class="form-label">Sub Category</label>
                                             <select class="form-control" name="category_id" id="catid" required>
-                                            <option value="0"> Choose </option>
+                                                <option value="0"> Choose </option>
                                             </select>
                                         </div>
                                         <div class="col-lg-12 mb-4">
@@ -116,7 +122,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                    </div>
                     </form>
                 </div>
             </div>
@@ -147,17 +153,28 @@
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script>
-        window.addEventListener("load", async ()=>{
+        window.addEventListener("load", async () => {
             await fetch('/hotissuesubcategory')
-            .then(response => response.json())
-            .then((data) => {
-                data.forEach(element => {
-                    const ddd = document.createElement('option')                    
-                    ddd.value = `${element?.id}`;
-                    ddd.text = `${element?.title}`;
-                    document.getElementById("catid").append(ddd);
-                });
-            })
+                .then(response => response.json())
+                .then((data) => {
+                    data.forEach(element => {
+                        const ddd = document.createElement('option')
+                        ddd.value = `${element?.id}`;
+                        ddd.text = `${element?.title}`;
+                        document.getElementById("catid").append(ddd);
+                    });
+                })
+
+            await fetch('/hotissuecategory')
+            .then(res => res.json())
+            .then((rrr) => {
+                rrr.forEach(items => {
+                        const bbb = document.createElement('option')
+                        bbb.value = `${items?.id}`;
+                        bbb.text = `${items?.title}`;
+                        document.getElementById("hotcatid").append(bbb);
+                    });
+            });
         })
     </script>
 </body>
