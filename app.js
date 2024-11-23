@@ -564,6 +564,8 @@ apps.get('/pdes_overview_detail/:id', db.pdes_overview_detail);
 
 apps.post('/updatepdesoverview', db.updatepdesoverview);
 
+apps.get('/zona_khas', db.khas_zone);
+
 //::::::::::::::: Api & Query DB AUTH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.post('/do_login', db.api_login);

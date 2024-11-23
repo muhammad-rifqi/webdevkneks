@@ -1649,6 +1649,19 @@ const deleteuser = async (req, res) => {
     }
 }
 //::::::::::::::::::::::::::::::End Of Users:::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+//:::::::::::::::::::::::::::::: Zona Khas  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+const khas_zone = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM khas_zone');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+//:::::::::::::::::::::::::::::: End Zona Khas  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
 module.exports = {
     do_login,
@@ -1758,5 +1771,6 @@ module.exports = {
     updatepassword,
     changespassword,
     deleteuser,
+    khas_zone,
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::
