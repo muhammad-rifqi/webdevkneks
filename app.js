@@ -24,7 +24,7 @@ let storage = multer.diskStorage(
     {
         destination: './public/uploads/hot_issue/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ",""));
+            cb(null, file.originalname.replace(" ", ""));
         }
     }
 );
@@ -34,7 +34,7 @@ let storages = multer.diskStorage(
     {
         destination: './public/uploads/news/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ",""));
+            cb(null, file.originalname.replace(" ", ""));
         }
     }
 );
@@ -44,7 +44,7 @@ let disks = multer.diskStorage(
     {
         destination: './public/uploads/photo/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ",""));
+            cb(null, file.originalname.replace(" ", ""));
         }
     }
 );
@@ -54,7 +54,7 @@ let drive = multer.diskStorage(
     {
         destination: './public/uploads/structure/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ",""));
+            cb(null, file.originalname.replace(" ", ""));
         }
     }
 );
@@ -65,11 +65,23 @@ let drives = multer.diskStorage(
     {
         destination: './public/uploads/filesupload/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ",""));
+            cb(null, file.originalname.replace(" ", ""));
         }
     }
 );
 let files_path = multer({ storage: drives });
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+let custom_page = multer.diskStorage(
+    {
+        destination: './public/uploads/custompage/',
+        filename: function (req, file, cb) {
+            cb(null, file.originalname.replace(" ", ""));
+        }
+    }
+);
+let page_path = multer({ storage: custom_page });
 
 //::::::::::::::: Start Of Routes :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -331,6 +343,14 @@ apps.get('/po_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/one_data_center/pdes_overview/edit.html'));
 })
 
+apps.get('/custom', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/custom_page/list.html'));
+})
+
+apps.get('/custom_add', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/custom_page/add.html'));
+})
+
 //::::::::::::::: User Management ::::::::::::::::::::::::::::
 
 apps.get('/u', (req, res) => {
@@ -370,7 +390,7 @@ apps.post('/updatenews', news_path.single('photo'), db.updatenews);
 
 apps.get('/newsdetail/:id', db.newsdetail);
 
-apps.get('/deletenews/:id/:foto' , db.deletenews);
+apps.get('/deletenews/:id/:foto', db.deletenews);
 
 apps.post('/insertnewscategory', db.insertnewscategory);
 
@@ -393,7 +413,7 @@ apps.get('/api/newspaging', db.pagingnews);
 
 apps.get('/photodetail/:id', db.photodetail);
 
-apps.get('/deletephoto/:id/:foto' , db.deletephoto);
+apps.get('/deletephoto/:id/:foto', db.deletephoto);
 
 apps.post('/insertphoto', photo_path.single('photo'), db.insertphoto);
 
@@ -401,9 +421,9 @@ apps.post('/updatephoto', photo_path.single('photo'), db.updatephoto);
 
 //::::::::::::::: Api & Query DB VIDEOS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-apps.post('/insertvideo',  db.insertvideo);
+apps.post('/insertvideo', db.insertvideo);
 
-apps.post('/updatevideo',  db.updatevideos);
+apps.post('/updatevideo', db.updatevideos);
 
 apps.get('/videodetail/:id', db.videodetail);
 
@@ -417,7 +437,7 @@ apps.get('/roles', db.userroles);
 
 apps.post('/insertusers', db.insertusers);
 
-apps.get('/deleteuser/:id' , db.deleteuser);
+apps.get('/deleteuser/:id', db.deleteuser);
 
 apps.get('/updatepassword', db.updatepassword);
 
@@ -457,9 +477,9 @@ apps.get('/hotissuedetail/:id', db.hotissue_detail);
 
 apps.post('/inserthotissue', hotissue_path.single('photo'), db.inserthotissue);
 
-apps.get('/deletehotissue/:id/:foto' , db.deletehotissue);
+apps.get('/deletehotissue/:id/:foto', db.deletehotissue);
 
-apps.post('/updatehotissue' , hotissue_path.single('photo'), db.updatehotissue);
+apps.post('/updatehotissue', hotissue_path.single('photo'), db.updatehotissue);
 
 apps.get('/hotissuecategory', db.hotissuecategory);
 
@@ -539,7 +559,7 @@ apps.post('/insertfiles', files_path.single('file_data'), db.insertfileupload);
 
 apps.post('/updatefileupload', files_path.single('file_data'), db.updatefileupload);
 
-apps.get('/deletefilesupload/:id/:file' , db.deletefileupload);
+apps.get('/deletefilesupload/:id/:file', db.deletefileupload);
 
 apps.get('/files_category', db.files_category);
 
@@ -551,7 +571,7 @@ apps.get('/filesdetails/:id', db.filesdetails);
 
 apps.post('/insertfilescategory', db.insertfilecategorydetails);
 
-apps.get('/deletefilecategory/:id' , db.deletefilecategorydetail);
+apps.get('/deletefilecategory/:id', db.deletefilecategorydetail);
 
 //::::::::::::::: Api & Query DB AGENDA ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -622,6 +642,15 @@ apps.post('/updatetagging', db.updatetagging);
 apps.get('/provinces', db.provinces);
 
 //::::::::::::::: Api & Query DB AUTH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.get('/custom_page', db.custom_page);
+
+apps.get('/detail_custom_page/:id', db.detail_custom_page);
+
+apps.post('/insertcustompage', page_path.single('files_image'), db.insertcustompage);
+
+apps.get('/delete_custom_page/:id/:foto', db.delete_custom_page);
+//::::::::::::::: Api & Query CUSTOM PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.post('/insertusers', db.user_register);
 

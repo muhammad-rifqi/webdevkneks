@@ -21,13 +21,11 @@ const do_login = async (req, res) => {
     } else {
         res.redirect("/");
     }
-
 }
-
 
 const user_register = async (req, res) => {
     const passwords = md5(req?.body?.password);
-     const sql = await executeQuery("insert into users(name,email,password) values(?,?,?)",
+    const sql = await executeQuery("insert into users(name,email,password) values(?,?,?)",
         [req.body.username, req.body.email, passwords]);
     if (sql) {
         res.redirect('/');
@@ -754,9 +752,9 @@ const agenda_graph = async (req, res) => {
     const result = await executeQuery("SELECT * FROM db_event ORDER BY id DESC ");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
-            let wil = await executeQuery("SELECT count(province) as wilayah FROM agendas WHERE organizer LIKE '%" + item?.name  + "%'");
-            let particip = await executeQuery("SELECT count(participants) as participants FROM agendas WHERE organizer LIKE '%" + item?.name  + "%'");
-            let kegt = await executeQuery("SELECT count(organizer) as kegiatan FROM agendas WHERE organizer LIKE '%" + item?.name  + "%'");
+            let wil = await executeQuery("SELECT count(province) as wilayah FROM agendas WHERE organizer LIKE '%" + item?.name + "%'");
+            let particip = await executeQuery("SELECT count(participants) as participants FROM agendas WHERE organizer LIKE '%" + item?.name + "%'");
+            let kegt = await executeQuery("SELECT count(organizer) as kegiatan FROM agendas WHERE organizer LIKE '%" + item?.name + "%'");
             let detail1 = wil[0];
             let detail2 = particip[0];
             let detail3 = kegt[0];
@@ -1180,7 +1178,7 @@ const posts = async (req, res) => {
                 "image": item?.image,
                 "img": item?.image?.split('/')[5],
                 "category_id": item?.category_id,
-                "tagging" : item?.tag, 
+                "tagging": item?.tag,
                 "detail": detail
             };
             resolve(row);
@@ -1215,7 +1213,7 @@ const seacrh_posts = async (req, res) => {
                 "is_publish": item?.is_publish,
                 "image": item?.image,
                 "category_id": item?.category_id,
-                "tagging" : item?.tag, 
+                "tagging": item?.tag,
                 "detail": detail
             };
             resolve(row);
@@ -1312,7 +1310,7 @@ const insertnews = async (req, res) => {
     const news_datetime = req.body.news_datetime.replace("T", " ");
     const fileupload = "https://webdev.rifhandi.com/uploads/news/" + req.file.originalname.replace(" ", "");
     const sql = await executeQuery("insert into news(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,news_datetime,created_at,updated_at,deleted_at,category_id,tag) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id,req.body.taggings]);
+        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id, req.body.taggings]);
     if (sql) {
         res.redirect('/n');
     } else {
@@ -1750,9 +1748,9 @@ const detail_khas_zone = async (req, res) => {
     }
 }
 
-const insertzonakhas = async (req,res) => {
+const insertzonakhas = async (req, res) => {
     const sql = await executeQuery("insert into khas_zone(khas_zone,city,province,inauguration,tenant,inaugurated) values(?,?,?,?,?,?)",
-        [req.body.khas_zone,req.body.city,req.body.province,req.body.inauguration,req.body.tenant,req.body.inaugurated]);
+        [req.body.khas_zone, req.body.city, req.body.province, req.body.inauguration, req.body.tenant, req.body.inaugurated]);
     if (sql) {
         res.redirect('/zk');
     } else {
@@ -1761,9 +1759,9 @@ const insertzonakhas = async (req,res) => {
     }
 }
 
-const updatezonakhas = async (req,res) => {
+const updatezonakhas = async (req, res) => {
     const sql = await executeQuery("update khas_zone set khas_zone=?, city=?,province=?,inauguration=?,tenant=?,inaugurated=? where id = ?",
-        [req.body.khas_zone,req.body.city,req.body.province,req.body.inauguration,req.body.tenant,req.body.inaugurated,req.body.id]);
+        [req.body.khas_zone, req.body.city, req.body.province, req.body.inauguration, req.body.tenant, req.body.inaugurated, req.body.id]);
     if (sql) {
         res.redirect('/zk');
     } else {
@@ -1772,7 +1770,7 @@ const updatezonakhas = async (req,res) => {
     }
 }
 
-const deletezonakhas = async (req,res) => {
+const deletezonakhas = async (req, res) => {
     const id_zona_khas = req.params.id;
     const sql = await executeQuery("delete from khas_zone where id = ?",
         [id_zona_khas]);
@@ -1804,7 +1802,7 @@ const detailtagging = async (req, res) => {
 }
 
 
-const inserttagging = async (req,res) => {
+const inserttagging = async (req, res) => {
     const sql = await executeQuery("insert into tagging(tagging) values(?)",
         [req.body.tagging]);
     if (sql) {
@@ -1815,9 +1813,9 @@ const inserttagging = async (req,res) => {
     }
 }
 
-const updatetagging = async (req,res) => {
+const updatetagging = async (req, res) => {
     const sql = await executeQuery("update tagging set tagging=? where id = ?",
-        [req.body.tagging,req.body.id]);
+        [req.body.tagging, req.body.id]);
     if (sql) {
         res.redirect('/tg');
     } else {
@@ -1826,7 +1824,7 @@ const updatetagging = async (req,res) => {
     }
 }
 
-const deletetagging = async (req,res) => {
+const deletetagging = async (req, res) => {
     const id_tagging = req.params.id;
     const sql = await executeQuery("delete from tagging where id = ?",
         [id_tagging]);
@@ -1835,6 +1833,71 @@ const deletetagging = async (req,res) => {
     } else {
         console.log(sql)
         res.redirect('/tg');
+    }
+}
+
+const custom_page = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM custom_page');
+    const array = [];
+    sql.forEach((element, index)=>{
+        const rrr = {
+            "id" : element?.id,
+            "name" : element?.name,
+            "path" : element?.path,
+            "imgs" : element?.path?.split('/')[5],
+        }
+        array.push(rrr);
+    })
+
+    if (array?.length > 0) {
+        res.status(200).json(array)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const detail_custom_page = async (req, res) => {
+    const id_custom = req.params.id;
+    const sql = await executeQuery('SELECT * FROM custom_page where id = ? ', [id_custom]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const insertcustompage = async (req, res) => {
+    const filesimage = "https://webdev.rifhandi.com/uploads/custompage/" + req.file.originalname.replace(" ", "");
+    const sql = await executeQuery('insert into custom_page(name,path) values (?,?)', [req.body.names, filesimage]);
+    if (sql?.length > 0) {
+        res.redirect('/custom');
+    } else {
+        res.redirect('/custom');
+    }
+}
+
+const delete_custom_page = async (req, res) => {
+    const id_custom = req.params.id;
+    const image = req.params.foto;
+    if (fs.existsSync(fileslinux + 'custompage/' + image)) {
+        fs.unlink(fileslinux + 'custompage/' + image, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM custom_page where id = ? ', [id_custom]);
+            if (sql) {
+                res.redirect('/custom');
+            } else {
+                res.redirect('/custom');
+                console.log(sql);
+            }
+        });
+        console.log("ada")
+    } else {
+        const sql = await executeQuery('DELETE FROM custom_page where id = ? ', [id_custom]);
+        if (sql?.length > 0) {
+            res.redirect('/custom');
+        } else {
+            res.redirect('/custom');
+        }
     }
 }
 
@@ -1962,5 +2025,9 @@ module.exports = {
     detailtagging,
     deletetagging,
     updatetagging,
+    custom_page,
+    detail_custom_page,
+    insertcustompage,
+    delete_custom_page
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::
