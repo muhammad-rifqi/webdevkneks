@@ -1120,7 +1120,7 @@ const updatepdesoverview = async (req, res) => {
 //::::::::::::::::::::::::::::::End Of PDES :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of News:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const posts = async (req, res) => {
-    const result = await executeQuery("SELECT * FROM news where id between 580 and 700 ORDER BY id ASC ");
+    const result = await executeQuery("SELECT * FROM news ORDER BY id DESC ");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
             let r = await executeQuery("SELECT * FROM news_categories WHERE id = ?", [item.category_id]);
