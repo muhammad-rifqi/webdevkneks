@@ -353,6 +353,11 @@ apps.get('/cp', (req, res) => {
 
 apps.get('/dashboards', db.dashboards);
 
+apps.get('/register', (req, res) => {
+    res.sendFile(path.resolve('./views/register.html'));
+})
+
+
 //::::::::::::::: Api & Query DB NEWS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/posts', db.posts);
@@ -610,6 +615,8 @@ apps.post('/updatetagging', db.updatetagging);
 
 
 //::::::::::::::: Api & Query DB AUTH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.post('/insertusers', db.user_register);
 
 apps.post('/do_login', db.api_login);
 

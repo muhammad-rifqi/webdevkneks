@@ -24,6 +24,18 @@ const do_login = async (req, res) => {
 
 }
 
+
+const user_register = async (req, res) => {
+    const passwords = md5(req?.body?.password);
+     const sql = await executeQuery("insert into users(name,email,password) values(?,?,?)",
+        [req.body.username, req.body.email, passwords]);
+    if (sql) {
+        res.redirect('/');
+    } else {
+        res.redirect('/');
+    }
+}
+
 const do_logout = (req, res) => {
     res.clearCookie("islogin");
     res.clearCookie("name");
@@ -1767,6 +1779,7 @@ module.exports = {
     do_login,
     do_logout,
     api_login,
+    user_register,
     dashboards,
     categories,
     photodetail,
