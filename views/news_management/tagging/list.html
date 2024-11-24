@@ -32,17 +32,16 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/nc_add'"> Tambah Kategori Berita </button>
+                            <button class="btn btn-primary" onclick="window.location.href = '/tg_add'"> Tambah Tagging Berita </button>
                         </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
-                                    <table id="news_category" class="display" style="width: 100%;">
+                                    <table id="tagging" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Title</th>
-                                                <th>Title EN</th>
+                                                <th>Tagging</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -90,20 +89,19 @@
     <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
-            $('#news_category').DataTable({
+            $('#tagging').DataTable({
                 "ajax": {
-                    "url": "/categories",
+                    "url": "/tagging",
                     "dataSrc": ""
                 },
                 "columns": [
                     { "data": "id" },
-                    { "data": "title" },
-                    { "data": "title_en" },
+                    { "data": "tagging" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='edit-btn-news_category btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Edit</button>
-                                    <button class='delete-btn-news_category btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button></p>`;
+                            return `<p><button class='edit-btn-tagging btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Edit</button>
+                                    <button class='delete-btn-tagging btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button></p>`;
                         }
                     }
                 ],
@@ -119,16 +117,16 @@
             });
 
             // 3. Event Listener untuk Tombol Edit
-            $('#news_category').on('click', '.edit-btn-news_category', function () {
+            $('#tagging').on('click', '.edit-btn-tagging', function () {
                 var id = $(this).data('id');
-                window.location.href='/nc_edit/'+id;
+                window.location.href='/tg_edit/'+id;
             });
 
             // 4. Event Listener untuk Tombol Hapus
-            $('#news_category').on('click', '.delete-btn-news_category', function () {
+            $('#tagging').on('click', '.delete-btn-tagging', function () {
                 var id = $(this).data('id');
                 if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    window.location.href='/deletenewscategory/'+id;
+                    window.location.href='/deletetagging/'+id;
                 }
             });
         });

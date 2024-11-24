@@ -16,13 +16,6 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
-    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
-    <script type="text/javascript">
-        bkLib.onDomLoaded(function () {
-            new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
-            new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
-        });
-    </script>
 </head>
 
 <body>
@@ -47,40 +40,43 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/updatenewscategory" method="post">
-                            <input type="hidden" name="id" id="id" value="">
+                        <form action="/updatezonakhas" method="post">
+                            <input type="hidden" id="id" name="id" value="">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
                                         <h5 class="fw-bold mb-0 me-4">
-                                            <span class="d-block mb-2">Edit News Category:</span>
+                                            <span class="d-block mb-2">Edit Zona Khas :</span>
                                             <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
                                                 Edit
-                                                Data News Category Di Bawah Ini</span>
+                                                Data Zona Khas Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Title Indonesia</label>
-                                            <input class="form-control" type="text" name="title" id="title" required>
+                                            <label class="form-label">Zona Khas*</label>
+                                            <input class="form-control" type="text" name="khas_zone" id="khas_zones" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Title English</label>
-                                            <input class="form-control" type="text" name="title_en" id="title_en"
-                                                required>
-                                        </div>
-
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Description Indonesia</label>
-                                            <textarea class="form-control" name="description" id="editor3"
-                                                required><p id="val3"></p></textarea>
+                                            <label class="form-label">Kota</label>
+                                            <input class="form-control" type="text" name="city" id="citys" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Description English</label>
-                                            <textarea class="form-control" name="description_en" id="editor4"
-                                                required><p id="val4"></p></textarea>
+                                            <label class="form-label">Provinsi</label>
+                                            <input class="form-control" type="text" name="province" id="provinces" required>
                                         </div>
-
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Presemian</label>
+                                            <input class="form-control" type="text" name="inauguration" id="inaugurations" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tenant</label>
+                                            <input class="form-control" type="text" name="tenant" id="tenants" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Diresmikan</label>
+                                            <input class="form-control" type="text" name="inaugurated" id="inaugurateds" required>
+                                        </div>
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -88,8 +84,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
             </div>
             <!-- [ Main Content ] end -->
@@ -118,6 +114,8 @@
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+
+
     <script>
         window.addEventListener("load", async () => {
             await getUrlById();
@@ -125,18 +123,22 @@
 
         function getUrlById() {
             const URLS = new URL(window.location.href);
-            fetch('/detailnewscategory/' + URLS.pathname.split('/')[2])
+            fetch('/detail_zona_khas/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
+                    console.log(rows)
                     document.getElementById("id").value = rows[0]?.id;
-                    document.getElementById("title").value = rows[0]?.title;
-                    document.getElementById("title_en").value = rows[0]?.title_en;
-                    document.getElementById("val3").innerHTML = rows[0]?.description;
-                    document.getElementById("val4").innerHTML = rows[0]?.description_en;
+                    document.getElementById("khas_zones").value = rows[0]?.khas_zone;
+                    document.getElementById("citys").value = rows[0]?.city;
+                    document.getElementById("provinces").value = rows[0]?.province;
+                    document.getElementById("inaugurations").value = rows[0]?.inauguration;
+                    document.getElementById("tenants").value = rows[0]?.tenant;
+                    document.getElementById("inaugurateds").value = rows[0]?.inaugurated;  
                 })
         }
 
     </script>
+
 </body>
 
 </html>

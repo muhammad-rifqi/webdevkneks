@@ -200,15 +200,15 @@ apps.get('/ph_edit/:id', (req, res) => {
 })
 
 apps.get('/zk', (req, res) => {
-    res.sendFile(path.resolve('./views/news_management/zona_khas/list.html'));
+    res.sendFile(path.resolve('./views/profile/zona_khas/list.html'));
 })
 
 apps.get('/zk_add', (req, res) => {
-    res.sendFile(path.resolve('./views/news_management/zona_khas/add.html'));
+    res.sendFile(path.resolve('./views/profile/zona_khas/add.html'));
 })
 
 apps.get('/zk_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/news_management/zona_khas/edit.html'));
+    res.sendFile(path.resolve('./views/profile/zona_khas/edit.html'));
 })
 
 //::::::::::::::: Home Management :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -590,7 +590,23 @@ apps.post('/updatepdesoverview', db.updatepdesoverview);
 
 apps.get('/zona_khas', db.khas_zone);
 
+apps.get('/detail_zona_khas/:id', db.detail_khas_zone);
+
+apps.post('/insertzonakhas', db.insertzonakhas);
+
+apps.post('/updatezonakhas', db.updatezonakhas);
+
+apps.get('/deletezonakhas/:id', db.deletezonakhas);
+
 apps.get('/tagging', db.tagging);
+
+apps.get('/detailtagging/:id', db.detailtagging);
+
+apps.post('/inserttagging', db.inserttagging);
+
+apps.get('/deletetagging/:id', db.deletetagging);
+
+apps.post('/updatetagging', db.updatetagging);
 
 
 //::::::::::::::: Api & Query DB AUTH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

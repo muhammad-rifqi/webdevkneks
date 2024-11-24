@@ -1344,8 +1344,8 @@ const insertnewscategory = async (req, res) => {
     const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const cat_datetime = date + ' ' + time;
-    const sql = await executeQuery("insert into news_categories(title,title_en,created_at,updated_at) values(?,?,?,?)",
-        [req.body.title, req.body.title_en, cat_datetime, cat_datetime]);
+    const sql = await executeQuery("insert into news_categories(title,title_en,description,description_en,created_at,updated_at) values(?,?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, cat_datetime, cat_datetime]);
     if (sql) {
         res.redirect('/nc');
     } else {
@@ -1663,12 +1663,101 @@ const khas_zone = async (req, res) => {
     }
 }
 
+const detail_khas_zone = async (req, res) => {
+    const id_khas_zone = req.params.id;
+    const sql = await executeQuery('SELECT * FROM khas_zone where id = ?', [id_khas_zone]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const insertzonakhas = async (req,res) => {
+    const sql = await executeQuery("insert into khas_zone(khas_zone,city,province,inauguration,tenant,inaugurated) values(?,?,?,?,?,?)",
+        [req.body.khas_zone,req.body.city,req.body.province,req.body.inauguration,req.body.tenant,req.body.inaugurated]);
+    if (sql) {
+        res.redirect('/zk');
+    } else {
+        console.log(sql)
+        res.redirect('/zk');
+    }
+}
+
+const updatezonakhas = async (req,res) => {
+    const sql = await executeQuery("update khas_zone set khas_zone=?, city=?,province=?,inauguration=?,tenant=?,inaugurated=? where id = ?",
+        [req.body.khas_zone,req.body.city,req.body.province,req.body.inauguration,req.body.tenant,req.body.inaugurated,req.body.id]);
+    if (sql) {
+        res.redirect('/zk');
+    } else {
+        console.log(sql)
+        res.redirect('/zk');
+    }
+}
+
+const deletezonakhas = async (req,res) => {
+    const id_zona_khas = req.params.id;
+    const sql = await executeQuery("delete from khas_zone where id = ?",
+        [id_zona_khas]);
+    if (sql) {
+        res.redirect('/zk');
+    } else {
+        console.log(sql)
+        res.redirect('/zk');
+    }
+}
+
 const tagging = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM tagging');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
         res.status(200).json({ "success": false })
+    }
+}
+
+const detailtagging = async (req, res) => {
+    const id_tagging = req.params.id;
+    const sql = await executeQuery('SELECT * FROM tagging where id = ? ', [id_tagging]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+
+const inserttagging = async (req,res) => {
+    const sql = await executeQuery("insert into tagging(tagging) values(?)",
+        [req.body.tagging]);
+    if (sql) {
+        res.redirect('/tg');
+    } else {
+        console.log(sql)
+        res.redirect('/tg');
+    }
+}
+
+const updatetagging = async (req,res) => {
+    const sql = await executeQuery("update tagging set tagging=? where id = ?",
+        [req.body.tagging,req.body.id]);
+    if (sql) {
+        res.redirect('/tg');
+    } else {
+        console.log(sql)
+        res.redirect('/tg');
+    }
+}
+
+const deletetagging = async (req,res) => {
+    const id_tagging = req.params.id;
+    const sql = await executeQuery("delete from tagging where id = ?",
+        [id_tagging]);
+    if (sql) {
+        res.redirect('/tg');
+    } else {
+        console.log(sql)
+        res.redirect('/tg');
     }
 }
 
@@ -1783,6 +1872,14 @@ module.exports = {
     changespassword,
     deleteuser,
     khas_zone,
+    deletezonakhas,
+    updatezonakhas,
+    insertzonakhas,
+    detail_khas_zone,
     tagging,
+    inserttagging,
+    detailtagging,
+    deletetagging,
+    updatetagging,
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::

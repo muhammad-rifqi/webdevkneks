@@ -17,12 +17,6 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
     <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
-    <script type="text/javascript">
-        bkLib.onDomLoaded(function () {
-            new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
-            new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
-        });
-    </script>
 </head>
 
 <body>
@@ -47,38 +41,24 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/updatenewscategory" method="post">
+                        <form action="/updatetagging" method="post">
                             <input type="hidden" name="id" id="id" value="">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
                                         <h5 class="fw-bold mb-0 me-4">
-                                            <span class="d-block mb-2">Edit News Category:</span>
+                                            <span class="d-block mb-2">Edit Tagging :</span>
                                             <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
                                                 Edit
-                                                Data News Category Di Bawah Ini</span>
+                                                Data Tagging Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
+                                      
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Title Indonesia</label>
-                                            <input class="form-control" type="text" name="title" id="title" required>
-                                        </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Title English</label>
-                                            <input class="form-control" type="text" name="title_en" id="title_en"
+                                            <label class="form-label"> Tagging </label>
+                                            <input class="form-control" name="tagging" id="tag_name"
                                                 required>
-                                        </div>
-
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Description Indonesia</label>
-                                            <textarea class="form-control" name="description" id="editor3"
-                                                required><p id="val3"></p></textarea>
-                                        </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Description English</label>
-                                            <textarea class="form-control" name="description_en" id="editor4"
-                                                required><p id="val4"></p></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -125,14 +105,11 @@
 
         function getUrlById() {
             const URLS = new URL(window.location.href);
-            fetch('/detailnewscategory/' + URLS.pathname.split('/')[2])
+            fetch('/detailtagging/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("id").value = rows[0]?.id;
-                    document.getElementById("title").value = rows[0]?.title;
-                    document.getElementById("title_en").value = rows[0]?.title_en;
-                    document.getElementById("val3").innerHTML = rows[0]?.description;
-                    document.getElementById("val4").innerHTML = rows[0]?.description_en;
+                    document.getElementById("tag_name").value = rows[0]?.tagging;
                 })
         }
 
