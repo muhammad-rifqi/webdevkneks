@@ -557,6 +557,8 @@ apps.get('/deletefilecategory/:id' , db.deletefilecategorydetail);
 
 apps.get('/agenda', db.agendas);
 
+apps.get('/agenda_graph', db.agenda_graph);
+
 apps.post('/insertagenda', db.insertagenda);
 
 apps.get('/deleteagenda/:id', db.deleteagenda);

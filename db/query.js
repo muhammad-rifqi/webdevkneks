@@ -749,6 +749,36 @@ const agendas = async (req, res) => {
     }
 }
 
+
+const agenda_graph = async (req, res) => {
+    const result = await executeQuery("SELECT * FROM db_event ORDER BY id DESC ");
+    let promises = result.map(async (item) => {
+        return new Promise(async (resolve, reject) => {
+            let wil = await executeQuery("SELECT count(province) as wilayah FROM agendas WHERE organizer LIKE '%" + item?.name  + "%'");
+            let particip = await executeQuery("SELECT count(participants) as participants FROM agendas WHERE organizer LIKE '%" + item?.name  + "%'");
+            let kegt = await executeQuery("SELECT count(organizer) as kegiatan FROM agendas WHERE organizer LIKE '%" + item?.name  + "%'");
+            let detail1 = wil[0];
+            let detail2 = particip[0];
+            let detail3 = kegt[0];
+            let row = {
+                "id": item?.id,
+                "name": item?.name,
+                "wilayah": detail1,
+                "peserta": detail2,
+                "kegiatan": detail3,
+            };
+            resolve(row);
+        });
+    });
+    Promise.all(promises)
+        .then((rows) => {
+            res.status(200).json(rows);
+        })
+        .catch((error) => {
+            res.status(500).json({ error: error.message });
+        });
+}
+
 const search_agenda = async (req, res) => {
     const sql = await executeQuery("SELECT * FROM  agendas where organizer LIKE '%" + req.query.cari + "%'");
     if (sql?.length > 0) {
@@ -1851,6 +1881,7 @@ module.exports = {
     detailbanner,
     updatebanners,
     agendas,
+    agenda_graph,
     agendadetails,
     insertagenda,
     deleteagenda,
