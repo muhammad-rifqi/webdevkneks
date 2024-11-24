@@ -51,6 +51,7 @@
                     <div class="col-lg-12">
                         <form action="/updatenews" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" id="id" value="">
+                            <input type="hidden" id="taggings" name="taggings" value="">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
@@ -119,6 +120,21 @@
                                                 type="datetime-local">
                                         </div>
 
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Tagging</label>
+                                            <span id="listtag">
+
+                                            </span>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Ganti/Ubah Tagging</label>
+                                            <span id="tag">
+
+                                            </span>
+                                        </div>
+
+
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -162,6 +178,9 @@
             let news_category_id;
             await getUrlById();
             await getCategoryHotIssue();
+            await getTagging();
+            await handleClick();
+
         })
 
         function getUrlById() {
@@ -172,15 +191,12 @@
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    // document.getElementById("val1").innerHTML = rows[0]?.excerpt;
-                    // document.getElementById("val2").innerHTML = rows[0]?.excerpt_en;
-                    // document.getElementById("val3").innerHTML = rows[0]?.content;
-                    // document.getElementById("val4").innerHTML = rows[0]?.content_en;
                     nicEditors.findEditor( "editor1" ).setContent( rows[0]?.excerpt );
                     nicEditors.findEditor( "editor2" ).setContent( rows[0]?.excerpt_en );
                     nicEditors.findEditor( "editor3" ).setContent( rows[0]?.content );
                     nicEditors.findEditor( "editor4" ).setContent( rows[0]?.content_en );
                     news_category_id = rows[0]?.category_id;
+                    document.getElementById("listtag").innerHTML=`<b>[${rows[0]?.tag}]</b>`;
                     if (rows?.is_publish == 1) {
                         document.getElementById("is_publish").setAttribute('checked', true);
                     } else {
@@ -209,6 +225,25 @@
                         document.getElementById("newscatid").append(ddd);
                     });
                 })
+        }
+
+
+        function getTagging(){
+            fetch('/tagging')
+                .then(res => res.json())
+                .then((rrr) => {
+                    let ttt = "";
+                    rrr.forEach(items => {
+                        ttt += `&nbsp;<input type="checkbox" id="cek${items?.id}" name="options" value="${items?.tagging}" onchange="handleClick(${items?.id})"> &nbsp; ${items?.tagging} &nbsp;`;
+                    });
+                    document.getElementById("tag").innerHTML = ttt;
+                })
+        }
+
+        function handleClick(event) {
+            const checkboxes = document.querySelectorAll('input[name="options"]:checked');
+            const selectedValues = Array.from(checkboxes).map(checkbox => checkbox.value);
+            document.getElementById("taggings").value = selectedValues.join(',');
         }
 
     </script>
