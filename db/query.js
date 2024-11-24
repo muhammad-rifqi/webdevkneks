@@ -759,11 +759,12 @@ const agenda_graph = async (req, res) => {
             let detail2 = particip[0];
             let detail3 = kegt[0];
             let row = {
-                "id": item?.id,
-                "name": item?.name,
-                "wilayah": detail1,
-                "peserta": detail2,
-                "kegiatan": detail3,
+                "key": item?.name,
+                "data" : {
+                    "totalKegiatan": detail1?.wilayah,
+                    "totalPeserta": detail2?.participants,
+                    "totalWilayah": detail3?.kegiatan
+                }
             };
             resolve(row);
         });
