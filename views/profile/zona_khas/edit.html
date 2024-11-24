@@ -63,8 +63,11 @@
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Provinsi</label>
-                                            <input class="form-control" type="text" name="province" id="provinces" required>
+                                            <select class="form-control" name="province" id="provincesss" required>
+                                                <option value="0"> Choose </option>
+                                            </select>
                                         </div>
+
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Presemian</label>
                                             <input class="form-control" type="text" name="inauguration" id="inaugurations" required>
@@ -118,7 +121,9 @@
 
     <script>
         window.addEventListener("load", async () => {
+            let id_province;
             await getUrlById();
+            await getProvinces();
         })
 
         function getUrlById() {
@@ -126,18 +131,34 @@
             fetch('/detail_zona_khas/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
-                    console.log(rows)
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("khas_zones").value = rows[0]?.khas_zone;
                     document.getElementById("citys").value = rows[0]?.city;
-                    document.getElementById("provinces").value = rows[0]?.province;
+                    id_province = rows[0]?.province;
                     document.getElementById("inaugurations").value = rows[0]?.inauguration;
                     document.getElementById("tenants").value = rows[0]?.tenant;
                     document.getElementById("inaugurateds").value = rows[0]?.inaugurated;  
                 })
         }
 
+        
+    function getProvinces() {
+        fetch('/provinces')
+            .then(response => response.json())
+            .then((data) => {
+                data.forEach(element => {
+                    const choosed = (element?.id == id_province) ? true : false ;
+                    const ddd = document.createElement('option')
+                    ddd.value = `${element?.id}`;
+                    ddd.text = `${element?.province_name}`;
+                    ddd.selected = choosed
+                    document.getElementById("provincesss").append(ddd);
+                });
+            })
+    }
+
     </script>
+
 
 </body>
 

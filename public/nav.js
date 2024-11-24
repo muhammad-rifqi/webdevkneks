@@ -67,6 +67,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                             <li class="nxl-item"><a class="nxl-link" href="/b">Banners</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/scp">Scope</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/m">Maps</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/custom">Custom Page</a></li>
                         </ul>
                     </li>
                    <li class="nxl-item nxl-hasmenu">

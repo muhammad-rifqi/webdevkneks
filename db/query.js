@@ -1696,7 +1696,32 @@ const deleteuser = async (req, res) => {
 
 //:::::::::::::::::::::::::::::: Zona Khas  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
+
 const khas_zone = async (req, res) => {
+    const result = await executeQuery("SELECT * FROM province ORDER BY id DESC ");
+    let promises = result.map(async (item) => {
+        return new Promise(async (resolve, reject) => {
+            let zone = await executeQuery("SELECT * FROM khas_zone WHERE province = ?", [item?.id]);
+            let detail = zone;
+            let row = {
+                "id": item?.id,
+                "province_name": item?.province_name,
+                "zonakhas": detail,
+            };
+            resolve(row);
+        });
+    });
+    Promise.all(promises)
+        .then((rows) => {
+            res.status(200).json(rows);
+        })
+        .catch((error) => {
+            res.status(500).json({ error: error.message });
+        });
+}
+
+const zona_peta = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM khas_zone');
     if (sql?.length > 0) {
         res.status(200).json(sql)
@@ -1704,6 +1729,16 @@ const khas_zone = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
+
+const provinces = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM province');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 
 const detail_khas_zone = async (req, res) => {
     const id_khas_zone = req.params.id;
@@ -1916,9 +1951,11 @@ module.exports = {
     changespassword,
     deleteuser,
     khas_zone,
+    zona_peta,
     deletezonakhas,
     updatezonakhas,
     insertzonakhas,
+    provinces,
     detail_khas_zone,
     tagging,
     inserttagging,

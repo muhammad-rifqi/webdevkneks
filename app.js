@@ -597,6 +597,8 @@ apps.post('/updatepdesoverview', db.updatepdesoverview);
 
 apps.get('/zona_khas', db.khas_zone);
 
+apps.get('/zona_peta', db.zona_peta);
+
 apps.get('/detail_zona_khas/:id', db.detail_khas_zone);
 
 apps.post('/insertzonakhas', db.insertzonakhas);
@@ -615,6 +617,9 @@ apps.get('/deletetagging/:id', db.deletetagging);
 
 apps.post('/updatetagging', db.updatetagging);
 
+//::::::::::::::: Api & Query DB DAERAH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.get('/provinces', db.provinces);
 
 //::::::::::::::: Api & Query DB AUTH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
