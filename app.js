@@ -141,6 +141,18 @@ apps.get('/nc_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/news_management/news_category/edit.html'));
 })
 
+apps.get('/tg', (req, res) => {
+    res.sendFile(path.resolve('./views/news_management/tagging/list.html'));
+})
+
+apps.get('/tg_add', (req, res) => {
+    res.sendFile(path.resolve('./views/news_management/tagging/add.html'));
+})
+
+apps.get('/tg_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/news_management/tagging/edit.html'));
+})
+
 //::::::::::::::: Profile ::::::::::::::::::::::::::::
 
 apps.get('/tk', (req, res) => {
@@ -185,6 +197,18 @@ apps.get('/ph_add', (req, res) => {
 
 apps.get('/ph_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/profile/photos/edit.html'));
+})
+
+apps.get('/zk', (req, res) => {
+    res.sendFile(path.resolve('./views/news_management/zona_khas/list.html'));
+})
+
+apps.get('/zk_add', (req, res) => {
+    res.sendFile(path.resolve('./views/news_management/zona_khas/add.html'));
+})
+
+apps.get('/zk_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/news_management/zona_khas/edit.html'));
 })
 
 //::::::::::::::: Home Management :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -565,6 +589,9 @@ apps.get('/pdes_overview_detail/:id', db.pdes_overview_detail);
 apps.post('/updatepdesoverview', db.updatepdesoverview);
 
 apps.get('/zona_khas', db.khas_zone);
+
+apps.get('/tagging', db.tagging);
+
 
 //::::::::::::::: Api & Query DB AUTH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

@@ -39,6 +39,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                         <ul class="nxl-submenu">
                             <li class="nxl-item"><a class="nxl-link" href="/n">News</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/nc">News Category</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/tg">Tagging</a></li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">
@@ -51,6 +52,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                             <li class="nxl-item"><a class="nxl-link" href="/s">Struktur</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/v">Videos</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/ph">Galeri Foto</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/zk">Zona Khas</a></li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">

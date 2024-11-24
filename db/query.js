@@ -1138,6 +1138,7 @@ const posts = async (req, res) => {
                 "image": item?.image,
                 "img": item?.image?.split('/')[5],
                 "category_id": item?.category_id,
+                "tagging" : item?.tag, 
                 "detail": detail
             };
             resolve(row);
@@ -1172,6 +1173,7 @@ const seacrh_posts = async (req, res) => {
                 "is_publish": item?.is_publish,
                 "image": item?.image,
                 "category_id": item?.category_id,
+                "tagging" : item?.tag, 
                 "detail": detail
             };
             resolve(row);
@@ -1661,6 +1663,15 @@ const khas_zone = async (req, res) => {
     }
 }
 
+const tagging = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM tagging');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 //:::::::::::::::::::::::::::::: End Zona Khas  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
 module.exports = {
@@ -1772,5 +1783,6 @@ module.exports = {
     changespassword,
     deleteuser,
     khas_zone,
+    tagging,
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::
