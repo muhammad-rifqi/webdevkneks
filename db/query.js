@@ -1702,7 +1702,22 @@ const khas_zone = async (req, res) => {
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
             let zone = await executeQuery("SELECT * FROM khas_zone WHERE province = ?", [item?.id]);
-            let detail = zone;
+            const aar = [];
+            zone.forEach((elem)=>{
+                const ppp = {
+                    "id": elem?.id,
+                    "khas_zone": elem?.khas_zone,
+                    "city": elem?.city,
+                    "province": elem?.province,
+                    "province_names" : item?.province_name,
+                    "inauguration": elem?.inauguration,
+                    "tenant": elem?.tenant,
+                    "inaugurated": elem?.inaugurated
+                }
+                aar.push(ppp);
+            })
+            
+            let detail = aar;
             let row = {
                 "id": item?.id,
                 "province_name": item?.province_name,
