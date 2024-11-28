@@ -99,4 +99,9 @@ document.write(`<header class="nxl-header">
         var [key, value] = b;
         cookies[key.trim()] = value;
     }
-    document.getElementById("nama").innerText = cookies["name"];
+    if (cookie['name'] == "" || cookie['name'] == undefined) {
+        window.location.href = '/';
+      } else {
+        document.getElementById("nama").innerText = cookies["name"]
+      }
+    ;
