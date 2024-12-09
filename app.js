@@ -680,6 +680,18 @@ apps.get('/narations', db.naration);
 
 apps.post('/updatenarations', db.updatenarations);
 
+apps.get('/statistics', db.statistics);
+
+apps.get('/delete_statistics/:id', db.deletestatistic);
+
+apps.post('/insertstatistics', db.insertstatistic);
+
+apps.get('/sourcesdata', db.sourcesdata);
+
+apps.get('/deletesourcesdata/:id', db.deletesourcesdata);
+
+apps.post('/insertsourcesdata', db.insertsourcesdata);
+
 //::::::::::::::: Api & Query CUSTOM DATA NARATION PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.post('/insertusers', db.user_register);

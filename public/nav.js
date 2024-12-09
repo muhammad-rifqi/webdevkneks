@@ -92,7 +92,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                         <ul class="nxl-submenu">
                             <li class="nxl-item"><a class="nxl-link" href="/narationfront">Naration Data</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/datafront">Source Data</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/slidefront">Data Slide</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/slidefront">Data Slider</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/customfront">Custom Image Page</a></li>
                         </ul>
                     </li>

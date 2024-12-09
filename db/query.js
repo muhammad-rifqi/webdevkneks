@@ -760,7 +760,7 @@ const agenda_graph = async (req, res) => {
             let detail3 = kegt[0];
             let row = {
                 "key": item?.name,
-                "data" : {
+                "data": {
                     "totalKegiatan": detail1?.wilayah,
                     "totalPeserta": detail2?.participants,
                     "totalWilayah": detail3?.kegiatan
@@ -1703,20 +1703,20 @@ const khas_zone = async (req, res) => {
         return new Promise(async (resolve, reject) => {
             let zone = await executeQuery("SELECT * FROM khas_zone WHERE province = ?", [item?.id]);
             const aar = [];
-            zone.forEach((elem)=>{
+            zone.forEach((elem) => {
                 const ppp = {
                     "id": elem?.id,
                     "khas_zone": elem?.khas_zone,
                     "city": elem?.city,
                     "province": elem?.province,
-                    "province_names" : item?.province_name,
+                    "province_names": item?.province_name,
                     "inauguration": elem?.inauguration,
                     "tenant": elem?.tenant,
                     "inaugurated": elem?.inaugurated
                 }
                 aar.push(ppp);
             })
-            
+
             let detail = aar;
             let row = {
                 "id": item?.id,
@@ -1855,12 +1855,12 @@ const deletetagging = async (req, res) => {
 const custom_page = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM custom_page');
     const array = [];
-    sql.forEach((element, index)=>{
+    sql.forEach((element, index) => {
         const rrr = {
-            "id" : element?.id,
-            "name" : element?.name,
-            "path" : element?.path,
-            "imgs" : element?.path?.split('/')[5],
+            "id": element?.id,
+            "name": element?.name,
+            "path": element?.path,
+            "imgs": element?.path?.split('/')[5],
         }
         array.push(rrr);
     })
@@ -1937,6 +1937,68 @@ const updatenarations = async (req, res) => {
         res.redirect('/narationfront');
     }
 }
+
+const statistics = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM statistic');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const insertstatistic = async (req, res) => {
+    const sql = await executeQuery("insert into statistic(title,title_en,amount,date_created) values(?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.amount, req.body.date_created]);
+    if (sql) {
+        res.redirect('/slidefront');
+    } else {
+        console.log(sql)
+        res.redirect('/slidefront');
+    }
+}
+
+const deletestatistic = async (req, res) => {
+    const id_stat = req.params.id;
+    const sql = await executeQuery('DELETE FROM statistic where id = ? ', [id_stat]);
+    if (sql) {
+        res.redirect('/slidefront');
+    } else {
+        res.redirect('/slidefront');
+    }
+}
+
+
+const sourcesdata = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM sourcedata');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const insertsourcesdata = async (req, res) => {
+    const sql = await executeQuery("insert into sourcedata(dataset,source,date_created) values(?,?,?)",
+        [req.body.dataset, req.body.source, req.body.date_created]);
+    if (sql) {
+        res.redirect('/datafront');
+    } else {
+        console.log(sql)
+        res.redirect('/datafront');
+    }
+}
+
+const deletesourcesdata = async (req, res) => {
+    const id_stat = req.params.id;
+    const sql = await executeQuery('DELETE FROM sourcedata where id = ? ', [id_stat]);
+    if (sql) {
+        res.redirect('/datafront');
+    } else {
+        res.redirect('/datafront');
+    }
+}
+
 //::::::::::::::::::::::::::::::::::: END OF CUSTOM DATA NARATION PAGE
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
 module.exports = {
@@ -2066,6 +2128,12 @@ module.exports = {
     insertcustompage,
     delete_custom_page,
     naration,
-    updatenarations
+    updatenarations,
+    statistics,
+    deletestatistic,
+    insertstatistic,
+    sourcesdata,
+    deletesourcesdata,
+    insertsourcesdata,
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::

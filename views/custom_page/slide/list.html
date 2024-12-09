@@ -32,17 +32,19 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/custom_add'"> Tambah Custom Page </button>
+                            <button class="btn btn-primary" onclick="window.location.href = '/slide_add'"> Tambah Slider Data Home </button>
                         </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
-                                    <table id="custom_page" class="display" style="width: 100%;">
+                                    <table id="statistics" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>URL Name</th>
-                                                <th>Files Images</th>
+                                                <th>Title</th>
+                                                <th>Title EN</th>
+                                                <th>Amount</th>
+                                                <th>Date Created</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -90,19 +92,21 @@
     <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
-            $('#custom_page').DataTable({
+            $('#statistics').DataTable({
                 "ajax": {
-                    "url": "/custom_page",
+                    "url": "/statistics",
                     "dataSrc": ""
                 },
                 "columns": [
                     { "data": "id" },
-                    { "data": "name" },
-                    { "data": "path" },
+                    { "data": "title" },
+                    { "data": "title_en" },
+                    { "data": "amount" },
+                    { "data": "date_created" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='delete-btn-custom-page btn btn-danger' data-id='${row.id}' data-foto = '${row.imgs}'style="padding:2px; float: left; margin: 2px">Delete</button></p>`;
+                            return `<p><button class='delete-btn-custom-page btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button></p>`;
                         }
                     }
                 ],
@@ -118,11 +122,10 @@
             });
 
             // 4. Event Listener untuk Tombol Hapus
-            $('#custom_page').on('click', '.delete-btn-custom-page', function () {
+            $('#statistics').on('click', '.delete-btn-custom-page', function () {
                 var id = $(this).data('id');
-                var foto = $(this).data('foto');
                 if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    window.location.href='/delete_custom_page/'+id+'/'+ foto;
+                    window.location.href='/delete_statistics/'+id;
                 }
             });
         });
