@@ -1886,9 +1886,9 @@ const insertcustompage = async (req, res) => {
     const filesimage = "https://webdev.rifhandi.com/uploads/custompage/" + req.file.originalname.replace(" ", "");
     const sql = await executeQuery('insert into custom_page(name,path) values (?,?)', [req.body.names, filesimage]);
     if (sql?.length > 0) {
-        res.redirect('/custom');
+        res.redirect('/customfront');
     } else {
-        res.redirect('/custom');
+        res.redirect('/customfront');
     }
 }
 
@@ -1900,9 +1900,9 @@ const delete_custom_page = async (req, res) => {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM custom_page where id = ? ', [id_custom]);
             if (sql) {
-                res.redirect('/custom');
+                res.redirect('/customfront');
             } else {
-                res.redirect('/custom');
+                res.redirect('/customfront');
                 console.log(sql);
             }
         });
@@ -1910,9 +1910,9 @@ const delete_custom_page = async (req, res) => {
     } else {
         const sql = await executeQuery('DELETE FROM custom_page where id = ? ', [id_custom]);
         if (sql?.length > 0) {
-            res.redirect('/custom');
+            res.redirect('/customfront');
         } else {
-            res.redirect('/custom');
+            res.redirect('/customfront');
         }
     }
 }

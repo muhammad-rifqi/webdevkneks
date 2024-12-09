@@ -67,7 +67,6 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                             <li class="nxl-item"><a class="nxl-link" href="/b">Banners</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/scp">Scope</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/m">Maps</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/custom">Custom Page</a></li>
                         </ul>
                     </li>
                    <li class="nxl-item nxl-hasmenu">
@@ -83,6 +82,17 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                             <li class="nxl-item"><a class="nxl-link" href="/pm">PDES Menu</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/ps">PDES SubMenu</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/po">PDES Overview</a></li>
+                        </ul>
+                    </li>
+                    <li class="nxl-item nxl-hasmenu">
+                        <a href="javascript:void(0);" class="nxl-link">
+                            <span class="nxl-micon"><i class="feather-home"></i></span>
+                            <span class="nxl-mtext">Custom Page</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                        </a>
+                        <ul class="nxl-submenu">
+                            <li class="nxl-item"><a class="nxl-link" href="/datafront">Data Sumber</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/slidefront">Data Slide</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/customfront">Custom Image Page</a></li>
                         </ul>
                     </li>
                     <li class="nxl-item nxl-hasmenu">

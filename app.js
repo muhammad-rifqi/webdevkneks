@@ -343,7 +343,7 @@ apps.get('/po_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/one_data_center/pdes_overview/edit.html'));
 })
 
-apps.get('/custom', (req, res) => {
+apps.get('/customfront', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/custom_page/list.html'));
 })
 
@@ -367,6 +367,21 @@ apps.get('/u_edit', (req, res) => {
 
 apps.get('/cp', (req, res) => {
     res.sendFile(path.resolve('./views/user_management/change_password/list.html'));
+})
+
+//:::::::::::::::::::::::::::::::: Custom Page :::::::::::::::::::::::::::::::::::::
+
+
+apps.get('/slidefront', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/slide/list.html'));
+})
+
+apps.get('/slide_add', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/slide/add.html'));
+})
+
+apps.get('/datafront', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/add.html'));
 })
 
 //::::::::::::::: Api & Query DB :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
