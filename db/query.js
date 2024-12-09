@@ -1918,6 +1918,26 @@ const delete_custom_page = async (req, res) => {
 }
 
 //:::::::::::::::::::::::::::::: End Zona Khas  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+const naration = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM naration where id = 1');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const updatenarations = async (req, res) => {
+    const sql = await executeQuery("UPDATE naration set description = ?, description_en = ? where id = ?",
+        [req.body.description, req.body.description_en, req.body.id]);
+    if (sql) {
+        res.redirect('/narationfront');
+    } else {
+        res.redirect('/narationfront');
+    }
+}
+//::::::::::::::::::::::::::::::::::: END OF CUSTOM DATA NARATION PAGE
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
 module.exports = {
     do_login,
@@ -2044,6 +2064,8 @@ module.exports = {
     custom_page,
     detail_custom_page,
     insertcustompage,
-    delete_custom_page
+    delete_custom_page,
+    naration,
+    updatenarations
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::

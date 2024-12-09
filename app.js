@@ -673,7 +673,14 @@ apps.get('/detail_custom_page/:id', db.detail_custom_page);
 apps.post('/insertcustompage', page_path.single('files_image'), db.insertcustompage);
 
 apps.get('/delete_custom_page/:id/:foto', db.delete_custom_page);
+
 //::::::::::::::: Api & Query CUSTOM PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.get('/narations', db.naration);
+
+apps.post('/updatenarations', db.updatenarations);
+
+//::::::::::::::: Api & Query CUSTOM DATA NARATION PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.post('/insertusers', db.user_register);
 

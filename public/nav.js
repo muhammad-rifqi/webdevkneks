@@ -90,8 +90,8 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                             <span class="nxl-mtext">Custom Page</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="/narationfront">Narasi Data</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/datafront">Sumber Data</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/narationfront">Naration Data</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/datafront">Source Data</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/slidefront">Data Slide</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/customfront">Custom Image Page</a></li>
                         </ul>
