@@ -381,8 +381,16 @@ apps.get('/slide_add', (req, res) => {
 })
 
 apps.get('/datafront', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/list.html'));
+})
+
+apps.get('/data_add', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/add.html'));
 })
+
+apps.get('/narationfront', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/edit.html'));
+});
 
 //::::::::::::::: Api & Query DB :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
