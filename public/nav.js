@@ -257,7 +257,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3
 }
 
 //Isu Terkini
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3|| cookie["roles_id"] == 4|| cookie["roles_id"] == 7|| cookie["roles_id"] == 6) {
+if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2||  cookie["roles_id"] == 4) {
     document.write(` <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
@@ -274,7 +274,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                             <li class="nxl-item"><a class="nxl-link" href="/hisc">Sub Kategori</a></li>
                         `);
 }
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3|| cookie["roles_id"] == 4|| cookie["roles_id"] == 7|| cookie["roles_id"] == 6) {
+if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 4) {
   document.write(`
                         </ul>
                     </li>`);
