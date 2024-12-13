@@ -381,7 +381,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3
 }
 
 //kdeks
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3|| cookie["roles_id"] == 4|| cookie["roles_id"] == 7 ) {
+if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3|| cookie["roles_id"] == 4|| cookie["roles_id"] == 6 ) {
     document.write(`<li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
@@ -398,7 +398,7 @@ if (cookie["roles_id"] == 1 ) {
                             
                            `);
 }
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3|| cookie["roles_id"] == 4|| cookie["roles_id"] == 7 ) {
+if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3|| cookie["roles_id"] == 4|| cookie["roles_id"] == 6 ) {
 document.write(`
                             
                             </ul>
@@ -407,7 +407,7 @@ document.write(`
 
 }
 
-//Zona Khas
+//Zona Kh6s
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 4) {
     document.write(` <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
