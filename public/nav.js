@@ -355,7 +355,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3
 
 if (cookie["roles_id"] == 1 ) {
     document.write(`
-                            <li class="nxl-item"><a class="nxl-link" href="/#">Dashboard</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/dashboard">Dashboard</a></li>
                            `);
 }
 
@@ -393,7 +393,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3
 //kdeks master
 if (cookie["roles_id"] == 1 ) {
     document.write(`
-                            <li class="nxl-item"><a class="nxl-link" href="/#">Master</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/master">Master</a></li>
                             
                            `);
 }
@@ -452,8 +452,8 @@ if (cookie["roles_id"] == 1 ) {
 }
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
     document.write(`
-                            <li class="nxl-item"><a class="nxl-link" href="/#">Persetujuan User Baru</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/#">Persetujuan Whitelist</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/new_user">Persetujuan User Baru</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/whitelist">Persetujuan Whitelist</a></li>
                             
                            `);
 }
@@ -494,12 +494,12 @@ if (cookie["roles_id"] == 1 ) {
                             <span class="nxl-mtext">Pengaturan</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="/#">Judul Situs</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/#">Logo</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/#">Header</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/#">Warna</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/#">Menu</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/#">Sub Menu</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/titleweb">Judul Situs</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/logo">Logo</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/header">Header</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/warna">Warna</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/menu">Menu</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/submenu">Sub Menu</a></li>
                          </ul>
                     </li>
                             `);

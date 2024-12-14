@@ -223,6 +223,10 @@ apps.get('/zk_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/profile/zona_khas/edit.html'));
 })
 
+apps.get('/master', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/tentang_kami/master.html'));
+})
+
 //::::::::::::::: Home Management :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/i', (req, res) => {
@@ -369,6 +373,13 @@ apps.get('/cp', (req, res) => {
     res.sendFile(path.resolve('./views/user_management/change_password/list.html'));
 })
 
+apps.get('/new_user', (req, res) => {
+    res.sendFile(path.resolve('./views/user_management/new_user/list.html'));
+})
+
+apps.get('/whitelist', (req, res) => {
+    res.sendFile(path.resolve('./views/user_management/whitelist/list.html'));
+})
 //:::::::::::::::::::::::::::::::: Custom Page :::::::::::::::::::::::::::::::::::::
 
 
@@ -404,6 +415,32 @@ apps.get('/opini_add', (req, res) => {
 
 apps.get('/opini_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/opini/opini_edit.html'));
+})
+
+//::::::::::::::: Pengaturan :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.get('/titleweb', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/identitas_web/title.html'));
+})
+
+apps.get('/logo', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/identitas_web/logo.html'));
+})
+
+apps.get('/header', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/identitas_web/header.html'));
+})
+
+apps.get('/warna', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/identitas_web/warna.html'));
+})
+
+apps.get('/menu', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/menu/list.html'));
+})
+
+apps.get('/submenu', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/sub_menu/list.html'));
 })
 
 //::::::::::::::: Api & Query DB :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
