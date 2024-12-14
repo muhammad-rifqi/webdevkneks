@@ -400,6 +400,10 @@ apps.get('/data_add', (req, res) => {
 })
 
 apps.get('/narationfront', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/naration.html'));
+});
+
+apps.get('/edit_narationfront/:id', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/edit.html'));
 });
 
