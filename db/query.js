@@ -1999,6 +1999,61 @@ const deletesourcesdata = async (req, res) => {
     }
 }
 
+//:::::::::::::::::::::::::::::::::::::Start Of OPINI :::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+const opini = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM opini where web_identity = 'kneks'")
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const opini_detail = async (req, res) => {
+    const id_opini = req.params.id;
+    const sql = await executeQuery("SELECT * FROM opini where id = ? ", [id_opini]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const insertopini = async (req, res) => {
+    const sql = await executeQuery("insert into opini(title,title_en,content,content_en,web_identity) values(?,?,?,?,?)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, 'kneks']);
+    if (sql) {
+        res.redirect('/opini');
+    } else {
+        console.log(sql)
+        res.redirect('/opini');
+    }
+}
+
+const deleteopini = async (req, res) => {
+    const id_opini = req.params.id;
+    const sql = await executeQuery('DELETE FROM  opini where id = ?', [id_opini]);
+    if (sql) {
+        res.redirect('/opini');
+    } else {
+        console.log(sql)
+        res.redirect('/opini');
+    }
+}
+
+
+const updateopini = async (req, res) => {
+    const sql = await executeQuery("UPDATE opini SET title=?,title_en=?,content=?,content_en=? where id = ?",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.id]);
+    if (sql) {
+        res.redirect('/opini');
+    } else {
+        console.log(sql)
+        res.redirect('/opini');
+    }
+}
 //::::::::::::::::::::::::::::::::::: END OF CUSTOM DATA NARATION PAGE
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
 module.exports = {
@@ -2135,5 +2190,10 @@ module.exports = {
     sourcesdata,
     deletesourcesdata,
     insertsourcesdata,
+    opini,
+    opini_detail,
+    insertopini,
+    updateopini,
+    deleteopini
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::

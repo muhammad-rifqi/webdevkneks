@@ -392,6 +392,20 @@ apps.get('/narationfront', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/edit.html'));
 });
 
+// :::::::::::::::::::::::::::: Opini ::::::::::::::::::::::::::::::::::::::::
+
+apps.get('/opini', (req, res) => {
+    res.sendFile(path.resolve('./views/opini/opini.html'));
+})
+
+apps.get('/opini_add', (req, res) => {
+    res.sendFile(path.resolve('./views/opini/opini_add.html'));
+})
+
+apps.get('/opini_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/opini/opini_edit.html'));
+})
+
 //::::::::::::::: Api & Query DB :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/dashboards', db.dashboards);
@@ -691,6 +705,19 @@ apps.get('/sourcesdata', db.sourcesdata);
 apps.get('/deletesourcesdata/:id', db.deletesourcesdata);
 
 apps.post('/insertsourcesdata', db.insertsourcesdata);
+
+//::::::::::::::::::::::::::: APi Opini ::::::::::::::::::::::::::::::::::::
+
+apps.get('/api_opini', db.opini);
+
+apps.get('/api_opini_detail/:id', db.opini_detail);
+
+apps.post('/insertopini', db.insertopini);
+
+apps.post('/updateopini', db.updateopini);
+
+apps.get('/deleteopini/:id', db.deleteopini);
+
 
 //::::::::::::::: Api & Query CUSTOM DATA NARATION PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
