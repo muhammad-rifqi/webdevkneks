@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/tagify.min.css" />
     <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
@@ -49,6 +50,7 @@
                     <div class="col-lg-12">
                         <form action="/updatephoto" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" id="id" value="">
+                            <input type="hidden" id="max_id" name="MAX_FILE_SIZE" value="1048000" />
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
@@ -66,8 +68,7 @@
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Title English</label>
-                                            <input class="form-control" type="text" name="title_en" id="title_en"
-                                                >
+                                            <input class="form-control" type="text" name="title_en" id="title_en">
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Content Indonesia</label>
@@ -87,13 +88,29 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Photo</label>
-                                            <input class="form-control" name="photo" id="photo" type="file" >
+                                            <input class="form-control" name="photo" id="photo" type="file"
+                                                accept="image/*" onchange="upload_check()">
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Tanggal Publish</label>
                                             <input class="form-control" name="news_datetime" id="news_datetime"
                                                 type="datetime-local">
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Tagging</label>
+                                            <span id="listtag">
+
+                                            </span>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Ganti/Ubah Tagging</label>
+                                            <span id="tag">
+
+                                            </span>
+                                            <input name="taggings" type="text" class="tagify" id="tagify" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -134,9 +151,14 @@
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/assets/vendors/js/tagify.min.js"></script>
     <script>
         window.addEventListener("load", async () => {
+            const inputElm = document.querySelector('input.tagify');
+            new Tagify(inputElm);
             await getUrlById();
+            await getTagging();
+            await upload_check();
         })
 
         function getUrlById() {
@@ -147,14 +169,38 @@
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    nicEditors.findEditor( "editor3" ).setContent( rows[0]?.content );
-                    nicEditors.findEditor( "editor4" ).setContent( rows[0]?.content_en );
-                    // document.getElementById("val3").innerHTML = rows[0]?.content;
-                    // document.getElementById("val4").innerHTML = rows[0]?.content_en;
+                    nicEditors.findEditor("editor3").setContent(rows[0]?.content);
+                    nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
                     document.getElementById("news_datetime").value = rows[0]?.news_datetime.split('.')[0];
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.photo}" width="180"/>`;
                 })
         }
+
+        function getTagging() {
+            fetch('/tagging')
+                .then(res => res.json())
+                .then((rrr) => {
+                    let tttt = "";
+                    rrr.forEach(items => {
+                        // ttt += `&nbsp;<input type="checkbox" id="cek${items?.id}" name="options" value="${items?.tagging}" onchange="handleClick(${items?.id})"> &nbsp; ${items?.tagging} &nbsp;`;
+                        tttt += `${items?.tagging},`;
+                    });
+                    document.getElementById("tag").innerHTML = tttt;
+                    document.getElementById("tagify").value = tttt;
+                })
+        }
+
+        function upload_check() {
+            var upl = document.getElementById("photo");
+            var max = document.getElementById("max_id").value;
+            if (upl.files[0].size > max) {
+                alert("File too big!");
+                upl.value = "";
+                return false;
+            }
+
+            return true;
+        };
     </script>
 </body>
 
