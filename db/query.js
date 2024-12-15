@@ -2025,6 +2025,44 @@ const updatewebcolor = async (req, res) => {
         res.redirect('/color');
     }
 }
+
+const menu = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM menu');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const menu_detail = async (req, res) => {
+    const id_menu = req.params.id;
+    const sql = await executeQuery('SELECT * FROM menu where id = ? ', [id_menu]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const submenu = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM menu_sub');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const submenu_detail = async (req, res) => {
+    const id_menu = req.params.id;
+    const sql = await executeQuery('SELECT * FROM menu_sub where id = ? ', [id_menu]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
 module.exports = {
     do_login,
@@ -2162,6 +2200,10 @@ module.exports = {
     updatewebtitle,
     updateweblogo,
     updatewebheader,
-    updatewebcolor
+    updatewebcolor,
+    menu,
+    submenu,
+    menu_detail,
+    submenu_detail
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::

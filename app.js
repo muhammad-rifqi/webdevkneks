@@ -455,8 +455,24 @@ apps.get('/menu', (req, res) => {
     res.sendFile(path.resolve('./views/pengaturan/menu/list.html'));
 })
 
+apps.get('/menu_add', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/menu/add.html'));
+})
+
+apps.get('/menu_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/menu/edit.html'));
+})
+
 apps.get('/submenu', (req, res) => {
     res.sendFile(path.resolve('./views/pengaturan/sub_menu/list.html'));
+})
+
+apps.get('/submenu_add', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/menu/add.html'));
+})
+
+apps.get('/submenu_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/menu/edit.html'));
 })
 
 //::::::::::::::: Api & Query DB :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -768,6 +784,14 @@ apps.post('/updateweblogo', db.updateweblogo);
 apps.post('/updatewebheader', db.updatewebheader);
 
 apps.post('/updatewebcolor', db.updatewebcolor);
+
+apps.get('/api_menu', db.menu);
+
+apps.get('/api_menu_detail/:id', db.menu_detail);
+
+apps.get('/api_submenu', db.submenu);
+
+apps.get('/api_submenu_detail/:id', db.submenu_detail);
 //::::::::::::::: Api & Query CUSTOM DATA NARATION PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.post('/insertusers', db.user_register);
