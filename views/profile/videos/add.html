@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/tagify.min.css" />
     <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
@@ -77,7 +78,7 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Mauskan ID Video : </label>
+                                            <label class="form-label">Masuskan ID Video : </label>
                                             <input class="form-control" name="video" id="video" type="text" value="" required>
                                             <p>** : contoh => https://www.youtube.com/watch?v=<font color="red"><b>MKDjCD0eWDo</b></font></b> </p>
                                         </div>
@@ -91,6 +92,14 @@
                                             <label class="form-label">Tanggal Publish</label>
                                             <input class="form-control" name="video_datetime" id="video_datetime"
                                                 type="datetime-local" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tagging</label>
+                                            <span id="tag">
+
+                                            </span>
+                                            <input name="taggings" type="text" class="tagify" id="tagify" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -122,7 +131,7 @@
         </footer>
         <!-- [ Footer ] end -->
     </main>
-
+    <script src="/assets/vendors/js/jquery.min.js"></script>
     <script src="/assets/vendors/js/vendors.min.js"></script>
     <script src="/assets/vendors/js/dataTables.min.js"></script>
     <script src="/assets/vendors/js/dataTables.bs5.min.js"></script>
@@ -130,6 +139,24 @@
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <script src="/assets/vendors/js/tagify.min.js"></script>
+    <script>
+        window.addEventListener("load", async () => {
+            const inputElm = document.querySelector('input.tagify');
+            new Tagify(inputElm);
+            await fetch('/tagging')
+                .then(res => res.json())
+                .then((rrr) => {
+                    let ttt = "";
+                    rrr.forEach(items => {
+                        // ttt += `&nbsp;<input type="checkbox" id="cek${items?.id}" name="options" value="${items?.tagging}" onchange="handleClick(${items?.id})"> &nbsp; ${items?.tagging} &nbsp;`;
+                        ttt += `${items?.tagging},`;
+                    });
+                    document.getElementById("tag").innerHTML = ttt;
+                    document.getElementById("tagify").value = ttt;
+                })
+        })
+    </script>
 </body>
 
 </html>
