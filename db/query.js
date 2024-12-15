@@ -1623,7 +1623,7 @@ const updatevideos = async (req, res) => {
 //::::::::::::::::::::::::::::::End Of Videos:::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Users:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const users = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM users');
+    const sql = await executeQuery('SELECT * FROM users where approve = "Y"');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1652,8 +1652,12 @@ const users_whitelist = async (req, res) => {
 
 const approveusers = async (req, res) => {
     const id_params_user = req.params.id;
-    await executeQuery("UPDATE users SET approve=? WHERE id=? ", ['Y', id_params_user]);
-    res.redirect('/whitelist');
+    const sql = await executeQuery("UPDATE users SET approve=? WHERE id=? ", ['Y', id_params_user]);
+    if (sql) {
+        res.redirect('/whitelist');
+    } else {
+        res.redirect('/whitelist')
+    }
 }
 
 const userroles = async (req, res) => {

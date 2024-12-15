@@ -517,7 +517,7 @@ apps.get('/users_whitelist', db.users_whitelist);
 
 apps.get('/roles', db.userroles);
 
-apps.post('/approveusers', db.approveusers);
+apps.get('/approveusers/:id', db.approveusers);
 
 apps.post('/insertusers', db.insertusers);
 

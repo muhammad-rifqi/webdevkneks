@@ -51,7 +51,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <form action="/insertnews" method="post" enctype="multipart/form-data">
-                            <input type="hidden" id="taggings" name="taggings" value="">
+                            <!-- <input type="hidden" id="taggings" name="taggings" value=""> -->
+                            <input type="hidden" id="max_id" name="MAX_FILE_SIZE" value="1048000" />
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
@@ -96,12 +97,13 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Photo</label>
-                                            <input class="form-control" name="photo" id="photo" type="file" required>
+                                            <input class="form-control" name="photo" id="photo" type="file"
+                                                accept="image/*" onchange="upload_check()" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Publish</label>
-                                            <input name="publish" id="publish" type="checkbox" value="1" required>
+                                            <input name="is_publish" id="publish" type="checkbox" value="1" required>
                                             Publish
                                         </div>
 
@@ -120,7 +122,10 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Tagging</label>
-                                            <input name="options" type="text" class="tagify" required>
+                                            <span id="tag">
+
+                                            </span>
+                                            <input name="taggings" type="text" class="tagify" id="tagify" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -165,7 +170,7 @@
 
     <script>
         window.addEventListener("load", async () => {
-            
+
             const inputElm = document.querySelector('input.tagify');
             new Tagify(inputElm);
 
@@ -185,10 +190,14 @@
                 .then((rrr) => {
                     let ttt = "";
                     rrr.forEach(items => {
-                        ttt += `&nbsp;<input type="checkbox" id="cek${items?.id}" name="options" value="${items?.tagging}" onchange="handleClick(${items?.id})"> &nbsp; ${items?.tagging} &nbsp;`;
+                        // ttt += `&nbsp;<input type="checkbox" id="cek${items?.id}" name="options" value="${items?.tagging}" onchange="handleClick(${items?.id})"> &nbsp; ${items?.tagging} &nbsp;`;
+                        ttt += `${items?.tagging},`;
                     });
                     document.getElementById("tag").innerHTML = ttt;
+                    document.getElementById("tagify").value = ttt;
                 })
+
+            await upload_check();    
         })
 
 
@@ -197,6 +206,18 @@
         //     const selectedValues = Array.from(checkboxes).map(checkbox => checkbox.value);
         //     document.getElementById("taggings").value = selectedValues.join(',');
         // }
+
+        function upload_check() {
+            var upl = document.getElementById("photo");
+            var max = document.getElementById("max_id").value;
+            if (upl.files[0].size > max) {
+                alert("File too big!");
+                upl.value = "";
+                return false;
+            }
+
+            return true;
+        };
     </script>
 
 
