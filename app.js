@@ -468,11 +468,11 @@ apps.get('/submenu', (req, res) => {
 })
 
 apps.get('/submenu_add', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/menu/add.html'));
+    res.sendFile(path.resolve('./views/pengaturan/sub_menu/add.html'));
 })
 
 apps.get('/submenu_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/menu/edit.html'));
+    res.sendFile(path.resolve('./views/pengaturan/sub_menu/edit.html'));
 })
 
 //::::::::::::::: Api & Query DB :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
