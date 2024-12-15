@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/tagify.min.css" />
     <script type="text/javascript" src="https://js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
@@ -110,11 +111,16 @@
                                                 type="datetime-local" required>
                                         </div>
 
-                                        <div class="col-lg-12 mb-4">
+                                        <!-- <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Tagging</label>
                                             <span id="tag">
 
                                             </span>
+                                        </div> -->
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tagging</label>
+                                            <input name="options" type="text" class="tagify" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -147,6 +153,7 @@
         <!-- [ Footer ] end -->
     </main>
 
+    <script src="/assets/vendors/js/jquery.min.js"></script>
     <script src="/assets/vendors/js/vendors.min.js"></script>
     <script src="/assets/vendors/js/dataTables.min.js"></script>
     <script src="/assets/vendors/js/dataTables.bs5.min.js"></script>
@@ -154,8 +161,14 @@
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <script src="/assets/vendors/js/tagify.min.js"></script>
+
     <script>
         window.addEventListener("load", async () => {
+            
+            const inputElm = document.querySelector('input.tagify');
+            new Tagify(inputElm);
+
             await fetch('/categories')
                 .then(response => response.json())
                 .then((data) => {
@@ -179,11 +192,11 @@
         })
 
 
-        function handleClick(event) {
-            const checkboxes = document.querySelectorAll('input[name="options"]:checked');
-            const selectedValues = Array.from(checkboxes).map(checkbox => checkbox.value);
-            document.getElementById("taggings").value = selectedValues.join(',');
-        }
+        // function handleClick(event) {
+        //     const checkboxes = document.querySelectorAll('input[name="options"]:checked');
+        //     const selectedValues = Array.from(checkboxes).map(checkbox => checkbox.value);
+        //     document.getElementById("taggings").value = selectedValues.join(',');
+        // }
     </script>
 
 
