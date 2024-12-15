@@ -739,6 +739,9 @@ apps.post('/updateopini', db.updateopini);
 
 apps.get('/deleteopini/:id', db.deleteopini);
 
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::: Api & Setting ::::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.get('/api_web_profile', db.web_profile);
 
 //::::::::::::::: Api & Query CUSTOM DATA NARATION PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

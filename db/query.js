@@ -1508,7 +1508,6 @@ const users = async (req, res) => {
     }
 }
 
-
 const users_new = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH) AND approve = "Y" ORDER BY created_at DESC');
     if (sql?.length > 0) {
@@ -1961,6 +1960,18 @@ const updateopini = async (req, res) => {
     }
 }
 //::::::::::::::::::::::::::::::::::: END OF CUSTOM DATA NARATION PAGE
+// :::::::::::::::::::::::::: Setting Page :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+const web_profile = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM web_profile where id = 1');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
 module.exports = {
     do_login,
@@ -2092,6 +2103,7 @@ module.exports = {
     opini_detail,
     insertopini,
     updateopini,
-    deleteopini
+    deleteopini,
+    web_profile,
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::
