@@ -1981,6 +1981,50 @@ const web_profile_detail = async (req, res) => {
     }
 }
 
+
+const updatewebtitle = async (req, res) => {
+    const sql = await executeQuery("UPDATE web_profile SET web_title=? where id = ?",
+        [req.body.web_title, req.body.id]);
+    if (sql) {
+        res.redirect('/titleweb');
+    } else {
+        console.log(sql)
+        res.redirect('/titleweb');
+    }
+}
+
+const updateweblogo = async (req, res) => {
+    const sql = await executeQuery("UPDATE web_profile SET web_logo=? where id = ?",
+        [req.body.web_logo, req.body.id]);
+    if (sql) {
+        res.redirect('/logo');
+    } else {
+        console.log(sql)
+        res.redirect('/logo');
+    }
+}
+
+const updatewebheader = async (req, res) => {
+    const sql = await executeQuery("UPDATE web_profile SET web_header=? where id = ?",
+        [req.body.web_header, req.body.id]);
+    if (sql) {
+        res.redirect('/header');
+    } else {
+        console.log(sql)
+        res.redirect('/header');
+    }
+}
+
+const updatewebcolor = async (req, res) => {
+    const sql = await executeQuery("UPDATE web_profile SET web_color=? where id = ?",
+        [req.body.web_color, req.body.id]);
+    if (sql) {
+        res.redirect('/color');
+    } else {
+        console.log(sql)
+        res.redirect('/color');
+    }
+}
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
 module.exports = {
     do_login,
@@ -2114,6 +2158,10 @@ module.exports = {
     updateopini,
     deleteopini,
     web_profile,
-    web_profile_detail
+    web_profile_detail,
+    updatewebtitle,
+    updateweblogo,
+    updatewebheader,
+    updatewebcolor
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::

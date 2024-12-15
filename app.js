@@ -761,6 +761,13 @@ apps.get('/api_web_profile', db.web_profile);
 
 apps.get('/api_detail_webprofile/:id', db.web_profile_detail);
 
+apps.post('/updatewebtitle', db.updatewebtitle);
+
+apps.post('/updateweblogo', db.updateweblogo);
+
+apps.post('/updatewebheader', db.updatewebheader);
+
+apps.post('/updatewebcolor', db.updatewebcolor);
 //::::::::::::::: Api & Query CUSTOM DATA NARATION PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.post('/insertusers', db.user_register);
