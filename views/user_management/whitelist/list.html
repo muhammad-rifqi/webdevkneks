@@ -44,6 +44,7 @@
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Roles ID</th>
+                                                <th>Whitelist</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -93,7 +94,7 @@
             // 2. Inisialisasi DataTable
             $('#users').DataTable({
                 "ajax": {
-                    "url": "/users",
+                    "url": "/users_whitelist",
                     "dataSrc": ""
                 },
                 "columns": [
@@ -101,10 +102,11 @@
                     { "data": "name" },
                     { "data": "email" },
                     { "data": "role_id" },
+                    { "data": "approve" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='delete-btn-users btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button></p>`;
+                            return `<p><button class='whitelist-btn-users btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">WhiteList</button></p>`;
                         }
                     }
                 ],
@@ -119,10 +121,10 @@
                 // ],
             });
 
-            $('#users').on('click', '.delete-btn-users', function () {
+            $('#users').on('click', '.whitelist-btn-users', function () {
                 var id = $(this).data('id');
-                if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    window.location.href = '/deleteuser/'+id;
+                if (confirm('Apakah kamu yakin ingin Whitelist data ini?')) {
+                    window.location.href = '/approveuser/'+id;
                 }
             });
         });

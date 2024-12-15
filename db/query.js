@@ -1631,6 +1631,31 @@ const users = async (req, res) => {
     }
 }
 
+
+const users_new = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH) AND approve = "Y" ORDER BY created_at DESC');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+};
+
+const users_whitelist = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM users WHERE approve = "N" ORDER BY created_at DESC');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+};
+
+const approveusers = async (req, res) => {
+    const id_params_user = req.params.id;
+    await executeQuery("UPDATE users SET approve=? WHERE id=? ", ['Y', id_params_user]);
+    res.redirect('/whitelist');
+}
+
 const userroles = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  roles');
     if (sql?.length > 0) {
@@ -2161,6 +2186,9 @@ module.exports = {
     pdes_overview_detail,
     updatepdesoverview,
     users,
+    users_new,
+    users_whitelist,
+    approveusers,
     userroles,
     insertusers,
     updatepassword,

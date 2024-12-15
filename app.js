@@ -511,7 +511,13 @@ apps.get('/deletevideo/:id', db.deletevideo);
 
 apps.get('/users', db.users);
 
+apps.get('/users_new', db.users_new);
+
+apps.get('/users_whitelist', db.users_whitelist);
+
 apps.get('/roles', db.userroles);
+
+apps.post('/approveusers', db.approveusers);
 
 apps.post('/insertusers', db.insertusers);
 
