@@ -41,7 +41,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3
                             <span class="nxl-mtext">Direktorat</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="/hic">Direktorat</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/directorats">Direktorat</a></li>
                         </ul>
                     </li>`);
 }

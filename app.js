@@ -293,6 +293,10 @@ apps.get('/m_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/maps/edit.html'));
 })
 
+apps.get('/directorats', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/directorat/list.html'));
+})
+
 //::::::::::::::: One Data Center ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/f', (req, res) => {
