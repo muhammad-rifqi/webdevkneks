@@ -83,6 +83,18 @@ let custom_page = multer.diskStorage(
 );
 let page_path = multer({ storage: custom_page });
 
+// :::::::::::::::::::::::::::::::::: Slide Show Path ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+let slideshow_page = multer.diskStorage(
+    {
+        destination: './public/uploads/slideshow/',
+        filename: function (req, file, cb) {
+            cb(null, file.originalname.replace(" ", ""));
+        }
+    }
+);
+let slide_path = multer({ storage: slideshow_page });
+
 //::::::::::::::: Start Of Routes :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/', (req, res) => {
@@ -257,6 +269,10 @@ apps.get('/b', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/banner/list.html'));
 })
 
+apps.get('/b_add', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/banner/add.html'));
+})
+
 apps.get('/b_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/banner/edit.html'));
 })
@@ -321,30 +337,6 @@ apps.get('/p', (req, res) => {
 
 apps.get('/p_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/one_data_center/pdes/edit.html'));
-})
-
-apps.get('/pm', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/pdes_menu/list.html'));
-})
-
-apps.get('/pm_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/pdes_menu/edit.html'));
-})
-
-apps.get('/ps', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/pdes_submenu/list.html'));
-})
-
-apps.get('/ps_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/pdes_submenu/edit.html'));
-})
-
-apps.get('/po', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/pdes_overview/list.html'));
-})
-
-apps.get('/po_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/pdes_overview/edit.html'));
 })
 
 apps.get('/customfront', (req, res) => {
@@ -632,6 +624,8 @@ apps.get('/banners', db.banners);
 
 apps.get('/detailbanners/:id', db.detailbanner);
 
+apps.post('/insertbanners', db.insertbanners);
+
 apps.get('/deletebanners/:id', db.deletebanner);
 
 apps.post('/updatebanner', db.updatebanners);
@@ -674,30 +668,6 @@ apps.post('/updateagenda', db.updateagenda);
 apps.get('/search_agenda', db.search_agenda);
 
 //::::::::::::::: Api & Query DB PDES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-apps.get('/pdes', db.pdes);
-
-apps.get('/pdes_detail/:id', db.pdes_detail);
-
-apps.post('/updatepdes', db.updatepdes);
-
-apps.get('/pdes_menu', db.pdes_menu);
-
-apps.get('/pdes_menu_detail/:id', db.pdes_menu_detail);
-
-apps.post('/updatepdesmenu', db.updatepdesmenu);
-
-apps.get('/pdes_submenu', db.pdes_submenu);
-
-apps.get('/pdes_submenu_detail/:id', db.pdes_submenu_detail);
-
-apps.post('/updatepdessubmenu', db.updatepdessubmenu);
-
-apps.get('/pdes_overview', db.pdes_overview);
-
-apps.get('/pdes_overview_detail/:id', db.pdes_overview_detail);
-
-apps.post('/updatepdesoverview', db.updatepdesoverview);
 
 apps.get('/zona_khas', db.khas_zone);
 

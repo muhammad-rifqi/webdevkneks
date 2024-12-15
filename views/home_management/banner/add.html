@@ -16,6 +16,13 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript">
+        bkLib.onDomLoaded(function () {
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
+        });
+    </script>
 </head>
 
 <body>
@@ -40,21 +47,42 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/updatepdesmenu" method="post">
-                            <input type="hidden" id="id" name="id">
+                        <form action="/insertebanner" method="post" enctype="multipart/form-data">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
                                         <h5 class="fw-bold mb-0 me-4">
-                                            <span class="d-block mb-2">EDIT PDES MENU :</span>
-                                            <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan Edit
-                                                Data PDES MENU Di Bawah Ini</span>
+                                            <span class="d-block mb-2">Edit SlideShow Kami:</span>
+                                            <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
+                                                Tambah
+                                                Data Banners Slideshow Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Name</label>
-                                            <input class="form-control" type="text" id="name_menu" name="name" required>
+                                            <label class="form-label">Title Indonesia</label>
+                                            <input class="form-control" type="text" name="title" id="title" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Title English</label>
+                                            <input class="form-control" type="text" name="title_en" id="title_en"
+                                                required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Content Indonesia</label>
+                                            <textarea class="form-control" name="content" id="editor3"
+                                                ></textarea>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Content English</label>
+                                            <textarea class="form-control" name="content_en" id="editor4"
+                                                ></textarea>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Images Slide Show</label>
+                                            <input  type="file" class="form-control" name="images" id="images" />
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -64,8 +92,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
+                    </form>
                 </div>
             </div>
             <!-- [ Main Content ] end -->
@@ -94,24 +122,7 @@
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+   
 </body>
-
-<script>
-    window.addEventListener("load", async () => {
-        await getUrlById();
-    })
-
-    function getUrlById() {
-        const URLS = new URL(window.location.href);
-        fetch('/pdes_menu_detail/' + URLS.pathname.split('/')[2])
-            .then(data => data.json())
-            .then((rows) => {
-                console.log(rows)
-                document.getElementById("id").value = rows[0]?.id;
-                document.getElementById("name_menu").value = rows[0]?.name;
-            })
-    }
-
-</script>
 
 </html>

@@ -47,16 +47,16 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/updatebanner" method="post">
+                        <form action="/updatebanner" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" id="id" value="">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
                                         <h5 class="fw-bold mb-0 me-4">
-                                            <span class="d-block mb-2">Edit Banners Kami:</span>
+                                            <span class="d-block mb-2">Edit SlideShow Kami:</span>
                                             <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
                                                 Edit
-                                                Data Banners Kami Di Bawah Ini</span>
+                                                Data Slideshow  Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
@@ -87,8 +87,8 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">URL Images</label>
-                                            <input  type="text" class="form-control" name="images" id="images" />
+                                            <label class="form-label">Images Slide Show</label>
+                                            <input  type="file" class="form-control" name="images" id="images" />
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -143,7 +143,7 @@
                     document.getElementById("title_en").value = rows[0]?.title_en;
                     document.getElementById("val3").innerHTML = rows[0]?.content;
                     document.getElementById("val4").innerHTML = rows[0]?.content_en;
-                    document.getElementById("previews").innerHTML = `<img src="https://webdev.kneks.go.id/${rows[0]?.image}" width="180"/>`;
+                    document.getElementById("previews").innerHTML = `<img src="${rows[0]?.image}" width="180"/>`;
                 })
         }
 

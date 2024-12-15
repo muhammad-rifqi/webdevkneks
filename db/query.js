@@ -715,6 +715,28 @@ const deletebanner = async (req, res) => {
     }
 }
 
+const insertbanners = async (req, res) => {
+
+    if (req.body.images != "" || req.body.images != undefined || !req.body.images) {
+        const sql = await executeQuery('UPDATE banners set title=?, title_en=?, content=?, content_en=?, image=? where  id = ? ', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, req.body.images, id_banners]);
+        if (sql) {
+            res.redirect('/b');
+        } else {
+            console.log(sql);
+            res.redirect('/b');
+        }
+    } else {
+        const sql = await executeQuery('UPDATE banners set title=?, title_en=?, content=?, content_en=? where  id = ? ', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, id_banners]);
+        if (sql) {
+            res.redirect('/b');
+        } else {
+            console.log(sql);
+            res.redirect('/b');
+        }
+    }
+}
+
+
 const updatebanners = async (req, res) => {
     const id_banners = req.body.id;
 
@@ -1022,143 +1044,6 @@ const updatefilescategory = async (req, res) => {
 }
 
 //::::::::::::::::::::::::::::::End Of Files :::::::::::::::::::::::::::::::::::::::::::::::::::::
-//::::::::::::::::::::::::::::::Start Of PDES :::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-const pdes = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  syariah')
-    const array = [];
-    sql?.forEach((listdata) => {
-        const ddd = {
-            "id": listdata?.id,
-            "name": listdata?.name,
-            "link": listdata?.link,
-            "menu_id": listdata?.menu_id,
-            "submenu_id": listdata?.submenu_id,
-            "order": listdata?.order,
-        }
-        array.push(ddd)
-    });
-    if (array?.length > 0) {
-        res.status(200).json(array)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-
-const pdes_detail = async (req, res) => {
-    const id_pdes = req.params.id;
-    const listdata = await executeQuery('SELECT * FROM  syariah where id = ? ', [id_pdes]);
-    if (listdata?.length > 0) {
-        res.status(200).json(listdata)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const updatepdes = async (req, res) => {
-    const sql = await executeQuery("update syariah set name = ? , link =? where id = ?",
-        [req.body.name, req.body.link, req.body.id]);
-    if (sql) {
-        res.redirect('/p');
-    } else {
-        console.log(sql)
-        res.redirect('/p');
-    }
-}
-
-const pdes_menu = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  syariah_menu');
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const pdes_menu_detail = async (req, res) => {
-    const id_pdes_menu = req.params.id;
-    const listdata = await executeQuery('SELECT * FROM  syariah_menu where id = ? ', [id_pdes_menu]);
-    if (listdata?.length > 0) {
-        res.status(200).json(listdata)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const updatepdesmenu = async (req, res) => {
-    const sql = await executeQuery("update syariah_menu set name = ? where id = ?",
-        [req.body.name, req.body.id]);
-    if (sql) {
-        res.redirect('/pm');
-    } else {
-        console.log(sql)
-        res.redirect('/pm');
-    }
-}
-
-const pdes_submenu = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  syariah_submenu');
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const pdes_submenu_detail = async (req, res) => {
-    const id_pdes_submenu = req.params.id;
-    const listdata = await executeQuery('SELECT * FROM  syariah_submenu where id = ? ', [id_pdes_submenu]);
-    if (listdata?.length > 0) {
-        res.status(200).json(listdata)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const updatepdessubmenu = async (req, res) => {
-    const sql = await executeQuery("update syariah_submenu set name = ? where id = ?",
-        [req.body.name, req.body.id]);
-    if (sql) {
-        res.redirect('/ps');
-    } else {
-        console.log(sql)
-        res.redirect('/ps');
-    }
-}
-
-
-const pdes_overview = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  syariah_overview');
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const pdes_overview_detail = async (req, res) => {
-    const id_pdes_overview = req.params.id;
-    const sql = await executeQuery('SELECT * FROM  syariah_overview where id = ? ', [id_pdes_overview]);
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const updatepdesoverview = async (req, res) => {
-    const sql = await executeQuery("update syariah_overview set title = ? , link = ? where id = ?",
-        [req.body.title, req.body.link, req.body.id]);
-    if (sql) {
-        res.redirect('/po');
-    } else {
-        console.log(sql)
-        res.redirect('/po');
-    }
-}
-
-//::::::::::::::::::::::::::::::End Of PDES :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of News:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const posts = async (req, res) => {
     const result = await executeQuery("SELECT * FROM news ORDER BY id DESC ");
@@ -2160,6 +2045,7 @@ module.exports = {
     deletebanner,
     detailbanner,
     updatebanners,
+    insertbanners,
     agendas,
     agenda_graph,
     agendadetails,
@@ -2177,18 +2063,6 @@ module.exports = {
     updatefilescategory,
     insertfilecategorydetails,
     deletefilecategorydetail,
-    pdes,
-    pdes_detail,
-    updatepdes,
-    pdes_menu,
-    updatepdesmenu,
-    pdes_menu_detail,
-    pdes_submenu,
-    updatepdessubmenu,
-    pdes_submenu_detail,
-    pdes_overview,
-    pdes_overview_detail,
-    updatepdesoverview,
     users,
     users_new,
     users_whitelist,
