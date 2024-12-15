@@ -1971,6 +1971,15 @@ const web_profile = async (req, res) => {
     }
 }
 
+const web_profile_detail = async (req, res) => {
+    const id_web = req.params.id;
+    const sql = await executeQuery('SELECT * FROM web_profile where id = ? ', [id_web]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
 
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
 module.exports = {
@@ -2105,5 +2114,6 @@ module.exports = {
     updateopini,
     deleteopini,
     web_profile,
+    web_profile_detail
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::

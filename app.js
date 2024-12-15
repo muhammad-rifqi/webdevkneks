@@ -423,16 +423,32 @@ apps.get('/titleweb', (req, res) => {
     res.sendFile(path.resolve('./views/pengaturan/identitas_web/title.html'));
 })
 
+apps.get('/web_title_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/identitas_web/edit_title.html'));
+})
+
 apps.get('/logo', (req, res) => {
     res.sendFile(path.resolve('./views/pengaturan/identitas_web/logo.html'));
+})
+
+apps.get('/web_logo_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/identitas_web/edit_logo.html'));
 })
 
 apps.get('/header', (req, res) => {
     res.sendFile(path.resolve('./views/pengaturan/identitas_web/header.html'));
 })
 
-apps.get('/warna', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/identitas_web/warna.html'));
+apps.get('/web_header_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/identitas_web/edit_header.html'));
+})
+
+apps.get('/color', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/identitas_web/color.html'));
+})
+
+apps.get('/web_color_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/pengaturan/identitas_web/edit_color.html'));
 })
 
 apps.get('/menu', (req, res) => {
@@ -742,6 +758,8 @@ apps.get('/deleteopini/:id', db.deleteopini);
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::: Api & Setting ::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/api_web_profile', db.web_profile);
+
+apps.get('/api_detail_webprofile/:id', db.web_profile_detail);
 
 //::::::::::::::: Api & Query CUSTOM DATA NARATION PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
