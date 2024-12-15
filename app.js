@@ -624,11 +624,11 @@ apps.get('/banners', db.banners);
 
 apps.get('/detailbanners/:id', db.detailbanner);
 
-apps.post('/insertbanners', db.insertbanners);
+apps.post('/insertbanners', slide_path.single('images'), db.insertbanners);
 
 apps.get('/deletebanners/:id', db.deletebanner);
 
-apps.post('/updatebanner', db.updatebanners);
+apps.post('/updatebanner', slide_path.single('images'), db.updatebanners);
 //::::::::::::::: Api & Query DB FILES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/files', db.files);

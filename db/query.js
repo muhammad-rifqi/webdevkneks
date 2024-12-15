@@ -716,32 +716,25 @@ const deletebanner = async (req, res) => {
 }
 
 const insertbanners = async (req, res) => {
-
-    if (req.body.images != "" || req.body.images != undefined || !req.body.images) {
-        const sql = await executeQuery('UPDATE banners set title=?, title_en=?, content=?, content_en=?, image=? where  id = ? ', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, req.body.images, id_banners]);
+    if (req.file) {
+        const filesimage = "https://webdev.rifhandi.com/uploads/slideshow/" + req.file.originalname.replace(" ", "");
+        const sql = await executeQuery('INSERT INTO banners (title,title_en,content,content_en,image,order, is_publish)values(?,?,?,?,?,?,?) ', [req.body.title, req.body.title_en, req.body.content, req.body.content_en, filesimage, '0','1']);
         if (sql) {
             res.redirect('/b');
         } else {
-            console.log(sql);
+            console.log(sql)
             res.redirect('/b');
         }
     } else {
-        const sql = await executeQuery('UPDATE banners set title=?, title_en=?, content=?, content_en=? where  id = ? ', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, id_banners]);
-        if (sql) {
-            res.redirect('/b');
-        } else {
-            console.log(sql);
-            res.redirect('/b');
-        }
+        res.redirect('/b');
     }
 }
 
-
 const updatebanners = async (req, res) => {
     const id_banners = req.body.id;
-
-    if (req.body.images != "" || req.body.images != undefined || !req.body.images) {
-        const sql = await executeQuery('UPDATE banners set title=?, title_en=?, content=?, content_en=?, image=? where  id = ? ', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, req.body.images, id_banners]);
+    if (req.file) {
+        const filesimage = "https://webdev.rifhandi.com/uploads/slideshow/" + req.file.originalname.replace(" ", "");
+        const sql = await executeQuery('UPDATE banners set title=?, title_en=?, content=?, content_en=?, image=? where  id = ? ', [req.body.title, req.body.title_en, req.body.content, req.body.content_en,filesimage, id_banners]);
         if (sql) {
             res.redirect('/b');
         } else {
@@ -749,7 +742,7 @@ const updatebanners = async (req, res) => {
             res.redirect('/b');
         }
     } else {
-        const sql = await executeQuery('UPDATE banners set title=?, title_en=?, content=?, content_en=? where  id = ? ', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, id_banners]);
+        const sql = await executeQuery('UPDATE banners set title=?, title_en=?, content=?, content_en=? where  id = ? ', [req.body.title, req.body.title_en, req.body.content, req.body.content_en, id_banners]);
         if (sql) {
             res.redirect('/b');
         } else {
