@@ -41,6 +41,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <form action="/insertcustompage" method="post" enctype="multipart/form-data">
+                            <input type="hidden" id="max_id" name="MAX_FILE_SIZE" value="1048000" />
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
@@ -58,9 +59,10 @@
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Files Image</label>
-                                            <input class="form-control" name="files_image" id="files_image" type="file" required>
+                                            <input class="form-control" name="files_image" id="files_image" type="file"
+                                                accept="image/*" onchange="upload_check()" required> )* Max Upload 1 MB
                                         </div>
-                                       
+
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -99,6 +101,23 @@
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
 
+    <script>
+        window.addEventListener("load", async () => {
+            await upload_check();
+        })
+
+        function upload_check() {
+            var upl = document.getElementById("images");
+            var max = document.getElementById("max_id").value;
+            if (upl.files[0].size > max) {
+                alert("File too big!");
+                upl.value = "";
+                return false;
+            }
+
+            return true;
+        };
+    </script>
 </body>
 
 </html>
