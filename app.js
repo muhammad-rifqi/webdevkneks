@@ -408,9 +408,12 @@ apps.get('/narationfront', (req, res) => {
 });
 
 apps.get('/edit_narationfront/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/edit.html'));
+    res.sendFile(path.resolve('./views/custom_page/data/naration_edit.html'));
 });
 
+apps.get('/narationfront_add', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/naration_add.html'));
+});
 // :::::::::::::::::::::::::::: Opini ::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/opini', (req, res) => {
@@ -758,6 +761,10 @@ apps.get('/delete_custom_page/:id/:foto', db.delete_custom_page);
 //::::::::::::::: Api & Query CUSTOM PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/narations', db.naration);
+
+apps.get('/narations_detail/:id', db.naration_detail);
+
+apps.post('/insertnarations', db.insertnarations);
 
 apps.post('/updatenarations', db.updatenarations);
 

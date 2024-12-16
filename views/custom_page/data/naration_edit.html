@@ -54,12 +54,25 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Title</label>
+                                            <input class="form-control" type="text" name="title" id="title" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Title EN</label>
+                                            <input class="form-control" type="text" name="title_en" id="title_en"
+                                                required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
                                             <label class="form-label">Descritpion Id</label>
-                                            <textarea class="form-control" name="description" id="description_ids"></textarea>
+                                            <textarea class="form-control" name="description"
+                                                id="description_ids"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Descritpion En</label>
-                                            <textarea class="form-control" name="description_en" id="description_ens"></textarea>
+                                            <textarea class="form-control" name="description_en"
+                                                id="description_ens"></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -106,10 +119,12 @@
 
         function getUrlById() {
             const URLS = new URL(window.location.href);
-            fetch('/narations')
+            fetch('/narations_detail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("id").value = rows[0]?.id;
+                    document.getElementById("title").value = rows[0]?.title;
+                    document.getElementById("title_en").value = rows[0]?.title_en;
                     document.getElementById("description_ids").innerHTML = rows[0]?.description;
                     document.getElementById("description_ens").innerHTML = rows[0]?.description_en;
                 })

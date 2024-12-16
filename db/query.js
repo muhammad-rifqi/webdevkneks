@@ -259,7 +259,7 @@ const directorat = async (req, res) => {
 }
 
 const insertdirectorats = async (req, res) => {
-    const sql = await executeQuery('INSERT INTO hot_categories(title,title_en,description,description_en)values(?,?,?,?)',[req.body.title,req.body.title_en,req.body.description,req.body.description_en]);
+    const sql = await executeQuery('INSERT INTO hot_categories(title,title_en,description,description_en)values(?,?,?,?)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en]);
     if (sql?.length > 0) {
         res.redirect('/directorats');
     } else {
@@ -1862,7 +1862,7 @@ const delete_custom_page = async (req, res) => {
 //:::::::::::::::::::::::::::::: End Zona Khas  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 const naration = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM naration where id = 1');
+    const sql = await executeQuery('SELECT * FROM naration');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1870,9 +1870,29 @@ const naration = async (req, res) => {
     }
 }
 
+const naration_detail = async (req, res) => {
+    const id_nar = req.params.id;
+    const sql = await executeQuery('SELECT * FROM naration where id = ?', [id_nar]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const insertnarations = async (req, res) => {
+    const sql = await executeQuery("INSERT INTO naration (title,title_en,description,description_en)values(?,?,?,?)",
+        [req.body.title,req.body.title_en,req.body.description, req.body.description_en]);
+    if (sql) {
+        res.redirect('/narationfront');
+    } else {
+        res.redirect('/narationfront');
+    }
+}
+
 const updatenarations = async (req, res) => {
-    const sql = await executeQuery("UPDATE naration set description = ?, description_en = ? where id = ?",
-        [req.body.description, req.body.description_en, req.body.id]);
+    const sql = await executeQuery("UPDATE naration set title= ? , title_en = ?, description = ?, description_en = ? where id = ?",
+        [req.body.title,req.body.title_en,req.body.description, req.body.description_en, req.body.id]);
     if (sql) {
         res.redirect('/narationfront');
     } else {
@@ -2223,6 +2243,8 @@ module.exports = {
     insertcustompage,
     delete_custom_page,
     naration,
+    naration_detail,
+    insertnarations,
     updatenarations,
     statistics,
     deletestatistic,
