@@ -1900,6 +1900,35 @@ const updatenarations = async (req, res) => {
     }
 }
 
+const metabase = async (req, res) => {
+    const id_nar = req.params.id;
+    const sql = await executeQuery('SELECT * FROM api_meta where naration_id = ?', [id_nar]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const metabase_delete = async (req, res) => {
+    const id_meta = req.params.id;
+    const sql = await executeQuery('DELETE FROM api_meta where id = ?', [id_meta]);
+    if (sql?.length > 0) {
+        res.redirect('/view_narationfront/'+id_meta);
+    } else {
+        res.redirect('/view_narationfront/'+id_meta);
+    }
+}
+
+const insertapimeta = async (req, res) => {
+    const sql = await executeQuery('INSERT INTO api_meta (api,naration_id) values (?,?)', [req.body.api,req.body.idm]);
+    if (sql?.length > 0) {
+        res.redirect('/view_narationfront/'+req.body.idm);
+    } else {
+        res.redirect('/view_narationfront/'+req.body.idm);
+    }
+}
+
 const statistics = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM statistic');
     if (sql?.length > 0) {
@@ -1965,7 +1994,7 @@ const deletesourcesdata = async (req, res) => {
 
 
 const opini = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM opini where web_identity = 'kneks'")
+    const sql = await executeQuery("SELECT * FROM opini")
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1985,7 +2014,7 @@ const opini_detail = async (req, res) => {
 
 const insertopini = async (req, res) => {
     const sql = await executeQuery("insert into opini(title,title_en,content,content_en,web_identity) values(?,?,?,?,?)",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, 'kneks']);
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.web_identity]);
     if (sql) {
         res.redirect('/opini');
     } else {
@@ -2246,6 +2275,9 @@ module.exports = {
     naration_detail,
     insertnarations,
     updatenarations,
+    metabase,
+    metabase_delete,
+    insertapimeta,
     statistics,
     deletestatistic,
     insertstatistic,

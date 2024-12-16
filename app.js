@@ -414,6 +414,11 @@ apps.get('/edit_narationfront/:id', (req, res) => {
 apps.get('/narationfront_add', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/naration_add.html'));
 });
+
+apps.get('/view_narationfront/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/naration_detail.html'));
+});
+
 // :::::::::::::::::::::::::::: Opini ::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/opini', (req, res) => {
@@ -596,9 +601,11 @@ apps.get('/directorat', db.directorat);
 
 apps.get('/directorat_path/:id', db.directorat_path);
 
-apps.get('/direktorat', db.directorat);
-
 apps.post('/insertdirectorats', db.insertdirectorats);
+
+apps.post('/directorats_update', db.update_directorats);
+
+apps.get('/directorats_delete/:id', db.delete_direactorats);
 
 apps.get('/hotissuedetail/:id', db.hotissue_detail);
 
@@ -612,11 +619,7 @@ apps.get('/hotissuecategory', db.hotissuecategory);
 
 apps.post('/updatehotissuecategory', db.updatehotissuecategory);
 
-apps.post('/directorats_update', db.update_directorats);
-
 apps.get('/deletehotissuecategory/:id', db.deletehotissuecategory);
-
-apps.get('/directorats_delete/:id', db.delete_direactorats);
 
 apps.get('/deletehotissuesubcategory/:id', db.deletehotissuesubcategory);
 
@@ -767,6 +770,12 @@ apps.get('/narations_detail/:id', db.naration_detail);
 apps.post('/insertnarations', db.insertnarations);
 
 apps.post('/updatenarations', db.updatenarations);
+
+apps.get('/api_metabase/:id', db.metabase);
+
+apps.get('/api_metabase_delete/:id', db.metabase_delete);
+
+apps.post('/insertapimeta', db.insertapimeta);
 
 apps.get('/statistics', db.statistics);
 

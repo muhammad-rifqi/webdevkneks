@@ -92,7 +92,7 @@
             // 2. Inisialisasi DataTable
             $('#direktorat').DataTable({
                 "ajax": {
-                    "url": "/hotissuecategory",
+                    "url": "/directorat",
                     "dataSrc": ""
                 },
                 "columns": [
@@ -102,8 +102,8 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='edit-btn-hotissue_category btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Edit</button>
-                                    <button class='delete-btn-hotissue_category btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button></p>`;
+                            return `<p><button class='edit-btn-directorat btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Edit</button>
+                                    <button class='delete-btn--directorat btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button></p>`;
                         }
                     }
                 ],
@@ -118,12 +118,12 @@
                 // ],
             });
 
-            $('#direktorat').on('click', '.edit-btn-hotissue_category', function () {
+            $('#direktorat').on('click', '.edit-btn-directorat', function () {
                 var id = $(this).data('id');
                 window.location.href='/directorats_edit/'+id;
             });
 
-            $('#direktorat').on('click', '.delete-btn-hotissue_category', function () {
+            $('#direktorat').on('click', '.delete-btn-directorat', function () {
                 var id = $(this).data('id');
                 if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
                     window.location.href='/directorats_delete/'+id;

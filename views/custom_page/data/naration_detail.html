@@ -40,52 +40,58 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/updateopini" method="post">
-                            <input type="hidden" name="id" id="id" value="">
-                            <div class="card stretch stretch-full">
-                                <div class="card-body lead-status">
-                                    <div class="mb-5 d-flex align-items-center justify-content-between">
-                                        <h5 class="fw-bold mb-0 me-4">
-                                            <span class="d-block mb-2"> Edit OPINI :</span>
-                                            <span
-                                                class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
-                                                Edit
-                                                Data OPINI Di Bawah Ini</span>
-                                        </h5>
+                        <div class="card stretch stretch-full">
+                            <div class="card-body lead-status">
+                                <div class="mb-2 d-flex align-items-center justify-content-between">
+                                    <h4 class="fw-bold mb-0 me-4">
+                                        <span class="d-block mb-2">Detail Narasi :</span>
+                                        <span class="fs-12 fw-normal text-muted text-truncate-1-line">
+                                            Detail
+                                            Data Narasi Di Bawah Ini</span>
+                                    </h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 mb-4">
+                                        <label class="form-label">Judul</label>
+                                        <h4 id="titles"></h4>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="card stretch stretch-full">
+                            <form action="/insertapimeta" method="post">
+                                <input type="hidden" name="idm" id="ids" value="">
+                                <div class="card-body lead-status">
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Title Indonesia</label>
-                                            <input class="form-control" type="text" name="title" id="title" required>
-                                        </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Title English</label>
-                                            <input class="form-control" type="text" id="title_en" name="title_en"
-                                                required>
-                                        </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Content Indonesia</label>
-                                            <textarea class="form-control" name="content"
-                                                id="content"></textarea>
-                                        </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Content English</label>
-                                            <textarea class="form-control" name="content_en"
-                                                id="content_en"></textarea>
-                                        </div>
-
-                                        <div class="col-lg-12 mb-4" id="webidentity">
-                                            
+                                            <label class="form-label">Masukan Api Meta</label>
+                                            <input class="form-control" type="text" name="api" id="api" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
-                                            <button class="btn btn-primary" type="submit">Simpan</button>
+                                            <input class="btn btn-primary" type="submit" value="Simpan">
                                         </div>
                                     </div>
                                 </div>
+                            </form>
+                            <div class="table-responsive p-5">
+                                <table class="table table-bordered" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>API</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabb">
+                                    </tbody>
+                                </table>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -115,38 +121,38 @@
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
-
-
     <script>
         window.addEventListener("load", async () => {
             await getUrlById();
+            await getDataMeta();
         })
-    
         function getUrlById() {
             const URLS = new URL(window.location.href);
-            fetch('/api_opini_detail/' + URLS.pathname.split('/')[2])
+            fetch('/narations_detail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
-                    document.getElementById("id").value = rows[0]?.id;
-                    document.getElementById("title").value = rows[0]?.title;
-                    document.getElementById("title_en").value = rows[0]?.title_en;
-                    document.getElementById("content").innerHTML = rows[0]?.content;
-                    document.getElementById("content_en").innerHTML = rows[0]?.content_en;
-                    if(rows[0]?.web_identity == "kneks"){
-                        document.getElementById("webidentity").innerHTML = `
-                        <label class="form-label">Web Identity</label>
-                        <input type="radio" name="web_identity" value="kneks" checked>kneks
-                        <input type="radio" name="web_identity" value="kdeks">kdeks
-                        `;
-                    }else{
-                        document.getElementById("webidentity").innerHTML = `
-                        <label class="form-label">Web Identity</label>
-                        <input type="radio" name="web_identity" value="kneks">kneks
-                        <input type="radio" name="web_identity" value="kdeks" checked>kdeks
-                        `;
-                    }
+                    document.getElementById("ids").value = rows[0]?.id;
+                    document.getElementById("titles").innerHTML = rows[0]?.title;
                 })
         }
+
+        function getDataMeta() {
+            const URLS = new URL(window.location.href);
+            fetch('/api_metabase/' + URLS.pathname.split('/')[2])
+                .then(row => row.json())
+                .then((rrr) => {
+                    var aaa = "";
+                    rrr.forEach((element) => {
+                        aaa += `<tr>
+                                    <td>#${element?.id}</td>
+                                    <td>${element?.api}</td>
+                                    <td><a href="/api_metabase_delete/${element?.id}" onclick="return confirm('Yakin Mau Hapus Data Ini ?')"><button class="btn btn-danger">Delete</button></a></td>                           
+                                </tr>`;
+                    });
+                    document.getElementById("tabb").innerHTML = aaa;
+                })
+        }
+
     </script>
 </body>
 
