@@ -258,6 +258,15 @@ const directorat = async (req, res) => {
     }
 }
 
+const insertdirectorats = async (req, res) => {
+    const sql = await executeQuery('INSERT INTO hot_categories(title,title_en,description,description_en)values(?,?,?,?)',[req.body.title,req.body.title_en,req.body.description,req.body.description_en]);
+    if (sql?.length > 0) {
+        res.redirect('/directorats');
+    } else {
+        res.redirect('/directorats');
+    }
+}
+
 
 const directorat_path = async (req, res) => {
     const id_hot_cat = req.params.id;
@@ -299,7 +308,6 @@ const detailhotissuecategory = async (req, res) => {
 }
 
 const updatehotissuecategory = async (req, res) => {
-
     const today = new Date();
     const month = (today.getMonth() + 1);
     const mmm = month.length < 2 ? "0" + month : month;
@@ -316,7 +324,25 @@ const updatehotissuecategory = async (req, res) => {
         console.log(sql)
         res.redirect('/hic');
     }
+}
 
+const update_directorats = async (req, res) => {
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const datetimes = date + ' ' + time;
+
+    const sql = await executeQuery("update hot_categories set title=?,title_en=?,description=?,description_en=?,created_at=?,updated_at=?,deleted_at=? where id = ?",
+        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, datetimes, datetimes, datetimes, req.body.id]);
+
+    if (sql) {
+        res.redirect('/directorats');
+    } else {
+        console.log(sql)
+        res.redirect('/directorats');
+    }
 }
 
 const deletehotissuecategory = async (req, res) => {
@@ -327,6 +353,17 @@ const deletehotissuecategory = async (req, res) => {
     } else {
         console.log(sql)
         res.redirect('/hic');
+    }
+}
+
+const delete_direactorats = async (req, res) => {
+    const idcat = req.params.id;
+    const sql = await executeQuery('DELETE FROM  hot_categories where id=?', [idcat]);
+    if (sql) {
+        res.redirect('/directorats');
+    } else {
+        console.log(sql)
+        res.redirect('/directorats');
     }
 }
 
@@ -2106,9 +2143,11 @@ module.exports = {
     hotissue_detail,
     hotissuecategory,
     updatehotissuecategory,
+    update_directorats,
     detailhotissuecategory,
     hotissuesubcategory,
     deletehotissuecategory,
+    delete_direactorats,
     deletehotissuesubcategory,
     detailhotissuesubcategory,
     updatehotissue,
@@ -2118,6 +2157,7 @@ module.exports = {
     updatehotissuesubcategory,
     directorat,
     directorat_path,
+    insertdirectorats,
     institutions,
     detailinstitutions,
     deleteinstitution,

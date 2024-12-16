@@ -32,12 +32,12 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/directorat_add'"> Tambah Direktorat </button>
+                            <button class="btn btn-primary" onclick="window.location.href = '/directorats_add'"> Tambah Direktorat </button>
                         </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
-                                    <table id="hotissue_category" class="display" style="width: 100%;">
+                                    <table id="direktorat" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -90,7 +90,7 @@
     <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
-            $('#hotissue_category').DataTable({
+            $('#direktorat').DataTable({
                 "ajax": {
                     "url": "/hotissuecategory",
                     "dataSrc": ""
@@ -118,15 +118,15 @@
                 // ],
             });
 
-            $('#hotissue_category').on('click', '.edit-btn-hotissue_category', function () {
+            $('#direktorat').on('click', '.edit-btn-hotissue_category', function () {
                 var id = $(this).data('id');
-                window.location.href='/hic_edit/'+id;
+                window.location.href='/directorats_edit/'+id;
             });
 
-            $('#hotissue_category').on('click', '.delete-btn-hotissue_category', function () {
+            $('#direktorat').on('click', '.delete-btn-hotissue_category', function () {
                 var id = $(this).data('id');
                 if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    window.location.href='/deletehotissuecategory/'+id;
+                    window.location.href='/directorats_delete/'+id;
                 }
             });
         });

@@ -16,6 +16,13 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript">
+        bkLib.onDomLoaded(function () {
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
+        });
+    </script>
 </head>
 
 <body>
@@ -40,38 +47,40 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/insertdirectorats" method="post">
+                        <form action="/directorats_update" method="post">
+                            <input type="hidden" name="id" id="id" value="">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
                                         <h5 class="fw-bold mb-0 me-4">
-                                            <span class="d-block mb-2">Tambah Direktorat :</span>
+                                            <span class="d-block mb-2">Edit Direktorat :</span>
                                             <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
-                                                Tambah
+                                                Edit
                                                 Data Direktorat Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
-
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Title*</label>
+                                            <label class="form-label">Title Indonesia</label>
                                             <input class="form-control" type="text" name="title" id="title" required>
                                         </div>
-
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Title EN*</label>
-                                            <input class="form-control" type="text" name="title_en" id="title_en" required>
+                                            <label class="form-label">Title English</label>
+                                            <input class="form-control" type="text" name="title_en" id="title_en"
+                                                required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Description Indonesia</label>
-                                            <textarea class="form-control" name="description" id="description"></textarea>
+                                            <textarea class="form-control" name="description" id="editor3"
+                                                ></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Description English</label>
-                                            <textarea class="form-control" name="description_en" id="description_en"></textarea>
+                                            <textarea class="form-control" name="description_en" id="editor4"
+                                                ></textarea>
                                         </div>
-                        
+
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -79,8 +88,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
+                    </form>
                 </div>
             </div>
             <!-- [ Main Content ] end -->
@@ -109,6 +118,27 @@
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <script>
+        window.addEventListener("load", async () => {
+            let hot_category_id;
+            await getUrlById();
+        })
+
+        function getUrlById() {
+            const URLS = new URL(window.location.href);
+            fetch('/detailhotissuecategory/' + URLS.pathname.split('/')[2])
+                .then(data => data.json())
+                .then((rows) => {
+                    document.getElementById("id").value = rows[0]?.id;
+                    document.getElementById("title").value = rows[0]?.title;
+                    document.getElementById("title_en").value = rows[0]?.title_en;
+                    nicEditors.findEditor("editor2").setContent(rows[0]?.description);
+                    nicEditors.findEditor("editor3").setContent(rows[0]?.description_en);
+                    hot_category_id = rows[0]?.hot_category_id;
+                })
+        }
+
+    </script>
 </body>
 
 </html>

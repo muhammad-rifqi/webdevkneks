@@ -297,6 +297,14 @@ apps.get('/directorats', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/directorat/list.html'));
 })
 
+apps.get('/directorats_add', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/directorat/add.html'));
+})
+
+apps.get('/directorats_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/directorat/edit.html'));
+})
+
 //::::::::::::::: One Data Center ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/f', (req, res) => {
@@ -585,6 +593,10 @@ apps.get('/directorat', db.directorat);
 
 apps.get('/directorat_path/:id', db.directorat_path);
 
+apps.get('/direktorat', db.directorat);
+
+apps.post('/insertdirectorats', db.insertdirectorats);
+
 apps.get('/hotissuedetail/:id', db.hotissue_detail);
 
 apps.post('/inserthotissue', hotissue_path.single('photo'), db.inserthotissue);
@@ -597,7 +609,11 @@ apps.get('/hotissuecategory', db.hotissuecategory);
 
 apps.post('/updatehotissuecategory', db.updatehotissuecategory);
 
+apps.post('/directorats_update', db.update_directorats);
+
 apps.get('/deletehotissuecategory/:id', db.deletehotissuecategory);
+
+apps.get('/directorats_delete/:id', db.delete_direactorats);
 
 apps.get('/deletehotissuesubcategory/:id', db.deletehotissuesubcategory);
 
@@ -610,8 +626,6 @@ apps.get('/detailhotissuecategory/:id', db.detailhotissuecategory);
 apps.post('/inserthotissubcategory', db.inserthotissubcategory);
 
 apps.post('/updatehotissuesubcategory', db.updatehotissuesubcategory);
-
-apps.get('/direktorat', db.directorat);
 
 //::::::::::::::: Api & Query DB INSTITUTION ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
