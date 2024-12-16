@@ -22,7 +22,7 @@ document.write(`<nav class="nxl-navigation">
                     document.write(``);
 //menu
 //banner
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
+if (cookie["roles_id"] == 2) {
     document.write(` <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
@@ -32,7 +32,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                             <li class="nxl-item"><a class="nxl-link" href="/customfront">Custom Banner</a></li>
                         </ul>
                     </li>`);
-}
+} 
 //Direktorat
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3|| cookie["roles_id"] == 4) {
     document.write(` <li class="nxl-item nxl-hasmenu">
@@ -325,7 +325,7 @@ if (cookie["roles_id"] == 1 ) {
 
 
 //Pengaturan
-if (cookie["roles_id"] == 1 ) {
+if (cookie["roles_id"] == 1) {
     document.write(` <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
@@ -338,6 +338,7 @@ if (cookie["roles_id"] == 1 ) {
                             <li class="nxl-item"><a class="nxl-link" href="/color">Warna</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/menu">Menu</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/submenu">Sub Menu</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/customfront">Custom Banner</a></li>
                          </ul>
                     </li>
                             `);

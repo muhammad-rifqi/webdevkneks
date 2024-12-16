@@ -82,8 +82,20 @@ let custom_page = multer.diskStorage(
     }
 );
 let page_path = multer({ storage: custom_page });
-
 // :::::::::::::::::::::::::::::::::: Slide Show Path ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+let directorat_images = multer.diskStorage(
+    {
+        destination: './public/uploads/directorat/images/',
+        filename: function (req, file, cb) {
+            cb(null, file.originalname.replace(" ", ""));
+        }
+    }
+);
+let directorats_images = multer({ storage: directorat_images });
+
+//:::::::::::::::::::::::::::::::::::::::::::::End Of Direktorat Images :::::::::::::::::::::::::::::::::::::::
+
 
 let slideshow_page = multer.diskStorage(
     {
@@ -305,6 +317,9 @@ apps.get('/directorats_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/directorat/edit.html'));
 })
 
+apps.get('/directorats_detail/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/directorat/detail.html'));
+})
 //::::::::::::::: One Data Center ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/f', (req, res) => {
@@ -608,6 +623,8 @@ apps.get('/directorat_path/:id', db.directorat_path);
 apps.post('/insertdirectorats', db.insertdirectorats);
 
 apps.post('/directorats_update', db.update_directorats);
+
+apps.post('/directorats_upload', directorats_images.fields([{ name: "images", maxCount: 1 },{ name: "banners", maxCount: 1 },]), db.directorats_uploads);
 
 apps.get('/directorats_delete/:id', db.delete_direactorats);
 
