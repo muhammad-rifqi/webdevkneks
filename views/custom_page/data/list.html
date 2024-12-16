@@ -32,7 +32,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/data_add'"> Tambah Sumber Data </button>
+                            <button class="btn btn-primary" onclick="window.location.href = '/data_add'"> Tambah Sumber
+                                Data </button>
                         </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
@@ -85,7 +86,7 @@
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script> -->
-    
+
     <script src="/assets/js/theme-customizer-init.min.js"></script>
 
     <script>
@@ -104,11 +105,14 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='delete-btn-custom-page btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button></p>`;
+                            return `<p>
+                                        <button class='edit-btn-custom-page btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">View/Detail</button>
+                                        <button class='delete-btn-custom-page btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button>
+                                    </p>`;
                         }
                     }
                 ],
-                lengthMenu: [10, 25, 50, 100 ], 
+                lengthMenu: [10, 25, 50, 100],
                 // dom: 'Bfrtip',  
                 // buttons: [
                 //     'copy',        
@@ -119,11 +123,15 @@
                 // ],
             });
 
-            // 4. Event Listener untuk Tombol Hapus
+            $('#sourcesdata').on('click', '.edit-btn-custom-page', function () {
+                var id = $(this).data('id');
+                window.location.href = '/data_detail/' + id;
+            });
+
             $('#sourcesdata').on('click', '.delete-btn-custom-page', function () {
                 var id = $(this).data('id');
                 if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    window.location.href='/deletesourcesdata/'+id;
+                    window.location.href = '/deletesourcesdata/' + id;
                 }
             });
         });

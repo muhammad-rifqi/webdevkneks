@@ -43,10 +43,10 @@
                             <div class="card-body lead-status">
                                 <div class="mb-2 d-flex align-items-center justify-content-between">
                                     <h4 class="fw-bold mb-0 me-4">
-                                        <span class="d-block mb-2">Detail Narasi :</span>
+                                        <span class="d-block mb-2">Detail Data Set :</span>
                                         <span class="fs-12 fw-normal text-muted text-truncate-1-line">
                                             Detail
-                                            Data Narasi Di Bawah Ini</span>
+                                            Data Set Di Bawah Ini</span>
                                     </h4>
                                 </div>
                                 <div class="row">
@@ -61,13 +61,13 @@
 
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
-                            <form action="/insertapimeta" method="post">
-                                <input type="hidden" name="idm" id="ids" value="">
+                            <form action="/insertdetail" method="post">
+                                <input type="hidden" name="idd" id="idd" value="">
                                 <div class="card-body lead-status">
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Masukan Api Meta</label>
-                                            <input class="form-control" type="text" name="api" id="api" required>
+                                            <label class="form-label">Masukan Data Detail Set</label>
+                                            <input class="form-control" type="text" name="detail" id="detail" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -82,11 +82,11 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>API</th>
+                                            <th>Detail</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tabb">
+                                    <tbody id="tabd">
                                     </tbody>
                                 </table>
                             </div>
@@ -128,32 +128,14 @@
     <script>
         window.addEventListener("load", async () => {
             await getUrlById();
-            await getDataMeta();
         })
         function getUrlById() {
             const URLS = new URL(window.location.href);
-            fetch('/narations_detail/' + URLS.pathname.split('/')[2])
+            fetch('/sourcesdatadetail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
-                    document.getElementById("ids").value = rows[0]?.id;
-                    document.getElementById("titles").innerHTML = rows[0]?.title;
-                })
-        }
-
-        function getDataMeta() {
-            const URLS = new URL(window.location.href);
-            fetch('/api_metabase/' + URLS.pathname.split('/')[2])
-                .then(row => row.json())
-                .then((rrr) => {
-                    var aaa = "";
-                    rrr.forEach((element) => {
-                        aaa += `<tr>
-                                    <td>#${element?.id}</td>
-                                    <td>${element?.api}</td>
-                                    <td><a href="/api_metabase_delete/${element?.id}" onclick="return confirm('Yakin Mau Hapus Data Ini ?')"><button class="btn btn-danger">Delete</button></a></td>                           
-                                </tr>`;
-                    });
-                    document.getElementById("tabb").innerHTML = aaa;
+                    document.getElementById("idd").value = rows[0]?.id;
+                    document.getElementById("titles").innerHTML = rows[0]?.dataset;
                 })
         }
 

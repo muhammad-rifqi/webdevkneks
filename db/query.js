@@ -1969,6 +1969,16 @@ const sourcesdata = async (req, res) => {
     }
 }
 
+const sourcesdatadetail = async (req, res) => {
+    const id_source = req.params.id;
+    const sql = await executeQuery('SELECT * FROM sourcedata where id = ? ' , [id_source]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 const insertsourcesdata = async (req, res) => {
     const sql = await executeQuery("insert into sourcedata(dataset,source,date_created) values(?,?,?)",
         [req.body.dataset, req.body.source, req.body.date_created]);
@@ -2282,6 +2292,7 @@ module.exports = {
     deletestatistic,
     insertstatistic,
     sourcesdata,
+    sourcesdatadetail,
     deletesourcesdata,
     insertsourcesdata,
     opini,

@@ -403,6 +403,10 @@ apps.get('/data_add', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/add.html'));
 })
 
+apps.get('/data_detail/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/view.html'));
+});
+
 apps.get('/narationfront', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/naration.html'));
 });
@@ -784,6 +788,8 @@ apps.get('/delete_statistics/:id', db.deletestatistic);
 apps.post('/insertstatistics', db.insertstatistic);
 
 apps.get('/sourcesdata', db.sourcesdata);
+
+apps.get('/sourcesdatadetail/:id', db.sourcesdatadetail);
 
 apps.get('/deletesourcesdata/:id', db.deletesourcesdata);
 
