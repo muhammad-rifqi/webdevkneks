@@ -259,10 +259,10 @@
                     document.getElementById("place").value = rows[0]?.place;
                     document.getElementById("organizer").value = rows[0]?.organizer;
                     document.getElementById("link").value = rows[0]?.link;
-                    document.getElementById("agenda_datetime").value = rows[0]?.agenda_datetime.split('.')[0]??"null";
+                    document.getElementById("agenda_datetime").value = rows[0]?.agenda_datetime.split('.')[0] ?? "null";
                     document.getElementById("project").value = rows[0]?.project;
                     document.getElementById("description").value = rows[0]?.description;
-                    document.getElementById("agenda_endtime").value = rows[0]?.agenda_endtime.split('.')[0]??"null";
+                    document.getElementById("agenda_endtime").value = rows[0]?.agenda_endtime.split('.')[0] ?? "null";
                     document.getElementById("manager").value = rows[0]?.manager;
                     document.getElementById("contributor").value = rows[0]?.contributor;
                     document.getElementById("indicator").value = rows[0]?.indicator;
@@ -276,7 +276,7 @@
                     usias = rows[0]?.age;
                     areas = rows[0]?.area;
                     prioritast = rows[0]?.priority_participants;
-                   
+
                 })
         }
 
@@ -286,15 +286,9 @@
                 .then((data) => {
                     data.forEach(element => {
                         const ddd = document.createElement('option')
-                        if (element?.province_name == provs) {
-                            ddd.value = `${element?.province_name}`;
-                            ddd.text = `${element?.province_name}`;
-                            ddd.selected = true;
-                        } else {
-                            ddd.value = `${element?.province_name}`;
-                            ddd.text = `${element?.province_name}`;
-                            ddd.selected = false;
-                        }
+                        ddd.value = `${element?.province_name}`;
+                        ddd.text = `${element?.province_name}`;
+                        ddd.selected = false;
                         document.getElementById("province").append(ddd);
                     });
                 })
@@ -306,15 +300,9 @@
                 .then((data) => {
                     data.forEach(element => {
                         const dd = document.createElement('option')
-                        if (element?.kbli == kblis) {
-                            dd.value = `${element?.kbli}`;
-                            dd.text = `${element?.kbli}`;
-                            dd.selected = true;
-                        } else {
-                            dd.value = `${element?.kbli}`;
-                            dd.text = `${element?.kbli}`;
-                            dd.selected = false;
-                        }
+                        dd.value = `${element?.kbli}`;
+                        dd.text = `${element?.kbli}`;
+                        dd.selected = false;
                         document.getElementById("kbli").append(dd);
                     });
                 })
@@ -326,15 +314,9 @@
                 .then((b) => {
                     b.forEach(items => {
                         const dddd = document.createElement('option')
-                        if (items?.jumlah == pesertas) {
-                            dddd.value = `${items?.jumlah}`;
-                            dddd.text = `${items?.jumlah}`;
-                            dddd.selected = true;
-                        } else {
-                            dddd.value = `${items?.jumlah}`;
-                            dddd.text = `${items?.jumlah}`;
-                            dddd.selected = false;
-                        }
+                        dddd.value = `${items?.jumlah}`;
+                        dddd.text = `${items?.jumlah}`;
+                        dddd.selected = false;
                         document.getElementById("participants").append(dddd);
                     });
                 })
@@ -346,15 +328,9 @@
                 .then((r) => {
                     r.forEach(element => {
                         const ddd = document.createElement('option')
-                        if (element?.pembuka == pembukas) {
-                            ddd.value = `${element?.pembuka}`;
-                            ddd.text = `${element?.pembuka}`;
-                            ddd.selected = true;
-                        } else {
-                            ddd.value = `${element?.pembuka}`;
-                            ddd.text = `${element?.pembuka}`;
-                            ddd.selected = false;
-                        }
+                        ddd.value = `${element?.pembuka}`;
+                        ddd.text = `${element?.pembuka}`;
+                        ddd.selected = false;
                         document.getElementById("opening").append(ddd);
                     });
                 })
@@ -366,15 +342,9 @@
                 .then((r) => {
                     r.forEach(element => {
                         const ddd = document.createElement('option')
-                        if (element?.gender == genders) {
-                            ddd.value = `${element?.gender}`;
-                            ddd.text = `${element?.gender}`;
-                            ddd.selected = true;
-                        } else {
-                            ddd.value = `${element?.gender}`;
-                            ddd.text = `${element?.gender}`;
-                            ddd.selected = false;
-                        }
+                        ddd.value = `${element?.gender}`;
+                        ddd.text = `${element?.gender}`;
+                        ddd.selected = false;
                         document.getElementById("gender").append(ddd);
                     });
                 })
@@ -386,15 +356,9 @@
                 .then((r) => {
                     r.forEach(element => {
                         const ddd = document.createElement('option')
-                        if (element?.usia == usias) {
-                            ddd.value = `${element?.usia}`;
-                            ddd.text = `${element?.usia}`;
-                            ddd.selected = true;
-                        } else {
-                            ddd.value = `${element?.usia}`;
-                            ddd.text = `${element?.usia}`;
-                            ddd.selected = false;
-                        }
+                        ddd.value = `${element?.usia}`;
+                        ddd.text = `${element?.usia}`;
+                        ddd.selected = false;
                         document.getElementById("age").append(ddd);
                     });
                 })
@@ -406,15 +370,9 @@
                 .then((r) => {
                     r.forEach(element => {
                         const ddd = document.createElement('option')
-                        if (element?.area == areas) {
-                            ddd.value = `${element?.area}`;
-                            ddd.text = `${element?.area}`;
-                            ddd.selected = true;
-                        } else {
-                            ddd.value = `${element?.area}`;
-                            ddd.text = `${element?.area}`;
-                            ddd.selected = false;
-                        }
+                        ddd.value = `${element?.area}`;
+                        ddd.text = `${element?.area}`;
+                        ddd.selected = false;
                         document.getElementById("area").append(ddd);
                     });
                 })
@@ -426,15 +384,9 @@
                 .then((r) => {
                     r.forEach(element => {
                         const ddd = document.createElement('option')
-                        if (element?.prioritas == prioritast) {
-                            ddd.value = `${element?.prioritas}`;
-                            ddd.text = `${element?.prioritas}`;
-                            ddd.selected = true;
-                        } else {
-                            ddd.value = `${element?.prioritas}`;
-                            ddd.text = `${element?.prioritas}`;
-                            ddd.selected = false;
-                        }
+                        ddd.value = `${element?.prioritas}`;
+                        ddd.text = `${element?.prioritas}`;
+                        ddd.selected = false;
                         document.getElementById("priority_participants").append(ddd);
                     });
                 })
