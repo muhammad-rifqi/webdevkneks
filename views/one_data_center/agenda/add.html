@@ -126,9 +126,10 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Opening</label>
-                                            <input class="form-control" type="text" name="opening" id="opening"
-                                                required>
+                                            <label class="form-label"> Pembuka </label>
+                                            <select class="form-control" name="opening" id="opening" required>
+                                                <option value="0">Choose</option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -139,9 +140,12 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Area )* embed dari maps</label>
-                                            <input class="form-control" type="text" name="area" id="area" required>
+                                            <label class="form-label"> Area </label>
+                                            <select class="form-control" name="area" id="area" required>
+                                                <option value="0">Choose</option>
+                                            </select>
                                         </div>
+
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Level Of Content</label>
@@ -149,9 +153,10 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Priority Participants</label>
-                                            <input class="form-control" type="text" name="priority_participants"
-                                                id="priority_participants" required>
+                                            <label class="form-label"> Priority Participants </label>
+                                            <select class="form-control" name="priority_participants" id="priority_participants" required>
+                                                <option value="0">Choose</option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -162,13 +167,17 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Usia Partisipan</label>
-                                            <input class="form-control" type="text" name="age" id="age" required>
+                                            <label class="form-label"> Usia Partisipan </label>
+                                            <select class="form-control" name="age" id="age" required>
+                                                <option value="0">Choose</option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Genders</label>
-                                            <input class="form-control" type="text" name="gender" id="gender" required>
+                                            <label class="form-label"> Genders </label>
+                                            <select class="form-control" name="gender" id="gender" required>
+                                                <option value="0">Choose</option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -220,6 +229,11 @@
             await prov();
             await kbli();
             await peserta();
+            await pembuka();
+            await gender();
+            await usia();
+            await area();
+            await prioritas();
         })
 
         function prov(){
@@ -228,7 +242,7 @@
             .then((data) => {
                 data.forEach(element => {
                     const ddd = document.createElement('option')                    
-                    ddd.value = `${element?.id}`;
+                    ddd.value = `${element?.province_name}`;
                     ddd.text = `${element?.province_name}`;
                     document.getElementById("province").append(ddd);
                 });
@@ -249,33 +263,83 @@
         }
 
         function peserta(){
-            fetch('/provinces')
-            .then(resp => resp.json())
-            .then((d) => {
-                d.forEach(items => {
+            fetch('/peserta')
+            .then(res => res.json())
+            .then((b) => {
+                b.forEach(items => {
                     const dddd = document.createElement('option')                    
-                    dddd.value = `${items?.id}`;
-                    dddd.text = `${items?.province_name}`;
-                    document.getElementById("peserta").append(dddd);
+                    dddd.value = `${items?.jumlah}`;
+                    dddd.text = `${items?.jumlah}`;
+                    document.getElementById("participants").append(dddd);
                 });
             })
         }
 
-        // function prov(){
-        //     fetch('/provinces')
-        //     .then(response => response.json())
-        //     .then((data) => {
-        //         data.forEach(element => {
-        //             const ddd = document.createElement('option')                    
-        //             ddd.value = `${element?.id}`;
-        //             ddd.text = `${element?.province_name}`;
-        //             document.getElementById("province").append(ddd);
-        //         });
-        //     })
-        // }
+        function pembuka(){
+            fetch('/pembuka')
+            .then(responses => responses.json())
+            .then((r) => {
+                r.forEach(element => {
+                    const ddd = document.createElement('option')                    
+                    ddd.value = `${element?.pembuka}`;
+                    ddd.text = `${element?.pembuka}`;
+                    document.getElementById("opening").append(ddd);
+                });
+            })
+        }
 
-     
+        function gender(){
+            fetch('/gender')
+            .then(responses => responses.json())
+            .then((r) => {
+                r.forEach(element => {
+                    const ddd = document.createElement('option')                    
+                    ddd.value = `${element?.gender}`;
+                    ddd.text = `${element?.gender}`;
+                    document.getElementById("gender").append(ddd);
+                });
+            })
+        }
 
+        function usia(){
+            fetch('/usia')
+            .then(responses => responses.json())
+            .then((r) => {
+                r.forEach(element => {
+                    const ddd = document.createElement('option')                    
+                    ddd.value = `${element?.usia}`;
+                    ddd.text = `${element?.usia}`;
+                    document.getElementById("age").append(ddd);
+                });
+            })
+        }
+
+        function area(){
+            fetch('/area')
+            .then(responses => responses.json())
+            .then((r) => {
+                r.forEach(element => {
+                    const ddd = document.createElement('option')                    
+                    ddd.value = `${element?.area}`;
+                    ddd.text = `${element?.area}`;
+                    document.getElementById("area").append(ddd);
+                });
+            })
+        }
+
+        function prioritas(){
+            fetch('/prioritas')
+            .then(responses => responses.json())
+            .then((r) => {
+                r.forEach(element => {
+                    const ddd = document.createElement('option')                    
+                    ddd.value = `${element?.prioritas}`;
+                    ddd.text = `${element?.prioritas}`;
+                    document.getElementById("priority_participants").append(ddd);
+                });
+            })
+        }
+ 
         
     </script>
 

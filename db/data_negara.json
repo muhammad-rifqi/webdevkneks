@@ -1,14 +1,10 @@
 [
     {
         "id": "1",
-        "negara": "Laki-Laki"
+        "negara": "Indonesia"
     },
     {
         "id": "2",
-        "negara": "Perempuan"
-    },
-    {
-        "id": "3",
-        "negara": "Semua"
+        "negara": "Luar Negeri"
     }
 ]
