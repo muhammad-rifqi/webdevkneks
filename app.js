@@ -848,9 +848,17 @@ apps.post('/updatewebcolor', db.updatewebcolor);
 
 apps.get('/api_menu', db.menu);
 
+apps.post('/insertmenu', db.insertmenu);
+
+apps.post('/updatemenu', db.updatemenu);
+
 apps.get('/api_menu_detail/:id', db.menu_detail);
 
 apps.get('/api_submenu', db.submenu);
+
+apps.post('/insertsubmenu', db.insertsubmenu);
+
+apps.post('/updatesubmenu', db.updatesubmenu);
 
 apps.get('/api_submenu_detail/:id', db.submenu_detail);
 //::::::::::::::: Api & Query CUSTOM DATA NARATION PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

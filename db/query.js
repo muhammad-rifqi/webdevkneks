@@ -2204,6 +2204,28 @@ const menu = async (req, res) => {
     }
 }
 
+const insertmenu = async (req, res) => {
+    const sql = await executeQuery("insert into menu(menu_name,menu_link,orders) values(?,?,?)",
+        [req.body.menu_name, req.body.menu_link, req.body.orders]);
+    if (sql) {
+        res.redirect('/menu');
+    } else {
+        console.log(sql)
+        res.redirect('/menu');
+    }
+}
+
+const updatemenu = async (req, res) => {
+    const sql = await executeQuery("update menu set menu_name=?, menu_link=?, orders=? where id = ?",
+        [req.body.menu_name, req.body.menu_link, req.body.orders, req.body.id]);
+    if (sql) {
+        res.redirect('/menu');
+    } else {
+        console.log(sql)
+        res.redirect('/menu');
+    }
+}
+
 const menu_detail = async (req, res) => {
     const id_menu = req.params.id;
     const sql = await executeQuery('SELECT * FROM menu where id = ? ', [id_menu]);
@@ -2220,6 +2242,28 @@ const submenu = async (req, res) => {
         res.status(200).json(sql)
     } else {
         res.status(200).json({ "success": false })
+    }
+}
+
+const insertsubmenu = async (req, res) => {
+    const sql = await executeQuery("insert into menu_sub(menu_id,submenu_name,submenu_link,orders) values(?,?,?,?)",
+        [req.body.menu_id,req.body.submenu_name, req.body.submenu_link, req.body.orders]);
+    if (sql) {
+        res.redirect('/submenu');
+    } else {
+        console.log(sql)
+        res.redirect('/submenu');
+    }
+}
+
+const updatesubmenu = async (req, res) => {
+    const sql = await executeQuery("update menu_sub set menu_id = ?, submenu_name=?, submenu_link=?, orders=? where id = ?",
+        [req.body.menu_id, req.body.submenu_name, req.body.submenu_link, req.body.orders, req.body.id]);
+    if (sql) {
+        res.redirect('/submenu');
+    } else {
+        console.log(sql)
+        res.redirect('/submenu');
     }
 }
 
@@ -2385,7 +2429,11 @@ module.exports = {
     updatewebheader,
     updatewebcolor,
     menu,
+    insertmenu,
+    updatemenu,
     submenu,
+    insertsubmenu,
+    updatesubmenu,
     menu_detail,
     submenu_detail
 }
