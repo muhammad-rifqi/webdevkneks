@@ -384,7 +384,7 @@ apps.get('/u_add', (req, res) => {
     res.sendFile(path.resolve('./views/user_management/users/add.html'));
 })
 
-apps.get('/u_edit', (req, res) => {
+apps.get('/u_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/user_management/users/edit.html'));
 })
 
@@ -574,6 +574,8 @@ apps.get('/deletevideo/:id', db.deletevideo);
 
 apps.get('/users', db.users);
 
+apps.get('/users_detail/:id', db.users_detail);
+
 apps.get('/users_new', db.users_new);
 
 apps.get('/users_whitelist', db.users_whitelist);
@@ -583,6 +585,8 @@ apps.get('/roles', db.userroles);
 apps.get('/approveusers/:id', db.approveusers);
 
 apps.post('/insertusers', db.insertusers);
+
+apps.post('/updateusers', db.updateusers);
 
 apps.get('/deleteuser/:id', db.deleteuser);
 

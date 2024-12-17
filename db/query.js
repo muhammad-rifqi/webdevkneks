@@ -320,19 +320,19 @@ const delete_images_direactorats = async (req, res) => {
             if (err) return console.log(err);
             const sql = await executeQuery('UPDATE hot_categories set images = ? where id = ? ', ['NULL', id_dir]);
             if (sql) {
-                res.redirect('/directorats_detail/'+id_dir);
+                res.redirect('/directorats_detail/' + id_dir);
             } else {
                 console.log(sql);
-                res.redirect('/directorats_detail/'+id_dir);
+                res.redirect('/directorats_detail/' + id_dir);
             }
         });
     } else {
         const sql = await executeQuery('UPDATE hot_categories set images = ? where id = ? ', ['NULL', id_dir]);
         if (sql) {
-            res.redirect('/directorats_detail/'+id_dir);
+            res.redirect('/directorats_detail/' + id_dir);
         } else {
             console.log(sql);
-            res.redirect('/directorats_detail/'+id_dir);
+            res.redirect('/directorats_detail/' + id_dir);
         }
     }
 }
@@ -346,19 +346,19 @@ const delete_banners_direactorats = async (req, res) => {
             if (err) return console.log(err);
             const sql = await executeQuery('UPDATE hot_categories set images = ? where id = ? ', ['NULL', id_dirct]);
             if (sql) {
-                res.redirect('/directorats_detail/'+id_dirct);
+                res.redirect('/directorats_detail/' + id_dirct);
             } else {
                 console.log(sql);
-                res.redirect('/directorats_detail/'+id_dirct);
+                res.redirect('/directorats_detail/' + id_dirct);
             }
         });
     } else {
         const sql = await executeQuery('UPDATE hot_categories set images = ? where id = ? ', ['NULL', id_dirct]);
         if (sql) {
-            res.redirect('/directorats_detail/'+id_dirct);
+            res.redirect('/directorats_detail/' + id_dirct);
         } else {
             console.log(sql);
-            res.redirect('/directorats_detail/'+id_dirct);
+            res.redirect('/directorats_detail/' + id_dirct);
         }
     }
 }
@@ -1597,6 +1597,15 @@ const users = async (req, res) => {
     }
 }
 
+const users_detail = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM users where id = ?', [req.params.id]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 const users_new = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH) AND approve = "Y" ORDER BY created_at DESC');
     if (sql?.length > 0) {
@@ -1683,6 +1692,18 @@ const deleteuser = async (req, res) => {
         res.redirect('/u');
     } else {
         console.log(sql);
+        res.redirect('/u');
+    }
+}
+
+const updateusers = async (req, res) => {
+    const id_user = req.body.id;
+    if (req.body.passwords == "" || req.body.passwords == null) {
+        await executeQuery("UPDATE users SET name=? , email=? ,  role_id = ? WHERE id=? ", [req.body.names, req.body.emails, req.body.roles_id, id_user]);
+        res.redirect('/u');
+    } else {
+        await executeQuery("UPDATE users SET name=? , email=? , password = ? , role_id = ? WHERE id=? ", [req.body.names, req.body.emails, md5(req.body.passwords), req.body.roles_id, id_user]);
+        res.redirect('/u');
     }
 }
 //::::::::::::::::::::::::::::::End Of Users:::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -2312,11 +2333,13 @@ module.exports = {
     insertfilecategorydetails,
     deletefilecategorydetail,
     users,
+    users_detail,
     users_new,
     users_whitelist,
     approveusers,
     userroles,
     insertusers,
+    updateusers,
     updatepassword,
     changespassword,
     deleteuser,

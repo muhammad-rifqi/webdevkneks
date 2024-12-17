@@ -40,33 +40,36 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/insertusers" method="post">
+                        <form action="/updateusers" method="post">
+                            <input type="hidden" name="id" id="id" value="">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
                                         <h5 class="fw-bold mb-0 me-4">
-                                            <span class="d-block mb-2">Tambah Users :</span>
+                                            <span class="d-block mb-2">Edit Users :</span>
                                             <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
-                                                Tambah
+                                                Edit
                                                 Data Users Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Nama *</label>
-                                            <input class="form-control" type="text" name="name" id="name" required>
+                                            <input class="form-control" type="text" name="names" id="name" 
+                                            >
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Email </label>
-                                            <input class="form-control" type="text" name="email" id="email" required>
+                                            <input class="form-control" type="text" name="emails" id="email" >
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Password </label>
-                                            <input class="form-control" type="password" name="password" id="password" required>
+                                            <input class="form-control" type="password" name="passwords" id="password"
+                                                required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Role ID </label>
-                                            <select class="form-control" name="role_id" id="role_id" required>
+                                            <select class="form-control" name="roles_id" id="role_id" >
                                                 <option value="0">Choose</option>
                                             </select>
                                         </div>
@@ -108,18 +111,45 @@
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script>
-        window.addEventListener("load", async ()=>{
-            await fetch('/roles')
-            .then(response => response.json())
-            .then((data) => {
-                data.forEach(element => {
-                    const ddd = document.createElement('option')                    
-                    ddd.value = `${element?.id}`;
-                    ddd.text = `${element?.title}`;
-                    document.getElementById("role_id").append(ddd);
-                });
-            })
+        window.addEventListener("load", async () => {
+            let roleid;
+            await getUrlById();
+            await getRoles();
         })
+
+        function getUrlById() {
+            const URLS = new URL(window.location.href);
+            fetch('/users_detail/' + URLS.pathname.split('/')[2])
+                .then(data => data.json())
+                .then((rows) => {
+                    roleid = rows[0]?.role_id;
+                    document.getElementById("id").value = rows[0]?.id;
+                    document.getElementById("name").value = rows[0]?.name;
+                    document.getElementById("email").value = rows[0]?.email;
+                })
+        }
+
+        function getRoles() {
+            fetch('/roles')
+                .then(response => response.json())
+                .then((data) => {
+                    data.forEach(element => {
+                        const ddd = document.createElement('option')
+                        if (element?.id == roleid) {
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.title}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.title}`;
+                            ddd.selected = false;
+                        }
+                        document.getElementById("role_id").append(ddd);
+                    });
+                })
+        }
+
+
     </script>
 </body>
 
