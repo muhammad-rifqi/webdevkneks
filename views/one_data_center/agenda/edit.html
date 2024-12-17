@@ -12,9 +12,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/dataTables.bs5.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
 </head>
 
@@ -82,12 +79,11 @@
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Link Zoom</label>
-                                            <input class="form-control" type="text" name="link" id="link"
-                                                required>
+                                            <input class="form-control" type="text" name="link" id="link" required>
                                         </div>
 
-                                         <!-- // ////////////////////////////////////////////////////////////////  -->
-                                         <div class="col-lg-12 mb-4">
+                                        <!-- // ////////////////////////////////////////////////////////////////  -->
+                                        <div class="col-lg-12 mb-4">
                                             <label class="form-label">Projek </label>
                                             <input class="form-control" type="text" name="project" id="project"
                                                 required>
@@ -131,20 +127,24 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Opening</label>
-                                            <input class="form-control" type="text" name="opening" id="opening"
-                                                required>
+                                            <label class="form-label"> Pembuka </label>
+                                            <select class="form-control" name="opening" id="opening" required>
+                                                <option value="0">Choose</option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Participants</label>
-                                            <input class="form-control" type="text" name="participants"
-                                                id="participants" required>
+                                            <label class="form-label"> Peserta </label>
+                                            <select class="form-control" name="participants" id="participants" required>
+                                                <option value="0">Choose</option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Area )* embed dari maps</label>
-                                            <input class="form-control" type="text" name="area" id="area" required>
+                                            <label class="form-label"> Area </label>
+                                            <select class="form-control" name="area" id="area" required>
+                                                <option value="0">Choose</option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -153,30 +153,39 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Priority Participants</label>
-                                            <input class="form-control" type="text" name="priority_participants"
+                                            <label class="form-label"> Priority Participants </label>
+                                            <select class="form-control" name="priority_participants"
                                                 id="priority_participants" required>
+                                                <option value="0">Choose</option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Kbli</label>
-                                            <input class="form-control" type="text" name="kbli" id="kbli" required>
+                                            <label class="form-label"> Kbli </label>
+                                            <select class="form-control" name="kbli" id="kbli" required>
+                                                <option value="0">Choose</option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Usia Partisipan</label>
-                                            <input class="form-control" type="text" name="age" id="age" required>
+                                            <label class="form-label"> Usia Partisipan </label>
+                                            <select class="form-control" name="age" id="age" required>
+                                                <option value="0">Choose</option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Gender</label>
-                                            <input class="form-control" type="text" name="gender" id="gender" required>
+                                            <label class="form-label"> Genders </label>
+                                            <select class="form-control" name="gender" id="gender" required>
+                                                <option value="0">Choose</option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Province</label>
-                                            <input class="form-control" type="text" name="province" id="province"
-                                                required>
+                                            <label class="form-label"> Province </label>
+                                            <select class="form-control" name="province" id="province" required>
+                                                <option value="0">Choose</option>
+                                            </select>
                                         </div>
 
 
@@ -214,15 +223,28 @@
     </main>
 
     <script src="/assets/vendors/js/vendors.min.js"></script>
-    <script src="/assets/vendors/js/dataTables.min.js"></script>
-    <script src="/assets/vendors/js/dataTables.bs5.min.js"></script>
-    <script src="/assets/vendors/js/select2.min.js"></script>
-    <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script>
         window.addEventListener("load", async () => {
+            let provs;
+            let kblis;
+            let pesertas;
+            let pembukas;
+            let genders;
+            let usias;
+            let areas;
+            let prioritast;
+
             await getUrlById();
+            await prov();
+            await kbli();
+            await peserta();
+            await pembuka();
+            await gender();
+            await usia();
+            await area();
+            await prioritas();
         })
 
         function getUrlById() {
@@ -237,23 +259,184 @@
                     document.getElementById("place").value = rows[0]?.place;
                     document.getElementById("organizer").value = rows[0]?.organizer;
                     document.getElementById("link").value = rows[0]?.link;
-                    document.getElementById("agenda_datetime").value = rows[0]?.agenda_datetime.split('.')[0];
+                    document.getElementById("agenda_datetime").value = rows[0]?.agenda_datetime.split('.')[0]??"null";
                     document.getElementById("project").value = rows[0]?.project;
                     document.getElementById("description").value = rows[0]?.description;
-                    document.getElementById("agenda_endtime").value = rows[0]?.agenda_endtime.split('.')[0];
+                    document.getElementById("agenda_endtime").value = rows[0]?.agenda_endtime.split('.')[0]??"null";
                     document.getElementById("manager").value = rows[0]?.manager;
                     document.getElementById("contributor").value = rows[0]?.contributor;
                     document.getElementById("indicator").value = rows[0]?.indicator;
                     document.getElementById("impact").value = rows[0]?.impact;
-                    document.getElementById("opening").value = rows[0]?.opening;
-                    document.getElementById("participants").value = rows[0]?.participants;
-                    document.getElementById("area").value = rows[0]?.area;
                     document.getElementById("loc").value = rows[0]?.loc;
-                    document.getElementById("priority_participants").value = rows[0]?.priority_participants;
-                    document.getElementById("kbli").value = rows[0]?.kbli;
-                    document.getElementById("age").value = rows[0]?.age;
-                    document.getElementById("gender").value = rows[0]?.gender;
-                    document.getElementById("province").value = rows[0]?.province;
+                    provs = rows[0]?.province;
+                    kblis = rows[0]?.kbli;
+                    pesertas = rows[0]?.participants;
+                    pembukas = rows[0]?.opening;
+                    genders = rows[0]?.gender;
+                    usias = rows[0]?.age;
+                    areas = rows[0]?.area;
+                    prioritast = rows[0]?.priority_participants;
+                   
+                })
+        }
+
+        function prov() {
+            fetch('/provinces')
+                .then(response => response.json())
+                .then((data) => {
+                    data.forEach(element => {
+                        const ddd = document.createElement('option')
+                        if (element?.province_name == provs) {
+                            ddd.value = `${element?.province_name}`;
+                            ddd.text = `${element?.province_name}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${element?.province_name}`;
+                            ddd.text = `${element?.province_name}`;
+                            ddd.selected = false;
+                        }
+                        document.getElementById("province").append(ddd);
+                    });
+                })
+        }
+
+        function kbli() {
+            fetch('/kbli')
+                .then(response => response.json())
+                .then((data) => {
+                    data.forEach(element => {
+                        const dd = document.createElement('option')
+                        if (element?.kbli == kblis) {
+                            dd.value = `${element?.kbli}`;
+                            dd.text = `${element?.kbli}`;
+                            dd.selected = true;
+                        } else {
+                            dd.value = `${element?.kbli}`;
+                            dd.text = `${element?.kbli}`;
+                            dd.selected = false;
+                        }
+                        document.getElementById("kbli").append(dd);
+                    });
+                })
+        }
+
+        function peserta() {
+            fetch('/peserta')
+                .then(res => res.json())
+                .then((b) => {
+                    b.forEach(items => {
+                        const dddd = document.createElement('option')
+                        if (items?.jumlah == pesertas) {
+                            dddd.value = `${items?.jumlah}`;
+                            dddd.text = `${items?.jumlah}`;
+                            dddd.selected = true;
+                        } else {
+                            dddd.value = `${items?.jumlah}`;
+                            dddd.text = `${items?.jumlah}`;
+                            dddd.selected = false;
+                        }
+                        document.getElementById("participants").append(dddd);
+                    });
+                })
+        }
+
+        function pembuka() {
+            fetch('/pembuka')
+                .then(responses => responses.json())
+                .then((r) => {
+                    r.forEach(element => {
+                        const ddd = document.createElement('option')
+                        if (element?.pembuka == pembukas) {
+                            ddd.value = `${element?.pembuka}`;
+                            ddd.text = `${element?.pembuka}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${element?.pembuka}`;
+                            ddd.text = `${element?.pembuka}`;
+                            ddd.selected = false;
+                        }
+                        document.getElementById("opening").append(ddd);
+                    });
+                })
+        }
+
+        function gender() {
+            fetch('/gender')
+                .then(responses => responses.json())
+                .then((r) => {
+                    r.forEach(element => {
+                        const ddd = document.createElement('option')
+                        if (element?.gender == genders) {
+                            ddd.value = `${element?.gender}`;
+                            ddd.text = `${element?.gender}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${element?.gender}`;
+                            ddd.text = `${element?.gender}`;
+                            ddd.selected = false;
+                        }
+                        document.getElementById("gender").append(ddd);
+                    });
+                })
+        }
+
+        function usia() {
+            fetch('/usia')
+                .then(responses => responses.json())
+                .then((r) => {
+                    r.forEach(element => {
+                        const ddd = document.createElement('option')
+                        if (element?.usia == usias) {
+                            ddd.value = `${element?.usia}`;
+                            ddd.text = `${element?.usia}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${element?.usia}`;
+                            ddd.text = `${element?.usia}`;
+                            ddd.selected = false;
+                        }
+                        document.getElementById("age").append(ddd);
+                    });
+                })
+        }
+
+        function area() {
+            fetch('/area')
+                .then(responses => responses.json())
+                .then((r) => {
+                    r.forEach(element => {
+                        const ddd = document.createElement('option')
+                        if (element?.area == areas) {
+                            ddd.value = `${element?.area}`;
+                            ddd.text = `${element?.area}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${element?.area}`;
+                            ddd.text = `${element?.area}`;
+                            ddd.selected = false;
+                        }
+                        document.getElementById("area").append(ddd);
+                    });
+                })
+        }
+
+        function prioritas() {
+            fetch('/prioritas')
+                .then(responses => responses.json())
+                .then((r) => {
+                    r.forEach(element => {
+                        const ddd = document.createElement('option')
+                        if (element?.prioritas == prioritast) {
+                            ddd.value = `${element?.prioritas}`;
+                            ddd.text = `${element?.prioritas}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${element?.prioritas}`;
+                            ddd.text = `${element?.prioritas}`;
+                            ddd.selected = false;
+                        }
+                        document.getElementById("priority_participants").append(ddd);
+                    });
                 })
         }
 

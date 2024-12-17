@@ -472,10 +472,10 @@ const updatehotissuesubcategory = async (req, res) => {
         [req.body.title, req.body.title_en, req.body.description, req.body.description_en, datetimes, datetimes, datetimes, req.body.id]);
 
     if (sql) {
-        res.redirect('/hic');
+        res.redirect('/hisc');
     } else {
         console.log(sql)
-        res.redirect('/hic');
+        res.redirect('/hisc');
     }
 }
 
