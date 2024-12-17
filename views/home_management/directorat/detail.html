@@ -38,8 +38,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <form action="/directorats_upload" method="post" enctype="multipart/form-data">
-                            <input type="hidden" id="max_id" name="MAX_FILE_SIZE" value="1048000" />
-                            <input type="hidden" id="max_id_banner" name="MAX_FILE_SIZE" value="6048000" />
+                            <input type="hidden" id="max_id" name="MAX_FILE_SIZE" value="1148000" />
+                            <input type="hidden" id="max_id_banner" name="MAX_FILE_SIZE" value="2148000" />
                             <input type="hidden" name="id" id="id" value="">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
@@ -137,8 +137,8 @@
                     document.getElementById("id").value = rows[0]?.id;
                     let img = (rows[0]?.images == "" || rows[0]?.images == null) ? "https://webdev.rifhandi.com/assets/images/brand/figma.png" : rows[0]?.images;
                     let bann = (rows[0]?.directiorat_banner == "" || rows[0]?.directiorat_banner == null) ? "https://webdev.rifhandi.com/assets/images/brand/figma.png" : rows[0]?.directiorat_banner;
-                    document.getElementById("iii").innerHTML = `<img src="${img}" width="100%" alt="images"/>`;
-                    document.getElementById("bbb").innerHTML = `<img src="${bann}" width="100%" alt="banners"/>`;
+                    document.getElementById("iii").innerHTML = `<img src="${img}" width="100%" alt="images"/> <hr/> <p> <b> )* Ukuran Gambar : 800 x 450 1 MB </b> </p> <p> <a class="btn btn-danger" href="/images_direactorat_delete/${rows[0]?.id}/${rows[0]?.images.split('/')[6]}" onclick="return confirm('Yakin Mau Hapus Data Ini??')"> Delete </a> </p> `;
+                    document.getElementById("bbb").innerHTML = `<img src="${bann}" width="100%" alt="banners"/> <hr/> <p> <b> Ukuran Banner : 1920 x 340 </b> </p> <p> <a class="btn btn-danger" href="/banners_direactorat_delete/${rows[0]?.id}/${rows[0]?.directiorat_banner.split('/')[6]}" onclick="return confirm('Yakin Mau Hapus Data Ini??')"> Delete </a> </p>`;
                 })
         }
 

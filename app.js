@@ -628,6 +628,10 @@ apps.post('/directorats_upload', directorats_images.fields([{ name: "images", ma
 
 apps.get('/directorats_delete/:id', db.delete_direactorats);
 
+apps.get('/images_direactorat_delete/:id/:foto', db.delete_images_direactorats);
+
+apps.get('/banners_direactorat_delete/:id/:foto', db.delete_banners_direactorats);
+
 apps.get('/hotissuedetail/:id', db.hotissue_detail);
 
 apps.post('/inserthotissue', hotissue_path.single('photo'), db.inserthotissue);

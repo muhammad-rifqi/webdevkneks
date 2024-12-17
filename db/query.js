@@ -10,7 +10,7 @@ let fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/publ
 const do_login = async (req, res) => {
     const email = req?.body?.email;
     const password = md5(req?.body?.password);
-    const sql = await executeQuery('SELECT * FROM users where email = ? AND password = ? ', [email, password])
+    const sql = await executeQuery('SELECT * FROM users where email = ? AND password = ?  AND approve = "Y"', [email, password])
     if (sql?.length > 0) {
         const isLogin = true;
         res.cookie("islogin", isLogin);
@@ -308,6 +308,58 @@ const directorats_uploads = async (req, res) => {
         res.redirect('/directorats_detail/' + req.body.id);
     } else {
         res.redirect('/directorats_detail/' + req.body.id);
+    }
+}
+
+const delete_images_direactorats = async (req, res) => {
+    const id_dir = req.params.id;
+    const foto_dir = req.params.foto;
+
+    if (fs.existsSync(fileslinux + 'directorat/images/' + foto_dir)) {
+        fs.unlink(fileslinux + 'directorat/images/' + foto_dir, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('UPDATE hot_categories set images = ? where id = ? ', ['NULL', id_dir]);
+            if (sql) {
+                res.redirect('/directorats_detail/'+id_dir);
+            } else {
+                console.log(sql);
+                res.redirect('/directorats_detail/'+id_dir);
+            }
+        });
+    } else {
+        const sql = await executeQuery('UPDATE hot_categories set images = ? where id = ? ', ['NULL', id_dir]);
+        if (sql) {
+            res.redirect('/directorats_detail/'+id_dir);
+        } else {
+            console.log(sql);
+            res.redirect('/directorats_detail/'+id_dir);
+        }
+    }
+}
+
+const delete_banners_direactorats = async (req, res) => {
+    const id_dirct = req.params.id;
+    const foto_dirct = req.params.foto;
+
+    if (fs.existsSync(fileslinux + 'directorat/images/' + foto_dirct)) {
+        fs.unlink(fileslinux + 'directorat/images/' + foto_dirct, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('UPDATE hot_categories set images = ? where id = ? ', ['NULL', id_dirct]);
+            if (sql) {
+                res.redirect('/directorats_detail/'+id_dirct);
+            } else {
+                console.log(sql);
+                res.redirect('/directorats_detail/'+id_dirct);
+            }
+        });
+    } else {
+        const sql = await executeQuery('UPDATE hot_categories set images = ? where id = ? ', ['NULL', id_dirct]);
+        if (sql) {
+            res.redirect('/directorats_detail/'+id_dirct);
+        } else {
+            console.log(sql);
+            res.redirect('/directorats_detail/'+id_dirct);
+        }
     }
 }
 
@@ -2203,6 +2255,8 @@ module.exports = {
     hotissuecategory,
     updatehotissuecategory,
     update_directorats,
+    delete_banners_direactorats,
+    delete_images_direactorats,
     detailhotissuecategory,
     hotissuesubcategory,
     deletehotissuecategory,
