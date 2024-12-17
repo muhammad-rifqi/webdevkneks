@@ -1,0 +1,70 @@
+[
+    {
+        "id": "1",
+        "kbli": "1 - Makanan dan Minuman Halal"
+    },
+    {
+        "id": "2",
+        "kbli": "1a - Produk Pertanian, Kehutanan, dan Perikanan Halal"
+    },
+    {
+        "id": "3",
+        "kbli": "1b - Industri Makanan dan Minuman Halal"
+    }, 
+    {
+        "id": "5",
+        "kbli": "1c - Penyediaan Makanan dan Minuman Halal"
+    },
+    {
+        "id": "6",
+        "kbli": "2 - Pariwisata Ramah Muslim"
+    },
+    {
+        "id": "7",
+        "kbli": "3 - Pakaian dan Fesyen Muslim"
+    }, 
+    {
+        "id": "8",
+        "kbli": "3a - Tekstil Halal"
+    },
+    {
+        "id": "9",
+        "kbli": "3b - Pakaian Jadi Halal"
+    },
+    {
+        "id": "10",
+        "kbli": "3c - Industri Kulit, Barang dari Kulit dan Alas Kaki"
+    },
+    {
+        "id": "11",
+        "kbli": "3d - Fesyen/Mode Muslim"
+    },
+    {
+        "id": "12",
+        "kbli": "4 - Ekonomi Kreatif Syariah"
+    },
+    {
+        "id": "13",
+        "kbli": "5 - Farmasi dan Komestik Halal"
+    },
+    {
+        "id": "14",
+        "kbli": "5a - Farmasi Halal"
+    },
+    {
+        "id": "15",
+        "kbli": "5b - Kosmetik Halal"
+    },
+    {
+        "id": "16",
+        "kbli": "6 - Energi Terbarukan"
+    },
+    {
+        "id": "17",
+        "kbli": "7 - Keuangan Syariah"
+    },
+    {
+        "id": "18",
+        "kbli": "8 - Sektor Syariah Lainnya"
+    }
+]

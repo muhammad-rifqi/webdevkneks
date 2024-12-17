@@ -1,0 +1,22 @@
+[
+    {
+        "id": "1",
+        "pembuka": "Presiden/Wakil Presiden"
+    },
+    {
+        "id": "2",
+        "pembuka": "Menteri/Pejabat Setingkat"
+    },
+    {
+        "id": "3",
+        "pembuka": "Eselon I/Pejabat Setingkat"
+    },
+    {
+        "id": "4",
+        "pembuka": "Eselon II/Pejabat Setingkat"
+    },
+    {
+        "id": "5",
+        "pembuka": "Eselon III/Pejabat Setingkat"
+    }
+]

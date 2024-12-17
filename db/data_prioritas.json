@@ -1,0 +1,14 @@
+[
+    {
+        "id": "1",
+        "prioritas": "Tinggi"
+    },
+    {
+        "id": "2",
+        "prioritas": "Menengah"
+    },
+    {
+        "id": "3",
+        "prioritas": "Rendah"
+    }
+]

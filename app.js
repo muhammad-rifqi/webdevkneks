@@ -7,6 +7,14 @@ const port = process.env.PORT;
 const path = require('path');
 const cookieParser = require("cookie-parser");
 const db = require('./db/query');
+const peserta = require('./db/data_peserta.json');
+const pembuka = require('./db/data_pembuka.json');
+const prioritas = require('./db/data_prioritas.json');
+const usia = require('./db/data_usia.json');
+const negara = require('./db/data_negara.json');
+const kbli = require('./db/data_kbli.json');
+const gender = require('./db/data_gender.json');
+const area = require('./db/data_area.json');
 
 apps.use(cookieParser());
 apps.use(bodyParser.json())
@@ -628,7 +636,7 @@ apps.post('/insertdirectorats', db.insertdirectorats);
 
 apps.post('/directorats_update', db.update_directorats);
 
-apps.post('/directorats_upload', directorats_images.fields([{ name: "images", maxCount: 1 },{ name: "banners", maxCount: 1 },]), db.directorats_uploads);
+apps.post('/directorats_upload', directorats_images.fields([{ name: "images", maxCount: 1 }, { name: "banners", maxCount: 1 },]), db.directorats_uploads);
 
 apps.get('/directorats_delete/:id', db.delete_direactorats);
 
@@ -779,6 +787,38 @@ apps.post('/updatetagging', db.updatetagging);
 //::::::::::::::: Api & Query DB DAERAH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/provinces', db.provinces);
+
+apps.get('/kbli', async (req, res) => {
+    return res.status(200).json(kbli);
+});
+
+apps.get('/peserta', async (req, res) => {
+    return res.status(200).json(peserta);
+});
+
+apps.get('/area', async (req, res) => {
+    return res.status(200).json(area);
+});
+
+apps.get('/gender', async (req, res) => {
+    return res.status(200).json(gender);
+});
+
+apps.get('/negara', async (req, res) => {
+    return res.status(200).json(negara);
+});
+
+apps.get('/pembuka', async (req, res) => {
+    return res.status(200).json(pembuka);
+});
+
+apps.get('/prioritas', async (req, res) => {
+    return res.status(200).json(prioritas);
+});
+
+apps.get('/usia', async (req, res) => {
+    return res.status(200).json(usia);
+});
 
 //::::::::::::::: Api & Query DB AUTH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
