@@ -1652,7 +1652,7 @@ const insertusers = async (req, res) => {
     const time_datetime = date + ' ' + time;
     const pw = md5(req.body.password);
     const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at) values(?,?,?,?,?,?)",
-        [req.body.name, req.body.email, pw, req.body.role_id, time_datetime, time_datetime]);
+        [req.body.name.split(' ').join('_'), req.body.email, pw, req.body.role_id, time_datetime, time_datetime]);
     if (sql) {
         res.redirect('/u');
     } else {
@@ -1699,10 +1699,10 @@ const deleteuser = async (req, res) => {
 const updateusers = async (req, res) => {
     const id_user = req.body.id;
     if (req.body.passwords == "" || req.body.passwords == null) {
-        await executeQuery("UPDATE users SET name=? , email=? ,  role_id = ? WHERE id=? ", [req.body.names, req.body.emails, req.body.roles_id, id_user]);
+        await executeQuery("UPDATE users SET name=? , email=? ,  role_id = ? WHERE id=? ", [req.body.names.split(' ').join('_'), req.body.emails, req.body.roles_id, id_user]);
         res.redirect('/u');
     } else {
-        await executeQuery("UPDATE users SET name=? , email=? , password = ? , role_id = ? WHERE id=? ", [req.body.names, req.body.emails, md5(req.body.passwords), req.body.roles_id, id_user]);
+        await executeQuery("UPDATE users SET name=? , email=? , password = ? , role_id = ? WHERE id=? ", [req.body.names.split(' ').join('_'), req.body.emails, md5(req.body.passwords), req.body.roles_id, id_user]);
         res.redirect('/u');
     }
 }
