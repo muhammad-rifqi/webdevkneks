@@ -442,8 +442,8 @@ apps.get('/narationfront_add', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/naration_add.html'));
 });
 
-apps.get('/view_narationfront/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/naration_detail.html'));
+apps.get('/metabase', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/metabase.html'));
 });
 
 // :::::::::::::::::::::::::::: Opini ::::::::::::::::::::::::::::::::::::::::
@@ -840,11 +840,15 @@ apps.post('/insertnarations', db.insertnarations);
 
 apps.post('/updatenarations', db.updatenarations);
 
-apps.get('/api_metabase/:id', db.metabase);
+apps.get('/api_metabase', db.metabase);
+
+apps.get('/api_metabase_detail/:id', db.detail_metabase);
 
 apps.get('/api_metabase_delete/:id', db.metabase_delete);
 
 apps.post('/insertapimeta', db.insertapimeta);
+
+
 
 apps.get('/statistics', db.statistics);
 

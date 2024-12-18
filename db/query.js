@@ -1974,6 +1974,16 @@ const updatenarations = async (req, res) => {
 }
 
 const metabase = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM api_meta');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+
+const detail_metabase = async (req, res) => {
     const id_nar = req.params.id;
     const sql = await executeQuery('SELECT * FROM api_meta where naration_id = ?', [id_nar]);
     if (sql?.length > 0) {
@@ -2408,6 +2418,7 @@ module.exports = {
     insertnarations,
     updatenarations,
     metabase,
+    detail_metabase,
     metabase_delete,
     insertapimeta,
     statistics,

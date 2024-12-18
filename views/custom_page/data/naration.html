@@ -117,7 +117,6 @@
                         "data": null,
                         "render": function (data, type, row) {
                             return `<p>
-                                        <button class='view-btn btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Set-Api</button>
                                         <button class='edit-btn btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Edit</button>
                                     </p>`;
                         }
@@ -144,6 +143,8 @@
                 window.location.href = '/edit_narationfront/' + id;
             });
         });
+
+        // <button class='view-btn btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Set-Api</button>
     </script>
 
 </body>
