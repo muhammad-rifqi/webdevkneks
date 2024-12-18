@@ -276,7 +276,6 @@
                     usias = rows[0]?.age;
                     areas = rows[0]?.area;
                     prioritast = rows[0]?.priority_participants;
-
                 })
         }
 
@@ -286,9 +285,15 @@
                 .then((data) => {
                     data.forEach(element => {
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.province_name}`;
-                        ddd.text = `${element?.province_name}`;
-                        ddd.selected = false;
+                        if (element?.province_name == provs) {
+                            ddd.value = `${element?.province_name}`;
+                            ddd.text = `${element?.province_name}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${element?.province_name}`;
+                            ddd.text = `${element?.province_name}`;
+                            ddd.selected = false;
+                        }
                         document.getElementById("province").append(ddd);
                     });
                 })
@@ -300,9 +305,15 @@
                 .then((data) => {
                     data.forEach(element => {
                         const dd = document.createElement('option')
-                        dd.value = `${element?.kbli}`;
-                        dd.text = `${element?.kbli}`;
-                        dd.selected = false;
+                        if (element?.kbli === kblis) {
+                            dd.value = `${element?.kbli}`;
+                            dd.text = `${element?.kbli}`;
+                            dd.selected = true;
+                        } else {
+                            dd.value = `${element?.kbli}`;
+                            dd.text = `${element?.kbli}`;
+                            dd.selected = false;
+                        }
                         document.getElementById("kbli").append(dd);
                     });
                 })
@@ -314,9 +325,15 @@
                 .then((b) => {
                     b.forEach(items => {
                         const dddd = document.createElement('option')
-                        dddd.value = `${items?.jumlah}`;
-                        dddd.text = `${items?.jumlah}`;
-                        dddd.selected = false;
+                        if (items?.jumlah === pesertas) {
+                            dddd.value = `${items?.jumlah}`;
+                            dddd.text = `${items?.jumlah}`;
+                            dddd.selected = true;
+                        } else {
+                            dddd.value = `${items?.jumlah}`;
+                            dddd.text = `${items?.jumlah}`;
+                            dddd.selected = false;
+                        }
                         document.getElementById("participants").append(dddd);
                     });
                 })
@@ -328,9 +345,16 @@
                 .then((r) => {
                     r.forEach(element => {
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.pembuka}`;
-                        ddd.text = `${element?.pembuka}`;
-                        ddd.selected = false;
+                        if (element?.pembuka === pembukas) {
+
+                            ddd.value = `${element?.pembuka}`;
+                            ddd.text = `${element?.pembuka}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${element?.pembuka}`;
+                            ddd.text = `${element?.pembuka}`;
+                            ddd.selected = false;
+                        }
                         document.getElementById("opening").append(ddd);
                     });
                 })
@@ -342,9 +366,15 @@
                 .then((r) => {
                     r.forEach(element => {
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.gender}`;
-                        ddd.text = `${element?.gender}`;
-                        ddd.selected = false;
+                        if (element?.gender == genders) {
+                            ddd.value = `${element?.gender}`;
+                            ddd.text = `${element?.gender}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${element?.gender}`;
+                            ddd.text = `${element?.gender}`;
+                            ddd.selected = false;
+                        }
                         document.getElementById("gender").append(ddd);
                     });
                 })
@@ -356,9 +386,15 @@
                 .then((r) => {
                     r.forEach(element => {
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.usia}`;
-                        ddd.text = `${element?.usia}`;
-                        ddd.selected = false;
+                        if (element?.gender == genders) {
+                            ddd.value = `${element?.usia}`;
+                            ddd.text = `${element?.usia}`;
+                            ddd.selected = false;
+                        } else {
+                            ddd.value = `${element?.usia}`;
+                            ddd.text = `${element?.usia}`;
+                            ddd.selected = false;
+                        }
                         document.getElementById("age").append(ddd);
                     });
                 })
@@ -370,9 +406,15 @@
                 .then((r) => {
                     r.forEach(element => {
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.area}`;
-                        ddd.text = `${element?.area}`;
-                        ddd.selected = false;
+                        if (element?.area == areas) {
+                            ddd.value = `${element?.area}`;
+                            ddd.text = `${element?.area}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${element?.area}`;
+                            ddd.text = `${element?.area}`;
+                            ddd.selected = false;
+                        }
                         document.getElementById("area").append(ddd);
                     });
                 })
@@ -384,17 +426,19 @@
                 .then((r) => {
                     r.forEach(element => {
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.prioritas}`;
-                        ddd.text = `${element?.prioritas}`;
-                        ddd.selected = false;
+                        if (element?.prioritas == prioritast) {
+                            ddd.value = `${element?.prioritas}`;
+                            ddd.text = `${element?.prioritas}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${element?.area}`;
+                            ddd.text = `${element?.area}`;
+                            ddd.selected = false;
+                        }
                         document.getElementById("priority_participants").append(ddd);
                     });
                 })
         }
-
     </script>
-
-
 </body>
-
 </html>

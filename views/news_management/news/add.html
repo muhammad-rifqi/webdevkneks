@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
@@ -12,7 +11,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/dataTables.bs5.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
@@ -128,6 +126,13 @@
                                             <input name="taggings" type="text" class="tagify" id="tagify" required>
                                         </div>
 
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Direktorat</label>
+                                            <select class="form-control" name="hot_category_id" id="mySelect" multiple placeholder="Silahkan Pilih" required>
+                                            </select>
+                                        </div>
+
+                                        
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -159,22 +164,43 @@
     </main>
 
     <script src="/assets/vendors/js/jquery.min.js"></script>
+    <script src="/assets/vendors/js/jquery.min.js"></script>
     <script src="/assets/vendors/js/vendors.min.js"></script>
-    <script src="/assets/vendors/js/dataTables.min.js"></script>
-    <script src="/assets/vendors/js/dataTables.bs5.min.js"></script>
     <script src="/assets/vendors/js/select2.min.js"></script>
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script src="/assets/vendors/js/tagify.min.js"></script>
-
+    <script>
+        $(document).ready(function () {
+            $('#mySelect').select2();
+        });
+    </script>
     <script>
         window.addEventListener("load", async () => {
-
             const inputElm = document.querySelector('input.tagify');
             new Tagify(inputElm);
+            await getTagging();
+            await getCategoryHotIssue();
+            await getCategoryHotIssueId();
+            await upload_check();
+        })
 
-            await fetch('/categories')
+        function getTagging() {
+            fetch('/tagging')
+                .then(res => res.json())
+                .then((rrr) => {
+                    let ttt = "";
+                    rrr.forEach(items => {
+                        ttt += `${items?.tagging},`;
+                    });
+                    document.getElementById("tag").innerHTML = ttt;
+                    document.getElementById("tagify").value = ttt;
+                })
+        }
+
+        function getCategoryHotIssue() {
+            fetch('/categories')
                 .then(response => response.json())
                 .then((data) => {
                     data.forEach(element => {
@@ -184,28 +210,20 @@
                         document.getElementById("cat_news").append(ddd);
                     });
                 })
+        }
 
-            await fetch('/tagging')
+        function getCategoryHotIssueId() {
+            fetch('/hotissuecategory')
                 .then(res => res.json())
-                .then((rrr) => {
-                    let ttt = "";
-                    rrr.forEach(items => {
-                        // ttt += `&nbsp;<input type="checkbox" id="cek${items?.id}" name="options" value="${items?.tagging}" onchange="handleClick(${items?.id})"> &nbsp; ${items?.tagging} &nbsp;`;
-                        ttt += `${items?.tagging},`;
+                .then((qqq) => {
+                    qqq.forEach(items => {
+                        const aaa = document.createElement('option')
+                        aaa.value = `${items?.id}`;
+                        aaa.text = `${items?.title}`;
+                        document.getElementById("mySelect").append(aaa);
                     });
-                    document.getElementById("tag").innerHTML = ttt;
-                    document.getElementById("tagify").value = ttt;
                 })
-
-            await upload_check();    
-        })
-
-
-        // function handleClick(event) {
-        //     const checkboxes = document.querySelectorAll('input[name="options"]:checked');
-        //     const selectedValues = Array.from(checkboxes).map(checkbox => checkbox.value);
-        //     document.getElementById("taggings").value = selectedValues.join(',');
-        // }
+        }
 
         function upload_check() {
             var upl = document.getElementById("photo");
@@ -215,12 +233,8 @@
                 upl.value = "";
                 return false;
             }
-
             return true;
         };
     </script>
-
-
 </body>
-
 </html>

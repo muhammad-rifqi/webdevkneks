@@ -12,7 +12,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/dataTables.bs5.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
@@ -133,6 +132,11 @@
                                             <input name="taggings" type="text" class="tagify" id="tagify" required>
                                         </div>
 
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Direktorat</label>
+                                            <select class="form-control" name="hot_category_id" id="mySelect" multiple placeholder="Silahkan Pilih" required>
+                                            </select>
+                                        </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
@@ -163,16 +167,18 @@
         </footer>
         <!-- [ Footer ] end -->
     </main>
-
+    <script src="/assets/vendors/js/jquery.min.js"></script>
     <script src="/assets/vendors/js/vendors.min.js"></script>
-    <script src="/assets/vendors/js/dataTables.min.js"></script>
-    <script src="/assets/vendors/js/dataTables.bs5.min.js"></script>
     <script src="/assets/vendors/js/select2.min.js"></script>
-    <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script src="/assets/vendors/js/tagify.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#mySelect').select2();
+        });
+    </script>
     <script>
         window.addEventListener("load", async () => {
             const inputElm = document.querySelector('input.tagify');
@@ -181,8 +187,10 @@
             await getUrlById();
             await getCategoryHotIssue();
             await getTagging();
+            await getCategoryHotIssueId();
             // await handleClick();
             await upload_check();
+            
         })
 
         function getUrlById() {
@@ -241,6 +249,20 @@
                     });
                     document.getElementById("tag").innerHTML = tttt;
                     document.getElementById("tagify").value = tttt;
+                })
+        }
+
+
+        function getCategoryHotIssueId() {
+            fetch('/hotissuecategory')
+                .then(res => res.json())
+                .then((qqq) => {
+                    qqq.forEach(items => {
+                        const aaa = document.createElement('option')
+                        aaa.value = `${items?.id}`;
+                        aaa.text = `${items?.title}`;
+                        document.getElementById("mySelect").append(aaa);
+                    });
                 })
         }
 
