@@ -1278,7 +1278,7 @@ const insertnews = async (req, res) => {
     const news_datetime = req.body.news_datetime.replace("T", " ");
     const fileupload = "https://webdev.rifhandi.com/uploads/news/" + req.file.originalname.replace(" ", "");
     const sql = await executeQuery("insert into news(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,news_datetime,created_at,updated_at,deleted_at,category_id,tag,directorat) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id, req.body.taggings,req.body.hot_category_id]);
+        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id, req.body.taggings, req.body.hot_category_id]);
     if (sql) {
         res.redirect('/n');
     } else {
@@ -1954,8 +1954,9 @@ const naration_detail = async (req, res) => {
 }
 
 const insertnarations = async (req, res) => {
-    const sql = await executeQuery("INSERT INTO naration (title,title_en,description,description_en)values(?,?,?,?)",
-        [req.body.title, req.body.title_en, req.body.description, req.body.description_en]);
+    const ddd = req.body.data_type.split('-');
+    const sql = await executeQuery("INSERT INTO naration (statistic_id,statistic_name,description,description_en)values(?,?,?,?)",
+        [ddd[0], ddd[1], req.body.description, req.body.description_en]);
     if (sql) {
         res.redirect('/narationfront');
     } else {
@@ -1964,8 +1965,9 @@ const insertnarations = async (req, res) => {
 }
 
 const updatenarations = async (req, res) => {
-    const sql = await executeQuery("UPDATE naration set title= ? , title_en = ?, description = ?, description_en = ? where id = ?",
-        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, req.body.id]);
+    const ddd = req.body.data_type.split('-');
+    const sql = await executeQuery("UPDATE naration set statistic_id= ? , statistic_name = ?, description = ?, description_en = ? where id = ?",
+        [ddd[0], ddd[1], req.body.description, req.body.description_en, req.body.id]);
     if (sql) {
         res.redirect('/narationfront');
     } else {
@@ -1997,18 +1999,19 @@ const metabase_delete = async (req, res) => {
     const id_meta = req.params.id;
     const sql = await executeQuery('DELETE FROM api_meta where id = ?', [id_meta]);
     if (sql?.length > 0) {
-        res.redirect('/view_narationfront/' + id_meta);
+        res.redirect('/metabase');
     } else {
-        res.redirect('/view_narationfront/' + id_meta);
+        res.redirect('/metabase');
     }
 }
 
 const insertapimeta = async (req, res) => {
-    const sql = await executeQuery('INSERT INTO api_meta (api,naration_id) values (?,?)', [req.body.api, req.body.idm]);
+    const ddd = req.body.data_type.split('-');
+    const sql = await executeQuery('INSERT INTO api_meta (api,statistic_id,statistic_name) values (?,?,?)', [req.body.api, ddd[0], ddd[1]]);
     if (sql?.length > 0) {
-        res.redirect('/view_narationfront/' + req.body.idm);
+        res.redirect('/metabase');
     } else {
-        res.redirect('/view_narationfront/' + req.body.idm);
+        res.redirect('/metabase');
     }
 }
 
@@ -2257,7 +2260,7 @@ const submenu = async (req, res) => {
 
 const insertsubmenu = async (req, res) => {
     const sql = await executeQuery("insert into menu_sub(menu_id,submenu_name,submenu_link,orders) values(?,?,?,?)",
-        [req.body.menu_id,req.body.submenu_name, req.body.submenu_link, req.body.orders]);
+        [req.body.menu_id, req.body.submenu_name, req.body.submenu_link, req.body.orders]);
     if (sql) {
         res.redirect('/submenu');
     } else {

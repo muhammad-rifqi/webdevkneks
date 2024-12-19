@@ -44,6 +44,14 @@
                                 <input type="hidden" name="idm" id="ids" value="">
                                 <div class="card-body lead-status">
                                     <div class="row">
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Pilih Data</label>
+                                            <select class="form-control" name="data_type" id="data_types" required>
+                                                <option value="0">Choose</option>
+                                            </select>
+                                        </div>
+
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Masukan Api Meta</label>
                                             <input class="form-control" type="text" name="api" id="api" required>
@@ -62,6 +70,8 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>API</th>
+                                            <th>RELATION API ID</th>
+                                            <th>TYPE DATA</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -106,18 +116,23 @@
 
     <script>
         window.addEventListener("load", async () => {
-            // await getUrlById();
             await getDataMeta();
+            await geDataType();
         })
-        // function getUrlById() {
-        //     const URLS = new URL(window.location.href);
-        //     fetch('/narations_detail/' + URLS.pathname.split('/')[2])
-        //         .then(data => data.json())
-        //         .then((rows) => {
-        //             document.getElementById("ids").value = rows[0]?.id;
-        //             document.getElementById("titles").innerHTML = rows[0]?.title;
-        //         })
-        // }
+        function geDataType() {
+            // const URLS = new URL(window.location.href);
+            // fetch('/narations_detail/' + URLS.pathname.split('/')[2])
+            fetch('/statistics')
+                .then(data => data.json())
+                .then((rows) => {
+                    rows.forEach((element) => {
+                        const ddd = document.createElement('option')
+                        ddd.value = `${element?.id}-${element?.title}`;
+                        ddd.text = `${element?.title}`;
+                        document.getElementById("data_types").append(ddd);
+                    })
+                })
+        }
 
         function getDataMeta() {
             const URLS = new URL(window.location.href);
@@ -129,6 +144,8 @@
                         aaa += `<tr>
                                     <td>#${element?.id}</td>
                                     <td>${element?.api}</td>
+                                    <td>${element?.statistic_id}</td>
+                                    <td>${element?.statistic_name}</td>
                                     <td><a href="/api_metabase_delete/${element?.id}" onclick="return confirm('Yakin Mau Hapus Data Ini ?')"><button class="btn btn-danger">Delete</button></a></td>                           
                                 </tr>`;
                     });
