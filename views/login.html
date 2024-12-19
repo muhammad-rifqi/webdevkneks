@@ -38,6 +38,7 @@
         <div class="input-box">
           <header>KNEKS BACKEND</header>
           <h5>USER LOGIN</h5>
+          <h6 id="ips" align="center"></h6>
           <form class="sign-in-form" action="/act_login" method="post">
             <input type="hidden" id="ip_address" name="ip_address" value="" />
             <div class="input-field mb-4"><i class="fas fa-user"></i><input type="text" placeholder="Masukkan Email"
@@ -80,6 +81,7 @@
         .then(response => response.json())
         .then((data) => {
           document.getElementById('ip_address').value = data.ip;
+          document.getElementById('ips').innerText = "Ip Anda :"+data.ip;
         })
 
     } catch (error) {
