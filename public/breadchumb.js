@@ -222,7 +222,10 @@ if(path == 'customfront' || path == 'custom_add'){
     breadcrumb2 = "List Data";
 }
 //-----------------------End Of Whitelist-----------------------------
-
+if(path == 'cp'){
+    breadcrumb1 = "Ubah Password";
+    breadcrumb2 = "Form Data";
+}
 
 
 document.write(`<div class="page-header">
