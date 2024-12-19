@@ -41,7 +41,8 @@
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Roles ID</th>
-                                                <th>Whitelist</th>
+                                                <th>Approve</th>
+                                                <th>Whitelist IP</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -100,10 +101,11 @@
                     { "data": "email" },
                     { "data": "role_id" },
                     { "data": "approve" },
+                    { "data": "ip_address" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='whitelist-btn-users btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">WhiteList</button></p>`;
+                            return `<p><button class='whitelist-btn-users btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">WhiteList & Approve</button></p>`;
                         }
                     }
                 ],

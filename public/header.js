@@ -76,6 +76,11 @@ document.write(`<header class="nxl-header">
                                     </div>
                                 </div>
                             </div>
+                            <a href="/cp" class="dropdown-item">
+                                <i class="feather-user"></i>
+                                <span>Change Password</span>
+                            </a>
+
                             <a href="/logout" class="dropdown-item">
                                 <i class="feather-log-out"></i>
                                 <span>Logout</span>
@@ -92,16 +97,16 @@ document.write(`<header class="nxl-header">
     <!--! ================================================================ !-->`);
 
 
-    let cookies = {};
-    var a = document.cookie.split(";");
-    for (var i = 0; i < a.length; i++) {
-        var b = a[i].split("=");
-        var [key, value] = b;
-        cookies[key.trim()] = value;
-    }
-    if (cookie['name'] == "" || cookie['name'] == undefined) {
-        window.location.href = '/';
-      } else {
-        document.getElementById("nama").innerText = cookies["name"]
-      }
-    ;
+let cookies = {};
+var a = document.cookie.split(";");
+for (var i = 0; i < a.length; i++) {
+    var b = a[i].split("=");
+    var [key, value] = b;
+    cookies[key.trim()] = value;
+}
+if (cookie['name'] == "" || cookie['name'] == undefined) {
+    window.location.href = '/';
+} else {
+    document.getElementById("nama").innerText = cookies["name"]
+}
+;

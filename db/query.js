@@ -10,7 +10,7 @@ let fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/publ
 const do_login = async (req, res) => {
     const email = req?.body?.email;
     const password = md5(req?.body?.password);
-    const sql = await executeQuery('SELECT * FROM users where email = ? AND password = ?  AND approve = "Y"', [email, password])
+    const sql = await executeQuery('SELECT * FROM users where email = ? AND password = ?  AND approve = "Y" AND ip_address = ?', [email, password, req.body.ip_address]);
     if (sql?.length > 0) {
         const isLogin = true;
         res.cookie("islogin", isLogin);
@@ -1591,6 +1591,8 @@ const updatevideos = async (req, res) => {
 const users = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM users where approve = "Y"');
     if (sql?.length > 0) {
+        // const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        // console.log(ip);
         res.status(200).json(sql)
     } else {
         res.status(200).json({ "success": false })
@@ -1651,8 +1653,8 @@ const insertusers = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
     const pw = md5(req.body.password);
-    const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at) values(?,?,?,?,?,?)",
-        [req.body.name.split(' ').join('_'), req.body.email, pw, req.body.role_id, time_datetime, time_datetime]);
+    const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at,ip_address) values(?,?,?,?,?,?,?)",
+        [req.body.name.split(' ').join('_'), req.body.email, pw, req.body.role_id, time_datetime, time_datetime, req.body.ip_address]);
     if (sql) {
         res.redirect('/u');
     } else {
@@ -1699,10 +1701,10 @@ const deleteuser = async (req, res) => {
 const updateusers = async (req, res) => {
     const id_user = req.body.id;
     if (req.body.passwords == "" || req.body.passwords == null) {
-        await executeQuery("UPDATE users SET name=? , email=? ,  role_id = ? WHERE id=? ", [req.body.names.split(' ').join('_'), req.body.emails, req.body.roles_id, id_user]);
+        await executeQuery("UPDATE users SET name=? , email=? ,  role_id = ? , ip_address = ? WHERE id=? ", [req.body.names.split(' ').join('_'), req.body.emails, req.body.roles_id, req.body.ip_address, id_user]);
         res.redirect('/u');
     } else {
-        await executeQuery("UPDATE users SET name=? , email=? , password = ? , role_id = ? WHERE id=? ", [req.body.names.split(' ').join('_'), req.body.emails, md5(req.body.passwords), req.body.roles_id, id_user]);
+        await executeQuery("UPDATE users SET name=? , email=? , password = ? , role_id = ?, ip_address = ? WHERE id=? ", [req.body.names.split(' ').join('_'), req.body.emails, md5(req.body.passwords), req.body.roles_id, req.body.ip_address, id_user]);
         res.redirect('/u');
     }
 }

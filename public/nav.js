@@ -281,8 +281,9 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3
                             <span class="nxl-mtext">User</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="/cp">Change Password</a></li>
+                            
                             `);
+                            // <li class="nxl-item"><a class="nxl-link" href="/cp">Change Password</a></li>
 }
 if (cookie["roles_id"] == 1 ) {
     document.write(`
