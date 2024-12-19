@@ -38,9 +38,7 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Title</th>
-                                                <th>Title EN</th>
-                                                <th>Tag</th>
+                                                <th>Provincsi</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -90,14 +88,12 @@
             // 2. Inisialisasi DataTable
             $('#abouts').DataTable({
                 "ajax": {
-                    "url": "/abouts",
+                    "url": "/provinces",
                     "dataSrc": ""
                 },
                 "columns": [
                     { "data": "id" },
-                    { "data": "title" },
-                    { "data": "title_en" },
-                    { "data": "tag" },
+                    { "data": "province_name" },
                     {
                         "data": null,
                         "render": function (data, type, row) {

@@ -918,6 +918,12 @@ apps.post('/updatesubmenu', db.updatesubmenu);
 apps.get('/api_submenu_detail/:id', db.submenu_detail);
 //::::::::::::::: Api & Query CUSTOM DATA NARATION PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+apps.get('/api_kdeks', db.kdeks);
+
+
+
+
+//::::::::::::::::: End Of KDEKS ::::::::::::::::::::::::::
 apps.post('/insertusers', db.user_register);
 
 apps.post('/do_login', db.api_login);

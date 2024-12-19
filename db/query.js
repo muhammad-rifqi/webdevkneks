@@ -82,7 +82,7 @@ const dashboards = async (req, res) => {
 
 //::::::::::::::::::::::::::::::Start Of Abouts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const abouts = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM abouts');
+    const sql = await executeQuery('SELECT * FROM abouts where web_identity = "kneks"');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -90,6 +90,14 @@ const abouts = async (req, res) => {
     }
 }
 
+const kdeks = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM abouts where web_identity = "kdeks" ');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
 
 const deleteabout = async (req, res) => {
     const id_abouts = req.params.id;
@@ -2356,6 +2364,7 @@ module.exports = {
     detailabout,
     updateabouts,
     structure,
+    kdeks,
     deletestructure,
     detailstructure,
     inserstructure,
