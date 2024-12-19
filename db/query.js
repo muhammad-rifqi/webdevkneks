@@ -2088,6 +2088,36 @@ const deletesourcesdata = async (req, res) => {
     }
 }
 
+const insertdetailsourcedata = async (req, res) => {
+    const sql = await executeQuery("insert into sourcedata_detail(id_sourcedata,description) values(?,?)",
+        [req.body.idd, req.body.detail]);
+    if (sql) {
+        res.redirect('/data_detail/'+req.body.idd);
+    } else {
+        console.log(sql)
+        res.redirect('/data_detail/'+req.body.idd);
+    }
+}
+
+const sourcesdatadetaillist = async (req, res) => {
+    const id_source = req.params.id;
+    const sql = await executeQuery('SELECT * FROM sourcedata_detail where id_sourcedata = ? ', [id_source]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const sourcesdatadetaildelete = async (req, res) => {
+    const id_sc = req.params.id;
+    const sql = await executeQuery('DELETE FROM sourcedata_detail where id = ? ', [id_sc]);
+    if (sql) {
+        res.redirect('/data_detail/'+id_sc);
+    } else {
+        res.redirect('/data_detail/'+id_sc);
+    }
+}
 //:::::::::::::::::::::::::::::::::::::Start Of OPINI :::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -2432,6 +2462,9 @@ module.exports = {
     sourcesdata,
     sourcesdatadetail,
     deletesourcesdata,
+    insertdetailsourcedata,
+    sourcesdatadetaillist,
+    sourcesdatadetaildelete,
     insertsourcesdata,
     opini,
     opini_detail,

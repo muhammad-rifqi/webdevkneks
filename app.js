@@ -848,8 +848,6 @@ apps.get('/api_metabase_delete/:id', db.metabase_delete);
 
 apps.post('/insertapimeta', db.insertapimeta);
 
-
-
 apps.get('/statistics', db.statistics);
 
 apps.get('/delete_statistics/:id', db.deletestatistic);
@@ -864,6 +862,11 @@ apps.get('/deletesourcesdata/:id', db.deletesourcesdata);
 
 apps.post('/insertsourcesdata', db.insertsourcesdata);
 
+apps.post('/insertdetailsourcedata', db.insertdetailsourcedata);
+
+apps.get('/sourcesdatadetaillist/:id', db.sourcesdatadetaillist);
+
+apps.get('/sourcedata_detail_delete/:id', db.sourcesdatadetaildelete);
 //::::::::::::::::::::::::::: APi Opini ::::::::::::::::::::::::::::::::::::
 
 apps.get('/api_opini', db.opini);
