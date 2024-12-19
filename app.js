@@ -255,8 +255,16 @@ apps.get('/zk_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/profile/zona_khas/edit.html'));
 })
 
+apps.get('/kdeks', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/tentang_kami/kdeks.html'));
+})
+
 apps.get('/master', (req, res) => {
     res.sendFile(path.resolve('./views/profile/tentang_kami/master.html'));
+})
+
+apps.get('/es', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/tentang_kami/ekonomi_syariah.html'));
 })
 
 //::::::::::::::: Home Management :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

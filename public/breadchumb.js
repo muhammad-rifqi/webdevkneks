@@ -114,6 +114,16 @@ if(path == 'master'){
     breadcrumb2 = "List Data";
 }
 //-----------------------End Of KDEKS Master-----------------------------
+if(path == 'es'){
+    breadcrumb1 = "Ekonomi Syariah";
+    breadcrumb2 = "List Data";
+}
+//-----------------------End Of KDEKS Master-----------------------------
+if(path == 'kdeks'){
+    breadcrumb1 = "KDEKS";
+    breadcrumb2 = "List Data";
+}
+//-----------------------End Of KDEKS Master-----------------------------
 //------------------------ Zona Khas----------------------
 if(path == 'zk' || path == 'zk_add' || path == 'zk_edit'){
     breadcrumb1 = "Zona Khas";
