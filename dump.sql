@@ -34,7 +34,9 @@ CREATE TABLE public.abouts (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     deleted_at timestamp without time zone,
-    web_identity character varying(100) DEFAULT 'kneks'::character varying
+    web_identity character varying(100) DEFAULT 'kneks'::character varying,
+    id_province integer DEFAULT 0,
+    images character varying(255)
 );
 
 
@@ -120,6 +122,42 @@ ALTER TABLE public.agendas_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE public.agendas_id_seq OWNED BY public.agendas.id;
+
+
+--
+-- Name: api_meta; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.api_meta (
+    id integer NOT NULL,
+    api character varying(255),
+    statistic_id integer,
+    statistic_name character varying(100)
+);
+
+
+ALTER TABLE public.api_meta OWNER TO postgres;
+
+--
+-- Name: api_meta_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.api_meta_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.api_meta_id_seq OWNER TO postgres;
+
+--
+-- Name: api_meta_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.api_meta_id_seq OWNED BY public.api_meta.id;
 
 
 --
@@ -209,6 +247,75 @@ ALTER SEQUENCE public.contacts_id_seq OWNED BY public.contacts.id;
 
 
 --
+-- Name: custom_page; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.custom_page (
+    id integer NOT NULL,
+    name character varying(100),
+    path character varying(100)
+);
+
+
+ALTER TABLE public.custom_page OWNER TO postgres;
+
+--
+-- Name: custom_page_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.custom_page_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.custom_page_id_seq OWNER TO postgres;
+
+--
+-- Name: custom_page_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.custom_page_id_seq OWNED BY public.custom_page.id;
+
+
+--
+-- Name: db_event; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.db_event (
+    id integer NOT NULL,
+    name character varying(100)
+);
+
+
+ALTER TABLE public.db_event OWNER TO postgres;
+
+--
+-- Name: db_event_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.db_event_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.db_event_id_seq OWNER TO postgres;
+
+--
+-- Name: db_event_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.db_event_id_seq OWNED BY public.db_event.id;
+
+
+--
 -- Name: hot_categories; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -221,7 +328,9 @@ CREATE TABLE public.hot_categories (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     deleted_at timestamp without time zone,
-    web_identity character varying(100) DEFAULT 'kneks'::character varying
+    web_identity character varying(100) DEFAULT 'kneks'::character varying,
+    images character varying(255),
+    directiorat_banner character varying(255)
 );
 
 
@@ -268,7 +377,9 @@ CREATE TABLE public.hot_issues (
     updated_at timestamp without time zone,
     deleted_at timestamp without time zone,
     hot_subcategory_id integer,
-    web_identity character varying(100) DEFAULT 'kneks'::character varying
+    web_identity character varying(100) DEFAULT 'kneks'::character varying,
+    hot_issue_category integer,
+    tag character varying(100)
 );
 
 
@@ -381,6 +492,177 @@ ALTER SEQUENCE public.institutions_id_seq OWNED BY public.institutions.id;
 
 
 --
+-- Name: khas_zone; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.khas_zone (
+    id integer NOT NULL,
+    khas_zone integer NOT NULL,
+    city integer NOT NULL,
+    province integer NOT NULL,
+    inauguration integer NOT NULL,
+    tenant integer NOT NULL,
+    inaugurated integer NOT NULL
+);
+
+
+ALTER TABLE public.khas_zone OWNER TO postgres;
+
+--
+-- Name: khas_zone_city_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.khas_zone_city_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.khas_zone_city_seq OWNER TO postgres;
+
+--
+-- Name: khas_zone_city_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.khas_zone_city_seq OWNED BY public.khas_zone.city;
+
+
+--
+-- Name: khas_zone_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.khas_zone_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.khas_zone_id_seq OWNER TO postgres;
+
+--
+-- Name: khas_zone_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.khas_zone_id_seq OWNED BY public.khas_zone.id;
+
+
+--
+-- Name: khas_zone_inaugurated_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.khas_zone_inaugurated_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.khas_zone_inaugurated_seq OWNER TO postgres;
+
+--
+-- Name: khas_zone_inaugurated_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.khas_zone_inaugurated_seq OWNED BY public.khas_zone.inaugurated;
+
+
+--
+-- Name: khas_zone_inauguration_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.khas_zone_inauguration_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.khas_zone_inauguration_seq OWNER TO postgres;
+
+--
+-- Name: khas_zone_inauguration_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.khas_zone_inauguration_seq OWNED BY public.khas_zone.inauguration;
+
+
+--
+-- Name: khas_zone_khas_zone_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.khas_zone_khas_zone_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.khas_zone_khas_zone_seq OWNER TO postgres;
+
+--
+-- Name: khas_zone_khas_zone_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.khas_zone_khas_zone_seq OWNED BY public.khas_zone.khas_zone;
+
+
+--
+-- Name: khas_zone_province_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.khas_zone_province_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.khas_zone_province_seq OWNER TO postgres;
+
+--
+-- Name: khas_zone_province_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.khas_zone_province_seq OWNED BY public.khas_zone.province;
+
+
+--
+-- Name: khas_zone_tenant_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.khas_zone_tenant_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.khas_zone_tenant_seq OWNER TO postgres;
+
+--
+-- Name: khas_zone_tenant_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.khas_zone_tenant_seq OWNED BY public.khas_zone.tenant;
+
+
+--
 -- Name: map; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -418,23 +700,24 @@ ALTER SEQUENCE public.map_id_seq OWNED BY public.map.id;
 
 
 --
--- Name: migrations; Type: TABLE; Schema: public; Owner: postgres
+-- Name: menu; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.migrations (
+CREATE TABLE public.menu (
     id integer NOT NULL,
-    migration character varying(100),
-    batch integer
+    "menu_name	" character varying(100),
+    menu_link character varying(100),
+    orders integer
 );
 
 
-ALTER TABLE public.migrations OWNER TO postgres;
+ALTER TABLE public.menu OWNER TO postgres;
 
 --
--- Name: migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: menu_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.migrations_id_seq
+CREATE SEQUENCE public.menu_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -443,13 +726,87 @@ CREATE SEQUENCE public.migrations_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.migrations_id_seq OWNER TO postgres;
+ALTER TABLE public.menu_id_seq OWNER TO postgres;
 
 --
--- Name: migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: menu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.migrations_id_seq OWNED BY public.migrations.id;
+ALTER SEQUENCE public.menu_id_seq OWNED BY public.menu.id;
+
+
+--
+-- Name: menu_sub; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.menu_sub (
+    id integer NOT NULL,
+    menu_id integer,
+    submenu_name character varying(100),
+    submenu_link character varying(100),
+    orders integer
+);
+
+
+ALTER TABLE public.menu_sub OWNER TO postgres;
+
+--
+-- Name: menu_sub_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.menu_sub_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.menu_sub_id_seq OWNER TO postgres;
+
+--
+-- Name: menu_sub_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.menu_sub_id_seq OWNED BY public.menu_sub.id;
+
+
+--
+-- Name: naration; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.naration (
+    id integer NOT NULL,
+    statistic_id integer,
+    statistic_name character varying(100),
+    description text,
+    description_en text
+);
+
+
+ALTER TABLE public.naration OWNER TO postgres;
+
+--
+-- Name: naration_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.naration_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.naration_id_seq OWNER TO postgres;
+
+--
+-- Name: naration_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.naration_id_seq OWNED BY public.naration.id;
 
 
 --
@@ -471,7 +828,9 @@ CREATE TABLE public.news (
     excerpt_en character varying(100),
     content_en text,
     "category_id	" integer,
-    web_identity character varying(100) DEFAULT 'kneks'::character varying
+    web_identity character varying(100) DEFAULT 'kneks'::character varying,
+    tag character varying(100),
+    directorat character varying(255)
 );
 
 
@@ -541,40 +900,6 @@ ALTER SEQUENCE public.news_id_seq OWNED BY public.news.id;
 
 
 --
--- Name: news_news_category; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.news_news_category (
-    news_id integer NOT NULL,
-    "news_category_id	" integer
-);
-
-
-ALTER TABLE public.news_news_category OWNER TO postgres;
-
---
--- Name: news_news_category_news_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.news_news_category_news_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.news_news_category_news_id_seq OWNER TO postgres;
-
---
--- Name: news_news_category_news_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.news_news_category_news_id_seq OWNED BY public.news_news_category.news_id;
-
-
---
 -- Name: news_photos; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -589,7 +914,8 @@ CREATE TABLE public.news_photos (
     news_datetime timestamp without time zone,
     title_en character varying(100),
     content_en text,
-    web_identity character varying(100) DEFAULT 'kneks'::character varying
+    web_identity character varying(100) DEFAULT 'kneks'::character varying,
+    tag character varying(100)
 );
 
 
@@ -633,7 +959,8 @@ CREATE TABLE public.news_videos (
     news_datetime timestamp without time zone,
     title_en character varying(100),
     content_en text,
-    web_identity character varying(100) DEFAULT 'kneks'::character varying
+    web_identity character varying(100) DEFAULT 'kneks'::character varying,
+    tag character varying(100)
 );
 
 
@@ -670,7 +997,8 @@ CREATE TABLE public.opini (
     title character varying(100),
     title_en character varying(100),
     content text,
-    content_en text
+    content_en text,
+    web_identity character varying(100)
 );
 
 
@@ -699,24 +1027,22 @@ ALTER SEQUENCE public.opini_id_seq OWNED BY public.opini.id;
 
 
 --
--- Name: password_resets; Type: TABLE; Schema: public; Owner: postgres
+-- Name: province; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.password_resets (
+CREATE TABLE public.province (
     id integer NOT NULL,
-    email character varying(100),
-    token character varying(100),
-    created_at timestamp without time zone
+    province_name character varying(100)
 );
 
 
-ALTER TABLE public.password_resets OWNER TO postgres;
+ALTER TABLE public.province OWNER TO postgres;
 
 --
--- Name: password_resets_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: province_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.password_resets_id_seq
+CREATE SEQUENCE public.province_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -725,47 +1051,13 @@ CREATE SEQUENCE public.password_resets_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.password_resets_id_seq OWNER TO postgres;
+ALTER TABLE public.province_id_seq OWNER TO postgres;
 
 --
--- Name: password_resets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: province_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.password_resets_id_seq OWNED BY public.password_resets.id;
-
-
---
--- Name: pdes_menu_temp; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.pdes_menu_temp (
-    id integer NOT NULL,
-    value integer
-);
-
-
-ALTER TABLE public.pdes_menu_temp OWNER TO postgres;
-
---
--- Name: pdes_menu_temp_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.pdes_menu_temp_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.pdes_menu_temp_id_seq OWNER TO postgres;
-
---
--- Name: pdes_menu_temp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.pdes_menu_temp_id_seq OWNED BY public.pdes_menu_temp.id;
+ALTER SEQUENCE public.province_id_seq OWNED BY public.province.id;
 
 
 --
@@ -1050,6 +1342,114 @@ ALTER SEQUENCE public.social_medias_id_seq OWNED BY public.social_medias.id;
 
 
 --
+-- Name: sourcedata; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.sourcedata (
+    id integer NOT NULL,
+    dataset character varying(255),
+    source character varying(255),
+    date_created timestamp without time zone
+);
+
+
+ALTER TABLE public.sourcedata OWNER TO postgres;
+
+--
+-- Name: sourcedata_detail; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.sourcedata_detail (
+    id integer NOT NULL,
+    "id_sourcedata	" integer,
+    description text
+);
+
+
+ALTER TABLE public.sourcedata_detail OWNER TO postgres;
+
+--
+-- Name: sourcedata_detail_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.sourcedata_detail_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sourcedata_detail_id_seq OWNER TO postgres;
+
+--
+-- Name: sourcedata_detail_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.sourcedata_detail_id_seq OWNED BY public.sourcedata_detail.id;
+
+
+--
+-- Name: sourcedata_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.sourcedata_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sourcedata_id_seq OWNER TO postgres;
+
+--
+-- Name: sourcedata_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.sourcedata_id_seq OWNED BY public.sourcedata.id;
+
+
+--
+-- Name: statistic; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.statistic (
+    id integer NOT NULL,
+    title character varying(255),
+    title_en character varying(255),
+    amount integer,
+    date_created timestamp without time zone
+);
+
+
+ALTER TABLE public.statistic OWNER TO postgres;
+
+--
+-- Name: statistic_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.statistic_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.statistic_id_seq OWNER TO postgres;
+
+--
+-- Name: statistic_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.statistic_id_seq OWNED BY public.statistic.id;
+
+
+--
 -- Name: structure_assets; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1062,7 +1462,8 @@ CREATE TABLE public.structure_assets (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     deleted_at timestamp without time zone,
-    web_identity character varying(100) DEFAULT 'kneks'::character varying
+    web_identity character varying(100) DEFAULT 'kneks'::character varying,
+    description text
 );
 
 
@@ -1088,204 +1489,6 @@ ALTER TABLE public.structure_assets_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE public.structure_assets_id_seq OWNED BY public.structure_assets.id;
-
-
---
--- Name: structures; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.structures (
-    id integer NOT NULL,
-    xml text,
-    svg text,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    deleted_at timestamp without time zone
-);
-
-
-ALTER TABLE public.structures OWNER TO postgres;
-
---
--- Name: structures_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.structures_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.structures_id_seq OWNER TO postgres;
-
---
--- Name: structures_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.structures_id_seq OWNED BY public.structures.id;
-
-
---
--- Name: syariah; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.syariah (
-    id integer NOT NULL,
-    name character varying(100),
-    link character varying(100),
-    menu_id integer,
-    submenu_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    deleted_at timestamp without time zone,
-    "order" character varying(100)
-);
-
-
-ALTER TABLE public.syariah OWNER TO postgres;
-
---
--- Name: syariah_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.syariah_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.syariah_id_seq OWNER TO postgres;
-
---
--- Name: syariah_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.syariah_id_seq OWNED BY public.syariah.id;
-
-
---
--- Name: syariah_menu; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.syariah_menu (
-    id integer NOT NULL,
-    name character varying(100),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    deleted_at timestamp without time zone,
-    is_single integer,
-    "order" character varying(100)
-);
-
-
-ALTER TABLE public.syariah_menu OWNER TO postgres;
-
---
--- Name: syariah_menu_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.syariah_menu_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.syariah_menu_id_seq OWNER TO postgres;
-
---
--- Name: syariah_menu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.syariah_menu_id_seq OWNED BY public.syariah_menu.id;
-
-
---
--- Name: syariah_overview; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.syariah_overview (
-    id integer NOT NULL,
-    image character varying(100),
-    title character varying(100),
-    is_publish integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    deleted_at timestamp without time zone,
-    "order" character varying(100),
-    link character varying(100)
-);
-
-
-ALTER TABLE public.syariah_overview OWNER TO postgres;
-
---
--- Name: syariah_overview_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.syariah_overview_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.syariah_overview_id_seq OWNER TO postgres;
-
---
--- Name: syariah_overview_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.syariah_overview_id_seq OWNED BY public.syariah_overview.id;
-
-
---
--- Name: syariah_submenu; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.syariah_submenu (
-    id integer NOT NULL,
-    name character varying(100),
-    menu_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    deleted_at timestamp without time zone,
-    "order" character varying(100)
-);
-
-
-ALTER TABLE public.syariah_submenu OWNER TO postgres;
-
---
--- Name: syariah_submenu_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.syariah_submenu_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.syariah_submenu_id_seq OWNER TO postgres;
-
---
--- Name: syariah_submenu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.syariah_submenu_id_seq OWNED BY public.syariah_submenu.id;
 
 
 --
@@ -1336,7 +1539,11 @@ CREATE TABLE public.users (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     role_id integer,
-    web_identity character varying(100) DEFAULT 'kneks'::character varying
+    web_identity character varying(100) DEFAULT 'kneks'::character varying,
+    roles_user integer,
+    active integer,
+    approve character varying(50),
+    ip_address character varying(50)
 );
 
 
@@ -1365,6 +1572,81 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: web_identity; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.web_identity (
+    id integer NOT NULL,
+    name character varying(191),
+    active integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    deleted_at timestamp without time zone
+);
+
+
+ALTER TABLE public.web_identity OWNER TO postgres;
+
+--
+-- Name: web_identity_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.web_identity_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.web_identity_id_seq OWNER TO postgres;
+
+--
+-- Name: web_identity_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.web_identity_id_seq OWNED BY public.web_identity.id;
+
+
+--
+-- Name: web_profile; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.web_profile (
+    id integer NOT NULL,
+    web_title character varying(100),
+    web_logo character varying(100),
+    web_header character varying(100),
+    web_color character varying(100)
+);
+
+
+ALTER TABLE public.web_profile OWNER TO postgres;
+
+--
+-- Name: web_profile_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.web_profile_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.web_profile_id_seq OWNER TO postgres;
+
+--
+-- Name: web_profile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.web_profile_id_seq OWNED BY public.web_profile.id;
+
+
+--
 -- Name: abouts id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1379,6 +1661,13 @@ ALTER TABLE ONLY public.agendas ALTER COLUMN id SET DEFAULT nextval('public.agen
 
 
 --
+-- Name: api_meta id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_meta ALTER COLUMN id SET DEFAULT nextval('public.api_meta_id_seq'::regclass);
+
+
+--
 -- Name: banners id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1390,6 +1679,20 @@ ALTER TABLE ONLY public.banners ALTER COLUMN id SET DEFAULT nextval('public.bann
 --
 
 ALTER TABLE ONLY public.contacts ALTER COLUMN id SET DEFAULT nextval('public.contacts_id_seq'::regclass);
+
+
+--
+-- Name: custom_page id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.custom_page ALTER COLUMN id SET DEFAULT nextval('public.custom_page_id_seq'::regclass);
+
+
+--
+-- Name: db_event id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.db_event ALTER COLUMN id SET DEFAULT nextval('public.db_event_id_seq'::regclass);
 
 
 --
@@ -1421,6 +1724,55 @@ ALTER TABLE ONLY public.institutions ALTER COLUMN id SET DEFAULT nextval('public
 
 
 --
+-- Name: khas_zone id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.khas_zone ALTER COLUMN id SET DEFAULT nextval('public.khas_zone_id_seq'::regclass);
+
+
+--
+-- Name: khas_zone khas_zone; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.khas_zone ALTER COLUMN khas_zone SET DEFAULT nextval('public.khas_zone_khas_zone_seq'::regclass);
+
+
+--
+-- Name: khas_zone city; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.khas_zone ALTER COLUMN city SET DEFAULT nextval('public.khas_zone_city_seq'::regclass);
+
+
+--
+-- Name: khas_zone province; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.khas_zone ALTER COLUMN province SET DEFAULT nextval('public.khas_zone_province_seq'::regclass);
+
+
+--
+-- Name: khas_zone inauguration; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.khas_zone ALTER COLUMN inauguration SET DEFAULT nextval('public.khas_zone_inauguration_seq'::regclass);
+
+
+--
+-- Name: khas_zone tenant; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.khas_zone ALTER COLUMN tenant SET DEFAULT nextval('public.khas_zone_tenant_seq'::regclass);
+
+
+--
+-- Name: khas_zone inaugurated; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.khas_zone ALTER COLUMN inaugurated SET DEFAULT nextval('public.khas_zone_inaugurated_seq'::regclass);
+
+
+--
 -- Name: map id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1428,10 +1780,24 @@ ALTER TABLE ONLY public.map ALTER COLUMN id SET DEFAULT nextval('public.map_id_s
 
 
 --
--- Name: migrations id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: menu id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.migrations ALTER COLUMN id SET DEFAULT nextval('public.migrations_id_seq'::regclass);
+ALTER TABLE ONLY public.menu ALTER COLUMN id SET DEFAULT nextval('public.menu_id_seq'::regclass);
+
+
+--
+-- Name: menu_sub id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.menu_sub ALTER COLUMN id SET DEFAULT nextval('public.menu_sub_id_seq'::regclass);
+
+
+--
+-- Name: naration id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.naration ALTER COLUMN id SET DEFAULT nextval('public.naration_id_seq'::regclass);
 
 
 --
@@ -1446,13 +1812,6 @@ ALTER TABLE ONLY public.news ALTER COLUMN id SET DEFAULT nextval('public.news_id
 --
 
 ALTER TABLE ONLY public.news_categories ALTER COLUMN id SET DEFAULT nextval('public.news_categories_id_seq'::regclass);
-
-
---
--- Name: news_news_category news_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.news_news_category ALTER COLUMN news_id SET DEFAULT nextval('public.news_news_category_news_id_seq'::regclass);
 
 
 --
@@ -1477,17 +1836,10 @@ ALTER TABLE ONLY public.opini ALTER COLUMN id SET DEFAULT nextval('public.opini_
 
 
 --
--- Name: password_resets id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: province id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.password_resets ALTER COLUMN id SET DEFAULT nextval('public.password_resets_id_seq'::regclass);
-
-
---
--- Name: pdes_menu_temp id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.pdes_menu_temp ALTER COLUMN id SET DEFAULT nextval('public.pdes_menu_temp_id_seq'::regclass);
+ALTER TABLE ONLY public.province ALTER COLUMN id SET DEFAULT nextval('public.province_id_seq'::regclass);
 
 
 --
@@ -1540,45 +1892,31 @@ ALTER TABLE ONLY public.social_medias ALTER COLUMN id SET DEFAULT nextval('publi
 
 
 --
+-- Name: sourcedata id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sourcedata ALTER COLUMN id SET DEFAULT nextval('public.sourcedata_id_seq'::regclass);
+
+
+--
+-- Name: sourcedata_detail id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sourcedata_detail ALTER COLUMN id SET DEFAULT nextval('public.sourcedata_detail_id_seq'::regclass);
+
+
+--
+-- Name: statistic id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.statistic ALTER COLUMN id SET DEFAULT nextval('public.statistic_id_seq'::regclass);
+
+
+--
 -- Name: structure_assets id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.structure_assets ALTER COLUMN id SET DEFAULT nextval('public.structure_assets_id_seq'::regclass);
-
-
---
--- Name: structures id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.structures ALTER COLUMN id SET DEFAULT nextval('public.structures_id_seq'::regclass);
-
-
---
--- Name: syariah id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.syariah ALTER COLUMN id SET DEFAULT nextval('public.syariah_id_seq'::regclass);
-
-
---
--- Name: syariah_menu id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.syariah_menu ALTER COLUMN id SET DEFAULT nextval('public.syariah_menu_id_seq'::regclass);
-
-
---
--- Name: syariah_overview id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.syariah_overview ALTER COLUMN id SET DEFAULT nextval('public.syariah_overview_id_seq'::regclass);
-
-
---
--- Name: syariah_submenu id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.syariah_submenu ALTER COLUMN id SET DEFAULT nextval('public.syariah_submenu_id_seq'::regclass);
 
 
 --
@@ -1596,10 +1934,24 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 
 --
+-- Name: web_identity id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.web_identity ALTER COLUMN id SET DEFAULT nextval('public.web_identity_id_seq'::regclass);
+
+
+--
+-- Name: web_profile id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.web_profile ALTER COLUMN id SET DEFAULT nextval('public.web_profile_id_seq'::regclass);
+
+
+--
 -- Data for Name: abouts; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.abouts (id, title, title_en, tag, content, content_en, created_at, updated_at, deleted_at, web_identity) FROM stdin;
+COPY public.abouts (id, title, title_en, tag, content, content_en, created_at, updated_at, deleted_at, web_identity, id_province, images) FROM stdin;
 \.
 
 
@@ -1608,6 +1960,14 @@ COPY public.abouts (id, title, title_en, tag, content, content_en, created_at, u
 --
 
 COPY public.agendas (id, title, title_en, url, "agenda_datetime	", created_at, updated_at, deleted_at, place, organizer, web_identity, link, project, description, agenda_endtime, manager, contributor, indicator, impact, opening, participants, area, loc, priority_participants, kbli, age, gender, province) FROM stdin;
+\.
+
+
+--
+-- Data for Name: api_meta; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.api_meta (id, api, statistic_id, statistic_name) FROM stdin;
 \.
 
 
@@ -1628,10 +1988,26 @@ COPY public.contacts (id, address_building, address, phone_number, fax_number, e
 
 
 --
+-- Data for Name: custom_page; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.custom_page (id, name, path) FROM stdin;
+\.
+
+
+--
+-- Data for Name: db_event; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.db_event (id, name) FROM stdin;
+\.
+
+
+--
 -- Data for Name: hot_categories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.hot_categories (id, title, title_en, description, description_en, created_at, updated_at, deleted_at, web_identity) FROM stdin;
+COPY public.hot_categories (id, title, title_en, description, description_en, created_at, updated_at, deleted_at, web_identity, images, directiorat_banner) FROM stdin;
 \.
 
 
@@ -1639,7 +2015,7 @@ COPY public.hot_categories (id, title, title_en, description, description_en, cr
 -- Data for Name: hot_issues; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.hot_issues (id, title, title_en, excerpt, excerpt_en, content, content_en, image, is_publish, "hot_issue_datetime	", created_at, updated_at, deleted_at, hot_subcategory_id, web_identity) FROM stdin;
+COPY public.hot_issues (id, title, title_en, excerpt, excerpt_en, content, content_en, image, is_publish, "hot_issue_datetime	", created_at, updated_at, deleted_at, hot_subcategory_id, web_identity, hot_issue_category, tag) FROM stdin;
 \.
 
 
@@ -1660,6 +2036,14 @@ COPY public.institutions (id, tag, name, logo, link, created_at, "updated_at	", 
 
 
 --
+-- Data for Name: khas_zone; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.khas_zone (id, khas_zone, city, province, inauguration, tenant, inaugurated) FROM stdin;
+\.
+
+
+--
 -- Data for Name: map; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1668,10 +2052,26 @@ COPY public.map (id, embed, created_at, updated_at, web_identity) FROM stdin;
 
 
 --
--- Data for Name: migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: menu; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.migrations (id, migration, batch) FROM stdin;
+COPY public.menu (id, "menu_name	", menu_link, orders) FROM stdin;
+\.
+
+
+--
+-- Data for Name: menu_sub; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.menu_sub (id, menu_id, submenu_name, submenu_link, orders) FROM stdin;
+\.
+
+
+--
+-- Data for Name: naration; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.naration (id, statistic_id, statistic_name, description, description_en) FROM stdin;
 \.
 
 
@@ -1679,7 +2079,7 @@ COPY public.migrations (id, migration, batch) FROM stdin;
 -- Data for Name: news; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.news (id, title, excerpt, content, image, news_datetime, is_publish, created_at, updated_at, deleted_at, title_en, excerpt_en, content_en, "category_id	", web_identity) FROM stdin;
+COPY public.news (id, title, excerpt, content, image, news_datetime, is_publish, created_at, updated_at, deleted_at, title_en, excerpt_en, content_en, "category_id	", web_identity, tag, directorat) FROM stdin;
 \.
 
 
@@ -1692,18 +2092,10 @@ COPY public.news_categories (id, title, created_at, updated_at, deleted_at, desc
 
 
 --
--- Data for Name: news_news_category; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.news_news_category (news_id, "news_category_id	") FROM stdin;
-\.
-
-
---
 -- Data for Name: news_photos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.news_photos (id, title, photo, content, created_at, updated_at, deleted_at, news_datetime, title_en, content_en, web_identity) FROM stdin;
+COPY public.news_photos (id, title, photo, content, created_at, updated_at, deleted_at, news_datetime, title_en, content_en, web_identity, tag) FROM stdin;
 \.
 
 
@@ -1711,7 +2103,7 @@ COPY public.news_photos (id, title, photo, content, created_at, updated_at, dele
 -- Data for Name: news_videos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.news_videos (id, title, video, duration, content, created_at, updated_at, deleted_at, news_datetime, title_en, content_en, web_identity) FROM stdin;
+COPY public.news_videos (id, title, video, duration, content, created_at, updated_at, deleted_at, news_datetime, title_en, content_en, web_identity, tag) FROM stdin;
 \.
 
 
@@ -1719,23 +2111,45 @@ COPY public.news_videos (id, title, video, duration, content, created_at, update
 -- Data for Name: opini; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.opini (id, title, title_en, content, content_en) FROM stdin;
+COPY public.opini (id, title, title_en, content, content_en, web_identity) FROM stdin;
 \.
 
 
 --
--- Data for Name: password_resets; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: province; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.password_resets (id, email, token, created_at) FROM stdin;
-\.
-
-
---
--- Data for Name: pdes_menu_temp; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.pdes_menu_temp (id, value) FROM stdin;
+COPY public.province (id, province_name) FROM stdin;
+1	Aceh
+2	Sumatera Utara
+3	Sumatera Barat
+4	Riau
+5	Jambi
+6	Bengkulu
+7	Sumatera Selatan
+8	Bangka Belitung
+9	Lampung
+10	Banten
+11	DKI Jakarta
+12	Jawa Barat
+13	Jawa Tengah
+14	DI Yogyakarta
+15	Jawa Timur
+16	Bali 
+17	Nusa Tenggara Barat
+18	Nusa Tenggara Timur
+19	Kalimantan Barat
+20	Kalimantan Tengah
+21	Kalimantan Selatan
+22	Kalimantan Timur
+23	Kalimantan Utara
+24	Sulawesi Utara
+25	Sulawesi Tengah
+26	Sulawesi Selatan
+27	Sulawesi Barat
+28	Sulawesi Tenggara
+29	Gorontalo
+30	Maluku 
 \.
 
 
@@ -1768,6 +2182,13 @@ COPY public.reports (id, title, date, file, content, is_publish, created_at, upd
 --
 
 COPY public.roles (id, title, created_at, updated_at, web_identity) FROM stdin;
+1	Super Admin	2019-05-09 08:05:42	2019-05-09 08:05:42	kneks
+2	Admin	2019-05-09 08:05:42	2019-05-09 08:05:42	kneks
+3	Contributor	2019-05-09 08:05:42	2019-05-09 08:05:42	kneks
+4	Redaktur	2019-05-09 08:05:42	2019-05-09 08:05:42	kneks
+5	Multimedia	2019-05-09 08:05:42	2019-05-09 08:05:42	kneks
+6	KDEKS	2019-05-09 08:05:42	2019-05-09 08:05:42	kneks
+7	Anggota	2019-05-09 08:05:42	2019-05-09 08:05:42	kneks
 \.
 
 
@@ -1796,50 +2217,34 @@ COPY public.social_medias (id, name, logo, link, created_at, "updated_at	", dele
 
 
 --
+-- Data for Name: sourcedata; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.sourcedata (id, dataset, source, date_created) FROM stdin;
+\.
+
+
+--
+-- Data for Name: sourcedata_detail; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.sourcedata_detail (id, "id_sourcedata	", description) FROM stdin;
+\.
+
+
+--
+-- Data for Name: statistic; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.statistic (id, title, title_en, amount, date_created) FROM stdin;
+\.
+
+
+--
 -- Data for Name: structure_assets; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.structure_assets (id, name, "position", photo, tag, created_at, updated_at, deleted_at, web_identity) FROM stdin;
-\.
-
-
---
--- Data for Name: structures; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.structures (id, xml, svg, created_at, updated_at, deleted_at) FROM stdin;
-\.
-
-
---
--- Data for Name: syariah; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.syariah (id, name, link, menu_id, submenu_id, created_at, updated_at, deleted_at, "order") FROM stdin;
-\.
-
-
---
--- Data for Name: syariah_menu; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.syariah_menu (id, name, created_at, updated_at, deleted_at, is_single, "order") FROM stdin;
-\.
-
-
---
--- Data for Name: syariah_overview; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.syariah_overview (id, image, title, is_publish, created_at, updated_at, deleted_at, "order", link) FROM stdin;
-\.
-
-
---
--- Data for Name: syariah_submenu; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.syariah_submenu (id, name, menu_id, created_at, updated_at, deleted_at, "order") FROM stdin;
+COPY public.structure_assets (id, name, "position", photo, tag, created_at, updated_at, deleted_at, web_identity, description) FROM stdin;
 \.
 
 
@@ -1848,6 +2253,10 @@ COPY public.syariah_submenu (id, name, menu_id, created_at, updated_at, deleted_
 --
 
 COPY public.tagging (id, tagging) FROM stdin;
+2	kneks
+3	kdeks
+4	syariah
+1	indonesia
 \.
 
 
@@ -1855,7 +2264,24 @@ COPY public.tagging (id, tagging) FROM stdin;
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (id, name, email, "email_verified_at	", password, remember_token, created_at, updated_at, role_id, web_identity) FROM stdin;
+COPY public.users (id, name, email, "email_verified_at	", password, remember_token, created_at, updated_at, role_id, web_identity, roles_user, active, approve, ip_address) FROM stdin;
+1	Administrator	admin@admin.com	muhammad45rifki@gmail.com	827ccb0eea8a706c4c34a16891f84e7b		2019-05-09 08:05:42	2024-08-12 13:30:00	1	kneks	1	1	Y	140.213.21.237
+\.
+
+
+--
+-- Data for Name: web_identity; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.web_identity (id, name, active, created_at, updated_at, deleted_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: web_profile; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.web_profile (id, web_title, web_logo, web_header, web_color) FROM stdin;
 \.
 
 
@@ -1874,6 +2300,13 @@ SELECT pg_catalog.setval('public.agendas_id_seq', 1, false);
 
 
 --
+-- Name: api_meta_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.api_meta_id_seq', 1, false);
+
+
+--
 -- Name: banners_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -1885,6 +2318,20 @@ SELECT pg_catalog.setval('public.banners_id_seq', 1, false);
 --
 
 SELECT pg_catalog.setval('public.contacts_id_seq', 1, false);
+
+
+--
+-- Name: custom_page_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.custom_page_id_seq', 1, false);
+
+
+--
+-- Name: db_event_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.db_event_id_seq', 1, false);
 
 
 --
@@ -1916,6 +2363,55 @@ SELECT pg_catalog.setval('public.institutions_id_seq', 1, false);
 
 
 --
+-- Name: khas_zone_city_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.khas_zone_city_seq', 1, false);
+
+
+--
+-- Name: khas_zone_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.khas_zone_id_seq', 1, false);
+
+
+--
+-- Name: khas_zone_inaugurated_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.khas_zone_inaugurated_seq', 1, false);
+
+
+--
+-- Name: khas_zone_inauguration_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.khas_zone_inauguration_seq', 1, false);
+
+
+--
+-- Name: khas_zone_khas_zone_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.khas_zone_khas_zone_seq', 1, false);
+
+
+--
+-- Name: khas_zone_province_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.khas_zone_province_seq', 1, false);
+
+
+--
+-- Name: khas_zone_tenant_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.khas_zone_tenant_seq', 1, false);
+
+
+--
 -- Name: map_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -1923,10 +2419,24 @@ SELECT pg_catalog.setval('public.map_id_seq', 1, false);
 
 
 --
--- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.migrations_id_seq', 1, false);
+SELECT pg_catalog.setval('public.menu_id_seq', 1, false);
+
+
+--
+-- Name: menu_sub_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.menu_sub_id_seq', 1, false);
+
+
+--
+-- Name: naration_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.naration_id_seq', 1, false);
 
 
 --
@@ -1941,13 +2451,6 @@ SELECT pg_catalog.setval('public.news_categories_id_seq', 1, false);
 --
 
 SELECT pg_catalog.setval('public.news_id_seq', 1, false);
-
-
---
--- Name: news_news_category_news_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.news_news_category_news_id_seq', 1, false);
 
 
 --
@@ -1972,17 +2475,10 @@ SELECT pg_catalog.setval('public.opini_id_seq', 1, false);
 
 
 --
--- Name: password_resets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: province_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.password_resets_id_seq', 1, false);
-
-
---
--- Name: pdes_menu_temp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.pdes_menu_temp_id_seq', 1, false);
+SELECT pg_catalog.setval('public.province_id_seq', 30, true);
 
 
 --
@@ -2010,7 +2506,7 @@ SELECT pg_catalog.setval('public.reports_id_seq', 1, false);
 -- Name: roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.roles_id_seq', 1, false);
+SELECT pg_catalog.setval('public.roles_id_seq', 7, true);
 
 
 --
@@ -2035,6 +2531,27 @@ SELECT pg_catalog.setval('public.social_medias_id_seq', 1, false);
 
 
 --
+-- Name: sourcedata_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.sourcedata_detail_id_seq', 1, false);
+
+
+--
+-- Name: sourcedata_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.sourcedata_id_seq', 1, false);
+
+
+--
+-- Name: statistic_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.statistic_id_seq', 1, false);
+
+
+--
 -- Name: structure_assets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2042,52 +2559,31 @@ SELECT pg_catalog.setval('public.structure_assets_id_seq', 1, false);
 
 
 --
--- Name: structures_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.structures_id_seq', 1, false);
-
-
---
--- Name: syariah_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.syariah_id_seq', 1, false);
-
-
---
--- Name: syariah_menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.syariah_menu_id_seq', 1, false);
-
-
---
--- Name: syariah_overview_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.syariah_overview_id_seq', 1, false);
-
-
---
--- Name: syariah_submenu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.syariah_submenu_id_seq', 1, false);
-
-
---
 -- Name: tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.tags_id_seq', 1, false);
+SELECT pg_catalog.setval('public.tags_id_seq', 5, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 1, false);
+SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+
+
+--
+-- Name: web_identity_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.web_identity_id_seq', 1, false);
+
+
+--
+-- Name: web_profile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.web_profile_id_seq', 1, false);
 
 
 --
@@ -2107,6 +2603,14 @@ ALTER TABLE ONLY public.agendas
 
 
 --
+-- Name: api_meta api_meta_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.api_meta
+    ADD CONSTRAINT api_meta_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: banners banners_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2120,6 +2624,22 @@ ALTER TABLE ONLY public.banners
 
 ALTER TABLE ONLY public.contacts
     ADD CONSTRAINT contacts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: custom_page custom_page_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.custom_page
+    ADD CONSTRAINT custom_page_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: db_event db_event_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.db_event
+    ADD CONSTRAINT db_event_pkey PRIMARY KEY (id);
 
 
 --
@@ -2163,11 +2683,27 @@ ALTER TABLE ONLY public.map
 
 
 --
--- Name: migrations migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: menu menu_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.migrations
-    ADD CONSTRAINT migrations_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.menu
+    ADD CONSTRAINT menu_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: menu_sub menu_sub_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.menu_sub
+    ADD CONSTRAINT menu_sub_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: naration naration_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.naration
+    ADD CONSTRAINT naration_pkey PRIMARY KEY (id);
 
 
 --
@@ -2176,14 +2712,6 @@ ALTER TABLE ONLY public.migrations
 
 ALTER TABLE ONLY public.news_categories
     ADD CONSTRAINT news_categories_pkey PRIMARY KEY (id);
-
-
---
--- Name: news_news_category news_news_category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.news_news_category
-    ADD CONSTRAINT news_news_category_pkey PRIMARY KEY (news_id);
 
 
 --
@@ -2211,19 +2739,11 @@ ALTER TABLE ONLY public.news_videos
 
 
 --
--- Name: password_resets password_resets_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: province province_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.password_resets
-    ADD CONSTRAINT password_resets_pkey PRIMARY KEY (id);
-
-
---
--- Name: pdes_menu_temp pdes_menu_temp_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.pdes_menu_temp
-    ADD CONSTRAINT pdes_menu_temp_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.province
+    ADD CONSTRAINT province_pkey PRIMARY KEY (id);
 
 
 --
@@ -2267,51 +2787,35 @@ ALTER TABLE ONLY public.social_medias
 
 
 --
+-- Name: sourcedata_detail sourcedata_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sourcedata_detail
+    ADD CONSTRAINT sourcedata_detail_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sourcedata sourcedata_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sourcedata
+    ADD CONSTRAINT sourcedata_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: statistic statistic_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.statistic
+    ADD CONSTRAINT statistic_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: structure_assets structure_assets_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.structure_assets
     ADD CONSTRAINT structure_assets_pkey PRIMARY KEY (id);
-
-
---
--- Name: structures structures_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.structures
-    ADD CONSTRAINT structures_pkey PRIMARY KEY (id);
-
-
---
--- Name: syariah_menu syariah_menu_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.syariah_menu
-    ADD CONSTRAINT syariah_menu_pkey PRIMARY KEY (id);
-
-
---
--- Name: syariah_overview syariah_overview_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.syariah_overview
-    ADD CONSTRAINT syariah_overview_pkey PRIMARY KEY (id);
-
-
---
--- Name: syariah syariah_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.syariah
-    ADD CONSTRAINT syariah_pkey PRIMARY KEY (id);
-
-
---
--- Name: syariah_submenu syariah_submenu_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.syariah_submenu
-    ADD CONSTRAINT syariah_submenu_pkey PRIMARY KEY (id);
 
 
 --
@@ -2328,6 +2832,22 @@ ALTER TABLE ONLY public.tagging
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: web_identity web_identity_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.web_identity
+    ADD CONSTRAINT web_identity_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: web_profile web_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.web_profile
+    ADD CONSTRAINT web_profile_pkey PRIMARY KEY (id);
 
 
 --

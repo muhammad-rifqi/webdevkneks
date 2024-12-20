@@ -1,16 +1,15 @@
 const md5 = require('md5');
-const { executeQuery } = require('./config');
+const { executeQuery } = require('./postgres');
 const fs = require('fs');
 
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
 let fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/';
 let site_url = "https://webdev.rifhandi.com";
 //::::::::::::::::::::::::::::::Start Of LOGIN LOGOUT :::::::::::::::::::::::::::::::::::::::::::::::::::::
-// email = $1 AND password = $1
 const do_login = async (req, res) => {
     const email = req?.body?.email;
     const password = md5(req?.body?.password);
-    const sql = await executeQuery('SELECT * FROM users where email = ? AND password = ?  AND approve = "Y" AND ip_address = ?', [email, password, req.body.ip_address]);
+    const sql = await executeQuery("SELECT * FROM users where  email = $1 AND password = $2  AND approve = 'Y' AND ip_address = $3", [email, password, req.body.ip_address]);
     if (sql?.length > 0) {
         const isLogin = true;
         res.cookie("islogin", isLogin);
@@ -1756,7 +1755,7 @@ const insertusers = async (req, res) => {
 
 const updatepassword = async (req, res) => {
     const id_users = req.cookies.id;
-    const sql = await executeQuery('SELECT * FROM users where id = ? ', [id_users])
+    const sql = await executeQuery('SELECT * FROM users where id = $1 ', [id_users])
     if (sql.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1765,10 +1764,10 @@ const updatepassword = async (req, res) => {
 }
 
 const changespassword = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM users where id = ? ', [req.body.id_user]);
+    const sql = await executeQuery('SELECT * FROM users where id = $1 ', [req.body.id_user]);
     if (md5(req.body.old_password) == sql[0]?.password) {
         if (req.body.new_password == req.body.verify_password) {
-            await executeQuery("UPDATE users SET name=? , password=? WHERE id=? ", [req.body.names, md5(req.body.new_password), req.body.id_user]);
+            await executeQuery("UPDATE users SET name=$1 , password=$2 WHERE id=$3 ", [req.body.names, md5(req.body.new_password), req.body.id_user]);
             // console.log('success');
             res.redirect('/logout');
         } else {
@@ -1781,7 +1780,7 @@ const changespassword = async (req, res) => {
 
 const deleteuser = async (req, res) => {
     const id_users = req.params.id;
-    const sql = await executeQuery('DELETE FROM users where id = ? ', [id_users]);
+    const sql = await executeQuery('DELETE FROM users where id = $1 ', [id_users]);
     if (sql) {
         res.redirect('/u');
     } else {
@@ -1793,10 +1792,10 @@ const deleteuser = async (req, res) => {
 const updateusers = async (req, res) => {
     const id_user = req.body.id;
     if (req.body.passwords == "" || req.body.passwords == null) {
-        await executeQuery("UPDATE users SET name=? , email=? ,  role_id = ? , ip_address = ? WHERE id=? ", [req.body.names.split(' ').join('_'), req.body.emails, req.body.roles_id, req.body.ip_address, id_user]);
+        await executeQuery("UPDATE users SET name=$1 , email=$2 ,  role_id = $3 , ip_address = $4 WHERE id=$5 ", [req.body.names.split(' ').join('_'), req.body.emails, req.body.roles_id, req.body.ip_address, id_user]);
         res.redirect('/u');
     } else {
-        await executeQuery("UPDATE users SET name=? , email=? , password = ? , role_id = ?, ip_address = ? WHERE id=? ", [req.body.names.split(' ').join('_'), req.body.emails, md5(req.body.passwords), req.body.roles_id, req.body.ip_address, id_user]);
+        await executeQuery("UPDATE users SET name=$1 , email=$2 , password = $3 , role_id = $4, ip_address = $5 WHERE id=$6 ", [req.body.names.split(' ').join('_'), req.body.emails, md5(req.body.passwords), req.body.roles_id, req.body.ip_address, id_user]);
         res.redirect('/u');
     }
 }
@@ -1810,7 +1809,7 @@ const khas_zone = async (req, res) => {
     const result = await executeQuery("SELECT * FROM province ORDER BY id DESC ");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
-            let zone = await executeQuery("SELECT * FROM khas_zone WHERE province = ?", [item?.id]);
+            let zone = await executeQuery("SELECT * FROM khas_zone WHERE province = $1", [item?.id]);
             const aar = [];
             zone.forEach((elem) => {
                 const ppp = {
@@ -1864,7 +1863,7 @@ const provinces = async (req, res) => {
 
 const provinces_detail = async (req, res) => {
     const id_p = req.params.id;
-    const sql = await executeQuery('SELECT * FROM province where id = ? ', [id_p]);
+    const sql = await executeQuery('SELECT * FROM province where id = $1 ', [id_p]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1873,7 +1872,7 @@ const provinces_detail = async (req, res) => {
 }
 
 const insertmaster = async (req, res) => {
-    const sql = await executeQuery('INSERT INTO province(province_name)values(?)', [req.body.provinces]);
+    const sql = await executeQuery('INSERT INTO province(province_name)values($1)', [req.body.provinces]);
     if (sql?.length > 0) {
         res.redirect('/master');
     } else {
@@ -1882,7 +1881,7 @@ const insertmaster = async (req, res) => {
 }
 
 const updatemaster = async (req, res) => {
-    const sql = await executeQuery('UPDATE province set province_name=? where id = ?', [req.body.province_name, req.body.id]);
+    const sql = await executeQuery('UPDATE province set province_name=$1 where id = $2', [req.body.province_name, req.body.id]);
     if (sql?.length > 0) {
         res.redirect('/master');
     } else {
@@ -1892,7 +1891,7 @@ const updatemaster = async (req, res) => {
 
 const deletemaster = async (req, res) => {
     const idp = req.params.id;
-    const sql = await executeQuery("delete from province where id = ?",
+    const sql = await executeQuery("delete from province where id = $1",
         [idp]);
     if (sql) {
         res.redirect('/master');
@@ -1904,7 +1903,7 @@ const deletemaster = async (req, res) => {
 
 const detail_khas_zone = async (req, res) => {
     const id_khas_zone = req.params.id;
-    const sql = await executeQuery('SELECT * FROM khas_zone where id = ?', [id_khas_zone]);
+    const sql = await executeQuery('SELECT * FROM khas_zone where id = $1', [id_khas_zone]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1913,7 +1912,7 @@ const detail_khas_zone = async (req, res) => {
 }
 
 const insertzonakhas = async (req, res) => {
-    const sql = await executeQuery("insert into khas_zone(khas_zone,city,province,inauguration,tenant,inaugurated) values(?,?,?,?,?,?)",
+    const sql = await executeQuery("insert into khas_zone(khas_zone,city,province,inauguration,tenant,inaugurated) values($1,$2,$3,$4,$5,$6)",
         [req.body.khas_zone, req.body.city, req.body.province, req.body.inauguration, req.body.tenant, req.body.inaugurated]);
     if (sql) {
         res.redirect('/zk');
@@ -1924,7 +1923,7 @@ const insertzonakhas = async (req, res) => {
 }
 
 const updatezonakhas = async (req, res) => {
-    const sql = await executeQuery("update khas_zone set khas_zone=?, city=?,province=?,inauguration=?,tenant=?,inaugurated=? where id = ?",
+    const sql = await executeQuery("update khas_zone set khas_zone=$1, city=$2,province=$3,inauguration=$4,tenant=$5,inaugurated=$6 where id = $7",
         [req.body.khas_zone, req.body.city, req.body.province, req.body.inauguration, req.body.tenant, req.body.inaugurated, req.body.id]);
     if (sql) {
         res.redirect('/zk');
@@ -1936,7 +1935,7 @@ const updatezonakhas = async (req, res) => {
 
 const deletezonakhas = async (req, res) => {
     const id_zona_khas = req.params.id;
-    const sql = await executeQuery("delete from khas_zone where id = ?",
+    const sql = await executeQuery("delete from khas_zone where id = $1",
         [id_zona_khas]);
     if (sql) {
         res.redirect('/zk');
@@ -1947,7 +1946,7 @@ const deletezonakhas = async (req, res) => {
 }
 
 const tagging = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM tagging');
+    const sql = await executeQuery("SELECT * FROM tagging");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1957,7 +1956,7 @@ const tagging = async (req, res) => {
 
 const detailtagging = async (req, res) => {
     const id_tagging = req.params.id;
-    const sql = await executeQuery('SELECT * FROM tagging where id = ? ', [id_tagging]);
+    const sql = await executeQuery("SELECT * FROM tagging where id = $1 ", [id_tagging]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1967,7 +1966,7 @@ const detailtagging = async (req, res) => {
 
 
 const inserttagging = async (req, res) => {
-    const sql = await executeQuery("insert into tagging(tagging) values(?)",
+    const sql = await executeQuery("insert into tagging(tagging) values($1)",
         [req.body.tagging]);
     if (sql) {
         res.redirect('/tg');
@@ -1978,7 +1977,7 @@ const inserttagging = async (req, res) => {
 }
 
 const updatetagging = async (req, res) => {
-    const sql = await executeQuery("update tagging set tagging=? where id = ?",
+    const sql = await executeQuery("update tagging set tagging=$1 where id = $2",
         [req.body.tagging, req.body.id]);
     if (sql) {
         res.redirect('/tg');
@@ -1990,7 +1989,7 @@ const updatetagging = async (req, res) => {
 
 const deletetagging = async (req, res) => {
     const id_tagging = req.params.id;
-    const sql = await executeQuery("delete from tagging where id = ?",
+    const sql = await executeQuery("delete from tagging where id = $1",
         [id_tagging]);
     if (sql) {
         res.redirect('/tg');
@@ -2022,7 +2021,7 @@ const custom_page = async (req, res) => {
 
 const detail_custom_page = async (req, res) => {
     const id_custom = req.params.id;
-    const sql = await executeQuery('SELECT * FROM custom_page where id = ? ', [id_custom]);
+    const sql = await executeQuery('SELECT * FROM custom_page where id = $1 ', [id_custom]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2032,7 +2031,7 @@ const detail_custom_page = async (req, res) => {
 
 const insertcustompage = async (req, res) => {
     const filesimage = site_url + "/uploads/custompage/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery('insert into custom_page(name,path) values (?,?)', [req.body.names, filesimage]);
+    const sql = await executeQuery('insert into custom_page(name,path) values ($1,$2)', [req.body.names, filesimage]);
     if (sql?.length > 0) {
         res.redirect('/customfront');
     } else {
@@ -2046,7 +2045,7 @@ const delete_custom_page = async (req, res) => {
     if (fs.existsSync(fileslinux + 'custompage/' + image)) {
         fs.unlink(fileslinux + 'custompage/' + image, async function (err) {
             if (err) return console.log(err);
-            const sql = await executeQuery('DELETE FROM custom_page where id = ? ', [id_custom]);
+            const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
             if (sql) {
                 res.redirect('/customfront');
             } else {
@@ -2056,7 +2055,7 @@ const delete_custom_page = async (req, res) => {
         });
         console.log("ada")
     } else {
-        const sql = await executeQuery('DELETE FROM custom_page where id = ? ', [id_custom]);
+        const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
         if (sql?.length > 0) {
             res.redirect('/customfront');
         } else {
@@ -2078,7 +2077,7 @@ const naration = async (req, res) => {
 
 const naration_detail = async (req, res) => {
     const id_nar = req.params.id;
-    const sql = await executeQuery('SELECT * FROM naration where id = ?', [id_nar]);
+    const sql = await executeQuery('SELECT * FROM naration where id = $1', [id_nar]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2088,7 +2087,7 @@ const naration_detail = async (req, res) => {
 
 const insertnarations = async (req, res) => {
     const ddd = req.body.data_type.split('-');
-    const sql = await executeQuery("INSERT INTO naration (statistic_id,statistic_name,description,description_en)values(?,?,?,?)",
+    const sql = await executeQuery("INSERT INTO naration (statistic_id,statistic_name,description,description_en)values($1,$2,$3,$4)",
         [ddd[0], ddd[1], req.body.description, req.body.description_en]);
     if (sql) {
         res.redirect('/narationfront');
@@ -2099,7 +2098,7 @@ const insertnarations = async (req, res) => {
 
 const updatenarations = async (req, res) => {
     const ddd = req.body.data_type.split('-');
-    const sql = await executeQuery("UPDATE naration set statistic_id= ? , statistic_name = ?, description = ?, description_en = ? where id = ?",
+    const sql = await executeQuery("UPDATE naration set statistic_id= $1 , statistic_name = $2, description = $3, description_en = $4 where id = $5",
         [ddd[0], ddd[1], req.body.description, req.body.description_en, req.body.id]);
     if (sql) {
         res.redirect('/narationfront');
@@ -2120,7 +2119,7 @@ const metabase = async (req, res) => {
 
 const detail_metabase = async (req, res) => {
     const id_nar = req.params.id;
-    const sql = await executeQuery('SELECT * FROM api_meta where naration_id = ?', [id_nar]);
+    const sql = await executeQuery('SELECT * FROM api_meta where naration_id = $1', [id_nar]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2130,7 +2129,7 @@ const detail_metabase = async (req, res) => {
 
 const metabase_delete = async (req, res) => {
     const id_meta = req.params.id;
-    const sql = await executeQuery('DELETE FROM api_meta where id = ?', [id_meta]);
+    const sql = await executeQuery('DELETE FROM api_meta where id = $1', [id_meta]);
     if (sql?.length > 0) {
         res.redirect('/metabase');
     } else {
@@ -2140,7 +2139,7 @@ const metabase_delete = async (req, res) => {
 
 const insertapimeta = async (req, res) => {
     const ddd = req.body.data_type.split('-');
-    const sql = await executeQuery('INSERT INTO api_meta (api,statistic_id,statistic_name) values (?,?,?)', [req.body.api, ddd[0], ddd[1]]);
+    const sql = await executeQuery('INSERT INTO api_meta (api,statistic_id,statistic_name) values ($1,$2,$3)', [req.body.api, ddd[0], ddd[1]]);
     if (sql?.length > 0) {
         res.redirect('/metabase');
     } else {
@@ -2158,7 +2157,7 @@ const statistics = async (req, res) => {
 }
 
 const insertstatistic = async (req, res) => {
-    const sql = await executeQuery("insert into statistic(title,title_en,amount,date_created) values(?,?,?,?)",
+    const sql = await executeQuery("insert into statistic(title,title_en,amount,date_created) values($1,$2,$3,$4)",
         [req.body.title, req.body.title_en, req.body.amount, req.body.date_created]);
     if (sql) {
         res.redirect('/slidefront');
@@ -2170,7 +2169,7 @@ const insertstatistic = async (req, res) => {
 
 const deletestatistic = async (req, res) => {
     const id_stat = req.params.id;
-    const sql = await executeQuery('DELETE FROM statistic where id = ? ', [id_stat]);
+    const sql = await executeQuery('DELETE FROM statistic where id = $1 ', [id_stat]);
     if (sql) {
         res.redirect('/slidefront');
     } else {
@@ -2190,7 +2189,7 @@ const sourcesdata = async (req, res) => {
 
 const sourcesdatadetail = async (req, res) => {
     const id_source = req.params.id;
-    const sql = await executeQuery('SELECT * FROM sourcedata where id = ? ', [id_source]);
+    const sql = await executeQuery('SELECT * FROM sourcedata where id = $1 ', [id_source]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2199,7 +2198,7 @@ const sourcesdatadetail = async (req, res) => {
 }
 
 const insertsourcesdata = async (req, res) => {
-    const sql = await executeQuery("insert into sourcedata(dataset,source,date_created) values(?,?,?)",
+    const sql = await executeQuery("insert into sourcedata(dataset,source,date_created) values($1,$2,$3)",
         [req.body.dataset, req.body.source, req.body.date_created]);
     if (sql) {
         res.redirect('/datafront');
@@ -2211,7 +2210,7 @@ const insertsourcesdata = async (req, res) => {
 
 const deletesourcesdata = async (req, res) => {
     const id_stat = req.params.id;
-    const sql = await executeQuery('DELETE FROM sourcedata where id = ? ', [id_stat]);
+    const sql = await executeQuery('DELETE FROM sourcedata where id = $1 ', [id_stat]);
     if (sql) {
         res.redirect('/datafront');
     } else {
@@ -2220,7 +2219,7 @@ const deletesourcesdata = async (req, res) => {
 }
 
 const insertdetailsourcedata = async (req, res) => {
-    const sql = await executeQuery("insert into sourcedata_detail(id_sourcedata,description) values(?,?)",
+    const sql = await executeQuery("insert into sourcedata_detail(id_sourcedata,description) values($1,$2)",
         [req.body.idd, req.body.detail]);
     if (sql) {
         res.redirect('/data_detail/' + req.body.idd);
@@ -2232,7 +2231,7 @@ const insertdetailsourcedata = async (req, res) => {
 
 const sourcesdatadetaillist = async (req, res) => {
     const id_source = req.params.id;
-    const sql = await executeQuery('SELECT * FROM sourcedata_detail where id_sourcedata = ? ', [id_source]);
+    const sql = await executeQuery('SELECT * FROM sourcedata_detail where id_sourcedata = $1 ', [id_source]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2242,7 +2241,7 @@ const sourcesdatadetaillist = async (req, res) => {
 
 const sourcesdatadetaildelete = async (req, res) => {
     const id_sc = req.params.id;
-    const sql = await executeQuery('DELETE FROM sourcedata_detail where id = ? ', [id_sc]);
+    const sql = await executeQuery('DELETE FROM sourcedata_detail where id = $1 ', [id_sc]);
     if (sql) {
         res.redirect('/data_detail/' + id_sc);
     } else {
@@ -2263,7 +2262,7 @@ const opini = async (req, res) => {
 
 const opini_detail = async (req, res) => {
     const id_opini = req.params.id;
-    const sql = await executeQuery("SELECT * FROM opini where id = ? ", [id_opini]);
+    const sql = await executeQuery("SELECT * FROM opini where id = $1 ", [id_opini]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2272,7 +2271,7 @@ const opini_detail = async (req, res) => {
 }
 
 const insertopini = async (req, res) => {
-    const sql = await executeQuery("insert into opini(title,title_en,content,content_en,web_identity) values(?,?,?,?,?)",
+    const sql = await executeQuery("insert into opini(title,title_en,content,content_en,web_identity) values($1,$2,$3,$4,$5)",
         [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.web_identity]);
     if (sql) {
         res.redirect('/opini');
@@ -2284,7 +2283,7 @@ const insertopini = async (req, res) => {
 
 const deleteopini = async (req, res) => {
     const id_opini = req.params.id;
-    const sql = await executeQuery('DELETE FROM  opini where id = ?', [id_opini]);
+    const sql = await executeQuery('DELETE FROM  opini where id = $1', [id_opini]);
     if (sql) {
         res.redirect('/opini');
     } else {
@@ -2295,7 +2294,7 @@ const deleteopini = async (req, res) => {
 
 
 const updateopini = async (req, res) => {
-    const sql = await executeQuery("UPDATE opini SET title=?,title_en=?,content=?,content_en=? where id = ?",
+    const sql = await executeQuery("UPDATE opini SET title=$1,title_en=$2,content=$3,content_en=$4 where id = $5",
         [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.id]);
     if (sql) {
         res.redirect('/opini');
@@ -2308,7 +2307,7 @@ const updateopini = async (req, res) => {
 // :::::::::::::::::::::::::: Setting Page :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 const web_profile = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM web_profile where id = 1');
+    const sql = await executeQuery("SELECT * FROM web_profile where id = 1");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2318,7 +2317,7 @@ const web_profile = async (req, res) => {
 
 const web_profile_detail = async (req, res) => {
     const id_web = req.params.id;
-    const sql = await executeQuery('SELECT * FROM web_profile where id = ? ', [id_web]);
+    const sql = await executeQuery("SELECT * FROM web_profile where id = $1 ", [id_web]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2328,7 +2327,7 @@ const web_profile_detail = async (req, res) => {
 
 
 const updatewebtitle = async (req, res) => {
-    const sql = await executeQuery("UPDATE web_profile SET web_title=? where id = ?",
+    const sql = await executeQuery("UPDATE web_profile SET web_title=$1 where id = $2",
         [req.body.web_title, req.body.id]);
     if (sql) {
         res.redirect('/titleweb');
@@ -2339,7 +2338,7 @@ const updatewebtitle = async (req, res) => {
 }
 
 const updateweblogo = async (req, res) => {
-    const sql = await executeQuery("UPDATE web_profile SET web_logo=? where id = ?",
+    const sql = await executeQuery("UPDATE web_profile SET web_logo=$1 where id = $2",
         [req.body.web_logo, req.body.id]);
     if (sql) {
         res.redirect('/logo');
@@ -2350,7 +2349,7 @@ const updateweblogo = async (req, res) => {
 }
 
 const updatewebheader = async (req, res) => {
-    const sql = await executeQuery("UPDATE web_profile SET web_header=? where id = ?",
+    const sql = await executeQuery("UPDATE web_profile SET web_header=$1 where id = $2",
         [req.body.web_header, req.body.id]);
     if (sql) {
         res.redirect('/header');
@@ -2361,7 +2360,7 @@ const updatewebheader = async (req, res) => {
 }
 
 const updatewebcolor = async (req, res) => {
-    const sql = await executeQuery("UPDATE web_profile SET web_color=? where id = ?",
+    const sql = await executeQuery("UPDATE web_profile SET web_color=$1 where id = $2",
         [req.body.web_color, req.body.id]);
     if (sql) {
         res.redirect('/color');
@@ -2381,7 +2380,7 @@ const menu = async (req, res) => {
 }
 
 const insertmenu = async (req, res) => {
-    const sql = await executeQuery("insert into menu(menu_name,menu_link,orders) values(?,?,?)",
+    const sql = await executeQuery("insert into menu(menu_name,menu_link,orders) values($1,$2,$3)",
         [req.body.menu_name, req.body.menu_link, req.body.orders]);
     if (sql) {
         res.redirect('/menu');
@@ -2392,7 +2391,7 @@ const insertmenu = async (req, res) => {
 }
 
 const updatemenu = async (req, res) => {
-    const sql = await executeQuery("update menu set menu_name=?, menu_link=?, orders=? where id = ?",
+    const sql = await executeQuery("update menu set menu_name=$1, menu_link=$2, orders=$3 where id = $4",
         [req.body.menu_name, req.body.menu_link, req.body.orders, req.body.id]);
     if (sql) {
         res.redirect('/menu');
@@ -2404,7 +2403,7 @@ const updatemenu = async (req, res) => {
 
 const menu_detail = async (req, res) => {
     const id_menu = req.params.id;
-    const sql = await executeQuery('SELECT * FROM menu where id = ? ', [id_menu]);
+    const sql = await executeQuery('SELECT * FROM menu where id = $1 ', [id_menu]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2422,7 +2421,7 @@ const submenu = async (req, res) => {
 }
 
 const insertsubmenu = async (req, res) => {
-    const sql = await executeQuery("insert into menu_sub(menu_id,submenu_name,submenu_link,orders) values(?,?,?,?)",
+    const sql = await executeQuery("insert into menu_sub(menu_id,submenu_name,submenu_link,orders) values($1,$2,$3,$4)",
         [req.body.menu_id, req.body.submenu_name, req.body.submenu_link, req.body.orders]);
     if (sql) {
         res.redirect('/submenu');
