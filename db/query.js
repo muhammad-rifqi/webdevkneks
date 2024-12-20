@@ -1796,6 +1796,45 @@ const provinces = async (req, res) => {
     }
 }
 
+const provinces_detail = async (req, res) => {
+    const id_p = req.params.id;
+    const sql = await executeQuery('SELECT * FROM province where id = ? ', [id_p]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const insertmaster = async (req, res) => {
+    const sql = await executeQuery('INSERT INTO province(province_name)values(?)',[req.body.provinces]);
+    if (sql?.length > 0) {
+        res.redirect('/master');
+    } else {
+        res.redirect('/master');
+    }
+}
+
+const updatemaster = async (req, res) => {
+    const sql = await executeQuery('UPDATE province set province_name=? where id = ?',[req.body.province_name,req.body.id]);
+    if (sql?.length > 0) {
+        res.redirect('/master');
+    } else {
+        res.redirect('/master');
+    }
+}
+
+const deletemaster = async (req, res) => {
+    const idp = req.params.id;
+    const sql = await executeQuery("delete from province where id = ?",
+        [idp]);
+    if (sql) {
+        res.redirect('/master');
+    } else {
+        console.log(sql)
+        res.redirect('/master');
+    }
+}
 
 const detail_khas_zone = async (req, res) => {
     const id_khas_zone = req.params.id;
@@ -2467,6 +2506,10 @@ module.exports = {
     updatezonakhas,
     insertzonakhas,
     provinces,
+    provinces_detail,
+    insertmaster,
+    updatemaster,
+    deletemaster,
     detail_khas_zone,
     tagging,
     inserttagging,

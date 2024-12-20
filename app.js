@@ -271,6 +271,14 @@ apps.get('/master', (req, res) => {
     res.sendFile(path.resolve('./views/profile/tentang_kami/master.html'));
 })
 
+apps.get('/master_add', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/tentang_kami/master_add.html'));
+})
+
+apps.get('/master_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/tentang_kami/master_edit.html'));
+})
+
 apps.get('/es', (req, res) => {
     res.sendFile(path.resolve('./views/profile/tentang_kami/ekonomi_syariah.html'));
 })
@@ -808,6 +816,8 @@ apps.post('/updatetagging', db.updatetagging);
 
 apps.get('/provinces', db.provinces);
 
+apps.get('/provinces_detail/:id', db.provinces_detail);
+
 apps.get('/kbli', async (req, res) => {
     return res.status(200).json(kbli);
 });
@@ -932,10 +942,14 @@ apps.get('/api_submenu_detail/:id', db.submenu_detail);
 
 apps.get('/api_kdeks', db.kdeks);
 
+apps.post('/insertmaster', db.insertmaster);
 
+apps.post('/updatemaster', db.updatemaster);
 
+apps.get('/master_delete/:id', db.deletemaster);
 
 //::::::::::::::::: End Of KDEKS ::::::::::::::::::::::::::
+
 apps.post('/insertusers', db.user_register);
 
 apps.post('/do_login', db.api_login);

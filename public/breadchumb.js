@@ -109,7 +109,7 @@ if(path == 'tk'){
 }
 //-----------------------End Of KDEKS -----------------------------
 //------------------------ KDEKS Master----------------------
-if(path == 'master'){
+if(path == 'master' || path == 'master_add' || path == 'master_edit'){
     breadcrumb1 = "Master";
     breadcrumb2 = "List Data";
 }
