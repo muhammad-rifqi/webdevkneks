@@ -259,6 +259,14 @@ apps.get('/kdeks', (req, res) => {
     res.sendFile(path.resolve('./views/profile/tentang_kami/kdeks.html'));
 })
 
+apps.get('/kdeks_add', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/tentang_kami/kdeks_add.html'));
+})
+
+apps.get('/kdeks_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/tentang_kami/kdeks_edit.html'));
+})
+
 apps.get('/master', (req, res) => {
     res.sendFile(path.resolve('./views/profile/tentang_kami/master.html'));
 })
@@ -619,6 +627,10 @@ apps.get('/detailabouts/:id', db.detailabout);
 apps.post('/updatetentangkami', db.updateabouts);
 
 apps.get('/deleteabouts/:id', db.deleteabout);
+
+apps.post('/insertkdeks', db.insertkdeks);
+
+apps.post('/updatekdeks', db.updatekdeks);
 
 //::::::::::::::: Api & Query DB STRUCTURE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

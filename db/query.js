@@ -131,6 +131,24 @@ const updateabouts = async (req, res) => {
 
 }
 
+const insertkdeks = async (req, res) => {
+    const sql = await executeQuery("INSERT into abouts (title,title_en,tag,content,content_en,web_identity,id_province)values(?,?,?,?,?,?,?) ", [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.web_identity,req.body.id_province]);
+    if (sql) {
+        res.redirect('/kdeks');
+    } else {
+        res.redirect('/kdeks');
+    }
+}
+
+const updatekdeks = async (req, res) => {
+    const sql = await executeQuery("UPDATE abouts set title= ?, title_en= ?, tag= ?, content= ?, content_en= ?, id_province = ? , web_identity = ? , tag = ? where id = ?  ", [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.id_province, req.body.web_identity, req.body.tag, req.body.id]);
+    if (sql) {
+        res.redirect('/kdeks');
+    } else {
+        res.redirect('/kdeks');
+    }
+}
+
 //::::::::::::::::::::::::::::::End Of Abouts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const structure = async (req, res) => {
@@ -2363,6 +2381,8 @@ module.exports = {
     deleteabout,
     detailabout,
     updateabouts,
+    insertkdeks,
+    updatekdeks,
     structure,
     kdeks,
     deletestructure,

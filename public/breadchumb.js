@@ -119,7 +119,7 @@ if(path == 'es'){
     breadcrumb2 = "List Data";
 }
 //-----------------------End Of KDEKS Master-----------------------------
-if(path == 'kdeks'){
+if(path == 'kdeks' || path == 'kdeks_add' || path == 'kdeks_edit'){
     breadcrumb1 = "KDEKS";
     breadcrumb2 = "List Data";
 }
