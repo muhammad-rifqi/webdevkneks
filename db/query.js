@@ -132,7 +132,7 @@ const updateabouts = async (req, res) => {
 }
 
 const insertkdeks = async (req, res) => {
-    const sql = await executeQuery("INSERT into abouts (title,title_en,tag,content,content_en,web_identity,id_province)values(?,?,?,?,?,?,?) ", [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.web_identity,req.body.id_province]);
+    const sql = await executeQuery("INSERT into abouts (title,title_en,tag,content,content_en,web_identity,id_province)values(?,?,?,?,?,?,?) ", [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.web_identity, req.body.id_province]);
     if (sql) {
         res.redirect('/kdeks');
     } else {
@@ -978,30 +978,59 @@ const updateagenda = async (req, res) => {
 //::::::::::::::::::::::::::::::End Of Agenda :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of FILES :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const files = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  reports');
-    if (sql?.length > 0) {
-        const array = [];
-        sql?.forEach((items, index) => {
-            const bbb = {
-                "id": items?.id,
-                "title": items?.title,
-                "date": items?.date,
-                "file": items?.file,
-                "content": items?.content,
-                "is_publish": items?.is_publish,
-                "created_at": items?.created_at,
-                "updated_at": items?.updated_at,
-                "deleted_at": items?.deleted_at,
-                "report_category_id": items?.report_category_id,
-                "title_en": items?.title_en,
-                "content_en": items?.content_en,
-                "fl": items?.file?.split('/')[5]
-            };
-            array.push(bbb);
-        })
-        res.status(200).json(array)
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == '6') {
+        const sql = await executeQuery('SELECT * FROM  reports where web_identity = "kdeks"');
+        if (sql?.length > 0) {
+            const array = [];
+            sql?.forEach((items, index) => {
+                const bbb = {
+                    "id": items?.id,
+                    "title": items?.title,
+                    "date": items?.date,
+                    "file": items?.file,
+                    "content": items?.content,
+                    "is_publish": items?.is_publish,
+                    "created_at": items?.created_at,
+                    "updated_at": items?.updated_at,
+                    "deleted_at": items?.deleted_at,
+                    "report_category_id": items?.report_category_id,
+                    "title_en": items?.title_en,
+                    "content_en": items?.content_en,
+                    "fl": items?.file?.split('/')[5]
+                };
+                array.push(bbb);
+            })
+            res.status(200).json(array)
+        } else {
+            res.status(200).json({ "success": false })
+        }
     } else {
-        res.status(200).json({ "success": false })
+        const sql = await executeQuery('SELECT * FROM  reports where web_identity = "kneks"');
+        if (sql?.length > 0) {
+            const array = [];
+            sql?.forEach((items, index) => {
+                const bbb = {
+                    "id": items?.id,
+                    "title": items?.title,
+                    "date": items?.date,
+                    "file": items?.file,
+                    "content": items?.content,
+                    "is_publish": items?.is_publish,
+                    "created_at": items?.created_at,
+                    "updated_at": items?.updated_at,
+                    "deleted_at": items?.deleted_at,
+                    "report_category_id": items?.report_category_id,
+                    "title_en": items?.title_en,
+                    "content_en": items?.content_en,
+                    "fl": items?.file?.split('/')[5]
+                };
+                array.push(bbb);
+            })
+            res.status(200).json(array)
+        } else {
+            res.status(200).json({ "success": false })
+        }
     }
 }
 
@@ -1154,37 +1183,74 @@ const updatefilescategory = async (req, res) => {
 //::::::::::::::::::::::::::::::End Of Files :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of News:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const posts = async (req, res) => {
-    const result = await executeQuery("SELECT * FROM news ORDER BY id DESC ");
-    let promises = result.map(async (item) => {
-        return new Promise(async (resolve, reject) => {
-            let r = await executeQuery("SELECT * FROM news_categories WHERE id = ?", [item.category_id]);
-            let detail = r[0];
-            let row = {
-                "id": item?.id,
-                "title": item?.title,
-                "title_en": item?.title_en,
-                "news_datetime": item?.news_datetime,
-                "content": item?.content,
-                "content_en": item?.content_en,
-                "excerpt": item?.excerpt,
-                "excerpt_en": item?.excerpt_en,
-                "is_publish": item?.is_publish,
-                "image": item?.image,
-                "img": item?.image?.split('/')[5],
-                "category_id": item?.category_id,
-                "tagging": item?.tag,
-                "detail": detail
-            };
-            resolve(row);
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == '6') {
+        const result = await executeQuery("SELECT * FROM news where web_identity = 'kdeks' ORDER BY id DESC ");
+        let promises = result.map(async (item) => {
+            return new Promise(async (resolve, reject) => {
+                let r = await executeQuery("SELECT * FROM news_categories WHERE id = ?", [item.category_id]);
+                let detail = r[0];
+                let row = {
+                    "id": item?.id,
+                    "title": item?.title,
+                    "title_en": item?.title_en,
+                    "news_datetime": item?.news_datetime,
+                    "content": item?.content,
+                    "content_en": item?.content_en,
+                    "excerpt": item?.excerpt,
+                    "excerpt_en": item?.excerpt_en,
+                    "is_publish": item?.is_publish,
+                    "image": item?.image,
+                    "img": item?.image?.split('/')[5],
+                    "category_id": item?.category_id,
+                    "tagging": item?.tag,
+                    "detail": detail
+                };
+                resolve(row);
+            });
         });
-    });
-    Promise.all(promises)
-        .then((rows) => {
-            res.status(200).json(rows);
-        })
-        .catch((error) => {
-            res.status(500).json({ error: error.message });
+        Promise.all(promises)
+            .then((rows) => {
+                res.status(200).json(rows);
+            })
+            .catch((error) => {
+                res.status(500).json({ error: error.message });
+            });
+
+    } else {
+
+        const result = await executeQuery("SELECT * FROM news  where web_identity = 'kneks'  ORDER BY id DESC ");
+        let promises = result.map(async (item) => {
+            return new Promise(async (resolve, reject) => {
+                let r = await executeQuery("SELECT * FROM news_categories WHERE id = ?", [item.category_id]);
+                let detail = r[0];
+                let row = {
+                    "id": item?.id,
+                    "title": item?.title,
+                    "title_en": item?.title_en,
+                    "news_datetime": item?.news_datetime,
+                    "content": item?.content,
+                    "content_en": item?.content_en,
+                    "excerpt": item?.excerpt,
+                    "excerpt_en": item?.excerpt_en,
+                    "is_publish": item?.is_publish,
+                    "image": item?.image,
+                    "img": item?.image?.split('/')[5],
+                    "category_id": item?.category_id,
+                    "tagging": item?.tag,
+                    "detail": detail
+                };
+                resolve(row);
+            });
         });
+        Promise.all(promises)
+            .then((rows) => {
+                res.status(200).json(rows);
+            })
+            .catch((error) => {
+                res.status(500).json({ error: error.message });
+            });
+    }
 }
 
 const seacrh_posts = async (req, res) => {
@@ -1807,7 +1873,7 @@ const provinces_detail = async (req, res) => {
 }
 
 const insertmaster = async (req, res) => {
-    const sql = await executeQuery('INSERT INTO province(province_name)values(?)',[req.body.provinces]);
+    const sql = await executeQuery('INSERT INTO province(province_name)values(?)', [req.body.provinces]);
     if (sql?.length > 0) {
         res.redirect('/master');
     } else {
@@ -1816,7 +1882,7 @@ const insertmaster = async (req, res) => {
 }
 
 const updatemaster = async (req, res) => {
-    const sql = await executeQuery('UPDATE province set province_name=? where id = ?',[req.body.province_name,req.body.id]);
+    const sql = await executeQuery('UPDATE province set province_name=? where id = ?', [req.body.province_name, req.body.id]);
     if (sql?.length > 0) {
         res.redirect('/master');
     } else {
