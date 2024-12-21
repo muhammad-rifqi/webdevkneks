@@ -24,7 +24,7 @@ const do_login = async (req, res) => {
 
 const user_register = async (req, res) => {
     const passwords = md5(req?.body?.password);
-    const sql = await executeQuery("insert into users(name,email,password) values(?,?,?)",
+    const sql = await executeQuery("insert into users(name,email,password) values($1,$2,$3)",
         [req.body.username, req.body.email, passwords]);
     if (sql) {
         res.redirect('/');
@@ -44,7 +44,7 @@ const do_logout = (req, res) => {
 const api_login = async (req, res) => {
     const email = req?.body?.email;
     const password = md5(req?.body?.password);
-    const sql = await executeQuery('SELECT * FROM users where email = ? AND password = ? ', [email, password])
+    const sql = await executeQuery("SELECT * FROM users where email = $1 AND password = $2 ", [email, password])
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -58,13 +58,13 @@ const api_login = async (req, res) => {
 
 const dashboards = async (req, res) => {
 
-    const news_mounts = await executeQuery('SELECT * FROM news');
+    const news_mounts = await executeQuery("SELECT * FROM news");
     const jumlah1 = news_mounts.length;
-    const videos_mounts = await executeQuery('SELECT * FROM news_videos');
+    const videos_mounts = await executeQuery("SELECT * FROM news_videos");
     const jumlah2 = videos_mounts.length;
-    const photos_mounts = await executeQuery('SELECT * FROM news_photos');
+    const photos_mounts = await executeQuery("SELECT * FROM news_photos");
     const jumlah3 = photos_mounts.length;
-    const files_mounts = await executeQuery('SELECT * FROM reports');
+    const files_mounts = await executeQuery("SELECT * FROM reports");
     const jumlah4 = files_mounts.length;
 
     const mounted = {
@@ -81,7 +81,7 @@ const dashboards = async (req, res) => {
 
 //::::::::::::::::::::::::::::::Start Of Abouts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const abouts = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM abouts where web_identity = "kneks"');
+    const sql = await executeQuery("SELECT * FROM abouts where web_identity = 'kneks'");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -90,7 +90,7 @@ const abouts = async (req, res) => {
 }
 
 const kdeks = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM abouts where web_identity = "kdeks" ');
+    const sql = await executeQuery("SELECT * FROM abouts where web_identity = 'kdeks'");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -100,7 +100,7 @@ const kdeks = async (req, res) => {
 
 const deleteabout = async (req, res) => {
     const id_abouts = req.params.id;
-    const sql = await executeQuery('DELETE FROM  abouts where id=?', [id_abouts]);
+    const sql = await executeQuery("DELETE FROM  abouts where id = $1", [id_abouts]);
     if (sql) {
         res.redirect('/tk');
     } else {
@@ -111,7 +111,7 @@ const deleteabout = async (req, res) => {
 
 const detailabout = async (req, res) => {
     const id_abouts = req.params.id;
-    const sql = await executeQuery('SELECT *  FROM  abouts where id=?', [id_abouts]);
+    const sql = await executeQuery('SELECT *  FROM  abouts where id = $1', [id_abouts]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -120,7 +120,7 @@ const detailabout = async (req, res) => {
 }
 
 const updateabouts = async (req, res) => {
-    const sql = await executeQuery('UPDATE abouts set title=? , title_en=?, tag=? , content=? , content_en=? where id=?', [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.id]);
+    const sql = await executeQuery('UPDATE abouts set title = $1 , title_en = $2, tag = $3 , content = $4 , content_en = $5 where id = $6', [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.id]);
     if (sql) {
         res.redirect('/tk');
     } else {
@@ -131,7 +131,7 @@ const updateabouts = async (req, res) => {
 }
 
 const insertkdeks = async (req, res) => {
-    const sql = await executeQuery("INSERT into abouts (title,title_en,tag,content,content_en,web_identity,id_province)values(?,?,?,?,?,?,?) ", [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.web_identity, req.body.id_province]);
+    const sql = await executeQuery("INSERT into abouts (title,title_en,tag,content,content_en,web_identity,id_province)values($1,$2,$3,$4,$4,$5,$6) ", [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.web_identity, req.body.id_province]);
     if (sql) {
         res.redirect('/kdeks');
     } else {
@@ -140,7 +140,7 @@ const insertkdeks = async (req, res) => {
 }
 
 const updatekdeks = async (req, res) => {
-    const sql = await executeQuery("UPDATE abouts set title= ?, title_en= ?, tag= ?, content= ?, content_en= ?, id_province = ? , web_identity = ? , tag = ? where id = ?  ", [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.id_province, req.body.web_identity, req.body.tag, req.body.id]);
+    const sql = await executeQuery("UPDATE abouts set title= $1, title_en= $2, tag= $3, content= $4, content_en= $5, id_province = $6 , web_identity = $7 , tag = $8 where id = $9  ", [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.id_province, req.body.web_identity, req.body.tag, req.body.id]);
     if (sql) {
         res.redirect('/kdeks');
     } else {
