@@ -1667,7 +1667,7 @@ const updatevideos = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
     const videos_datetime = req.body.video_datetime.replace("T", " ");
-    const sql = await executeQuery("update news_videos set title=?,title_en=?,content=?,content_en=?,video=?,duration=?,news_datetime=?,created_at=?,updated_at=?, tag=? where id = ?",
+    const sql = await executeQuery("update news_videos set title=$1,title_en=$2,content=$3,content_en=$4,video=$5,duration=$6,news_datetime=$7,created_at=$8,updated_at=$9, tag=$10 where id = $11",
         [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.video, req.body.duration, videos_datetime, time_datetime, time_datetime, req.body.taggings, req.body.id]);
     if (sql) {
         res.redirect('/v');
@@ -1680,7 +1680,7 @@ const updatevideos = async (req, res) => {
 //::::::::::::::::::::::::::::::End Of Videos:::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Users:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const users = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM users where approve = "Y"');
+    const sql = await executeQuery("SELECT * FROM users where approve = 'Y'");
     if (sql?.length > 0) {
         // const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         // console.log(ip);
@@ -1691,7 +1691,7 @@ const users = async (req, res) => {
 }
 
 const users_detail = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM users where id = ?', [req.params.id]);
+    const sql = await executeQuery('SELECT * FROM users where id = $1', [req.params.id]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1700,7 +1700,7 @@ const users_detail = async (req, res) => {
 }
 
 const users_new = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH) AND approve = "Y" ORDER BY created_at DESC');
+    const sql = await executeQuery("SELECT * FROM users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH) AND approve = 'Y' ORDER BY created_at DESC");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1709,7 +1709,7 @@ const users_new = async (req, res) => {
 };
 
 const users_whitelist = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM users WHERE approve = "N" ORDER BY created_at DESC');
+    const sql = await executeQuery("SELECT * FROM users WHERE approve = 'N' ORDER BY created_at DESC");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1719,7 +1719,7 @@ const users_whitelist = async (req, res) => {
 
 const approveusers = async (req, res) => {
     const id_params_user = req.params.id;
-    const sql = await executeQuery("UPDATE users SET approve=? WHERE id=? ", ['Y', id_params_user]);
+    const sql = await executeQuery("UPDATE users SET approve=$1 WHERE id=$2 ", ['Y', id_params_user]);
     if (sql) {
         res.redirect('/whitelist');
     } else {
@@ -2432,7 +2432,7 @@ const insertsubmenu = async (req, res) => {
 }
 
 const updatesubmenu = async (req, res) => {
-    const sql = await executeQuery("update menu_sub set menu_id = ?, submenu_name=?, submenu_link=?, orders=? where id = ?",
+    const sql = await executeQuery("update menu_sub set menu_id = $1, submenu_name=$2, submenu_link=$3, orders=$4 where id = $5",
         [req.body.menu_id, req.body.submenu_name, req.body.submenu_link, req.body.orders, req.body.id]);
     if (sql) {
         res.redirect('/submenu');
@@ -2444,7 +2444,7 @@ const updatesubmenu = async (req, res) => {
 
 const submenu_detail = async (req, res) => {
     const id_menu = req.params.id;
-    const sql = await executeQuery('SELECT * FROM menu_sub where id = ? ', [id_menu]);
+    const sql = await executeQuery('SELECT * FROM menu_sub where id = $1 ', [id_menu]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
