@@ -1523,7 +1523,7 @@ const updatenews = async (req, res) => {
         }
     } else {
         const fileupload = site_url + "/uploads/news/" + req.file.originalname.replace(" ", "");
-        const sql = await executeQuery("UPDATE news set  title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,image=$7,is_publish=$8,news_datetime=$9,created_at=10,updated_at=$11,deleted_at=12,category_id=$13, tag=$14,directorat=$15 where id = $16",
+        const sql = await executeQuery("UPDATE news set  title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,image=$7,is_publish=$8,news_datetime=$9,created_at=$10,updated_at=$11,deleted_at=$12,category_id=$13, tag=$14,directorat=$15 where id = $16",
             [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.news_category_id, req.body.taggings, req.body.hot_category_id, req.body.id]);
         if (sql) {
             res.redirect('/n');
@@ -1869,8 +1869,8 @@ const insertusers = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
     const pw = md5(req.body.password);
-    const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at,ip_address) values(?,?,?,?,?,?,?)",
-        [req.body.name.split(' ').join('_'), req.body.email, pw, req.body.role_id, time_datetime, time_datetime, req.body.ip_address]);
+    const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at,ip_address) values($1,$2,$3,$4,$5,$6,$7)",
+        [req.body.name.replace( /\s/g, ''), req.body.email, pw, req.body.role_id, time_datetime, time_datetime, req.body.ip_address]);
     if (sql) {
         res.redirect('/u');
     } else {
@@ -1917,10 +1917,10 @@ const deleteuser = async (req, res) => {
 const updateusers = async (req, res) => {
     const id_user = req.body.id;
     if (req.body.passwords == "" || req.body.passwords == null) {
-        await executeQuery("UPDATE users SET name=$1 , email=$2 ,  role_id = $3 , ip_address = $4 WHERE id=$5 ", [req.body.names.split(' ').join('_'), req.body.emails, req.body.roles_id, req.body.ip_address, id_user]);
+        await executeQuery("UPDATE users SET name=$1 , email=$2 ,  role_id = $3 , ip_address = $4 WHERE id=$5 ", [req.body.names.replace( /\s/g, ''), req.body.emails, req.body.roles_id, req.body.ip_address, id_user]);
         res.redirect('/u');
     } else {
-        await executeQuery("UPDATE users SET name=$1 , email=$2 , password = $3 , role_id = $4, ip_address = $5 WHERE id=$6 ", [req.body.names.split(' ').join('_'), req.body.emails, md5(req.body.passwords), req.body.roles_id, req.body.ip_address, id_user]);
+        await executeQuery("UPDATE users SET name=$1 , email=$2 , password = $3 , role_id = $4, ip_address = $5 WHERE id=$6 ", [req.body.names.replace( /\s/g, ''), req.body.emails, md5(req.body.passwords), req.body.roles_id, req.body.ip_address, id_user]);
         res.redirect('/u');
     }
 }
