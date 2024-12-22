@@ -1244,7 +1244,7 @@ const updatefilescategory = async (req, res) => {
 const posts = async (req, res) => {
     const role_id_users = req.cookies.roles_id;
     if (role_id_users == '6') {
-        const result = await executeQuery("SELECT * FROM news where web_identity = 'kdeks' ORDER BY id DESC ");
+        const result = await executeQuery("SELECT * FROM news where web_identity = 'kdeks' ORDER BY id ASC ");
         let promises = result.map(async (item) => {
             return new Promise(async (resolve, reject) => {
                 let r = await executeQuery("SELECT * FROM news_categories WHERE id = $1", [item.category_id]);
@@ -1278,7 +1278,7 @@ const posts = async (req, res) => {
 
     } else {
 
-        const result = await executeQuery("SELECT * FROM news  where web_identity = 'kneks'  ORDER BY id DESC ");
+        const result = await executeQuery("SELECT * FROM news  where web_identity = 'kneks'  ORDER BY id ASC");
         let promises = result.map(async (item) => {
             return new Promise(async (resolve, reject) => {
                 let r = await executeQuery("SELECT * FROM news_categories WHERE id = $1", [item.category_id]);
