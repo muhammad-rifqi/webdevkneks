@@ -89,6 +89,66 @@ const abouts = async (req, res) => {
     }
 }
 
+const abouts_kdeks = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM abouts where id = '7' and web_identity = 'kdeks' and tag = 'about'");
+    res.status(200).json(sql)
+}
+
+const history_kdeks = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM abouts where id = '9' and web_identity = 'kdeks' and tag = 'about'");
+    res.status(200).json(sql)
+}
+
+const about_province = async (req, res) => {
+    const id_province = req.params.id;
+    const arr = [];
+    const sql = await executeQuery("SELECT *  FROM  abouts where id_province = $1 AND web_identity = 'kdeks' and tag = 'about' ", [id_province]);
+    if (sql?.length > 0) {
+        const rows = {
+            "id": sql[0]?.id,
+            "title": sql[0]?.title,
+            "title_en": sql[0]?.title_en,
+            "tag": sql[0]?.tag,
+            "content": sql[0]?.content,
+            "created_at": sql[0]?.created_at,
+            "web_identity": sql[0]?.web_identity,
+            "id_province": sql[0]?.id_province,
+            "images": sql[0]?.images,
+            "updated_at": sql[0]?.updated_at,
+            "deleted_at": sql[0]?.deleted_at,
+        }
+        arr.push(rows);
+        res.status(200).json(arr)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const history_province = async (req, res) => {
+    const id_province = req.params.id;
+    const arr = [];
+    const sql = await executeQuery("SELECT *  FROM  abouts where id_province = $1 AND web_identity = 'kdeks' and tag = 'history' ", [id_province]);
+    if (sql?.length > 0) {
+        const rows = {
+            "id": sql[0]?.id,
+            "title": sql[0]?.title,
+            "title_en": sql[0]?.title_en,
+            "tag": sql[0]?.tag,
+            "content": sql[0]?.content,
+            "created_at": sql[0]?.created_at,
+            "web_identity": sql[0]?.web_identity,
+            "id_province": sql[0]?.id_province,
+            "images": sql[0]?.images,
+            "updated_at": sql[0]?.updated_at,
+            "deleted_at": sql[0]?.deleted_at,
+        }
+        arr.push(rows);
+        res.status(200).json(arr)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 const kdeks = async (req, res) => {
     const sql = await executeQuery("SELECT * FROM abouts where web_identity = 'kdeks'");
     if (sql?.length > 0) {
@@ -1301,6 +1361,70 @@ const newsdetail = async (req, res) => {
     }
 }
 
+const news_kdeks = async (req, res) => {
+
+    const result = await executeQuery("SELECT * FROM news where web_identity = 'kdeks' ORDER BY id ASC ");
+    let promises = result.map(async (item) => {
+        return new Promise(async (resolve, reject) => {
+            let r = await executeQuery("SELECT * FROM news_categories WHERE id = $1 AND  web_identity = 'kdeks' ", [item.category_id]);
+            let detail = r[0];
+            let row = {
+                "id": item?.id,
+                "title": item?.title,
+                "title_en": item?.title_en,
+                "news_datetime": item?.news_datetime,
+                "content": item?.content,
+                "content_en": item?.content_en,
+                "excerpt": item?.excerpt,
+                "excerpt_en": item?.excerpt_en,
+                "is_publish": item?.is_publish,
+                "image": item?.image,
+                "img": item?.image?.split('/')[5],
+                "category_id": item?.category_id,
+                "detail": detail
+            };
+            resolve(row);
+        });
+    });
+    Promise.all(promises)
+        .then((rows) => {
+            res.status(200).json(rows);
+        })
+        .catch((error) => {
+            res.status(500).json({ error: error.message });
+        });
+
+}
+
+const news_details_kdeks = async (req, res) => {
+    const id_news = req.params.id;
+    const sql = await executeQuery("SELECT * FROM news where id = $1 AND web_identity = 'kdeks' ", [id_news]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const news_categories_kdeks = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM news_categories where web_identity = 'kdeks'");
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const news_detailnewscategory_kdeks = async (req, res) => {
+    const id_cat = req.params.id;
+    const sql = await executeQuery("SELECT * FROM news_categories where id = $1 AND web_identity = 'kdeks'", [id_cat]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 
 const news_categories_menu = async (req, res) => {
     const id_cnm = req.params.id;
@@ -1700,7 +1824,7 @@ const users_detail = async (req, res) => {
 }
 
 const users_new = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH) AND approve = 'Y' ORDER BY created_at DESC");
+    const sql = await executeQuery("SELECT * FROM users WHERE created_at >= NOW() - INTERVAL '1 month'  AND approve = 'Y' ORDER BY created_at DESC");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2231,7 +2355,7 @@ const insertdetailsourcedata = async (req, res) => {
 
 const sourcesdatadetaillist = async (req, res) => {
     const id_source = req.params.id;
-    const sql = await executeQuery('SELECT * FROM sourcedata_detail where id_sourcedata = $1 ', [id_source]);
+    const sql = await executeQuery("SELECT * FROM sourcedata_detail where id_sourcedata = $1 ", [id_source]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2481,7 +2605,15 @@ module.exports = {
     updatevideos,
     videodetail,
     deletevideo,
+    news_kdeks,
+    news_categories_kdeks,
+    news_detailnewscategory_kdeks,
+    news_details_kdeks,
     abouts,
+    abouts_kdeks,
+    history_kdeks,
+    history_province,
+    about_province,
     deleteabout,
     detailabout,
     updateabouts,

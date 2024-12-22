@@ -582,6 +582,16 @@ apps.get('/detailnewscategory/:id', db.detailnewscategory);
 apps.get('/deletenewscategory/:id', db.deletenewscategory);
 
 apps.get('/api/newspaging', db.pagingnews);
+
+apps.get('/api_news', db.news_kdeks);
+
+apps.get('/api_news_detail/:id', db.news_details_kdeks);
+
+apps.get('/api_newscategory', db.news_categories_kdeks);
+
+apps.get('/api_detailnewscategory/:id', db.news_detailnewscategory_kdeks);
+
+
 //::::::::::::::: Api & Query DB PHOTOS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/photodetail/:id', db.photodetail);
@@ -630,7 +640,15 @@ apps.post('/changespassword', db.changespassword);
 
 apps.get('/abouts', db.abouts);
 
+apps.get('/api_about', db.abouts_kdeks);
+
+apps.get('/api_history', db.history_kdeks);
+
 apps.get('/detailabouts/:id', db.detailabout);
+
+apps.get('/api_sejarah_province/:id', db.history_province);
+
+apps.get('/api_about_province/:id', db.about_province);
 
 apps.post('/updatetentangkami', db.updateabouts);
 
