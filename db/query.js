@@ -96,7 +96,7 @@ const abouts_kdeks = async (req, res) => {
 
 const history_kdeks = async (req, res) => {
     //9
-    const sql = await executeQuery("SELECT * FROM abouts where id = '2' and web_identity = 'kdeks' and tag = 'about'");
+    const sql = await executeQuery("SELECT * FROM abouts where id = '2' and web_identity = 'kdeks' and tag = 'history'");
     res.status(200).json(sql)
 }
 
