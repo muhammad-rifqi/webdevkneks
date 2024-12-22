@@ -4,9 +4,11 @@ const pool = new pgsql.Pool({
     user: 'postgres',
     host: 'localhost',
     database: 'kneks',
-    password: '123',
+    password: 'Barlok15@',
     port: 5432,
 })
+
+// live : Barlok15@ localhost : 123
 pool.query = util.promisify(pool.query);
 const executeQuery = (query, arraParms) => {
     return new Promise((resolve, reject) => {
