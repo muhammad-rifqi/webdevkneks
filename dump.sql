@@ -1361,7 +1361,7 @@ ALTER TABLE public.sourcedata OWNER TO postgres;
 
 CREATE TABLE public.sourcedata_detail (
     id integer NOT NULL,
-    "id_sourcedata	" integer,
+    id_sourcedata integer,
     description text
 );
 
@@ -2813,7 +2813,6 @@ COPY public.reports (id, title, date, file, content, is_publish, created_at, upd
 105	Buku Program Kerja 2020-2024 KNEKS	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Buku Program Kerja 2020-2024 KNEKS</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	7	\N	\N	kneks
 106	Varian Logo Brand Ekonomi Syariah	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Untuk varian logo Brand Ekonomi Syariah bisa didapat melalui link berikut</p>\r\n\r\n<p>http://bit.ly/LogoEkonomiSyariah</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	7	\N	\N	kneks
 107	Peluncuran Buku Teks Ekonomi Syariah dan  Panduan Magang/Praktik Kerja Sektor Ekonomi Syariah	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>KNEKS dan Bank Indonesia meluncurkan 3 buku teks, yaitu (1) Pengantar Ekonomi Islam, (2) Ekonomi Pembangunan Islam, dan (3) Sejarah Pemikiran Ekonomi Islam</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	6	\N	\N	kneks
-213	asd	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>asd</p>	0	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	5	asdasd	<p>asdassad</p>	kneks
 108	Webinar Pasar Modal Syariah “Investasi di Pasar Modal Syariah: Mudah dan Berkah”	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Webinar &ldquo;Investasi di Pasar Modal Syariah: Mudah dan Berkah&rdquo;&nbsp;<br />\r\n30 Juni 2021<br />\r\n-----<br />\r\nAnda bisa mendownload seluruh bahan pada acara ini melalui link berikut:&nbsp;<br />\r\nhttps://s.id/PMS20210630</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2	\N	\N	kneks
 118	Panduan Pelaksanaan Magang/Praktik Kerja di Sektor Ekonomi Syariah	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Panduan Pelaksanaan Magang/Praktik Kerja di Sektor Ekonomi dan Keuangan Syariah dalam Mendukung Merdeka Belajar-Kampus Merdeka</p>\r\n\r\n<p>Buku ini diterbitkan dengan tujuan sebagai Pelaksanaan Magang/Praktik Kerja di Sektor Ekonomi dan Keuangan Syariah dalam Mendukung Kebijakan Merdeka Belajar: Kampus Merdeka. Melalui panduan ini diharapkan Perguruan Tinggi dapat mengembangkan dan mengimplementasikan program magang/praktik kerja secara optimal demi mewujudkan link and match dengan industri di sektor ekonomi dan keuangan syariah guna menciptakan sumber daya manusia (SDM) ekonomi syariah yang unggul dan berdaya saing global.</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	7	\N	\N	kneks
 119	Buku Teks Ekonomi Pembangunan Islam	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Buku Teks Ekonomi Pembangunan Islam</p>\r\n\r\n<p>Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) bersama dengan Bank Indonesia dan perwakilan 10 (sepuluh) Perguruan Tinggi menerbitkan buku Ekonomi Pembagunan Islam sebagai langkah strategis dalam membangun SDM dan literasi ekonomi syariah Indonesia. Adapun 10 Perguruan Tinggi tersebut adalah Universitas Indonesia (UI), Universitas Airlangga (UNAIR), Universitas Padjadjaran (UNPAD), Institut Pertanian Bogor (IPB), Universitas Pendidikan Indonesia (UPI), UIN Syarif Hidayatullah Jakarta (UIN Jakarta), UIN Sunan Kalijaga (UIN Suka), UIN Ar-Raniry Banda Aceh (UIN Ar-Raniry), UII, dan Institut Agama Islam Tazkia (IAI Tazkia).</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	7	\N	\N	kneks
@@ -2899,7 +2898,6 @@ COPY public.reports (id, title, date, file, content, is_publish, created_at, upd
 200	Modul 1 Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Modul 1&nbsp;Pelatihan Berbasis Kompetensi (PBK)&nbsp;- Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	7	\N	\N	kneks
 206	Modul 7 Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Modul 7 Pelatihan Berbasis Kompetensi (PBK) - Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	7	\N	\N	kneks
 210	asd	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>asd</p>	0	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	5	asdasd	<p>asdassad</p>	kneks
-216	asd	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>asd</p>	0	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	5	asdasd	<p>asdassad</p>	kneks
 173	​Buku Ayat Hadits Ekonomi	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Buku Ayat Hadits Ekonomi diharapkan dapat menjadi acuan untuk para pembaca dan khususnya peneliti ekonomi islam dalam mengkaji konstruksi dasar ilmu ekonomi Islam yang bersumber dari Al-Qur&rsquo;an dan Hadits serta sejalan dengan tujuan syariah Islam yang sempurna. Atas dasar ini, para pembaca diharapkan dapat memiliki pemahaman mengenai sumber-sumber dasar pemikiran ekonomi Islam dengan baik dan tepat</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	7	\N	\N	kneks
 172	Rekomendasi Kebijakan Pengembangan Ekosistem Securities Crowdfunding Syariah	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>SCF Syariah masih tergolong infant industry memerlukan dukungan dari yang berbagai pihak agar mampu menyediakan ekosistem pendukung SCF Syariah. Ekosistem ini diperlukan agar SCF Syariah efektif dan efisien mengoptimalkan perannya dalam pemberdayaan UMKM Industri Halal.</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	3	\N	\N	kneks
 174	INSIGHT Edisi 14 - Zona KHAS	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>INSIGHT merupakan media informasi yang menyajikan analisis perkembangan kondisi ekonomi dan keuangan syariah serta pemikiran tokoh ekonomi syariah Indonesia dalam rangka meningkatkan edukasi dan literasi masyarakat mengenai ekonomi dan keuangan syariah. INSIGHT Edisi 14 mengulas tentang Zona Kuliner Halal, Aman &amp; Sehat (KHAS).</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	7	\N	\N	kneks
@@ -2916,9 +2914,7 @@ COPY public.reports (id, title, date, file, content, is_publish, created_at, upd
 204	Modul 5 Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Modul 5 Pelatihan Berbasis Kompetensi (PBK) - Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	7	\N	\N	kneks
 211	asd	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>asd</p>	0	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	5	asdasd	<p>asdassad</p>	kneks
 202	Modul 3 Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Modul 3 Pelatihan Berbasis Kompetensi (PBK) - Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	7	\N	\N	kneks
-215	asd	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>asd</p>	0	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	5	asdasd	<p>asdassad</p>	kneks
 205	Modul 6 Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Modul 6 Pelatihan Berbasis Kompetensi (PBK) - Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	7	\N	\N	kneks
-214	asd	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>asd</p>	0	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	5	asdasd	<p>asdassad</p>	kneks
 207	Modul 8 Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Modul 8 Pelatihan Berbasis Kompetensi (PBK) - Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	7	\N	\N	kneks
 208	Masterplan Industri Halal Indonesia 2023-2029	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>MPIHI 2023-2029 merupakan road map pengembangan industri halal dari tahun 2023 sampai dengan tahun 2029, dengan 4 strategi utama, yaitu 1) peningkatan produktivitas dan daya saing; 2) penerapan serta penguatan kebijakan dan regulasi; 3) penguatan keuangan dan infrastruktur; serta 4) penguatan halal brand and awareness, yang didukung juga dengan 11 program utama, dan 8 indikator yang akan dipantau perkembangannya secara berkala.</p>	1	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	1	\N	\N	kneks
 \.
@@ -2987,8 +2983,9 @@ COPY public.sourcedata (id, dataset, source, date_created) FROM stdin;
 -- Data for Name: sourcedata_detail; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.sourcedata_detail (id, "id_sourcedata	", description) FROM stdin;
+COPY public.sourcedata_detail (id, id_sourcedata, description) FROM stdin;
 1	1	ini detail keterangan saja
+2	1	ini detail keterangan saja
 \.
 
 
@@ -3059,7 +3056,7 @@ COPY public.users (id, name, email, "email_verified_at	", password, remember_tok
 14	anggota	anggota@kneks.go.id	\N	827ccb0eea8a706c4c34a16891f84e7b	\N	2024-12-13 02:37:28	2024-12-13 02:37:28	7	kneks	4	\N	Y	\N
 15	Co-Admin	coadmin@kneks.go.id	\N	827ccb0eea8a706c4c34a16891f84e7b	\N	2024-12-13 03:28:05	2024-12-13 03:28:05	2	kneks	4	\N	Y	\N
 16	Joe	aribiya@gmail.com	\N	900150983cd24fb0d6963f7d28e17f72	\N	2024-12-18 03:50:40	2024-12-18 03:50:40	2	kneks	4	\N	N	\N
-1	Administrator	admin@admin.com	muhammad45rifki@gmail.com	827ccb0eea8a706c4c34a16891f84e7b		2019-05-09 08:05:42	2024-08-12 13:30:00	1	kneks	1	1	Y	140.213.129.124
+1	Administrator	admin@admin.com	muhammad45rifki@gmail.com	827ccb0eea8a706c4c34a16891f84e7b		2019-05-09 08:05:42	2024-08-12 13:30:00	1	kneks	1	1	Y	140.213.21.92
 \.
 
 
@@ -3329,7 +3326,7 @@ SELECT pg_catalog.setval('public.social_medias_id_seq', 3, true);
 -- Name: sourcedata_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.sourcedata_detail_id_seq', 1, true);
+SELECT pg_catalog.setval('public.sourcedata_detail_id_seq', 2, true);
 
 
 --
