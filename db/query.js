@@ -327,7 +327,7 @@ const updatestructure = async (req, res) => {
 
 const directorat = async (req, res) => {
     // const sql = await executeQuery('SELECT * FROM `hot_issues` LEFT JOIN `hot_subcategories`on hot_issues.hot_subcategory_id = hot_subcategories.id LEFT JOIN hot_categories on hot_subcategories.hot_category_id = hot_categories.id GROUP BY hot_categories.id');
-    const sql = await executeQuery('SELECT * FROM `hot_categories`');
+    const sql = await executeQuery('SELECT * FROM hot_categories');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
