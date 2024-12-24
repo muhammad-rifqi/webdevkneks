@@ -1,7 +1,7 @@
 const md5 = require('md5');
 const { executeQuery } = require('./postgres');
 const fs = require('fs');
-let alert = require('alert');
+// let alert = require('alert');
 
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
 let fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/';
