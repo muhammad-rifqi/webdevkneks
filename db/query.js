@@ -17,10 +17,10 @@ const do_login = async (req, res) => {
         res.cookie("id", sql[0]?.id);
         res.cookie("name", sql[0]?.name);
         res.cookie("roles_id", sql[0]?.role_id);
-        alert('Login New Device');
+        // alert('Login New Device');
         res.redirect("/dashboard");
     } else {
-        alert('Login Gagal');
+        // alert('Login Gagal');
         res.redirect("/");
     }
 }
