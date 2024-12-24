@@ -23,6 +23,8 @@
   <link rel="stylesheet" type="text/css" href="/style/vendor/flaticon/css/flaticon_towngov.css">
 
   <link rel="stylesheet" type="text/css" href="/style/css/style.css">
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <title>KNEKS BACKEND APPS</title>
 
 </head>
@@ -39,15 +41,16 @@
           <header>KNEKS BACKEND</header>
           <h5>USER LOGIN</h5>
           <h6 id="ips" align="center"></h6>
-          <form class="sign-in-form" action="/act_login" method="post">
+          <!-- <form class="sign-in-form" action="/act_login" method="post"> -->
+          <form class="sign-in-form" method="POST" onsubmit="do_login(); return false;">
             <input type="hidden" id="ip_address" name="ip_address" value="" />
             <div class="input-field mb-4"><i class="fas fa-user"></i><input type="text" placeholder="Masukkan Email"
                 id="email" name="email" value=""></div>
             <div class="input-field mb-4"><i class="fas fa-lock"></i><input type="password"
                 placeholder="Masukkan Password" id="password" name="password" value=""><span class="toggle-password"><i
                   id="texts" onclick="changeToText()" class="fas fa-eye"></i></span><span class="toggle-password"><i
-                    onclick="changeToPassword()" id="passwords" class="fas fa-eye-slash" style="display: none;"></i></span></div><input
-              type="submit" class="btn-login solid" value="Login">
+                  onclick="changeToPassword()" id="passwords" class="fas fa-eye-slash"
+                  style="display: none;"></i></span></div><input type="submit" class="btn-login solid" value="Login">
             <div class="text-center"></div>
           </form>
           <button type="button" class="btn-login solid" onclick="window.location.href='/register'"> Register </button>
@@ -101,6 +104,48 @@
     document.getElementById("password").type = 'password';
     document.getElementById("texts").style = 'display:block';
     document.getElementById("passwords").style = 'display:none';
+  }
+
+
+  async function do_login() {
+    const em = document.getElementById("email").value;
+    const pw = document.getElementById("password").value;
+    const ips_address = document.getElementById("ip_address").value;
+    try {
+      await fetch('/do_login', {
+        method: "POST",
+        headers: { "Access-Control-Allow-Origin": "*", "Content-type": "application/json" },
+        body: JSON.stringify({ email: em, password: pw, ip_address : ips_address }),
+      })
+        .then(response => response.json())
+        .then((data) => {
+          if (data?.success) {
+            swal({
+              title: "Login Success",
+              text: `Silahkan Masuk ${em} Ke Dashboard Untuk Mengola Dana Anda`,
+              icon: "success",
+            }).then(function () {
+              window.location.href = "/dashboard";
+            });
+          } else {
+            swal({
+              title: "Login Failed",
+              text: "Login Gagal , Pastikan Data Anda Benar!",
+              icon: "error",
+            }).then(function () {
+              window.location.href = "/";
+            });
+          }
+        })
+    } catch (error) {
+      swal({
+        title: "Login Failed",
+        text: error.message,
+        icon: "error",
+      }).then(function () {
+        window.location.href = "/";
+      });
+    }
   }
 
 </script>

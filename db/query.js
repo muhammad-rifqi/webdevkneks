@@ -1,7 +1,6 @@
 const md5 = require('md5');
 const { executeQuery } = require('./postgres');
 const fs = require('fs');
-// let alert = require('alert');
 
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
 let fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/';
@@ -17,11 +16,11 @@ const do_login = async (req, res) => {
         res.cookie("id", sql[0]?.id);
         res.cookie("name", sql[0]?.name);
         res.cookie("roles_id", sql[0]?.role_id);
-        // alert('Login New Device');
-        res.redirect("/dashboard");
+        // res.redirect("/dashboard");
+        res.status(200).json({"success":"true"})
     } else {
-        // alert('Login Gagal');
-        res.redirect("/");
+        // res.redirect("/");
+        res.status(200).json({"success": "false"})
     }
 }
 

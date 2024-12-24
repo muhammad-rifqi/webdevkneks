@@ -970,7 +970,7 @@ apps.get('/master_delete/:id', db.deletemaster);
 
 apps.post('/insertusers', db.user_register);
 
-apps.post('/do_login', db.api_login);
+apps.post('/do_login', db.do_login);
 
 apps.post('/act_login', db.do_login);
 
