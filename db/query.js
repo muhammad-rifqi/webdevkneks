@@ -347,7 +347,7 @@ const insertdirectorats = async (req, res) => {
 
 const directorat_path = async (req, res) => {
     const id_hot_cat = req.params.id;
-    const sql = await executeQuery('SELECT * FROM `hot_issues` where hot_issue_category = $1 ', [id_hot_cat]);
+    const sql = await executeQuery('SELECT * FROM hot_issues where hot_issue_category = $1 ', [id_hot_cat]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -692,7 +692,7 @@ const deleteinstitution = async (req, res) => {
 const updateinstitution = async (req, res) => {
 
     if (req.body.logo != "" || req.body.logo == undefined || !req.body.logo) {
-        const sql = await executeQuery('UPDATE institutions set tag=$1, name=$2, logo=$3, link=$4, `order`=$5 where id = $6 ', [req.body.tag, req.body.name, req.body.logo, req.body.link, req.body.order, req.body.id]);
+        const sql = await executeQuery('UPDATE institutions set tag=$1, name=$2, logo=$3, link=$4, order=$5 where id = $6 ', [req.body.tag, req.body.name, req.body.logo, req.body.link, req.body.order, req.body.id]);
         if (sql) {
             res.redirect('/i');
         } else {
@@ -700,7 +700,7 @@ const updateinstitution = async (req, res) => {
             res.redirect('/i');
         }
     } else {
-        const sql = await executeQuery('UPDATE institutions set tag=$1, name=$2, link=$3, `order`=$4 where id = $5 ', [req.body.tag, req.body.name, req.body.link, req.body.order, req.body.id]);
+        const sql = await executeQuery('UPDATE institutions set tag=$1, name=$2, link=$3, order=$4 where id = $5 ', [req.body.tag, req.body.name, req.body.link, req.body.order, req.body.id]);
         if (sql) {
             res.redirect('/i');
         } else {
