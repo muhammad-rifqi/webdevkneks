@@ -38,8 +38,8 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Title</th>
-                                                <th>Title EN</th>
+                                                <th>Direktorat</th>
+                                                <th> KDEKS Daerah </th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -81,7 +81,7 @@
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script> -->
-    
+
     <script src="/assets/js/theme-customizer-init.min.js"></script>
 
     <script>
@@ -95,7 +95,11 @@
                 "columns": [
                     { "data": "id" },
                     { "data": "title" },
-                    { "data": "title_en"},
+                    {
+                        "data": null, "render": function (data, type, row) {
+                            return ` -- `;
+                        }
+                    },
                     {
                         "data": null,
                         "render": function (data, type, row) {
@@ -104,7 +108,7 @@
                         }
                     }
                 ],
-                lengthMenu: [10, 25, 50, 100 ], 
+                lengthMenu: [10, 25, 50, 100],
                 // dom: 'Bfrtip',  
                 // buttons: [
                 //     'copy',        
@@ -117,13 +121,13 @@
 
             $('#hotissue_category').on('click', '.edit-btn-hotissue_category', function () {
                 var id = $(this).data('id');
-                window.location.href='/hic_edit/'+id;
+                window.location.href = '/hic_edit/' + id;
             });
 
             $('#hotissue_category').on('click', '.delete-btn-hotissue_category', function () {
                 var id = $(this).data('id');
                 if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    window.location.href='/deletehotissuecategory/'+id;
+                    window.location.href = '/deletehotissuecategory/' + id;
                 }
             });
         });
