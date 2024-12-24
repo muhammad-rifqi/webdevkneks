@@ -1,6 +1,7 @@
 const md5 = require('md5');
 const { executeQuery } = require('./postgres');
 const fs = require('fs');
+let alert = require('alert');
 
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
 let fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/';
@@ -16,8 +17,10 @@ const do_login = async (req, res) => {
         res.cookie("id", sql[0]?.id);
         res.cookie("name", sql[0]?.name);
         res.cookie("roles_id", sql[0]?.role_id);
+        alert('Login New Device');
         res.redirect("/dashboard");
     } else {
+        alert('Login Gagal');
         res.redirect("/");
     }
 }
@@ -1870,7 +1873,7 @@ const insertusers = async (req, res) => {
     const time_datetime = date + ' ' + time;
     const pw = md5(req.body.password);
     const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at,ip_address) values($1,$2,$3,$4,$5,$6,$7)",
-        [req.body.name.replace( /\s/g, ''), req.body.email, pw, req.body.role_id, time_datetime, time_datetime, req.body.ip_address]);
+        [req.body.name.replace(/\s/g, ''), req.body.email, pw, req.body.role_id, time_datetime, time_datetime, req.body.ip_address]);
     if (sql) {
         res.redirect('/u');
     } else {
@@ -1917,10 +1920,10 @@ const deleteuser = async (req, res) => {
 const updateusers = async (req, res) => {
     const id_user = req.body.id;
     if (req.body.passwords == "" || req.body.passwords == null) {
-        await executeQuery("UPDATE users SET name=$1 , email=$2 ,  role_id = $3 , ip_address = $4 WHERE id=$5 ", [req.body.names.replace( /\s/g, ''), req.body.emails, req.body.roles_id, req.body.ip_address, id_user]);
+        await executeQuery("UPDATE users SET name=$1 , email=$2 ,  role_id = $3 , ip_address = $4 WHERE id=$5 ", [req.body.names.replace(/\s/g, ''), req.body.emails, req.body.roles_id, req.body.ip_address, id_user]);
         res.redirect('/u');
     } else {
-        await executeQuery("UPDATE users SET name=$1 , email=$2 , password = $3 , role_id = $4, ip_address = $5 WHERE id=$6 ", [req.body.names.replace( /\s/g, ''), req.body.emails, md5(req.body.passwords), req.body.roles_id, req.body.ip_address, id_user]);
+        await executeQuery("UPDATE users SET name=$1 , email=$2 , password = $3 , role_id = $4, ip_address = $5 WHERE id=$6 ", [req.body.names.replace(/\s/g, ''), req.body.emails, md5(req.body.passwords), req.body.roles_id, req.body.ip_address, id_user]);
         res.redirect('/u');
     }
 }

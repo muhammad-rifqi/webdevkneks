@@ -271,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `api_meta` (
   `api` varchar(255) DEFAULT NULL,
   `statistic_id` int DEFAULT NULL,
   `statistic_name` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `api_meta`
@@ -345,7 +345,7 @@ CREATE TABLE IF NOT EXISTS `custom_page` (
   `id` int NOT NULL,
   `name` varchar(100) NOT NULL,
   `path` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `custom_page`
@@ -363,7 +363,7 @@ INSERT INTO `custom_page` (`id`, `name`, `path`) VALUES
 CREATE TABLE IF NOT EXISTS `db_event` (
   `id` int NOT NULL,
   `name` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `db_event`
@@ -585,7 +585,7 @@ CREATE TABLE IF NOT EXISTS `khas_zone` (
   `inauguration` varchar(100) DEFAULT NULL,
   `tenant` int DEFAULT NULL,
   `inaugurated` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `khas_zone`
@@ -646,7 +646,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `menu_name` varchar(100) DEFAULT NULL,
   `menu_link` varchar(100) DEFAULT NULL,
   `orders` int DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `menu`
@@ -668,7 +668,7 @@ CREATE TABLE IF NOT EXISTS `menu_sub` (
   `submenu_name` varchar(100) DEFAULT NULL,
   `submenu_link` varchar(100) DEFAULT NULL,
   `orders` int DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `menu_sub`
@@ -686,10 +686,10 @@ INSERT INTO `menu_sub` (`id`, `menu_id`, `submenu_name`, `submenu_link`, `orders
 CREATE TABLE IF NOT EXISTS `naration` (
   `id` int NOT NULL,
   `statistic_id` int DEFAULT NULL,
-  `statistic_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `statistic_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `description` text,
   `description_en` text
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `naration`
@@ -1130,12 +1130,12 @@ INSERT INTO `news_videos` (`id`, `title`, `video`, `duration`, `content`, `creat
 
 CREATE TABLE IF NOT EXISTS `opini` (
   `id` int NOT NULL,
-  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `title_en` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `content_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `title_en` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `content_en` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   `web_identity` varchar(100) NOT NULL DEFAULT 'kneks'
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `opini`
@@ -1153,8 +1153,8 @@ INSERT INTO `opini` (`id`, `title`, `title_en`, `content`, `content_en`, `web_id
 
 CREATE TABLE IF NOT EXISTS `province` (
   `id` int NOT NULL,
-  `province_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `province_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `province`
@@ -1205,7 +1205,7 @@ CREATE TABLE IF NOT EXISTS `questbook` (
   `phone_number` varchar(50) NOT NULL,
   `subjek` varchar(255) NOT NULL,
   `pesan` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1552,7 +1552,7 @@ CREATE TABLE IF NOT EXISTS `sk` (
   `content` text,
   `content_en` text,
   `doc_link` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sk`
@@ -1596,10 +1596,10 @@ INSERT INTO `social_medias` (`id`, `name`, `logo`, `link`, `created_at`, `update
 
 CREATE TABLE IF NOT EXISTS `sourcedata` (
   `id` int NOT NULL,
-  `dataset` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `dataset` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `source` varchar(255) DEFAULT NULL,
   `date_created` date DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sourcedata`
@@ -1620,7 +1620,7 @@ CREATE TABLE IF NOT EXISTS `sourcedata_detail` (
   `id` int NOT NULL,
   `id_sourcedata` int DEFAULT NULL,
   `description` text
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sourcedata_detail`
@@ -1637,11 +1637,11 @@ INSERT INTO `sourcedata_detail` (`id`, `id_sourcedata`, `description`) VALUES
 
 CREATE TABLE IF NOT EXISTS `statistic` (
   `id` int NOT NULL,
-  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `title_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `title_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `amount` int NOT NULL DEFAULT '0',
   `date_created` date DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `statistic`
@@ -1701,8 +1701,8 @@ INSERT INTO `structure_assets` (`id`, `name`, `position`, `photo`, `tag`, `descr
 
 CREATE TABLE IF NOT EXISTS `tagging` (
   `id` int NOT NULL,
-  `tagging` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `tagging` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tagging`
@@ -1772,7 +1772,7 @@ CREATE TABLE IF NOT EXISTS `web_identity` (
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL,
   `deleted_at` timestamp NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1782,11 +1782,11 @@ CREATE TABLE IF NOT EXISTS `web_identity` (
 
 CREATE TABLE IF NOT EXISTS `web_profile` (
   `id` int NOT NULL,
-  `web_title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `web_title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `web_logo` varchar(100) DEFAULT NULL,
   `web_header` varchar(100) DEFAULT NULL,
   `web_color` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `web_profile`

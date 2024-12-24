@@ -45,7 +45,9 @@
                 id="email" name="email" value=""></div>
             <div class="input-field mb-4"><i class="fas fa-lock"></i><input type="password"
                 placeholder="Masukkan Password" id="password" name="password" value=""><span class="toggle-password"><i
-                  class="fas fa-eye"></i></span></div><input type="submit" class="btn-login solid" value="Login">
+                  id="texts" onclick="changeToText()" class="fas fa-eye"></i></span><span class="toggle-password"><i
+                    onclick="changeToPassword()" id="passwords" class="fas fa-eye-slash" style="display: none;"></i></span></div><input
+              type="submit" class="btn-login solid" value="Login">
             <div class="text-center"></div>
           </form>
           <button type="button" class="btn-login solid" onclick="window.location.href='/register'"> Register </button>
@@ -81,12 +83,24 @@
         .then(response => response.json())
         .then((data) => {
           document.getElementById('ip_address').value = data.ip;
-          document.getElementById('ips').innerText = "Ip Anda :"+data.ip;
+          document.getElementById('ips').innerText = "Ip Anda :" + data.ip;
         })
 
     } catch (error) {
       console.error('Error fetching IP address:', error);
     }
+  }
+
+  function changeToText() {
+    document.getElementById("password").type = 'text';
+    document.getElementById("texts").style = 'display:none';
+    document.getElementById("passwords").style = 'display:block';
+  }
+
+  function changeToPassword() {
+    document.getElementById("password").type = 'password';
+    document.getElementById("texts").style = 'display:block';
+    document.getElementById("passwords").style = 'display:none';
   }
 
 </script>
