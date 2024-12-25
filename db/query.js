@@ -16,6 +16,8 @@ const do_login = async (req, res) => {
         res.cookie("id", sql[0]?.id);
         res.cookie("name", sql[0]?.name);
         res.cookie("roles_id", sql[0]?.role_id);
+        res.cookie("id_province", sql[0]?.id_province);
+        res.cookie("directorat_id", sql[0]?.directorat_id);
         // res.redirect("/dashboard");
         res.status(200).json({ "success": "true" })
     } else {
@@ -40,6 +42,8 @@ const do_logout = (req, res) => {
     res.clearCookie("name");
     res.clearCookie("id");
     res.clearCookie("roles_id");
+    res.clearCookie("id_province");
+    res.clearCookie("directorat_id");
     res.redirect("/");
 }
 
@@ -153,11 +157,23 @@ const history_province = async (req, res) => {
 }
 
 const kdeks = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM abouts where web_identity = 'kdeks'");
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
+    //rifqi
+    const role_id_users = req.cookies.roles_id;
+    const roles_prov = req.cookies.id_province;
+    if (role_id_users == 1 || role_id_users == 2) {
+        const sql = await executeQuery("SELECT * FROM abouts where web_identity = 'kdeks'");
+        if (sql?.length > 0) {
+            res.status(200).json(sql)
+        } else {
+            res.status(200).json({ "success": false })
+        }
     } else {
-        res.status(200).json({ "success": false })
+        const sql = await executeQuery("SELECT * FROM abouts where id_province = $1", [roles_prov]);
+        if (sql?.length > 0) {
+            res.status(200).json(sql)
+        } else {
+            res.status(200).json({ "success": false })
+        }
     }
 }
 
@@ -338,7 +354,7 @@ const directorat = async (req, res) => {
             res.status(200).json([])
         }
     } else {
-        const sql = await executeQuery("SELECT * FROM hot_categories where id = $1" , [role_id_users]);
+        const sql = await executeQuery("SELECT * FROM hot_categories where id = $1", [role_id_users]);
         if (sql?.length > 0) {
             res.status(200).json(sql)
         } else {
@@ -349,7 +365,7 @@ const directorat = async (req, res) => {
 
 const insertdirectorats = async (req, res) => {
     const a = req.body.daerah.split('-');
-    const sql = await executeQuery('INSERT INTO hot_categories(title,title_en,description,description_en,id_province,province_name)values($1,$2,$3,$4,$5,$6)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en,a[0],a[1]]);
+    const sql = await executeQuery('INSERT INTO hot_categories(title,title_en,description,description_en,id_province,province_name)values($1,$2,$3,$4,$5,$6)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, a[0], a[1]]);
     if (sql?.length > 0) {
         res.redirect('/directorats');
     } else {
@@ -1882,8 +1898,8 @@ const insertusers = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
     const pw = md5(req.body.password);
-    const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at,ip_address, directorat_id) values($1,$2,$3,$4,$5,$6,$7,$8)",
-        [req.body.name.replace(/\s/g, ''), req.body.email, pw, req.body.role_id, time_datetime, time_datetime, req.body.ip_address, req.body.directorat_id]);
+    const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at,ip_address, directorat_id, id_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9)",
+        [req.body.name.replace(/\s/g, ''), req.body.email, pw, req.body.role_id, time_datetime, time_datetime, req.body.ip_address, req.body.directorat_id, req.body.id_province]);
     if (sql) {
         res.redirect('/u');
     } else {
@@ -1930,10 +1946,10 @@ const deleteuser = async (req, res) => {
 const updateusers = async (req, res) => {
     const id_user = req.body.id;
     if (req.body.passwords == "" || req.body.passwords == null) {
-        await executeQuery("UPDATE users SET name=$1 , email=$2 ,  role_id = $3 , ip_address = $4 , directorat_id = $5 WHERE id=$6 ", [req.body.names.replace(/\s/g, ''), req.body.emails, req.body.roles_id, req.body.ip_address, req.body.directorat_id, id_user]);
+        await executeQuery("UPDATE users SET name=$1 , email=$2 ,  role_id = $3 , ip_address = $4 , directorat_id = $5, id_province=$6 WHERE id=$7 ", [req.body.names.replace(/\s/g, ''), req.body.emails, req.body.roles_id, req.body.ip_address, req.body.directorat_id, req.body.id_province, id_user]);
         res.redirect('/u');
     } else {
-        await executeQuery("UPDATE users SET name=$1 , email=$2 , password = $3 , role_id = $4, ip_address = $5, directorat_id = $6 WHERE id=$7 ", [req.body.names.replace(/\s/g, ''), req.body.emails, md5(req.body.passwords), req.body.roles_id, req.body.ip_address, req.body.directorat_id, id_user]);
+        await executeQuery("UPDATE users SET name=$1 , email=$2 , password = $3 , role_id = $4, ip_address = $5, directorat_id = $6, id_province = $7 WHERE id=$8 ", [req.body.names.replace(/\s/g, ''), req.body.emails, md5(req.body.passwords), req.body.roles_id, req.body.ip_address, req.body.directorat_id, req.body.id_province, id_user]);
         res.redirect('/u');
     }
 }
