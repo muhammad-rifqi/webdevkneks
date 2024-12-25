@@ -348,7 +348,8 @@ const directorat = async (req, res) => {
 }
 
 const insertdirectorats = async (req, res) => {
-    const sql = await executeQuery('INSERT INTO hot_categories(title,title_en,description,description_en,id_province)values($1,$2,$3,$4,$5)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en,req.body.daerah]);
+    const a = req.body.daerah.split('-');
+    const sql = await executeQuery('INSERT INTO hot_categories(title,title_en,description,description_en,id_province,province_name)values($1,$2,$3,$4,$5,$6)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en,a[0],a[1]]);
     if (sql?.length > 0) {
         res.redirect('/directorats');
     } else {
@@ -374,9 +375,9 @@ const update_directorats = async (req, res) => {
     const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const datetimes = date + ' ' + time;
-
-    const sql = await executeQuery("update hot_categories set title=$1,title_en=$2,description=$3,description_en=$4,created_at=$5,updated_at=$6,deleted_at=$7,id_province=$8 where id = $9",
-        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, datetimes, datetimes, datetimes, req.body.daerah, req.body.id]);
+    const a = req.body.daerah.split('-');
+    const sql = await executeQuery("update hot_categories set title=$1,title_en=$2,description=$3,description_en=$4,created_at=$5,updated_at=$6,deleted_at=$7,id_province=$8,province_name=$9 where id = $10",
+        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, datetimes, datetimes, datetimes, a[0], a[1], req.body.id]);
 
     if (sql) {
         res.redirect('/directorats');
