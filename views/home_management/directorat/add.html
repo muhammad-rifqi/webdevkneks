@@ -12,9 +12,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/dataTables.bs5.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
 </head>
 
@@ -60,18 +57,28 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Title EN*</label>
-                                            <input class="form-control" type="text" name="title_en" id="title_en" required>
+                                            <input class="form-control" type="text" name="title_en" id="title_en"
+                                                required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Description Indonesia</label>
-                                            <textarea class="form-control" name="description" id="description"></textarea>
+                                            <textarea class="form-control" name="description"
+                                                id="description"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Description English</label>
-                                            <textarea class="form-control" name="description_en" id="description_en"></textarea>
+                                            <textarea class="form-control" name="description_en"
+                                                id="description_en"></textarea>
                                         </div>
-                        
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Provinsi/Daerah</label>
+                                            <select class="form-control" name="daerah" id="daerah" required>
+                                                <option value="0">Choose</option>
+                                            </select>
+                                        </div>
+                                        
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -103,12 +110,26 @@
     </main>
 
     <script src="/assets/vendors/js/vendors.min.js"></script>
-    <script src="/assets/vendors/js/dataTables.min.js"></script>
-    <script src="/assets/vendors/js/dataTables.bs5.min.js"></script>
-    <script src="/assets/vendors/js/select2.min.js"></script>
-    <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <script>
+        window.addEventListener("load", async () => {
+            await prov();
+        })
+
+        function prov() {
+            fetch('/provinces')
+                .then(response => response.json())
+                .then((data) => {
+                    data.forEach(element => {
+                        const ddd = document.createElement('option')
+                        ddd.value = `${element?.province_name}`;
+                        ddd.text = `${element?.province_name}`;
+                        document.getElementById("daerah").append(ddd);
+                    });
+                })
+        }
+    </script>
 </body>
 
 </html>

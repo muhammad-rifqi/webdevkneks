@@ -17,10 +17,10 @@ const do_login = async (req, res) => {
         res.cookie("name", sql[0]?.name);
         res.cookie("roles_id", sql[0]?.role_id);
         // res.redirect("/dashboard");
-        res.status(200).json({"success":"true"})
+        res.status(200).json({ "success": "true" })
     } else {
         // res.redirect("/");
-        res.status(200).json({"success": "false"})
+        res.status(200).json({ "success": "false" })
     }
 }
 
@@ -329,16 +329,26 @@ const updatestructure = async (req, res) => {
 
 const directorat = async (req, res) => {
     // const sql = await executeQuery('SELECT * FROM `hot_issues` LEFT JOIN `hot_subcategories`on hot_issues.hot_subcategory_id = hot_subcategories.id LEFT JOIN hot_categories on hot_subcategories.hot_category_id = hot_categories.id GROUP BY hot_categories.id');
-    const sql = await executeQuery('SELECT * FROM hot_categories');
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) {
+        const sql = await executeQuery('SELECT * FROM hot_categories');
+        if (sql?.length > 0) {
+            res.status(200).json(sql)
+        } else {
+            res.status(200).json([])
+        }
     } else {
-        res.status(200).json({ "success": false })
+        const sql = await executeQuery("SELECT * FROM hot_categories where id = $1" , [role_id_users]);
+        if (sql?.length > 0) {
+            res.status(200).json(sql)
+        } else {
+            res.status(200).json([])
+        }
     }
 }
 
 const insertdirectorats = async (req, res) => {
-    const sql = await executeQuery('INSERT INTO hot_categories(title,title_en,description,description_en)values($1,$2,$3,$4)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en]);
+    const sql = await executeQuery('INSERT INTO hot_categories(title,title_en,description,description_en,id_province)values($1,$2,$3,$4,$5)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en,req.body.daerah]);
     if (sql?.length > 0) {
         res.redirect('/directorats');
     } else {
@@ -365,8 +375,8 @@ const update_directorats = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const datetimes = date + ' ' + time;
 
-    const sql = await executeQuery("update hot_categories set title=$1,title_en=$2,description=$3,description_en=$4,created_at=$5,updated_at=$6,deleted_at=$7 where id = $8",
-        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, datetimes, datetimes, datetimes, req.body.id]);
+    const sql = await executeQuery("update hot_categories set title=$1,title_en=$2,description=$3,description_en=$4,created_at=$5,updated_at=$6,deleted_at=$7,id_province=$8 where id = $9",
+        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, datetimes, datetimes, datetimes, req.body.daerah, req.body.id]);
 
     if (sql) {
         res.redirect('/directorats');
@@ -1871,8 +1881,8 @@ const insertusers = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
     const pw = md5(req.body.password);
-    const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at,ip_address) values($1,$2,$3,$4,$5,$6,$7)",
-        [req.body.name.replace(/\s/g, ''), req.body.email, pw, req.body.role_id, time_datetime, time_datetime, req.body.ip_address]);
+    const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at,ip_address, directorat_id) values($1,$2,$3,$4,$5,$6,$7,$8)",
+        [req.body.name.replace(/\s/g, ''), req.body.email, pw, req.body.role_id, time_datetime, time_datetime, req.body.ip_address, req.body.directorat_id]);
     if (sql) {
         res.redirect('/u');
     } else {
@@ -1919,10 +1929,10 @@ const deleteuser = async (req, res) => {
 const updateusers = async (req, res) => {
     const id_user = req.body.id;
     if (req.body.passwords == "" || req.body.passwords == null) {
-        await executeQuery("UPDATE users SET name=$1 , email=$2 ,  role_id = $3 , ip_address = $4 WHERE id=$5 ", [req.body.names.replace(/\s/g, ''), req.body.emails, req.body.roles_id, req.body.ip_address, id_user]);
+        await executeQuery("UPDATE users SET name=$1 , email=$2 ,  role_id = $3 , ip_address = $4 , directorat_id = $5 WHERE id=$6 ", [req.body.names.replace(/\s/g, ''), req.body.emails, req.body.roles_id, req.body.ip_address, req.body.directorat_id, id_user]);
         res.redirect('/u');
     } else {
-        await executeQuery("UPDATE users SET name=$1 , email=$2 , password = $3 , role_id = $4, ip_address = $5 WHERE id=$6 ", [req.body.names.replace(/\s/g, ''), req.body.emails, md5(req.body.passwords), req.body.roles_id, req.body.ip_address, id_user]);
+        await executeQuery("UPDATE users SET name=$1 , email=$2 , password = $3 , role_id = $4, ip_address = $5, directorat_id = $6 WHERE id=$7 ", [req.body.names.replace(/\s/g, ''), req.body.emails, md5(req.body.passwords), req.body.roles_id, req.body.ip_address, req.body.directorat_id, id_user]);
         res.redirect('/u');
     }
 }

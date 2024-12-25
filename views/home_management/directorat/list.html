@@ -31,9 +31,8 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/directorats_add'"> Tambah
-                                Direktorat </button>
+                        <p id="tambah_directorat">
+                           
                         </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
@@ -87,7 +86,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script> -->
 
     <script src="/assets/js/theme-customizer-init.min.js"></script>
-
+    <script src="/cookie.js"></script>
     <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
@@ -100,19 +99,26 @@
                     { "data": "id" },
                     { "data": "title" },
                     {
-                        "data": null, 
+                        "data": null,
                         "render": function (data, type, row) {
-                            return ` -- `;
+                            return `${row.id_province}`;
                         }
                     },
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p>
+                            if (cookie['roles_id'] == '1' || cookie['roles_id'] == 2) {
+                                return `<p>
                                         <button class='view-btn-directorat btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Icon/Banner</button>
                                         <button class='edit-btn-directorat btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Edit</button>
                                         <button class='delete-btn-directorat btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button>
                                     </p>`;
+                            } else {
+                                return `<p>
+                                        <button class='edit-btn-directorat btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Edit</button>
+                                        <button class='delete-btn-directorat btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button>
+                                    </p>`;
+                            }
                         }
                     }
                 ],
@@ -145,7 +151,13 @@
             });
         });
     </script>
-
+    <script>
+        if(cookie['roles_id'] == 1 || cookie['roles_id'] == 2){
+            document.getElementById("tambah_directorat").innerHTML = `<button class="btn btn-primary" onclick="window.location.href = '/directorats_add'"> Tambah Direktorat </button>`;
+        }else{
+            document.getElementById("tambah_directorat").innerHTML=`<h4>Direktorat</h4>`;
+        }
+    </script>
 </body>
 
 </html>

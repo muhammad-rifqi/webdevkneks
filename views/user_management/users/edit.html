@@ -77,6 +77,14 @@
                                             <label class="form-label"> IP Adress </label>
                                             <input class="form-control" type="text" name="ip_address" id="ip_address" required>
                                         </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Direktorat</label>
+                                            <select class="form-control" name="directorat_id" id="myDirectorat" required>
+                                                <option value="0">Choose</option>
+                                            </select>
+                                        </div>
+
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -116,9 +124,11 @@
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script>
         window.addEventListener("load", async () => {
+            let directoratid;
             let roleid;
             await getUrlById();
             await getRoles();
+            await getDirectoratID();
         })
 
         function getUrlById() {
@@ -126,7 +136,9 @@
             fetch('/users_detail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
+                    console.log(rows)
                     roleid = rows[0]?.role_id;
+                    directoratid = rows[0]?.directorat_id;
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("name").value = rows[0]?.name;
                     document.getElementById("email").value = rows[0]?.email;
@@ -150,6 +162,26 @@
                             ddd.selected = false;
                         }
                         document.getElementById("role_id").append(ddd);
+                    });
+                })
+        }
+
+        function getDirectoratID() {
+            fetch('/directorat')
+                .then(response => response.json())
+                .then((datas) => {
+                    datas.forEach(elements => {
+                        const ddd = document.createElement('option')
+                        if (elements?.id == directoratid) {
+                            ddd.value = `${elements?.id}`;
+                            ddd.text = `${elements?.title}`;
+                            ddd.selected = true;
+                        } else {
+                            ddd.value = `${elements?.id}`;
+                            ddd.text = `${elements?.title}`;
+                            ddd.selected = false;
+                        }
+                        document.getElementById("myDirectorat").append(ddd);
                     });
                 })
         }
