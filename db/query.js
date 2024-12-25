@@ -1522,8 +1522,10 @@ const insertnews = async (req, res) => {
     const timeupdate = date + ' ' + time;
     const news_datetime = req.body.news_datetime.replace("T", " ");
     const fileupload = site_url + "/uploads/news/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery("insert into news(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,news_datetime,created_at,updated_at,deleted_at,category_id,tag,directorat) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)",
-        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id, req.body.taggings, req.body.hot_category_id]);
+    const id_user = req.cookies.id;
+    const wei = (req.cookies.roles_id == '6') ? 'kdeks' :  'kneks';
+    const sql = await executeQuery("insert into news(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,news_datetime,created_at,updated_at,deleted_at,category_id,web_identity,tag,directorat,users_id) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)",
+        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id, wei, req.body.taggings, req.body.hot_category_id,id_user]);
     if (sql) {
         res.redirect('/n');
     } else {
