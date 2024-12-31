@@ -10,7 +10,7 @@ const do_login = async (req, res) => {
     const email = req?.body?.email;
     const password = md5(req?.body?.password);
     const ip = req.body.ip_address;
-    const query = await executeQuery("SELECT * FROM ip_address where  ip = $1", [ip]);
+    const query = await executeQuery("SELECT * FROM ip_address where  ip = $1 AND aprrove = 'Y'", [ip]);
     if (query.length > 0) {
         const sql = await executeQuery("SELECT * FROM users where  email = $1 AND password = $2  AND approve = 'Y'", [email, password]);
         if (sql?.length > 0) {
