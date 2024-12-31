@@ -29,9 +29,9 @@ const do_login = async (req, res) => {
         }
 
     } else {
-        const query = await executeQuery("SELECT * FROM ip_address where  ip = $1 AND aprrove = 'Y'", [ip]);
+        const query = await executeQuery("SELECT * FROM ip_address where  ip = $1 AND ip_address.approve = $2", [ip,'Y']);
         if (query.length > 0) {
-            const sql = await executeQuery("SELECT * FROM users where  email = $1 AND password = $2  AND approve = 'Y'", [email, password]);
+            const sql = await executeQuery("SELECT * FROM users where  email = $1 AND password = $2  AND users.approve = 'Y'", [email, password]);
             if (sql?.length > 0) {
                 u_id = sql[0]?.id;
                 const isLogin = true;
