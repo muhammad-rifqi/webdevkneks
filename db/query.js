@@ -10,8 +10,7 @@ const do_login = async (req, res) => {
     const email = req?.body?.email;
     const password = md5(req?.body?.password);
     const ip = req.body.ip_address;
-    const query = await executeQuery("SELECT * FROM ip_address where  ip = $1 AND aprrove = 'Y'", [ip]);
-    if (query.length > 0) {
+    if (email == 'admin@kneks.go.id' || email == 'admin2@kneks.go.id') {
         const sql = await executeQuery("SELECT * FROM users where  email = $1 AND password = $2  AND approve = 'Y'", [email, password]);
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
@@ -28,12 +27,33 @@ const do_login = async (req, res) => {
             // res.redirect("/");
             res.status(200).json({ "success": "false" })
         }
+
     } else {
-        const insert = await executeQuery("INSERT INTO ip_address(ip,email) VALUES ($1,$2)", [ip, email]);
-        if (insert) {
-            res.status(200).json({ "success": "pending" })
+        const query = await executeQuery("SELECT * FROM ip_address where  ip = $1 AND aprrove = 'Y'", [ip]);
+        if (query.length > 0) {
+            const sql = await executeQuery("SELECT * FROM users where  email = $1 AND password = $2  AND approve = 'Y'", [email, password]);
+            if (sql?.length > 0) {
+                u_id = sql[0]?.id;
+                const isLogin = true;
+                res.cookie("islogin", isLogin);
+                res.cookie("id", sql[0]?.id);
+                res.cookie("name", sql[0]?.name);
+                res.cookie("roles_id", sql[0]?.role_id);
+                res.cookie("id_province", sql[0]?.id_province);
+                res.cookie("directorat_id", sql[0]?.directorat_id);
+                // res.redirect("/dashboard");
+                res.status(200).json({ "success": "true" })
+            } else {
+                // res.redirect("/");
+                res.status(200).json({ "success": "false" })
+            }
         } else {
-            res.status(200).json({ "success": "eror" })
+            const insert = await executeQuery("INSERT INTO ip_address(ip,email) VALUES ($1,$2)", [ip, email]);
+            if (insert) {
+                res.status(200).json({ "success": "pending" })
+            } else {
+                res.status(200).json({ "success": "eror" })
+            }
         }
     }
 }
