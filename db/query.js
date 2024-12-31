@@ -1904,7 +1904,7 @@ const approveusers = async (req, res) => {
     const time_datetime = date + ' ' + time;
 
     const id_params_user = req.params.id;
-    const sql = await executeQuery("UPDATE users SET approve=$1, approve_by=$2, approve_date=$3 WHERE id=$4 ", ['Y', res.cookies.name, time_datetime, id_params_user]);
+    const sql = await executeQuery("UPDATE users SET approve=$1, approve_by=$2, approve_date=$3 WHERE id=$4 ", ['Y', req.cookies.name, time_datetime, id_params_user]);
     if (sql) {
         res.redirect('/whitelist');
     } else {
@@ -1912,6 +1912,23 @@ const approveusers = async (req, res) => {
     }
 }
 
+const approveipaddress = async (req, res) => {
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const time_datetime = date + ' ' + time;
+
+    const id_params_user = req.params.id;
+    const sql = await executeQuery("UPDATE ip_address SET approve=$1, approve_by=$2, approve_date=$3 WHERE id=$4 ", ['Y', req.cookies.name, time_datetime, id_params_user]);
+    if (sql) {
+        res.redirect('/ip_address');
+    } else {
+        res.redirect('/ip_address')
+    }
+}
 const userroles = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  roles');
     if (sql?.length > 0) {
@@ -2753,6 +2770,7 @@ module.exports = {
     users_whitelist,
     users_ipaddress,
     approveusers,
+    approveipaddress,
     userroles,
     insertusers,
     updateusers,

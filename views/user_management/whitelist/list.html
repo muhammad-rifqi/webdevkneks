@@ -109,7 +109,7 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='whitelist-btn-users btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">WhiteList & Approve</button></p>`;
+                            return `<p><button class='whitelist-btn-users btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Approve Pengguna</button></p>`;
                         }
                     }
                 ],
@@ -126,7 +126,7 @@
 
             $('#users').on('click', '.whitelist-btn-users', function () {
                 var id = $(this).data('id');
-                if (confirm('Apakah kamu yakin ingin Whitelist data ini?')) {
+                if (confirm('Apakah kamu yakin ingin Approve User ini?')) {
                     window.location.href = '/approveusers/'+id;
                 }
             });

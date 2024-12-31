@@ -632,6 +632,8 @@ apps.get('/roles', db.userroles);
 
 apps.get('/approveusers/:id', db.approveusers);
 
+apps.get('/approveipaddress/:id', db.approveipaddress);
+
 apps.post('/insertusers', db.insertusers);
 
 apps.post('/updateusers', db.updateusers);

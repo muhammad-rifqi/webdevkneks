@@ -33,7 +33,6 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Users ID</th>
                                                 <th>Email</th>
                                                 <th>Approve</th>
                                                 <th>Approve BY</th>
@@ -87,16 +86,15 @@
                 },
                 "columns": [
                     { "data": "id" },
-                    { "data": "user_id" },
                     { "data": "email" },
                     { "data": "approve" },
                     { "data": "approve_by" },
                     { "data": "approve_date" },
-                    { "data": "ip_address" },
+                    { "data": "ip" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='whitelist-btn-users btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">WhiteList & Approve</button></p>`;
+                            return `<p><button class='whitelist-btn-users btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Approve Ip Address</button></p>`;
                         }
                     }
                 ],
@@ -111,10 +109,10 @@
                 // ],
             });
 
-            $('#users').on('click', '.whitelist-btn-users', function () {
+            $('#ipaddress').on('click', '.whitelist-btn-users', function () {
                 var id = $(this).data('id');
                 if (confirm('Apakah kamu yakin ingin Whitelist data ini?')) {
-                    window.location.href = '/approveusers/'+id;
+                    window.location.href = '/approveipaddress/'+id;
                 }
             });
         });
