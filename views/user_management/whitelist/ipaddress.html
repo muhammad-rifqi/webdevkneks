@@ -15,11 +15,6 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
-    <!--[if lt IE 9]>
-			<script src="https:oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="https:oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-</head>
 
 <body>
     <script src="/nav.js"></script>
@@ -34,17 +29,16 @@
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
-                                    <table id="users" class="display" style="width: 100%;">
+                                    <table id="ipaddress" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Name</th>
+                                                <th>Users ID</th>
                                                 <th>Email</th>
-                                                <th>Roles ID</th>
                                                 <th>Approve</th>
                                                 <th>Approve BY</th>
-                                                <th>Approve DATE</th>
-                                                <th>Whitelist IP</th>
+                                                <th>Approve Date</th>
+                                                <th>IP</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -81,27 +75,20 @@
     <!-- DataTables -->
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script> -->
     
     <script src="/assets/js/theme-customizer-init.min.js"></script>
 
     <script>
         $(document).ready(function () {
-            // 2. Inisialisasi DataTable
-            $('#users').DataTable({
+            $('#ipaddress').DataTable({
                 "ajax": {
-                    "url": "/users_whitelist",
+                    "url": "/users_ipaddress",
                     "dataSrc": ""
                 },
                 "columns": [
                     { "data": "id" },
-                    { "data": "name" },
+                    { "data": "user_id" },
                     { "data": "email" },
-                    { "data": "role_id" },
                     { "data": "approve" },
                     { "data": "approve_by" },
                     { "data": "approve_date" },

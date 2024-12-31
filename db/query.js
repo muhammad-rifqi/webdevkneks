@@ -9,20 +9,32 @@ let site_url = "https://webdev.rifhandi.com";
 const do_login = async (req, res) => {
     const email = req?.body?.email;
     const password = md5(req?.body?.password);
-    const sql = await executeQuery("SELECT * FROM users where  email = $1 AND password = $2  AND approve = 'Y' AND ip_address = $3", [email, password, req.body.ip_address]);
-    if (sql?.length > 0) {
-        const isLogin = true;
-        res.cookie("islogin", isLogin);
-        res.cookie("id", sql[0]?.id);
-        res.cookie("name", sql[0]?.name);
-        res.cookie("roles_id", sql[0]?.role_id);
-        res.cookie("id_province", sql[0]?.id_province);
-        res.cookie("directorat_id", sql[0]?.directorat_id);
-        // res.redirect("/dashboard");
-        res.status(200).json({ "success": "true" })
+    const ip = req.body.ip_address;
+    const query = await executeQuery("SELECT * FROM ip_address where  ip = $1", [ip]);
+    if (query.length > 0) {
+        const sql = await executeQuery("SELECT * FROM users where  email = $1 AND password = $2  AND approve = 'Y'", [email, password]);
+        if (sql?.length > 0) {
+            u_id = sql[0]?.id;
+            const isLogin = true;
+            res.cookie("islogin", isLogin);
+            res.cookie("id", sql[0]?.id);
+            res.cookie("name", sql[0]?.name);
+            res.cookie("roles_id", sql[0]?.role_id);
+            res.cookie("id_province", sql[0]?.id_province);
+            res.cookie("directorat_id", sql[0]?.directorat_id);
+            // res.redirect("/dashboard");
+            res.status(200).json({ "success": "true" })
+        } else {
+            // res.redirect("/");
+            res.status(200).json({ "success": "false" })
+        }
     } else {
-        // res.redirect("/");
-        res.status(200).json({ "success": "false" })
+        const insert = await executeQuery("INSERT INTO ip_address(ip,email) VALUES ($1,$2)", [ip, email]);
+        if (insert) {
+            res.status(200).json({ "success": "pending" })
+        } else {
+            res.status(200).json({ "success": "eror" })
+        }
     }
 }
 
@@ -1523,9 +1535,9 @@ const insertnews = async (req, res) => {
     const news_datetime = req.body.news_datetime.replace("T", " ");
     const fileupload = site_url + "/uploads/news/" + req.file.originalname.replace(" ", "");
     const id_user = req.cookies.id;
-    const wei = (req.cookies.roles_id == '6') ? 'kdeks' :  'kneks';
+    const wei = (req.cookies.roles_id == '6') ? 'kdeks' : 'kneks';
     const sql = await executeQuery("insert into news(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,news_datetime,created_at,updated_at,deleted_at,category_id,web_identity,tag,directorat,users_id) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)",
-        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id, wei, req.body.taggings, req.body.hot_category_id,id_user]);
+        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id, wei, req.body.taggings, req.body.hot_category_id, id_user]);
     if (sql) {
         res.redirect('/n');
     } else {
@@ -1873,9 +1885,26 @@ const users_whitelist = async (req, res) => {
     }
 };
 
+const users_ipaddress = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM ip_address");
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+};
+
 const approveusers = async (req, res) => {
+
+    const today = new Date();
+    const month = (today.getMonth() + 1);
+    const mmm = month.length < 2 ? "0" + month : month;
+    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const time_datetime = date + ' ' + time;
+
     const id_params_user = req.params.id;
-    const sql = await executeQuery("UPDATE users SET approve=$1 WHERE id=$2 ", ['Y', id_params_user]);
+    const sql = await executeQuery("UPDATE users SET approve=$1, approve_by=$2, approve_date=$3 WHERE id=$4 ", ['Y', res.cookies.name, time_datetime, id_params_user]);
     if (sql) {
         res.redirect('/whitelist');
     } else {
@@ -2722,6 +2751,7 @@ module.exports = {
     users_detail,
     users_new,
     users_whitelist,
+    users_ipaddress,
     approveusers,
     userroles,
     insertusers,

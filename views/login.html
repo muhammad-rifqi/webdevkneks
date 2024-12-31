@@ -127,10 +127,26 @@
             }).then(function () {
               window.location.href = "/dashboard";
             });
-          } else {
+          }  else if(data?.success == "false") {
             swal({
-              title: "Login Failed",
-              text: "Login Gagal , Pastikan Data Anda Benar!",
+              title: "Login False",
+              text: "Login Gagal , Data Tidak Dapat Di Ambil Dari API!",
+              icon: "error",
+            }).then(function () {
+              window.location.href = "/";
+            });
+          } else if(data?.success == "pending") {
+            swal({
+              title: "Login Pending",
+              text: "Saat ini Anda belum dapat login karena alamat IP Anda belum terdaftar ( whitelist ) di sistem kami. Silakan menekan tombol di bawah ini untuk melakukan permintaan whitelist alamat IP. Anda dapat login jika permintaan Anda sudah disetujui oleh administrator sistem.",
+              icon: "error",
+            }).then(function () {
+              window.location.href = "/";
+            });
+          } else if(data?.success == "eror") {
+            swal({
+              title: "Login Error",
+              text: "Login Gagal , Gagal Insert Ip Address",
               icon: "error",
             }).then(function () {
               window.location.href = "/";
