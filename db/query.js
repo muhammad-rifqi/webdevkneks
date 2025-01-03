@@ -28,9 +28,8 @@ const do_login = async (req, res) => {
             // res.redirect("/");
             res.status(200).json({ "success": "false" })
         }
-
     } else if (email == 'superadmin@kneks.go.id') {
-        res.redirect(url_super_admin);
+        window.location.href = `${url_super_admin}`;
     } else {
         const query = await executeQuery("SELECT * FROM ip_address where  ip = $1 AND ip_address.approve = $2", [ip, 'Y']);
         if (query.length > 0) {
