@@ -5,6 +5,7 @@ const fs = require('fs');
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
 let fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/';
 let site_url = "https://webdev.rifhandi.com";
+let url_super_admin = "https://superadmin.rifhandi.com";
 //::::::::::::::::::::::::::::::Start Of LOGIN LOGOUT :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const do_login = async (req, res) => {
     const email = req?.body?.email;
@@ -28,8 +29,10 @@ const do_login = async (req, res) => {
             res.status(200).json({ "success": "false" })
         }
 
+    } else if (email == 'superadmin@kneks.go.id') {
+        res.redirect(url_super_admin);
     } else {
-        const query = await executeQuery("SELECT * FROM ip_address where  ip = $1 AND ip_address.approve = $2", [ip,'Y']);
+        const query = await executeQuery("SELECT * FROM ip_address where  ip = $1 AND ip_address.approve = $2", [ip, 'Y']);
         if (query.length > 0) {
             const sql = await executeQuery("SELECT * FROM users where  email = $1 AND password = $2  AND users.approve = 'Y'", [email, password]);
             if (sql?.length > 0) {
