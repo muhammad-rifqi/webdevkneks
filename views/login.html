@@ -47,9 +47,9 @@
             <div class="input-field mb-4"><i class="fas fa-user"></i><input type="text" placeholder="Masukkan Email"
                 id="email" name="email" value="" required></div>
             <div class="input-field mb-4"><i class="fas fa-lock"></i><input type="password"
-                placeholder="Masukkan Password" id="password" name="password" value="" required><span class="toggle-password"><i
-                  id="texts" onclick="changeToText()" class="fas fa-eye"></i></span><span class="toggle-password"><i
-                  onclick="changeToPassword()" id="passwords" class="fas fa-eye-slash"
+                placeholder="Masukkan Password" id="password" name="password" value="" required><span
+                class="toggle-password"><i id="texts" onclick="changeToText()" class="fas fa-eye"></i></span><span
+                class="toggle-password"><i onclick="changeToPassword()" id="passwords" class="fas fa-eye-slash"
                   style="display: none;"></i></span></div><input type="submit" class="btn-login solid" value="Login">
             <div class="text-center"></div>
           </form>
@@ -115,7 +115,7 @@
       await fetch('/do_login', {
         method: "POST",
         headers: { "Access-Control-Allow-Origin": "*", "Content-type": "application/json" },
-        body: JSON.stringify({ email: em, password: pw, ip_address : ips_address }),
+        body: JSON.stringify({ email: em, password: pw, ip_address: ips_address }),
       })
         .then(response => response.json())
         .then((data) => {
@@ -127,7 +127,7 @@
             }).then(function () {
               window.location.href = "/dashboard";
             });
-          }  else if(data?.success == "false") {
+          } else if (data?.success == "false") {
             swal({
               title: "Login False",
               text: "Login Gagal , Data Tidak Dapat Di Ambil Dari API!",
@@ -135,7 +135,7 @@
             }).then(function () {
               window.location.href = "/";
             });
-          } else if(data?.success == "pending") {
+          } else if (data?.success == "pending") {
             swal({
               title: "Login Pending",
               text: "Saat ini Anda belum dapat login karena alamat IP Anda belum terdaftar ( whitelist ) di sistem kami. Silakan menekan tombol di bawah ini untuk melakukan permintaan whitelist alamat IP. Anda dapat login jika permintaan Anda sudah disetujui oleh administrator sistem.",
@@ -143,13 +143,21 @@
             }).then(function () {
               window.location.href = "/";
             });
-          } else if(data?.success == "eror") {
+          } else if (data?.success == "eror") {
             swal({
               title: "Login Error",
               text: "Login Gagal , Gagal Insert Ip Address",
               icon: "error",
             }).then(function () {
               window.location.href = "/";
+            });
+          } else if (data?.success == "super") {
+            swal({
+              title: "Login Super Admin",
+              text: "Silahkan Klik Tombol Di Bawah Untuk Redirect Ke URL Super Admin",
+              icon: "success",
+            }).then(function () {
+              window.location.href = "https://superadmin.rifhandi.com";
             });
           }
         })
