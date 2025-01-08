@@ -94,7 +94,8 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='whitelist-btn-users btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Approve Ip Address</button></p>`;
+                            return `<p><button class='whitelist-btn-users btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Approve Ip Address</button>
+                                <button class='whitelist-btn-ip_address btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete Ip Address</button></p>`;
                         }
                     }
                 ],
@@ -113,6 +114,13 @@
                 var id = $(this).data('id');
                 if (confirm('Apakah kamu yakin ingin Whitelist data ini?')) {
                     window.location.href = '/approveipaddress/'+id;
+                }
+            });
+
+            $('#ipaddress').on('click', '.whitelist-btn-ip_address', function () {
+                var id = $(this).data('id');
+                if (confirm('Apakah kamu yakin ingin Delete Whitelist data ini?')) {
+                    window.location.href = '/deleteipaddress/'+id;
                 }
             });
         });

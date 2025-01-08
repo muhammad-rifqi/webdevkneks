@@ -1950,6 +1950,17 @@ const approveipaddress = async (req, res) => {
         res.redirect('/ip_address')
     }
 }
+
+const deleteipaddress = async (req, res) => {
+    const id_params_user = req.params.id;
+    const sql = await executeQuery("DELETE from ip_address WHERE id = $1 ", [id_params_user]);
+    if (sql) {
+        res.redirect('/ip_address');
+    } else {
+        res.redirect('/ip_address')
+    }
+}
+
 const userroles = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  roles');
     if (sql?.length > 0) {
@@ -2792,6 +2803,7 @@ module.exports = {
     users_ipaddress,
     approveusers,
     approveipaddress,
+    deleteipaddress,
     userroles,
     insertusers,
     updateusers,
