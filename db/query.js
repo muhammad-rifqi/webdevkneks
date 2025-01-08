@@ -955,7 +955,7 @@ const deletebanner = async (req, res) => {
 const insertbanners = async (req, res) => {
     if (req.file) {
         const filesimage = site_url + "/uploads/slideshow/" + req.file.originalname.replace(" ", "");
-        const sql = await executeQuery('INSERT INTO banners (title,title_en,content,content_en,image,order, is_publish)values($1,$2,$3,$4,$5,$6,$7) ', [req.body.title, req.body.title_en, req.body.content, req.body.content_en, filesimage, '0', '1']);
+        const sql = await executeQuery('INSERT INTO banners (title,title_en,content,content_en,image, is_publish)values($1,$2,$3,$4,$5,$6) ', [req.body.title, req.body.title_en, req.body.content, req.body.content_en, filesimage, '1']);
         if (sql) {
             res.redirect('/b');
         } else {
