@@ -71,12 +71,12 @@ const user_register = async (req, res) => {
 }
 
 const do_logout = (req, res) => {
-    res.clearCookie("islogin");
-    res.clearCookie("name");
-    res.clearCookie("id");
-    res.clearCookie("roles_id");
-    res.clearCookie("id_province");
-    res.clearCookie("directorat_id");
+    res.clearCookie("islogin", {domain: ".rifhandi.com"});
+    res.clearCookie("name", {domain: ".rifhandi.com"});
+    res.clearCookie("id", {domain: ".rifhandi.com"});
+    res.clearCookie("roles_id", {domain: ".rifhandi.com"});
+    res.clearCookie("id_province", {domain: ".rifhandi.com"});
+    res.clearCookie("directorat_id", {domain: ".rifhandi.com"});
     res.redirect("/");
 }
 
