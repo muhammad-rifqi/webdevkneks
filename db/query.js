@@ -16,6 +16,7 @@ const do_login = async (req, res) => {
             u_id = sql[0]?.id;
             const isLogin = true;
             res.cookie("islogin", isLogin, {
+                maxAge: 900000,
                 domain: '.rifhandi.com',
                 secure: true,
                 httpOnly: false,
@@ -24,12 +25,14 @@ const do_login = async (req, res) => {
             });
             res.cookie("id", sql[0]?.id, {
                 domain: '.rifhandi.com',
+                maxAge: 900000,
                 secure: true,
                 httpOnly: false,
                 sameSite: 'None',
                 overwrite: true,
             });
             res.cookie("name", sql[0]?.name, {
+                maxAge: 900000,
                 domain: '.rifhandi.com',
                 secure: true,
                 httpOnly: false,
@@ -37,6 +40,7 @@ const do_login = async (req, res) => {
                 overwrite: true,
             });
             res.cookie("roles_id", sql[0]?.role_id, {
+                maxAge: 900000,
                 domain: '.rifhandi.com',
                 secure: true,
                 httpOnly: false,
@@ -44,13 +48,21 @@ const do_login = async (req, res) => {
                 overwrite: true,
             });
             res.cookie("id_province", sql[0]?.id_province, {
+                maxAge: 900000,
                 domain: '.rifhandi.com',
                 secure: true,
                 httpOnly: false,
                 sameSite: 'None',
                 overwrite: true,
             });
-            res.cookie("directorat_id", sql[0]?.directorat_id);
+            res.cookie("directorat_id", sql[0]?.directorat_id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -67,6 +79,7 @@ const do_login = async (req, res) => {
                 u_id = sql[0]?.id;
                 const isLogin = true;
                 res.cookie("islogin", isLogin, {
+                    maxAge: 900000,
                     domain: '.rifhandi.com',
                     secure: true,
                     httpOnly: false,
@@ -74,6 +87,7 @@ const do_login = async (req, res) => {
                     overwrite: true,
                 });
                 res.cookie("id", sql[0]?.id, {
+                    maxAge: 900000,
                     domain: '.rifhandi.com',
                     secure: true,
                     httpOnly: false,
@@ -81,6 +95,7 @@ const do_login = async (req, res) => {
                     overwrite: true,
                 });
                 res.cookie("name", sql[0]?.name, {
+                    maxAge: 900000,
                     domain: '.rifhandi.com',
                     secure: true,
                     httpOnly: false,
@@ -88,6 +103,7 @@ const do_login = async (req, res) => {
                     overwrite: true,
                 });
                 res.cookie("roles_id", sql[0]?.role_id, {
+                    maxAge: 900000,
                     domain: '.rifhandi.com',
                     secure: true,
                     httpOnly: false,
@@ -95,6 +111,7 @@ const do_login = async (req, res) => {
                     overwrite: true,
                 });
                 res.cookie("id_province", sql[0]?.id_province, {
+                    maxAge: 900000,
                     domain: '.rifhandi.com',
                     secure: true,
                     httpOnly: false,
@@ -102,6 +119,7 @@ const do_login = async (req, res) => {
                     overwrite: true,
                 });
                 res.cookie("directorat_id", sql[0]?.directorat_id, {
+                    maxAge: 900000,
                     domain: '.rifhandi.com',
                     secure: true,
                     httpOnly: false,
