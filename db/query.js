@@ -2877,7 +2877,6 @@ module.exports = {
     users_ipaddress,
     approveusers,
     approveipaddress,
-    deleteipaddress,
     userroles,
     insertusers,
     updateusers,
