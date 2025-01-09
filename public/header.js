@@ -109,4 +109,3 @@ if (cookies['name'] == "" || cookies['name'] == undefined) {
 } else {
     document.getElementById("nama").innerText = cookies["name"]
 }
-;
