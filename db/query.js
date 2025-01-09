@@ -15,11 +15,41 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin);
-            res.cookie("id", sql[0]?.id);
-            res.cookie("name", sql[0]?.name);
-            res.cookie("roles_id", sql[0]?.role_id);
-            res.cookie("id_province", sql[0]?.id_province);
+            res.cookie("islogin", isLogin, {
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id", sql[0]?.id, {
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("name", sql[0]?.name, {
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("roles_id", sql[0]?.role_id, {
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id_province", sql[0]?.id_province, {
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
             res.cookie("directorat_id", sql[0]?.directorat_id);
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
@@ -36,12 +66,48 @@ const do_login = async (req, res) => {
             if (sql?.length > 0) {
                 u_id = sql[0]?.id;
                 const isLogin = true;
-                res.cookie("islogin", isLogin);
-                res.cookie("id", sql[0]?.id);
-                res.cookie("name", sql[0]?.name);
-                res.cookie("roles_id", sql[0]?.role_id);
-                res.cookie("id_province", sql[0]?.id_province);
-                res.cookie("directorat_id", sql[0]?.directorat_id);
+                res.cookie("islogin", isLogin, {
+                    domain: '.rifhandi.com',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("id", sql[0]?.id, {
+                    domain: '.rifhandi.com',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("name", sql[0]?.name, {
+                    domain: '.rifhandi.com',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("roles_id", sql[0]?.role_id, {
+                    domain: '.rifhandi.com',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("id_province", sql[0]?.id_province, {
+                    domain: '.rifhandi.com',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("directorat_id", sql[0]?.directorat_id, {
+                    domain: '.rifhandi.com',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
                 // res.redirect("/dashboard");
                 res.status(200).json({ "success": "true" })
             } else {
@@ -71,12 +137,12 @@ const user_register = async (req, res) => {
 }
 
 const do_logout = (req, res) => {
-    res.clearCookie("islogin", {domain: ".rifhandi.com"});
-    res.clearCookie("name", {domain: ".rifhandi.com"});
-    res.clearCookie("id", {domain: ".rifhandi.com"});
-    res.clearCookie("roles_id", {domain: ".rifhandi.com"});
-    res.clearCookie("id_province", {domain: ".rifhandi.com"});
-    res.clearCookie("directorat_id", {domain: ".rifhandi.com"});
+    res.clearCookie("islogin", { domain: ".rifhandi.com" });
+    res.clearCookie("name", { domain: ".rifhandi.com" });
+    res.clearCookie("id", { domain: ".rifhandi.com" });
+    res.clearCookie("roles_id", { domain: ".rifhandi.com" });
+    res.clearCookie("id_province", { domain: ".rifhandi.com" });
+    res.clearCookie("directorat_id", { domain: ".rifhandi.com" });
     res.redirect("/");
 }
 
@@ -1944,16 +2010,6 @@ const approveipaddress = async (req, res) => {
 
     const id_params_user = req.params.id;
     const sql = await executeQuery("UPDATE ip_address SET approve=$1, approve_by=$2, approve_date=$3 WHERE id=$4 ", ['Y', req.cookies.name, time_datetime, id_params_user]);
-    if (sql) {
-        res.redirect('/ip_address');
-    } else {
-        res.redirect('/ip_address')
-    }
-}
-
-const deleteipaddress = async (req, res) => {
-    const id_params_user = req.params.id;
-    const sql = await executeQuery("DELETE from ip_address WHERE id = $1 ", [id_params_user]);
     if (sql) {
         res.redirect('/ip_address');
     } else {
