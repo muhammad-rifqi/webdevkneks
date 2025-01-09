@@ -104,7 +104,7 @@ for (var i = 0; i < a.length; i++) {
     var [key, value] = b;
     cookies[key.trim()] = value;
 }
-if (cookie['name'] == "" || cookie['name'] == undefined) {
+if (cookies['name'] == "" || cookies['name'] == undefined) {
     window.location.href = '/';
 } else {
     document.getElementById("nama").innerText = cookies["name"]
