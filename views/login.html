@@ -89,10 +89,11 @@
       var [key, value] = b;
       kuki[key.trim()] = value;
     }
-    if (kuki['name'] != "" || kuki['name'] != undefined) {
-      window.location.href = '/dashboard';
+    if(kuki['name'] === "" || kuki['name'] === undefined) {
+        console.log(kuki['name']??"Tidak Ada Kuki!")
     } else {
-      window.location.href = '/';
+        console.log(kuki['name']??"Tidak Ada Kuki!")
+        window.location.href = '/dashboard';
     }
   }
 
