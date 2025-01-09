@@ -68,6 +68,7 @@
   window.addEventListener("load", async (event) => {
     await getImageLogin();
     await checkIP();
+    await checkKuki();
   })
 
   function getImageLogin() {
@@ -78,6 +79,21 @@
         document.getElementById("gbrs").setAttribute('src', rows[0]?.path);
       }
     })
+  }
+
+  function checkKuki() {
+    let kuki = {};
+    var a = document.cookie.split(";");
+    for (var i = 0; i < a.length; i++) {
+      var b = a[i].split("=");
+      var [key, value] = b;
+      kuki[key.trim()] = value;
+    }
+    if (kuki['name'] != "" || kuki['name'] != undefined) {
+      window.location.href = '/dashboard';
+    } else {
+      window.location.href = '/';
+    }
   }
 
   function checkIP() {
