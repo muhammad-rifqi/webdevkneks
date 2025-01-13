@@ -37,7 +37,7 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/directorats_devisi" method="post">
+                        <form action="/directorats_devisi_add" method="post">
                             <input type="hidden" name="id" id="id" value="">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
@@ -77,9 +77,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
-                                                    <th>API</th>
-                                                    <th>RELATION API ID</th>
-                                                    <th>TYPE DATA</th>
+                                                    <th>TITLE</th>
+                                                    <th>DESCRIPTION</th>
+                                                    <th>DIRECTORAT ID</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -125,37 +125,33 @@
 
     <script>
         window.addEventListener("load", async () => {
-            await getDataMeta();
-            await geDataType();
+            await getUrlById();
+            await getDataDevisi();
         })
-        function geDataType() {
-            // const URLS = new URL(window.location.href);
-            // fetch('/narations_detail/' + URLS.pathname.split('/')[2])
-            fetch('/statistics')
+
+        function getUrlById() {
+            const URLS = new URL(window.location.href);
+            fetch('/detailhotissuecategory/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
-                    rows.forEach((element) => {
-                        const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}-${element?.title}`;
-                        ddd.text = `${element?.title}`;
-                        document.getElementById("data_types").append(ddd);
-                    })
+                    document.getElementById("id").value = rows[0]?.id;
                 })
         }
 
-        function getDataMeta() {
+
+        function getDataDevisi() {
             const URLS = new URL(window.location.href);
-            fetch('/api_metabase')
+            fetch('/directorat_devisi')
                 .then(row => row.json())
                 .then((rrr) => {
                     var aaa = "";
                     rrr.forEach((element) => {
                         aaa += `<tr>
                                     <td>#${element?.id}</td>
-                                    <td>${element?.api}</td>
-                                    <td>${element?.statistic_id}</td>
-                                    <td>${element?.statistic_name}</td>
-                                    <td><a href="/api_metabase_delete/${element?.id}" onclick="return confirm('Yakin Mau Hapus Data Ini ?')"><button class="btn btn-danger">Delete</button></a></td>                           
+                                    <td>${element?.title}</td>
+                                    <td>${element?.description}</td>
+                                    <td>${element?.directorats_id}</td>
+                                    <td><a href="/directorat_devisi_delete/${element?.id}" onclick="return confirm('Yakin Mau Hapus Data Ini ?')"><button class="btn btn-danger">Delete</button></a></td>                           
                                 </tr>`;
                     });
                     document.getElementById("tabb").innerHTML = aaa;

@@ -219,6 +219,10 @@ apps.get('/s_edit/:id', (req, res) => {
     res.sendFile(path.resolve('./views/profile/struktur/edit.html'));
 })
 
+apps.get('/s_logo', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/struktur/s_logo.html'));
+})
+
 apps.get('/v', (req, res) => {
     res.sendFile(path.resolve('./views/profile/videos/list.html'));
 })
@@ -706,6 +710,8 @@ apps.get('/directorats_delete/:id', db.delete_direactorats);
 apps.get('/images_direactorat_delete/:id/:foto', db.delete_images_direactorats);
 
 apps.get('/banners_direactorat_delete/:id/:foto', db.delete_banners_direactorats);
+
+apps.get('/directorat_devisi/:id', db.directorat_devisi);
 
 apps.get('/hotissuedetail/:id', db.hotissue_detail);
 

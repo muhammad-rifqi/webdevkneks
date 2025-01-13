@@ -480,6 +480,15 @@ const directorat = async (req, res) => {
     }
 }
 
+const directorat_devisi = async (req, res) => {
+        const sql = await executeQuery('SELECT * FROM devisi');
+        if (sql?.length > 0) {
+            res.status(200).json(sql)
+        } else {
+            res.status(200).json([])
+        }
+}
+
 const insertdirectorats = async (req, res) => {
     const a = req.body.daerah.split('-');
     const sql = await executeQuery('INSERT INTO hot_categories(title,title_en,description,description_en,id_province,province_name)values($1,$2,$3,$4,$5,$6)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, a[0], a[1]]);
@@ -2821,6 +2830,7 @@ module.exports = {
     deletehotissuecategory,
     delete_direactorats,
     directorats_uploads,
+    directorat_devisi,
     deletehotissuesubcategory,
     detailhotissuesubcategory,
     updatehotissue,
