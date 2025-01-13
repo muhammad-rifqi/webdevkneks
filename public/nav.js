@@ -22,30 +22,54 @@ document.write(`<nav class="nxl-navigation">
 document.write(``);
 //menu
 //banner
-if (cookie["roles_id"] == 2) {
-    document.write(` <li class="nxl-item nxl-hasmenu">
-                        <a href="/customfront" class="nxl-link">
+if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
+    document.write(`<li class="nxl-item nxl-hasmenu">
+                        <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
-                             Custom Banner
+                            <span class="nxl-mtext">Banner</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
+                        <ul class="nxl-submenu">
+                        <li class="nxl-item"><a class="nxl-link" href="/welcomebanner">Welcome Banner</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/customfront">Custom Banner</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/b">Slide Show</a></li>
+                         </ul>
                     </li>`);
 }
 //Direktorat
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4) {
-    document.write(` <li class="nxl-item nxl-hasmenu">
-                        <a href="/directorats" class="nxl-link">
+    document.write(`<li class="nxl-item nxl-hasmenu">
+                        <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
-                            Direktorat
+                            <span class="nxl-mtext">Direktorat</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
+                        <ul class="nxl-submenu">
+                            <li class="nxl-item"><a class="nxl-link" href="/directorats">Direktorat Master</a></li>
+                         </ul>
                     </li>`);
 }
 //Struktur
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4) {
-    document.write(` <li class="nxl-item nxl-hasmenu">
-                        <a href="/s" class="nxl-link">
+if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
+    document.write(`<li class="nxl-item nxl-hasmenu">
+                        <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
-                            Struktur
+                            <span class="nxl-mtext">Struktur</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
+                        <ul class="nxl-submenu">
+                            <li class="nxl-item"><a class="nxl-link" href="/s_logo">Struktur</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/s">Pejabat</a></li>
+                         </ul>
+                    </li>`);
+}
+
+if (cookie["roles_id"] == 3 || cookie["roles_id"] == 4) {
+    document.write(`<li class="nxl-item nxl-hasmenu">
+                        <a href="javascript:void(0);" class="nxl-link">
+                            <span class="nxl-micon"><i class="feather-bookmark"></i></span>
+                            <span class="nxl-mtext">Struktur</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                        </a>
+                        <ul class="nxl-submenu">
+                            <li class="nxl-item"><a class="nxl-link" href="/s">Pejabat</a></li>
+                         </ul>
                     </li>`);
 }
 
@@ -177,7 +201,13 @@ if (cookie["roles_id"] == 1) {
 }
 
 //e-pustaka kategori
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {
+if (cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {
+    document.write(`
+                            <li class="nxl-item"><a class="nxl-link" href="/narationfront">Narasi</a></li>
+                           `);
+}
+
+if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
     document.write(`
                             <li class="nxl-item"><a class="nxl-link" href="/narationfront">Narasi</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/metabase">Api Metabase</a></li>
@@ -248,7 +278,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 
 
 //User
 //if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2|| cookie["roles_id"] == 3|| cookie["roles_id"] == 4|| cookie["roles_id"] == 6|| cookie["roles_id"] == 7) {
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 4 || cookie["roles_id"] == 7) {
+if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 4) {
     document.write(` <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
@@ -293,7 +323,6 @@ if (cookie["roles_id"] == 1) {
                             <li class="nxl-item"><a class="nxl-link" href="/c">Kontak</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/m">Peta</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/scp">Scope</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/b">Banners</a></li>
                          </ul>
                     </li>
                             `);
@@ -314,7 +343,6 @@ if (cookie["roles_id"] == 1) {
                             <li class="nxl-item"><a class="nxl-link" href="/color">Warna</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/menu">Menu</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/submenu">Sub Menu</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/customfront">Custom Banner</a></li>
                          </ul>
                     </li>
                             `);

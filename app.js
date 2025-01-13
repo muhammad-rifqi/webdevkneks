@@ -352,6 +352,11 @@ apps.get('/directorats_edit/:id', (req, res) => {
 apps.get('/directorats_detail/:id', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/directorat/detail.html'));
 })
+
+apps.get('/directorats_devisi/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/directorat/devisi.html'));
+})
+
 //::::::::::::::: One Data Center ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/f', (req, res) => {
@@ -404,6 +409,10 @@ apps.get('/customfront', (req, res) => {
 
 apps.get('/custom_add', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/custom_page/add.html'));
+})
+
+apps.get('/welcomebanner', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/welcome/update.html'));
 })
 
 //::::::::::::::: User Management ::::::::::::::::::::::::::::

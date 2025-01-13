@@ -107,8 +107,9 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            if (cookie['roles_id'] == '1' || cookie['roles_id'] == 2) {
+                            if (cookie['roles_id'] == '1' || cookie['roles_id'] == 2 || cookie['roles_id'] == 3 || cookie['roles_id'] == 4) {
                                 return `<p>
+                                        <button class='devisi-btn-directorat btn btn-success' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Devisi</button>
                                         <button class='view-btn-directorat btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Icon/Banner</button>
                                         <button class='edit-btn-directorat btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Edit</button>
                                         <button class='delete-btn-directorat btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete</button>
@@ -131,6 +132,11 @@
                 //     'pdf',         
                 //     'print'        
                 // ],
+            });
+
+            $('#direktorat').on('click', '.devisi-btn-directorat', function () {
+                var id = $(this).data('id');
+                window.location.href = '/directorats_devisi/' + id;
             });
 
             $('#direktorat').on('click', '.view-btn-directorat', function () {
