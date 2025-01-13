@@ -223,6 +223,10 @@ apps.get('/s_logo', (req, res) => {
     res.sendFile(path.resolve('./views/profile/struktur/s_logo.html'));
 })
 
+apps.get('/custom_add_s_logo', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/struktur/add_s_logo.html'));
+})
+
 apps.get('/v', (req, res) => {
     res.sendFile(path.resolve('./views/profile/videos/list.html'));
 })
@@ -417,6 +421,10 @@ apps.get('/custom_add', (req, res) => {
 
 apps.get('/welcomebanner', (req, res) => {
     res.sendFile(path.resolve('./views/home_management/welcome/update.html'));
+})
+
+apps.get('/custom_add_welcome', (req, res) => {
+    res.sendFile(path.resolve('./views/home_management/welcome/add.html'));
 })
 
 //::::::::::::::: User Management ::::::::::::::::::::::::::::
@@ -898,6 +906,10 @@ apps.get('/custom_page', db.custom_page);
 apps.get('/detail_custom_page/:id', db.detail_custom_page);
 
 apps.post('/insertcustompage', page_path.single('files_image'), db.insertcustompage);
+
+apps.post('/insertcustompage_slogo', page_path.single('files_image'), db.insertcustompage_slogo);
+
+apps.post('/insertcustompage_welcome', page_path.single('files_image'), db.insertcustompage_welcome);
 
 apps.get('/delete_custom_page/:id/:foto', db.delete_custom_page);
 

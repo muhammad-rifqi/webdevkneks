@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="keyword" content="" />
+    <meta name="author" content="theme_ocean" />
+    <title>KNEKS BACKEND || Dashboard</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+</head>
+
+<body>
+    <!--! ================================================================ !-->
+    <!--! [Start] Navigation Manu !-->
+    <!--! ================================================================ !-->
+    <script src="/nav.js"></script>
+    <!--! ================================================================ !-->
+    <!--! [End]  Navigation Manu !-->
+    <!--! ================================================================ !-->
+    <!--! ================================================================ !-->
+    <!--! [Start] Header !-->
+    <!--! ================================================================ !-->
+    <script src="/header.js"></script>
+    <!--! ================================================================ !-->
+    <!--! [Start] Main Content !-->
+    <!--! ================================================================ !-->
+    <main class="nxl-container">
+        <div class="nxl-content">
+            <!-- [ page-header ] start -->
+            <script src="/breadchumb.js"></script>
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form action="/insertcustompage_welcome" method="post" enctype="multipart/form-data">
+                            <input type="hidden" id="max_id" name="MAX_FILE_SIZE" value="1048000" />
+                            <div class="card stretch stretch-full">
+                                <div class="card-body lead-status">
+                                    <div class="mb-5 d-flex align-items-center justify-content-between">
+                                        <h5 class="fw-bold mb-0 me-4">
+                                            <span class="d-block mb-2">Tambah Files Image :</span>
+                                            <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
+                                                Tambah
+                                                Data Files Image Di Bawah Ini</span>
+                                        </h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Name URL)*</label>
+                                            <input class="form-control" type="text" name="names" id="names" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Files Image</label>
+                                            <input class="form-control" name="files_image" id="files_image" type="file"
+                                                accept="image/*" onchange="upload_check()" required> )* Max Upload 1 MB
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4 text-left">
+                                            <label class="form-label"></label>
+                                            <input class="btn btn-primary" type="submit" value="Simpan">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- [ Main Content ] end -->
+        </div>
+        <!-- [ Footer ] start -->
+        <footer class="footer">
+            <p class="fs-11 text-muted fw-medium text-uppercase mb-0 copyright">
+                <span>Copyright ©</span>
+                <script>
+                    document.write(new Date().getFullYear());
+                </script>
+            </p>
+            <div class="d-flex align-items-center gap-4">
+                <a href="javascript:void(0);" class="fs-11 fw-semibold text-uppercase">Help</a>
+                <a href="javascript:void(0);" class="fs-11 fw-semibold text-uppercase">Terms</a>
+                <a href="javascript:void(0);" class="fs-11 fw-semibold text-uppercase">Privacy</a>
+            </div>
+        </footer>
+        <!-- [ Footer ] end -->
+    </main>
+
+    <script src="/assets/vendors/js/vendors.min.js"></script>
+    <script src="/assets/js/common-init.min.js"></script>
+    <script src="/assets/js/theme-customizer-init.min.js"></script>
+
+    <script>
+        window.addEventListener("load", async () => {
+            await upload_check();
+        })
+
+        function upload_check() {
+            var upl = document.getElementById("images");
+            var max = document.getElementById("max_id").value;
+            if (upl.files[0].size > max) {
+                alert("File too big!");
+                upl.value = "";
+                return false;
+            }
+
+            return true;
+        };
+    </script>
+</body>
+
+</html>

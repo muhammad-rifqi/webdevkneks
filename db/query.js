@@ -15,54 +15,12 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id", sql[0]?.id, {
-                domain: '.rifhandi.com',
-                maxAge: 900000,
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("name", sql[0]?.name, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("roles_id", sql[0]?.role_id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id_province", sql[0]?.id_province, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("directorat_id", sql[0]?.directorat_id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+            res.cookie("islogin", isLogin);
+            res.cookie("id", sql[0]?.id);
+            res.cookie("name", sql[0]?.name);
+            res.cookie("roles_id", sql[0]?.role_id);
+            res.cookie("id_province", sql[0]?.id_province);
+            res.cookie("directorat_id", sql[0]?.directorat_id);
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -2356,6 +2314,26 @@ const insertcustompage = async (req, res) => {
     }
 }
 
+const insertcustompage_slogo = async (req, res) => {
+    const filesimage = site_url + "/uploads/custompage/" + req.file.originalname.replace(" ", "");
+    const sql = await executeQuery('insert into custom_page(name,path) values ($1,$2)', [req.body.names, filesimage]);
+    if (sql?.length > 0) {
+        res.redirect('/s_logo');
+    } else {
+        res.redirect('/s_logo');
+    }
+}
+
+const insertcustompage_welcome = async (req, res) => {
+    const filesimage = site_url + "/uploads/custompage/" + req.file.originalname.replace(" ", "");
+    const sql = await executeQuery('insert into custom_page(name,path) values ($1,$2)', [req.body.names, filesimage]);
+    if (sql?.length > 0) {
+        res.redirect('/welcomebanner');
+    } else {
+        res.redirect('/welcomebanner');
+    }
+}
+
 const delete_custom_page = async (req, res) => {
     const id_custom = req.params.id;
     const image = req.params.foto;
@@ -2912,6 +2890,8 @@ module.exports = {
     custom_page,
     detail_custom_page,
     insertcustompage,
+    insertcustompage_slogo,
+    insertcustompage_welcome,
     delete_custom_page,
     naration,
     naration_detail,
