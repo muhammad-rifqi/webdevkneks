@@ -2421,6 +2421,56 @@ const delete_custom_page = async (req, res) => {
     }
 }
 
+const delete_custom_page_slogo = async (req, res) => {
+    const id_custom = req.params.id;
+    const image = req.params.foto;
+    if (fs.existsSync(fileslinux + 'custompage/' + image)) {
+        fs.unlink(fileslinux + 'custompage/' + image, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
+            if (sql) {
+                res.redirect('/s_logo');
+            } else {
+                res.redirect('/s_logo');
+                console.log(sql);
+            }
+        });
+        console.log("ada")
+    } else {
+        const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
+        if (sql?.length > 0) {
+            res.redirect('/s_logo');
+        } else {
+            res.redirect('/s_logo');
+        }
+    }
+}
+
+const delete_custom_page_welcome = async (req, res) => {
+    const id_custom = req.params.id;
+    const image = req.params.foto;
+    if (fs.existsSync(fileslinux + 'custompage/' + image)) {
+        fs.unlink(fileslinux + 'custompage/' + image, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
+            if (sql) {
+                res.redirect('/welcomebanner');
+            } else {
+                res.redirect('/welcomebanner');
+                console.log(sql);
+            }
+        });
+        console.log("ada")
+    } else {
+        const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
+        if (sql?.length > 0) {
+            res.redirect('/welcomebanner');
+        } else {
+            res.redirect('/welcomebanner');
+        }
+    }
+}
+
 //:::::::::::::::::::::::::::::: End Zona Khas  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 const naration = async (req, res) => {
@@ -2959,6 +3009,8 @@ module.exports = {
     custom_page_welcome,
     insertcustompage_welcome,
     delete_custom_page,
+    delete_custom_page_slogo,
+    delete_custom_page_welcome,
     naration,
     naration_detail,
     insertnarations,

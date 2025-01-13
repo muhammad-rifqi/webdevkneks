@@ -921,6 +921,10 @@ apps.post('/insertcustompage_welcome', page_path.single('files_image'), db.inser
 
 apps.get('/delete_custom_page/:id/:foto', db.delete_custom_page);
 
+apps.get('/delete_custom_page_slogo/:id/:foto', db.delete_custom_page_slogo);
+
+apps.get('/delete_custom_page_welcome/:id/:foto', db.delete_custom_page_welcome);
+
 //::::::::::::::: Api & Query CUSTOM PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/narations', db.naration);
