@@ -15,10 +15,20 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
-    <!--[if lt IE 9]>
-			<script src="https:oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="https:oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+    <style>
+        div.dt-top-container {
+            display: grid;
+            grid-template-columns: auto auto auto;
+        }
+
+        div.dt-center-in-div {
+            margin: 0 auto;
+        }
+
+        div.dt-filter-spacer {
+            margin: 10px 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -80,11 +90,11 @@
     <!-- DataTables -->
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
     <script src="/assets/js/theme-customizer-init.min.js"></script>
 
@@ -104,20 +114,20 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='edit-btn-files btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Edit</button>
-                                    <button class='delete-btn-files btn btn-danger' data-id='${row.id}' data-file='${row.fl}' style="padding:2px; float: left; margin: 2px">Delete</button></p>`;
+                            return `<p><button class='edit-btn-files btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
+                                    <button class='delete-btn-files btn btn-danger' data-id='${row.id}' data-file='${row.fl}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button></p>`;
                         }
                     }
                 ],
                 lengthMenu: [10, 25, 50, 100],
-                // dom: 'Bfrtip',  
-                // buttons: [
-                //     'copy',        
-                //     'csv',         
-                //     'excel',       
-                //     'pdf',         
-                //     'print'        
-                // ],
+                dom: '<"dt-top-container"<l><"dt-center-in-div"B><f>r>t<"dt-filter-spacer"f><ip>', 
+                buttons: [
+                    'copy',        
+                    'csv',         
+                    'excel',       
+                    'pdf',         
+                    'print'        
+                ],
             });
 
             // 3. Event Listener untuk Tombol Edit
