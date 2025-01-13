@@ -158,6 +158,7 @@
         });
     </script>
     <script>
+        console.log(cookie['roles_id'])
         if(cookie['roles_id'] == 1){
             document.getElementById("tambah_directorat").innerHTML = `<button class="btn btn-primary" onclick="window.location.href = '/directorats_add'"> Tambah Direktorat </button>`;
         }else{
