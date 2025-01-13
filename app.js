@@ -721,6 +721,10 @@ apps.get('/banners_direactorat_delete/:id/:foto', db.delete_banners_direactorats
 
 apps.get('/directorat_devisi/:id', db.directorat_devisi);
 
+apps.post('/directorats_devisi_add', db.directorat_devisi_add);
+
+apps.get('/directorat_devisi_delete/:id', db.directorats_devisi_delete);
+
 apps.get('/hotissuedetail/:id', db.hotissue_detail);
 
 apps.post('/inserthotissue', hotissue_path.single('photo'), db.inserthotissue);

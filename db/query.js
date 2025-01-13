@@ -439,12 +439,23 @@ const directorat = async (req, res) => {
 }
 
 const directorat_devisi = async (req, res) => {
-        const sql = await executeQuery('SELECT * FROM devisi');
-        if (sql?.length > 0) {
-            res.status(200).json(sql)
-        } else {
-            res.status(200).json([])
-        }
+    const sql = await executeQuery('SELECT * FROM devisi');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
+}
+
+const directorats_devisi_delete = async (req, res) => {
+    const iddev = req.params.id;
+    const sql = await executeQuery('DELETE FROM  devisi where id=$1', [iddev]);
+    if (sql) {
+        res.redirect('/directorats_devisi/' + iddev);
+    } else {
+        console.log(sql)
+        res.redirect('/directorats_devisi/' + iddev);
+    }
 }
 
 const insertdirectorats = async (req, res) => {
@@ -507,6 +518,17 @@ const directorats_uploads = async (req, res) => {
         res.redirect('/directorats_detail/' + req.body.id);
     } else {
         res.redirect('/directorats_detail/' + req.body.id);
+    }
+}
+
+
+const directorat_devisi_add = async (req, res) => {
+    const sql = await executeQuery("insert into devisi(title,description,directorats_id)values($1,$2,$3)",
+        [req.body.title, req.body.description, req.body.id]);
+    if (sql) {
+        res.redirect('/directorats_devisi/' + req.body.id);
+    } else {
+        res.redirect('/directorats_devisi/' + req.body.id);
     }
 }
 
@@ -2275,7 +2297,7 @@ const deletetagging = async (req, res) => {
 }
 
 const custom_page = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM custom_page');
+    const sql = await executeQuery("SELECT * FROM custom_page where flag = 'login'");
     const array = [];
     sql.forEach((element, index) => {
         const rrr = {
@@ -2314,9 +2336,29 @@ const insertcustompage = async (req, res) => {
     }
 }
 
+const custom_page_slogo = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM custom_page where flag = 's_logo'");
+    const array = [];
+    sql.forEach((element, index) => {
+        const rrr = {
+            "id": element?.id,
+            "name": element?.name,
+            "path": element?.path,
+            "imgs": element?.path?.split('/')[5],
+        }
+        array.push(rrr);
+    })
+
+    if (array?.length > 0) {
+        res.status(200).json(array)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 const insertcustompage_slogo = async (req, res) => {
     const filesimage = site_url + "/uploads/custompage/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery('insert into custom_page(name,path) values ($1,$2)', [req.body.names, filesimage]);
+    const sql = await executeQuery('insert into custom_page(name,path,flag) values ($1,$2,$3)', [req.body.names, filesimage, req.body.flag]);
     if (sql?.length > 0) {
         res.redirect('/s_logo');
     } else {
@@ -2324,9 +2366,29 @@ const insertcustompage_slogo = async (req, res) => {
     }
 }
 
+const custom_page_welcome = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM custom_page where flag = 'welcome'");
+    const array = [];
+    sql.forEach((element, index) => {
+        const rrr = {
+            "id": element?.id,
+            "name": element?.name,
+            "path": element?.path,
+            "imgs": element?.path?.split('/')[5],
+        }
+        array.push(rrr);
+    })
+
+    if (array?.length > 0) {
+        res.status(200).json(array)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 const insertcustompage_welcome = async (req, res) => {
     const filesimage = site_url + "/uploads/custompage/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery('insert into custom_page(name,path) values ($1,$2)', [req.body.names, filesimage]);
+    const sql = await executeQuery('insert into custom_page(name,path,flag) values ($1,$2,$3)', [req.body.names, filesimage,req.body.flag]);
     if (sql?.length > 0) {
         res.redirect('/welcomebanner');
     } else {
@@ -2808,7 +2870,9 @@ module.exports = {
     deletehotissuecategory,
     delete_direactorats,
     directorats_uploads,
+    directorat_devisi_add,
     directorat_devisi,
+    directorats_devisi_delete,
     deletehotissuesubcategory,
     detailhotissuesubcategory,
     updatehotissue,
@@ -2890,7 +2954,9 @@ module.exports = {
     custom_page,
     detail_custom_page,
     insertcustompage,
+    custom_page_slogo,
     insertcustompage_slogo,
+    custom_page_welcome,
     insertcustompage_welcome,
     delete_custom_page,
     naration,

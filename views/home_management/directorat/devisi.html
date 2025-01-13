@@ -141,7 +141,7 @@
 
         function getDataDevisi() {
             const URLS = new URL(window.location.href);
-            fetch('/directorat_devisi')
+            fetch('/directorat_devisi/' + URLS.pathname.split('/')[2])
                 .then(row => row.json())
                 .then((rrr) => {
                     var aaa = "";
