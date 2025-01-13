@@ -45,23 +45,6 @@ document.write(`<header class="nxl-header">
             <div class="header-right ms-auto">
                 <div class="d-flex align-items-center">
                     
-                    <div class="nxl-h-item d-none d-sm-flex">
-                        <div class="full-screen-switcher">
-                            <a href="javascript:void(0);" class="nxl-head-link me-0" onclick="$('body').fullScreenHelper('toggle');">
-                                <i class="feather-maximize maximize"></i>
-                                <i class="feather-minimize minimize"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="nxl-h-item dark-light-theme">
-                        <a href="javascript:void(0);" class="nxl-head-link me-0 dark-button">
-                            <i class="feather-cloud-lightning"></i>
-                        </a>
-                        <a href="javascript:void(0);" class="nxl-head-link me-0 light-button" style="display: none">
-                            <i class="feather-sun"></i>
-                        </a>
-                    </div>
-                    
                     <div class="dropdown nxl-h-item">
                         <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" data-bs-auto-close="outside">
                             <img src="/assets/images/avatar/1.png" alt="user-image" class="img-fluid user-avtar me-0" />
@@ -109,3 +92,21 @@ if (cookies['name'] == "" || cookies['name'] == undefined) {
 } else {
     document.getElementById("nama").innerText = cookies["name"]
 }
+
+
+{/* <div class="nxl-h-item d-none d-sm-flex">
+<div class="full-screen-switcher">
+    <a href="javascript:void(0);" class="nxl-head-link me-0" onclick="$('body').fullScreenHelper('toggle');">
+        <i class="feather-maximize maximize"></i>
+        <i class="feather-minimize minimize"></i>
+    </a>
+</div>
+</div>
+<div class="nxl-h-item dark-light-theme">
+<a href="javascript:void(0);" class="nxl-head-link me-0 dark-button">
+    <i class="feather-cloud-lightning"></i>
+</a>
+<a href="javascript:void(0);" class="nxl-head-link me-0 light-button" style="display: none">
+    <i class="feather-sun"></i>
+</a>
+</div> */}
