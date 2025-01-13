@@ -158,7 +158,7 @@
         });
     </script>
     <script>
-        if(cookie['roles_id'] == 1 || cookie['roles_id'] == 2){
+        if(cookie['roles_id'] == 1){
             document.getElementById("tambah_directorat").innerHTML = `<button class="btn btn-primary" onclick="window.location.href = '/directorats_add'"> Tambah Direktorat </button>`;
         }else{
             document.getElementById("tambah_directorat").innerHTML=`<h4>Direktorat</h4>`;
