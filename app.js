@@ -911,7 +911,11 @@ apps.get('/detail_custom_page/:id', db.detail_custom_page);
 
 apps.post('/insertcustompage', page_path.single('files_image'), db.insertcustompage);
 
+apps.get('/custom_page_slogo', db.custom_page_slogo);
+
 apps.post('/insertcustompage_slogo', page_path.single('files_image'), db.insertcustompage_slogo);
+
+apps.get('/custom_page_welcome', db.custom_page_welcome);
 
 apps.post('/insertcustompage_welcome', page_path.single('files_image'), db.insertcustompage_welcome);
 

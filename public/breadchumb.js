@@ -43,7 +43,7 @@ if(path == 'nc' || path == 'nc_add' || path == 'nc_edit'){
 }
 //------------------------------- End Of Berita Kategori -----------------------------
 //------------------------------Start Of Struktur----------------------
-if(path == 's' || path == 's_add' || path == 's_edit' || path == 's_logo'){
+if(path == 's' || path == 's_add' || path == 's_edit' || path == 's_logo' || path == 'custom_add_s_logo'){
     breadcrumb1 = "Struktur";
     breadcrumb2 = "List Data";
 }
@@ -227,7 +227,7 @@ if(path == 'submenu' || path == 'submenu_add' || path == 'submenu_add'){
 }
 //-----------------------End Of Whitelist-----------------------------
 //------------------------ Whitelist----------------------
-if(path == 'customfront' || path == 'custom_add' || path == 'welcomebanner'){
+if(path == 'customfront' || path == 'custom_add' || path == 'welcomebanner' || path == 'custom_add_welcome'){
     breadcrumb1 = "Custom Halaman";
     breadcrumb2 = "List Data";
 }
