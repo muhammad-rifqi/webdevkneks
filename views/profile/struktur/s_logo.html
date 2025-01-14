@@ -131,9 +131,20 @@
             $('#custom_page').on('click', '.delete-btn-custom-page', function () {
                 var id = $(this).data('id');
                 var foto = $(this).data('foto');
-                if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    window.location.href='/delete_custom_page_slogo/'+id+'/'+ foto;
-                }
+                swal({
+                    title: "Are you sure?",
+                    text: "To Delete this Data ??",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willOut) => {
+                        if (willOut) {
+                            window.location = '/delete_custom_page_slogo/'+id+'/'+ foto;
+                        } else {
+                            console.log('NaN')
+                        }
+                    });
             });
         });
     </script>

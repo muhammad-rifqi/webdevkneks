@@ -144,9 +144,20 @@
             $('#structure').on('click', '.delete-btn-structure', function () {
                 var id = $(this).data('id');
                 var foto = $(this).data('foto');
-                if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    window.location.href='/deletestructure/'+id+'/'+foto;
-                }
+                swal({
+                    title: "Are you sure?",
+                    text: "To Delete this Data ??",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willOut) => {
+                        if (willOut) {
+                            window.location = '/deletestructure/'+id+'/'+foto;
+                        } else {
+                            console.log('NaN')
+                        }
+                    });
             });
         });
     </script>

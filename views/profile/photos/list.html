@@ -145,9 +145,20 @@
             $('#news_photo').on('click', '.delete-btn-news_photo', function () {
                 var id = $(this).data('id');
                 var foto = $(this).data('foto');
-                if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                   window.location.href='/deletephoto/'+id+'/'+foto;
-                }
+                swal({
+                    title: "Are you sure?",
+                    text: "To Delete this Data ??",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willOut) => {
+                        if (willOut) {
+                            window.location = '/deletephoto/'+id+'/'+foto;
+                        } else {
+                            console.log('NaN')
+                        }
+                    });
             });
         });
     </script>
