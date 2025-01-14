@@ -117,6 +117,7 @@
     <script src="/assets/vendors/js/vendors.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#api_devisi').DataTable()
@@ -151,11 +152,28 @@
                                     <td>${element?.title}</td>
                                     <td>${element?.description}</td>
                                     <td>${element?.directorats_id}</td>
-                                    <td><a href="/directorat_devisi_delete/${element?.id}" onclick="return confirm('Yakin Mau Hapus Data Ini ?')"><button class="btn btn-danger">Delete</button></a></td>                           
+                                    <td><a href="#" onclick="deleteData('${element?.id}')"><button class="btn btn-danger"><i class="feather-trash"></i></button></a></td>                           
                                 </tr>`;
                     });
                     document.getElementById("tabb").innerHTML = aaa;
                 })
+        }
+
+        function deleteData(e) {
+            swal({
+                title: "Are you sure?",
+                text: "To Delete this Data ??",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willOut) => {
+                    if (willOut) {
+                        window.location = "/directorat_devisi_delete/" + e;
+                    } else {
+                        console.log('NaN')
+                    }
+                });
         }
 
     </script>
