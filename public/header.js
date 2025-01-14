@@ -64,7 +64,7 @@ document.write(`<header class="nxl-header">
                                 <span>Change Password</span>
                             </a>
 
-                            <a href="/logout" class="dropdown-item">
+                            <a href="#" onclick="logout()" class="dropdown-item">
                                 <i class="feather-log-out"></i>
                                 <span>Logout</span>
                             </a>
@@ -110,3 +110,22 @@ if (cookies['name'] == "" || cookies['name'] == undefined) {
     <i class="feather-sun"></i>
 </a>
 </div> */}
+
+
+function logout(){
+    swal({
+        title: "Are you sure?",
+        text: "To Leave this Page ??",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willOut) => {
+            if (willOut) {
+                window.location.href = '/logout';
+            } else {
+                console.log('NaN')
+            }
+        });
+   
+}
