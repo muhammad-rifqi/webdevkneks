@@ -97,7 +97,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
     <script src="/assets/js/theme-customizer-init.min.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
@@ -144,9 +144,20 @@
             // 4. Event Listener untuk Tombol Hapus
             $('#banners').on('click', '.delete-btn-banners', function () {
                 var id = $(this).data('id');
-                if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                   window.location.href='/deletebanners/'+id;
-                }
+                swal({
+                    title: "Are you sure?",
+                    text: "To Delete this Data ??",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willOut) => {
+                        if (willOut) {
+                            window.location = '/deletebanners/'+id;
+                        } else {
+                            console.log('NaN')
+                        }
+                    });
             });
         });
     </script>

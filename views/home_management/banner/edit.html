@@ -12,9 +12,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/dataTables.bs5.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
     <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
@@ -74,12 +71,12 @@
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Content Indonesia</label>
                                             <textarea class="form-control" name="content" id="editor3"
-                                                required><p id="val3"></p></textarea>
+                                                ></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Content English</label>
                                             <textarea class="form-control" name="content_en" id="editor4"
-                                                required><p id="val4"></p></textarea>
+                                                ></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -123,12 +120,9 @@
     </main>
 
     <script src="/assets/vendors/js/vendors.min.js"></script>
-    <script src="/assets/vendors/js/dataTables.min.js"></script>
-    <script src="/assets/vendors/js/dataTables.bs5.min.js"></script>
-    <script src="/assets/vendors/js/select2.min.js"></script>
-    <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         window.addEventListener("load", async () => {
             await getUrlById();
@@ -143,8 +137,8 @@
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    document.getElementById("val3").innerHTML = rows[0]?.content;
-                    document.getElementById("val4").innerHTML = rows[0]?.content_en;
+                    nicEditors.findEditor( "editor3" ).setContent( rows[0]?.content );
+                    nicEditors.findEditor( "editor4" ).setContent( rows[0]?.content_en );
                     document.getElementById("previews").innerHTML = `<img src="${rows[0]?.image}" width="180"/>`;
                 })
         }
