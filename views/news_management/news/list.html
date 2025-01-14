@@ -98,7 +98,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
     <script src="/assets/js/theme-customizer-init.min.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
@@ -144,9 +144,20 @@
             $('#news').on('click', '.delete-btn', function () {
                 var id = $(this).data('id');
                 var foto = $(this).data('foto');
-                if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    window.location.href = '/deletenews/' + id + '/' + foto;
-                }
+                swal({
+                    title: "Are you sure?",
+                    text: "To Delete this Data ??",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willOut) => {
+                        if (willOut) {
+                            window.location = '/deletenews/' + id + '/' + foto;
+                        } else {
+                            console.log('NaN')
+                        }
+                    });
             });
         });
     </script>

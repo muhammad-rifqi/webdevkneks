@@ -141,9 +141,20 @@
             // 4. Event Listener untuk Tombol Hapus
             $('#agenda').on('click', '.delete-btn-agenda', function () {
                 var id = $(this).data('id');
-                if (confirm('Apakah kamu yakin ingin menghapus data ini?')) {
-                    window.location.href='/deleteagenda/'+id;
-                }
+                swal({
+                    title: "Are you sure?",
+                    text: "To Delete this Data ??",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willOut) => {
+                        if (willOut) {
+                            window.location = '/deleteagenda/'+id;
+                        } else {
+                            console.log('NaN')
+                        }
+                    });
             });
         });
     </script>
