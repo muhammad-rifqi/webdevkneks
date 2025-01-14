@@ -221,7 +221,7 @@ if(path == 'menu' || path == 'menu_add' || path == 'menu_edit'){
 } 
 //-----------------------End Of Whitelist-----------------------------
 //------------------------ Whitelist----------------------
-if(path == 'submenu' || path == 'submenu_add' || path == 'submenu_add'){
+if(path == 'submenu' || path == 'submenu_add' || path == 'submenu_edit'){
     breadcrumb1 = "Sub Menu";
     breadcrumb2 = "List Data";
 }
