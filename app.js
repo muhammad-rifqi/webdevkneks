@@ -1015,7 +1015,7 @@ apps.get('/master_delete/:id', db.deletemaster);
 
 //::::::::::::::::: End Of KDEKS ::::::::::::::::::::::::::
 
-apps.post('/insertusers', db.user_register);
+apps.post('/insertreg', db.user_register);
 
 apps.post('/do_login', db.do_login);
 

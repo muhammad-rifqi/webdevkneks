@@ -146,11 +146,12 @@ const do_login = async (req, res) => {
 const user_register = async (req, res) => {
     const passwords = md5(req?.body?.password);
     const sql = await executeQuery("insert into users(name,email,password) values($1,$2,$3)",
-        [req.body.username, req.body.email, passwords]);
+        [req.body.username.replace(/\s/g, ''), req.body.email, passwords]);
     if (sql) {
-        res.redirect('/');
+        // res.redirect('/');
+        res.status(200).json({ "success": true });
     } else {
-        res.redirect('/');
+        res.status(200).json({ "success": false });
     }
 }
 
