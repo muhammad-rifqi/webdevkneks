@@ -39,7 +39,7 @@
         <div class="input-box">
           <header>KNEKS BACKEND</header>
           <h5>USER LOGIN</h5>
-          <h6 id="ips" align="center"></h6>
+          <!-- <h6 id="ips" align="center"></h6> -->
           <!-- <form class="sign-in-form" action="/act_login" method="post"> -->
           <form class="sign-in-form" method="POST" onsubmit="do_login(); return false;">
             <input type="hidden" id="ip_address" name="ip_address" value="" />
@@ -102,7 +102,7 @@
         .then(response => response.json())
         .then((data) => {
           document.getElementById('ip_address').value = data.ip;
-          document.getElementById('ips').innerText = "Ip Anda :" + data.ip;
+          // document.getElementById('ips').innerText = "Ip Anda :" + data.ip;
         })
 
     } catch (error) {
