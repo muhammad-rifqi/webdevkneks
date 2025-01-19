@@ -33,7 +33,7 @@
     <div class="row">
       <div class="col-lg-8 col-md-6 d-none d-md-block ">
         <div class=" m-5"><img src="/style/image/logo-login.svg" alt="logoLogin"></div>
-        <div class="text-center gb-login"><img id="gbrs" src="" alt="imgLogin" width="60%" loading="lazy"></div>
+        <div class="text-center gb-login" id="gbrs"></div>
       </div>
       <div class="col-lg-4 col-md-6  col-sm-12 right ">
         <div class="input-box">
@@ -72,10 +72,12 @@
 
   function getImageLogin() {
     fetch('/custom_page').then(response => response.json()).then((rows) => {
-      if (rows[0]?.path == undefined || rows[0]?.path == "") {
-        document.getElementById("gbrs").setAttribute('src', '/style/image/gbr-login.png');
+      if (rows[0]?.path == undefined || rows[0]?.path == "" || rows[0]?.path == null) {
+        // document.getElementById("gbrs").setAttribute('src', '/style/image/gbr-login.png');
+        document.getElementById("gbrs").innerHTML = `Loading...`;
       } else {
-        document.getElementById("gbrs").setAttribute('src', rows[0]?.path);
+        // document.getElementById("gbrs").setAttribute('src', rows[0]?.path);
+        document.getElementById("gbrs").innerHTML = `<img src="${rows[0]?.path}" alt="imgLogin" width="60%" loading="lazy">`;
       }
     })
   }
@@ -88,11 +90,11 @@
       var [key, value] = b;
       kuki[key.trim()] = value;
     }
-    if(kuki['name'] === "" || kuki['name'] === undefined) {
-        console.log(kuki['name']??"Tidak Ada Kuki!")
+    if (kuki['name'] === "" || kuki['name'] === undefined) {
+      console.log(kuki['name'] ?? "Tidak Ada Kuki!")
     } else {
-        console.log(kuki['name']??"Tidak Ada Kuki!")
-        window.location.href = '/dashboard';
+      console.log(kuki['name'] ?? "Tidak Ada Kuki!")
+      window.location.href = '/dashboard';
     }
   }
 
