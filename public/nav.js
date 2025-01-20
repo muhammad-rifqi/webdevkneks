@@ -322,7 +322,7 @@ if (cookie["roles_id"] == 1) {
                             <li class="nxl-item"><a class="nxl-link" href="/sm">Media Sosial</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/c">Kontak</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/m">Peta</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/scp">Scope</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/scp">Skup</a></li>
                          </ul>
                     </li>
                             `);
