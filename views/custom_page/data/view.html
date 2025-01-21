@@ -51,8 +51,11 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 mb-4">
-                                        <label class="form-label">Judul</label>
                                         <h4 id="titles"></h4>
+                                        <p id="judul"></p>
+                                        <p id="produsen_data"></p>
+                                        <p id="tanggal"></p>
+                                        <p id="periode_tanggal"></p>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +64,7 @@
 
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
-                            <form action="/insertdetailsourcedata" method="post">
+                            <!-- <form action="/insertdetailsourcedata" method="post">
                                 <input type="hidden" name="idd" id="idd" value="">
                                 <div class="card-body lead-status">
                                     <div class="row">
@@ -76,7 +79,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </form> -->
                             <div class="table-responsive p-5">
                                 <table id="sourcesdatadetail" class="display" style="width: 100%;">
                                     <thead>
@@ -87,7 +90,7 @@
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tabb">
+                                    <tbody>
                                     </tbody>
                                 </table>
                             </div>
@@ -130,52 +133,57 @@
     <script>
         window.addEventListener("load", async () => {
             await getUrlById();
-            await getDataDetail();
+            // await getDataDetail();
         })
         function getUrlById() {
             const URLS = new URL(window.location.href);
             fetch('/sourcesdatadetail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
-                    document.getElementById("idd").value = rows[0]?.id;
-                    document.getElementById("titles").innerHTML = rows[0]?.dataset;
+                    console.log(rows)
+                    // document.getElementById("idd").value = rows[0]?.id;
+                    document.getElementById("titles").innerHTML = rows[0]?.dataset??"--:";
+                    document.getElementById("judul").innerHTML = rows[0]?.judul??"--:";
+                    document.getElementById("produsen_data").innerHTML = rows[0]?.produsen_data??"--:";
+                    document.getElementById("tanggal").innerHTML = rows[0]?.tanggal??"--:";
+                    document.getElementById("periode_tanggal").innerHTML = rows[0]?.periode_tanggal??"--:";
                 })
         }
 
-        function getDataDetail() {
-            const URLS = new URL(window.location.href);
-            fetch('/sourcesdatadetaillist/' + URLS.pathname.split('/')[2])
-                .then(data => data.json())
-                .then((rrr) => {
-                    var aaa = "";
-                    rrr.forEach((element) => {
-                        aaa += `<tr>
-                                    <td>#${element?.id}</td>
-                                    <td>#${element?.id_sourcedata}</td>
-                                    <td>${element?.description}</td>
-                                    <td><a href="#" onclick="deleteApi('${element?.id}')"><button class="btn btn-danger"><i class="feather-trash"></i></button></a></td>                           
-                                </tr>`;
-                    });
-                    document.getElementById("tabb").innerHTML = aaa;
-                })
-        }
+        // function getDataDetail() {
+        //     const URLS = new URL(window.location.href);
+        //     fetch('/sourcesdatadetaillist/' + URLS.pathname.split('/')[2])
+        //         .then(data => data.json())
+        //         .then((rrr) => {
+        //             var aaa = "";
+        //             rrr.forEach((element) => {
+        //                 aaa += `<tr>
+        //                             <td>#${element?.id}</td>
+        //                             <td>#${element?.id_sourcedata}</td>
+        //                             <td>${element?.description}</td>
+        //                             <td><a href="#" onclick="deleteApi('${element?.id}')"><button class="btn btn-danger"><i class="feather-trash"></i></button></a></td>                           
+        //                         </tr>`;
+        //             });
+        //             document.getElementById("tabb").innerHTML = aaa;
+        //         })
+        // }
 
-        function deleteApi(e) {
-            swal({
-                title: "Are you sure?",
-                text: "To Delete this Data ??",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willOut) => {
-                    if (willOut) {
-                        window.location = "/sourcedata_detail_delete/" + e;
-                    } else {
-                        console.log('NaN')
-                    }
-                });
-        }
+        // function deleteApi(e) {
+        //     swal({
+        //         title: "Are you sure?",
+        //         text: "To Delete this Data ??",
+        //         icon: "warning",
+        //         buttons: true,
+        //         dangerMode: true,
+        //     })
+        //         .then((willOut) => {
+        //             if (willOut) {
+        //                 window.location = "/sourcedata_detail_delete/" + e;
+        //             } else {
+        //                 console.log('NaN')
+        //             }
+        //         });
+        // }
     </script>
 </body>
 

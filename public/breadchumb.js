@@ -11,7 +11,7 @@ if(path == 'narationfront' || path == 'narationfront_add' || path == 'edit_narat
     breadcrumb1 = "Data";
     breadcrumb2 = "Narasi";
 }
-if(path == 'metabase'){
+if(path == 'metabase' || path == 'metabaseadd'){
     breadcrumb1 = "Data";
     breadcrumb2 = "Metabase";
 }
@@ -24,9 +24,9 @@ if(path == 'slidefront' || path == 'slide_add' ){
     breadcrumb2 = "Slider";
 }
 
-if(path == 'iph' || path == 'jks' || path == 'kss' || path == 'biwis' || path == 'insis'){
+if(path == 'slidefrontsubmenu' || path == 'slidefrontsubmenuadd'){
     breadcrumb1 = "Data";
-    breadcrumb2 = "Link Data";
+    breadcrumb2 = "Sub Menu";
 }
 //------------------------------- End Of Data -----------------------------
 //------------------------------Start Of Direktorat----------------------

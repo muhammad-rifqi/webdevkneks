@@ -53,38 +53,19 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
+                        <p>
+                            <button class="btn btn-primary" onclick="window.location.href = '/metabaseadd'">Tambah
+                                Dashboard </button>
+                        </p>
                         <div class="card stretch stretch-full">
-                            <form action="/insertapimeta" method="post">
-                                <input type="hidden" name="idm" id="ids" value="">
-                                <div class="card-body lead-status">
-                                    <div class="row">
-
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Pilih Data</label>
-                                            <select class="form-control" name="data_type" id="data_types" required>
-                                                <option value="0">Choose</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Masukan Link Data</label>
-                                            <input class="form-control" type="text" name="api" id="api" required>
-                                        </div>
-
-                                        <div class="col-lg-12 mb-4 text-left">
-                                            <label class="form-label"></label>
-                                            <input class="btn btn-primary" type="submit" value="Simpan">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
                             <div class="table-responsive p-5">
                                 <table id="api_meta" class="display" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
+                                            <th>NAMA PENDEK</th>
                                             <th>API</th>
-                                            <th>TIPE DATA</th>
+                                            <th>MENU</th>
                                             <th>AKSI</th>
                                         </tr>
                                     </thead>
@@ -145,22 +126,7 @@
     <script>
         window.addEventListener("load", async () => {
             await getDataMeta();
-            await geDataType();
         })
-        function geDataType() {
-            // const URLS = new URL(window.location.href);
-            // fetch('/narations_detail/' + URLS.pathname.split('/')[2])
-            fetch('/statistics')
-                .then(data => data.json())
-                .then((rows) => {
-                    rows.forEach((element) => {
-                        const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}-${element?.title}`;
-                        ddd.text = `${element?.title}`;
-                        document.getElementById("data_types").append(ddd);
-                    })
-                })
-        }
 
         function getDataMeta() {
             const URLS = new URL(window.location.href);
@@ -171,6 +137,7 @@
                     rrr.forEach((element) => {
                         aaa += `<tr>
                                     <td>#${element?.id}</td>
+                                    <td>${element?.short_name}</td>
                                     <td>${element?.api}</td>
                                     <td>${element?.statistic_name}</td>
                                     <td><a href="#" onclick="deleteMeta('${element?.id}')"><button class="btn btn-danger"><i class="feather-edit"></i></button></a></td>                           

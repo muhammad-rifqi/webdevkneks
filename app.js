@@ -495,6 +495,18 @@ apps.get('/metabase', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/metabase.html'));
 });
 
+apps.get('/metabaseadd', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/metabaseadd.html'));
+});
+
+apps.get('/slidefrontsubmenu', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/subdata/list.html'));
+});
+
+apps.get('/slidefrontsubmenuadd', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/subdata/add.html'));
+});
+
 // :::::::::::::::::::::::::::: Opini ::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/opini', (req, res) => {
@@ -926,6 +938,14 @@ apps.get('/delete_custom_page_slogo/:id/:foto', db.delete_custom_page_slogo);
 apps.get('/delete_custom_page_welcome/:id/:foto', db.delete_custom_page_welcome);
 
 //::::::::::::::: Api & Query CUSTOM PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.get('/sub_slides', db.sub_slides);
+
+apps.post('/insert_subslides', db.insert_subslides);
+
+apps.get('/delete_subslide/:id', db.delete_slides);
+
+apps.get('/detail_subslides/:id', db.detailsub_slides);
 
 apps.get('/narations/:id', db.naration);
 

@@ -41,19 +41,21 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p id="tambah_naration">
-
+                        <p>
+                            <button class="btn btn-primary"
+                                onclick="window.location.href = '/slidefrontsubmenuadd'">Tambah
+                                Sub Menu </button>
                         </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
-                                    <table id="narations" class="display" style="width: 100%;">
+                                    <table id="subslide" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Menu</th>
-                                                <th>Keterangan [ID]</th>
-                                                <th>Keterangan [EN]</th>
+                                                <th>ID Menu </th>
+                                                <th>Nama Pendek</th>
+                                                <th>Nama Panjang</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -101,34 +103,21 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
-            // 2. Inisialisasi DataTable
-            const URLS = new URL(window.location.href);
-            document.getElementById("tambah_naration").innerHTML = `<button class="btn btn-primary" onclick="window.location.href = '/narationfront_add/${URLS.pathname.split('/')[2]}/${URLS.pathname.split('/')[3]}'">Tambah Narasi </button>`;
-            $('#narations').DataTable({
+            $('#subslide').DataTable({
                 "ajax": {
-                    "url": "/narations/" + URLS.pathname.split('/')[2],
+                    "url": "/sub_slides",
                     "dataSrc": ""
                 },
                 "columns": [
                     { "data": "id" },
-                    { "data": "statistic_name" },
-                    {
-                        "data": null,
-                        "render": function (data, type, row) {
-                            return `${row?.description.substring(0, 50)}...`;
-                        }
-                    },
-                    {
-                        "data": null,
-                        "render": function (data, type, row) {
-                            return `${row?.description_en.substring(0, 50)}...`;
-                        }
-                    },
+                    { "data": "id_slide" },
+                    { "data": "short_name" },
+                    { "data": "long_name" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
                             return `<p>
-                                        <button class='edit-btn btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
+                                        <button class='edit-btn btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
                                     </p>`;
                         }
                     }
@@ -144,13 +133,24 @@
                 ],
             });
 
-            $('#narations').on('click', '.edit-btn', function () {
+            $('#subslide').on('click', '.edit-btn', function () {
                 var id = $(this).data('id');
-                window.location.href = '/edit_narationfront/' + id;
+                swal({
+                    title: "Are you sure?",
+                    text: "To Delete this Data ??",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willOut) => {
+                        if (willOut) {
+                            window.location = '/delete_subslide/' + id;
+                        } else {
+                            console.log('NaN')
+                        }
+                    });
             });
         });
-
-        // <button class='view-btn btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Set-Api</button>
     </script>
 
 </body>

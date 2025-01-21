@@ -15,12 +15,54 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin);
-            res.cookie("id", sql[0]?.id);
-            res.cookie("name", sql[0]?.name);
-            res.cookie("roles_id", sql[0]?.role_id);
-            res.cookie("id_province", sql[0]?.id_province);
-            res.cookie("directorat_id", sql[0]?.directorat_id);
+            res.cookie("islogin", isLogin, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id", sql[0]?.id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("name", sql[0]?.name, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("roles_id", sql[0]?.role_id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id_province", sql[0]?.id_province, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("directorat_id", sql[0]?.directorat_id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -2389,7 +2431,7 @@ const custom_page_welcome = async (req, res) => {
 
 const insertcustompage_welcome = async (req, res) => {
     const filesimage = site_url + "/uploads/custompage/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery('insert into custom_page(name,path,flag) values ($1,$2,$3)', [req.body.names, filesimage,req.body.flag]);
+    const sql = await executeQuery('insert into custom_page(name,path,flag) values ($1,$2,$3)', [req.body.names, filesimage, req.body.flag]);
     if (sql?.length > 0) {
         res.redirect('/welcomebanner');
     } else {
@@ -2474,6 +2516,44 @@ const delete_custom_page_welcome = async (req, res) => {
 
 //:::::::::::::::::::::::::::::: End Zona Khas  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+const sub_slides = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM sub_slide');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+const detailsub_slides = async (req, res) => {
+    const id_slides = req.params.id;
+    const sql = await executeQuery('SELECT * FROM sub_slide where id = $1', [id_slides]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
+}
+const insert_subslides = async (req, res) => {
+    // const ddd = req.body.data_type.split('-');
+    const sql = await executeQuery("INSERT INTO sub_slide (id_slide,short_name,long_name)values($1,$2,$3)",
+        [req.body.menu_id, req.body.short_name, req.body.long_name]);
+    if (sql) {
+        res.redirect('/slidefrontsubmenu');
+    } else {
+        res.redirect('/slidefrontsubmenu');
+    }
+}
+
+const delete_slides = async (req, res) => {
+    const id_meta = req.params.id;
+    const sql = await executeQuery('DELETE FROM sub_slide where id = $1', [id_meta]);
+    if (sql?.length > 0) {
+        res.redirect('/slidefrontsubmenu');
+    } else {
+        res.redirect('/slidefrontsubmenu');
+    }
+}
+
 const naration = async (req, res) => {
     const id_mt = req.params.id;
     const sql = await executeQuery('SELECT * FROM naration where statistic_id = $1 ', [id_mt]);
@@ -2495,24 +2575,24 @@ const naration_detail = async (req, res) => {
 }
 
 const insertnarations = async (req, res) => {
-    const ddd = req.body.data_type.split('-');
+    // const ddd = req.body.data_type.split('-');
     const sql = await executeQuery("INSERT INTO naration (statistic_id,statistic_name,description,description_en)values($1,$2,$3,$4)",
-        [ddd[0], ddd[1], req.body.description, req.body.description_en]);
+        [req.body.data_type, req.body.data_type_name, req.body.description, req.body.description_en]);
     if (sql) {
-        res.redirect('/narationfront');
+        res.redirect('/narationfront/' + req.body.data_type + '/' + req.body.data_type_name);
     } else {
-        res.redirect('/narationfront');
+        res.redirect('/narationfront/' + req.body.data_type + '/' + req.body.data_type_name);
     }
 }
 
 const updatenarations = async (req, res) => {
-    const ddd = req.body.data_type.split('-');
+    // const ddd = req.body.data_type.split('-');
     const sql = await executeQuery("UPDATE naration set statistic_id= $1 , statistic_name = $2, description = $3, description_en = $4 where id = $5",
-        [ddd[0], ddd[1], req.body.description, req.body.description_en, req.body.id]);
+        [req.body.data_type, req.body.data_type_name, req.body.description, req.body.description_en, req.body.id]);
     if (sql) {
-        res.redirect('/narationfront');
+        res.redirect('/narationfront/' + req.body.data_type + '/' + req.body.data_type_name);
     } else {
-        res.redirect('/narationfront');
+        res.redirect('/narationfront/' + req.body.data_type + '/' + req.body.data_type_name);
     }
 }
 
@@ -2548,7 +2628,7 @@ const metabase_delete = async (req, res) => {
 
 const insertapimeta = async (req, res) => {
     const ddd = req.body.data_type.split('-');
-    const sql = await executeQuery('INSERT INTO api_meta (api,statistic_id,statistic_name) values ($1,$2,$3)', [req.body.api, ddd[0], ddd[1]]);
+    const sql = await executeQuery('INSERT INTO api_meta (api,statistic_id,statistic_name,short_name) values ($1,$2,$3,$4)', [req.body.api, ddd[0], ddd[1], req.body.short_name]);
     if (sql?.length > 0) {
         res.redirect('/metabase');
     } else {
@@ -3013,6 +3093,10 @@ module.exports = {
     delete_custom_page,
     delete_custom_page_slogo,
     delete_custom_page_welcome,
+    sub_slides,
+    detailsub_slides,
+    insert_subslides,
+    delete_slides,
     naration,
     naration_detail,
     insertnarations,

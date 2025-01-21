@@ -52,10 +52,13 @@
                                     <div class="row">
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Pilih Data</label>
-                                            <select class="form-control" name="data_type" id="data_types" required>
-                                                <option value="0">Pilih Data</option>
-                                            </select>
+                                            <label class="form-label">ID Menu Data </label>
+                                            <input class="form-control" name="data_type" id="data_types" readonly>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Nama Menu Data</label>
+                                            <input class="form-control" name="data_type_name" id="data_types_name" readonly>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -105,9 +108,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         window.addEventListener("load", async () => {
-            let stat_id;
             await getUrlById();
-            await geDataType();
         })
 
         function getUrlById() {
@@ -116,32 +117,12 @@
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("id").value = rows[0]?.id;
+                    document.getElementById("data_types").value = rows[0]?.statistic_id;
+                    document.getElementById("data_types_name").value = rows[0]?.statistic_name;
                     document.getElementById("description_ids").innerHTML = rows[0]?.description;
                     document.getElementById("description_ens").innerHTML = rows[0]?.description_en;
-                    stat_id = rows[0]?.statistic_id;
                 })
         }
-
-        function geDataType() {
-            fetch('/statistics')
-                .then(data => data.json())
-                .then((rows) => {
-                    rows.forEach((element) => {
-                        const ddd = document.createElement('option')
-                        if (element?.id == stat_id) {
-                            ddd.value = `${element?.id}-${element?.title}`;
-                            ddd.text = `${element?.title}`;
-                            ddd.selected = true;
-                        } else {
-                            ddd.value = `${element?.id}-${element?.title}`;
-                            ddd.text = `${element?.title}`;
-                            ddd.selected = false;
-                        }
-                        document.getElementById("data_types").append(ddd);
-                    })
-                })
-        }
-
     </script>
 </body>
 
