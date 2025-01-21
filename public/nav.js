@@ -218,15 +218,15 @@ if (cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 
 
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
     document.write(`
-                            <li class="nxl-item"><a class="nxl-link" href="/narationfront">Narasi</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/metabase">Api Metabase</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/slidefront">Data Menu</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/metabase">Link Data</a></li>
                            `);
 }
 //data set dan slide
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
     document.write(`
+                            <li class="nxl-item"><a class="nxl-link" href="/narationfront">Narasi</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/datafront">Data Set</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/slidefront">Data Menu</a></li>
                             `);
 }
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {

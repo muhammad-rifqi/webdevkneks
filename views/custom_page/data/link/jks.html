@@ -57,7 +57,7 @@
                     <div class="col-xxl-12 col-md-12">
                         <div class="card stretch stretch-full">
                             <div class="card-body">
-                                <iframe src="https://metabase.kneks.go.id/public/dashboard/76abbee6-24af-43e5-96ea-8c6bfdee48c7" width="100%" height="700"></iframe>
+                                <iframe width="100%" height="700" id="jks"></iframe>
                             </div>
                         </div>
                     </div>
@@ -97,5 +97,18 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>
+<script>
+    window.addEventListener("load", async () => {
+        await getData();
+    })
 
+    function getData() {
+        fetch('/api_metabase')
+            .then(data => data.json())
+            .then((rows) => {
+                console.log(rows)
+                document.getElementById("jks").setAttribute('src',rows[4]?.api);
+            })
+    }
+</script>
 </html>
