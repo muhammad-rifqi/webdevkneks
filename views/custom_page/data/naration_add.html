@@ -51,10 +51,13 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Pilih Data</label>
-                                            <select class="form-control" name="data_type" id="data_types" required>
-                                                <option value="0">Pilih Data</option>
-                                            </select>
+                                            <label class="form-label">ID Menu Data </label>
+                                            <input class="form-control" name="data_type" id="data_types" readonly>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Nama Menu Data</label>
+                                            <input class="form-control" name="data_type" id="data_types_name" readonly>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -106,21 +109,10 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         window.addEventListener("load", async () => {
-            await geDataType();
+            const URLS = new URL(window.location.href);
+            document.getElementById("data_types").value=`${URLS.pathname.split('/')[2]}`;
+            document.getElementById("data_types_name").value=`${URLS.pathname.split('/')[3]}`;
         })
-
-        function geDataType() {
-            fetch('/statistics')
-                .then(data => data.json())
-                .then((rows) => {
-                    rows.forEach((element) => {
-                        const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}-${element?.title}`;
-                        ddd.text = `${element?.title}`;
-                        document.getElementById("data_types").append(ddd);
-                    })
-                })
-        }
     </script>
 </body>
 

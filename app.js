@@ -479,7 +479,7 @@ apps.get('/data_detail/:id', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/view.html'));
 });
 
-apps.get('/narationfront', (req, res) => {
+apps.get('/narationfront/:id/:name', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/naration.html'));
 });
 
@@ -487,33 +487,13 @@ apps.get('/edit_narationfront/:id', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/naration_edit.html'));
 });
 
-apps.get('/narationfront_add', (req, res) => {
+apps.get('/narationfront_add/:id/:name', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/naration_add.html'));
 });
 
 apps.get('/metabase', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/metabase.html'));
 });
-
-apps.get('/iph', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/link/iph.html'));
-})
-
-apps.get('/jks', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/link/jks.html'));
-})
-
-apps.get('/kss', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/link/kss.html'));
-})
-
-apps.get('/biwis', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/link/biwis.html'));
-})
-
-apps.get('/insis', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/link/insis.html'));
-})
 
 // :::::::::::::::::::::::::::: Opini ::::::::::::::::::::::::::::::::::::::::
 
@@ -947,7 +927,7 @@ apps.get('/delete_custom_page_welcome/:id/:foto', db.delete_custom_page_welcome)
 
 //::::::::::::::: Api & Query CUSTOM PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-apps.get('/narations', db.naration);
+apps.get('/narations/:id', db.naration);
 
 apps.get('/narations_detail/:id', db.naration_detail);
 
