@@ -61,12 +61,12 @@ document.write(`<header class="nxl-header">
                             </div>
                             <a href="/cp" class="dropdown-item">
                                 <i class="feather-user"></i>
-                                <span>Change Password</span>
+                                <span>Ubah Password</span>
                             </a>
 
                             <a href="#" onclick="logout()" class="dropdown-item">
                                 <i class="feather-log-out"></i>
-                                <span>Logout</span>
+                                <span>Keluar</span>
                             </a>
                         </div>
                     </div>
