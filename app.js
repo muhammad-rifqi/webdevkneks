@@ -495,6 +495,26 @@ apps.get('/metabase', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/metabase.html'));
 });
 
+apps.get('/iph', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/link/iph.html'));
+})
+
+apps.get('/jks', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/link/jks.html'));
+})
+
+apps.get('/kss', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/link/kss.html'));
+})
+
+apps.get('/biwis', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/link/biwis.html'));
+})
+
+apps.get('/insis', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/data/link/insis.html'));
+})
+
 // :::::::::::::::::::::::::::: Opini ::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/opini', (req, res) => {

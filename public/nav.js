@@ -191,10 +191,21 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 
                         <ul class="nxl-submenu">
                             `);
 }
-
-if (cookie["roles_id"] == 1) {
+{/* <li class="nxl-item"><a class="nxl-link" href="/dashboard">Dashboard</a></li>  */}
+if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
     document.write(`
-                            <li class="nxl-item"><a class="nxl-link" href="/dashboard">Dashboard</a></li>
+                     <li class="nxl-item nxl-hasmenu">
+                        <a href="javascript:void(0);" class="nxl-link">
+                            <span class="nxl-mtext">Dashboard</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                        </a>
+                        <ul class="nxl-submenu">
+                               <li class="nxl-item"><a class="nxl-link" href="/iph">IPH</a></li>
+                               <li class="nxl-item"><a class="nxl-link" href="/jks">JKS</a></li>
+                               <li class="nxl-item"><a class="nxl-link" href="/kss">KSS</a></li> 
+                               <li class="nxl-item"><a class="nxl-link" href="/biwis">BIWIS</a></li>
+                               <li class="nxl-item"><a class="nxl-link" href="/insis">INSIS</a></li>
+                        </ul>
+                    </li>    
                            `);
 }
 
@@ -212,10 +223,10 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                            `);
 }
 //data set dan slide
-if (cookie["roles_id"] == 1) {
+if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
     document.write(`
                             <li class="nxl-item"><a class="nxl-link" href="/datafront">Data Set</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/slidefront">Slide</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/slidefront">Data Menu</a></li>
                             `);
 }
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {

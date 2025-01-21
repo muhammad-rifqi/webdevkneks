@@ -23,6 +23,11 @@ if(path == 'slidefront' || path == 'slide_add' ){
     breadcrumb1 = "Data";
     breadcrumb2 = "Slider";
 }
+
+if(path == 'iph' || path == 'jks' || path == 'kss' || path == 'biwis' || path == 'insis'){
+    breadcrumb1 = "Data";
+    breadcrumb2 = "Link Data";
+}
 //------------------------------- End Of Data -----------------------------
 //------------------------------Start Of Direktorat----------------------
 if(path == 'directorats' || path == 'directorats_add' || path == 'directorats_edit' || path == 'directorats_detail' || path == 'directorats_devisi'){
