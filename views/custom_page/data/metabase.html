@@ -64,7 +64,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>NAMA PENDEK</th>
-                                            <th>API</th>
+                                            <th>LINK DATA</th>
                                             <th>MENU</th>
                                             <th>AKSI</th>
                                         </tr>
@@ -140,7 +140,10 @@
                                     <td>${element?.short_name}</td>
                                     <td>${element?.api}</td>
                                     <td>${element?.statistic_name}</td>
-                                    <td><a href="#" onclick="deleteMeta('${element?.id}')"><button class="btn btn-danger"><i class="feather-edit"></i></button></a></td>                           
+                                    <td>
+                                        <a href="/narationfront/${element?.id}/${element?.statistic_name}"><button class="btn btn-warning" style="padding:2px;">Narasi</button></a> 
+                                        <a href="#" onclick="deleteMeta('${element?.id}')"><button class="btn btn-danger" style="padding:2px;"><i class="feather-trash"></i></button></a>      
+                                    </td>                           
                                 </tr>`;
                     });
                     document.getElementById("tabb").innerHTML = aaa;

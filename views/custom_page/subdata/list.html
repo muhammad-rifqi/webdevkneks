@@ -49,7 +49,7 @@
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
-                                    <table id="subslide" class="display" style="width: 100%;">
+                                    <table id="sub_statistics" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -103,14 +103,14 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#subslide').DataTable({
+            $('#sub_statistics').DataTable({
                 "ajax": {
-                    "url": "/sub_slides",
+                    "url": "/sub_statistic",
                     "dataSrc": ""
                 },
                 "columns": [
                     { "data": "id" },
-                    { "data": "id_slide" },
+                    { "data": "id_statistic" },
                     { "data": "short_name" },
                     { "data": "long_name" },
                     {
@@ -133,7 +133,7 @@
                 ],
             });
 
-            $('#subslide').on('click', '.edit-btn', function () {
+            $('#sub_statistics').on('click', '.edit-btn', function () {
                 var id = $(this).data('id');
                 swal({
                     title: "Are you sure?",
@@ -144,7 +144,7 @@
                 })
                     .then((willOut) => {
                         if (willOut) {
-                            window.location = '/delete_subslide/' + id;
+                            window.location = '/delete_substatistic/' + id;
                         } else {
                             console.log('NaN')
                         }

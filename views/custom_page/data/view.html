@@ -52,10 +52,10 @@
                                 <div class="row">
                                     <div class="col-lg-12 mb-4">
                                         <h4 id="titles"></h4>
-                                        <p id="judul"></p>
-                                        <p id="produsen_data"></p>
-                                        <p id="tanggal"></p>
-                                        <p id="periode_tanggal"></p>
+                                        Judul : <p id="judul"></p>
+                                        Produsen Data : <p id="produsen_data"></p>
+                                        Tanggal : <p id="tanggal"></p>
+                                        Periode Tanggal : <p id="periode_tanggal"></p>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                                 </div>
                             </form> -->
                             <div class="table-responsive p-5">
-                                <table id="sourcesdatadetail" class="display" style="width: 100%;">
+                                <table id="api_database" class="display" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -90,7 +90,7 @@
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="databases">
                                     </tbody>
                                 </table>
                             </div>
@@ -126,14 +126,15 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#sourcesdatadetail').DataTable()
+            $('#api_database').DataTable()
         });
     </script>
 
     <script>
         window.addEventListener("load", async () => {
             await getUrlById();
-            // await getDataDetail();
+            await getDataDetail();
+            await getDataBase();
         })
         function getUrlById() {
             const URLS = new URL(window.location.href);
@@ -142,48 +143,46 @@
                 .then((rows) => {
                     console.log(rows)
                     // document.getElementById("idd").value = rows[0]?.id;
-                    document.getElementById("titles").innerHTML = rows[0]?.dataset??"--:";
-                    document.getElementById("judul").innerHTML = rows[0]?.judul??"--:";
-                    document.getElementById("produsen_data").innerHTML = rows[0]?.produsen_data??"--:";
-                    document.getElementById("tanggal").innerHTML = rows[0]?.tanggal??"--:";
-                    document.getElementById("periode_tanggal").innerHTML = rows[0]?.periode_tanggal??"--:";
+                    document.getElementById("titles").innerHTML = rows[0]?.dataset ?? "--:";
                 })
         }
 
-        // function getDataDetail() {
-        //     const URLS = new URL(window.location.href);
-        //     fetch('/sourcesdatadetaillist/' + URLS.pathname.split('/')[2])
-        //         .then(data => data.json())
-        //         .then((rrr) => {
-        //             var aaa = "";
-        //             rrr.forEach((element) => {
-        //                 aaa += `<tr>
-        //                             <td>#${element?.id}</td>
-        //                             <td>#${element?.id_sourcedata}</td>
-        //                             <td>${element?.description}</td>
-        //                             <td><a href="#" onclick="deleteApi('${element?.id}')"><button class="btn btn-danger"><i class="feather-trash"></i></button></a></td>                           
-        //                         </tr>`;
-        //             });
-        //             document.getElementById("tabb").innerHTML = aaa;
-        //         })
-        // }
+        function getDataDetail() {
+            const URLS = new URL(window.location.href);
+            fetch('/sourcesdatadetaillist/' + URLS.pathname.split('/')[2])
+                .then(data => data.json())
+                .then((rrr) => {
+                    document.getElementById("judul").innerHTML = rrr[0]?.judul ?? "--:";
+                    document.getElementById("produsen_data").innerHTML = rrr[0]?.produsen_data ?? "--:";
+                    document.getElementById("tanggal").innerHTML = rrr[0]?.tanggal ?? "--:";
+                    document.getElementById("periode_tanggal").innerHTML = rrr[0]?.periode_tanggal ?? "--:";
+                })
+        }
 
-        // function deleteApi(e) {
-        //     swal({
-        //         title: "Are you sure?",
-        //         text: "To Delete this Data ??",
-        //         icon: "warning",
-        //         buttons: true,
-        //         dangerMode: true,
-        //     })
-        //         .then((willOut) => {
-        //             if (willOut) {
-        //                 window.location = "/sourcedata_detail_delete/" + e;
-        //             } else {
-        //                 console.log('NaN')
-        //             }
-        //         });
-        // }
+
+        function getDataBase() {
+            fetch('https://dashboard-dev.kneks.go.id/api/aus/indikator-aus', {
+                method: 'GET',
+                headers: {
+                    'Access-Control-Allow-Origin':'*',
+                    'x-api-key': 'RnwSHSOWkAAXWN3QRO6XZppBiJSLqroCHQuYzj8LoJE992oWfbeCw3Ligxq6HJIJh83T1yo0NHRiYc4L5N1lq6HLq7bqKeek5fydZCfJUu9DEJJPV2ldhdTQQmFALO9t'
+                }
+                }).then(row => row.json())
+                .then((rowp) => {
+                    var aaa = "";
+                    rrr.slice(0,7).forEach((element) => {
+                        aaa += `<tr>
+                                    <td>#${element?.kuartal}</td>
+                                    <td>${element?.total_nilai_pembiayaan}</td>
+                                    <td>${element?.pangsa_pembiayaan}</td>
+                                    <td>${element?.pangsa_aktivitas_usaha}</td>         
+                                </tr>`;
+                    });
+                    document.getElementById("databases").innerHTML = aaa;
+                })
+        }
+
+       
     </script>
 </body>
 

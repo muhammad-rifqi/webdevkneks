@@ -939,13 +939,13 @@ apps.get('/delete_custom_page_welcome/:id/:foto', db.delete_custom_page_welcome)
 
 //::::::::::::::: Api & Query CUSTOM PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-apps.get('/sub_slides', db.sub_slides);
+apps.get('/sub_statistic', db.sub_statistic);
 
-apps.post('/insert_subslides', db.insert_subslides);
+apps.post('/insert_substatistic', db.insert_substatistic);
 
-apps.get('/delete_subslide/:id', db.delete_slides);
+apps.get('/delete_substatistic/:id', db.delete_substatistic);
 
-apps.get('/detail_subslides/:id', db.detailsub_slides);
+apps.get('/detail_substatistic/:id', db.detailsub_substatistic);
 
 apps.get('/narations/:id', db.naration);
 
@@ -977,11 +977,7 @@ apps.get('/deletesourcesdata/:id', db.deletesourcesdata);
 
 apps.post('/insertsourcesdata', db.insertsourcesdata);
 
-apps.post('/insertdetailsourcedata', db.insertdetailsourcedata);
-
 apps.get('/sourcesdatadetaillist/:id', db.sourcesdatadetaillist);
-
-apps.get('/sourcedata_detail_delete/:id', db.sourcesdatadetaildelete);
 //::::::::::::::::::::::::::: APi Opini ::::::::::::::::::::::::::::::::::::
 
 apps.get('/api_opini', db.opini);

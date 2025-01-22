@@ -42,24 +42,35 @@
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
                                         <h5 class="fw-bold mb-0 me-4">
-                                            <span class="d-block mb-2">Tambah Data Sub Menu :</span>
+                                            <span class="d-block mb-2">Tambah Data Dashboard :</span>
                                             <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
                                                 Tambah
-                                                Data Sub Menu Di Bawah Ini</span>
+                                                Data Dashboard Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Pilih Data</label>
+                                            <label class="form-label">Menu</label>
                                             <select class="form-control" name="data_type" id="data_types" onchange="getDatasubType(this.value)" required>
                                                 
                                             </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Pilih Data</label>
+                                            <label class="form-label">Sub Menu</label>
                                             <select class="form-control" name="short_name" id="short_names" required>
                                             </select>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Masukan Nama Pendek</label>
+                                            <input class="form-control" type="text" name="shorts_name" required>
+                                        </div>
+
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Masukan Nama Panjang </label>
+                                            <input class="form-control" type="text" name="long_name" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -120,7 +131,7 @@
     }
 
     function getDatasubType(e) {
-        fetch('/detail_subslides/' + e.split('-')[0])
+        fetch('/detail_substatistic/' + e.split('-')[0])
             .then(datas => datas.json())
             .then((rowst) => {
                 rowst.forEach((elements) => {

@@ -43,7 +43,7 @@
                     <div class="col-lg-12">
                         <p>
                             <button class="btn btn-primary" onclick="window.location.href = '/slide_add'"> Tambah Data
-                                Slider </button>
+                                Menu </button>
                         </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
@@ -54,8 +54,6 @@
                                                 <th>ID</th>
                                                 <th>Judul [ID]</th>
                                                 <th>Judul [EN]</th>
-                                                <th>Jumlah</th>
-                                                <th>Tanggal dibuat</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -113,13 +111,10 @@
                     { "data": "id" },
                     { "data": "title" },
                     { "data": "title_en" },
-                    { "data": "amount" },
-                    { "data": "date_created" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
                             return `<p>
-                                    <button class='detail-btn-custom-page btn btn-warning' data-id='${row.id}' data-title='${row.title}' style="padding:2px; float: left; margin: 2px">Narasi</button>
                                     <button class='delete-btn-custom-page btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
                                 </p>`;
                         }
@@ -134,13 +129,6 @@
                     'pdf',
                     'print'
                 ],
-            });
-
-
-            $('#statistics').on('click', '.detail-btn-custom-page', function () {
-                var id = $(this).data('id');
-                var name = $(this).data('title');
-                window.location = '/narationfront/' + id + '/' + name;
             });
 
             $('#statistics').on('click', '.delete-btn-custom-page', function () {

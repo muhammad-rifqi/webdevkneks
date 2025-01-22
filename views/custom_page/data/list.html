@@ -124,13 +124,13 @@
                     }
                 ],
                 lengthMenu: [10, 25, 50, 100],
-                dom: '<"dt-top-container"<l><"dt-center-in-div"B><f>r>t<"dt-filter-spacer"f><ip>',   
+                dom: '<"dt-top-container"<l><"dt-center-in-div"B><f>r>t<"dt-filter-spacer"f><ip>',
                 buttons: [
-                    'copy',        
-                    'csv',         
-                    'excel',       
-                    'pdf',         
-                    'print'        
+                    'copy',
+                    'csv',
+                    'excel',
+                    'pdf',
+                    'print'
                 ],
             });
 
@@ -157,8 +157,40 @@
                     });
             });
         });
+
+
+        $('#sourcesdata').on('click', '.add-btn-custom-page', function () {
+            var id = $(this).data('id');
+            $('#detailModal').modal('show');
+        });
+
     </script>
 
+<!-- <button class='add-btn-custom-page btn btn-success' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-plus"></i></button> -->
+    <!-- <div class="modal fade bd-example-modal-lg" id="detailModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Detail Hewan <span id="titles"></span> </h5>
+                    <button class="close btn btn-primary" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3>Detail Hewan</h3>
+                    <p> <b> ID Owner : <span id="owner_id_hewan"></span> </b> </p>
+                    <hr>
+                    <h3> Detail Hewan </h3>
+                    <table class="table" id="lists_hewan" width="100%">
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <h4 id="total"></h4>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </body>
 
 </html>
