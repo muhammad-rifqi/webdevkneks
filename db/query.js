@@ -1,6 +1,8 @@
 const md5 = require('md5');
 const { executeQuery } = require('./postgres');
 const fs = require('fs');
+const axios = require('axios');
+
 
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
 let fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/';
@@ -2535,8 +2537,8 @@ const detailsub_substatistic = async (req, res) => {
 }
 const insert_substatistic = async (req, res) => {
     // const ddd = req.body.data_type.split('-');
-    const sql = await executeQuery("INSERT INTO sub_statistic (id_statistic,short_name,long_name)values($1,$2,$3)",
-        [req.body.menu_id, req.body.short_name, req.body.long_name]);
+    const sql = await executeQuery("INSERT INTO sub_statistic (id_statistic,short_name,long_name,short_name_en,long_name_en)values($1,$2,$3,$4,$5)",
+        [req.body.menu_id, req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en]);
     if (sql) {
         res.redirect('/slidefrontsubmenu');
     } else {
@@ -2674,6 +2676,17 @@ const sourcesdata = async (req, res) => {
     } else {
         res.status(200).json({ "success": false })
     }
+}
+
+const api_kneks = async (req, res) => {
+    await axios.get('https://dashboard-dev.kneks.go.id/api/aus/indikator-aus', {
+        headers: {
+            'x-api-key': 'RnwSHSOWkAAXWN3QRO6XZppBiJSLqroCHQuYzj8LoJE992oWfbeCw3Ligxq6HJIJh83T1yo0NHRiYc4L5N1lq6HLq7bqKeek5fydZCfJUu9DEJJPV2ldhdTQQmFALO9t'
+        }
+    })
+        .then((res) => res.data)
+        .then((datas) => { res.status(200).json(datas) })
+        .catch((err) => console.error(err));
 }
 
 const sourcesdatadetail = async (req, res) => {
@@ -3096,6 +3109,7 @@ module.exports = {
     deletesourcesdata,
     sourcesdatadetaillist,
     insertsourcesdata,
+    api_kneks,
     opini,
     opini_detail,
     insertopini,

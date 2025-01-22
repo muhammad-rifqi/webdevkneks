@@ -192,30 +192,21 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 
                             `);
 }
 //data
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
+if (cookie["roles_id"] == 1) {
     document.write(`<li class="nxl-item"><a class="nxl-link" href="/metabase">Dashboard</a></li>`);
     document.write(`<li class="nxl-item"><a class="nxl-link" href="/slidefront">Menu</a></li>`);
-    document.write(`<li class="nxl-item"><a class="nxl-link" href="/slidefrontsubmenu">Sub Menu</a></li>`);
+    document.write(`<li class="nxl-item"><a class="nxl-link" href="/slidefrontsubmenu">Sub Menu</a></li>
+        <li class="nxl-item"><a class="nxl-link" href="/datafront">Data Set</a></li>`);
 }
 
 //e-pustaka kategori
 if (cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {
-    document.write(`
-                            <li class="nxl-item"><a class="nxl-link" href="/narationfront">Narasi</a></li>
-                           `);
+    document.write(`<li class="nxl-item"><a class="nxl-link" href="/metabase">Dashboard</a></li>`);
 }
 
-//data set dan slide
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
-    document.write(`
-                            <li class="nxl-item"><a class="nxl-link" href="/datafront">Data Set</a></li>
-                            `);
-}
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {
-    document.write(`
-                           </ul>
-                    </li>
-                           `);
+    document.write(`</ul>
+                    </li>`);
 }
 
 //kdeks
