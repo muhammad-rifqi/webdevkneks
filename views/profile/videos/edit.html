@@ -70,13 +70,11 @@
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Keterangan [ID]</label>
-                                            <textarea class="form-control" name="content"
-                                                id="editor3"></textarea>
+                                            <textarea class="form-control" name="content" id="editor3"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Keterangan [EN]</label>
-                                            <textarea class="form-control" name="content_en"
-                                                id="editor4"></textarea>
+                                            <textarea class="form-control" name="content_en" id="editor4"></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -100,12 +98,12 @@
                                                 type="datetime-local" required>
                                         </div>
 
-                                        <div class="col-lg-12 mb-4">
+                                        <!-- <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Tagging</label>
                                             <span id="listtag">
 
                                             </span>
-                                        </div>
+                                        </div> -->
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Ganti/Ubah Tagging</label>
@@ -113,6 +111,18 @@
 
                                             </span>
                                             <input name="taggings" type="text" class="tagify" id="tagify" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Direktorat</label>
+                                            <p id="directorat_val"></p>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Pilih Direktorat</label>
+                                            <select class="form-control" name="directorat" id="mySelect" multiple
+                                                required>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -150,15 +160,21 @@
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script src="/assets/vendors/js/tagify.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#mySelect').select2();
+        });
+    </script>
     <script>
         window.addEventListener("load", async () => {
             const inputElm = document.querySelector('input.tagify');
             new Tagify(inputElm);
             await getUrlById();
             await getTagging();
+            await getCategoryHotIssueId();
         })
 
         function getUrlById() {
@@ -166,7 +182,17 @@
             fetch('/videodetail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
-                    console.log(rows)
+                    const cleanedString = rows[0]?.directorat.slice(1, -1);
+                    const arrayWithNumbers = cleanedString.split(',');
+                    const finalArray = arrayWithNumbers.map(item => item.substring(item.indexOf('-') + 1));
+                    // const finalArray = arrayWithNumbers.map(item => {
+                    //     const parts = item.split('-');
+                    //     return {
+                    //         number: parts[0],
+                    //         text: parts[1]
+                    //     };
+                    // });
+                    console.log(finalArray);
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
@@ -177,6 +203,7 @@
                     document.getElementById("videos").value = rows[0]?.video;
                     document.getElementById("durations").value = rows[0]?.duration;
                     document.getElementById("video_datetimes").value = rows[0]?.news_datetime.split('.')[0];
+                    document.getElementById("directorat_val").innerHTML = finalArray.toString().replace('\"','').replace('"','');
                 })
         }
 
@@ -191,6 +218,19 @@
                     });
                     document.getElementById("tag").innerHTML = tttt;
                     document.getElementById("tagify").value = tttt;
+                })
+        }
+
+        function getCategoryHotIssueId() {
+            fetch('/hotissuecategory')
+                .then(res => res.json())
+                .then((qqq) => {
+                    qqq.forEach(items => {
+                        const aaa = document.createElement('option')
+                        aaa.value = `${items?.id}-${items?.title}`;
+                        aaa.text = `${items?.title}`;
+                        document.getElementById("mySelect").append(aaa);
+                    });
                 })
         }
 

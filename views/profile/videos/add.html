@@ -101,6 +101,12 @@
                                             <input name="taggings" type="text" class="tagify" id="tagify" required>
                                         </div>
 
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Direktorat</label>
+                                            <select class="form-control" name="directorat" id="mySelect" multiple required>
+                                            </select>
+                                        </div>
+
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -139,6 +145,11 @@
     <script src="/assets/vendors/js/tagify.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
+        $(document).ready(function () {
+            $('#mySelect').select2();
+        });
+    </script>
+    <script>
         window.addEventListener("load", async () => {
             const inputElm = document.querySelector('input.tagify');
             new Tagify(inputElm);
@@ -153,7 +164,21 @@
                     document.getElementById("tag").innerHTML = ttt;
                     document.getElementById("tagify").value = ttt;
                 })
+            await getCategoryHotIssueId();
         })
+
+        function getCategoryHotIssueId() {
+            fetch('/hotissuecategory')
+                .then(res => res.json())
+                .then((qqq) => {
+                    qqq.forEach(items => {
+                        const aaa = document.createElement('option')
+                        aaa.value = `${items?.id}-${items?.title}`;
+                        aaa.text = `${items?.title}`;
+                        document.getElementById("mySelect").append(aaa);
+                    });
+                })
+        }
     </script>
 </body>
 

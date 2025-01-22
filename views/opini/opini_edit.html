@@ -14,7 +14,15 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/tagify.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript">
+        bkLib.onDomLoaded(function () {
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
+        });
+    </script>
 </head>
 
 <body>
@@ -46,8 +54,7 @@
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
                                         <h5 class="fw-bold mb-0 me-4">
                                             <span class="d-block mb-2"> Ubah OPINI :</span>
-                                            <span
-                                                class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
+                                            <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
                                                 Ubah
                                                 Data OPINI Di Bawah Ini</span>
                                         </h5>
@@ -64,17 +71,30 @@
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Keterangan [ID]</label>
-                                            <textarea class="form-control" name="content"
-                                                id="content"></textarea>
+                                            <textarea class="form-control" name="content" id="editor3"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Keterangan [EN]</label>
-                                            <textarea class="form-control" name="content_en"
-                                                id="content_en"></textarea>
+                                            <textarea class="form-control" name="content_en" id="editor4"></textarea>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tagging</label>
+                                            <span id="tag">
+
+                                            </span>
+                                            <input name="taggings" type="text" class="tagify" id="tagify" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Direktorat</label>
+                                            <select class="form-control" name="directorat" id="mySelect" multiple
+                                                required>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4" id="webidentity">
-                                            
+
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -113,13 +133,23 @@
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <script src="/assets/vendors/js/tagify.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
+        $(document).ready(function () {
+            $('#mySelect').select2();
+        });
+    </script>
+    <script>
         window.addEventListener("load", async () => {
+            const inputElm = document.querySelector('input.tagify');
+            new Tagify(inputElm);
             await getUrlById();
+            await getTagging();
+            await getCategoryHotIssueId();
         })
-    
+
         function getUrlById() {
             const URLS = new URL(window.location.href);
             fetch('/api_opini_detail/' + URLS.pathname.split('/')[2])
@@ -128,21 +158,50 @@
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    document.getElementById("content").innerHTML = rows[0]?.content;
-                    document.getElementById("content_en").innerHTML = rows[0]?.content_en;
-                    if(rows[0]?.web_identity == "kneks"){
+                    // document.getElementById("content").innerHTML = rows[0]?.content;
+                    // document.getElementById("content_en").innerHTML = rows[0]?.content_en;
+                    nicEditors.findEditor("editor3").setContent(rows[0]?.content);
+                    nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
+                    news_category_id = rows[0]?.category_id;
+                    if (rows[0]?.web_identity == "kneks") {
                         document.getElementById("webidentity").innerHTML = `
                         <label class="form-label">Web Identity</label>
                         <input type="radio" name="web_identity" value="kneks" checked>kneks
                         <input type="radio" name="web_identity" value="kdeks">kdeks
                         `;
-                    }else{
+                    } else {
                         document.getElementById("webidentity").innerHTML = `
                         <label class="form-label">Web Identity</label>
                         <input type="radio" name="web_identity" value="kneks">kneks
                         <input type="radio" name="web_identity" value="kdeks" checked>kdeks
                         `;
                     }
+                })
+        }
+
+        function getTagging() {
+            fetch('/tagging')
+                .then(res => res.json())
+                .then((rrr) => {
+                    let ttt = "";
+                    rrr.forEach(items => {
+                        ttt += `${items?.tagging},`;
+                    });
+                    document.getElementById("tag").innerHTML = ttt;
+                    document.getElementById("tagify").value = ttt;
+                })
+        }
+
+        function getCategoryHotIssueId() {
+            fetch('/hotissuecategory')
+                .then(res => res.json())
+                .then((qqq) => {
+                    qqq.forEach(items => {
+                        const aaa = document.createElement('option')
+                        aaa.value = `${items?.id}`;
+                        aaa.text = `${items?.title}`;
+                        document.getElementById("mySelect").append(aaa);
+                    });
                 })
         }
     </script>
