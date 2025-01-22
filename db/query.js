@@ -3094,7 +3094,6 @@ module.exports = {
     sourcesdatadetail,
     deletesourcesdata,
     sourcesdatadetaillist,
-    sourcesdatadetaildelete,
     insertsourcesdata,
     opini,
     opini_detail,
