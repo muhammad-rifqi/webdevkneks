@@ -2704,6 +2704,7 @@ const deletesourcesdata = async (req, res) => {
     const id_stat = req.params.id;
     const sql = await executeQuery('DELETE FROM sourcedata where id = $1 ', [id_stat]);
     if (sql) {
+        await executeQuery('DELETE FROM sourcedata_detail where id_sourcedata = $1 ', [id_stat]);
         res.redirect('/datafront');
     } else {
         res.redirect('/datafront');
