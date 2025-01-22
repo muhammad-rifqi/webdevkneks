@@ -12,9 +12,24 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/dataTables.bs5.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+    <style>
+        div.dt-top-container {
+            display: grid;
+            grid-template-columns: auto auto auto;
+        }
+
+        div.dt-center-in-div {
+            margin: 0 auto;
+        }
+
+        div.dt-filter-spacer {
+            margin: 10px 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -84,13 +99,13 @@
                                 <table id="api_database" class="display" style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>ID Data Set</th>
-                                            <th>Keterangan</th>
-                                            <th>Aksi</th>
+                                            <th>kuartal</th>
+                                            <th>total_nilai_pembiayaan</th>
+                                            <th>pangsa_pembiayaan</th>
+                                            <th>pangsa_aktivitas_usaha</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="databases">
+                                    <tbody>
                                     </tbody>
                                 </table>
                             </div>
@@ -119,14 +134,41 @@
 
     <script src="/assets/vendors/js/vendors.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
-    <script src="/assets/js/common-init.min.js"></script>
-    <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <!-- DataTables -->
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#api_database').DataTable()
+            $('#api_database').DataTable({
+                "ajax": {
+                    "url": "/kneks/api",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { "data": "kuartal" },
+                    { "data": "total_nilai_pembiayaan" },
+                    { "data": "pangsa_pembiayaan" },
+                    { "data": "pangsa_aktivitas_usaha" },
+                ],
+                lengthMenu: [10, 25, 50, 100],
+                dom: '<"dt-top-container"<l><"dt-center-in-div"B><f>r>t<"dt-filter-spacer"f><ip>',
+                buttons: [
+                    'copy',
+                    'csv',
+                    'excel',
+                    'pdf',
+                    'print'
+                ],
+            });
         });
     </script>
 
@@ -134,7 +176,6 @@
         window.addEventListener("load", async () => {
             await getUrlById();
             await getDataDetail();
-            await getDataBase();
         })
         function getUrlById() {
             const URLS = new URL(window.location.href);
@@ -158,31 +199,6 @@
                     document.getElementById("periode_tanggal").innerHTML = rrr[0]?.periode_tanggal ?? "--:";
                 })
         }
-
-
-        function getDataBase() {
-            fetch('https://dashboard-dev.kneks.go.id/api/aus/indikator-aus', {
-                method: 'GET',
-                headers: {
-                    'Access-Control-Allow-Origin':'*',
-                    'x-api-key': 'RnwSHSOWkAAXWN3QRO6XZppBiJSLqroCHQuYzj8LoJE992oWfbeCw3Ligxq6HJIJh83T1yo0NHRiYc4L5N1lq6HLq7bqKeek5fydZCfJUu9DEJJPV2ldhdTQQmFALO9t'
-                }
-                }).then(row => row.json())
-                .then((rowp) => {
-                    var aaa = "";
-                    rrr.slice(0,7).forEach((element) => {
-                        aaa += `<tr>
-                                    <td>#${element?.kuartal}</td>
-                                    <td>${element?.total_nilai_pembiayaan}</td>
-                                    <td>${element?.pangsa_pembiayaan}</td>
-                                    <td>${element?.pangsa_aktivitas_usaha}</td>         
-                                </tr>`;
-                    });
-                    document.getElementById("databases").innerHTML = aaa;
-                })
-        }
-
-       
     </script>
 </body>
 

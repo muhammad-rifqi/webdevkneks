@@ -15,6 +15,7 @@ const negara = require('./db/data_negara.json');
 const kbli = require('./db/data_kbli.json');
 const gender = require('./db/data_gender.json');
 const area = require('./db/data_area.json');
+const axios = require('axios');
 
 apps.use(cookieParser());
 apps.use(bodyParser.json())
@@ -1040,5 +1041,16 @@ apps.post('/act_login', db.do_login);
 apps.get("/logout", db.do_logout);
 
 //::::::::::::::: End Of Routes :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.get('/kneks/api', (req, res) => {
+    axios.get('https://dashboard-dev.kneks.go.id/api/aus/indikator-aus', {
+        headers: {
+            'x-api-key': 'RnwSHSOWkAAXWN3QRO6XZppBiJSLqroCHQuYzj8LoJE992oWfbeCw3Ligxq6HJIJh83T1yo0NHRiYc4L5N1lq6HLq7bqKeek5fydZCfJUu9DEJJPV2ldhdTQQmFALO9t'
+        }
+    })
+        .then((res) => res.data)
+        .then((datas) => { res.status(200).json(datas) })
+        .catch((err) => console.error(err));
+})
 
 apps.listen(3001);
