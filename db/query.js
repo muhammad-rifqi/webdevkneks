@@ -2528,7 +2528,7 @@ const sub_statistic = async (req, res) => {
 }
 const detailsub_substatistic = async (req, res) => {
     const id_ss = req.params.id;
-    const sql = await executeQuery('SELECT * FROM sub_statistic where id = $1', [id_ss]);
+    const sql = await executeQuery('SELECT * FROM sub_statistic where id_statistic = $1', [id_ss]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2588,7 +2588,7 @@ const metabase_delete = async (req, res) => {
 
 const insertapimeta = async (req, res) => {
     const ddd = req.body.data_type.split('-');
-    const sql = await executeQuery('INSERT INTO api_meta (api,statistic_id,statistic_name,sub_menu,short_name,long_name,short_name_en,long_name_en) values ($1,$2,$3,$4,$5,$6,$7,$8)', [req.body.api, ddd[0], ddd[1], req.body.sub_menu, req.body.shorts_name, req.body.long_name, req.body.shorts_name_en, req.body.long_name_en]);
+    const sql = await executeQuery('INSERT INTO api_meta (api,statistic_id,statistic_name,sub_statistic,short_name,long_name,short_name_en,long_name_en,tagging,directorat,kdeks,publish,dataset) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)', [req.body.api, ddd[0], ddd[1], req.body.sub_statistic, req.body.shorts_name, req.body.long_name, req.body.shorts_name_en, req.body.long_name_en,req.body.taggings,req.body.directorat,req.body.kdeks,req.body.publish,req.body.dataset]);
     if (sql?.length > 0) {
         res.redirect('/metabase');
     } else {

@@ -12,7 +12,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/tagify.min.css" />
 </head>
 
 <body>
@@ -51,14 +54,15 @@
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Menu</label>
-                                            <select class="form-control" name="data_type" id="data_types" onchange="getDatasubType(this.value)" required>
-                                                
+                                            <select class="form-control" name="data_type" id="data_types"
+                                                onchange="getDatasubType(this.value)" required>
+
                                             </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Sub Menu</label>
-                                            <select class="form-control" name="sub_menu" id="short_names" required>
+                                            <select class="form-control" name="sub_statistic" id="short_names" required>
                                             </select>
                                         </div>
 
@@ -89,30 +93,40 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Direktorat </label>
-                                            <input class="form-control" type="text" name="direktorat" required>
+                                            <label class="form-label">Tagging</label>
+                                            <span id="tag">
+
+                                            </span>
+                                            <input name="taggings" type="text" class="tagify" id="tagify" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Kdeks </label>
-                                            <input class="form-control" type="text" name="kdeks" required>
+                                            <label class="form-label">Direktorat</label>
+                                            <select class="form-control" name="directorat" id="mySelect" multiple
+                                                required>
+                                            </select>
                                         </div>
 
+
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tagging </label>
-                                            <input class="form-control" type="text" name="tagging" required>
+                                            <label class="form-label">KDEKS</label>
+                                            <select class="form-control" name="kdeks" id="provinces" required>
+                                                <option value="0"> Pilih </option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Publish </label>
-                                            <input class="form-control" type="text" name="publish" required>
+                                            <input type="checkbox" name="publish" value="1" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label"> Dataset </label>
-                                            <input class="form-control" type="text" name="dataset" required>
+                                            <label class="form-label">Dataset</label>
+                                            <select class="form-control" name="dataset" id="mySelect3" multiple
+                                                required>
+                                            </select>
                                         </div>
-                                        
+
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -146,12 +160,28 @@
 
     <script src="/assets/vendors/js/vendors.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
+    <script src="/assets/vendors/js/select2.min.js"></script>
+    <script src="/assets/vendors/js/select2-active.min.js"></script>
+    <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <script src="/assets/vendors/js/tagify.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#mySelect').select2();
+            $('#mySelect3').select2();
+        });
+    </script>
 </body>
 <script>
     window.addEventListener("load", async () => {
+        const inputElm = document.querySelector('input.tagify');
+        new Tagify(inputElm);
         await getDataType();
+        await getCategoryHotIssueId();
+        await getTagging();
+        await getProvinces();
+        await getDataSet();
     })
     function getDataType() {
         fetch('/statistics')
@@ -161,7 +191,7 @@
                 rows.forEach((element) => {
                     eee += `<option value="${element?.id}-${element?.title}">${element?.title}</option>`;
                 })
-                document.getElementById("data_types").innerHTML=eee;
+                document.getElementById("data_types").innerHTML = eee;
             })
     }
 
@@ -178,6 +208,58 @@
             })
     }
 
+    function getCategoryHotIssueId() {
+        fetch('/hotissuecategory')
+            .then(res => res.json())
+            .then((qqq) => {
+                qqq.forEach(items => {
+                    const aaa = document.createElement('option')
+                    aaa.value = `${items?.id}`;
+                    aaa.text = `${items?.title}`;
+                    document.getElementById("mySelect").append(aaa);
+                });
+            })
+    }
+
+    function getTagging() {
+        fetch('/tagging')
+            .then(res => res.json())
+            .then((rrr) => {
+                let ttt = "";
+                rrr.forEach(items => {
+                    ttt += `${items?.tagging},`;
+                });
+                document.getElementById("tag").innerHTML = ttt;
+                document.getElementById("tagify").value = ttt;
+            })
+
+    }
+
+    function getProvinces() {
+        fetch('/provinces')
+            .then(response => response.json())
+            .then((data) => {
+                data.forEach(element => {
+                    const ddd = document.createElement('option')
+                    ddd.value = `${element?.id}`;
+                    ddd.text = `${element?.province_name}`;
+                    document.getElementById("provinces").append(ddd);
+                });
+            })
+    }
+
+    function getDataSet() {
+        fetch('/sourcesdata')
+            .then(res => res.json())
+            .then((qqq) => {
+                qqq.forEach(items => {
+                    const aaa = document.createElement('option')
+                    aaa.value = `${items?.id}`;
+                    aaa.text = `${items?.dataset}`;
+                    document.getElementById("mySelect3").append(aaa);
+                });
+            })
+    }    
 </script>
 
 </html>

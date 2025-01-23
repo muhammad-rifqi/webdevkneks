@@ -943,8 +943,6 @@ apps.get('/delete_substatistic/:id', db.delete_substatistic);
 
 apps.get('/detail_substatistic/:id', db.detailsub_substatistic);
 
-apps.get('/narations/:id', db.naration);
-
 apps.get('/api_metabase', db.metabase);
 
 apps.get('/api_metabase_detail/:id', db.detail_metabase);
