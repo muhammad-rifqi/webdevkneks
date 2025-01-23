@@ -120,6 +120,14 @@
                                             </select>
                                         </div>
 
+                                        
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">KDEKS</label>
+                                            <select class="form-control" name="kdeks" id="provinces" required>
+                                                <option value="0"></option>
+                                            </select>
+                                        </div>
+
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -170,6 +178,7 @@
             await getUrlById();
             await getTagging();
             await getCategoryHotIssueId();
+            await getProvinces();
         })
 
         function getUrlById() {
@@ -228,6 +237,19 @@
                         aaa.value = `${items?.id}`;
                         aaa.text = `${items?.title}`;
                         document.getElementById("mySelect").append(aaa);
+                    });
+                })
+        }
+
+        function getProvinces() {
+            fetch('/provinces')
+                .then(response => response.json())
+                .then((data) => {
+                    data.forEach(element => {
+                        const ddd = document.createElement('option')
+                        ddd.value = `${element?.id}`;
+                        ddd.text = `${element?.province_name}`;
+                        document.getElementById("provinces").append(ddd);
                     });
                 })
         }
