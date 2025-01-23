@@ -51,9 +51,9 @@
                                     <table id="statistics" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Judul [ID]</th>
-                                                <th>Judul [EN]</th>
+                                                <th>NO</th>
+                                                <th>Nama Pendek</th>
+                                                <th>Nama Panjang</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -108,9 +108,14 @@
                     "dataSrc": ""
                 },
                 "columns": [
-                    { "data": "id" },
+                    {
+                        data: null,
+                        render: function (data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    },
                     { "data": "title" },
-                    { "data": "title_en" },
+                    { "data": "long_title" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
@@ -118,6 +123,13 @@
                                     <button class='delete-btn-custom-page btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
                                 </p>`;
                         }
+                    }
+                ],
+                columnDefs: [
+                    {
+                        targets: 0, 
+                        orderable: false, 
+                        searchable: false 
                     }
                 ],
                 lengthMenu: [10, 25, 50, 100],

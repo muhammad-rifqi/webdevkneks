@@ -52,12 +52,10 @@
                                     <table id="sub_statistics" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>ID Menu </th>
-                                                <th>Nama Pendek [ID]</th>
-                                                <th>Nama Pendek [EN]</th>
-                                                <th>Nama Panjang [ID]</th>
-                                                <th>Nama Panjang [EN]</th>
+                                                <th>NO</th>
+                                                <th>Nama Menu </th>
+                                                <th>Nama Pendek </th>
+                                                <th>Nama Panjang </th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -111,12 +109,15 @@
                     "dataSrc": ""
                 },
                 "columns": [
-                    { "data": "id" },
-                    { "data": "id_statistic" },
+                    {
+                        data: null,
+                        render: function (data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    },
+                    { "data": "statistic_name" },
                     { "data": "short_name" },
-                    { "data": "long_name_en" },
-                    { "data": "short_name" },
-                    { "data": "long_name_en" },
+                    { "data": "long_name" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
@@ -124,6 +125,13 @@
                                         <button class='edit-btn btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
                                     </p>`;
                         }
+                    }
+                ],
+                columnDefs: [
+                    {
+                        targets: 0, 
+                        orderable: false, 
+                        searchable: false 
                     }
                 ],
                 lengthMenu: [10, 25, 50, 100],

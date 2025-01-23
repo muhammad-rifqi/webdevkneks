@@ -126,7 +126,7 @@
             .then((rows) => {
                 rows.forEach((element) => {
                     const ddd = document.createElement('option')
-                    ddd.value = `${element?.id}`;
+                    ddd.value = `${element?.id}-${element?.title}`;
                     ddd.text = `${element?.title}`;
                     document.getElementById("menus_ids").append(ddd);
                 })

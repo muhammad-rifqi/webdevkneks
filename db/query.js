@@ -2536,9 +2536,9 @@ const detailsub_substatistic = async (req, res) => {
     }
 }
 const insert_substatistic = async (req, res) => {
-    // const ddd = req.body.data_type.split('-');
-    const sql = await executeQuery("INSERT INTO sub_statistic (id_statistic,short_name,long_name,short_name_en,long_name_en)values($1,$2,$3,$4,$5)",
-        [req.body.menu_id, req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en]);
+    const ddd = req.body.menu_id.split('-');
+    const sql = await executeQuery("INSERT INTO sub_statistic (id_statistic,short_name,long_name,short_name_en,long_name_en,statistic_name)values($1,$2,$3,$4,$5,$6)",
+        [ddd[0], req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en, ddd[1]]);
     if (sql) {
         res.redirect('/slidefrontsubmenu');
     } else {
@@ -2556,48 +2556,6 @@ const delete_substatistic = async (req, res) => {
     }
 }
 
-const naration = async (req, res) => {
-    const id_mt = req.params.id;
-    const sql = await executeQuery('SELECT * FROM naration where statistic_id = $1 ', [id_mt]);
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const naration_detail = async (req, res) => {
-    const id_nar = req.params.id;
-    const sql = await executeQuery('SELECT * FROM naration where id = $1', [id_nar]);
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const insertnarations = async (req, res) => {
-    // const ddd = req.body.data_type.split('-');
-    const sql = await executeQuery("INSERT INTO naration (statistic_id,statistic_name,description,description_en)values($1,$2,$3,$4)",
-        [req.body.data_type, req.body.data_type_name, req.body.description, req.body.description_en]);
-    if (sql) {
-        res.redirect('/narationfront/' + req.body.data_type + '/' + req.body.data_type_name);
-    } else {
-        res.redirect('/narationfront/' + req.body.data_type + '/' + req.body.data_type_name);
-    }
-}
-
-const updatenarations = async (req, res) => {
-    // const ddd = req.body.data_type.split('-');
-    const sql = await executeQuery("UPDATE naration set statistic_id= $1 , statistic_name = $2, description = $3, description_en = $4 where id = $5",
-        [req.body.data_type, req.body.data_type_name, req.body.description, req.body.description_en, req.body.id]);
-    if (sql) {
-        res.redirect('/narationfront/' + req.body.data_type + '/' + req.body.data_type_name);
-    } else {
-        res.redirect('/narationfront/' + req.body.data_type + '/' + req.body.data_type_name);
-    }
-}
-
 const metabase = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM api_meta');
     if (sql?.length > 0) {
@@ -2610,7 +2568,7 @@ const metabase = async (req, res) => {
 
 const detail_metabase = async (req, res) => {
     const id_nar = req.params.id;
-    const sql = await executeQuery('SELECT * FROM api_meta where naration_id = $1', [id_nar]);
+    const sql = await executeQuery('SELECT * FROM api_meta where id = $1', [id_nar]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2630,7 +2588,7 @@ const metabase_delete = async (req, res) => {
 
 const insertapimeta = async (req, res) => {
     const ddd = req.body.data_type.split('-');
-    const sql = await executeQuery('INSERT INTO api_meta (api,statistic_id,statistic_name,short_name,long_name) values ($1,$2,$3,$4,$5)', [req.body.api, ddd[0], ddd[1], req.body.shorts_name, req.body.long_name]);
+    const sql = await executeQuery('INSERT INTO api_meta (api,statistic_id,statistic_name,sub_menu,short_name,long_name,short_name_en,long_name_en) values ($1,$2,$3,$4,$5,$6,$7,$8)', [req.body.api, ddd[0], ddd[1], req.body.sub_menu, req.body.shorts_name, req.body.long_name, req.body.shorts_name_en, req.body.long_name_en]);
     if (sql?.length > 0) {
         res.redirect('/metabase');
     } else {
@@ -2648,8 +2606,8 @@ const statistics = async (req, res) => {
 }
 
 const insertstatistic = async (req, res) => {
-    const sql = await executeQuery("insert into statistic(title,title_en,amount,date_created) values($1,$2,$3,$4)",
-        [req.body.title, req.body.title_en, 0, '2025-01-01 : 00:00:00']);
+    const sql = await executeQuery("insert into statistic(title,title_en,long_title,long_title_en,amount,date_created) values($1,$2,$3,$4,$5,$6)",
+        [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en, 0, '2025-01-01 : 00:00:00']);
     if (sql) {
         res.redirect('/slidefront');
     } else {
@@ -3093,10 +3051,6 @@ module.exports = {
     detailsub_substatistic,
     insert_substatistic,
     delete_substatistic,
-    naration,
-    naration_detail,
-    insertnarations,
-    updatenarations,
     metabase,
     detail_metabase,
     metabase_delete,

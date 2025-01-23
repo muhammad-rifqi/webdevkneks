@@ -467,6 +467,10 @@ apps.get('/slide_add', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/slide/add.html'));
 })
 
+apps.get('/slidedata', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/slide/data.html'));
+})
+
 apps.get('/datafront', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/list.html'));
 })
@@ -481,14 +485,6 @@ apps.get('/data_detail/:id', (req, res) => {
 
 apps.get('/narationfront/:id/:name', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/naration.html'));
-});
-
-apps.get('/edit_narationfront/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/naration_edit.html'));
-});
-
-apps.get('/narationfront_add/:id/:name', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/naration_add.html'));
 });
 
 apps.get('/metabase', (req, res) => {
@@ -948,12 +944,6 @@ apps.get('/delete_substatistic/:id', db.delete_substatistic);
 apps.get('/detail_substatistic/:id', db.detailsub_substatistic);
 
 apps.get('/narations/:id', db.naration);
-
-apps.get('/narations_detail/:id', db.naration_detail);
-
-apps.post('/insertnarations', db.insertnarations);
-
-apps.post('/updatenarations', db.updatenarations);
 
 apps.get('/api_metabase', db.metabase);
 

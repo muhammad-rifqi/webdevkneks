@@ -177,9 +177,9 @@
             fetch('/videodetail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
-                    var uuu = rows[0]?.directorat;
-                    const array = uuu.replace(/[{}]/g, '').split(',');
-                    const toarray = array.map(item => item.replace(/"/g, ''));
+                    // var uuu = rows[0]?.directorat;
+                    // const array = uuu.replace(/[{}]/g, '').split(',');
+                    // const toarray = array.map(item => item.replace(/"/g, ''));
                     // const cleanedString = rows[0]?.directorat.slice(1, -1);
                     // const arrayWithNumbers = cleanedString.split(',');
                     // const finalArray = arrayWithNumbers.map(item => item.substring(item.indexOf('-') + 1));

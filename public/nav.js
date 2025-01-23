@@ -197,6 +197,7 @@ if (cookie["roles_id"] == 1) {
     document.write(`<li class="nxl-item"><a class="nxl-link" href="/slidefront">Menu</a></li>`);
     document.write(`<li class="nxl-item"><a class="nxl-link" href="/slidefrontsubmenu">Sub Menu</a></li>
         <li class="nxl-item"><a class="nxl-link" href="/datafront">Data Set</a></li>`);
+    document.write(`<li class="nxl-item"><a class="nxl-link" href="/slidedata">Slider</a></li>`);
 }
 
 //e-pustaka kategori

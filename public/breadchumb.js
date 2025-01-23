@@ -7,7 +7,7 @@ if(path == 'dashboard'){
     breadcrumb1 = "Data";
     breadcrumb2 = "Dashboard";
 }
-if(path == 'narationfront' || path == 'narationfront_add' || path == 'edit_narationfront'){
+if(path == 'narationfront'){
     breadcrumb1 = "Data";
     breadcrumb2 = "Narasi";
 }
