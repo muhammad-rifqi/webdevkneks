@@ -1293,8 +1293,8 @@ const insertfileupload = async (req, res) => {
     const timeupdate = date + ' ' + time;
     const file_date = req.body.date;
     const fileuploads = site_url + "/uploads/filesupload/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery("insert into reports(title,title_en,content,content_en,file,is_publish,date,created_at,updated_at,report_category_id) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.file_category_id]);
+    const sql = await executeQuery("insert into reports(title,title_en,content,content_en,file,is_publish,date,created_at,updated_at,report_category_id) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.taggings, req.body.directorat, req.body.file_category_id]);
     if (sql) {
         res.redirect('/f');
     } else {
@@ -1312,8 +1312,8 @@ const updatefileupload = async (req, res) => {
     const timeupdate = date + ' ' + time;
     const file_date = req.body.date;
     if (!req.file || req.file == undefined || req.file == "") {
-        const sql = await executeQuery("update reports set title=$1,title_en=$2,content=$3,content_en=$4,is_publish=$5,date=$6,created_at=$7,updated_at=$8,report_category_id=$9 where id = $10",
-            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.file_category_id, req.body.id]);
+        const sql = await executeQuery("update reports set title=$1,title_en=$2,content=$3,content_en=$4,is_publish=$5,date=$6,created_at=$7,updated_at=$8,report_category_id=$9,tagging=$10,directorat=$11 where id = $12",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.file_category_id, req.body.taggings, req.body.directorat, req.body.id]);
         if (sql) {
             res.redirect('/f');
         } else {

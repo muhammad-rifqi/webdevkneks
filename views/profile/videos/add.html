@@ -173,7 +173,7 @@
                 .then((qqq) => {
                     qqq.forEach(items => {
                         const aaa = document.createElement('option')
-                        aaa.value = `${items?.id}-${items?.title}`;
+                        aaa.value = `${items?.id}`;
                         aaa.text = `${items?.title}`;
                         document.getElementById("mySelect").append(aaa);
                     });
