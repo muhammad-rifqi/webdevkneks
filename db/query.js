@@ -17,54 +17,12 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id", sql[0]?.id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("name", sql[0]?.name, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("roles_id", sql[0]?.role_id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id_province", sql[0]?.id_province, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("directorat_id", sql[0]?.directorat_id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+            res.cookie("islogin", isLogin);
+            res.cookie("id", sql[0]?.id);
+            res.cookie("name", sql[0]?.name);
+            res.cookie("roles_id", sql[0]?.role_id);
+            res.cookie("id_province", sql[0]?.id_province);
+            res.cookie("directorat_id", sql[0]?.directorat_id);
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -2587,12 +2545,28 @@ const metabase_delete = async (req, res) => {
 }
 
 const insertapimeta = async (req, res) => {
+    const arraydir = req.body.directorat.toString().replace(/[{}]/g, '').split(',');
+    const directr = arraydir.map(item => item.replace(/"/g, ''));
+    const arraykdeks = req.body.kdeks.toString().replace(/[{}]/g, '').split(',');
+    const kdeksdir = arraykdeks.map(item => item.replace(/"/g, ''));
+    const arraykdataset = req.body.dataset.toString().replace(/[{}]/g, '').split(',');
+    const datasetdir = arraykdataset.map(item => item.replace(/"/g, ''));
     const ddd = req.body.data_type.split('-');
-    const sql = await executeQuery('INSERT INTO api_meta (api,statistic_id,statistic_name,sub_statistic,short_name,long_name,short_name_en,long_name_en,tagging,directorat,kdeks,publish,dataset) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)', [req.body.api, ddd[0], ddd[1], req.body.sub_statistic, req.body.shorts_name, req.body.long_name, req.body.shorts_name_en, req.body.long_name_en,req.body.taggings,req.body.directorat,req.body.kdeks,req.body.publish,req.body.dataset]);
+    const sql = await executeQuery('INSERT INTO api_meta (api,statistic_id,statistic_name,sub_statistic,short_name,long_name,short_name_en,long_name_en,tagging,directorat,kdeks,publish,dataset) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)', [req.body.api, ddd[0], ddd[1], req.body.sub_statistic, req.body.shorts_name, req.body.long_name, req.body.shorts_name_en, req.body.long_name_en, req.body.taggings, directr, kdeksdir, req.body.publish, datasetdir]);
     if (sql?.length > 0) {
         res.redirect('/metabase');
     } else {
         res.redirect('/metabase');
+    }
+}
+
+
+const updateapimeta = async (req, res) => {
+    const sql = await executeQuery('UPDATE api_meta set naration = $1, month = $2 where id = $3', [req.body.naration, req.body.month, req.body.id]);
+    if (sql?.length > 0) {
+        res.status(200).json({"message" : true});
+    } else {
+        res.status(200).json({"message" : false});
     }
 }
 
@@ -3055,6 +3029,7 @@ module.exports = {
     detail_metabase,
     metabase_delete,
     insertapimeta,
+    updateapimeta,
     statistics,
     deletestatistic,
     insertstatistic,

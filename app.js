@@ -951,6 +951,8 @@ apps.get('/api_metabase_delete/:id', db.metabase_delete);
 
 apps.post('/insertapimeta', db.insertapimeta);
 
+apps.post('/udpateapimeta', db.updateapimeta);
+
 apps.get('/statistics', db.statistics);
 
 apps.get('/delete_statistics/:id', db.deletestatistic);

@@ -110,8 +110,8 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">KDEKS</label>
-                                            <select class="form-control" name="kdeks" id="provinces" required>
-                                                <option value="0"> Pilih </option>
+                                            <select class="form-control" name="kdeks" id="provinces" multiple required>
+                                               
                                             </select>
                                         </div>
 
@@ -122,8 +122,7 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Dataset</label>
-                                            <select class="form-control" name="dataset" id="mySelect3" multiple
-                                                required>
+                                            <select class="form-control" name="dataset" id="mySelect3"  multiple required>
                                             </select>
                                         </div>
 
@@ -170,6 +169,7 @@
         $(document).ready(function () {
             $('#mySelect').select2();
             $('#mySelect3').select2();
+            $('#provinces').select2();
         });
     </script>
 </body>

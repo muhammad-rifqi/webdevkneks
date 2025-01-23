@@ -32,7 +32,8 @@
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
-                                <form action="/insertsourcesdata" method="post">
+                                <form action="/updatemetadata" method="post">
+                                    <input type="hidden" id="idmeta" name="id" value="">
                                     <div class="card stretch stretch-full">
                                         <div class="card-body lead-status">
                                             <div class="mb-5 d-flex align-items-center justify-content-between">
@@ -44,16 +45,27 @@
                                                 </h5>
                                             </div>
                                             <div class="row">
+                                                <div class="col-lg-6 text-left mt-2">
+                                                    NARASI
+                                                </div>
+                                                <div class="col-lg-6 text-right mb-2">
+                                                    BULAN : <input type="date" name="month" placeholder="" class="form">
+                                                </div>
                                                 <div class="col-lg-12 mb-4">
-                                                    <label class="form-label"> Narasi </label>
                                                     <textarea class="form-control" name="naration" id="narations" style="height: 100px;">
-
                                                     </textarea>
                                                 </div>
         
                                                 <div class="col-lg-12 mb-4 text-left">
-                                                    <label class="form-label"></label>
-                                                    <input class="btn btn-primary" type="submit" value="Simpan">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 text-left">
+                                                            <label class="form-label"></label>
+                                                            <input class="btn btn-primary w-20" type="submit" value="Simpan">
+                                                        </div>
+                                                        <div class="col-lg-6 text-right">
+                                                            <label class="form-label"></label>
+                                                            <input class="btn btn-warning w-20" type="button" value="Hapus" onclick="deleteMeta()">
+                                                        </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -98,8 +110,19 @@
         fetch('/api_metabase_detail/' + URLS.pathname.split('/')[2])
             .then(data => data.json())
             .then((rrr) => {
+                document.getElementById("idmeta").value= rrr[0]?.id;
                 document.getElementById("metadata").setAttribute('src', rrr[0]?.api);
             })
     }
+
+    function deleteMeta(){
+        const URLS = new URL(window.location.href);
+        const idt = URLS.pathname.split('/')[2];
+        const ids = document.getElementById("idmeta").value;
+        alert(ids);
+
+
+    }
+
 </script>
 </html>
