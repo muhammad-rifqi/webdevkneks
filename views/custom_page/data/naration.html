@@ -25,21 +25,23 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                            <iframe width="100%" height="300" id="metadata"></iframe>
+                        <iframe width="100%" height="300" id="metadata"></iframe>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
-                                <form action="/updatemetadata" method="post">
+                                <form>
                                     <input type="hidden" id="idmeta" name="id" value="">
+                                    <input type="hidden" id="url_name" name="url_name" value="">
                                     <div class="card stretch stretch-full">
                                         <div class="card-body lead-status">
                                             <div class="mb-5 d-flex align-items-center justify-content-between">
                                                 <h5 class="fw-bold mb-0 me-4">
                                                     <span class="d-block mb-2">Tambah Narasi :</span>
-                                                    <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
+                                                    <span
+                                                        class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
                                                         Tambah
                                                         Data Narasi Di Bawah Ini</span>
                                                 </h5>
@@ -49,27 +51,31 @@
                                                     NARASI
                                                 </div>
                                                 <div class="col-lg-6 text-right mb-2">
-                                                    BULAN : <input type="date" name="month" placeholder="" class="form">
+                                                    BULAN : <input type="date" name="month" id="months" placeholder=""
+                                                        class="form">
                                                 </div>
                                                 <div class="col-lg-12 mb-4">
-                                                    <textarea class="form-control" name="naration" id="narations" style="height: 100px;">
+                                                    <textarea class="form-control" name="naration" id="narations"
+                                                        style="height: 100px;">
                                                     </textarea>
                                                 </div>
-        
+
                                                 <div class="col-lg-12 mb-4 text-left">
                                                     <div class="row">
                                                         <div class="col-lg-6 text-left">
                                                             <label class="form-label"></label>
-                                                            <input class="btn btn-primary w-20" type="submit" value="Simpan">
+                                                            <input class="btn btn-primary w-20" type="button"
+                                                                value="Simpan" onclick="sendData()">
                                                         </div>
                                                         <div class="col-lg-6 text-right">
                                                             <label class="form-label"></label>
-                                                            <input class="btn btn-warning w-20" type="button" value="Hapus" onclick="deleteMeta()">
+                                                            <input class="btn btn-warning w-20" type="button"
+                                                                value="Hapus" onclick="deleteMeta()">
                                                         </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -110,19 +116,81 @@
         fetch('/api_metabase_detail/' + URLS.pathname.split('/')[2])
             .then(data => data.json())
             .then((rrr) => {
-                document.getElementById("idmeta").value= rrr[0]?.id;
+                console.log(rrr)
+                document.getElementById("idmeta").value = rrr[0]?.id;
                 document.getElementById("metadata").setAttribute('src', rrr[0]?.api);
+                document.getElementById("url_name").value = rrr[0]?.statistic_name;
+                document.getElementById("narations").value = rrr[0]?.naration;
+                document.getElementById("months").value = rrr[0]?.month.split('T')[0];
             })
     }
 
-    function deleteMeta(){
+    async function deleteMeta() {
         const URLS = new URL(window.location.href);
         const idt = URLS.pathname.split('/')[2];
-        const ids = document.getElementById("idmeta").value;
-        alert(ids);
+        await fetch('/emptyapimeta', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ "id": idt })
+        }).then(response => response.json())
+            .then((data) => {
+                if (data?.message == true) {
+                    swal({
+                        title: "Success",
+                        text: "Delete Data",
+                        icon: "success",
+                        buttons: true,
+                    })
+                        .then((willOut) => {
+                            if (willOut) {
+                                window.location = '/metabase';
+                            } else {
+                                console.log('NaN')
+                            }
+                        });
+                } else {
 
+                }
+            })
 
     }
 
+    async function sendData() {
+        const ids = document.getElementById("idmeta").value;
+        const urls_name = document.getElementById("url_name").value;
+        const naration = document.getElementById("narations").value;
+        const monthss = document.getElementById("months").value;
+        await fetch('/updateapimeta', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ "id": ids, "naration": naration, "month": monthss })
+        })
+            .then(response => response.json())
+            .then((data) => {
+                if (data?.message == true) {
+                    swal({
+                        title: "Success",
+                        text: "Update Data",
+                        icon: "success",
+                        buttons: true,
+                    })
+                        .then((willOut) => {
+                            if (willOut) {
+                                window.location = '/narationfront/' + ids + '/' + urls_name;
+                            } else {
+                                console.log('NaN')
+                            }
+                        });
+                } else {
+
+                }
+            })
+    }
+
 </script>
+
 </html>

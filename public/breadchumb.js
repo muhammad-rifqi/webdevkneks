@@ -19,7 +19,7 @@ if(path == 'datafront' || path == 'data_add' || path == 'data_detail'){
     breadcrumb1 = "Data";
     breadcrumb2 = "Dataset";
 }
-if(path == 'slidefront' || path == 'slide_add' ){
+if(path == 'slidefront' || path == 'slide_add' || path == 'slidedata' || path == 'statistic_slideadd'){
     breadcrumb1 = "Data";
     breadcrumb2 = "Slider";
 }

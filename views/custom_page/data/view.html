@@ -67,10 +67,9 @@
                                 <div class="row">
                                     <div class="col-lg-12 mb-4">
                                         <h4 id="titles"></h4>
-                                        Judul : <p id="judul"></p>
                                         Produsen Data : <p id="produsen_data"></p>
-                                        Tanggal : <p id="tanggal"></p>
-                                        Periode Tanggal : <p id="periode_tanggal"></p>
+                                        Tanggal : <p id="tanggal_update"></p>
+                                        Keterangan : <p id="descriptions"></p>
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +144,6 @@
 
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#api_database').DataTable({
@@ -193,10 +191,9 @@
             fetch('/sourcesdatadetaillist/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rrr) => {
-                    document.getElementById("judul").innerHTML = rrr[0]?.judul ?? "--:";
                     document.getElementById("produsen_data").innerHTML = rrr[0]?.produsen_data ?? "--:";
-                    document.getElementById("tanggal").innerHTML = rrr[0]?.tanggal ?? "--:";
-                    document.getElementById("periode_tanggal").innerHTML = rrr[0]?.periode_tanggal ?? "--:";
+                    document.getElementById("tanggal_update").innerHTML = rrr[0]?.tanggal_update ?? "--:";
+                    document.getElementById("descriptions").innerHTML = rrr[0]?.description ?? "--:";
                 })
         }
     </script>

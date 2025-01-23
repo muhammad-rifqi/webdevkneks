@@ -103,8 +103,6 @@ let directorat_images = multer.diskStorage(
 let directorats_images = multer({ storage: directorat_images });
 
 //:::::::::::::::::::::::::::::::::::::::::::::End Of Direktorat Images :::::::::::::::::::::::::::::::::::::::
-
-
 let slideshow_page = multer.diskStorage(
     {
         destination: './public/uploads/slideshow/',
@@ -115,6 +113,16 @@ let slideshow_page = multer.diskStorage(
 );
 let slide_path = multer({ storage: slideshow_page });
 
+// :::::::::::::::: Start Of Data Slide ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+let data_slide = multer.diskStorage(
+    {
+        destination: './public/uploads/data/',
+        filename: function (req, file, cb) {
+            cb(null, file.originalname.replace(" ", ""));
+        }
+    }
+);
+let data_slide_path = multer({ storage: data_slide });
 //::::::::::::::: Start Of Routes :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/', (req, res) => {
@@ -470,6 +478,11 @@ apps.get('/slide_add', (req, res) => {
 apps.get('/slidedata', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/slide/data.html'));
 })
+
+apps.get('/statistic_slideadd', (req, res) => {
+    res.sendFile(path.resolve('./views/custom_page/slide/add_data.html'));
+})
+
 
 apps.get('/datafront', (req, res) => {
     res.sendFile(path.resolve('./views/custom_page/data/list.html'));
@@ -951,13 +964,21 @@ apps.get('/api_metabase_delete/:id', db.metabase_delete);
 
 apps.post('/insertapimeta', db.insertapimeta);
 
-apps.post('/udpateapimeta', db.updateapimeta);
+apps.post('/emptyapimeta', db.emptyapimeta);
+
+apps.post('/updateapimeta', db.updateapimeta);
 
 apps.get('/statistics', db.statistics);
 
 apps.get('/delete_statistics/:id', db.deletestatistic);
 
 apps.post('/insertstatistics', db.insertstatistic);
+
+apps.get('/statistic_slide', db.statistic_slides);
+
+apps.post('/insertstatisticsslide', data_slide_path.single('image'), db.insertstatisticslide);
+
+apps.get('/statistic_slide_delete/:id/:photo', db.delete_statistic_slides);
 
 apps.get('/sourcesdata', db.sourcesdata);
 

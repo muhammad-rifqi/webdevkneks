@@ -17,12 +17,54 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin);
-            res.cookie("id", sql[0]?.id);
-            res.cookie("name", sql[0]?.name);
-            res.cookie("roles_id", sql[0]?.role_id);
-            res.cookie("id_province", sql[0]?.id_province);
-            res.cookie("directorat_id", sql[0]?.directorat_id);
+            res.cookie("islogin", isLogin, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id", sql[0]?.id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("name", sql[0]?.name, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("roles_id", sql[0]?.role_id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id_province", sql[0]?.id_province, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("directorat_id", sql[0]?.directorat_id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -2561,12 +2603,21 @@ const insertapimeta = async (req, res) => {
 }
 
 
+const emptyapimeta = async (req, res) => {
+    const sql = await executeQuery('UPDATE api_meta set naration = $1, month = $2 where id = $3', ['', new Date(), req.body.id]);
+    if (sql) {
+        res.status(200).json({ "message": true });
+    } else {
+        res.status(200).json({ "message": false });
+    }
+}
+
 const updateapimeta = async (req, res) => {
     const sql = await executeQuery('UPDATE api_meta set naration = $1, month = $2 where id = $3', [req.body.naration, req.body.month, req.body.id]);
-    if (sql?.length > 0) {
-        res.status(200).json({"message" : true});
+    if (sql) {
+        res.status(200).json({ "message": true });
     } else {
-        res.status(200).json({"message" : false});
+        res.status(200).json({ "message": false });
     }
 }
 
@@ -2600,6 +2651,49 @@ const deletestatistic = async (req, res) => {
     }
 }
 
+const statistic_slides = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM statistic_slide');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const insertstatisticslide = async (req, res) => {
+    const filesimage = site_url + "/uploads/data/" + req.file.originalname.replace(" ", "");
+    const sql = await executeQuery('insert into statistic_slide(title,title_en,amount,date_created,image,link,publish) values ($1,$2,$3,$4,$5,$6,$7)', [req.body.title, req.body.title_en, req.body.amount, req.body.date_created, filesimage, req.body.link, req.body.publish]);
+    if (sql) {
+        res.redirect('/slidedata');
+    } else {
+        res.redirect('/slidedata');
+    }
+}
+
+const delete_statistic_slides = async (req, res) => {
+    const id_statistic_slide = req.params.id;
+    const image = req.params.photo;
+    if (fs.existsSync(fileslinux + 'data/' + image)) {
+        fs.unlink(fileslinux + 'data/' + image, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM statistic_slide where id = $1 ', [id_statistic_slide]);
+            if (sql) {
+                res.redirect('/slidedata');
+            } else {
+                res.redirect('/slidedata');
+                console.log(sql);
+            }
+        });
+        console.log("ada")
+    } else {
+        const sql = await executeQuery('DELETE FROM statistic_slide where id = $1 ', [id_statistic_slide]);
+        if (sql?.length > 0) {
+            res.redirect('/slidedata');
+        } else {
+            res.redirect('/slidedata');
+        }
+    }
+}
 
 const sourcesdata = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM sourcedata');
@@ -2632,11 +2726,11 @@ const sourcesdatadetail = async (req, res) => {
 }
 
 const insertsourcesdata = async (req, res) => {
-    const sql = await executeQuery("insert into sourcedata(dataset,source,date_created) values($1,$2,$3) RETURNING id",
-        [req.body.dataset, req.body.source, '2025-01-01 00:00:00']);
+    const sql = await executeQuery("insert into sourcedata(dataset,source,date_created,dataset_en) values($1,$2,$3,$4) RETURNING id",
+        [req.body.dataset, req.body.source, '2025-01-01 00:00:00', req.body.dataset_en]);
     if (sql) {
-        await executeQuery("insert into sourcedata_detail(id_sourcedata,description,judul,produsen_data,tanggal,periode_tanggal) values($1,$2,$3,$4,$5,$6)",
-            [sql[0].id, 'description', req.body.judul, req.body.produsen_data, req.body.tanggal, req.body.periode_tanggal]);
+        await executeQuery("insert into sourcedata_detail(id_sourcedata,description,produsen_data,tanggal_update,api_data) values($1,$2,$3,$4,$5)",
+            [sql[0].id, req.body.descriptions, req.body.produsen_data, req.body.tanggal_update, req.body.api_database]);
 
         res.redirect('/datafront');
     } else {
@@ -3025,10 +3119,14 @@ module.exports = {
     detailsub_substatistic,
     insert_substatistic,
     delete_substatistic,
+    statistic_slides,
+    insertstatisticslide,
+    delete_statistic_slides,
     metabase,
     detail_metabase,
     metabase_delete,
     insertapimeta,
+    emptyapimeta,
     updateapimeta,
     statistics,
     deletestatistic,
