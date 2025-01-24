@@ -42,13 +42,13 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/statistic_slideadd'">
+                            <button class="btn btn-primary" onclick="window.location.href = '/sliderdata_add'">
                                 Tambah Data Slider </button>
                         </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
-                                    <table id="statistics_slide" class="display" style="width: 100%;">
+                                    <table id="sliderdata" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>NOMOR</th>
@@ -104,7 +104,7 @@
     <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
-            $('#statistics_slide').DataTable({
+            $('#sliderdata').DataTable({
                 "ajax": {
                     "url": "/statistic_slide",
                     "dataSrc": ""
@@ -157,7 +157,7 @@
             });
         });
 
-        $('#statistics_slide').on('click', '.delete-btn', function () {
+        $('#sliderdata').on('click', '.delete-btn', function () {
             var ids = $(this).data('id');
             var photo = $(this).data('foto');
             swal({

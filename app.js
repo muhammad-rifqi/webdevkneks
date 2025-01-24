@@ -378,11 +378,11 @@ apps.get('/narations/:id/:name', (req, res) => {
 });
 
 apps.get('/dashboard', (req, res) => {
-    res.sendFile(path.resolve('./views/data/dashboard/metabase.html'));
+    res.sendFile(path.resolve('./views/data/dashboard/list.html'));
 });
 
 apps.get('/dashboard_add', (req, res) => {
-    res.sendFile(path.resolve('./views/data/dashboard/metabaseadd.html'));
+    res.sendFile(path.resolve('./views/data/dashboard/add.html'));
 });
 
 apps.get('/submenu_data', (req, res) => {
@@ -597,9 +597,6 @@ apps.get('/submenu_edit/:id', (req, res) => {
 })
 
 //::::::::::::::: Api & Query DB :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-apps.get('/homes', db.homes);
-
 apps.get('/register', (req, res) => {
     res.sendFile(path.resolve('./views/register.html'));
 })

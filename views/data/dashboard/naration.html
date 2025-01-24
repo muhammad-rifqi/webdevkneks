@@ -116,13 +116,14 @@
         fetch('/api_metabase_detail/' + URLS.pathname.split('/')[2])
             .then(data => data.json())
             .then((rrr) => {
-                const ddd = rrr[0]?.month.split('-');
-                const mmmm = parseInt(ddd[1]) + parseInt(1)
+                // const ddd = rrr[0]?.month.split('-');
+                // const mmmm = parseInt(ddd[1]) + parseInt(1)
                 document.getElementById("idmeta").value = rrr[0]?.id;
                 document.getElementById("metadata").setAttribute('src', rrr[0]?.api);
                 document.getElementById("url_name").value = rrr[0]?.statistic_name;
                 document.getElementById("narations").value = rrr[0]?.naration;
-                document.getElementById("months").value = ddd[0] + '-' + '0'+mmmm;
+                // document.getElementById("months").value = ddd[0] + '-' + '0'+mmmm;
+                document.getElementById("months").value = rrr[0]?.month;
             })
     }
 
@@ -146,7 +147,7 @@
                     })
                         .then((willOut) => {
                             if (willOut) {
-                                window.location = '/metabase';
+                                window.location = '/dashboard';
                             } else {
                                 console.log('NaN')
                             }
@@ -181,7 +182,7 @@
                     })
                         .then((willOut) => {
                             if (willOut) {
-                                window.location = '/narationfront/' + ids + '/' + urls_name;
+                                window.location = '/narations/' + ids + '/' + urls_name;
                             } else {
                                 console.log('NaN')
                             }

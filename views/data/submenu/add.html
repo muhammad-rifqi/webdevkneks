@@ -118,9 +118,9 @@
 </body>
 <script>
     window.addEventListener("load", async () => {
-        await getDataSlide();
+        await getDataMenu();
     })
-    function getDataSlide() {
+    function getDataMenu() {
         fetch('/statistics')
             .then(data => data.json())
             .then((rows) => {

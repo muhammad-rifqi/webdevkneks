@@ -17,12 +17,54 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin);
-            res.cookie("id", sql[0]?.id);
-            res.cookie("name", sql[0]?.name);
-            res.cookie("roles_id", sql[0]?.role_id);
-            res.cookie("id_province", sql[0]?.id_province);
-            res.cookie("directorat_id", sql[0]?.directorat_id);
+            res.cookie("islogin", isLogin, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id", sql[0]?.id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("name", sql[0]?.name, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("roles_id", sql[0]?.role_id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id_province", sql[0]?.id_province, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("directorat_id", sql[0]?.directorat_id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -126,31 +168,6 @@ const do_logout = (req, res) => {
 }
 
 //::::::::::::::::::::::::::::::End Of Login :::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-//::::::::::::::::::::::::::::::Start Of Dashboard :::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-const homes = async (req, res) => {
-
-    const news_mounts = await executeQuery("SELECT * FROM news");
-    const jumlah1 = news_mounts.length;
-    const videos_mounts = await executeQuery("SELECT * FROM news_videos");
-    const jumlah2 = videos_mounts.length;
-    const photos_mounts = await executeQuery("SELECT * FROM news_photos");
-    const jumlah3 = photos_mounts.length;
-    const files_mounts = await executeQuery("SELECT * FROM reports");
-    const jumlah4 = files_mounts.length;
-
-    const mounted = {
-        "news": jumlah1,
-        "videos": jumlah2,
-        "photos": jumlah3,
-        "files": jumlah4,
-    }
-
-    res.status(200).json(mounted)
-}
-
-//::::::::::::::::::::::::::::::End Of Dashboard :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 //::::::::::::::::::::::::::::::Start Of Abouts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const abouts = async (req, res) => {
@@ -2320,7 +2337,7 @@ const detail_login_banners = async (req, res) => {
 
 const insertloginbanner = async (req, res) => {
     const filesimage = site_url + "/uploads/custompage/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery('insert into custom_page(name,path,flag) values ($1,$2,$3)', [req.body.names, filesimage,req.body.flag]);
+    const sql = await executeQuery('insert into custom_page(name,path,flag) values ($1,$2,$3)', [req.body.names, filesimage, req.body.flag]);
     if (sql?.length > 0) {
         res.redirect('/login_banner');
     } else {
@@ -2487,9 +2504,9 @@ const insert_substatistic = async (req, res) => {
     const sql = await executeQuery("INSERT INTO sub_statistic (id_statistic,short_name,long_name,short_name_en,long_name_en,statistic_name)values($1,$2,$3,$4,$5,$6)",
         [ddd[0], req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en, ddd[1]]);
     if (sql) {
-        res.redirect('/slidefrontsubmenu');
+        res.redirect('/submenu_data');
     } else {
-        res.redirect('/slidefrontsubmenu');
+        res.redirect('/submenu_data');
     }
 }
 
@@ -2497,9 +2514,9 @@ const delete_substatistic = async (req, res) => {
     const id_meta = req.params.id;
     const sql = await executeQuery('DELETE FROM sub_statistic where id = $1', [id_meta]);
     if (sql?.length > 0) {
-        res.redirect('/slidefrontsubmenu');
+        res.redirect('/submenu_data');
     } else {
-        res.redirect('/slidefrontsubmenu');
+        res.redirect('/submenu_data');
     }
 }
 
@@ -2527,9 +2544,9 @@ const metabase_delete = async (req, res) => {
     const id_meta = req.params.id;
     const sql = await executeQuery('DELETE FROM api_meta where id = $1', [id_meta]);
     if (sql?.length > 0) {
-        res.redirect('/metabase');
+        res.redirect('/dashboard');
     } else {
-        res.redirect('/metabase');
+        res.redirect('/dashboard');
     }
 }
 
@@ -2543,15 +2560,15 @@ const insertapimeta = async (req, res) => {
     const ddd = req.body.data_type.split('-');
     const sql = await executeQuery('INSERT INTO api_meta (api,statistic_id,statistic_name,sub_statistic,short_name,long_name,short_name_en,long_name_en,tagging,directorat,kdeks,publish,dataset) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)', [req.body.api, ddd[0], ddd[1], req.body.sub_statistic, req.body.shorts_name, req.body.long_name, req.body.shorts_name_en, req.body.long_name_en, req.body.taggings, directr, kdeksdir, req.body.publish, datasetdir]);
     if (sql?.length > 0) {
-        res.redirect('/metabase');
+        res.redirect('/dashboard');
     } else {
-        res.redirect('/metabase');
+        res.redirect('/dashboard');
     }
 }
 
 
 const emptyapimeta = async (req, res) => {
-    const sql = await executeQuery('UPDATE api_meta set naration = $1, month = $2 where id = $3', ['', '0000-00-00', req.body.id]);
+    const sql = await executeQuery('UPDATE api_meta set naration = $1, month = $2 where id = $3', ['', '', req.body.id]);
     if (sql) {
         res.status(200).json({ "message": true });
     } else {
@@ -2560,8 +2577,7 @@ const emptyapimeta = async (req, res) => {
 }
 
 const updateapimeta = async (req, res) => {
-    const mmm = req.body.month + '-' + '1';
-    const sql = await executeQuery('UPDATE api_meta set naration = $1, month = $2 where id = $3', [req.body.naration, mmm, req.body.id]);
+    const sql = await executeQuery('UPDATE api_meta set naration = $1, month = $2 where id = $3', [req.body.naration, req.body.month, req.body.id]);
     if (sql) {
         res.status(200).json({ "message": true });
     } else {
@@ -2582,10 +2598,10 @@ const insertstatistic = async (req, res) => {
     const sql = await executeQuery("insert into statistic(title,title_en,long_title,long_title_en,amount,date_created) values($1,$2,$3,$4,$5,$6)",
         [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en, 0, '2025-01-01 : 00:00:00']);
     if (sql) {
-        res.redirect('/slidefront');
+        res.redirect('/menu_data');
     } else {
         console.log(sql)
-        res.redirect('/slidefront');
+        res.redirect('/menu_data');
     }
 }
 
@@ -2593,9 +2609,9 @@ const deletestatistic = async (req, res) => {
     const id_stat = req.params.id;
     const sql = await executeQuery('DELETE FROM statistic where id = $1 ', [id_stat]);
     if (sql) {
-        res.redirect('/slidefront');
+        res.redirect('/menu_data');
     } else {
-        res.redirect('/slidefront');
+        res.redirect('/menu_data');
     }
 }
 
@@ -2612,9 +2628,9 @@ const insertstatisticslide = async (req, res) => {
     const filesimage = site_url + "/uploads/data/" + req.file.originalname.replace(" ", "");
     const sql = await executeQuery('insert into statistic_slide(title,title_en,amount,date_created,image,link,publish) values ($1,$2,$3,$4,$5,$6,$7)', [req.body.title, req.body.title_en, req.body.amount, req.body.date_created, filesimage, req.body.link, req.body.publish]);
     if (sql) {
-        res.redirect('/slidedata');
+        res.redirect('/sliderdata');
     } else {
-        res.redirect('/slidedata');
+        res.redirect('/sliderdata');
     }
 }
 
@@ -2626,9 +2642,9 @@ const delete_statistic_slides = async (req, res) => {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM statistic_slide where id = $1 ', [id_statistic_slide]);
             if (sql) {
-                res.redirect('/slidedata');
+                res.redirect('/sliderdata');
             } else {
-                res.redirect('/slidedata');
+                res.redirect('/sliderdata');
                 console.log(sql);
             }
         });
@@ -2636,9 +2652,9 @@ const delete_statistic_slides = async (req, res) => {
     } else {
         const sql = await executeQuery('DELETE FROM statistic_slide where id = $1 ', [id_statistic_slide]);
         if (sql?.length > 0) {
-            res.redirect('/slidedata');
+            res.redirect('/sliderdata');
         } else {
-            res.redirect('/slidedata');
+            res.redirect('/sliderdata');
         }
     }
 }
@@ -2680,10 +2696,10 @@ const insertsourcesdata = async (req, res) => {
         await executeQuery("insert into sourcedata_detail(id_sourcedata,description,produsen_data,tanggal_update,api_data) values($1,$2,$3,$4,$5)",
             [sql[0].id, req.body.descriptions, req.body.produsen_data, req.body.tanggal_update, req.body.api_database]);
 
-        res.redirect('/datafront');
+        res.redirect('/dataset');
     } else {
         console.log(sql)
-        res.redirect('/datafront');
+        res.redirect('/dataset');
     }
 }
 
@@ -2692,9 +2708,9 @@ const deletesourcesdata = async (req, res) => {
     const sql = await executeQuery('DELETE FROM sourcedata where id = $1 ', [id_stat]);
     if (sql) {
         await executeQuery('DELETE FROM sourcedata_detail where id_sourcedata = $1 ', [id_stat]);
-        res.redirect('/datafront');
+        res.redirect('/dataset');
     } else {
-        res.redirect('/datafront');
+        res.redirect('/dataset');
     }
 }
 
@@ -2915,7 +2931,6 @@ module.exports = {
     do_login,
     do_logout,
     user_register,
-    homes,
     banners,
     insertbanners,
     updatebanners,

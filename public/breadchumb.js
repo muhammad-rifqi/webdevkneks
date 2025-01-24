@@ -3,33 +3,33 @@ const path =  URLS.pathname.split('/')[1];
 let breadcrumb1;
 let breadcrumb2;
 //------------------------------Start Of Data----------------------
-if(path == 'dashboard'){
+if(path == 'dashboard' || path == 'home'){
     breadcrumb1 = "Data";
     breadcrumb2 = "Dashboard";
 }
-if(path == 'narationfront'){
+if(path == 'narations'){
     breadcrumb1 = "Data";
     breadcrumb2 = "Narasi";
 }
-if(path == 'metabase' || path == 'metabaseadd'){
+if(path == 'dashboard' || path == 'dashboard_add'){
     breadcrumb1 = "Data";
     breadcrumb2 = "Dashboard";
 }
-if(path == 'datafront' || path == 'data_add' || path == 'data_detail'){
+if(path == 'dataset' || path == 'dataset_add' || path == 'dataset_detail'){
     breadcrumb1 = "Data";
     breadcrumb2 = "Dataset";
 }
-if(path == 'slidefront' || path == 'slide_add'){
+if(path == 'sliderdata' || path == 'sliderdata_add'){
     breadcrumb1 = "Data";
-    breadcrumb2 = "Menu";
+    breadcrumb2 = "Slider Data";
 }
 
-if(path == 'slidedata' || path == 'statistic_slideadd'){
+if(path == 'menu_data' || path == 'menudata_add'){
     breadcrumb1 = "Data";
-    breadcrumb2 = "Slider";
+    breadcrumb2 = "Menu Data";
 }
 
-if(path == 'slidefrontsubmenu' || path == 'slidefrontsubmenuadd'){
+if(path == 'submenu_data' || path == 'submenudata_add'){
     breadcrumb1 = "Data";
     breadcrumb2 = "Sub Menu";
 }

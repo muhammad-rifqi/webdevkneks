@@ -75,7 +75,7 @@
                         </div>
                         <div class="card stretch stretch-full">
                             <div class="table-responsive p-5">
-                                <table id="api_meta" class="display" style="width: 100%;">
+                                <table id="dashboard_data" class="display" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th>NOMOR</th>
@@ -126,18 +126,15 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         if (cookie["roles_id"] == 1) {
-            document.getElementById("btn_add_meta").innerHTML = `<button class="btn btn-primary" onclick="window.location.href = '/metabaseadd'">Tambah Dashboard </button>`;
+            document.getElementById("btn_add_meta").innerHTML = `<button class="btn btn-primary" onclick="window.location.href = '/dashboard_add'">Tambah Dashboard </button>`;
         } else {
             document.getElementById("btn_add_meta").innerHTML = `Data Dashboard`;
         }
         $(document).ready(function () {
-            var table = $('#api_meta').DataTable({
+            var table = $('#dashboard_data').DataTable({
                 "ajax": {
                     "url": "/api_metabase",
                     "dataSrc": ""
-                },
-                language: {
-                    search: "Filter Menu / Sub Menu :"
                 },
                 "columns": [
                     {
@@ -179,13 +176,13 @@
                 ],
             })
 
-            $('#api_meta').on('click', '.edit-btn', function () {
+            $('#dashboard_data').on('click', '.edit-btn', function () {
                 var ids = $(this).data('id');
                 var namas = $(this).data('name');
-                window.location.href = '/narationfront/' + ids + '/' + namas;
+                window.location.href = '/narations/' + ids + '/' + namas;
             });
 
-            $('#api_meta').on('click', '.delete-btn', function () {
+            $('#dashboard_data').on('click', '.delete-btn', function () {
                 var ids = $(this).data('id');
                 swal({
                     title: "Are you sure?",

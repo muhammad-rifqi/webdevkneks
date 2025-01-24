@@ -71,7 +71,7 @@
   })
 
   function getImageLogin() {
-    fetch('/custom_page').then(response => response.json()).then((rows) => {
+    fetch('/login_banners').then(response => response.json()).then((rows) => {
       if (rows[0]?.path == undefined || rows[0]?.path == "" || rows[0]?.path == null) {
         // document.getElementById("gbrs").setAttribute('src', '/style/image/gbr-login.png');
         document.getElementById("gbrs").innerHTML = `Loading...`;
@@ -94,7 +94,7 @@
       console.log(kuki['name'] ?? "Tidak Ada Kuki!")
     } else {
       console.log(kuki['name'] ?? "Tidak Ada Kuki!")
-      window.location.href = '/metabase';
+      window.location.href = '/home';
     }
   }
 
@@ -143,7 +143,7 @@
               text: `Silahkan Masuk ${em} Ke Dashboard Untuk Mengola Data Anda`,
               icon: "success",
             }).then(function () {
-              window.location.href = "/metabase";
+              window.location.href = "/home";
             });
           } else if (data?.success == "false") {
             swal({

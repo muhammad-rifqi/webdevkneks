@@ -43,7 +43,7 @@
                     <div class="col-lg-12">
                         <div class="row p-2">
                             <div class="col-md-4 text-left">
-                                <button class="btn btn-primary" onclick="window.location.href = '/data_add'"> Tambah
+                                <button class="btn btn-primary" onclick="window.location.href = '/dataset_add'"> Tambah
                                     Sumber
                                     Data </button>
                             </div>
@@ -62,7 +62,7 @@
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
-                                    <table id="sourcesdata" class="display" style="width: 100%;">
+                                    <table id="datasets" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>NOMOR</th>
@@ -116,7 +116,7 @@
     <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
-            const tables = $('#sourcesdata').DataTable({
+            const tables = $('#datasets').DataTable({
                 "ajax": {
                     "url": "/sourcesdata",
                     "dataSrc": ""
@@ -158,12 +158,12 @@
                 ],
             });
 
-            $('#sourcesdata').on('click', '.edit-btn-custom-page', function () {
+            $('#datasets').on('click', '.edit-btn-custom-page', function () {
                 var id = $(this).data('id');
-                window.location.href = '/data_detail/' + id;
+                window.location.href = '/dataset_detail/' + id;
             });
 
-            $('#sourcesdata').on('click', '.delete-btn-custom-page', function () {
+            $('#datasets').on('click', '.delete-btn-custom-page', function () {
                 var id = $(this).data('id');
                 swal({
                     title: "Are you sure?",
@@ -194,10 +194,10 @@
     </script>
     <script>
         window.addEventListener("load", async () => {
-            await getStatistics();
+            await getDataSets();
         })
 
-        function getStatistics() {
+        function getDataSets() {
             fetch('/sourcesdata')
                 .then(data => data.json())
                 .then((rows) => {
