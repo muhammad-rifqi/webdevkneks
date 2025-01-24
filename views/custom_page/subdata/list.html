@@ -53,9 +53,9 @@
                                         <thead>
                                             <tr>
                                                 <th>NO</th>
-                                                <th>Nama Menu </th>
                                                 <th>Nama Pendek </th>
                                                 <th>Nama Panjang </th>
+                                                <th>Nama Menu </th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -108,9 +108,6 @@
                     "url": "/sub_statistic",
                     "dataSrc": ""
                 },
-                language: {
-                    search: "Filter Menu:"
-                },
                 "columns": [
                     {
                         data: null,
@@ -118,9 +115,9 @@
                             return meta.row + 1;
                         }
                     },
-                    { "data": "statistic_name" },
                     { "data": "short_name" },
                     { "data": "long_name" },
+                    { "data": "statistic_name" },
                     {
                         "data": null,
                         "render": function (data, type, row) {

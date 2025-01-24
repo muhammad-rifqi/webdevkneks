@@ -51,8 +51,8 @@
                                                     NARASI
                                                 </div>
                                                 <div class="col-lg-6 text-right mb-2">
-                                                    BULAN : <input type="date" name="month" id="months" placeholder=""
-                                                        class="form">
+                                                    BULAN : <input type="month" name="month" id="months" placeholder=""
+                                                        class="form" required>
                                                 </div>
                                                 <div class="col-lg-12 mb-4">
                                                     <textarea class="form-control" name="naration" id="narations"
@@ -62,12 +62,12 @@
 
                                                 <div class="col-lg-12 mb-4 text-left">
                                                     <div class="row">
-                                                        <div class="col-lg-6 text-left">
+                                                        <div class="col-md-1 text-left">
                                                             <label class="form-label"></label>
                                                             <input class="btn btn-primary w-20" type="button"
                                                                 value="Simpan" onclick="sendData()">
                                                         </div>
-                                                        <div class="col-lg-6 text-right">
+                                                        <div class="col-md-11 text-left">
                                                             <label class="form-label"></label>
                                                             <input class="btn btn-warning w-20" type="button"
                                                                 value="Hapus" onclick="deleteMeta()">
@@ -116,12 +116,13 @@
         fetch('/api_metabase_detail/' + URLS.pathname.split('/')[2])
             .then(data => data.json())
             .then((rrr) => {
-                console.log(rrr)
+                const ddd = rrr[0]?.month.split('-');
+                const mmmm = parseInt(ddd[1]) + parseInt(1)
                 document.getElementById("idmeta").value = rrr[0]?.id;
                 document.getElementById("metadata").setAttribute('src', rrr[0]?.api);
                 document.getElementById("url_name").value = rrr[0]?.statistic_name;
                 document.getElementById("narations").value = rrr[0]?.naration;
-                document.getElementById("months").value = rrr[0]?.month.split('T')[0];
+                document.getElementById("months").value = ddd[0] + '-' + '0'+mmmm;
             })
     }
 

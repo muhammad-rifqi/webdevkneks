@@ -41,10 +41,26 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/data_add'"> Tambah Sumber
-                                Data </button>
-                        </p>
+                        <div class="row p-2">
+                            <div class="col-md-4 text-left">
+                                <button class="btn btn-primary" onclick="window.location.href = '/data_add'"> Tambah
+                                    Sumber
+                                    Data </button>
+                            </div>
+                            <div class="col-md-4 text-left">
+                                <p></p>
+                                <p style="padding-left: 180px;">Filter Produsen Data :</p>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <select id="search_produsen_data" name="search_produsen_data" class="form-control"
+                                    style="width: 300px;">
+                                    <option value="null">--</option>
+                                    <option value="OJK">OJK</option>
+                                    <option value="RKI">RKI</option>
+                                </select>
+                            </div>
+
+                        </div>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
@@ -102,12 +118,10 @@
     <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
-            $('#sourcesdata').DataTable({
+            const tables = $('#sourcesdata').DataTable({
                 "ajax": {
                     "url": "/sourcesdata",
                     "dataSrc": ""
-                },                language: {
-                    search: "Filter Produsen Data :"
                 },
                 "columns": [
                     {
@@ -130,9 +144,9 @@
                 ],
                 columnDefs: [
                     {
-                        targets: 0, 
-                        orderable: false, 
-                        searchable: false 
+                        targets: 0,
+                        orderable: false,
+                        searchable: false
                     }
                 ],
                 lengthMenu: [10, 25, 50, 100],
@@ -168,13 +182,17 @@
                         }
                     });
             });
+
+            $('#search_produsen_data').on('change', function () {
+                tables.column(2).search(this.value).draw(); 
+            });
         });
 
 
-        $('#sourcesdata').on('click', '.add-btn-custom-page', function () {
-            var id = $(this).data('id');
-            $('#detailModal').modal('show');
-        });
+        // $('#sourcesdata').on('click', '.add-btn-custom-page', function () {
+        //     var id = $(this).data('id');
+        //     $('#detailModal').modal('show');
+        // });
 
     </script>
 

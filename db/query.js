@@ -17,14 +17,14 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin, {
+            res.cookie("islogin", isLogin), {
                 maxAge: 900000,
                 domain: '.rifhandi.com',
                 secure: true,
                 httpOnly: false,
                 sameSite: 'None',
                 overwrite: true,
-            });
+            };
             res.cookie("id", sql[0]?.id, {
                 maxAge: 900000,
                 domain: '.rifhandi.com',
@@ -2604,7 +2604,7 @@ const insertapimeta = async (req, res) => {
 
 
 const emptyapimeta = async (req, res) => {
-    const sql = await executeQuery('UPDATE api_meta set naration = $1, month = $2 where id = $3', ['', new Date(), req.body.id]);
+    const sql = await executeQuery('UPDATE api_meta set naration = $1, month = $2 where id = $3', ['', '0000-00-00', req.body.id]);
     if (sql) {
         res.status(200).json({ "message": true });
     } else {
@@ -2613,7 +2613,8 @@ const emptyapimeta = async (req, res) => {
 }
 
 const updateapimeta = async (req, res) => {
-    const sql = await executeQuery('UPDATE api_meta set naration = $1, month = $2 where id = $3', [req.body.naration, req.body.month, req.body.id]);
+    const mmm = req.body.month + '-' + '1';
+    const sql = await executeQuery('UPDATE api_meta set naration = $1, month = $2 where id = $3', [req.body.naration, mmm, req.body.id]);
     if (sql) {
         res.status(200).json({ "message": true });
     } else {

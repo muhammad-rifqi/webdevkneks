@@ -53,9 +53,29 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p id="btn_add_meta">
+                        <div class="row p-2">
+                            <div class="col-md-4 text-left">
+                                <br>
+                                <p id="btn_add_meta"></p>
+                            </div>
+                            <div class="col-md-4 text-left">
+                                Filter Menu: <select id="search_menu" name="search_menu" class="form-control"
+                                    style="width: 300px;">
+                                    <option value="null">--</option>
+                                    <option value="RPH">RPH</option>
+                                    <option value="JKS">JKS</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                Filter Submenu:<select id="search_sub_menu" name="search_sub_menu" class="form-control"
+                                    style="width: 300px;">
+                                    <option value="null">--</option>
+                                    <option value="ASAAAA">ASAAAA</option>
+                                    <option value="ASAAAAA">ASAAAAA</option>
+                                </select>
+                            </div>
 
-                        </p>
+                        </div>
                         <div class="card stretch stretch-full">
                             <div class="table-responsive p-5">
                                 <table id="api_meta" class="display" style="width: 100%;">
@@ -161,35 +181,40 @@
                     'print'
                 ],
             })
+
+            $('#api_meta').on('click', '.edit-btn', function () {
+                var ids = $(this).data('id');
+                var namas = $(this).data('name');
+                window.location.href = '/narationfront/' + ids + '/' + namas;
+            });
+
+            $('#api_meta').on('click', '.delete-btn', function () {
+                var ids = $(this).data('id');
+                swal({
+                    title: "Are you sure?",
+                    text: "To Delete this Data ??",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willOut) => {
+                        if (willOut) {
+                            window.location = " /api_metabase_delete/" + ids;
+                        } else {
+                            console.log('NaN')
+                        }
+                    });
+            });
+
+            $('#search_menu').on('change', function () {
+                table.column(3).search(this.value).draw();
+            });
+
+            $('#search_sub_menu').on('change', function () {
+                table.column(4).search(this.value).draw();
+            });
+
         });
-    </script>
-
-    <script>
-
-        $('#api_meta').on('click', '.edit-btn', function () {
-            var ids = $(this).data('id');
-            var namas = $(this).data('name');
-            window.location.href = '/narationfront/' + ids + '/' + namas;
-        });
-
-        $('#api_meta').on('click', '.delete-btn', function () {
-            var ids = $(this).data('id');
-            swal({
-                title: "Are you sure?",
-                text: "To Delete this Data ??",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willOut) => {
-                    if (willOut) {
-                        window.location = " /api_metabase_delete/" + ids;
-                    } else {
-                        console.log('NaN')
-                    }
-                });
-        });
-
     </script>
 </body>
 
