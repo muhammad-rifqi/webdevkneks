@@ -61,7 +61,7 @@
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Nama</label>
-                                            <input class="form-control" type="text" name="name" id="nama" required>
+                                            <input class="form-control" type="text" name="name" id="nama_pejabat" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Posisi</label>
@@ -138,7 +138,7 @@
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("id").value = rows[0]?.id;
-                    document.getElementById("nama").value = rows[0]?.name;
+                    document.getElementById("nama_pejabat").value = rows[0]?.name;
                     document.getElementById("position").value = rows[0]?.position;
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.photo}" width="180">`;
                     document.getElementById("tag").value = rows[0]?.tag;

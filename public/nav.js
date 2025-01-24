@@ -30,7 +30,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                         </a>
                         <ul class="nxl-submenu">
                         <li class="nxl-item"><a class="nxl-link" href="/welcomebanner">Welcome Banner</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/customfront">Login Banner</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/login_banner">Login Banner</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/b">Slide Show Banner</a></li>
                          </ul>
                     </li>`);

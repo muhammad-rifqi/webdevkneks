@@ -18,46 +18,11 @@ const do_login = async (req, res) => {
             u_id = sql[0]?.id;
             const isLogin = true;
             res.cookie("islogin", isLogin);
-            res.cookie("id", sql[0]?.id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("name", sql[0]?.name, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("roles_id", sql[0]?.role_id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id_province", sql[0]?.id_province, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("directorat_id", sql[0]?.directorat_id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+            res.cookie("id", sql[0]?.id);
+            res.cookie("name", sql[0]?.name);
+            res.cookie("roles_id", sql[0]?.role_id);
+            res.cookie("id_province", sql[0]?.id_province);
+            res.cookie("directorat_id", sql[0]?.directorat_id);
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -2368,9 +2333,9 @@ const insertcustompage = async (req, res) => {
     const filesimage = site_url + "/uploads/custompage/" + req.file.originalname.replace(" ", "");
     const sql = await executeQuery('insert into custom_page(name,path) values ($1,$2)', [req.body.names, filesimage]);
     if (sql?.length > 0) {
-        res.redirect('/customfront');
+        res.redirect('/login_banner');
     } else {
-        res.redirect('/customfront');
+        res.redirect('/login_banner');
     }
 }
 
@@ -2442,9 +2407,9 @@ const delete_custom_page = async (req, res) => {
             if (err) return console.log(err);
             const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
             if (sql) {
-                res.redirect('/customfront');
+                res.redirect('/login_banner');
             } else {
-                res.redirect('/customfront');
+                res.redirect('/login_banner');
                 console.log(sql);
             }
         });
@@ -2452,9 +2417,9 @@ const delete_custom_page = async (req, res) => {
     } else {
         const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
         if (sql?.length > 0) {
-            res.redirect('/customfront');
+            res.redirect('/login_banner');
         } else {
-            res.redirect('/customfront');
+            res.redirect('/login_banner');
         }
     }
 }
