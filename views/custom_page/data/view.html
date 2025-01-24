@@ -56,20 +56,17 @@
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
                             <div class="card-body lead-status">
-                                <div class="mb-2 d-flex align-items-center justify-content-between">
-                                    <h4 class="fw-bold mb-0 me-4">
-                                        <span class="d-block mb-2">Detail Data Set :</span>
-                                        <span class="fs-12 fw-normal text-muted text-truncate-1-line">
-                                            Detail
-                                            Data Set Di Bawah Ini</span>
-                                    </h4>
-                                </div>
                                 <div class="row">
                                     <div class="col-lg-12 mb-4">
                                         <h4 id="titles"></h4>
-                                        Produsen Data : <p id="produsen_data"></p>
-                                        Tanggal : <p id="tanggal_update"></p>
-                                        Keterangan : <p id="descriptions"></p>
+                                        <b>Produsen Data</b> : <p id="produsen_data"></p>
+                                        <hr />
+                                        <b>Tanggal</b> : <p id="tanggal_update"></p>
+                                        <hr />
+                                        <b>Keterangan</b> : <p id="descriptions"></p>
+                                        <hr />
+                                        <b>Api Data</b> : <p id="api_data"></p>
+                                        <hr />
                                     </div>
                                 </div>
                             </div>
@@ -194,6 +191,7 @@
                     document.getElementById("produsen_data").innerHTML = rrr[0]?.produsen_data ?? "--:";
                     document.getElementById("tanggal_update").innerHTML = rrr[0]?.tanggal_update ?? "--:";
                     document.getElementById("descriptions").innerHTML = rrr[0]?.description ?? "--:";
+                    document.getElementById("api_data").innerHTML = rrr[0]?. api_data ?? "--:";
                 })
         }
     </script>

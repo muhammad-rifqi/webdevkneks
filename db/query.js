@@ -17,14 +17,7 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin), {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            };
+            res.cookie("islogin", isLogin);
             res.cookie("id", sql[0]?.id, {
                 maxAge: 900000,
                 domain: '.rifhandi.com',

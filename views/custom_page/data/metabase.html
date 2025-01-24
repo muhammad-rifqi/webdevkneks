@@ -62,16 +62,13 @@
                                 Filter Menu: <select id="search_menu" name="search_menu" class="form-control"
                                     style="width: 300px;">
                                     <option value="null">--</option>
-                                    <option value="RPH">RPH</option>
-                                    <option value="JKS">JKS</option>
+                                    
                                 </select>
                             </div>
                             <div class="col-md-4 text-right">
                                 Filter Submenu:<select id="search_sub_menu" name="search_sub_menu" class="form-control"
                                     style="width: 300px;">
                                     <option value="null">--</option>
-                                    <option value="ASAAAA">ASAAAA</option>
-                                    <option value="ASAAAAA">ASAAAAA</option>
                                 </select>
                             </div>
 
@@ -215,6 +212,39 @@
             });
 
         });
+    </script>
+
+    <script>
+        window.addEventListener("load", async() => {
+           await getStatistics()
+           await getSubStatistics();
+        })
+
+        function getStatistics() {
+            fetch('/statistics')
+                .then(data => data.json())
+                .then((rows) => {
+                    rows.forEach(element => {
+                        const ddd = document.createElement('option')
+                        ddd.value = `${element?.title}`;
+                        ddd.text = `${element?.title}`;
+                        document.getElementById("search_menu").append(ddd);
+                    });
+                })
+        }
+
+        function getSubStatistics() {
+            fetch('/sub_statistic')
+                .then(dt => dt.json())
+                .then((row) => {
+                    row.forEach(element => {
+                        const dddd = document.createElement('option')
+                        dddd.value = `${element?.short_name}`;
+                        dddd.text = `${element?.short_name}`;
+                        document.getElementById("search_sub_menu").append(dddd);
+                    });
+                })
+        }
     </script>
 </body>
 

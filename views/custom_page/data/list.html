@@ -55,8 +55,6 @@
                                 <select id="search_produsen_data" name="search_produsen_data" class="form-control"
                                     style="width: 300px;">
                                     <option value="null">--</option>
-                                    <option value="OJK">OJK</option>
-                                    <option value="RKI">RKI</option>
                                 </select>
                             </div>
 
@@ -184,10 +182,9 @@
             });
 
             $('#search_produsen_data').on('change', function () {
-                tables.column(2).search(this.value).draw(); 
+                tables.column(2).search(this.value).draw();
             });
         });
-
 
         // $('#sourcesdata').on('click', '.add-btn-custom-page', function () {
         //     var id = $(this).data('id');
@@ -195,7 +192,26 @@
         // });
 
     </script>
+    <script>
+        window.addEventListener("load", async () => {
+            await getStatistics();
+        })
 
+        function getStatistics() {
+            fetch('/sourcesdata')
+                .then(data => data.json())
+                .then((rows) => {
+                    const bbb = [...new Set(rows.map(obj => obj.source))]
+                    bbb.forEach((element, index) => {
+                        const ddd = document.createElement('option')
+                        ddd.value = `${bbb[index]}`;
+                        ddd.text = `${bbb[index]}`;
+                        document.getElementById("search_produsen_data").append(ddd);
+                    })
+                })
+        }
+
+    </script>
     <!-- <button class='add-btn-custom-page btn btn-success' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-plus"></i></button> -->
     <!-- <div class="modal fade bd-example-modal-lg" id="detailModal" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
