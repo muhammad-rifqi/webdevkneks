@@ -346,51 +346,51 @@ apps.get('/fc_edit/:id', (req, res) => {
 //:::::::::::::::::::::::::::::::::::::::  End Of E-Pustaka ::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::: Start Of Data :::::::::::::::::::::::::::::::::::::
 apps.get('/slidefront', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/slide/list.html'));
+    res.sendFile(path.resolve('./views/data/slide/list.html'));
 })
 
 apps.get('/slide_add', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/slide/add.html'));
+    res.sendFile(path.resolve('./views/data/slide/add.html'));
 })
 
 apps.get('/slidedata', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/slide/data.html'));
+    res.sendFile(path.resolve('./views/data/slide/data.html'));
 })
 
 apps.get('/statistic_slideadd', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/slide/add_data.html'));
+    res.sendFile(path.resolve('./views/data/slide/add_data.html'));
 })
 
 apps.get('/datafront', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/list.html'));
+    res.sendFile(path.resolve('./views/data/data/list.html'));
 })
 
 apps.get('/data_add', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/add.html'));
+    res.sendFile(path.resolve('./views/data/data/add.html'));
 })
 
 apps.get('/data_detail/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/view.html'));
+    res.sendFile(path.resolve('./views/data/data/view.html'));
 });
 
 apps.get('/narationfront/:id/:name', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/naration.html'));
+    res.sendFile(path.resolve('./views/data/data/naration.html'));
 });
 
 apps.get('/metabase', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/metabase.html'));
+    res.sendFile(path.resolve('./views/data/data/metabase.html'));
 });
 
 apps.get('/metabaseadd', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/data/metabaseadd.html'));
+    res.sendFile(path.resolve('./views/data/data/metabaseadd.html'));
 });
 
 apps.get('/slidefrontsubmenu', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/subdata/list.html'));
+    res.sendFile(path.resolve('./views/data/subdata/list.html'));
 });
 
 apps.get('/slidefrontsubmenuadd', (req, res) => {
-    res.sendFile(path.resolve('./views/custom_page/subdata/add.html'));
+    res.sendFile(path.resolve('./views/data/subdata/add.html'));
 });
 //:::::::::::::::::::::::::::::::::::::::: End Of Data :::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::::::::::::::::::::::::::::::::::::::::::::: Start Of Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::
