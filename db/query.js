@@ -125,17 +125,6 @@ const do_logout = (req, res) => {
     res.redirect("/");
 }
 
-const api_login = async (req, res) => {
-    const email = req?.body?.email;
-    const password = md5(req?.body?.password);
-    const sql = await executeQuery("SELECT * FROM users where email = $1 AND password = $2 ", [email, password])
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
 //::::::::::::::::::::::::::::::End Of Login :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 //::::::::::::::::::::::::::::::Start Of Dashboard :::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -2299,7 +2288,7 @@ const deletetagging = async (req, res) => {
     }
 }
 
-const custom_page = async (req, res) => {
+const login_banners = async (req, res) => {
     const sql = await executeQuery("SELECT * FROM custom_page where flag = 'login'");
     const array = [];
     sql.forEach((element, index) => {
@@ -2319,7 +2308,7 @@ const custom_page = async (req, res) => {
     }
 }
 
-const detail_custom_page = async (req, res) => {
+const detail_login_banners = async (req, res) => {
     const id_custom = req.params.id;
     const sql = await executeQuery('SELECT * FROM custom_page where id = $1 ', [id_custom]);
     if (sql?.length > 0) {
@@ -2329,9 +2318,9 @@ const detail_custom_page = async (req, res) => {
     }
 }
 
-const insertcustompage = async (req, res) => {
+const insertloginbanner = async (req, res) => {
     const filesimage = site_url + "/uploads/custompage/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery('insert into custom_page(name,path) values ($1,$2)', [req.body.names, filesimage]);
+    const sql = await executeQuery('insert into custom_page(name,path,flag) values ($1,$2,$3)', [req.body.names, filesimage,req.body.flag]);
     if (sql?.length > 0) {
         res.redirect('/login_banner');
     } else {
@@ -2339,7 +2328,7 @@ const insertcustompage = async (req, res) => {
     }
 }
 
-const custom_page_slogo = async (req, res) => {
+const slogo = async (req, res) => {
     const sql = await executeQuery("SELECT * FROM custom_page where flag = 's_logo'");
     const array = [];
     sql.forEach((element, index) => {
@@ -2359,7 +2348,7 @@ const custom_page_slogo = async (req, res) => {
     }
 }
 
-const insertcustompage_slogo = async (req, res) => {
+const inserts_slogo = async (req, res) => {
     const filesimage = site_url + "/uploads/custompage/" + req.file.originalname.replace(" ", "");
     const sql = await executeQuery('insert into custom_page(name,path,flag) values ($1,$2,$3)', [req.body.names, filesimage, req.body.flag]);
     if (sql?.length > 0) {
@@ -2399,7 +2388,7 @@ const insertcustompage_welcome = async (req, res) => {
     }
 }
 
-const delete_custom_page = async (req, res) => {
+const delete_login_banner = async (req, res) => {
     const id_custom = req.params.id;
     const image = req.params.foto;
     if (fs.existsSync(fileslinux + 'custompage/' + image)) {
@@ -2424,7 +2413,7 @@ const delete_custom_page = async (req, res) => {
     }
 }
 
-const delete_custom_page_slogo = async (req, res) => {
+const delete_slogos = async (req, res) => {
     const id_custom = req.params.id;
     const image = req.params.foto;
     if (fs.existsSync(fileslinux + 'custompage/' + image)) {
@@ -2925,9 +2914,13 @@ const submenu_detail = async (req, res) => {
 module.exports = {
     do_login,
     do_logout,
-    api_login,
     user_register,
     dashboards,
+    banners,
+    insertbanners,
+    updatebanners,
+    detailbanner,
+    deletebanner,
     categories,
     photodetail,
     deletephoto,
@@ -3013,11 +3006,6 @@ module.exports = {
     contacts,
     updatecontacts,
     questbook,
-    banners,
-    deletebanner,
-    detailbanner,
-    updatebanners,
-    insertbanners,
     agendas,
     agenda_graph,
     agendadetails,
@@ -3064,15 +3052,15 @@ module.exports = {
     detailtagging,
     deletetagging,
     updatetagging,
-    custom_page,
-    detail_custom_page,
-    insertcustompage,
-    custom_page_slogo,
-    insertcustompage_slogo,
+    login_banners,
+    detail_login_banners,
+    insertloginbanner,
+    slogo,
+    inserts_slogo,
     custom_page_welcome,
     insertcustompage_welcome,
-    delete_custom_page,
-    delete_custom_page_slogo,
+    delete_login_banner,
+    delete_slogos,
     delete_custom_page_welcome,
     sub_statistic,
     detailsub_substatistic,

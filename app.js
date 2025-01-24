@@ -604,6 +604,77 @@ apps.get('/register', (req, res) => {
     res.sendFile(path.resolve('./views/register.html'));
 })
 
+// :::::::::::::::::::::::::: Api Frontend ::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.get('/api/newspaging', db.pagingnews);
+
+apps.get('/api_news', db.news_kdeks);
+
+apps.get('/api_news_detail/:id', db.news_details_kdeks);
+
+apps.get('/api_newscategory', db.news_categories_kdeks);
+
+apps.get('/api_detailnewscategory/:id', db.news_detailnewscategory_kdeks);
+
+apps.get('/abouts', db.abouts);
+
+apps.get('/api_about', db.abouts_kdeks);
+
+apps.get('/api_history', db.history_kdeks);
+
+apps.get('/detailabouts/:id', db.detailabout);
+
+apps.get('/api_sejarah_province/:id', db.history_province);
+
+apps.get('/api_about_province/:id', db.about_province);
+
+apps.get('/api_metabase', db.metabase);
+
+apps.get('/api_metabase_detail/:id', db.detail_metabase);
+
+apps.get('/api_metabase_delete/:id', db.metabase_delete);
+
+apps.get('/api_opini', db.opini);
+
+apps.get('/api_opini_detail/:id', db.opini_detail);
+
+apps.get('/api_web_profile', db.web_profile);
+
+apps.get('/api_detail_webprofile/:id', db.web_profile_detail);
+
+apps.get('/api_menu', db.menu);
+
+apps.get('/api_menu_detail/:id', db.menu_detail);
+
+apps.get('/api_submenu', db.submenu);
+
+apps.get('/api_submenu_detail/:id', db.submenu_detail);
+
+apps.get('/api_kdeks', db.kdeks);
+
+apps.get('/kneks/api', db.api_kneks);
+
+//::::::::::::::::::::::::::::: Start Of Query ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.post('/insertreg', db.user_register);
+
+apps.post('/do_login', db.do_login);
+
+apps.post('/act_login', db.do_login);
+
+apps.get("/logout", db.do_logout);
+
+//::::::::::::::: Api & Query DB BANNERS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.get('/banners', db.banners);
+
+apps.get('/detailbanners/:id', db.detailbanner);
+
+apps.post('/insertbanners', slide_path.single('images'), db.insertbanners);
+
+apps.get('/deletebanners/:id', db.deletebanner);
+
+apps.post('/updatebanner', slide_path.single('images'), db.updatebanners);
 
 //::::::::::::::: Api & Query DB NEWS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -634,17 +705,6 @@ apps.get('/news/search/:date', db.news_categories_date);
 apps.get('/detailnewscategory/:id', db.detailnewscategory);
 
 apps.get('/deletenewscategory/:id', db.deletenewscategory);
-
-apps.get('/api/newspaging', db.pagingnews);
-
-apps.get('/api_news', db.news_kdeks);
-
-apps.get('/api_news_detail/:id', db.news_details_kdeks);
-
-apps.get('/api_newscategory', db.news_categories_kdeks);
-
-apps.get('/api_detailnewscategory/:id', db.news_detailnewscategory_kdeks);
-
 
 //::::::::::::::: Api & Query DB PHOTOS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -695,18 +755,6 @@ apps.get('/updatepassword', db.updatepassword);
 apps.post('/changespassword', db.changespassword);
 
 //::::::::::::::: Api & Query DB ABOUTS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-apps.get('/abouts', db.abouts);
-
-apps.get('/api_about', db.abouts_kdeks);
-
-apps.get('/api_history', db.history_kdeks);
-
-apps.get('/detailabouts/:id', db.detailabout);
-
-apps.get('/api_sejarah_province/:id', db.history_province);
-
-apps.get('/api_about_province/:id', db.about_province);
 
 apps.post('/updatetentangkami', db.updateabouts);
 
@@ -821,17 +869,7 @@ apps.get('/contacts', db.contacts);
 apps.post('/updatecontacts', db.updatecontacts);
 
 apps.post('/questbook', db.questbook);
-//::::::::::::::: Api & Query DB BANNERS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-apps.get('/banners', db.banners);
-
-apps.get('/detailbanners/:id', db.detailbanner);
-
-apps.post('/insertbanners', slide_path.single('images'), db.insertbanners);
-
-apps.get('/deletebanners/:id', db.deletebanner);
-
-apps.post('/updatebanner', slide_path.single('images'), db.updatebanners);
 //::::::::::::::: Api & Query DB FILES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/files', db.files);
@@ -934,23 +972,23 @@ apps.get('/usia', async (req, res) => {
 
 //::::::::::::::: Api & Query DB AUTH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-apps.get('/custom_page', db.custom_page);
+apps.get('/login_banners', db.login_banners);
 
-apps.get('/detail_custom_page/:id', db.detail_custom_page);
+apps.get('/detail_login_banner/:id', db.detail_login_banners);
 
-apps.post('/insertcustompage', page_path.single('files_image'), db.insertcustompage);
+apps.post('/insertloginbanners', page_path.single('files_image'), db.insertloginbanner);
 
-apps.get('/custom_page_slogo', db.custom_page_slogo);
+apps.get('/s_logos', db.slogo);
 
-apps.post('/insertcustompage_slogo', page_path.single('files_image'), db.insertcustompage_slogo);
+apps.post('/insert_slogo', page_path.single('files_image'), db.inserts_slogo);
 
 apps.get('/custom_page_welcome', db.custom_page_welcome);
 
 apps.post('/insertcustompage_welcome', page_path.single('files_image'), db.insertcustompage_welcome);
 
-apps.get('/delete_custom_page/:id/:foto', db.delete_custom_page);
+apps.get('/delete_login_banner/:id/:foto', db.delete_login_banner);
 
-apps.get('/delete_custom_page_slogo/:id/:foto', db.delete_custom_page_slogo);
+apps.get('/delete_slogo/:id/:foto', db.delete_slogos);
 
 apps.get('/delete_custom_page_welcome/:id/:foto', db.delete_custom_page_welcome);
 
@@ -963,12 +1001,6 @@ apps.post('/insert_substatistic', db.insert_substatistic);
 apps.get('/delete_substatistic/:id', db.delete_substatistic);
 
 apps.get('/detail_substatistic/:id', db.detailsub_substatistic);
-
-apps.get('/api_metabase', db.metabase);
-
-apps.get('/api_metabase_detail/:id', db.detail_metabase);
-
-apps.get('/api_metabase_delete/:id', db.metabase_delete);
 
 apps.post('/insertapimeta', db.insertapimeta);
 
@@ -999,10 +1031,6 @@ apps.post('/insertsourcesdata', db.insertsourcesdata);
 apps.get('/sourcesdatadetaillist/:id', db.sourcesdatadetaillist);
 //::::::::::::::::::::::::::: APi Opini ::::::::::::::::::::::::::::::::::::
 
-apps.get('/api_opini', db.opini);
-
-apps.get('/api_opini_detail/:id', db.opini_detail);
-
 apps.post('/insertopini', db.insertopini);
 
 apps.post('/updateopini', db.updateopini);
@@ -1010,10 +1038,6 @@ apps.post('/updateopini', db.updateopini);
 apps.get('/deleteopini/:id', db.deleteopini);
 
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::: Api & Setting ::::::::::::::::::::::::::::::::::::::::::::::::
-
-apps.get('/api_web_profile', db.web_profile);
-
-apps.get('/api_detail_webprofile/:id', db.web_profile_detail);
 
 apps.post('/updatewebtitle', db.updatewebtitle);
 
@@ -1023,24 +1047,15 @@ apps.post('/updatewebheader', db.updatewebheader);
 
 apps.post('/updatewebcolor', db.updatewebcolor);
 
-apps.get('/api_menu', db.menu);
-
 apps.post('/insertmenu', db.insertmenu);
 
 apps.post('/updatemenu', db.updatemenu);
-
-apps.get('/api_menu_detail/:id', db.menu_detail);
-
-apps.get('/api_submenu', db.submenu);
 
 apps.post('/insertsubmenu', db.insertsubmenu);
 
 apps.post('/updatesubmenu', db.updatesubmenu);
 
-apps.get('/api_submenu_detail/:id', db.submenu_detail);
 //::::::::::::::: Api & Query CUSTOM DATA NARATION PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-apps.get('/api_kdeks', db.kdeks);
 
 apps.post('/insertmaster', db.insertmaster);
 
@@ -1049,17 +1064,5 @@ apps.post('/updatemaster', db.updatemaster);
 apps.get('/master_delete/:id', db.deletemaster);
 
 //::::::::::::::::: End Of KDEKS ::::::::::::::::::::::::::
-
-apps.post('/insertreg', db.user_register);
-
-apps.post('/do_login', db.do_login);
-
-apps.post('/act_login', db.do_login);
-
-apps.get("/logout", db.do_logout);
-
-//::::::::::::::: End Of Routes :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-apps.get('/kneks/api', db.api_kneks);
 
 apps.listen(3001);
