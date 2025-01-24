@@ -238,7 +238,7 @@
         })
 
         function getDashboards() {
-            fetch('/dashboards')
+            fetch('/homes')
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("jumlah1").innerHTML = rows?.news;

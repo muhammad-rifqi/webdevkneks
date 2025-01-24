@@ -129,7 +129,7 @@ const do_logout = (req, res) => {
 
 //::::::::::::::::::::::::::::::Start Of Dashboard :::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-const dashboards = async (req, res) => {
+const homes = async (req, res) => {
 
     const news_mounts = await executeQuery("SELECT * FROM news");
     const jumlah1 = news_mounts.length;
@@ -2915,7 +2915,7 @@ module.exports = {
     do_login,
     do_logout,
     user_register,
-    dashboards,
+    homes,
     banners,
     insertbanners,
     updatebanners,

@@ -129,8 +129,8 @@ apps.get('/', (req, res) => {
     res.sendFile(path.resolve('./views/login.html'));
 })
 
-apps.get('/dashboard', (req, res) => {
-    res.sendFile(path.resolve('./views/dashboard.html'));
+apps.get('/home', (req, res) => {
+    res.sendFile(path.resolve('./views/home.html'));
 })
 //::::::::::::::: Start Of Banner ::::::::::::::::::::::::::::::::::::::::
 // :::::::::::::::::: Welcome Banners ::::::::::::::::::::::::::::::::::::
@@ -345,52 +345,52 @@ apps.get('/fc_edit/:id', (req, res) => {
 })
 //:::::::::::::::::::::::::::::::::::::::  End Of E-Pustaka ::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::: Start Of Data :::::::::::::::::::::::::::::::::::::
-apps.get('/slidefront', (req, res) => {
-    res.sendFile(path.resolve('./views/data/slide/list.html'));
+apps.get('/menu_data', (req, res) => {
+    res.sendFile(path.resolve('./views/data/menu/list.html'));
 })
 
-apps.get('/slide_add', (req, res) => {
-    res.sendFile(path.resolve('./views/data/slide/add.html'));
+apps.get('/menudata_add', (req, res) => {
+    res.sendFile(path.resolve('./views/data/menu/add.html'));
 })
 
-apps.get('/slidedata', (req, res) => {
-    res.sendFile(path.resolve('./views/data/slide/data.html'));
+apps.get('/sliderdata', (req, res) => {
+    res.sendFile(path.resolve('./views/data/slider/data.html'));
 })
 
-apps.get('/statistic_slideadd', (req, res) => {
-    res.sendFile(path.resolve('./views/data/slide/add_data.html'));
+apps.get('/sliderdata_add', (req, res) => {
+    res.sendFile(path.resolve('./views/data/slider/add_data.html'));
 })
 
-apps.get('/datafront', (req, res) => {
-    res.sendFile(path.resolve('./views/data/data/list.html'));
+apps.get('/dataset', (req, res) => {
+    res.sendFile(path.resolve('./views/data/dataset/list.html'));
 })
 
-apps.get('/data_add', (req, res) => {
-    res.sendFile(path.resolve('./views/data/data/add.html'));
+apps.get('/dataset_add', (req, res) => {
+    res.sendFile(path.resolve('./views/data/dataset/add.html'));
 })
 
-apps.get('/data_detail/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/data/data/view.html'));
+apps.get('/dataset_detail/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/data/dataset/view.html'));
 });
 
-apps.get('/narationfront/:id/:name', (req, res) => {
-    res.sendFile(path.resolve('./views/data/data/naration.html'));
+apps.get('/narations/:id/:name', (req, res) => {
+    res.sendFile(path.resolve('./views/data/dashboard/naration.html'));
 });
 
-apps.get('/metabase', (req, res) => {
-    res.sendFile(path.resolve('./views/data/data/metabase.html'));
+apps.get('/dashboard', (req, res) => {
+    res.sendFile(path.resolve('./views/data/dashboard/metabase.html'));
 });
 
-apps.get('/metabaseadd', (req, res) => {
-    res.sendFile(path.resolve('./views/data/data/metabaseadd.html'));
+apps.get('/dashboard_add', (req, res) => {
+    res.sendFile(path.resolve('./views/data/dashboard/metabaseadd.html'));
 });
 
-apps.get('/slidefrontsubmenu', (req, res) => {
-    res.sendFile(path.resolve('./views/data/subdata/list.html'));
+apps.get('/submenu_data', (req, res) => {
+    res.sendFile(path.resolve('./views/data/submenu/list.html'));
 });
 
-apps.get('/slidefrontsubmenuadd', (req, res) => {
-    res.sendFile(path.resolve('./views/data/subdata/add.html'));
+apps.get('/submenudata_add', (req, res) => {
+    res.sendFile(path.resolve('./views/data/submenu/add.html'));
 });
 //:::::::::::::::::::::::::::::::::::::::: End Of Data :::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::::::::::::::::::::::::::::::::::::::::::::: Start Of Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -598,7 +598,7 @@ apps.get('/submenu_edit/:id', (req, res) => {
 
 //::::::::::::::: Api & Query DB :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-apps.get('/dashboards', db.dashboards);
+apps.get('/homes', db.homes);
 
 apps.get('/register', (req, res) => {
     res.sendFile(path.resolve('./views/register.html'));

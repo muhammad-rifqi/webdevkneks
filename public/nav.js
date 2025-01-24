@@ -17,7 +17,7 @@ document.write(`<nav class="nxl-navigation">
                     </div><div class="navbar-content">
                 <ul class="nxl-navbar">
                     <li class="nxl-item nxl-caption">
-                        <label>Dashboard</label>
+                        <label>Dashboard Apps</label>
                     </li>`);
 document.write(``);
 //menu
@@ -193,16 +193,16 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 
 }
 //data
 if (cookie["roles_id"] == 1) {
-    document.write(`<li class="nxl-item"><a class="nxl-link" href="/metabase">Dashboard</a></li>`);
-    document.write(`<li class="nxl-item"><a class="nxl-link" href="/slidefront">Menu</a></li>`);
-    document.write(`<li class="nxl-item"><a class="nxl-link" href="/slidefrontsubmenu">Sub Menu</a></li>
-        <li class="nxl-item"><a class="nxl-link" href="/datafront">Data Set</a></li>`);
-    document.write(`<li class="nxl-item"><a class="nxl-link" href="/slidedata">Slider</a></li>`);
+    document.write(`<li class="nxl-item"><a class="nxl-link" href="/dashboard">Dashboard</a></li>`);
+    document.write(`<li class="nxl-item"><a class="nxl-link" href="/menu_data">Menu</a></li>`);
+    document.write(`<li class="nxl-item"><a class="nxl-link" href="/submenu_data">Submenu</a></li>
+        <li class="nxl-item"><a class="nxl-link" href="/dataset">Dataset</a></li>`);
+    document.write(`<li class="nxl-item"><a class="nxl-link" href="/sliderdata">Slider</a></li>`);
 }
 
 //e-pustaka kategori
 if (cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {
-    document.write(`<li class="nxl-item"><a class="nxl-link" href="/metabase">Dashboard</a></li>`);
+    document.write(`<li class="nxl-item"><a class="nxl-link" href="/dashboard">Dashboard</a></li>`);
 }
 
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {
