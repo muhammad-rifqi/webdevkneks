@@ -37,37 +37,44 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/insert_welcome_pages" method="post" enctype="multipart/form-data">
+                        <form action="/update_welcome_pages" method="post" enctype="multipart/form-data">
                             <input type="hidden" id="max_id" name="MAX_FILE_SIZE" value="1048000" />
                             <input type="hidden" id="flag" name="flag" value="welcome" />
+                            <input type="hidden" id="id_welcome" name="id_welcome" value="" />
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
                                         <h5 class="fw-bold mb-0 me-4">
-                                            <span class="d-block mb-2">Tambah Welcome Banner :</span>
+                                            <span class="d-block mb-2">Edit Welcome Banner :</span>
                                             <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
-                                                Tambah
+                                                Edit
                                                 Data Welcome Banner Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Judul Banners )*</label>
-                                            <input class="form-control" type="text" name="names" id="names" required>
+                                            <input class="form-control" type="text" name="names" id="nma" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Gambar Welcome Banner</label>
+                                            <p id="previews"></p>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Gambar Welcome Banner</label>
                                             <input class="form-control" name="files_image" id="files_image" type="file"
-                                                accept="image/*" onchange="upload_check()" required> )* Max Upload 1 MB
+                                                accept="image/*" onchange="upload_check()"> )* Max Upload 1 MB
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Tanggal Banners )*</label>
-                                            <input class="form-control" type="date" name="tanggal" id="tanggal_publish" value="2025-01-12" required>
+                                            <input class="form-control" type="date" name="tanggal" id="tanggal_publish"
+                                                value="" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Status Banners )*</label>
-                                            <input type="radio" name="status" id="status" value="aktif" required>Aktif
-                                            <input type="radio" name="status" id="status" value="non_aktif" required>Non Aktif
+                                            <span id="radio_buttons">
+
+                                            </span>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -106,13 +113,36 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         window.addEventListener("load", async () => {
+            await getDetailWelcome();
             await upload_check();
         })
 
+        function getDetailWelcome() {
+            const URLS = new URL(window.location.href);
+            fetch('/detail_welcome_pages/' + URLS.pathname.split('/')[2])
+                .then(data => data.json())
+                .then((rows) => {
+                    console.log(rows)
+                    document.getElementById("id_welcome").value = rows[0]?.id;
+                    document.getElementById("nma").value = rows[0]?.name;
+                    document.getElementById("previews").innerHTML = `<img src="${rows[0]?.path}" width="150" alt="Gambar Banner Welcome">`;
+                    document.getElementById("tanggal_publish").value = rows[0]?.date_created.split('T')[0];
+                    if (rows[0]?.status == 'aktif') {
+                        document.getElementById("radio_buttons").innerHTML = `
+                         <input type="radio" name="status" id="status" value="aktif" checked>Aktif
+                         <input type="radio" name="status" id="status" value="non_aktif">Non Aktif`;
+                    } else {
+                        document.getElementById("radio_buttons").innerHTML = `
+                         <input type="radio" name="status" id="status" value="aktif">Aktif
+                         <input type="radio" name="status" id="status" value="non_aktif" checked>Non Aktif`;
+                    }
+                })
+        }
+
         function upload_check() {
-            var upl = document.getElementById("images");
+            var upl = document.getElementById("files_image");
             var max = document.getElementById("max_id").value;
-            if (upl.files[0].size > max) {
+            if (upl.files[0]?.size > max) {
                 alert("File too big!");
                 upl.value = "";
                 return false;

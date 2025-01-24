@@ -81,15 +81,15 @@ let files_path = multer({ storage: drives });
 
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-let custom_page = multer.diskStorage(
+let banner_page = multer.diskStorage(
     {
-        destination: './public/uploads/custompage/',
+        destination: './public/uploads/banner/',
         filename: function (req, file, cb) {
             cb(null, file.originalname.replace(" ", ""));
         }
     }
 );
-let page_path = multer({ storage: custom_page });
+let page_path = multer({ storage: banner_page });
 // :::::::::::::::::::::::::::::::::: Slide Show Path ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 let directorat_images = multer.diskStorage(
@@ -140,6 +140,10 @@ apps.get('/welcomebanner', (req, res) => {
 
 apps.get('/welcomebanner_add', (req, res) => {
     res.sendFile(path.resolve('./views/banners/welcome/add.html'));
+})
+
+apps.get('/edit_welcome_page/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/banners/welcome/edit.html'));
 })
 //::::::::::::::::::::::::: End Of Welcome Banners :::::::::::::::::::::::::::::
 //::::::::::::::::::::::::: Start Of Login Banners :::::::::::::::::::::::::::::
@@ -967,7 +971,7 @@ apps.get('/usia', async (req, res) => {
     return res.status(200).json(usia);
 });
 
-//::::::::::::::: Api & Query DB AUTH ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::: Api & Query DB BANNERS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/login_banners', db.login_banners);
 
@@ -975,19 +979,23 @@ apps.get('/detail_login_banner/:id', db.detail_login_banners);
 
 apps.post('/insertloginbanners', page_path.single('files_image'), db.insertloginbanner);
 
+apps.get('/delete_login_banner/:id/:foto', db.delete_login_banner);
+
 apps.get('/s_logos', db.slogo);
 
 apps.post('/insert_slogo', page_path.single('files_image'), db.inserts_slogo);
 
-apps.get('/custom_page_welcome', db.custom_page_welcome);
-
-apps.post('/insertcustompage_welcome', page_path.single('files_image'), db.insertcustompage_welcome);
-
-apps.get('/delete_login_banner/:id/:foto', db.delete_login_banner);
-
 apps.get('/delete_slogo/:id/:foto', db.delete_slogos);
 
-apps.get('/delete_custom_page_welcome/:id/:foto', db.delete_custom_page_welcome);
+apps.get('/welcome_pages', db.welcome_pages);
+
+apps.get('/detail_welcome_pages/:id', db.detail_welcome_pages);
+
+apps.post('/insert_welcome_pages', page_path.single('files_image'), db.insert_welcome_pages);
+
+apps.post('/update_welcome_pages', page_path.single('files_image'), db.update_welcome_pages);
+
+apps.get('/delete_welcome_page/:id/:foto', db.delete_welcome_page);
 
 //::::::::::::::: Api & Query CUSTOM PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

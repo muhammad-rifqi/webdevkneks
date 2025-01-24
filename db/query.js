@@ -1860,7 +1860,6 @@ const deletephoto = async (req, res) => {
 }
 
 const updatephoto = async (req, res) => {
-
     const today = new Date();
     const month = (today.getMonth() + 1);
     const mmm = month.length < 2 ? "0" + month : month;
@@ -2305,14 +2304,18 @@ const deletetagging = async (req, res) => {
     }
 }
 
+//:::::::::::::::::::::::::::::::::::::::::::: Login Banner ::::::::::::::::::::::::::::::::::::::::::::::::
+
 const login_banners = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM custom_page where flag = 'login'");
+    const sql = await executeQuery("SELECT * FROM banner where flag = 'login'");
     const array = [];
     sql.forEach((element, index) => {
         const rrr = {
             "id": element?.id,
             "name": element?.name,
             "path": element?.path,
+            "date_created": element?.date_created,
+            "status": element?.status,
             "imgs": element?.path?.split('/')[5],
         }
         array.push(rrr);
@@ -2326,8 +2329,8 @@ const login_banners = async (req, res) => {
 }
 
 const detail_login_banners = async (req, res) => {
-    const id_custom = req.params.id;
-    const sql = await executeQuery('SELECT * FROM custom_page where id = $1 ', [id_custom]);
+    const id_login = req.params.id;
+    const sql = await executeQuery('SELECT * FROM banner where id = $1 ', [id_login]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2336,23 +2339,52 @@ const detail_login_banners = async (req, res) => {
 }
 
 const insertloginbanner = async (req, res) => {
-    const filesimage = site_url + "/uploads/custompage/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery('insert into custom_page(name,path,flag) values ($1,$2,$3)', [req.body.names, filesimage, req.body.flag]);
-    if (sql?.length > 0) {
+    const filesimage = site_url + "/uploads/banner/" + req.file.originalname.replace(" ", "");
+    const sql = await executeQuery('insert into banner(name,path,flag,date_created,status) values ($1,$2,$3,$4,$5)', [req.body.names, filesimage, req.body.flag, req.body.tanggal, req.body.status]);
+    if (sql) {
         res.redirect('/login_banner');
     } else {
         res.redirect('/login_banner');
     }
 }
 
+const delete_login_banner = async (req, res) => {
+    const id_login = req.params.id;
+    const image = req.params.foto;
+    if (fs.existsSync(fileslinux + 'banner/' + image)) {
+        fs.unlink(fileslinux + 'banner/' + image, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM banner where id = $1 ', [id_login]);
+            if (sql) {
+                res.redirect('/login_banner');
+            } else {
+                res.redirect('/login_banner');
+                console.log(sql);
+            }
+        });
+        console.log("ada")
+    } else {
+        const sql = await executeQuery('DELETE FROM banner where id = $1 ', [id_login]);
+        if (sql?.length > 0) {
+            res.redirect('/login_banner');
+        } else {
+            res.redirect('/login_banner');
+        }
+    }
+}
+
+//::::::::::::::::::::::::::::::::::::::::::::::::::: End Login Banner :::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::::::::::::::::::::::: Start Struktur Banner :::::::::::::::::::::::::::::::::::::::::::
 const slogo = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM custom_page where flag = 's_logo'");
+    const sql = await executeQuery("SELECT * FROM banner where flag = 's_logo'");
     const array = [];
     sql.forEach((element, index) => {
         const rrr = {
             "id": element?.id,
             "name": element?.name,
             "path": element?.path,
+            "date_created": element?.date_created,
+            "status": element?.status,
             "imgs": element?.path?.split('/')[5],
         }
         array.push(rrr);
@@ -2366,8 +2398,8 @@ const slogo = async (req, res) => {
 }
 
 const inserts_slogo = async (req, res) => {
-    const filesimage = site_url + "/uploads/custompage/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery('insert into custom_page(name,path,flag) values ($1,$2,$3)', [req.body.names, filesimage, req.body.flag]);
+    const filesimage = site_url + "/uploads/banner/" + req.file.originalname.replace(" ", "");
+    const sql = await executeQuery('insert into banner(name,path,flag,date_created,status) values ($1,$2,$3,$4,$5)', [req.body.names, filesimage, req.body.flag, req.body.tanggal, req.body.status]);
     if (sql?.length > 0) {
         res.redirect('/s_logo');
     } else {
@@ -2375,14 +2407,41 @@ const inserts_slogo = async (req, res) => {
     }
 }
 
-const custom_page_welcome = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM custom_page where flag = 'welcome'");
+const delete_slogos = async (req, res) => {
+    const id_logo = req.params.id;
+    const image = req.params.foto;
+    if (fs.existsSync(fileslinux + 'banner/' + image)) {
+        fs.unlink(fileslinux + 'banner/' + image, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM banner where id = $1 ', [id_logo]);
+            if (sql) {
+                res.redirect('/s_logo');
+            } else {
+                res.redirect('/s_logo');
+                console.log(sql);
+            }
+        });
+        console.log("ada")
+    } else {
+        const sql = await executeQuery('DELETE FROM banner where id = $1 ', [id_logo]);
+        if (sql?.length > 0) {
+            res.redirect('/s_logo');
+        } else {
+            res.redirect('/s_logo');
+        }
+    }
+}
+//::::::::::::::::::::::::::::::::::::::::::::::::::: End Of Struktur Banner ::::::::::::::::::::::::::::::::::::::
+const welcome_pages = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM banner where flag = 'welcome'");
     const array = [];
     sql.forEach((element, index) => {
         const rrr = {
             "id": element?.id,
             "name": element?.name,
             "path": element?.path,
+            "date_created": element?.date_created,
+            "status": element?.status,
             "imgs": element?.path?.split('/')[5],
         }
         array.push(rrr);
@@ -2395,73 +2454,53 @@ const custom_page_welcome = async (req, res) => {
     }
 }
 
-const insertcustompage_welcome = async (req, res) => {
-    const filesimage = site_url + "/uploads/custompage/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery('insert into custom_page(name,path,flag) values ($1,$2,$3)', [req.body.names, filesimage, req.body.flag]);
+const insert_welcome_pages = async (req, res) => {
+    const filesimage = site_url + "/uploads/banner/" + req.file.originalname.replace(" ", "");
+    const sql = await executeQuery('insert into banner(name,path,flag,date_created,status) values ($1,$2,$3,$4,$5)', [req.body.names, filesimage, req.body.flag, req.body.tanggal, req.body.status]);
+    if (sql) {
+        res.redirect('/welcomebanner');
+    } else {
+        res.redirect('/welcomebanner');
+    }
+}
+const detail_welcome_pages = async (req, res) => {
+    const id_welc = req.params.id;
+    const sql = await executeQuery('SELECT * FROM banner where id = $1 ', [id_welc]);
     if (sql?.length > 0) {
-        res.redirect('/welcomebanner');
+        res.status(200).json(sql)
     } else {
-        res.redirect('/welcomebanner');
+        res.status(200).json({ "success": false })
     }
 }
 
-const delete_login_banner = async (req, res) => {
-    const id_custom = req.params.id;
-    const image = req.params.foto;
-    if (fs.existsSync(fileslinux + 'custompage/' + image)) {
-        fs.unlink(fileslinux + 'custompage/' + image, async function (err) {
-            if (err) return console.log(err);
-            const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
-            if (sql) {
-                res.redirect('/login_banner');
-            } else {
-                res.redirect('/login_banner');
-                console.log(sql);
-            }
-        });
-        console.log("ada")
-    } else {
-        const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
-        if (sql?.length > 0) {
-            res.redirect('/login_banner');
+const update_welcome_pages = async (req, res) => {
+    if (!req.file || req.file == undefined || req.file == "") {
+        const sql = await executeQuery("UPDATE banner set  name=$1, date_created=$2, status=$3 where id = $4",
+            [req.body.names, req.body.tanggal, req.body.status, req.body.id_welcome]);
+        if (sql) {
+            res.redirect('/welcomebanner');
         } else {
-            res.redirect('/login_banner');
+            res.redirect('/welcomebanner');
+        }
+    } else {
+        const fileuploads = site_url + "/uploads/banner/" + req.file.originalname.replace(" ", "");
+        const sql = await executeQuery("UPDATE banner set  name=$1, path=$2, date_created=$3, status=$4 where id = $5",
+            [req.body.names, fileuploads, req.body.tanggal, req.body.status, req.body.id_welcome]);
+        if (sql) {
+            res.redirect('/welcomebanner');
+        } else {
+            res.redirect('/welcomebanner');
         }
     }
 }
 
-const delete_slogos = async (req, res) => {
-    const id_custom = req.params.id;
+const delete_welcome_page = async (req, res) => {
+    const id_welc = req.params.id;
     const image = req.params.foto;
-    if (fs.existsSync(fileslinux + 'custompage/' + image)) {
-        fs.unlink(fileslinux + 'custompage/' + image, async function (err) {
+    if (fs.existsSync(fileslinux + 'banner/' + image)) {
+        fs.unlink(fileslinux + 'banner/' + image, async function (err) {
             if (err) return console.log(err);
-            const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
-            if (sql) {
-                res.redirect('/s_logo');
-            } else {
-                res.redirect('/s_logo');
-                console.log(sql);
-            }
-        });
-        console.log("ada")
-    } else {
-        const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
-        if (sql?.length > 0) {
-            res.redirect('/s_logo');
-        } else {
-            res.redirect('/s_logo');
-        }
-    }
-}
-
-const delete_custom_page_welcome = async (req, res) => {
-    const id_custom = req.params.id;
-    const image = req.params.foto;
-    if (fs.existsSync(fileslinux + 'custompage/' + image)) {
-        fs.unlink(fileslinux + 'custompage/' + image, async function (err) {
-            if (err) return console.log(err);
-            const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
+            const sql = await executeQuery('DELETE FROM banner where id = $1 ', [id_welc]);
             if (sql) {
                 res.redirect('/welcomebanner');
             } else {
@@ -2471,7 +2510,7 @@ const delete_custom_page_welcome = async (req, res) => {
         });
         console.log("ada")
     } else {
-        const sql = await executeQuery('DELETE FROM custom_page where id = $1 ', [id_custom]);
+        const sql = await executeQuery('DELETE FROM banner where id = $1 ', [id_welc]);
         if (sql?.length > 0) {
             res.redirect('/welcomebanner');
         } else {
@@ -2479,9 +2518,7 @@ const delete_custom_page_welcome = async (req, res) => {
         }
     }
 }
-
 //:::::::::::::::::::::::::::::: End Zona Khas  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 const sub_statistic = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM sub_statistic');
     if (sql?.length > 0) {
@@ -3070,13 +3107,15 @@ module.exports = {
     login_banners,
     detail_login_banners,
     insertloginbanner,
+    delete_login_banner,
+    welcome_pages,
+    insert_welcome_pages,
+    detail_welcome_pages,
+    update_welcome_pages,
+    delete_welcome_page,
     slogo,
     inserts_slogo,
-    custom_page_welcome,
-    insertcustompage_welcome,
-    delete_login_banner,
     delete_slogos,
-    delete_custom_page_welcome,
     sub_statistic,
     detailsub_substatistic,
     insert_substatistic,
