@@ -42,7 +42,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/statistic_slideadd'"> Tambah Data Slider </button>
+                            <button class="btn btn-primary" onclick="window.location.href = '/statistic_slideadd'">
+                                Tambah Data Slider </button>
                         </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
@@ -118,7 +119,17 @@
                     { "data": "title" },
                     { "data": "amount" },
                     { "data": "date_created" },
-                    { "data": "publish" },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            if(row?.publish == 1){
+                                return `Published`;
+                            }else{
+                                return `Not Published`;
+                            }
+
+                        }
+                    },
                     {
                         "data": null,
                         "render": function (data, type, row) {
