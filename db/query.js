@@ -1003,74 +1003,6 @@ const questbook = async (req, res) => {
 }
 
 //::::::::::::::::::::::::::::::End Of Contacts :::::::::::::::::::::::::::::::::::::::::::::::::::::
-//::::::::::::::::::::::::::::::Start Of Banner :::::::::::::::::::::::::::::::::::::::::::::::::::::
-const banners = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  banners');
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const detailbanner = async (req, res) => {
-    const id_banners = req.params.id;
-    const sql = await executeQuery('SELECT *  FROM  banners where id=$1', [id_banners]);
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const deletebanner = async (req, res) => {
-    const id_banners = req.params.id;
-    const sql = await executeQuery('DELETE FROM  banners where id = $1 ', [id_banners]);
-    if (sql) {
-        res.redirect('/b');
-    } else {
-        console.log(sql);
-        res.redirect('/b');
-    }
-}
-
-const insertbanners = async (req, res) => {
-    if (req.file) {
-        const filesimage = site_url + "/uploads/slideshow/" + req.file.originalname.replace(" ", "");
-        const sql = await executeQuery('INSERT INTO banners (title,title_en,content,content_en,image, is_publish)values($1,$2,$3,$4,$5,$6) ', [req.body.title, req.body.title_en, req.body.content, req.body.content_en, filesimage, '1']);
-        if (sql) {
-            res.redirect('/b');
-        } else {
-            console.log(sql)
-            res.redirect('/b');
-        }
-    } else {
-        res.redirect('/b');
-    }
-}
-
-const updatebanners = async (req, res) => {
-    const id_banners = req.body.id;
-    if (req.file) {
-        const filesimage = site_url + "/uploads/slideshow/" + req.file.originalname.replace(" ", "");
-        const sql = await executeQuery('UPDATE banners set title=$1, title_en=$2, content=$3, content_en=$4, image=$5 where  id = $6 ', [req.body.title, req.body.title_en, req.body.content, req.body.content_en, filesimage, id_banners]);
-        if (sql) {
-            res.redirect('/b');
-        } else {
-            console.log(sql);
-            res.redirect('/b');
-        }
-    } else {
-        const sql = await executeQuery('UPDATE banners set title=$1, title_en=$2, content=$3, content_en=$4 where  id = $5 ', [req.body.title, req.body.title_en, req.body.content, req.body.content_en, id_banners]);
-        if (sql) {
-            res.redirect('/b');
-        } else {
-            console.log(sql);
-            res.redirect('/b');
-        }
-    }
-}
-//::::::::::::::::::::::::::::::End Of Banner :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Agenda :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const agendas = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  agendas');
@@ -2304,8 +2236,74 @@ const deletetagging = async (req, res) => {
     }
 }
 
-//:::::::::::::::::::::::::::::::::::::::::::: Login Banner ::::::::::::::::::::::::::::::::::::::::::::::::
 
+//::::::::::::::::::::::::::::::::::::::::::::::: Start Of Slideshow :::::::::::::::::::::::::::::::::::::::::::::::::::::
+const slideshows = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  slideshow');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const detailslideshow = async (req, res) => {
+    const id_slideshow = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  slideshow where id=$1', [id_slideshow]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const deleteslideshow = async (req, res) => {
+    const id_slideshows = req.params.id;
+    const sql = await executeQuery('DELETE FROM  slideshow where id = $1 ', [id_slideshows]);
+    if (sql) {
+        res.redirect('/b');
+    } else {
+        console.log(sql);
+        res.redirect('/b');
+    }
+}
+
+const insertslideshow = async (req, res) => {
+    if (req.file) {
+        const filesimage = site_url + "/uploads/slideshow/" + req.file.originalname.replace(" ", "");
+        const sql = await executeQuery('INSERT INTO slideshow (title,title_en,image, date_created,status, content,content)values($1,$2,$3,$4,$5,$6,$7) ', [req.body.title, req.body.title_en, filesimage, req.body.tanggal, req.body.status, req.body.content, req.body.content_en]);
+        if (sql) {
+            res.redirect('/b');
+        } else {
+            res.redirect('/b');
+        }
+    } else {
+        res.redirect('/b');
+    }
+}
+
+const updateslideshow = async (req, res) => {
+    const id_slidshowss = req.body.id;
+    if (req.file) {
+        const filesimage = site_url + "/uploads/slideshow/" + req.file.originalname.replace(" ", "");
+        const sql = await executeQuery('UPDATE slideshow set title=$1, title_en=$2, image=$3,content = $4 ,content_en = $5 , date_created=$6, status=$7  where  id = $8 ', [req.body.title, req.body.title_en, filesimage, req.body.tanggal, req.body.status, id_slidshowss]);
+        if (sql) {
+            res.redirect('/b');
+        } else {
+            res.redirect('/b');
+        }
+    } else {
+        const sql = await executeQuery('UPDATE slideshow set title=$1, title_en=$2, date_created=$3, status=$4  where  id = $5 ', [req.body.title, req.body.title_en, req.body.tanggal, req.body.status, id_slidshowss]);
+        if (sql) {
+            res.redirect('/b');
+        } else {
+            console.log(sql);
+            res.redirect('/b');
+        }
+    }
+}
+//:::::::::::::::::::::::::::::::::::::::::::: End Of SlideShow :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//:::::::::::::::::::::::::::::::::::::::::::: Login Banner ::::::::::::::::::::::::::::::::::::::::::::::::
 const login_banners = async (req, res) => {
     const sql = await executeQuery("SELECT * FROM banner where flag = 'login'");
     const array = [];
@@ -2348,6 +2346,27 @@ const insertloginbanner = async (req, res) => {
     }
 }
 
+const updateloginbanners = async (req, res) => {
+    if (!req.file || req.file == undefined || req.file == "") {
+        const sql = await executeQuery("UPDATE banner set  name=$1, date_created=$2, status=$3 where id = $4",
+            [req.body.names, req.body.tanggal, req.body.status, req.body.id_login_banner]);
+        if (sql) {
+            res.redirect('/login_banner');
+        } else {
+            res.redirect('/login_banner');
+        }
+    } else {
+        const fileuploads = site_url + "/uploads/banner/" + req.file.originalname.replace(" ", "");
+        const sql = await executeQuery("UPDATE banner set  name=$1, path=$2, date_created=$3, status=$4 where id = $5",
+            [req.body.names, fileuploads, req.body.tanggal, req.body.status, req.body.id_login_banner]);
+        if (sql) {
+            res.redirect('/login_banner');
+        } else {
+            res.redirect('/login_banner');
+        }
+    }
+}
+
 const delete_login_banner = async (req, res) => {
     const id_login = req.params.id;
     const image = req.params.foto;
@@ -2374,7 +2393,7 @@ const delete_login_banner = async (req, res) => {
 }
 
 //::::::::::::::::::::::::::::::::::::::::::::::::::: End Login Banner :::::::::::::::::::::::::::::::::::::::::::
-//::::::::::::::::::::::::::::::::::::::::::::::::::: Start Struktur Banner :::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::::::::::::::::::::::: Start Struktur Logo Banner :::::::::::::::::::::::::::::::::::::::::::
 const slogo = async (req, res) => {
     const sql = await executeQuery("SELECT * FROM banner where flag = 's_logo'");
     const array = [];
@@ -2397,6 +2416,16 @@ const slogo = async (req, res) => {
     }
 }
 
+const detail_slogo = async (req, res) => {
+    const id_slogo = req.params.id;
+    const sql = await executeQuery('SELECT * FROM banner where id = $1 ', [id_slogo]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 const inserts_slogo = async (req, res) => {
     const filesimage = site_url + "/uploads/banner/" + req.file.originalname.replace(" ", "");
     const sql = await executeQuery('insert into banner(name,path,flag,date_created,status) values ($1,$2,$3,$4,$5)', [req.body.names, filesimage, req.body.flag, req.body.tanggal, req.body.status]);
@@ -2404,6 +2433,27 @@ const inserts_slogo = async (req, res) => {
         res.redirect('/s_logo');
     } else {
         res.redirect('/s_logo');
+    }
+}
+
+const updates_slogo = async (req, res) => {
+    if (!req.file || req.file == undefined || req.file == "") {
+        const sql = await executeQuery("UPDATE banner set  name=$1, date_created=$2, status=$3 where id = $4",
+            [req.body.names, req.body.tanggal, req.body.status, req.body.id_s_logo_banner]);
+        if (sql) {
+            res.redirect('/s_logo');
+        } else {
+            res.redirect('/s_logo');
+        }
+    } else {
+        const fileuploads = site_url + "/uploads/banner/" + req.file.originalname.replace(" ", "");
+        const sql = await executeQuery("UPDATE banner set  name=$1, path=$2, date_created=$3, status=$4 where id = $5",
+            [req.body.names, fileuploads, req.body.tanggal, req.body.status, req.body.id_s_logo_banner]);
+        if (sql) {
+            res.redirect('/s_logo');
+        } else {
+            res.redirect('/s_logo');
+        }
     }
 }
 
@@ -2431,7 +2481,8 @@ const delete_slogos = async (req, res) => {
         }
     }
 }
-//::::::::::::::::::::::::::::::::::::::::::::::::::: End Of Struktur Banner ::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::::::::::::::::::::::: End Of Struktur Logo :::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::::::::::::::::::::::: Start Of Welcome Banner ::::::::::::::::::::::::::::::::::::::
 const welcome_pages = async (req, res) => {
     const sql = await executeQuery("SELECT * FROM banner where flag = 'welcome'");
     const array = [];
@@ -2518,7 +2569,7 @@ const delete_welcome_page = async (req, res) => {
         }
     }
 }
-//:::::::::::::::::::::::::::::: End Zona Khas  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//:::::::::::::::::::::::::::::: End Of Welcome Banner  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 const sub_statistic = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM sub_statistic');
     if (sql?.length > 0) {
@@ -2968,11 +3019,11 @@ module.exports = {
     do_login,
     do_logout,
     user_register,
-    banners,
-    insertbanners,
-    updatebanners,
-    detailbanner,
-    deletebanner,
+    slideshows,
+    insertslideshow,
+    updateslideshow,
+    detailslideshow,
+    deleteslideshow,
     categories,
     photodetail,
     deletephoto,
@@ -3107,6 +3158,7 @@ module.exports = {
     login_banners,
     detail_login_banners,
     insertloginbanner,
+    updateloginbanners,
     delete_login_banner,
     welcome_pages,
     insert_welcome_pages,
@@ -3115,6 +3167,8 @@ module.exports = {
     delete_welcome_page,
     slogo,
     inserts_slogo,
+    detail_slogo,
+    updates_slogo,
     delete_slogos,
     sub_statistic,
     detailsub_substatistic,

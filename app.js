@@ -154,6 +154,10 @@ apps.get('/login_banner', (req, res) => {
 apps.get('/login_banner_add', (req, res) => {
     res.sendFile(path.resolve('./views/banners/login_banner/add.html'));
 })
+
+apps.get('/login_banner_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/banners/login_banner/edit.html'));
+})
 //::::::::::::::::::::::::: End Of Login Banners :::::::::::::::::::::::::::::
 //::::::::::::::::::::::::: Start Of Slide Show Banners :::::::::::::::::::::::::::::
 apps.get('/b', (req, res) => {
@@ -210,6 +214,11 @@ apps.get('/s_logo', (req, res) => {
 apps.get('/s_logo_add', (req, res) => {
     res.sendFile(path.resolve('./views/struktur/struktur/add_s_logo.html'));
 })
+
+apps.get('/s_logo_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/struktur/struktur/edit_s_logo.html'));
+})
+
 //:::::::::::::::::::::::::::: End Of Struktur ::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::Start Of Berita ::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/n', (req, res) => {
@@ -667,15 +676,15 @@ apps.get("/logout", db.do_logout);
 
 //::::::::::::::: Api & Query DB BANNERS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-apps.get('/banners', db.banners);
+apps.get('/slideshow', db.slideshows);
 
-apps.get('/detailbanners/:id', db.detailbanner);
+apps.get('/detailslideshow/:id', db.detailslideshow);
 
-apps.post('/insertbanners', slide_path.single('images'), db.insertbanners);
+apps.post('/insertslideshow', slide_path.single('images'), db.insertslideshow);
 
-apps.get('/deletebanners/:id', db.deletebanner);
+apps.get('/deleteslideshow/:id', db.deleteslideshow);
 
-apps.post('/updatebanner', slide_path.single('images'), db.updatebanners);
+apps.post('/updateslideshow', slide_path.single('images'), db.updateslideshow);
 
 //::::::::::::::: Api & Query DB NEWS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -979,11 +988,17 @@ apps.get('/detail_login_banner/:id', db.detail_login_banners);
 
 apps.post('/insertloginbanners', page_path.single('files_image'), db.insertloginbanner);
 
+apps.post('/updateloginbanners', page_path.single('files_image'), db.updateloginbanners);
+
 apps.get('/delete_login_banner/:id/:foto', db.delete_login_banner);
 
 apps.get('/s_logos', db.slogo);
 
 apps.post('/insert_slogo', page_path.single('files_image'), db.inserts_slogo);
+
+apps.get('/detail_s_logos/:id', db.detail_slogo);
+
+apps.post('/updateslogo', page_path.single('files_image'), db.updates_slogo);
 
 apps.get('/delete_slogo/:id/:foto', db.delete_slogos);
 
