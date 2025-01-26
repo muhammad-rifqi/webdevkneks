@@ -608,15 +608,21 @@ const detailhotissuecategory = async (req, res) => {
     }
 }
 
+const inserthotissuecategory = async (req, res) => {
+    const sql = await executeQuery("insert into hot_categories(title,title_en)values($1,$2)",
+        [req.body.title, req.body.title_en]);
+
+    if (sql) {
+        res.redirect('/hic');
+    } else {
+        console.log(sql)
+        res.redirect('/hic');
+    }
+}
+
 const updatehotissuecategory = async (req, res) => {
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const datetimes = date + ' ' + time;
-    const sql = await executeQuery("update hot_categories set title=$1,title_en=$2,description=$3,description_en=$4,created_at=$5,updated_at=$6,deleted_at=$7 where id = $8",
-        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, datetimes, datetimes, datetimes, req.body.id]);
+    const sql = await executeQuery("update hot_categories set title=$1,title_en=$2 where id = $3",
+        [req.body.title, req.body.title_en, req.body.id]);
 
     if (sql) {
         res.redirect('/hic');
@@ -1247,7 +1253,7 @@ const deletefileupload = async (req, res) => {
 
 
 const files_category = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  report_categories');
+    const sql = await executeQuery('SELECT * FROM  files_categories');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1257,7 +1263,7 @@ const files_category = async (req, res) => {
 
 const files_category_details = async (req, res) => {
     const id_files_category = req.params.id;
-    const sql = await executeQuery('SELECT * FROM  report_categories where id = $1 ', [id_files_category]);
+    const sql = await executeQuery('SELECT * FROM  files_categories where id = $1 ', [id_files_category]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1266,14 +1272,8 @@ const files_category_details = async (req, res) => {
 }
 
 const insertfilecategorydetails = async (req, res) => {
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const time_datetime = date + ' ' + time;
-    const sql = await executeQuery("insert into report_categories(title,title_en,report_categories.orders,created_at,updated_at) values($1,$2,$3,$4,$5)",
-        [req.body.title, req.body.title_en, req.body.order, time_datetime, time_datetime]);
+    const sql = await executeQuery("insert into files_categories(title,title_en) values($1,$2)",
+        [req.body.title, req.body.title_en]);
     if (sql) {
         res.redirect('/fc');
     } else {
@@ -1284,7 +1284,7 @@ const insertfilecategorydetails = async (req, res) => {
 
 const deletefilecategorydetail = async (req, res) => {
     const id_files_category = req.params.id;
-    const sql = await executeQuery('DELETE FROM report_categories where id = $1 ', [id_files_category]);
+    const sql = await executeQuery('DELETE FROM files_categories where id = $1 ', [id_files_category]);
     if (sql) {
         res.redirect('/fc');
     } else {
@@ -1295,7 +1295,7 @@ const deletefilecategorydetail = async (req, res) => {
 
 const updatefilescategory = async (req, res) => {
     const id_files_category = req.body.id;
-    const sql = await executeQuery('UPDATE report_categories set title=$1, title_en=$2, orders=$3 where id = $4 ', [req.body.title, req.body.title_en, req.body.orders, id_files_category]);
+    const sql = await executeQuery('UPDATE files_categories set title=$1, title_en=$2 where id = $3 ', [req.body.title, req.body.title_en, id_files_category]);
     if (sql) {
         res.redirect('/fc');
     } else {
@@ -3028,6 +3028,7 @@ module.exports = {
     hotissue,
     hotissue_detail,
     hotissuecategory,
+    inserthotissuecategory,
     updatehotissuecategory,
     update_directorats,
     delete_banners_direactorats,

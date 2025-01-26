@@ -43,7 +43,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/fc_add'"> Tambah Kategori Berkas </button>
+                            <button class="btn btn-primary" onclick="window.location.href = '/fc_add'"> Tambah Kategori
+                                Berkas </button>
                         </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
@@ -51,10 +52,9 @@
                                     <table id="files_categories" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Judul [ID]</th>
-                                                <th>Judul [EN]</th>
-                                                <th>Urutan</th>
+                                                <th>NO</th>
+                                                <th>Kategori [ID]</th>
+                                                <th>Kategori [EN]</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -109,16 +109,26 @@
                     "dataSrc": ""
                 },
                 "columns": [
-                    { "data": "id" },
+                    {
+                        data: null,
+                        render: function (data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    },
                     { "data": "title" },
                     { "data": "title_en" },
-                    { "data": "orders" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
                             return `<p><button class='edit-btn-files_categories btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
                                     <button class='delete-btn-files_categories btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button></p>`;
                         }
+                    }
+                ], columnDefs: [
+                    {
+                        targets: 0,
+                        orderable: false,
+                        searchable: false
                     }
                 ],
                 lengthMenu: [10, 25, 50, 100],
