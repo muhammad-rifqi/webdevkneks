@@ -49,6 +49,8 @@
                     <div class="col-lg-12">
                         <form action="/updateopini" method="post">
                             <input type="hidden" name="id" id="id" value="">
+                            <input type="hidden" id="users_name" name="users_name">
+                            <input type="hidden" id="users_id" name="users_id">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
@@ -79,6 +81,17 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Tanggal </label>
+                                            <input class="form-control" type="date" id="tanggal_opini" name="tanggal_opini"
+                                                required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Publish</label>
+                                           <span id="publish_opini"></span>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
                                             <label class="form-label">Tagging</label>
                                             <span id="tag">
 
@@ -100,10 +113,10 @@
                                             </select>
                                         </div>
 
-                                        <div class="col-lg-12 mb-4" id="webidentity">
+                                        <!-- <div class="col-lg-12 mb-4" id="webidentity">
 
-                                        </div>
-
+                                        </div> -->
+                                        
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <button class="btn btn-primary" type="submit">Simpan</button>
@@ -152,10 +165,13 @@
         window.addEventListener("load", async () => {
             const inputElm = document.querySelector('input.tagify');
             new Tagify(inputElm);
+            let provinces_id;
             await getUrlById();
             await getTagging();
-            await getCategoryHotIssueId();
+            await getDirectorats();
             await getProvinces();
+            document.getElementById("users_name").value=`${cookie['name']}`;
+            document.getElementById("users_id").value=`${cookie['id']}`;
         })
 
         function getUrlById() {
@@ -171,18 +187,24 @@
                     nicEditors.findEditor("editor3").setContent(rows[0]?.content);
                     nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
                     news_category_id = rows[0]?.category_id;
-                    if (rows[0]?.web_identity == "kneks") {
-                        document.getElementById("webidentity").innerHTML = `
-                        <label class="form-label">Web Identity</label>
-                        <input type="radio" name="web_identity" value="kneks" checked>kneks
-                        <input type="radio" name="web_identity" value="kdeks">kdeks
-                        `;
+                    provinces_id = rows[0]?.id_province;
+                    // if (rows[0]?.web_identity == "kneks") {
+                    //     document.getElementById("webidentity").innerHTML = `
+                    //     <label class="form-label">Web Identity</label>
+                    //     <input type="radio" name="web_identity" value="kneks" checked>kneks
+                    //     <input type="radio" name="web_identity" value="kdeks">kdeks
+                    //     `;
+                    // } else {
+                    //     document.getElementById("webidentity").innerHTML = `
+                    //     <label class="form-label">Web Identity</label>
+                    //     <input type="radio" name="web_identity" value="kneks">kneks
+                    //     <input type="radio" name="web_identity" value="kdeks" checked>kdeks
+                    //     `;
+                    // }
+                    if (rows[0]?.is_publish == 1) {
+                        document.getElementById("publish_opini").innerHTML = `<input name="is_published" id="publish" type="radio" value="1" checked> Publish <input name="is_publish" id="publish" type="radio" value="0"> Not Publish`;
                     } else {
-                        document.getElementById("webidentity").innerHTML = `
-                        <label class="form-label">Web Identity</label>
-                        <input type="radio" name="web_identity" value="kneks">kneks
-                        <input type="radio" name="web_identity" value="kdeks" checked>kdeks
-                        `;
+                        document.getElementById("publish_opini").innerHTML = `<input name="is_published" id="publish" type="radio" value="1"> Publish <input name="is_publish" id="publish" type="radio" value="0" checked> Not Publish`;
                     }
                 })
         }
@@ -200,8 +222,8 @@
                 })
         }
 
-        function getCategoryHotIssueId() {
-            fetch('/hotissuecategory')
+        function getDirectorats() {
+            fetch('/directorat_fe')
                 .then(res => res.json())
                 .then((qqq) => {
                     qqq.forEach(items => {
@@ -218,10 +240,18 @@
                 .then(response => response.json())
                 .then((data) => {
                     data.forEach(element => {
-                        const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
-                        ddd.text = `${element?.province_name}`;
-                        document.getElementById("provinces").append(ddd);
+                        if (element?.id == provinces_id) {
+                            const ddd = document.createElement('option')
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.province_name}`;
+                            ddd.selected = true;
+                            document.getElementById("provinces").append(ddd);
+                        } else {
+                            const ddd = document.createElement('option')
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.province_name}`;
+                            document.getElementById("provinces").append(ddd);
+                        }
                     });
                 })
         }

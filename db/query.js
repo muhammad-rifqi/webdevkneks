@@ -448,11 +448,11 @@ const directorat = async (req, res) => {
 
 const directorats_fe = async (req, res) => {
     const sql = await executeQuery("SELECT * FROM directorats order by id ASC");
-        if (sql?.length > 0) {
-            res.status(200).json(sql)
-        } else {
-            res.status(200).json([])
-        }
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
 }
 
 const directorat_details = async (req, res) => {
@@ -1587,7 +1587,7 @@ const updatenews = async (req, res) => {
     } else {
         const fileupload = site_url + "/uploads/news/" + req.file.originalname.replace(" ", "");
         const sql = await executeQuery("UPDATE news set  title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,image=$7,is_publish=$8,news_datetime=$9,category_id=$10, tag=$11,directorat=$12,id_province=$13 where id = $14",
-            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, req.body.news_category_id, req.body.taggings, req.body.directorat_id,req.body.kdeks, req.body.id]);
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, req.body.news_category_id, req.body.taggings, req.body.directorat_id, req.body.kdeks, req.body.id]);
         if (sql) {
             res.redirect('/n');
         } else {
@@ -2836,8 +2836,8 @@ const opini_detail = async (req, res) => {
 }
 
 const insertopini = async (req, res) => {
-    const sql = await executeQuery("insert into opini(title,title_en,content,content_en,web_identity,tagging,directorat) values($1,$2,$3,$4,$5,$6,$7)",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.web_identity, req.body.taggings, req.body.directorat]);
+    const sql = await executeQuery("insert into opini(title,title_en,content,content_en,web_identity,tagging,directorat,is_publish,date_created,users_id,users_name,id_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.web_identity, req.body.taggings, req.body.directorat, req.body.is_published, req.body.tanggal_opini, req.body.users_id, req.body.users_name, req.body.kdeks,]);
     if (sql) {
         res.redirect('/opini');
     } else {
@@ -2859,8 +2859,8 @@ const deleteopini = async (req, res) => {
 
 
 const updateopini = async (req, res) => {
-    const sql = await executeQuery("UPDATE opini SET title=$1,title_en=$2,content=$3,content_en=$4,tagging=$5,directorat=$6 where id = $7",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.taggings, req.body.directorat, req.body.id]);
+    const sql = await executeQuery("UPDATE opini SET title=$1,title_en=$2,content=$3,content_en=$4,tagging=$5,directorat=$6,is_publish=$7,date_created=$8,users_id=$9,users_name=$10,id_province=$11 where id = $12",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.taggings, req.body.directorat, req.body.is_published, req.body.tanggal_opini, req.body.users_id, req.body.users_name, req.body.kdeks, req.body.id]);
     if (sql) {
         res.redirect('/opini');
     } else {

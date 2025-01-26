@@ -50,10 +50,11 @@
                   <table id="opini" class="display" style="width: 100%;">
                     <thead>
                       <tr>
-                        <th>ID</th>
-                        <th>Judul [ID]</th>
-                        <th>Judul [EN]</th>
-                        <th>Identitas Web</th>
+                        <th>NO</th>
+                        <th>Judul</th>
+                        <th>Tanggal</th>
+                        <th>Penulis</th>
+                        <th>Publish</th>
                         <th>Aksi</th>
                       </tr>
                     </thead>
@@ -108,16 +109,37 @@
           "dataSrc": ""
         },
         "columns": [
-          { "data": "id" },
+          {
+            data: null,
+            render: function (data, type, row, meta) {
+              return meta.row + 1;
+            }
+          },
           { "data": "title" },
-          { "data": "title_en" },
-          { "data": "web_identity" },
+          { "data": "date_created" },
+          { "data": "users_name" },
+          {
+            "data": null,
+            "render": function (data, type, row) {
+              if (data?.is_publish == 1) {
+                return `Published`;
+              } else {
+                return `Not Published`;
+              }
+            }
+          },
           {
             "data": null,
             "render": function (data, type, row) {
               return `<p><button class='edit-btn btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
                   <button class='delete-btn btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button></p>`;
             }
+          }
+        ], columnDefs: [
+          {
+            targets: 0,
+            orderable: false,
+            searchable: false
           }
         ],
         lengthMenu: [10, 25, 50, 100],
