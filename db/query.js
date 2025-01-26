@@ -1701,13 +1701,15 @@ const categories = async (req, res) => {
                     "title": items?.title,
                     "photo": items?.photo,
                     "content": items?.content,
-                    "created_at": items?.created_at,
-                    "updated_at": items?.updated_at,
-                    "deleted_at": items?.deleted_at,
-                    "news_datetime": items?.news_datetime,
+                    "photos_datetime": items?.photos_datetime,
                     "title_en": items?.title_en,
                     "content_en": items?.content_en,
-                    "ph": items?.photo?.split('/')[5]
+                    "ph": items?.photo?.split('/')[5],
+                    "web_identity": items?.web_identity,
+                    "tag": items?.tag,
+                    "directorat": items?.directorat,
+                    "id_province": items?.id_province,
+                    "is_publish": items?.is_publish
                 };
                 array.push(bbb);
             })
@@ -1742,16 +1744,10 @@ const categories = async (req, res) => {
 }
 
 const insertphoto = async (req, res) => {
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const time_datetime = date + ' ' + time;
     const photos_datetime = req.body.photo_datetime.replace("T", " ");
     const photoupload = site_url + "/uploads/photo/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery("insert into news_photos(title,title_en,content,content_en,photo,news_datetime,created_at,updated_at,deleted_at,tag,directorat) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photoupload, photos_datetime, time_datetime, time_datetime, null, req.body.taggings, req.body.directorat])
+    const sql = await executeQuery("insert into news_photos(title,title_en,content,content_en,photo,photos_datetime,tag,directorat,id_province,is_publish) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photoupload, photos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published])
     if (sql) {
         res.redirect('/ph');
     } else {
@@ -1797,16 +1793,10 @@ const deletephoto = async (req, res) => {
 }
 
 const updatephoto = async (req, res) => {
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const timeupdate = date + ' ' + time;
-    const news_datetime = req.body.news_datetime.replace("T", " ");
+    const photos_datetime = req.body.photo_datetime.replace("T", " ");
     if (!req.file || req.file == undefined || req.file == "") {
-        const sql = await executeQuery("UPDATE news_photos set  title=$1,title_en=$2,content=$3,content_en=$4,news_datetime=$5,created_at=$6,updated_at=$7,deleted_at=$8 , tag=$9, directorat = $10 where id = $11",
-            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, news_datetime, timeupdate, timeupdate, null, req.body.taggings, req.body.directorat, req.body.id]);
+        const sql = await executeQuery("UPDATE news_photos set  title=$1,title_en=$2,content=$3,content_en=$4,photos_datetime=$5,tag=$6,directorat=$7,id_province=$8,is_publish=$9 where id = $10",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published, req.body.id]);
         if (sql) {
             res.redirect('/ph');
         } else {
@@ -1815,8 +1805,8 @@ const updatephoto = async (req, res) => {
         }
     } else {
         const fileuploads = site_url + "/uploads/photo/" + req.file.originalname.replace(" ", "");
-        const sql = await executeQuery("UPDATE news_photos set  title=$1,title_en=$2,content=$3,content_en=$4,photo=$5, news_datetime=$6,created_at=$7,updated_at=$8,deleted_at=$9, tag = $10 , directorat = $11 where id = $12",
-            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, news_datetime, timeupdate, timeupdate, null, req.body.taggings, req.body.directorat, req.body.id]);
+        const sql = await executeQuery("UPDATE news_photos set  title=$1,title_en=$2,content=$3,content_en=$4,photo=$5, photos_datetime=$6,tag=$7,directorat=$8,id_province=$9,is_publish=$10 where id = $11",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, photos_datetime, req.body.taggings, req.body.directorat,  req.body.kdeks, req.body.is_published, req.body.id]);
         if (sql) {
             res.redirect('/ph');
         } else {

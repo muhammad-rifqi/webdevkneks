@@ -188,8 +188,8 @@
             const inputElm = document.querySelector('input.tagify');
             new Tagify(inputElm);
             await getTagging();
-            await getCategoryHotIssue();
-            await getCategoryHotIssueId();
+            await getCategoryNews();
+            await getCategoryDirectorat();
             await getProvinces();
             await upload_check();
         })
@@ -207,7 +207,7 @@
                 })
         }
 
-        function getCategoryHotIssue() {
+        function getCategoryNews() {
             fetch('/categories')
                 .then(response => response.json())
                 .then((data) => {
@@ -220,7 +220,7 @@
                 })
         }
 
-        function getCategoryHotIssueId() {
+        function getCategoryDirectorat() {
             fetch('/directorat_fe')
                 .then(res => res.json())
                 .then((qqq) => {

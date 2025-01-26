@@ -185,7 +185,7 @@
             let provinces_id;
             await getUrlById();
             await getTagging();
-            await getCategoryHotIssueId();
+            await getDireactorat();
             await getProvinces();
         })
 
@@ -221,9 +221,9 @@
                     document.getElementById("video_datetimes").value = rows[0]?.videos_datetime.split('.')[0];
                     // document.getElementById("directorat_val").innerHTML = finalArray.toString().replace('\"','').replace('"','');
                     if (rows[0]?.is_publish == 1) {
-                        document.getElementById("publish_video").innerHTML = `<input name="is_published" id="publish" type="radio" value="1" checked> Publish <input name="is_publish" id="publish" type="radio" value="0"> Not Publish`;
+                        document.getElementById("publish_video").innerHTML = `<input name="is_published" id="publish" type="radio" value="1" checked> Publish <input name="is_published" id="publish" type="radio" value="0"> Not Publish`;
                     } else {
-                        document.getElementById("publish_video").innerHTML = `<input name="is_published" id="publish" type="radio" value="1"> Publish <input name="is_publish" id="publish" type="radio" value="0" checked> Not Publish`;
+                        document.getElementById("publish_video").innerHTML = `<input name="is_published" id="publish" type="radio" value="1"> Publish <input name="is_published" id="publish" type="radio" value="0" checked> Not Publish`;
                     }
                 })
         }
@@ -242,7 +242,7 @@
                 })
         }
 
-        function getCategoryHotIssueId() {
+        function getDireactorat() {
             fetch('/directorat_fe')
                 .then(res => res.json())
                 .then((qqq) => {

@@ -92,17 +92,22 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tanggal Publish</label>
-                                            <input class="form-control" name="news_datetime" id="news_datetime"
+                                            <label class="form-label">Tanggal</label>
+                                            <input class="form-control" name="photo_datetime" id="photo_datetimes"
                                                 type="datetime-local">
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Publish</label>
+                                           <span id="publish_photo"></span>
+                                        </div>
+
+                                        <!-- <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Tagging</label>
                                             <span id="listtag">
 
                                             </span>
-                                        </div>
+                                        </div> -->
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Ganti/Ubah Tagging</label>
@@ -171,9 +176,10 @@
         window.addEventListener("load", async () => {
             const inputElm = document.querySelector('input.tagify');
             new Tagify(inputElm);
+            let provinces_id;
             await getUrlById();
             await getTagging();
-            await getCategoryHotIssueId();
+            await getDireactorat();
             await getProvinces();
             await upload_check();
         })
@@ -183,13 +189,21 @@
             fetch('/photodetail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
+                    console.log(rows)
+                    provinces_id = rows[0]?.id_province;
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
                     nicEditors.findEditor("editor3").setContent(rows[0]?.content);
                     nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
-                    document.getElementById("news_datetime").value = rows[0]?.news_datetime.split('.')[0];
+                    document.getElementById("photo_datetimes").value = rows[0]?.photos_datetime.split('.')[0];
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.photo}" width="180"/>`;
+                    if (rows[0]?.is_publish == 1) {
+                        document.getElementById("publish_photo").innerHTML = `<input name="is_published" id="publish" type="radio" value="1" checked> Publish <input name="is_published" id="publish" type="radio" value="0"> Not Publish`;
+                    } else {
+                        document.getElementById("publish_photo").innerHTML = `<input name="is_published" id="publish" type="radio" value="1"> Publish <input name="is_published" id="publish" type="radio" value="0" checked> Not Publish`;
+                    }
+
                 })
         }
 
@@ -207,8 +221,8 @@
                 })
         }
 
-        function getCategoryHotIssueId() {
-            fetch('/hotissuecategory')
+        function getDireactorat() {
+            fetch('/directorat_fe')
                 .then(res => res.json())
                 .then((qqq) => {
                     qqq.forEach(items => {
@@ -225,10 +239,18 @@
                 .then(response => response.json())
                 .then((data) => {
                     data.forEach(element => {
-                        const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
-                        ddd.text = `${element?.province_name}`;
-                        document.getElementById("provinces").append(ddd);
+                        if (element?.id == provinces_id) {
+                            const ddd = document.createElement('option')
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.province_name}`;
+                            ddd.selected = true;
+                            document.getElementById("provinces").append(ddd);
+                        } else {
+                            const ddd = document.createElement('option')
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.province_name}`;
+                            document.getElementById("provinces").append(ddd);
+                        }
                     });
                 })
         }
