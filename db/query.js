@@ -1721,12 +1721,15 @@ const categories = async (req, res) => {
                     "video": items?.video,
                     "duration": items?.duration,
                     "content": items?.content,
-                    "created_at": items?.created_at,
-                    "updated_at": items?.updated_at,
-                    "deleted_at": items?.news_datetime,
-                    "news_datetime": items?.news_datetime,
+                    "videos_datetime": items?.videos_datetime,
                     "title_en": items?.title_en,
-                    "content_en": items?.content_en
+                    "content_en": items?.content_en,
+                    "videos_datetime": items?.videos_datetime,
+                    "web_identity": items?.web_identity,
+                    "tag": items?.tag,
+                    "directorat": items?.directorat,
+                    "id_province": items?.id_province,
+                    "is_publish": items?.is_publish
                 };
                 array.push(bbb);
             })
@@ -1825,15 +1828,9 @@ const updatephoto = async (req, res) => {
 //::::::::::::::::::::::::::::::End Of Photos :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Videos:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const insertvideo = async (req, res) => {
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const time_datetime = date + ' ' + time;
     const videos_datetime = req.body.video_datetime.replace("T", " ");
-    const sql = await executeQuery("insert into news_videos(title,title_en,content,content_en,video,duration,news_datetime,created_at,updated_at,deleted_at,tag,directorat) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.video, req.body.duration, videos_datetime, time_datetime, time_datetime, null, req.body.taggings, req.body.directorat]);
+    const sql = await executeQuery("insert into news_videos(title,title_en,content,content_en,video,duration,videos_datetime,tag,directorat,id_province,is_publish) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.video, req.body.duration, videos_datetime, req.body.taggings, req.body.directorat,req.body.kdeks,req.body.is_published]);
     if (sql) {
         res.redirect('/v');
     } else {
@@ -1864,15 +1861,10 @@ const deletevideo = async (req, res) => {
 }
 
 const updatevideos = async (req, res) => {
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const time_datetime = date + ' ' + time;
+    // const videos_datetime = req.body.video_datetime.replace("T", " ");
     const videos_datetime = req.body.video_datetime.replace("T", " ");
-    const sql = await executeQuery("update news_videos set title=$1,title_en=$2,content=$3,content_en=$4,video=$5,duration=$6,news_datetime=$7,created_at=$8,updated_at=$9, tag=$10,directorat=$11 where id = $12",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.video, req.body.duration, videos_datetime, time_datetime, time_datetime, req.body.taggings, req.body.directorat, req.body.id]);
+    const sql = await executeQuery("update news_videos set title=$1,title_en=$2,content=$3,content_en=$4,video=$5,duration=$6,videos_datetime=$7,tag=$8,directorat=$9,id_province=$10,is_publish=$11 where id = $12",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.video, req.body.duration, videos_datetime,  req.body.taggings,req.body.directorat, req.body.kdeks, req.body.is_published , req.body.id]);
     if (sql) {
         res.redirect('/v');
     } else {

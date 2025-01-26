@@ -92,18 +92,25 @@
                                                 step="1">
                                         </div>
 
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tanggal Publish</label>
-                                            <input class="form-control" name="video_datetime" id="video_datetimes"
-                                                type="datetime-local" required>
-                                        </div>
-
                                         <!-- <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Tagging</label>
                                             <span id="listtag">
 
                                             </span>
                                         </div> -->
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tanggal</label>
+                                            <input class="form-control" name="video_datetime" id="video_datetimes"
+                                                type="datetime-local" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Publish</label>
+                                            <span id="publish_video"></span>
+                                        </div>
+
+
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Ganti/Ubah Tagging</label>
@@ -175,6 +182,7 @@
         window.addEventListener("load", async () => {
             const inputElm = document.querySelector('input.tagify');
             new Tagify(inputElm);
+            let provinces_id;
             await getUrlById();
             await getTagging();
             await getCategoryHotIssueId();
@@ -200,6 +208,7 @@
                     //     };
                     // });
                     // console.log(finalArray);
+                    provinces_id = rows[0]?.id_province;
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
@@ -209,8 +218,13 @@
                     nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
                     document.getElementById("videos").value = rows[0]?.video;
                     document.getElementById("durations").value = rows[0]?.duration;
-                    document.getElementById("video_datetimes").value = rows[0]?.news_datetime.split('.')[0];
+                    document.getElementById("video_datetimes").value = rows[0]?.videos_datetime.split('.')[0];
                     // document.getElementById("directorat_val").innerHTML = finalArray.toString().replace('\"','').replace('"','');
+                    if (rows[0]?.is_publish == 1) {
+                        document.getElementById("publish_video").innerHTML = `<input name="is_published" id="publish" type="radio" value="1" checked> Publish <input name="is_publish" id="publish" type="radio" value="0"> Not Publish`;
+                    } else {
+                        document.getElementById("publish_video").innerHTML = `<input name="is_published" id="publish" type="radio" value="1"> Publish <input name="is_publish" id="publish" type="radio" value="0" checked> Not Publish`;
+                    }
                 })
         }
 
@@ -229,7 +243,7 @@
         }
 
         function getCategoryHotIssueId() {
-            fetch('/hotissuecategory')
+            fetch('/directorat_fe')
                 .then(res => res.json())
                 .then((qqq) => {
                     qqq.forEach(items => {
@@ -246,10 +260,18 @@
                 .then(response => response.json())
                 .then((data) => {
                     data.forEach(element => {
-                        const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
-                        ddd.text = `${element?.province_name}`;
-                        document.getElementById("provinces").append(ddd);
+                        if (element?.id == provinces_id) {
+                            const ddd = document.createElement('option')
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.province_name}`;
+                            ddd.selected = true;
+                            document.getElementById("provinces").append(ddd);
+                        } else {
+                            const ddd = document.createElement('option')
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.province_name}`;
+                            document.getElementById("provinces").append(ddd);
+                        }
                     });
                 })
         }
