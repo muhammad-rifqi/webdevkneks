@@ -788,8 +788,6 @@ apps.post('/updatestructure', structure_path.single('photo'), db.updatestructure
 
 //::::::::::::::: Api & Query DB HOT ISSUE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-apps.get('/hotissue', db.hotissue);
-
 apps.get('/directorat', db.directorat);
 
 apps.get('/directorat_fe', db.directorats_fe);
@@ -816,6 +814,9 @@ apps.get('/directorat_devisi_delete/:id', db.directorats_devisi_delete);
 
 apps.get('/directorat_detail/:id', db.directorat_details);
 
+//:::::::::::::::::::::::::::: Hot Issue ::::::::::::::::::::::::::::::::::::::::::::::::::
+apps.get('/hotissue', db.hotissue);
+
 apps.get('/hotissuedetail/:id', db.hotissue_detail);
 
 apps.post('/inserthotissue', hotissue_path.single('photo'), db.inserthotissue);
@@ -824,13 +825,15 @@ apps.get('/deletehotissue/:id/:foto', db.deletehotissue);
 
 apps.post('/updatehotissue', hotissue_path.single('photo'), db.updatehotissue);
 
+//:::::::::::::::::::::::::::: Hot Issue Category ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 apps.get('/hotissuecategory', db.hotissuecategory);
 
 apps.post('/updatehotissuecategory', db.updatehotissuecategory);
 
 apps.get('/deletehotissuecategory/:id', db.deletehotissuecategory);
 
-apps.get('/deletehotissuesubcategory/:id', db.deletehotissuesubcategory);
+//::::::::::::::::::::::::::::::: Sub Category Issue :::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/hotissuesubcategory', db.hotissuesubcategory);
 
@@ -842,6 +845,7 @@ apps.post('/inserthotissubcategory', db.inserthotissubcategory);
 
 apps.post('/updatehotissuesubcategory', db.updatehotissuesubcategory);
 
+apps.get('/deletehotissuesubcategory/:id', db.deletehotissuesubcategory);
 //::::::::::::::: Api & Query DB INSTITUTION ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/institutions', db.institutions);

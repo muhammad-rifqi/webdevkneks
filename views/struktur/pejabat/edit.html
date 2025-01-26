@@ -19,6 +19,7 @@
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
             new nicEditor({ maxHeight: 100 }).panelInstance('editor1');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor2');
         });
     </script>
 </head>
@@ -64,10 +65,23 @@
                                             <input class="form-control" type="text" name="name" id="nama_pejabat" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Posisi</label>
+                                            <label class="form-label">Posisi [ID] </label>
                                             <input class="form-control" type="text" name="position" id="position"
                                                 required>
                                         </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Posisi [EN] </label>
+                                            <input class="form-control" type="text" name="position_en" id="position_en"
+                                                required>
+                                        </div>
+
+                                        
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Publish</label>
+                                           <span id="publish_pejabat"></span>
+                                        </div>
+
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Photo/Gambar Preview</label>
@@ -81,13 +95,14 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tag</label>
-                                            <input class="form-control" type="text" name="tag" id="tag" required>
+                                            <label class="form-label">Keterangan [ID] </label>
+                                            <textarea class="form-control" name="description" id="editor1"></textarea>
                                         </div>
 
+                                        
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Keterangan</label>
-                                            <textarea class="form-control" name="description" id="editor1"></textarea>
+                                            <label class="form-label">Keterangan [EN] </label>
+                                            <textarea class="form-control" name="description_en" id="editor2"></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -140,9 +155,15 @@
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("nama_pejabat").value = rows[0]?.name;
                     document.getElementById("position").value = rows[0]?.position;
+                    document.getElementById("position_en").value = rows[0]?.position_en;
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.photo}" width="180">`;
-                    document.getElementById("tag").value = rows[0]?.tag;
                     nicEditors.findEditor("editor1").setContent(rows[0]?.description);
+                    nicEditors.findEditor("editor2").setContent(rows[0]?.description_en);
+                    if (rows[0]?.is_publish == 1) {
+                        document.getElementById("publish_pejabat").innerHTML = `<input name="is_published" id="publish" type="radio" value="1" checked> Publish <input name="is_published" id="publish" type="radio" value="0"> Not Publish`;
+                    } else {
+                        document.getElementById("publish_pejabat").innerHTML = `<input name="is_published" id="publish" type="radio" value="1"> Publish <input name="is_published" id="publish" type="radio" value="0" checked> Not Publish`;
+                    }
                 })
         }
 

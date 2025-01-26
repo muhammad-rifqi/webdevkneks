@@ -15,13 +15,6 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
-    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
-    <script type="text/javascript">
-        bkLib.onDomLoaded(function () {
-            new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
-            new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
-        });
-    </script>
 </head>
 
 <body>
@@ -60,30 +53,19 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Judul [IN]</label>
+                                            <label class="form-label">Sub Kategori [IN]</label>
                                             <input class="form-control" type="text" name="title" id="title" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Judul [EN]</label>
+                                            <label class="form-label">Sub Kategori [EN]</label>
                                             <input class="form-control" type="text" name="title_en" id="title_en"
                                                 required>
                                         </div>
                     
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Keterangan [IN]</label>
-                                            <textarea class="form-control" name="description"
-                                                id="editor3" required><p id="val3"></p></textarea>
-                                        </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Keterangan [EN]</label>
-                                            <textarea class="form-control" name="description_en"
-                                                id="editor4" required><p id="val4"></p></textarea>
-                                        </div>
-
-                                        <div class="col-lg-12 mb-4">
                                             <label class="form-label">Kategori Isu Terkini</label>
                                             <select class="form-control" name="hot_category_id" id="hotcatid" required>
-                                                <option value="0"> Pilih </option>
+                                                <option value="0"> -- </option>
                                             </select>
                                         </div>
 
@@ -138,8 +120,6 @@
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    document.getElementById("val3").innerHTML = rows[0]?.description;
-                    document.getElementById("val4").innerHTML = rows[0]?.description_en;
                     hot_category_id = rows[0]?.hot_category_id;
                 })
         }
@@ -152,7 +132,7 @@
                     data.forEach(element => {
                         const choosed = (element?.id == hot_category_id) ? true : false ;
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
+                        ddd.value = `${element?.id}-${element?.title}`;
                         ddd.text = `${element?.title}`;
                         ddd.selected = choosed
                         document.getElementById("hotcatid").append(ddd);
