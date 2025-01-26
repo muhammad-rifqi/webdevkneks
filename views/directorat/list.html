@@ -51,8 +51,8 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Direktorat</th>
-                                                <th>KDEKS Daerah</th>
+                                                <th>Nama [ID]</th>
+                                                <th>Nama [EN]</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -113,7 +113,7 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `${row.province_name}`;
+                            return `${row.title_en}`;
                         }
                     },
                     {

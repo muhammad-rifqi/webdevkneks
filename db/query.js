@@ -425,25 +425,43 @@ const updatestructure = async (req, res) => {
     }
 }
 //::::::::::::::::::::::::::::::End Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
-//::::::::::::::::::::::::::::::Start Of ISSUE :::::::::::::::::::::::::::::::::::::::::::::::::::::
-
+//::::::::::::::::::::::::::::::Start Of DIREKTORAT :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const directorat = async (req, res) => {
     // const sql = await executeQuery('SELECT * FROM `hot_issues` LEFT JOIN `hot_subcategories`on hot_issues.hot_subcategory_id = hot_subcategories.id LEFT JOIN hot_categories on hot_subcategories.hot_category_id = hot_categories.id GROUP BY hot_categories.id');
     const role_id_users = req.cookies.roles_id;
     if (role_id_users == 1 || role_id_users == 2) {
-        const sql = await executeQuery('SELECT * FROM hot_categories');
+        const sql = await executeQuery('SELECT * FROM directorats');
         if (sql?.length > 0) {
             res.status(200).json(sql)
         } else {
             res.status(200).json([])
         }
     } else {
-        const sql = await executeQuery("SELECT * FROM hot_categories where id = $1", [role_id_users]);
+        const sql = await executeQuery("SELECT * FROM directorats where id = $1", [role_id_users]);
         if (sql?.length > 0) {
             res.status(200).json(sql)
         } else {
             res.status(200).json([])
         }
+    }
+}
+
+const directorats_fe = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM directorats order by id ASC");
+        if (sql?.length > 0) {
+            res.status(200).json(sql)
+        } else {
+            res.status(200).json([])
+        }
+}
+
+const directorat_details = async (req, res) => {
+    const pppd = req.params.id;
+    const sql = await executeQuery('SELECT * FROM  directorats where id = $1 ', [pppd]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
     }
 }
 
@@ -469,7 +487,7 @@ const directorats_devisi_delete = async (req, res) => {
 
 const insertdirectorats = async (req, res) => {
     const a = req.body.daerah.split('-');
-    const sql = await executeQuery('INSERT INTO hot_categories(title,title_en,description,description_en,id_province,province_name)values($1,$2,$3,$4,$5,$6)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, a[0], a[1]]);
+    const sql = await executeQuery('INSERT INTO directorats(title,title_en,description,description_en,id_province,province_name)values($1,$2,$3,$4,$5,$6)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, a[0], a[1]]);
     if (sql?.length > 0) {
         res.redirect('/directorats');
     } else {
@@ -489,15 +507,9 @@ const directorat_path = async (req, res) => {
 }
 
 const update_directorats = async (req, res) => {
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const datetimes = date + ' ' + time;
     const a = req.body.daerah.split('-');
-    const sql = await executeQuery("update hot_categories set title=$1,title_en=$2,description=$3,description_en=$4,created_at=$5,updated_at=$6,deleted_at=$7,id_province=$8,province_name=$9 where id = $10",
-        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, datetimes, datetimes, datetimes, a[0], a[1], req.body.id]);
+    const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4,id_province=$5,province_name=$6 where id = $7",
+        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, a[0], a[1], req.body.id]);
 
     if (sql) {
         res.redirect('/directorats');
@@ -509,7 +521,7 @@ const update_directorats = async (req, res) => {
 
 const delete_direactorats = async (req, res) => {
     const idcat = req.params.id;
-    const sql = await executeQuery('DELETE FROM  hot_categories where id=$1', [idcat]);
+    const sql = await executeQuery('DELETE FROM  directorats where id=$1', [idcat]);
     if (sql) {
         res.redirect('/directorats');
     } else {
@@ -521,7 +533,7 @@ const delete_direactorats = async (req, res) => {
 const directorats_uploads = async (req, res) => {
     const fileupload1 = site_url + "/uploads/directorat/images/" + req.files['images'][0].originalname.replace(" ", "");
     const fileupload2 = site_url + "/uploads/directorat/images/" + req.files['banners'][0].originalname.replace(" ", "");
-    const sql = await executeQuery("update hot_categories set images = $1 ,  directiorat_banner = $2 where id = $3",
+    const sql = await executeQuery("update directorats set images = $1 ,  directiorat_banner = $2 where id = $3",
         [fileupload1, fileupload2, req.body.id]);
     if (sql) {
         res.redirect('/directorats_detail/' + req.body.id);
@@ -548,7 +560,7 @@ const delete_images_direactorats = async (req, res) => {
     if (fs.existsSync(fileslinux + 'directorat/images/' + foto_dir)) {
         fs.unlink(fileslinux + 'directorat/images/' + foto_dir, async function (err) {
             if (err) return console.log(err);
-            const sql = await executeQuery('UPDATE hot_categories set images = $1 where id = $2 ', ['NULL', id_dir]);
+            const sql = await executeQuery('UPDATE directorats set images = $1 where id = $2 ', ['NULL', id_dir]);
             if (sql) {
                 res.redirect('/directorats_detail/' + id_dir);
             } else {
@@ -557,7 +569,7 @@ const delete_images_direactorats = async (req, res) => {
             }
         });
     } else {
-        const sql = await executeQuery('UPDATE hot_categories set images = $1 where id = $2 ', ['NULL', id_dir]);
+        const sql = await executeQuery('UPDATE directorats set images = $1 where id = $2 ', ['NULL', id_dir]);
         if (sql) {
             res.redirect('/directorats_detail/' + id_dir);
         } else {
@@ -574,7 +586,7 @@ const delete_banners_direactorats = async (req, res) => {
     if (fs.existsSync(fileslinux + 'directorat/images/' + foto_dirct)) {
         fs.unlink(fileslinux + 'directorat/images/' + foto_dirct, async function (err) {
             if (err) return console.log(err);
-            const sql = await executeQuery('UPDATE hot_categories set images = $1 where id = $2 ', ['NULL', id_dirct]);
+            const sql = await executeQuery('UPDATE directorats set images = $1 where id = $2 ', ['NULL', id_dirct]);
             if (sql) {
                 res.redirect('/directorats_detail/' + id_dirct);
             } else {
@@ -583,7 +595,7 @@ const delete_banners_direactorats = async (req, res) => {
             }
         });
     } else {
-        const sql = await executeQuery('UPDATE hot_categories set images = $1 where id = $2 ', ['NULL', id_dirct]);
+        const sql = await executeQuery('UPDATE directorats set images = $1 where id = $2 ', ['NULL', id_dirct]);
         if (sql) {
             res.redirect('/directorats_detail/' + id_dirct);
         } else {
@@ -592,6 +604,8 @@ const delete_banners_direactorats = async (req, res) => {
         }
     }
 }
+
+//:::::::::::::::::::::::::::::::::::::::::::: End Of Direktirat :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 const hotissue = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  hot_issues');
@@ -3082,6 +3096,8 @@ module.exports = {
     directorat_devisi_add,
     directorat_devisi,
     directorats_devisi_delete,
+    directorats_fe,
+    directorat_details,
     deletehotissuesubcategory,
     detailhotissuesubcategory,
     updatehotissue,

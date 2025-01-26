@@ -79,7 +79,6 @@
                                                     <th>Id</th>
                                                     <th>Judul</th>
                                                     <th>Keterangan</th>
-                                                    <th>Relasi_ID </th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -132,7 +131,7 @@
 
         function getUrlById() {
             const URLS = new URL(window.location.href);
-            fetch('/detailhotissuecategory/' + URLS.pathname.split('/')[2])
+            fetch('/directorat_detail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("id").value = rows[0]?.id;
@@ -151,7 +150,6 @@
                                     <td>#${element?.id}</td>
                                     <td>${element?.title}</td>
                                     <td>${element?.description}</td>
-                                    <td>${element?.directorats_id}</td>
                                     <td><a href="#" onclick="deleteData('${element?.id}')"><button class="btn btn-danger"><i class="feather-trash"></i></button></a></td>                           
                                 </tr>`;
                     });

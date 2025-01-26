@@ -132,7 +132,7 @@
 
         function getUrlById() {
             const URLS = new URL(window.location.href);
-            fetch('/detailhotissuecategory/' + URLS.pathname.split('/')[2])
+            fetch('/directorat_detail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("id").value = rows[0]?.id;

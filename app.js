@@ -792,6 +792,8 @@ apps.get('/hotissue', db.hotissue);
 
 apps.get('/directorat', db.directorat);
 
+apps.get('/directorat_fe', db.directorats_fe);
+
 apps.get('/directorat_path/:id', db.directorat_path);
 
 apps.post('/insertdirectorats', db.insertdirectorats);
@@ -811,6 +813,8 @@ apps.get('/directorat_devisi/:id', db.directorat_devisi);
 apps.post('/directorats_devisi_add', db.directorat_devisi_add);
 
 apps.get('/directorat_devisi_delete/:id', db.directorats_devisi_delete);
+
+apps.get('/directorat_detail/:id', db.directorat_details);
 
 apps.get('/hotissuedetail/:id', db.hotissue_detail);
 

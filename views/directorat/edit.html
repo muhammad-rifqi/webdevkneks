@@ -133,15 +133,15 @@
 
         function getUrlById() {
             const URLS = new URL(window.location.href);
-            fetch('/detailhotissuecategory/' + URLS.pathname.split('/')[2])
+            fetch('/directorat_detail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
                     prov_id = rows[0]?.id_province;
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    nicEditors.findEditor("editor2").setContent(rows[0]?.description);
-                    nicEditors.findEditor("editor3").setContent(rows[0]?.description_en);
+                    nicEditors.findEditor("editor3").setContent(rows[0]?.description);
+                    nicEditors.findEditor("editor4").setContent(rows[0]?.description_en);
                     hot_category_id = rows[0]?.hot_category_id;
                 })
         }

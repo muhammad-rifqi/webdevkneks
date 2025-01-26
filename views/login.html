@@ -73,8 +73,8 @@
   function getImageLogin() {
     fetch('/login_banners').then(response => response.json()).then((rows) => {
       if (rows[0]?.path == undefined || rows[0]?.path == "" || rows[0]?.path == null) {
-        // document.getElementById("gbrs").setAttribute('src', '/style/image/gbr-login.png');
-        document.getElementById("gbrs").innerHTML = `Loading...`;
+        document.getElementById("gbrs").setAttribute('src', '/style/image/gbr-login.png');
+        // document.getElementById("gbrs").innerHTML = `Loading...`;
       } else {
         // document.getElementById("gbrs").setAttribute('src', rows[0]?.path);
         document.getElementById("gbrs").innerHTML = `<img src="${rows[0]?.path}" alt="imgLogin" width="60%" loading="lazy">`;
