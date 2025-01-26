@@ -107,8 +107,7 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Publish</label>
-                                            <input name="is_publish" id="is_publish" type="checkbox" value="1">
-                                            Publish
+                                            <span id="publishs"></span>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -117,12 +116,12 @@
                                                 type="datetime-local">
                                         </div>
 
-                                        <div class="col-lg-12 mb-4">
+                                        <!-- <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Tagging</label>
                                             <span id="listtag">
 
                                             </span>
-                                        </div>
+                                        </div> -->
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Ganti/Ubah Tagging</label>
@@ -134,7 +133,8 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Direktorat</label>
-                                            <select class="form-control" name="hot_category_id" id="mySelect" multiple placeholder="Silahkan Pilih" required>
+                                            <select class="form-control" name="directorat_id" id="mySelect" multiple
+                                                placeholder="Silahkan Pilih" required>
                                             </select>
                                         </div>
 
@@ -192,14 +192,15 @@
             const inputElm = document.querySelector('input.tagify');
             new Tagify(inputElm);
             let news_category_id;
+            let province_id;
             await getUrlById();
-            await getCategoryHotIssue();
+            await getCategoryNews();
             await getTagging();
-            await getCategoryHotIssueId();
+            await getCategoryDirectorat();
             await getProvinces();
             // await handleClick();
             await upload_check();
-            
+
         })
 
         function getUrlById() {
@@ -207,6 +208,7 @@
             fetch('/newsdetail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
+                    console.log(rows)
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
@@ -215,18 +217,19 @@
                     nicEditors.findEditor("editor3").setContent(rows[0]?.content);
                     nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
                     news_category_id = rows[0]?.category_id;
-                    document.getElementById("listtag").innerHTML = `<b>[${rows[0]?.tag}]</b>`;
-                    if (rows?.is_publish == 1) {
-                        document.getElementById("is_publish").setAttribute('checked', true);
+                    province_id = rows[0]?.category_id;
+                    // document.getElementById("listtag").innerHTML = `<b>[${rows[0]?.tag}]</b>`;
+                    if (rows[0]?.is_publish == 1) {
+                        document.getElementById("publishs").innerHTML = `<input name="is_publish" id="publish" type="radio" value="1" checked> Publish <input name="is_publish" id="publish" type="radio" value="0"> Not Publish`;
                     } else {
-                        document.getElementById("is_publish").setAttribute('checked', false);
+                        document.getElementById("publishs").innerHTML = `<input name="is_publish" id="publish" type="radio" value="1"> Publish <input name="is_publish" id="publish" type="radio" value="0" checked> Not Publish`;
                     }
                     document.getElementById("news_datetime").value = rows[0]?.news_datetime.split('.')[0];
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.image}" width="180"/>`;
                 })
         }
 
-        function getCategoryHotIssue() {
+        function getCategoryNews() {
             fetch('/categories')
                 .then(response => response.json())
                 .then((data) => {
@@ -262,8 +265,8 @@
         }
 
 
-        function getCategoryHotIssueId() {
-            fetch('/hotissuecategory')
+        function getCategoryDirectorat() {
+            fetch('/directorat')
                 .then(res => res.json())
                 .then((qqq) => {
                     qqq.forEach(items => {
@@ -281,16 +284,24 @@
         //     document.getElementById("taggings").value = selectedValues.join(',');
         // }
 
-        
+
         function getProvinces() {
             fetch('/provinces')
                 .then(response => response.json())
                 .then((data) => {
                     data.forEach(element => {
-                        const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
-                        ddd.text = `${element?.province_name}`;
-                        document.getElementById("provinces").append(ddd);
+                        if (element?.id == province_id) {
+                            const ddd = document.createElement('option')
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.province_name}`;
+                            ddd.selected = true;
+                            document.getElementById("provinces").append(ddd);
+                        } else {
+                            const ddd = document.createElement('option')
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.province_name}`;
+                            document.getElementById("provinces").append(ddd);
+                        }
                     });
                 })
         }

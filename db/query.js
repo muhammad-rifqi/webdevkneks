@@ -1516,20 +1516,9 @@ const news_detailnewscategory_kdeks = async (req, res) => {
     }
 }
 
-
 const news_categories_menu = async (req, res) => {
     const id_cnm = req.params.id;
     const sql = await executeQuery('SELECT * FROM  news where category_id=$1', [id_cnm]);
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const news_categories_date = async (req, res) => {
-    const date_search = req.params.date;
-    const sql = await executeQuery('SELECT * FROM  news where news_datetime LIKE $1', ['%' + date_search + '%']);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1555,25 +1544,6 @@ const pagingnews = async (req, res) => {
 
 }
 
-const news_categories = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM news_categories');
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
-const detailnewscategory = async (req, res) => {
-    const id_cat = req.params.id;
-    const sql = await executeQuery('SELECT * FROM news_categories where id = $1 ', [id_cat]);
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
 const insertnews = async (req, res) => {
     const today = new Date();
     const month = (today.getMonth() + 1);
@@ -1585,8 +1555,8 @@ const insertnews = async (req, res) => {
     const fileupload = site_url + "/uploads/news/" + req.file.originalname.replace(" ", "");
     const id_user = req.cookies.id;
     const wei = (req.cookies.roles_id == '6') ? 'kdeks' : 'kneks';
-    const sql = await executeQuery("insert into news(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,news_datetime,created_at,updated_at,deleted_at,category_id,web_identity,tag,directorat,users_id) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)",
-        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.category_id, wei, req.body.taggings, req.body.hot_category_id, id_user]);
+    const sql = await executeQuery("insert into news(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,news_datetime,category_id,web_identity,tag,directorat,users_id,id_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)",
+        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, req.body.category_id, wei, req.body.taggings, req.body.directorat_id, id_user, req.body.kdeks]);
     if (sql) {
         res.redirect('/n');
     } else {
@@ -1602,11 +1572,12 @@ const updatenews = async (req, res) => {
     const mmm = month.length < 2 ? "0" + month : month;
     const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const timeupdate = date + ' ' + time;
+    // const timeupdate = date + ' ' + time;
     const news_datetime = req.body.news_datetime.replace("T", " ");
+    console.log(req.body);
     if (!req.file || req.file == undefined || req.file == "") {
-        const sql = await executeQuery("UPDATE news set  title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,is_publish=$7,news_datetime=$8,created_at=$9,updated_at=$10,deleted_at=$11,category_id=$12,tag=$13,directorat=$14 where id = $15",
-            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.news_category_id, req.body.taggings, req.body.hot_category_id, req.body.id]);
+        const sql = await executeQuery("UPDATE news set  title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,is_publish=$7,news_datetime=$8,category_id=$9,tag=$10,directorat=$11,id_province=$12 where id = $13",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, req.body.is_publish, news_datetime, req.body.news_category_id, req.body.taggings, req.body.directorat_id, req.body.kdeks, req.body.id]);
         if (sql) {
             res.redirect('/n');
         } else {
@@ -1615,8 +1586,8 @@ const updatenews = async (req, res) => {
         }
     } else {
         const fileupload = site_url + "/uploads/news/" + req.file.originalname.replace(" ", "");
-        const sql = await executeQuery("UPDATE news set  title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,image=$7,is_publish=$8,news_datetime=$9,created_at=$10,updated_at=$11,deleted_at=$12,category_id=$13, tag=$14,directorat=$15 where id = $16",
-            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, timeupdate, timeupdate, null, req.body.news_category_id, req.body.taggings, req.body.hot_category_id, req.body.id]);
+        const sql = await executeQuery("UPDATE news set  title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,image=$7,is_publish=$8,news_datetime=$9,category_id=$10, tag=$11,directorat=$12,id_province=$13 where id = $14",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, req.body.news_category_id, req.body.taggings, req.body.directorat_id,req.body.kdeks, req.body.id]);
         if (sql) {
             res.redirect('/n');
         } else {
@@ -1653,15 +1624,38 @@ const deletenews = async (req, res) => {
     }
 }
 
+const news_categories_date = async (req, res) => {
+    const date_search = req.params.date;
+    const sql = await executeQuery('SELECT * FROM  news where news_datetime LIKE $1', ['%' + date_search + '%']);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const news_categories = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM news_categories');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const detailnewscategory = async (req, res) => {
+    const id_cat = req.params.id;
+    const sql = await executeQuery('SELECT * FROM news_categories where id = $1 ', [id_cat]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 const insertnewscategory = async (req, res) => {
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const cat_datetime = date + ' ' + time;
-    const sql = await executeQuery("insert into news_categories(title,title_en,description,description_en,created_at,updated_at) values($1,$2,$3,$4,$5,$6)",
-        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, cat_datetime, cat_datetime]);
+    const sql = await executeQuery("insert into news_categories(title,title_en,description,description_en) values($1,$2,$3,$4)",
+        [req.body.title, req.body.title_en, req.body.description, req.body.description_en]);
     if (sql) {
         res.redirect('/nc');
     } else {
@@ -1671,14 +1665,8 @@ const insertnewscategory = async (req, res) => {
 }
 
 const updatenewscategory = async (req, res) => {
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const time_datetime = date + ' ' + time;
-    const sql = await executeQuery("update news_categories set title=$1,title_en=$2,description=$3,description_en=$4,created_at=$5,updated_at=$6 where id = $7",
-        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, time_datetime, time_datetime, req.body.id]);
+    const sql = await executeQuery("update news_categories set title=$1,title_en=$2,description=$3,description_en=$4 where id = $5",
+        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, req.body.id]);
     if (sql) {
         res.redirect('/nc');
     } else {

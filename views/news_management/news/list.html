@@ -51,10 +51,11 @@
                                     <table id="news" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Judul [ID]</th>
-                                                <th>Judul [EN]</th>
+                                                <th>No</th>
+                                                <th>Judul</th>
                                                 <th>Kategori</th>
+                                                <th>Tanggal</th>
+                                                <th>Publish</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -109,13 +110,29 @@
                     "dataSrc": ""
                 },
                 "columns": [
-                    { "data": "id" },
+                    {
+                        data: null,
+                        render: function (data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    },
                     { "data": "title" },
-                    { "data": "title_en" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
                             return `${data?.detail?.title}`;
+                        }
+                    },
+                    { "data": "news_datetime" },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            if (data?.publish == 1) {
+                                return `Published`;
+                            } else {
+                                return `Not Published`;
+                            }
+
                         }
                     },
                     {
@@ -124,6 +141,12 @@
                             return `<p><button class='edit-btn btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
                                     <button class='delete-btn btn btn-danger' data-id='${row.id}' data-foto='${row.img}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button></p>`;
                         }
+                    }
+                ], columnDefs: [
+                    {
+                        targets: 0,
+                        orderable: false,
+                        searchable: false
                     }
                 ],
                 lengthMenu: [10, 25, 50, 100],
