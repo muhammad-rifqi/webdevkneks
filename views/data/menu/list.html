@@ -104,7 +104,7 @@
             // 2. Inisialisasi DataTable
             $('#menudata').DataTable({
                 "ajax": {
-                    "url": "/statistics",
+                    "url": "/data_menu",
                     "dataSrc": ""
                 },
                 "columns": [
@@ -154,7 +154,7 @@
                 })
                     .then((willOut) => {
                         if (willOut) {
-                            window.location = '/delete_statistics/' + id;
+                            window.location = '/delete_data_menu/' + id;
                         } else {
                             console.log('NaN')
                         }

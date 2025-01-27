@@ -106,7 +106,7 @@
             // 2. Inisialisasi DataTable
             $('#sliderdata').DataTable({
                 "ajax": {
-                    "url": "/statistic_slide",
+                    "url": "/slider_data",
                     "dataSrc": ""
                 },
                 "columns": [
@@ -169,7 +169,7 @@
             })
                 .then((willOut) => {
                     if (willOut) {
-                        window.location = " /statistic_slide_delete/" + ids + "/" + photo;
+                        window.location = " /delete_slider_data/" + ids + "/" + photo;
                     } else {
                         console.log('NaN')
                     }

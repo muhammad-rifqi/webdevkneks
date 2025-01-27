@@ -2528,26 +2528,26 @@ const delete_welcome_page = async (req, res) => {
     }
 }
 //:::::::::::::::::::::::::::::: End Of Welcome Banner  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
-const sub_statistic = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM sub_statistic');
+const data_submenus = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM data_submenu');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
         res.status(200).json({ "success": false })
     }
 }
-const detailsub_substatistic = async (req, res) => {
+const detail_submenus = async (req, res) => {
     const id_ss = req.params.id;
-    const sql = await executeQuery('SELECT * FROM sub_statistic where id_statistic = $1', [id_ss]);
+    const sql = await executeQuery('SELECT * FROM data_submenu where id_statistic = $1', [id_ss]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
         res.status(200).json([])
     }
 }
-const insert_substatistic = async (req, res) => {
+const insert_submenus = async (req, res) => {
     const ddd = req.body.menu_id.split('-');
-    const sql = await executeQuery("INSERT INTO sub_statistic (id_statistic,short_name,long_name,short_name_en,long_name_en,statistic_name)values($1,$2,$3,$4,$5,$6)",
+    const sql = await executeQuery("INSERT INTO data_submenu (id_statistic,short_name,long_name,short_name_en,long_name_en,statistic_name)values($1,$2,$3,$4,$5,$6)",
         [ddd[0], req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en, ddd[1]]);
     if (sql) {
         res.redirect('/submenu_data');
@@ -2556,9 +2556,9 @@ const insert_substatistic = async (req, res) => {
     }
 }
 
-const delete_substatistic = async (req, res) => {
+const delete_submenus = async (req, res) => {
     const id_meta = req.params.id;
-    const sql = await executeQuery('DELETE FROM sub_statistic where id = $1', [id_meta]);
+    const sql = await executeQuery('DELETE FROM data_submenu where id = $1', [id_meta]);
     if (sql?.length > 0) {
         res.redirect('/submenu_data');
     } else {
@@ -2566,8 +2566,8 @@ const delete_substatistic = async (req, res) => {
     }
 }
 
-const metabase = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM api_meta');
+const data_dashboard = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM data_dashboard');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2576,9 +2576,9 @@ const metabase = async (req, res) => {
 }
 
 
-const detail_metabase = async (req, res) => {
+const detail_data_dashboard = async (req, res) => {
     const id_nar = req.params.id;
-    const sql = await executeQuery('SELECT * FROM api_meta where id = $1', [id_nar]);
+    const sql = await executeQuery('SELECT * FROM data_dashboard where id = $1', [id_nar]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2586,9 +2586,9 @@ const detail_metabase = async (req, res) => {
     }
 }
 
-const metabase_delete = async (req, res) => {
+const data_dashboard_delete = async (req, res) => {
     const id_meta = req.params.id;
-    const sql = await executeQuery('DELETE FROM api_meta where id = $1', [id_meta]);
+    const sql = await executeQuery('DELETE FROM data_dashboard where id = $1', [id_meta]);
     if (sql?.length > 0) {
         res.redirect('/dashboard');
     } else {
@@ -2596,7 +2596,7 @@ const metabase_delete = async (req, res) => {
     }
 }
 
-const insertapimeta = async (req, res) => {
+const insertapidashboards = async (req, res) => {
     const arraydir = req.body.directorat.toString().replace(/[{}]/g, '').split(',');
     const directr = arraydir.map(item => item.replace(/"/g, ''));
     const arraykdeks = req.body.kdeks.toString().replace(/[{}]/g, '').split(',');
@@ -2604,7 +2604,7 @@ const insertapimeta = async (req, res) => {
     const arraykdataset = req.body.dataset.toString().replace(/[{}]/g, '').split(',');
     const datasetdir = arraykdataset.map(item => item.replace(/"/g, ''));
     const ddd = req.body.data_type.split('-');
-    const sql = await executeQuery('INSERT INTO api_meta (api,statistic_id,statistic_name,sub_statistic,short_name,long_name,short_name_en,long_name_en,tagging,directorat,kdeks,publish,dataset) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)', [req.body.api, ddd[0], ddd[1], req.body.sub_statistic, req.body.shorts_name, req.body.long_name, req.body.shorts_name_en, req.body.long_name_en, req.body.taggings, directr, kdeksdir, req.body.publish, datasetdir]);
+    const sql = await executeQuery('INSERT INTO data_dashboard (api,statistic_id,statistic_name,sub_statistic,short_name,long_name,short_name_en,long_name_en,tagging,directorat,kdeks,publish,dataset) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)', [req.body.api, ddd[0], ddd[1], req.body.sub_statistic, req.body.shorts_name, req.body.long_name, req.body.shorts_name_en, req.body.long_name_en, req.body.taggings, directr, kdeksdir, req.body.publish, datasetdir]);
     if (sql?.length > 0) {
         res.redirect('/dashboard');
     } else {
@@ -2613,8 +2613,8 @@ const insertapimeta = async (req, res) => {
 }
 
 
-const emptyapimeta = async (req, res) => {
-    const sql = await executeQuery('UPDATE api_meta set naration = $1, month = $2 where id = $3', ['', '', req.body.id]);
+const emptyapidashboard = async (req, res) => {
+    const sql = await executeQuery('UPDATE data_dashboard set naration = $1, month = $2 where id = $3', ['', '', req.body.id]);
     if (sql) {
         res.status(200).json({ "message": true });
     } else {
@@ -2622,8 +2622,8 @@ const emptyapimeta = async (req, res) => {
     }
 }
 
-const updateapimeta = async (req, res) => {
-    const sql = await executeQuery('UPDATE api_meta set naration = $1, month = $2 where id = $3', [req.body.naration, req.body.month, req.body.id]);
+const updateapidashboard = async (req, res) => {
+    const sql = await executeQuery('UPDATE data_dashboard set naration = $1, month = $2 where id = $3', [req.body.naration, req.body.month, req.body.id]);
     if (sql) {
         res.status(200).json({ "message": true });
     } else {
@@ -2631,8 +2631,8 @@ const updateapimeta = async (req, res) => {
     }
 }
 
-const statistics = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM statistic');
+const data_menus = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM data_menu');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2640,9 +2640,9 @@ const statistics = async (req, res) => {
     }
 }
 
-const insertstatistic = async (req, res) => {
-    const sql = await executeQuery("insert into statistic(title,title_en,long_title,long_title_en,amount,date_created) values($1,$2,$3,$4,$5,$6)",
-        [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en, 0, '2025-01-01 : 00:00:00']);
+const insertdatamenus = async (req, res) => {
+    const sql = await executeQuery("insert into data_menu(title,title_en,long_title,long_title_en) values($1,$2,$3,$4)",
+        [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en]);
     if (sql) {
         res.redirect('/menu_data');
     } else {
@@ -2651,9 +2651,9 @@ const insertstatistic = async (req, res) => {
     }
 }
 
-const deletestatistic = async (req, res) => {
+const deletedatamenus = async (req, res) => {
     const id_stat = req.params.id;
-    const sql = await executeQuery('DELETE FROM statistic where id = $1 ', [id_stat]);
+    const sql = await executeQuery('DELETE FROM data_menu where id = $1 ', [id_stat]);
     if (sql) {
         res.redirect('/menu_data');
     } else {
@@ -2661,8 +2661,8 @@ const deletestatistic = async (req, res) => {
     }
 }
 
-const statistic_slides = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM statistic_slide');
+const sliders_data = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM data_slider');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2670,9 +2670,18 @@ const statistic_slides = async (req, res) => {
     }
 }
 
-const insertstatisticslide = async (req, res) => {
+const sliders_data_fe = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM data_slider');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const insertsliderdata = async (req, res) => {
     const filesimage = site_url + "/uploads/data/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery('insert into statistic_slide(title,title_en,amount,date_created,image,link,publish) values ($1,$2,$3,$4,$5,$6,$7)', [req.body.title, req.body.title_en, req.body.amount, req.body.date_created, filesimage, req.body.link, req.body.publish]);
+    const sql = await executeQuery('insert into data_slider(title,title_en,amount,date_created,image,link,publish) values ($1,$2,$3,$4,$5,$6,$7)', [req.body.title, req.body.title_en, req.body.amount, req.body.date_created, filesimage, req.body.link, req.body.publish]);
     if (sql) {
         res.redirect('/sliderdata');
     } else {
@@ -2680,13 +2689,13 @@ const insertstatisticslide = async (req, res) => {
     }
 }
 
-const delete_statistic_slides = async (req, res) => {
-    const id_statistic_slide = req.params.id;
+const delete_slider_data = async (req, res) => {
+    const id_data_slider = req.params.id;
     const image = req.params.photo;
     if (fs.existsSync(fileslinux + 'data/' + image)) {
         fs.unlink(fileslinux + 'data/' + image, async function (err) {
             if (err) return console.log(err);
-            const sql = await executeQuery('DELETE FROM statistic_slide where id = $1 ', [id_statistic_slide]);
+            const sql = await executeQuery('DELETE FROM data_slider where id = $1 ', [id_data_slider]);
             if (sql) {
                 res.redirect('/sliderdata');
             } else {
@@ -2696,7 +2705,7 @@ const delete_statistic_slides = async (req, res) => {
         });
         console.log("ada")
     } else {
-        const sql = await executeQuery('DELETE FROM statistic_slide where id = $1 ', [id_statistic_slide]);
+        const sql = await executeQuery('DELETE FROM data_slider where id = $1 ', [id_data_slider]);
         if (sql?.length > 0) {
             res.redirect('/sliderdata');
         } else {
@@ -3131,22 +3140,23 @@ module.exports = {
     detail_slogo,
     updates_slogo,
     delete_slogos,
-    sub_statistic,
-    detailsub_substatistic,
-    insert_substatistic,
-    delete_substatistic,
-    statistic_slides,
-    insertstatisticslide,
-    delete_statistic_slides,
-    metabase,
-    detail_metabase,
-    metabase_delete,
-    insertapimeta,
-    emptyapimeta,
-    updateapimeta,
-    statistics,
-    deletestatistic,
-    insertstatistic,
+    data_submenus,
+    detail_submenus,
+    insert_submenus,
+    delete_submenus,
+    sliders_data,
+    sliders_data_fe,
+    insertsliderdata,
+    delete_slider_data,
+    data_dashboard,
+    detail_data_dashboard,
+    data_dashboard_delete,
+    insertapidashboards,
+    emptyapidashboard,
+    updateapidashboard,
+    data_menus,
+    deletedatamenus,
+    insertdatamenus,
     sourcesdata,
     sourcesdatadetail,
     deletesourcesdata,

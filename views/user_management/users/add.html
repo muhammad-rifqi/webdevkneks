@@ -133,12 +133,12 @@
                 });
             })
 
-            await getCategoryHotIssueId();
+            await getDirectorat();
             await prov();
         })
 
-        function getCategoryHotIssueId() {
-            fetch('/hotissuecategory')
+        function getDirectorat() {
+            fetch('/directorat_fe')
                 .then(res => res.json())
                 .then((qqq) => {
                     qqq.forEach(items => {

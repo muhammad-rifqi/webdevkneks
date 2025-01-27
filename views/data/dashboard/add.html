@@ -40,7 +40,7 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/insertapimeta" method="post">
+                        <form action="/insertapidashboard" method="post">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
@@ -178,7 +178,7 @@
         const inputElm = document.querySelector('input.tagify');
         new Tagify(inputElm);
         await getDataType();
-        await getCategoryHotIssueId();
+        await getDirectorat();
         await getTagging();
         await getProvinces();
         await getDataSet();
@@ -196,7 +196,7 @@
     }
 
     function getDatasubType(e) {
-        fetch('/detail_substatistic/' + e.split('-')[0])
+        fetch('/detail_submenu/' + e.split('-')[0])
             .then(datas => datas.json())
             .then((rowst) => {
                 rowst.forEach((elements) => {
@@ -208,8 +208,8 @@
             })
     }
 
-    function getCategoryHotIssueId() {
-        fetch('/hotissuecategory')
+    function getDirectorat() {
+        fetch('/directorat_fe')
             .then(res => res.json())
             .then((qqq) => {
                 qqq.forEach(items => {

@@ -642,11 +642,11 @@ apps.get('/api_sejarah_province/:id', db.history_province);
 
 apps.get('/api_about_province/:id', db.about_province);
 
-apps.get('/api_metabase', db.metabase);
+apps.get('/api_dashboard', db.data_dashboard);
 
-apps.get('/api_metabase_detail/:id', db.detail_metabase);
+apps.get('/api_dashboard_detail/:id', db.detail_data_dashboard);
 
-apps.get('/api_metabase_delete/:id', db.metabase_delete);
+apps.get('/api_dashboard_delete/:id', db.data_dashboard_delete);
 
 apps.get('/api_opini', db.opini);
 
@@ -1028,31 +1028,33 @@ apps.get('/delete_welcome_page/:id/:foto', db.delete_welcome_page);
 
 //::::::::::::::: Api & Query CUSTOM PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-apps.get('/sub_statistic', db.sub_statistic);
+apps.get('/data_submenu', db.data_submenus);
 
-apps.post('/insert_substatistic', db.insert_substatistic);
+apps.post('/insert_submenu', db.insert_submenus);
 
-apps.get('/delete_substatistic/:id', db.delete_substatistic);
+apps.get('/delete_submenu/:id', db.delete_submenus);
 
-apps.get('/detail_substatistic/:id', db.detailsub_substatistic);
+apps.get('/detail_submenu/:id', db.detail_submenus);
 
-apps.post('/insertapimeta', db.insertapimeta);
+apps.post('/insertapidashboard', db.insertapidashboards);
 
-apps.post('/emptyapimeta', db.emptyapimeta);
+apps.post('/emptyapidashboards', db.emptyapidashboard);
 
-apps.post('/updateapimeta', db.updateapimeta);
+apps.post('/updateapidashboards', db.updateapidashboard);
 
-apps.get('/statistics', db.statistics);
+apps.get('/data_menu', db.data_menus);
 
-apps.get('/delete_statistics/:id', db.deletestatistic);
+apps.get('/delete_data_menu/:id', db.deletedatamenus);
 
-apps.post('/insertstatistics', db.insertstatistic);
+apps.post('/insert_data_menu', db.insertdatamenus);
 
-apps.get('/statistic_slide', db.statistic_slides);
+apps.get('/slider_data', db.sliders_data);
 
-apps.post('/insertstatisticsslide', data_slide_path.single('image'), db.insertstatisticslide);
+apps.get('/slider_data_fe', db.sliders_data_fe);
 
-apps.get('/statistic_slide_delete/:id/:photo', db.delete_statistic_slides);
+apps.post('/insertsliderdata', data_slide_path.single('image'), db.insertsliderdata);
+
+apps.get('/delete_slider_data/:id/:photo', db.delete_slider_data);
 
 apps.get('/sourcesdata', db.sourcesdata);
 

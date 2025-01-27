@@ -113,7 +113,7 @@
 
     function getMetabaseDetail() {
         const URLS = new URL(window.location.href);
-        fetch('/api_metabase_detail/' + URLS.pathname.split('/')[2])
+        fetch('/api_dashboard_detail/' + URLS.pathname.split('/')[2])
             .then(data => data.json())
             .then((rrr) => {
                 // const ddd = rrr[0]?.month.split('-');
@@ -130,7 +130,7 @@
     async function deleteMeta() {
         const URLS = new URL(window.location.href);
         const idt = URLS.pathname.split('/')[2];
-        await fetch('/emptyapimeta', {
+        await fetch('/emptyapidashboards', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -164,7 +164,7 @@
         const urls_name = document.getElementById("url_name").value;
         const naration = document.getElementById("narations").value;
         const monthss = document.getElementById("months").value;
-        await fetch('/updateapimeta', {
+        await fetch('/updateapidashboards', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

@@ -133,7 +133,7 @@
         $(document).ready(function () {
             var table = $('#dashboard_data').DataTable({
                 "ajax": {
-                    "url": "/api_metabase",
+                    "url": "/api_dashboard",
                     "dataSrc": ""
                 },
                 "columns": [
@@ -193,7 +193,7 @@
                 })
                     .then((willOut) => {
                         if (willOut) {
-                            window.location = " /api_metabase_delete/" + ids;
+                            window.location = " /api_dashboard_delete/" + ids;
                         } else {
                             console.log('NaN')
                         }
