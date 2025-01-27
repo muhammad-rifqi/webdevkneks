@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/tagify.min.css" />
     <script type="text/javascript" src="https://js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
@@ -68,15 +69,15 @@
                                             <label class="form-label">Judul [EN]</label>
                                             <input class="form-control" type="text" name="title_en" required>
                                         </div>
-                                        <div class="col-lg-12 mb-4">
+                                        <!-- <div class="col-lg-12 mb-4">
                                             <label class="form-label">Kategori Isu</label>
                                             <select class="form-control" name="hot_category_id" id="hotcatid" required>
                                                 <option value="0"> Pilih </option>
                                             </select>
-                                        </div>
+                                        </div> -->
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Sub Kategori</label>
-                                            <select class="form-control" name="category_id" id="catid" required>
+                                            <select class="form-control" name="sub_category_id" id="catid" required>
                                                 <option value="0"> Pilih </option>
                                             </select>
                                         </div>
@@ -102,6 +103,14 @@
                                             <input class="form-control" name="photo" id="photo" type="file" required>
                                         </div>
 
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tanggal</label>
+                                            <input class="form-control" name="issue_datetime" id="issue_datetime"
+                                                type="datetime-local" required>
+                                        </div>
+
+
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Publish</label>
                                             <input name="is_publish" id="is_publish" type="checkbox" value="1" required>
@@ -109,9 +118,25 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tanggal Publish</label>
-                                            <input class="form-control" name="issue_datetime" id="issue_datetime"
-                                                type="datetime-local" required>
+                                            <label class="form-label">Tagging</label>
+                                            <span id="tag">
+
+                                            </span>
+                                            <input name="taggings" type="text" class="tagify" id="tagify" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Direktorat</label>
+                                            <select class="form-control" name="directorat" id="mySelect" multiple
+                                                required>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">KDEKS</label>
+                                            <select class="form-control" name="kdeks" id="provinces" required>
+                                                <option value="0"></option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -149,31 +174,91 @@
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <script src="/assets/vendors/js/tagify.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $('#mySelect').select2();
+        });
+    </script>
     <script>
         window.addEventListener("load", async () => {
-            await fetch('/hotissuesubcategory')
+            const inputElm = document.querySelector('input.tagify');
+            new Tagify(inputElm);
+            await getSubCategoryIssue();
+            // await getCategoryIssue();
+            await getTagging();
+            await getProvinces();
+            await getCategoryDirectorat();
+        })
+
+        function getSubCategoryIssue() {
+            fetch('/hotissuesubcategory')
                 .then(response => response.json())
                 .then((data) => {
                     data.forEach(element => {
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
+                        ddd.value = `${element?.id}-${element?.title}`;
                         ddd.text = `${element?.title}`;
                         document.getElementById("catid").append(ddd);
                     });
                 })
 
-            await fetch('/hotissuecategory')
-            .then(res => res.json())
-            .then((rrr) => {
-                rrr.forEach(items => {
-                        const bbb = document.createElement('option')
-                        bbb.value = `${items?.id}`;
-                        bbb.text = `${items?.title}`;
-                        document.getElementById("hotcatid").append(bbb);
+        }
+
+        function getTagging() {
+            fetch('/tagging')
+                .then(res => res.json())
+                .then((rrr) => {
+                    let ttt = "";
+                    rrr.forEach(items => {
+                        ttt += `${items?.tagging},`;
                     });
-            });
-        })
+                    document.getElementById("tag").innerHTML = ttt;
+                    document.getElementById("tagify").value = ttt;
+                })
+        }
+
+        
+        function getProvinces() {
+            fetch('/provinces')
+                .then(response => response.json())
+                .then((data) => {
+                    data.forEach(element => {
+                        const ddd = document.createElement('option')
+                        ddd.value = `${element?.id}`;
+                        ddd.text = `${element?.province_name}`;
+                        document.getElementById("provinces").append(ddd);
+                    });
+                })
+        }
+
+        function getCategoryDirectorat() {
+            fetch('/directorat_fe')
+                .then(res => res.json())
+                .then((qqq) => {
+                    qqq.forEach(items => {
+                        const aaa = document.createElement('option')
+                        aaa.value = `${items?.id}`;
+                        aaa.text = `${items?.title}`;
+                        document.getElementById("mySelect").append(aaa);
+                    });
+                })
+        }
+
+        // function getCategoryIssue() {
+        //     fetch('/hotissuecategory')
+        //         .then(res => res.json())
+        //         .then((rrr) => {
+        //             rrr.forEach(items => {
+        //                 const bbb = document.createElement('option')
+        //                 bbb.value = `${items?.id}`;
+        //                 bbb.text = `${items?.title}`;
+        //                 document.getElementById("hotcatid").append(bbb);
+        //             });
+        //         });
+        // }
     </script>
 </body>
 

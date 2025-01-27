@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/tagify.min.css" />
     <script type="text/javascript" src="https://js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
@@ -63,44 +64,40 @@
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Judul [ID] </label>
-                                            <input class="form-control" type="text" name="title" id="title" >
+                                            <input class="form-control" type="text" name="title" id="title">
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Judul [EN]</label>
                                             <input class="form-control" type="text" name="title_en" id="title_en"
                                                 required>
                                         </div>
-                                        <div class="col-lg-12 mb-4">
+                                        <!-- <div class="col-lg-12 mb-4">
                                             <label class="form-label">Kategori Isu </label>
                                             <select class="form-control" name="hot_category_id" id="hotcatid" required>
                                                 <option value="0"> Pilih </option>
                                             </select>
-                                        </div>
+                                        </div> -->
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Sub Kategori</label>
-                                            <select class="form-control" name="category_id" id="catid" >
+                                            <select class="form-control" name="sub_category_id" id="catid">
                                                 <option value="0"> Pilih </option>
                                             </select>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Kutipan [ID]</label>
-                                            <textarea class="form-control" name="excerpt"
-                                                id="editor1"></textarea>
+                                            <textarea class="form-control" name="excerpt" id="editor1"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Kutipan [EN]</label>
-                                            <textarea class="form-control" name="excerpt_en"
-                                                id="editor2"></textarea>
+                                            <textarea class="form-control" name="excerpt_en" id="editor2"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Keterangan [ID] </label>
-                                            <textarea class="form-control" name="content"
-                                                id="editor3"></textarea>
+                                            <textarea class="form-control" name="content" id="editor3"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Keterangan [EN]</label>
-                                            <textarea class="form-control" name="content_en"
-                                                id="editor4"></textarea>
+                                            <textarea class="form-control" name="content_en" id="editor4"></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -123,6 +120,28 @@
                                             <label class="form-label">Tanggal Publish</label>
                                             <input class="form-control" name="issue_datetime" id="issue_datetime"
                                                 type="datetime-local">
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tagging</label>
+                                            <span id="tag">
+
+                                            </span>
+                                            <input name="taggings" type="text" class="tagify" id="tagify" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Direktorat</label>
+                                            <select class="form-control" name="directorat" id="mySelect" multiple
+                                                required>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">KDEKS</label>
+                                            <select class="form-control" name="kdeks" id="provinces" required>
+                                                <option value="0"></option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -160,15 +179,28 @@
     <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script src="/assets/vendors/js/tagify.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
+        $(document).ready(function () {
+            $('#mySelect').select2();
+        });
+    </script>
+
+    <script>
         window.addEventListener("load", async () => {
+            const inputElm = document.querySelector('input.tagify');
+            new Tagify(inputElm);
             let hot_subcategory_id;
             let hot_category;
+            let prov_id;
             await getUrlById();
             await getCategoryHotIssue();
-            await getCategoryHotIssueId()
+            await getProvinces();
+            await getTagging();
+            await getDirectorats();
+            // await getCategoryHotIssueId()
         })
 
         function getUrlById() {
@@ -179,19 +211,21 @@
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    nicEditors.findEditor( "editor1" ).setContent( rows[0]?.excerpt );
-                    nicEditors.findEditor( "editor2" ).setContent( rows[0]?.excerpt_en );
-                    nicEditors.findEditor( "editor3" ).setContent( rows[0]?.content );
-                    nicEditors.findEditor( "editor4" ).setContent( rows[0]?.content_en );
+                    nicEditors.findEditor("editor1").setContent(rows[0]?.excerpt);
+                    nicEditors.findEditor("editor2").setContent(rows[0]?.excerpt_en);
+                    nicEditors.findEditor("editor3").setContent(rows[0]?.content);
+                    nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
                     hot_subcategory_id = rows[0]?.hot_subcategory_id;
                     hot_category = rows[0]?.hot_issue_category;
+                    prov_id = rows[0]?.id_province;
                     if (rows?.is_publish == 1) {
                         document.getElementById("is_publish").setAttribute('checked', true);
                     } else {
                         document.getElementById("is_publish").setAttribute('checked', false);
                     }
                     document.getElementById("issue_datetime").value = rows[0]?.hot_issue_datetime.split('.')[0];
-                    document.getElementById("preview").innerHTML = `<img src="https://webdev.rifhandi.com/uploads/hot_issue/${rows[0]?.image}" width="180"/>`;
+                    document.getElementById("preview").innerHTML = `<img src="${rows[0]?.image}" width="180"/>`;
+
                 })
         }
 
@@ -200,9 +234,9 @@
                 .then(response => response.json())
                 .then((data) => {
                     data.forEach(element => {
-                        const choosed = (element?.id == hot_subcategory_id) ? true : false ;
+                        const choosed = (element?.id == hot_subcategory_id) ? true : false;
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
+                        ddd.value = `${element?.id}-${element?.title}`;
                         ddd.text = `${element?.title}`;
                         ddd.selected = choosed
                         document.getElementById("catid").append(ddd);
@@ -210,21 +244,68 @@
                 })
         }
 
-        function getCategoryHotIssueId() {
-            fetch('/hotissuecategory')
+        function getTagging() {
+            fetch('/tagging')
+                .then(res => res.json())
+                .then((rrr) => {
+                    let ttt = "";
+                    rrr.forEach(items => {
+                        ttt += `${items?.tagging},`;
+                    });
+                    document.getElementById("tag").innerHTML = ttt;
+                    document.getElementById("tagify").value = ttt;
+                })
+        }
+
+        function getDirectorats() {
+            fetch('/directorat_fe')
                 .then(res => res.json())
                 .then((qqq) => {
-                    console.log(qqq)
                     qqq.forEach(items => {
-                        const chooseds = (items?.id == hot_category) ? true : false ;
                         const aaa = document.createElement('option')
                         aaa.value = `${items?.id}`;
                         aaa.text = `${items?.title}`;
-                        aaa.selected = chooseds
-                        document.getElementById("hotcatid").append(aaa);
+                        document.getElementById("mySelect").append(aaa);
                     });
                 })
         }
+
+        function getProvinces() {
+            fetch('/provinces')
+                .then(response => response.json())
+                .then((data) => {
+                    data.forEach(element => {
+                        if (element?.id == prov_id) {
+                            const ddd = document.createElement('option')
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.province_name}`;
+                            ddd.selected = true;
+                            document.getElementById("provinces").append(ddd);
+                        } else {
+                            const ddd = document.createElement('option')
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.province_name}`;
+                            document.getElementById("provinces").append(ddd);
+                        }
+                    });
+                })
+        }
+
+        // function getCategoryHotIssueId() {
+        //     fetch('/hotissuecategory')
+        //         .then(res => res.json())
+        //         .then((qqq) => {
+        //             console.log(qqq)
+        //             qqq.forEach(items => {
+        //                 const chooseds = (items?.id == hot_category) ? true : false ;
+        //                 const aaa = document.createElement('option')
+        //                 aaa.value = `${items?.id}`;
+        //                 aaa.text = `${items?.title}`;
+        //                 aaa.selected = chooseds
+        //                 document.getElementById("hotcatid").append(aaa);
+        //             });
+        //         })
+        // }
 
     </script>
 </body>

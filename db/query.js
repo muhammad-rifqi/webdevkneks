@@ -17,12 +17,54 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin);
-            res.cookie("id", sql[0]?.id);
-            res.cookie("name", sql[0]?.name);
-            res.cookie("roles_id", sql[0]?.role_id);
-            res.cookie("id_province", sql[0]?.id_province);
-            res.cookie("directorat_id", sql[0]?.directorat_id);
+            res.cookie("islogin", isLogin, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id", sql[0]?.id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("name", sql[0]?.name, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("roles_id", sql[0]?.role_id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id_province", sql[0]?.id_province, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("directorat_id", sql[0]?.directorat_id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -679,16 +721,11 @@ const hotissue_detail = async (req, res) => {
     }
 }
 const inserthotissue = async (req, res) => {
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const hot_issue_datetime = date + ' ' + time;
     const issue_datetime = req.body.issue_datetime.replace("T", " ");
-    const fileupload = req.file.originalname.replace(" ", "");
-    const sql = await executeQuery("insert into hot_issues(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,hot_issue_datetime,created_at,updated_at,deleted_at,hot_subcategory_id,hot_issue_category) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",
-        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id, req.body.hot_category_id]);
+    const fileupload = site_url + "/uploads/hot_issue/" + req.file.originalname.replace(" ", "");
+    const rrr = req.body.sub_category_id.split('-');
+    const sql = await executeQuery("insert into hot_issues(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,hot_issue_datetime,hot_subcategory_id,tag,directorat,id_province,hot_subcategory_name) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",
+        [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, rrr[0], req.body.taggings, req.body.directorat, req.body.kdeks, rrr[1]]);
     if (sql) {
         res.redirect('/hi');
     } else {
@@ -698,30 +735,23 @@ const inserthotissue = async (req, res) => {
 }
 
 const updatehotissue = async (req, res) => {
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const hot_issue_datetime = date + ' ' + time;
     const issue_datetime = req.body.issue_datetime.replace("T", " ");
+    const rrr = req.body.sub_category_id.split('-');
     if (!req.file || req.file == undefined || req.file == "") {
-        const sql = await executeQuery("update hot_issues set title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,is_publish=$7,hot_issue_datetime=$8,created_at=$9,updated_at=$10,deleted_at=$11,hot_subcategory_id=$12,hot_issue_category=$13 where id = $14",
-            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id, req.body.hot_category_id, req.body.id]);
+        const sql = await executeQuery("update hot_issues set title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,is_publish=$7,hot_issue_datetime=$8,hot_subcategory_id=$9,tag=$10,directorat=$11,id_province=$12,hot_subcategory_name=$13 where id = $14",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, req.body.is_publish, issue_datetime, rrr[0], req.body.taggings, req.body.directorat, req.body.kdeks, rrr[1], req.body.id]);
         if (sql) {
             res.redirect('/hi');
         } else {
-            console.log(sql);
             res.redirect('/hi');
         }
     } else {
-        const fileupload = req.file.originalname.replace(" ", "");
-        const sql = await executeQuery("update hot_issues  set title=$1,title_en=$2,excerpt=$3,excerpt_en=4,content=5,content_en=6,image=$7,is_publish=$8,hot_issue_datetime=$9,created_at=$10,updated_at=$11,deleted_at=$12,hot_subcategory_id=$13,hot_issue_category=$14 where id = $15",
-            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, hot_issue_datetime, hot_issue_datetime, null, req.body.category_id, req.body.hot_category_id, req.body.id]);
+        const fileupload = site_url + "/uploads/hot_issue/" + req.file.originalname.replace(" ", "");
+        const sql = await executeQuery("update hot_issues set title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6, image=$7, is_publish=$8,hot_issue_datetime=$9,hot_subcategory_id=$10,tag=$11,directorat=$12,id_province=$13,hot_subcategory_name=$14 where id = $15",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, rrr[0], req.body.taggings, req.body.directorat, req.body.kdeks, rrr[1], req.body.id]);
         if (sql) {
             res.redirect('/hi');
         } else {
-            console.log(sql);
             res.redirect('/hi');
         }
     }
@@ -730,7 +760,6 @@ const updatehotissue = async (req, res) => {
 const deletehotissue = async (req, res) => {
     const id_issue = req.params.id;
     const foto_issue = req.params.foto;
-
     if (fs.existsSync(fileslinux + 'hot_issue/' + foto_issue)) {
         fs.unlink(fileslinux + 'hot_issue/' + foto_issue, async function (err) {
             if (err) return console.log(err);

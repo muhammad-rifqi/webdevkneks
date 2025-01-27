@@ -42,7 +42,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/hi_add'"> Tambah Isu Terkini
+                            <button class="btn btn-primary" onclick="window.location.href = '/hi_add'"> Tambah Isu
+                                Terkini
                             </button>
                         </p>
                         <div class="card stretch stretch-full">
@@ -52,9 +53,10 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Judul [ID]</th>
-                                                <th>Judul [EN]</th>
-                                                <th>Gambar/Photo</th>
+                                                <th>Judul</th>
+                                                <th>Sub Kategori</th>
+                                                <th>Tanggal</th>
+                                                <th>Publish</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -109,21 +111,37 @@
                     "dataSrc": ""
                 },
                 "columns": [
-                    { "data": "id" },
+                    {
+                        data: null,
+                        render: function (data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    },
                     { "data": "title" },
-                    { "data": "title_en" },
+                    { "data": "hot_subcategory_name" },
+                    { "data": "hot_issue_datetime" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<img src="/uploads/hot_issue/${data?.image}" width="80px">`;
+                            if (data?.is_publish == 1) {
+                                return `Published`;
+                            } else {
+                                return `Not Published`;
+                            }
                         }
                     },
                     {
                         "data": null,
                         "render": function (data, type, row) {
                             return `<p><button class='edit-btn-hotissue btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
-                                    <button class='delete-btn-hotissue btn btn-danger' data-id='${row.id}' data-foto='${row.image}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button></p>`;
+                                    <button class='delete-btn-hotissue btn btn-danger' data-id='${row.id}' data-foto='${row.image.split('/')[5]}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button></p>`;
                         }
+                    }
+                ], columnDefs: [
+                    {
+                        targets: 0,
+                        orderable: false,
+                        searchable: false
                     }
                 ],
                 lengthMenu: [10, 25, 50, 100],
