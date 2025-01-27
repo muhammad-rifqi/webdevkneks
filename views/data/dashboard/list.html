@@ -213,12 +213,12 @@
 
     <script>
         window.addEventListener("load", async() => {
-           await getStatistics()
-           await getSubStatistics();
+           await getMenu()
+           await getSubMenu();
         })
 
-        function getStatistics() {
-            fetch('/statistics')
+        function getMenu() {
+            fetch('/data_menu')
                 .then(data => data.json())
                 .then((rows) => {
                     rows.forEach(element => {
@@ -230,8 +230,8 @@
                 })
         }
 
-        function getSubStatistics() {
-            fetch('/sub_statistic')
+        function getSubMenu() {
+            fetch('/data_submenu')
                 .then(dt => dt.json())
                 .then((row) => {
                     row.forEach(element => {

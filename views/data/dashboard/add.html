@@ -184,7 +184,7 @@
         await getDataSet();
     })
     function getDataType() {
-        fetch('/statistics')
+        fetch('/data_menu')
             .then(data => data.json())
             .then((rows) => {
                 var eee = `<option value="0">Pilih</option>`;
