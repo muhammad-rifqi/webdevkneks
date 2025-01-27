@@ -55,7 +55,7 @@
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Menu</label>
                                             <select class="form-control" name="data_type" id="data_types"
-                                                onchange="getDatasubType(this.value)" required>
+                                                onchange="getDatasubMenu(this.value)" required>
 
                                             </select>
                                         </div>
@@ -177,13 +177,13 @@
     window.addEventListener("load", async () => {
         const inputElm = document.querySelector('input.tagify');
         new Tagify(inputElm);
-        await getDataType();
+        await getDataMenu();
         await getDirectorat();
         await getTagging();
         await getProvinces();
         await getDataSet();
     })
-    function getDataType() {
+    function getDataMenu() {
         fetch('/data_menu')
             .then(data => data.json())
             .then((rows) => {
@@ -195,7 +195,7 @@
             })
     }
 
-    function getDatasubType(e) {
+    function getDatasubMenu(e) {
         fetch('/detail_submenu/' + e.split('-')[0])
             .then(datas => datas.json())
             .then((rowst) => {

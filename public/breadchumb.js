@@ -24,12 +24,12 @@ if(path == 'sliderdata' || path == 'sliderdata_add'){
     breadcrumb2 = "Slider Data";
 }
 
-if(path == 'menu_data' || path == 'menudata_add'){
+if(path == 'menu_data' || path == 'menudata_add' || path == 'menudata_edit'){
     breadcrumb1 = "Data";
     breadcrumb2 = "Menu Data";
 }
 
-if(path == 'submenu_data' || path == 'submenudata_add'){
+if(path == 'submenu_data' || path == 'submenudata_add' || path == 'submenudata_edit'){
     breadcrumb1 = "Data";
     breadcrumb2 = "Sub Menu";
 }

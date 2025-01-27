@@ -122,7 +122,8 @@
                         "data": null,
                         "render": function (data, type, row) {
                             return `<p>
-                                        <button class='edit-btn btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
+                                        <button class='edit-btn-submenu btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
+                                        <button class='delete-btn-submenu btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
                                     </p>`;
                         }
                     }
@@ -145,7 +146,13 @@
                 ],
             });
 
-            $('#submenu_data').on('click', '.edit-btn', function () {
+            
+            $('#submenu_data').on('click', '.edit-btn-submenu', function () {
+                var id = $(this).data('id');
+                window.location.href = '/submenudata_edit/' + id;
+            });
+
+            $('#submenu_data').on('click', '.delete-btn-submenu', function () {
                 var id = $(this).data('id');
                 swal({
                     title: "Are you sure?",

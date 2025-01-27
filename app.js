@@ -370,6 +370,10 @@ apps.get('/menudata_add', (req, res) => {
     res.sendFile(path.resolve('./views/data/menu/add.html'));
 })
 
+apps.get('/menudata_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/data/menu/edit.html'));
+})
+
 apps.get('/sliderdata', (req, res) => {
     res.sendFile(path.resolve('./views/data/slider/data.html'));
 })
@@ -408,6 +412,10 @@ apps.get('/submenu_data', (req, res) => {
 
 apps.get('/submenudata_add', (req, res) => {
     res.sendFile(path.resolve('./views/data/submenu/add.html'));
+});
+
+apps.get('/submenudata_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/data/submenu/edit.html'));
 });
 //:::::::::::::::::::::::::::::::::::::::: End Of Data :::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::::::::::::::::::::::::::::::::::::::::::::: Start Of Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1032,9 +1040,13 @@ apps.get('/data_submenu', db.data_submenus);
 
 apps.post('/insert_submenu', db.insert_submenus);
 
+apps.post('/update_submenu', db.update_submenus);
+
 apps.get('/delete_submenu/:id', db.delete_submenus);
 
 apps.get('/detail_submenu/:id', db.detail_submenus);
+
+apps.get('/detail_submenus_edit/:id', db.detail_submenus_edit);
 
 apps.post('/insertapidashboard', db.insertapidashboards);
 
@@ -1044,9 +1056,13 @@ apps.post('/updateapidashboards', db.updateapidashboard);
 
 apps.get('/data_menu', db.data_menus);
 
+apps.get('/detail_data_menus/:id', db.detail_data_menus);
+
 apps.get('/delete_data_menu/:id', db.deletedatamenus);
 
 apps.post('/insert_data_menu', db.insertdatamenus);
+
+apps.post('/update_data_menu', db.updatedatamenus);
 
 apps.get('/slider_data', db.sliders_data);
 

@@ -2545,10 +2545,30 @@ const detail_submenus = async (req, res) => {
         res.status(200).json([])
     }
 }
+
+const detail_submenus_edit = async (req, res) => {
+    const id_sst = req.params.id;
+    const sql = await executeQuery('SELECT * FROM data_submenu where id = $1', [id_sst]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
+}
+
 const insert_submenus = async (req, res) => {
     const ddd = req.body.menu_id.split('-');
     const sql = await executeQuery("INSERT INTO data_submenu (id_statistic,short_name,long_name,short_name_en,long_name_en,statistic_name)values($1,$2,$3,$4,$5,$6)",
         [ddd[0], req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en, ddd[1]]);
+    if (sql) {
+        res.redirect('/submenu_data');
+    } else {
+        res.redirect('/submenu_data');
+    }
+}
+
+const update_submenus = async (req, res) => {
+    const sql = await executeQuery('UPDATE data_submenu set short_name = $1, short_name_en = $2, long_name = $3, long_name_en = $4  where id = $5', [req.body.short_name, req.body.short_name_en, req.body.long_name, req.body.long_name_en, req.body.id]);
     if (sql) {
         res.redirect('/submenu_data');
     } else {
@@ -2640,6 +2660,16 @@ const data_menus = async (req, res) => {
     }
 }
 
+const detail_data_menus = async (req, res) => {
+    const id_dm = req.params.id;
+    const sql = await executeQuery('SELECT * FROM data_menu where id = $1', [id_dm]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 const insertdatamenus = async (req, res) => {
     const sql = await executeQuery("insert into data_menu(title,title_en,long_title,long_title_en) values($1,$2,$3,$4)",
         [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en]);
@@ -2647,6 +2677,15 @@ const insertdatamenus = async (req, res) => {
         res.redirect('/menu_data');
     } else {
         console.log(sql)
+        res.redirect('/menu_data');
+    }
+}
+
+const updatedatamenus = async (req, res) => {
+    const sql = await executeQuery('UPDATE data_menu set title = $1, title_en = $2, long_title = $3, long_title_en = $4  where id = $5', [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en, req.body.id]);
+    if (sql) {
+        res.redirect('/menu_data');
+    } else {
         res.redirect('/menu_data');
     }
 }
@@ -3143,6 +3182,8 @@ module.exports = {
     data_submenus,
     detail_submenus,
     insert_submenus,
+    detail_submenus_edit,
+    update_submenus,
     delete_submenus,
     sliders_data,
     sliders_data_fe,
@@ -3155,8 +3196,10 @@ module.exports = {
     emptyapidashboard,
     updateapidashboard,
     data_menus,
+    detail_data_menus,
     deletedatamenus,
     insertdatamenus,
+    updatedatamenus,
     sourcesdata,
     sourcesdatadetail,
     deletesourcesdata,
