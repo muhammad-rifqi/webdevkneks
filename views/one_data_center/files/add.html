@@ -72,7 +72,7 @@
                                             <label class="form-label">Kategori Berkas</label>
                                             <select class="form-control" name="file_category_id" id="file_category_id"
                                                 required>
-                                                <option value="0"> Pilih </option>
+                                                <option value="0"> -- </option>
                                             </select>
                                         </div>
                                         <div class="col-lg-12 mb-4">
@@ -98,8 +98,42 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tanggal Publish</label>
+                                            <label class="form-label">Tanggal</label>
                                             <input class="form-control" name="date" id="date" type="date" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Penulis</label>
+                                            <input class="form-control" name="writer" id="writer" type="text" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Penerbit</label>
+                                            <input class="form-control" name="publisher" id="publisher" type="text"
+                                                required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Sinopsis</label>
+                                            <input class="form-control" name="synopsis" id="synopsis" type="text"
+                                                required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Isbn</label>
+                                            <input class="form-control" name="isbn" id="isbn" type="text" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Jumlah Halaman</label>
+                                            <input class="form-control" name="number_of_pages" id="number_of_pages"
+                                                type="number" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Lebar</label>
+                                            <input class="form-control" name="width" id="width" type="number" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tinggi</label>
+                                            <input class="form-control" name="height" id="height" type="number"
+                                                required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -117,7 +151,7 @@
                                             </select>
                                         </div>
 
-                                        
+
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">KDEKS</label>
                                             <select class="form-control" name="kdeks" id="provinces" required>
@@ -173,7 +207,7 @@
             const inputElm = document.querySelector('input.tagify');
             new Tagify(inputElm);
             await fileCategory();
-            await getCategoryHotIssueId();
+            await getDirectorat();
             await getTagging();
             await getProvinces();
             await upload_check();
@@ -185,15 +219,15 @@
                 .then((data) => {
                     data.forEach(element => {
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
+                        ddd.value = `${element?.id}-${element?.title}`;
                         ddd.text = `${element?.title}`;
                         document.getElementById("file_category_id").append(ddd);
                     });
                 })
         }
 
-        function getCategoryHotIssueId() {
-            fetch('/hotissuecategory')
+        function getDirectorat() {
+            fetch('/directorat_fe')
                 .then(res => res.json())
                 .then((qqq) => {
                     qqq.forEach(items => {

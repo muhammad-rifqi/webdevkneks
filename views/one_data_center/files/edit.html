@@ -110,6 +110,40 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Penulis</label>
+                                            <input class="form-control" name="writer" id="writers" type="text" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Penerbit</label>
+                                            <input class="form-control" name="publisher" id="publishers" type="text"
+                                                required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Sinopsis</label>
+                                            <input class="form-control" name="synopsis" id="synopsist" type="text"
+                                                required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Isbn</label>
+                                            <input class="form-control" name="isbn" id="isbns" type="text" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Jumlah Halaman</label>
+                                            <input class="form-control" name="number_of_pages" id="number_of_pagest"
+                                                type="number" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Lebar</label>
+                                            <input class="form-control" name="width" id="widths" type="number" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tinggi</label>
+                                            <input class="form-control" name="height" id="heights" type="number"
+                                                required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
                                             <label class="form-label">Tagging</label>
                                             <span id="tag">
 
@@ -130,7 +164,7 @@
                                                 <option value="0"></option>
                                             </select>
                                         </div>
-                                        
+
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -179,10 +213,11 @@
             const inputElm = document.querySelector('input.tagify');
             new Tagify(inputElm);
             let file_category_id;
+            let prove_id;
             await getUrlById();
             await getCategory();
             await getTagging();
-            await getCategoryHotIssueId();
+            await getDirectorats();
             await getProvinces();
             await upload_check();
         })
@@ -197,9 +232,8 @@
                     document.getElementById("title_en").value = rows[0]?.title_en;
                     nicEditors.findEditor("editor3").setContent(rows[0]?.content);
                     nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
-                    // document.getElementById("val3").innerHTML = rows[0]?.content;
-                    // document.getElementById("val4").innerHTML = rows[0]?.content_en;
                     file_category_id = rows[0]?.report_category_id;
+                    prove_id = rows[0]?.id_province;
                     if (rows?.is_publish == 1) {
                         document.getElementById("is_publish").setAttribute('checked', true);
                     } else {
@@ -207,6 +241,13 @@
                     }
                     document.getElementById("date").value = rows[0]?.date.split('.')[0];
                     document.getElementById("previews").innerHTML = `${rows[0]?.file}`;
+                    document.getElementById("writers").value = rows[0]?.writer;
+                    document.getElementById("publishers").value = rows[0]?.publisher;
+                    document.getElementById("synopsist").value = rows[0]?.synopsis;
+                    document.getElementById("isbns").value = rows[0]?.isbn;
+                    document.getElementById("number_of_pagest").value = rows[0]?.number_of_pages;
+                    document.getElementById("widths").value = rows[0]?.width;
+                    document.getElementById("heights").value = rows[0]?.height;
                 })
         }
 
@@ -217,7 +258,7 @@
                     data.forEach(element => {
                         const choosed = (element?.id == file_category_id) ? true : false;
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
+                        ddd.value = `${element?.id}-${element?.title}`;
                         ddd.text = `${element?.title}`;
                         ddd.selected = choosed
                         document.getElementById("file_category_id").append(ddd);
@@ -238,8 +279,8 @@
                 })
         }
 
-        function getCategoryHotIssueId() {
-            fetch('/hotissuecategory')
+        function getDirectorats() {
+            fetch('/directorat_fe')
                 .then(res => res.json())
                 .then((qqq) => {
                     qqq.forEach(items => {
@@ -256,10 +297,18 @@
                 .then(response => response.json())
                 .then((data) => {
                     data.forEach(element => {
-                        const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
-                        ddd.text = `${element?.province_name}`;
-                        document.getElementById("provinces").append(ddd);
+                        if (element?.id == prove_id) {
+                            const ddd = document.createElement('option')
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.province_name}`;
+                            ddd.selected = true;
+                            document.getElementById("provinces").append(ddd);
+                        } else {
+                            const ddd = document.createElement('option')
+                            ddd.value = `${element?.id}`;
+                            ddd.text = `${element?.province_name}`;
+                            document.getElementById("provinces").append(ddd);
+                        }
                     });
                 })
         }

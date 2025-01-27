@@ -1097,24 +1097,31 @@ const updateagenda = async (req, res) => {
 const files = async (req, res) => {
     const role_id_users = req.cookies.roles_id;
     if (role_id_users == '6') {
-        const sql = await executeQuery("SELECT * FROM  reports where web_identity = 'kdeks'");
+        const sql = await executeQuery("SELECT * FROM  files where web_identity = 'kdeks'");
         if (sql?.length > 0) {
             const array = [];
             sql?.forEach((items, index) => {
                 const bbb = {
                     "id": items?.id,
                     "title": items?.title,
+                    "title_en": items?.title_en,
                     "date": items?.date,
                     "file": items?.file,
                     "content": items?.content,
-                    "is_publish": items?.is_publish,
-                    "created_at": items?.created_at,
-                    "updated_at": items?.updated_at,
-                    "deleted_at": items?.deleted_at,
-                    "report_category_id": items?.report_category_id,
-                    "title_en": items?.title_en,
                     "content_en": items?.content_en,
-                    "fl": items?.file?.split('/')[5]
+                    "is_publish": items?.is_publish,
+                    "report_category_id": items?.report_category_id,
+                    "report_category_name": items?.report_category_name,
+                    "fl": items?.file?.split('/')[5],
+                    "wtiter": items?.writer,
+                    "synopsis": items?.synopsis,
+                    "isbn": items?.isbn,
+                    "number_of_pages": items?.number_of_pages,
+                    "width": items?.width,
+                    "height": items?.height,
+                    "tagging": items?.tagging,
+                    "directorat": items?.directorat,
+                    "id_province": items?.id_province,
                 };
                 array.push(bbb);
             })
@@ -1123,24 +1130,31 @@ const files = async (req, res) => {
             res.status(200).json({ "success": false })
         }
     } else {
-        const sql = await executeQuery("SELECT * FROM  reports where web_identity = 'kneks'");
+        const sql = await executeQuery("SELECT * FROM  files where web_identity = 'kneks'");
         if (sql?.length > 0) {
             const array = [];
             sql?.forEach((items, index) => {
                 const bbb = {
                     "id": items?.id,
                     "title": items?.title,
+                    "title_en": items?.title_en,
                     "date": items?.date,
                     "file": items?.file,
                     "content": items?.content,
-                    "is_publish": items?.is_publish,
-                    "created_at": items?.created_at,
-                    "updated_at": items?.updated_at,
-                    "deleted_at": items?.deleted_at,
-                    "report_category_id": items?.report_category_id,
-                    "title_en": items?.title_en,
                     "content_en": items?.content_en,
-                    "fl": items?.file?.split('/')[5]
+                    "is_publish": items?.is_publish,
+                    "report_category_id": items?.report_category_id,
+                    "report_category_name": items?.report_category_name,
+                    "fl": items?.file?.split('/')[5],
+                    "wtiter": items?.writer,
+                    "synopsis": items?.synopsis,
+                    "isbn": items?.isbn,
+                    "number_of_pages": items?.number_of_pages,
+                    "width": items?.width,
+                    "height": items?.height,
+                    "tagging": items?.tagging,
+                    "directorat": items?.directorat,
+                    "id_province": items?.id_province,
                 };
                 array.push(bbb);
             })
@@ -1153,7 +1167,7 @@ const files = async (req, res) => {
 
 const filesdetails = async (req, res) => {
     const id_files = req.params.id;
-    const sql = await executeQuery('SELECT * FROM  reports where id = $1 ', [id_files]);
+    const sql = await executeQuery('SELECT * FROM  files where id = $1 ', [id_files]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1162,16 +1176,11 @@ const filesdetails = async (req, res) => {
 }
 
 const insertfileupload = async (req, res) => {
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const timeupdate = date + ' ' + time;
     const file_date = req.body.date;
     const fileuploads = site_url + "/uploads/filesupload/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery("insert into reports(title,title_en,content,content_en,file,is_publish,date,created_at,updated_at,report_category_id) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.taggings, req.body.directorat, req.body.file_category_id]);
+    const bbb = req.body.file_category_id.split('-');
+    const sql = await executeQuery("insert into files(title,title_en,content,content_en,file,is_publish,date,report_category_id,report_category_name,writer,publisher,synopsis,isbn,number_of_pages,width,height,tagging,directorat,id_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, bbb[0], bbb[1] , req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.kdeks]);
     if (sql) {
         res.redirect('/f');
     } else {
@@ -1181,43 +1190,35 @@ const insertfileupload = async (req, res) => {
 }
 
 const updatefileupload = async (req, res) => {
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    const timeupdate = date + ' ' + time;
     const file_date = req.body.date;
+    const bbb = req.body.file_category_id.split('-');
     if (!req.file || req.file == undefined || req.file == "") {
-        const sql = await executeQuery("update reports set title=$1,title_en=$2,content=$3,content_en=$4,is_publish=$5,date=$6,created_at=$7,updated_at=$8,report_category_id=$9,tagging=$10,directorat=$11 where id = $12",
-            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.file_category_id, req.body.taggings, req.body.directorat, req.body.id]);
+        const sql = await executeQuery("update files set title=$1,title_en=$2,content=$3,content_en=$4,is_publish=$5,date=$6,report_category_id=$7,report_category_name=$8,writer=$9,publisher=$10,synopsis=$11,isbn=$12,number_of_pages=$13,width=$14,height=$15,tagging=$16,directorat=$17 where id = $18",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer,req.body.publisher,req.body.synopsis,req.body.isbn,req.body.number_of_pages,req.body.width,req.body.height, req.body.taggings, req.body.directorat, req.body.id]);
         if (sql) {
             res.redirect('/f');
         } else {
-            console.log(sql);
             res.redirect('/f');
         }
     } else {
         const fileuploads = site_url + "/uploads/filesupload/" + req.file.originalname.replace(" ", "");
-        const sql = await executeQuery("update reports set title=$1,title_en=$2,content=$3,content_en=$4,file=$5,is_publish=$6,date=$7,created_at=$8,updated_at=$9,report_category_id=$10 where id = $11",
-            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, timeupdate, timeupdate, req.body.file_category_id, req.body.id]);
+        const sql = await executeQuery("update files set title=$1,title_en=$2,content=$3,content_en=$4, file=$5, is_publish=$6,date=$7,report_category_id=$8,report_category_name=$9,writer=$10,publisher=$11,synopsis=$12,isbn=$13,number_of_pages=$14,width=$15,height=$16,tagging=$17,directorat=$18 where id = $19",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer,req.body.publisher,req.body.synopsis,req.body.isbn,req.body.number_of_pages,req.body.width,req.body.height, req.body.taggings, req.body.directorat, req.body.id]);
         if (sql) {
             res.redirect('/f');
         } else {
-            console.log(sql);
             res.redirect('/f');
         }
     }
 }
 
 const deletefileupload = async (req, res) => {
-
     const id_files = req.params.id;
     const file_upload = req.params.file;
     if (fs.existsSync(fileslinux + 'filesupload/' + file_upload)) {
         fs.unlink(fileslinux + 'filesupload/' + file_upload, async function (err) {
             if (err) return console.log(err);
-            const sql = await executeQuery('DELETE FROM reports where id = $1 ', [id_files]);
+            const sql = await executeQuery('DELETE FROM files where id = $1 ', [id_files]);
             if (sql) {
                 res.redirect('/f');
             } else {
@@ -1225,19 +1226,16 @@ const deletefileupload = async (req, res) => {
                 res.redirect('/f');
             }
         });
-        console.log("ada")
     } else {
-        const sql = await executeQuery('DELETE FROM reports where id = $1 ', [id_files]);
+        const sql = await executeQuery('DELETE FROM files where id = $1 ', [id_files]);
         if (sql) {
             res.redirect('/f');
         } else {
-            console.log(sql);
             res.redirect('/f');
         }
     }
 
 }
-
 
 const files_category = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  files_categories');
