@@ -122,9 +122,9 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            if(row?.publish == 1){
+                            if (row?.publish == 1) {
                                 return `Published`;
-                            }else{
+                            } else {
                                 return `Not Published`;
                             }
 
@@ -134,6 +134,7 @@
                         "data": null,
                         "render": function (data, type, row) {
                             return `<p>
+                                        <button class='edit-btn btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
                                         <button class='delete-btn btn btn-danger' data-id='${row.id}' data-foto='${row.image.split('/')[5]}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
                                     </p>`;
                         }
@@ -156,6 +157,11 @@
                 ],
             });
         });
+
+        $('#sliderdata').on('click', '.edit-btn', function () {
+            var ids = $(this).data('id');
+            window.location.href = '/sliderdata_edit/' + ids;
+        })
 
         $('#sliderdata').on('click', '.delete-btn', function () {
             var ids = $(this).data('id');

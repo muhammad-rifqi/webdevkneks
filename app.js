@@ -382,6 +382,10 @@ apps.get('/sliderdata_add', (req, res) => {
     res.sendFile(path.resolve('./views/data/slider/add_data.html'));
 })
 
+apps.get('/sliderdata_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/data/slider/edit.html'));
+})
+
 apps.get('/dataset', (req, res) => {
     res.sendFile(path.resolve('./views/data/dataset/list.html'));
 })
@@ -1069,6 +1073,10 @@ apps.get('/slider_data', db.sliders_data);
 apps.get('/slider_data_fe', db.sliders_data_fe);
 
 apps.post('/insertsliderdata', data_slide_path.single('image'), db.insertsliderdata);
+
+apps.get('/detail_slider_data/:id', db.detail_sliders_data);
+
+apps.post('/updatesliderdata', data_slide_path.single('image'), db.updateslidersdata);
 
 apps.get('/delete_slider_data/:id/:photo', db.delete_slider_data);
 

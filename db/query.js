@@ -17,54 +17,12 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id", sql[0]?.id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("name", sql[0]?.name, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("roles_id", sql[0]?.role_id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id_province", sql[0]?.id_province, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("directorat_id", sql[0]?.directorat_id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+            res.cookie("islogin", isLogin);
+            res.cookie("id", sql[0]?.id);
+            res.cookie("name", sql[0]?.name);
+            res.cookie("roles_id", sql[0]?.role_id);
+            res.cookie("id_province", sql[0]?.id_province);
+            res.cookie("directorat_id", sql[0]?.directorat_id);
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -2728,6 +2686,37 @@ const insertsliderdata = async (req, res) => {
     }
 }
 
+const detail_sliders_data = async (req, res) => {
+    const id_slides = req.params.id;
+    const sql = await executeQuery('SELECT * FROM data_slider where id = $1 ', [id_slides]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const updateslidersdata = async (req, res) => {
+    if (!req.file || req.file == undefined || req.file == "") {
+        const sql = await executeQuery("UPDATE data_slider set  title=$1, title_en=$2, amount=$3, date_created=$4,link=$5,publish=$6 where id = $7",
+            [req.body.title, req.body.title_en, req.body.amount, req.body.date_created, req.body.link, req.body.is_published, req.body.id_sliders]);
+        if (sql) {
+            res.redirect('/sliderdata');
+        } else {
+            res.redirect('/sliderdata');
+        }
+    } else {
+        const fileuploads = site_url + "/uploads/data/" + req.file.originalname.replace(" ", "");
+        const sql = await executeQuery("UPDATE data_slider set  title=$1, title_en=$2, amount=$3, date_created=$4, image = $5, link=$6, publish=$7 where id = $8",
+            [req.body.title, req.body.title_en, req.body.amount, req.body.date_created, fileuploads, req.body.link, req.body.is_published, req.body.id_sliders]);
+        if (sql) {
+            res.redirect('/sliderdata');
+        } else {
+            res.redirect('/sliderdata');
+        }
+    }
+}
+
 const delete_slider_data = async (req, res) => {
     const id_data_slider = req.params.id;
     const image = req.params.photo;
@@ -3188,6 +3177,8 @@ module.exports = {
     sliders_data,
     sliders_data_fe,
     insertsliderdata,
+    updateslidersdata,
+    detail_sliders_data,
     delete_slider_data,
     data_dashboard,
     detail_data_dashboard,
