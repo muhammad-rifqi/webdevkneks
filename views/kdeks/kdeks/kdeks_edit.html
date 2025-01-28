@@ -13,7 +13,15 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
-
+    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript">
+        bkLib.onDomLoaded(function () {
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor1');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor2');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
+        });
+    </script>
 </head>
 
 <body>
@@ -63,21 +71,32 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Keterangan [ID]</label>
-                                            <textarea class="form-control" name="content" id="editor3"></textarea>
+                                            <label class="form-label">Tentang [ID]</label>
+                                            <textarea class="form-control" name="abouts" id="editor1"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Keterangan [EN]</label>
-                                            <textarea class="form-control" name="content_en" id="editor4"></textarea>
+                                            <label class="form-label">Tentang [EN]</label>
+                                            <textarea class="form-control" name="abouts_en" id="editor2"></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tag</label>
-                                            <select class="form-control" name="tag" id="tags" required>
-
-                                            </select>
+                                            <label class="form-label">Sejarah [ID]</label>
+                                            <textarea class="form-control" name="historys" id="editor3"></textarea>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Sejarah [EN]</label>
+                                            <textarea class="form-control" name="historys_en" id="editor4"></textarea>
                                         </div>
 
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Logo </label>
+                                            <span id="images"></span>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Logo </label>
+                                            <input type="file" class="form-control" name="photo" id="photo" required>
+                                        </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Provinsi</label>
@@ -130,24 +149,29 @@
     })
     function getUrlById() {
         const URLS = new URL(window.location.href);
-        fetch('/detailabouts/' + URLS.pathname.split('/')[2])
+        fetch('/detail_kdeks/' + URLS.pathname.split('/')[2])
             .then(data => data.json())
             .then((rows) => {
                 id_prov = rows[0]?.id_province;
                 document.getElementById("id").value = rows[0]?.id;
                 document.getElementById("title").value = rows[0]?.title;
                 document.getElementById("title_en").value = rows[0]?.title_en;
-                document.getElementById("editor3").innerHTML = rows[0]?.content;
-                document.getElementById("editor4").innerHTML = rows[0]?.content_en;
-                if (rows[0]?.tag == 'about') {
-                    document.getElementById("tags").innerHTML = `
-                      <option value="about" selected> About </option>
-                      <option value="history"> History </option>`;
-                } else {
-                    document.getElementById("tags").innerHTML = `
-                      <option value="about"> About </option>
-                      <option value="history" selected> History </option>`;
-                }
+                nicEditors.findEditor("editor1").setContent(rows[0]?.abouts);
+                nicEditors.findEditor("editor2").setContent(rows[0]?.abouts_en);
+                nicEditors.findEditor("editor3").setContent(rows[0]?.historys);
+                nicEditors.findEditor("editor4").setContent(rows[0]?.historys_en);
+                document.getElementById("images").innerHTML = `<img src="${rows[0]?.images}" width="100" alt="image slider data">`;
+
+                
+                // if (rows[0]?.tag == 'about') {
+                //     document.getElementById("tags").innerHTML = `
+                //       <option value="about" selected> About </option>
+                //       <option value="history"> History </option>`;
+                // } else {
+                //     document.getElementById("tags").innerHTML = `
+                //       <option value="about"> About </option>
+                //       <option value="history" selected> History </option>`;
+                // }
             })
     }
 

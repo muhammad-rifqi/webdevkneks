@@ -123,6 +123,16 @@ let data_slide = multer.diskStorage(
     }
 );
 let data_slide_path = multer({ storage: data_slide });
+//:::::::::::::::::::::::::: Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+let kdeks_logo = multer.diskStorage(
+    {
+        destination: './public/uploads/kdeks/',
+        filename: function (req, file, cb) {
+            cb(null, file.originalname.replace(" ", ""));
+        }
+    }
+);
+let kdeks_logo_province = multer({ storage: kdeks_logo });
 //::::::::::::::: Start Of Page ::::::::::::::::::::::::::::::::::
 
 apps.get('/', (req, res) => {
@@ -634,19 +644,19 @@ apps.get('/register', (req, res) => {
 
 apps.get('/api/newspaging', db.pagingnews);
 
-apps.get('/api_news', db.news_kdeks);
+apps.get('/api_news_kdeks', db.news_kdeks);
 
-apps.get('/api_news_detail/:id', db.news_details_kdeks);
+apps.get('/api_news_detail_kdeks/:id', db.news_details_kdeks);
 
-apps.get('/api_newscategory', db.news_categories_kdeks);
+apps.get('/api_newscategory_kdeks', db.news_categories_kdeks);
 
-apps.get('/api_detailnewscategory/:id', db.news_detailnewscategory_kdeks);
+apps.get('/api_detailnewscategory_kdeks/:id', db.news_detailnewscategory_kdeks);
 
 apps.get('/abouts', db.abouts);
 
-apps.get('/api_about', db.abouts_kdeks);
+apps.get('/api_about_kdeks', db.abouts_kdeks);
 
-apps.get('/api_history', db.history_kdeks);
+apps.get('/api_history_kdeks', db.history_kdeks);
 
 apps.get('/detailabouts/:id', db.detailabout);
 
@@ -675,8 +685,6 @@ apps.get('/api_menu_detail/:id', db.menu_detail);
 apps.get('/api_submenu', db.submenu);
 
 apps.get('/api_submenu_detail/:id', db.submenu_detail);
-
-apps.get('/api_kdeks', db.kdeks);
 
 apps.get('/kneks/api', db.api_kneks);
 
@@ -786,9 +794,15 @@ apps.post('/updatetentangkami', db.updateabouts);
 
 apps.get('/deleteabouts/:id', db.deleteabout);
 
-apps.post('/insertkdeks', db.insertkdeks);
+apps.get('/api_kdeks', db.kdeks);
 
-apps.post('/updatekdeks', db.updatekdeks);
+apps.get('/detail_kdeks/:id', db.detailkdeks);
+
+apps.post('/insertkdeks', kdeks_logo_province.single('photo'), db.insertkdeks);
+
+apps.post('/updatekdeks' , kdeks_logo_province.single('photo') , db.updatekdeks);
+
+apps.get('/kdeks_delete/:id/:foto', db.deletekdeks);
 
 //::::::::::::::: Api & Query DB STRUCTURE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
