@@ -126,7 +126,7 @@ let data_slide_path = multer({ storage: data_slide });
 //:::::::::::::::::::::::::: Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 let kdeks_logo = multer.diskStorage(
     {
-        destination: './public/uploads/kdeks/',
+        destination: './public/uploads/kdeks/provinsi/',
         filename: function (req, file, cb) {
             cb(null, file.originalname.replace(" ", ""));
         }
