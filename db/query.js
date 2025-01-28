@@ -643,7 +643,7 @@ const delete_banners_direactorats = async (req, res) => {
     if (fs.existsSync(fileslinux + 'directorat/images/' + foto_dirct)) {
         fs.unlink(fileslinux + 'directorat/images/' + foto_dirct, async function (err) {
             if (err) return console.log(err);
-            const sql = await executeQuery('UPDATE directorats set images = $1 where id = $2 ', ['NULL', id_dirct]);
+            const sql = await executeQuery('UPDATE directorats set directiorat_banner = $1 where id = $2 ', ['NULL', id_dirct]);
             if (sql) {
                 res.redirect('/directorats_detail/' + id_dirct);
             } else {
@@ -652,7 +652,7 @@ const delete_banners_direactorats = async (req, res) => {
             }
         });
     } else {
-        const sql = await executeQuery('UPDATE directorats set images = $1 where id = $2 ', ['NULL', id_dirct]);
+        const sql = await executeQuery('UPDATE directorats set directiorat_banner = $1 where id = $2 ', ['NULL', id_dirct]);
         if (sql) {
             res.redirect('/directorats_detail/' + id_dirct);
         } else {
