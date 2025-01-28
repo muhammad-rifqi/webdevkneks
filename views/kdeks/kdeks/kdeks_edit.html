@@ -46,7 +46,7 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/updatekdeks" method="post">
+                        <form action="/updatekdeks" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" id="id" value="">
                             <input type="hidden" id="web_identity" name="web_identity" value="kdeks">
                             <div class="card stretch stretch-full">
@@ -160,7 +160,7 @@
                 nicEditors.findEditor("editor2").setContent(rows[0]?.abouts_en);
                 nicEditors.findEditor("editor3").setContent(rows[0]?.historys);
                 nicEditors.findEditor("editor4").setContent(rows[0]?.historys_en);
-                document.getElementById("images").innerHTML = `<img src="${rows[0]?.images}" width="100" alt="image slider data">`;
+                document.getElementById("images").innerHTML = `<img src="${rows[0]?.images}" width="100" alt="image logo kdeks">`;
 
                 
                 // if (rows[0]?.tag == 'about') {

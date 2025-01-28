@@ -644,6 +644,16 @@ apps.get('/register', (req, res) => {
 
 apps.get('/api/newspaging', db.pagingnews);
 
+apps.get('/abouts', db.abouts);
+
+apps.get('/detailabouts/:id', db.detailabout);
+
+apps.post('/updateabout', db.updateabouts);
+
+apps.get('/deleteabouts/:id', db.deleteabout);
+
+// :::::::::::::::::::::::::::::::::::::: KDEKS :::::::::::::::::::::::::::::::::::::::::::::::::::
+
 apps.get('/api_news_kdeks', db.news_kdeks);
 
 apps.get('/api_news_detail_kdeks/:id', db.news_details_kdeks);
@@ -652,17 +662,25 @@ apps.get('/api_newscategory_kdeks', db.news_categories_kdeks);
 
 apps.get('/api_detailnewscategory_kdeks/:id', db.news_detailnewscategory_kdeks);
 
-apps.get('/abouts', db.abouts);
-
 apps.get('/api_about_kdeks', db.abouts_kdeks);
 
 apps.get('/api_history_kdeks', db.history_kdeks);
 
-apps.get('/detailabouts/:id', db.detailabout);
+apps.get('/api_history_province_kdeks/:id', db.history_province_kdeks);
 
-apps.get('/api_sejarah_province/:id', db.history_province);
+apps.get('/api_about_province_kdeks/:id', db.about_province_kdeks);
 
-apps.get('/api_about_province/:id', db.about_province);
+apps.get('/api_kdeks', db.kdeks);
+
+apps.get('/detail_kdeks/:id', db.detailkdeks);
+
+apps.post('/insertkdeks', kdeks_logo_province.single('photo'), db.insertkdeks);
+
+apps.post('/updatekdeks' , kdeks_logo_province.single('photo') , db.updatekdeks);
+
+apps.get('/kdeks_delete/:id/:foto', db.deletekdeks);
+
+//::::::::::::::::::::::::::: KDEKS :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/api_dashboard', db.data_dashboard);
 
@@ -789,21 +807,6 @@ apps.get('/updatepassword', db.updatepassword);
 apps.post('/changespassword', db.changespassword);
 
 //::::::::::::::: Api & Query DB ABOUTS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-apps.post('/updatetentangkami', db.updateabouts);
-
-apps.get('/deleteabouts/:id', db.deleteabout);
-
-apps.get('/api_kdeks', db.kdeks);
-
-apps.get('/detail_kdeks/:id', db.detailkdeks);
-
-apps.post('/insertkdeks', kdeks_logo_province.single('photo'), db.insertkdeks);
-
-apps.post('/updatekdeks' , kdeks_logo_province.single('photo') , db.updatekdeks);
-
-apps.get('/kdeks_delete/:id/:foto', db.deletekdeks);
-
 //::::::::::::::: Api & Query DB STRUCTURE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/structure', db.structure);
