@@ -2502,7 +2502,7 @@ const delete_slogos = async (req, res) => {
 //::::::::::::::::::::::::::::::::::::::::::::::::::: End Of Struktur Logo :::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::::::::::::::: Start Of Welcome Banner ::::::::::::::::::::::::::::::::::::::
 const welcome_pages = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM banner where flag = 'welcome'");
+    const sql = await executeQuery("SELECT * FROM banner where flag = 'welcome' and status = 'aktif'");
     const array = [];
     sql.forEach((element, index) => {
         const rrr = {
