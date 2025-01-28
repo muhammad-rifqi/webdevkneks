@@ -646,6 +646,8 @@ apps.get('/api/newspaging', db.pagingnews);
 
 apps.get('/abouts', db.abouts);
 
+apps.get('/pindah', db.pindah);
+
 apps.get('/detailabouts/:id', db.detailabout);
 
 apps.post('/updateabout', db.updateabouts);
