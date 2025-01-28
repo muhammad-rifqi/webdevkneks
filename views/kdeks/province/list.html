@@ -41,16 +41,18 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
+                        <p>
+                            <button class="btn btn-primary" onclick="window.location.href='/province_add'"> Tambah Master
+                            </button>
+                        </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
-                                    <table id="abouts" class="display" style="width: 100%;">
+                                    <table id="province" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Judul [ID]</th>
-                                                <th>Judul [EN]</th>
-                                                <th>Tag</th>
+                                                <th>Provinsi</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -98,21 +100,21 @@
     <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
-            $('#abouts').DataTable({
+            $('#province').DataTable({
                 "ajax": {
-                    "url": "/api_kdeks_list",
+                    "url": "/provinces",
                     "dataSrc": ""
                 },
                 "columns": [
                     { "data": "id" },
-                    { "data": "title" },
-                    { "data": "title_en" },
-                    { "data": "tag" },
+                    { "data": "province_name" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='edit-btn-abouts btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
-                                    <button class='delete-btn-abouts btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button></p>`;
+                            return `<p>
+                                        <button class='edit-btn-master btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
+                                        <button class='delete-btn-master btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
+                                    </p>`;
                         }
                     }
                 ],
@@ -128,13 +130,13 @@
             });
 
             // 3. Event Listener untuk Tombol Edit
-            $('#abouts').on('click', '.edit-btn-abouts', function () {
+            $('#province').on('click', '.edit-btn-master', function () {
                 var id = $(this).data('id');
-                window.location.href = '/kdeks_edit/' + id;
+                window.location.href = '/province_edit/' + id;
             });
 
             // 4. Event Listener untuk Tombol Hapus
-            $('#abouts').on('click', '.delete-btn-abouts', function () {
+            $('#province').on('click', '.delete-btn-master', function () {
                 var id = $(this).data('id');
                 swal({
                     title: "Are you sure?",
@@ -145,7 +147,7 @@
                 })
                     .then((willOut) => {
                         if (willOut) {
-                            window.location = '/delete_about_kdeks/' + id;
+                            window.location = '/province_delete/' + id;
                         } else {
                             console.log('NaN')
                         }

@@ -8,11 +8,20 @@
     <meta name="description" content="" />
     <meta name="keyword" content="" />
     <meta name="author" content="theme_ocean" />
-    <title>KNEKS BACKEND || Dashboard</title>
+    <title>KDEKS BACKEND || Dashboard</title>
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript">
+        bkLib.onDomLoaded(function () {
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor1');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor2');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
+        });
+    </script>
 </head>
 
 <body>
@@ -37,29 +46,68 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/updatemaster" method="post">
+                        <form action="/updatekdeks" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" id="id" value="">
+                            <input type="hidden" id="web_identity" name="web_identity" value="kdeks">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
                                         <h5 class="fw-bold mb-0 me-4">
-                                            <span class="d-block mb-2">Ubah Master Provinsi :</span>
+                                            <span class="d-block mb-2">Ubah Kdeks:</span>
                                             <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
                                                 Ubah
-                                                Data Master Provinsi Di Bawah Ini</span>
+                                                Data Kdeks Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
-                                      
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label"> Master Provinsi </label>
-                                            <input class="form-control" name="province_name" id="province_name"
+                                            <label class="form-label">Judul [ID]</label>
+                                            <input class="form-control" type="text" name="title" id="title" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Judul [EN]</label>
+                                            <input class="form-control" type="text" name="title_en" id="title_en"
                                                 required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tentang [ID]</label>
+                                            <textarea class="form-control" name="abouts" id="editor1"></textarea>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tentang [EN]</label>
+                                            <textarea class="form-control" name="abouts_en" id="editor2"></textarea>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Sejarah [ID]</label>
+                                            <textarea class="form-control" name="historys" id="editor3"></textarea>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Sejarah [EN]</label>
+                                            <textarea class="form-control" name="historys_en" id="editor4"></textarea>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Logo </label>
+                                            <span id="images"></span>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Logo </label>
+                                            <input type="file" class="form-control" name="photo" id="photo" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Provinsi</label>
+                                            <select class="form-control" name="id_province" id="provincesss" required>
+                                                <option value="0"> Pilih </option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
-                                            <input class="btn btn-primary" type="submit" value="Simpan">
+                                            <button class="btn btn-primary" type="submit">Simpan</button>
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +116,8 @@
                     </form>
                 </div>
             </div>
-            <!-- [ Main Content ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
         </div>
         <!-- [ Footer ] start -->
         <!-- <footer class="footer">
@@ -91,22 +140,55 @@
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-        window.addEventListener("load", async () => {
-            await getUrlById();
-        })
-
-        function getUrlById() {
-            const URLS = new URL(window.location.href);
-            fetch('/provinces_detail/' + URLS.pathname.split('/')[2])
-                .then(data => data.json())
-                .then((rows) => {
-                    document.getElementById("id").value = rows[0]?.id;
-                    document.getElementById("province_name").value = rows[0]?.province_name;
-                })
-        }
-
-    </script>
 </body>
+<script>
+    window.addEventListener("load", async () => {
+        let id_prov;
+        await getUrlById();
+        await getProvinces();
+    })
+    function getUrlById() {
+        const URLS = new URL(window.location.href);
+        fetch('/detail_kdeks/' + URLS.pathname.split('/')[2])
+            .then(data => data.json())
+            .then((rows) => {
+                id_prov = rows[0]?.id_province;
+                document.getElementById("id").value = rows[0]?.id;
+                document.getElementById("title").value = rows[0]?.title;
+                document.getElementById("title_en").value = rows[0]?.title_en;
+                nicEditors.findEditor("editor1").setContent(rows[0]?.abouts);
+                nicEditors.findEditor("editor2").setContent(rows[0]?.abouts_en);
+                nicEditors.findEditor("editor3").setContent(rows[0]?.historys);
+                nicEditors.findEditor("editor4").setContent(rows[0]?.historys_en);
+                document.getElementById("images").innerHTML = `<img src="${rows[0]?.images}" width="100" alt="image logo kdeks">`;
+
+                
+                // if (rows[0]?.tag == 'about') {
+                //     document.getElementById("tags").innerHTML = `
+                //       <option value="about" selected> About </option>
+                //       <option value="history"> History </option>`;
+                // } else {
+                //     document.getElementById("tags").innerHTML = `
+                //       <option value="about"> About </option>
+                //       <option value="history" selected> History </option>`;
+                // }
+            })
+    }
+
+    function getProvinces() {
+        fetch('/provinces')
+            .then(response => response.json())
+            .then((data) => {
+                data.forEach(element => {
+                    const choosed = (element?.id == id_prov) ? true : false;
+                    const ddd = document.createElement('option')
+                    ddd.value = `${element?.id}`;
+                    ddd.text = `${element?.province_name}`;
+                    ddd.selected = choosed
+                    document.getElementById("provincesss").append(ddd);
+                });
+            })
+    }
+</script>
 
 </html>

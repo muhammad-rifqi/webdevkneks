@@ -42,17 +42,19 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <button class="btn btn-primary" onclick="window.location.href='/master_add'"> Tambah Master
-                            </button>
+                            <button class="btn btn-primary" onclick="window.location.href='/master_add'"> Tambah
+                                Kdeks</button>
                         </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
-                                    <table id="province" class="display" style="width: 100%;">
+                                    <table id="abouts" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Provinsi</th>
+                                                <th>NO</th>
+                                                <th>Logo Kdeks</th>
+                                                <th>Nama Kdeks [ID]</th>
+                                                <th>Nama Kdeks [EN]</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -100,22 +102,39 @@
     <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
-            $('#province').DataTable({
+            $('#abouts').DataTable({
                 "ajax": {
-                    "url": "/provinces",
+                    "url": "/api_kdeks",
                     "dataSrc": ""
                 },
                 "columns": [
-                    { "data": "id" },
-                    { "data": "province_name" },
+                    {
+                        data: null,
+                        render: function (data, type, row, meta) {
+                            return meta.row + 1;
+                        }
+                    },
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p>
-                                        <button class='edit-btn-master btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
-                                        <button class='delete-btn-master btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
-                                    </p>`;
+                            return `<img src="${data?.images}" width="100px">`;
                         }
+                    },
+                    { "data": "title" },
+                    { "data": "title_en" },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            return `<p><button class='edit-btn-kdeks btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
+                                    <button class='delete-btn-kdeks btn btn-danger' data-id='${row.id}' data-photo='${row.images}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button></p>`;
+                        }
+                    }
+                    // .split('/')[5]
+                ], columnDefs: [
+                    {
+                        targets: 0,
+                        orderable: false,
+                        searchable: false
                     }
                 ],
                 lengthMenu: [10, 25, 50, 100],
@@ -130,14 +149,15 @@
             });
 
             // 3. Event Listener untuk Tombol Edit
-            $('#province').on('click', '.edit-btn-master', function () {
+            $('#abouts').on('click', '.edit-btn-kdeks', function () {
                 var id = $(this).data('id');
                 window.location.href = '/master_edit/' + id;
             });
 
             // 4. Event Listener untuk Tombol Hapus
-            $('#province').on('click', '.delete-btn-master', function () {
+            $('#abouts').on('click', '.delete-btn-kdeks', function () {
                 var id = $(this).data('id');
+                var photo = $(this).data('photo');
                 swal({
                     title: "Are you sure?",
                     text: "To Delete this Data ??",
@@ -147,7 +167,7 @@
                 })
                     .then((willOut) => {
                         if (willOut) {
-                            window.location = '/master_delete/' + id;
+                            window.location = '/master_delete/' + id + '/' + photo;
                         } else {
                             console.log('NaN')
                         }
