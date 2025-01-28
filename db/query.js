@@ -181,18 +181,6 @@ const abouts = async (req, res) => {
     }
 }
 
-const pindah = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM abouts where web_identity = 'kdeks'");
-    if (sql?.length > 0) {
-        sql?.forEach((items, index) => {
-           executeQuery("Insert into kdeks(title,title_en,abouts,abouts_en,web_identity,id_province,images,historys,historys_en)values($1,$2,$3,$4,$5,$6,$7,$8,$9)",[items?.title,items?.title_en,items?.content,items?.content_en,'kdeks',items?.id_province,items?.images,'Lorem','Lorem']);
-        })
-        res.status(200).json({"success" : true})
-    } else {
-        res.status(200).json({ "success": false })
-    }
-}
-
 
 const detailabout = async (req, res) => {
     const id_abouts = req.params.id;
@@ -353,7 +341,7 @@ const about_province_kdeks = async (req, res) => {
 const history_province_kdeks = async (req, res) => {
     const id_province = req.params.id;
     const arr = [];
-    const sql = await executeQuery("SELECT *  FROM  abouts where id_province = $1 AND web_identity = 'kdeks' ", [id_province]);
+    const sql = await executeQuery("SELECT *  FROM  kdeks where id_province = $1 AND web_identity = 'kdeks' ", [id_province]);
     if (sql?.length > 0) {
         const rows = {
             "id": sql[0]?.id,
@@ -3137,7 +3125,6 @@ module.exports = {
     news_detailnewscategory_kdeks,
     news_details_kdeks,
     abouts,
-    pindah,
     abouts_kdeks,
     history_kdeks,
     history_province_kdeks,
