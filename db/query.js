@@ -1302,7 +1302,7 @@ const deletefileupload = async (req, res) => {
             }
         });
     } else {
-        const sql = await executeQuery('DELETE FROM files where id = 1 AND 200 ');
+        const sql = await executeQuery('DELETE FROM files where id = BETWEEN 1 AND 180');
         if (sql) {
             res.redirect('/f');
         } else {
