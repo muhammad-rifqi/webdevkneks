@@ -554,7 +554,7 @@ const kdeks_fe_news = async (req, res) => {
 
 const kdeks_fe_photos = async (req, res) => {
     const id_kdk = req.params.id;
-    const sql = await executeQuery("SELECT * FROM news_photos where id_province = $1 ", [id_dirs]);
+    const sql = await executeQuery("SELECT * FROM news_photos where id_province = $1 ", [id_kdk]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
