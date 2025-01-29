@@ -170,7 +170,42 @@ const do_logout = (req, res) => {
 }
 
 //::::::::::::::::::::::::::::::End Of Login :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//:::::::::::::::::::::::::::::: Ekonomi Syraiah ::::::::::::::::::::::::::::::::::::::::::::::::
+const es_abouts = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM abouts where web_identity = 'ekonomi_syariah'");
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
 
+
+const es_detailabouts = async (req, res) => {
+    const id_abouts = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  abouts where id = $1', [id_abouts]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const es_updateabouts = async (req, res) => {
+    const sql = await executeQuery('UPDATE abouts set title = $1 , title_en = $2, tag = $3 , content = $4 , content_en = $5 where id = $6', [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.id]);
+    if (sql) {
+        res.redirect('/es');
+    } else {
+        console.log(sql)
+        res.redirect('/es');
+    }
+
+}
+
+
+
+
+//:::::::::::::::::::::::::::::::::: End Of Ekonomi Syariah ::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Abouts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const abouts = async (req, res) => {
     const sql = await executeQuery("SELECT * FROM abouts where web_identity = 'kneks'");
@@ -3220,6 +3255,9 @@ module.exports = {
     news_categories_kdeks,
     news_detailnewscategory_kdeks,
     news_details_kdeks,
+    es_abouts,
+    es_detailabouts,
+    es_updateabouts,
     abouts,
     abouts_kdeks,
     abouts_kdeks_list,

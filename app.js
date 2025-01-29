@@ -536,10 +536,18 @@ apps.get('/tk_edit/:id', (req, res) => {
 apps.get('/es', (req, res) => {
     res.sendFile(path.resolve('./views/profile/ekonomi_syariah/ekonomi_syariah.html'));
 })
+
+apps.get('/es_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/ekonomi_syariah/edit.html'));
+})
 //:::::::::::::::::::::::::::::::::::::::::: End Of Ekonomi Syariah :::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::: Start Of Institusi ::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/i', (req, res) => {
     res.sendFile(path.resolve('./views/profile/institution/list.html'));
+})
+
+apps.get('/i_add', (req, res) => {
+    res.sendFile(path.resolve('./views/profile/institution/add.html'));
 })
 
 apps.get('/i_edit/:id', (req, res) => {
@@ -646,6 +654,12 @@ apps.get('/submenu_edit/:id', (req, res) => {
 apps.get('/register', (req, res) => {
     res.sendFile(path.resolve('./views/register.html'));
 })
+// ::::::::::::::::::::::::::: Ekonomi Syariah :::::::::::::::::::::::::::::::::::::::::::::
+apps.get('/es_abouts', db.es_abouts);
+
+apps.get('/es_detailabouts/:id', db.es_detailabouts);
+
+apps.post('/es_updateabout', db.es_updateabouts);
 
 // :::::::::::::::::::::::::: Api Frontend ::::::::::::::::::::::::::::::::::::::::::::::
 

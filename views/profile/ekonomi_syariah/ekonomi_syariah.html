@@ -44,7 +44,7 @@
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
-                                    <table id="abouts" class="display" style="width: 100%;">
+                                    <table id="es_abouts" class="display" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -98,9 +98,9 @@
     <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
-            $('#abouts').DataTable({
+            $('#es_abouts').DataTable({
                 "ajax": {
-                    "url": "/abouts",
+                    "url": "/es_abouts",
                     "dataSrc": ""
                 },
                 "columns": [
@@ -111,8 +111,7 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='edit-btn-abouts btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
-                                    <button class='delete-btn-abouts btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button></p>`;
+                            return `<p><button class='edit-btn-abouts btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button></p>`;
                         }
                     }
                 ],
@@ -127,29 +126,9 @@
                 ],
             });
 
-            // 3. Event Listener untuk Tombol Edit
-            $('#abouts').on('click', '.edit-btn-abouts', function () {
+            $('#es_abouts').on('click', '.edit-btn-abouts', function () {
                 var id = $(this).data('id');
-                window.location.href = '/tk_edit/' + id;
-            });
-
-            // 4. Event Listener untuk Tombol Hapus
-            $('#abouts').on('click', '.delete-btn-abouts', function () {
-                var id = $(this).data('id');
-                swal({
-                    title: "Are you sure?",
-                    text: "To Delete this Data ??",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                    .then((willOut) => {
-                        if (willOut) {
-                            window.location = '/deleteabouts/' + id;
-                        } else {
-                            console.log('NaN')
-                        }
-                    });
+                window.location.href = '/es_edit/' + id;
             });
         });
     </script>
