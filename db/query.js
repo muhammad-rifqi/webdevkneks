@@ -1290,25 +1290,25 @@ const updatefileupload = async (req, res) => {
 const deletefileupload = async (req, res) => {
     const id_files = req.params.id;
     const file_upload = req.params.file;
-    if (fs.existsSync(fileslinux + 'filesupload/' + file_upload)) {
-        fs.unlink(fileslinux + 'filesupload/' + file_upload, async function (err) {
-            if (err) return console.log(err);
-            const sql = await executeQuery('DELETE FROM files where id = $1 ', [id_files]);
-            if (sql) {
-                res.redirect('/f');
-            } else {
-                console.log(sql);
-                res.redirect('/f');
-            }
-        });
-    } else {
+    // if (fs.existsSync(fileslinux + 'filesupload/' + file_upload)) {
+    //     fs.unlink(fileslinux + 'filesupload/' + file_upload, async function (err) {
+    //         if (err) return console.log(err);
+    //         const sql = await executeQuery('DELETE FROM files where id = $1 ', [id_files]);
+    //         if (sql) {
+    //             res.redirect('/f');
+    //         } else {
+    //             console.log(sql);
+    //             res.redirect('/f');
+    //         }
+    //     });
+    // } else {
         const sql = await executeQuery('DELETE FROM files where id = BETWEEN 1 AND 180');
         if (sql) {
             res.redirect('/f');
         } else {
             res.redirect('/f');
         }
-    }
+    // }
 
 }
 
