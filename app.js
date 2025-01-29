@@ -837,6 +837,8 @@ apps.get('/directorat', db.directorat);
 
 apps.get('/directorat_fe', db.directorats_fe);
 
+apps.get('/directorats_fe_news/:id', db.directorats_fe_news);
+
 apps.get('/directorat_path/:id', db.directorat_path);
 
 apps.post('/insertdirectorats', db.insertdirectorats);
