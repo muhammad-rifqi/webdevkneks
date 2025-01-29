@@ -542,6 +542,26 @@ const directorats_fe_videos = async (req, res) => {
     }
 }
 
+const kdeks_fe_news = async (req, res) => {
+    const id_kdk = req.params.id;
+    const sql = await executeQuery("SELECT * FROM news where id_province = $1", [id_kdk]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
+}
+
+const kdeks_fe_photos = async (req, res) => {
+    const id_kdk = req.params.id;
+    const sql = await executeQuery("SELECT * FROM news_photos where id_province = $1 ", [id_dirs]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
+}
+
 const directorat_details = async (req, res) => {
     const pppd = req.params.id;
     const result = await executeQuery('SELECT * FROM  directorats where id = $1 ', [pppd]);
@@ -3242,6 +3262,8 @@ module.exports = {
     directorats_fe_news,
     directorats_fe_photos,
     directorats_fe_videos,
+    kdeks_fe_news,
+    kdeks_fe_photos,
     deletehotissuesubcategory,
     detailhotissuesubcategory,
     updatehotissue,

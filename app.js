@@ -843,6 +843,10 @@ apps.get('/directorats_fe_photos/:id', db.directorats_fe_photos);
 
 apps.get('/directorats_fe_videos/:id', db.directorats_fe_videos);
 
+apps.get('/kdeks_fe_news/:id', db.kdeks_fe_news);
+
+apps.get('/kdeks_fe_photos/:id', db.kdeks_fe_photos);
+
 apps.get('/directorat_path/:id', db.directorat_path);
 
 apps.post('/insertdirectorats', db.insertdirectorats);
