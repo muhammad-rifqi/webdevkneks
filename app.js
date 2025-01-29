@@ -335,15 +335,15 @@ apps.get('/v_edit/:id', (req, res) => {
 //:::::::::::::::::::::::::::::::::::::::: End Of Video ::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::Start Of Agenda ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/a', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/agenda/list.html'));
+    res.sendFile(path.resolve('./views/agenda/list.html'));
 })
 
 apps.get('/a_add', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/agenda/add.html'));
+    res.sendFile(path.resolve('./views/agenda/add.html'));
 })
 
 apps.get('/a_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/agenda/edit.html'));
+    res.sendFile(path.resolve('./views/agenda/edit.html'));
 })
 // ::::::::::::::::::::::::::::::::::: End Of Agenda :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::: Start Of E-Pustaka :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
