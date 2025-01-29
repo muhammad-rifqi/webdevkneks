@@ -218,13 +218,13 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 
                             <span class="nxl-mtext">KDEKS</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="/kdeks">KDEKS</a></li>
+                             <li class="nxl-item"><a class="nxl-link" href="/master">KDEKS</a></li>
                         `);
 }
 //kdeks master
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
     document.write(`
-                            <li class="nxl-item"><a class="nxl-link" href="/master">Master</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/kdeks">Profile</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/province">Provinsi Kdeks</a></li>
                            `);
 }
