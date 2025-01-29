@@ -522,6 +522,26 @@ const directorats_fe_news = async (req, res) => {
     }
 }
 
+const directorats_fe_photos = async (req, res) => {
+    const id_dirs = req.params.id;
+    const sql = await executeQuery("SELECT * FROM news_photos where directorat LIKE '%" + id_dirs + "%' order by id ASC");
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
+}
+
+const directorats_fe_videos = async (req, res) => {
+    const id_dirs = req.params.id;
+    const sql = await executeQuery("SELECT * FROM news_videos where directorat LIKE '%" + id_dirs + "%' order by id ASC");
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
+}
+
 const directorat_details = async (req, res) => {
     const pppd = req.params.id;
     const result = await executeQuery('SELECT * FROM  directorats where id = $1 ', [pppd]);
@@ -3220,6 +3240,8 @@ module.exports = {
     directorats_fe,
     directorat_details,
     directorats_fe_news,
+    directorats_fe_photos,
+    directorats_fe_videos,
     deletehotissuesubcategory,
     detailhotissuesubcategory,
     updatehotissue,
