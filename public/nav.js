@@ -36,7 +36,8 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                     </li>`);
 }
 //Direktorat
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4) {
+// if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4) {
+if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3) {
     document.write(`<li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
