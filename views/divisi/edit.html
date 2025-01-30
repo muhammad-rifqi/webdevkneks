@@ -37,7 +37,7 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/directorats_devisi_add" method="post">
+                        <form action="/directorats_devisi_edit" method="post">
                             <input type="hidden" name="id" id="id" value="">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
@@ -50,12 +50,20 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Devisi</label>
-                                            <input class="form-control" type="text" name="title" id="title">
+                                            <label class="form-label">Direktorat</label>
+                                            <select class="form-control" name="directorats_id" id="directorats_id"
+                                                required>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Nama Devisi</label>
+                                            <input class="form-control" type="text" name="title" id="titles">
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Keterangan</label>
-                                            <input class="form-control" type="text" name="description" id="description">
+                                            <input class="form-control" type="text" name="description"
+                                                id="descriptions">
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -67,31 +75,6 @@
                             </div>
                         </form>
                     </div>
-
-                    <div class="col-lg-12">
-                        <div class="card stretch stretch-full">
-                            <div class="card-body lead-status">
-                                <div class="row">
-                                    <div class="table-responsive p-5">
-                                        <table id="api_devisi" class="display" style="width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Judul</th>
-                                                    <th>Keterangan</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tabb">
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
                 </div>
             </div>
             <!-- [ Main Content ] end -->
@@ -117,63 +100,47 @@
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#api_devisi').DataTable()
-        });
-    </script>
 
     <script>
         window.addEventListener("load", async () => {
+            let dir_id;
             await getUrlById();
-            await getDataDevisi();
+            await getDirectorat();
         })
 
         function getUrlById() {
             const URLS = new URL(window.location.href);
-            fetch('/directorat_detail/' + URLS.pathname.split('/')[2])
+            fetch('/directorats_devisi_detail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("id").value = rows[0]?.id;
+                    document.getElementById("titles").value = rows[0]?.title;
+                    document.getElementById("descriptions").value = rows[0]?.description;
+                    dir_id = rows[0]?.directorats_id;
                 })
         }
 
-
-        function getDataDevisi() {
-            const URLS = new URL(window.location.href);
-            fetch('/directorat_devisi/' + URLS.pathname.split('/')[2])
-                .then(row => row.json())
-                .then((rrr) => {
-                    var aaa = "";
-                    rrr.forEach((element) => {
-                        aaa += `<tr>
-                                    <td>#${element?.id}</td>
-                                    <td>${element?.title}</td>
-                                    <td>${element?.description}</td>
-                                    <td><a href="#" onclick="deleteData('${element?.id}')"><button class="btn btn-danger"><i class="feather-trash"></i></button></a></td>                           
-                                </tr>`;
+        function getDirectorat() {
+            fetch('/directorat_fe')
+                .then(res => res.json())
+                .then((qqq) => {
+                    qqq.forEach(items => {
+                        if (items?.id == dir_id) {
+                            const aaa = document.createElement('option')
+                            aaa.value = `${items?.id}`;
+                            aaa.text = `${items?.title}`;
+                            aaa.checked = true;
+                            document.getElementById("directorats_id").append(aaa);
+                        } else {
+                            const aaa = document.createElement('option')
+                            aaa.value = `${items?.id}`;
+                            aaa.text = `${items?.title}`;
+                            aaa.checked = false;
+                            document.getElementById("directorats_id").append(aaa);
+                        }
                     });
-                    document.getElementById("tabb").innerHTML = aaa;
                 })
         }
-
-        function deleteData(e) {
-            swal({
-                title: "Are you sure?",
-                text: "To Delete this Data ??",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willOut) => {
-                    if (willOut) {
-                        window.location = "/directorat_devisi_delete/" + e;
-                    } else {
-                        console.log('NaN')
-                    }
-                });
-        }
-
     </script>
 </body>
 

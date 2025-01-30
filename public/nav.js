@@ -38,12 +38,18 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
 //Direktorat
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4) {
     document.write(`<li class="nxl-item nxl-hasmenu">
-                        <a href="/directorats" class="nxl-link">
-                            <span class="nxl-micon"><i class="feather-bookmark"></i></span>
+                        <a href="javascript:void(0);" class="nxl-link">
+                            <span class="nxl-micon"><i class="feather-bookmark"></i></span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                             Direktorat Master
                         </a>
+                         <ul class="nxl-submenu">
+                            <li class="nxl-item"><a class="nxl-link" href="/directorats">Direktorat</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/devision">Divisi</a></li>
+                         </ul>
                     </li>`);
 }
+
+
 
 //Struktur
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {

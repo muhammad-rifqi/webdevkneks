@@ -521,6 +521,7 @@ const updatestructure = async (req, res) => {
 const directorat = async (req, res) => {
     // const sql = await executeQuery('SELECT * FROM `hot_issues` LEFT JOIN `hot_subcategories`on hot_issues.hot_subcategory_id = hot_subcategories.id LEFT JOIN hot_categories on hot_subcategories.hot_category_id = hot_categories.id GROUP BY hot_categories.id');
     const role_id_users = req.cookies.roles_id;
+    const directorat_id = req.cookies.directorat_id;
     if (role_id_users == 1 || role_id_users == 2) {
         const sql = await executeQuery('SELECT * FROM directorats');
         if (sql?.length > 0) {
@@ -529,7 +530,7 @@ const directorat = async (req, res) => {
             res.status(200).json([])
         }
     } else {
-        const sql = await executeQuery("SELECT * FROM directorats where id = $1", [role_id_users]);
+        const sql = await executeQuery("SELECT * FROM directorats where id = $1", [directorat_id]);
         if (sql?.length > 0) {
             res.status(200).json(sql)
         } else {
@@ -670,8 +671,7 @@ const directorat_details = async (req, res) => {
 }
 
 const directorat_devisi = async (req, res) => {
-    id_d = req.params.id;
-    const sql = await executeQuery('SELECT * FROM devisi where 	directorats_id = $1', [id_d]);
+    const sql = await executeQuery('SELECT * FROM devisi');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -679,14 +679,43 @@ const directorat_devisi = async (req, res) => {
     }
 }
 
+const directorat_devisi_add = async (req, res) => {
+    const sql = await executeQuery("insert into devisi(title,description,directorats_id)values($1,$2,$3)",
+        [req.body.title, req.body.description, req.body.directorats_id]);
+    if (sql) {
+        res.redirect('/devision');
+    } else {
+        res.redirect('/devision');
+    }
+}
+
 const directorats_devisi_delete = async (req, res) => {
     const iddev = req.params.id;
     const sql = await executeQuery('DELETE FROM  devisi where id=$1', [iddev]);
     if (sql) {
-        res.redirect('/directorats_devisi/' + iddev);
+        res.redirect('/devision');
     } else {
-        console.log(sql)
-        res.redirect('/directorats_devisi/' + iddev);
+        res.redirect('/devision');
+    }
+}
+
+const directorat_devisi_detail = async (req, res) => {
+    const iddev = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  devisi where id = $1', [iddev]);
+    if (sql) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
+}
+
+const directorat_devisi_update = async (req, res) => {
+    const sql = await executeQuery("update devisi set title = $1, description = $2, directorats_id = $3 where id = $4",
+        [req.body.title, req.body.description, req.body.directorats_id, req.body.id]);
+    if (sql) {
+        res.redirect('/devision');
+    } else {
+        res.redirect('/devision');
     }
 }
 
@@ -747,17 +776,6 @@ const directorats_uploads = async (req, res) => {
         res.redirect('/directorats_detail/' + req.body.id);
     } else {
         res.redirect('/directorats_detail/' + req.body.id);
-    }
-}
-
-
-const directorat_devisi_add = async (req, res) => {
-    const sql = await executeQuery("insert into devisi(title,description,directorats_id)values($1,$2,$3)",
-        [req.body.title, req.body.description, req.body.id]);
-    if (sql) {
-        res.redirect('/directorats_devisi/' + req.body.id);
-    } else {
-        res.redirect('/directorats_devisi/' + req.body.id);
     }
 }
 
@@ -3338,6 +3356,8 @@ module.exports = {
     directorats_uploads,
     directorat_devisi_add,
     directorat_devisi,
+    directorat_devisi_detail,
+    directorat_devisi_update,
     directorats_devisi_delete,
     directorats_fe,
     directorat_details,

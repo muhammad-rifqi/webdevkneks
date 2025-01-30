@@ -200,8 +200,16 @@ apps.get('/directorats_detail/:id', (req, res) => {
     res.sendFile(path.resolve('./views/directorat/detail.html'));
 })
 
-apps.get('/directorats_devisi/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/directorat/devisi.html'));
+apps.get('/devision', (req, res) => {
+    res.sendFile(path.resolve('./views/divisi/devisi.html'));
+})
+
+apps.get('/devision_add', (req, res) => {
+    res.sendFile(path.resolve('./views/divisi/add.html'));
+})
+
+apps.get('/devision_edit/:id', (req, res) => {
+    res.sendFile(path.resolve('./views/divisi/edit.html'));
 })
 //:::::::::::::::::::::::::: End Of Direktorat ::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::: Start Of Struktur  ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -885,11 +893,17 @@ apps.get('/banners_direactorat_delete/:id/:foto', db.delete_banners_direactorats
 
 apps.get('/directorat_detail/:id', db.directorat_details);
 
-apps.get('/directorat_devisi/:id', db.directorat_devisi);
+//::::::::::::::::::::::::::::: DIVISI ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.get('/directorat_devisi', db.directorat_devisi);
 
 apps.post('/directorats_devisi_add', db.directorat_devisi_add);
 
-apps.get('/directorat_devisi_delete/:id', db.directorats_devisi_delete);
+apps.get('/directorats_devisi_detail/:id', db.directorat_devisi_detail);
+
+apps.get('/division_delete/:id', db.directorats_devisi_delete);
+
+apps.post('/directorats_devisi_edit', db.directorat_devisi_update);
 
 //:::::::::::::::::::::::::::: Hot Issue ::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/hotissue', db.hotissue);

@@ -35,9 +35,14 @@ if(path == 'submenu_data' || path == 'submenudata_add' || path == 'submenudata_e
 }
 //------------------------------- End Of Data -----------------------------
 //------------------------------Start Of Direktorat----------------------
-if(path == 'directorats' || path == 'directorats_add' || path == 'directorats_edit' || path == 'directorats_detail' || path == 'directorats_devisi'){
+if(path == 'directorats' || path == 'directorats_add' || path == 'directorats_edit' || path == 'directorats_detail'){
     breadcrumb1 = "Data";
     breadcrumb2 = "Direktorat";
+}
+
+if(path == 'devision' || path == 'devision_add' || path == 'devision_edit'){
+    breadcrumb1 = "Data";
+    breadcrumb2 = "Divisi";
 }
 //------------------------------- End Of Direktorat -----------------------------
 //------------------------------Start Of Berita----------------------
