@@ -99,10 +99,10 @@
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        if (cookie['roles_id'] == 1 && cookie['roles_id'] == '2') {
-            document.getElementById("kdeks_tambah_buttton").innerHTML = `<button class="btn btn-primary" onclick="window.location.href='/master_add'"> Tambah Kdeks</button>`;
+        if (cookie['roles_id'] == 1 || cookie['roles_id'] == '2') {
+            document.getElementById("kdeks_tambah_button").innerHTML = `<button class="btn btn-primary" onclick="window.location.href='/master_add'"> Tambah Kdeks</button>`;
         } else {
-            document.getElementById("kdeks_tambah_buttton").innerHTML = `Data KDEKS`;
+            document.getElementById("kdeks_tambah_button").innerHTML = `Data KDEKS`;
         }
 
         $(document).ready(function () {
