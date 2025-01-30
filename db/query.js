@@ -1079,6 +1079,16 @@ const updateinstitution = async (req, res) => {
     }
 }
 
+const insertinstitution = async (req, res) => {
+    const sql = await executeQuery('INSERT into institutions(tag,name,logo,link)values($1,$2,$3,$4)', [req.body.tag, req.body.name, req.body.logo, req.body.link]);
+    if (sql) {
+        res.redirect('/i');
+    } else {
+        console.log(sql);
+        res.redirect('/i');
+    }
+}
+
 //::::::::::::::::::::::::::::::End Of institutions :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Sosmed :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const sosmed = async (req, res) => {
@@ -3383,6 +3393,7 @@ module.exports = {
     institutions,
     detailinstitutions,
     deleteinstitution,
+    insertinstitution,
     updateinstitution,
     sosmed,
     detailsosmed,

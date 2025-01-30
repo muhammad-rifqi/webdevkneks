@@ -949,6 +949,7 @@ apps.get('/deleteinstitutions/:id', db.deleteinstitution);
 
 apps.post('/updateinstitution', db.updateinstitution);
 
+apps.post('/insertinstitution', db.insertinstitution);
 //::::::::::::::: Api & Query DB SOSMED ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/sosmed', db.sosmed);
