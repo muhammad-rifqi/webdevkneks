@@ -36,7 +36,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                     </li>`);
 }
 //Direktorat
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4) {
+if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
     document.write(`<li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
@@ -49,8 +49,16 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 
                     </li>`);
 }
 
+//Direktorat
+if (cookie["roles_id"] == 3 || cookie["roles_id"] == 4) {
+    document.write(`<li class="nxl-item nxl-hasmenu">
+                        <a href="/directorats" class="nxl-link">
+                            <span class="nxl-micon"><i class="feather-bookmark"></i></span><span class="nxl-arrow">Direktorat</span>
+                            Direktorat Master
+                        </a>
+                    </li>`);
 
-
+    }
 //Struktur
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
     document.write(`<li class="nxl-item nxl-hasmenu">
@@ -172,7 +180,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 
                             <span class="nxl-mtext">E-Pustaka</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="/f">E-Pustaka</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/f">e-Pustaka</a></li>
                             `);
 }
 //e-pustaka kategori

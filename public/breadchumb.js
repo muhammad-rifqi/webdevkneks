@@ -338,39 +338,39 @@ if(path == 'a_edit'){
 //-----------------------End Of Agenda -----------------------------
 //------------------------------Agenda ----------------------
 if(path == 'f'){
-    breadcrumb0 = "E Pustaka";
+    breadcrumb0 = "e-Pustaka";
     breadcrumb1 = "Data";
-    breadcrumb2 = "List E Pustaka";
+    breadcrumb2 = "List e-Pustaka";
 }
 
 if(path == 'f_add'){
-    breadcrumb0 = "E Pustaka";
+    breadcrumb0 = "e-Pustaka";
     breadcrumb1 = "Data";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'f_edit'){
-    breadcrumb0 = "E Pustaka";
+    breadcrumb0 = "e-Pustaka";
     breadcrumb1 = "Data";
     breadcrumb2 = "Edit";
 }
 //-----------------------End Of Agenda -----------------------------
 //------------------------------Agenda ----------------------
 if(path == 'fc'){
-    breadcrumb0 = "E Pustaka";
+    breadcrumb0 = "e-Pustaka";
     breadcrumb1 = "Data";
-    breadcrumb2 = "Kategori Pustaka";
+    breadcrumb2 = "Kategori";
 }
 
 if(path == 'fc_add'){
-    breadcrumb0 = "E Pustaka";
-    breadcrumb1 = "Kategori Pustaka";
+    breadcrumb0 = "e-Pustaka";
+    breadcrumb1 = "Kategori";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'fc_edit'){
-    breadcrumb0 = "E Pustaka";
-    breadcrumb1 = "Kategori Pustaka";
+    breadcrumb0 = "e-Pustaka";
+    breadcrumb1 = "Kategori";
     breadcrumb2 = "Edit";
 }
 //-----------------------End Of Agenda -----------------------------

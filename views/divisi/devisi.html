@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p id="button_add_devision">
-                            
+
                         </p>
                         <div class="card stretch stretch-full">
                             <div class="card-body lead-status">
@@ -112,10 +112,10 @@
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        if(cookie['roles_id'] == '1' || cookie['roles_id'] == '2'){
-            document.getElementById("button_add_devision").innerHTML=`<button class="btn btn-primary" onclick="window.location.href = '/devision_add'"> Tambah Divisi </button>`;
-        }else{
-            document.getElementById("button_add_devision").innerHTML=`<h3>Divisi</h3>`;
+        if (cookie['roles_id'] == '1' || cookie['roles_id'] == '2') {
+            document.getElementById("button_add_devision").innerHTML = `<button class="btn btn-primary" onclick="window.location.href = '/devision_add'"> Tambah Divisi </button>`;
+        } else {
+            document.getElementById("button_add_devision").innerHTML = `<h3>Divisi</h3>`;
         }
 
         $(document).ready(function () {
@@ -136,15 +136,10 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            if (cookie['roles_id'] == '1' || cookie['roles_id'] == 2) {
-                                return `<p>
+                            return `<p>
                                         <button class='edit-btn btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
                                         <button class='delete-btn btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
                                     </p>`;
-                            } else {
-                                return ``;
-                            }
-                            
                         }
                     }
                 ],
