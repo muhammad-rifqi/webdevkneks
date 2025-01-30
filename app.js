@@ -697,7 +697,7 @@ apps.get('/detail_kdeks/:id', db.detailkdeks);
 
 apps.post('/insertkdeks', kdeks_logo_province.single('photo'), db.insertkdeks);
 
-apps.post('/updatekdeks' , kdeks_logo_province.single('photo') , db.updatekdeks);
+apps.post('/updatekdeks', kdeks_logo_province.single('photo'), db.updatekdeks);
 
 apps.get('/kdeks_delete/:id/:foto', db.deletekdeks);
 
@@ -857,9 +857,17 @@ apps.get('/directorats_fe_photos/:id', db.directorats_fe_photos);
 
 apps.get('/directorats_fe_videos/:id', db.directorats_fe_videos);
 
+apps.get('/directorats_fe_opini/:id', db.directorats_fe_opini);
+
+apps.get('/directorats_fe_files/:id', db.directorats_fe_files);
+
 apps.get('/kdeks_fe_news/:id', db.kdeks_fe_news);
 
 apps.get('/kdeks_fe_photos/:id', db.kdeks_fe_photos);
+
+apps.get('/kdeks_fe_files/:id', db.kdeks_fe_files);
+
+apps.get('/kdeks_fe_opini/:id', db.kdeks_fe_opini);
 
 apps.get('/directorat_path/:id', db.directorat_path);
 

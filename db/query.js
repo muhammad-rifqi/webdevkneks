@@ -577,6 +577,26 @@ const directorats_fe_videos = async (req, res) => {
     }
 }
 
+const directorats_fe_opini = async (req, res) => {
+    const id_dirs = req.params.id;
+    const sql = await executeQuery("SELECT * FROM opini where directorat LIKE '%" + id_dirs + "%' order by id ASC");
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
+}
+
+const directorats_fe_files = async (req, res) => {
+    const id_dirs = req.params.id;
+    const sql = await executeQuery("SELECT * FROM files where directorat LIKE '%" + id_dirs + "%' order by id ASC");
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
+}
+
 const kdeks_fe_news = async (req, res) => {
     const id_kdk = req.params.id;
     const sql = await executeQuery("SELECT * FROM news where id_province = $1", [id_kdk]);
@@ -590,6 +610,26 @@ const kdeks_fe_news = async (req, res) => {
 const kdeks_fe_photos = async (req, res) => {
     const id_kdk = req.params.id;
     const sql = await executeQuery("SELECT * FROM news_photos where id_province = $1 ", [id_kdk]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
+}
+
+const kdeks_fe_opini = async (req, res) => {
+    const id_dirs = req.params.id;
+    const sql = await executeQuery("SELECT * FROM opini where id_province = $1", [id_kdk]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
+}
+
+const kdeks_fe_files = async (req, res) => {
+    const id_dirs = req.params.id;
+    const sql = await executeQuery("SELECT * FROM files where id_province = $1", [id_kdk]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -630,7 +670,8 @@ const directorat_details = async (req, res) => {
 }
 
 const directorat_devisi = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM devisi');
+    id_d = req.params.id;
+    const sql = await executeQuery('SELECT * FROM devisi where 	directorats_id = $1' , [id_d]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -3300,8 +3341,12 @@ module.exports = {
     directorats_fe_news,
     directorats_fe_photos,
     directorats_fe_videos,
+    directorats_fe_opini,
+    directorats_fe_files,
     kdeks_fe_news,
     kdeks_fe_photos,
+    kdeks_fe_files,
+    kdeks_fe_opini,
     deletehotissuesubcategory,
     detailhotissuesubcategory,
     updatehotissue,
