@@ -883,13 +883,13 @@ apps.get('/images_direactorat_delete/:id/:foto', db.delete_images_direactorats);
 
 apps.get('/banners_direactorat_delete/:id/:foto', db.delete_banners_direactorats);
 
+apps.get('/directorat_detail/:id', db.directorat_details);
+
 apps.get('/directorat_devisi/:id', db.directorat_devisi);
 
 apps.post('/directorats_devisi_add', db.directorat_devisi_add);
 
 apps.get('/directorat_devisi_delete/:id', db.directorats_devisi_delete);
-
-apps.get('/directorat_detail/:id', db.directorat_details);
 
 //:::::::::::::::::::::::::::: Hot Issue ::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/hotissue', db.hotissue);

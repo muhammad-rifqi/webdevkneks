@@ -124,9 +124,9 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            if (cookie['roles_id'] == '1' || cookie['roles_id'] == 2 || cookie['roles_id'] == 3 || cookie['roles_id'] == 4) {
+                            if (cookie['roles_id'] == '1' || cookie['roles_id'] == 2) {
                                 return `<p>
-                                        <button class='devisi-btn-directorat btn btn-success' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Devisi</button>
+                                        <button class='devisi-btn-directorat btn btn-success' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Divisi</button>
                                         <button class='view-btn-directorat btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Icon/Banner</button>
                                         <button class='edit-btn-directorat btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
                                         <button class='delete-btn-directorat btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
@@ -134,7 +134,6 @@
                             } else {
                                 return `<p>
                                         <button class='edit-btn-directorat btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
-                                        <button class='delete-btn-directorat btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
                                     </p>`;
                             }
                         }
@@ -193,7 +192,7 @@
     </script>
     <script>
         console.log(cookie['roles_id'])
-        if (cookie['roles_id'] == 1) {
+        if (cookie['roles_id'] == 1 ||cookie['roles_id'] == 2) {
             document.getElementById("tambah_directorat").innerHTML = `<button class="btn btn-primary" onclick="window.location.href = '/directorats_add'"> Tambah Direktorat </button>`;
         } else {
             document.getElementById("tambah_directorat").innerHTML = `<h4>Direktorat</h4>`;

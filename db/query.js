@@ -671,7 +671,7 @@ const directorat_details = async (req, res) => {
 
 const directorat_devisi = async (req, res) => {
     id_d = req.params.id;
-    const sql = await executeQuery('SELECT * FROM devisi where 	directorats_id = $1' , [id_d]);
+    const sql = await executeQuery('SELECT * FROM devisi where 	directorats_id = $1', [id_d]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -691,8 +691,9 @@ const directorats_devisi_delete = async (req, res) => {
 }
 
 const insertdirectorats = async (req, res) => {
-    const a = req.body.daerah.split('-');
-    const sql = await executeQuery('INSERT INTO directorats(title,title_en,description,description_en,id_province,province_name)values($1,$2,$3,$4,$5,$6)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, a[0], a[1]]);
+    // const a = req.body.daerah.split('-');
+    // const sql = await executeQuery('INSERT INTO directorats(title,title_en,description,description_en,id_province,province_name)values($1,$2,$3,$4,$5,$6)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, a[0], a[1]]);
+    const sql = await executeQuery('INSERT INTO directorats(title,title_en,description,description_en)values($1,$2,$3,$4)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en]);
     if (sql?.length > 0) {
         res.redirect('/directorats');
     } else {
@@ -712,9 +713,11 @@ const directorat_path = async (req, res) => {
 }
 
 const update_directorats = async (req, res) => {
-    const a = req.body.daerah.split('-');
-    const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4,id_province=$5,province_name=$6 where id = $7",
-        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, a[0], a[1], req.body.id]);
+    // const a = req.body.daerah.split('-');
+    // const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4,id_province=$5,province_name=$6 where id = $7",
+    //     [req.body.title, req.body.title_en, req.body.description, req.body.description_en, a[0], a[1], req.body.id]);
+    const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4 where id = $7",
+        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, req.body.id]);
 
     if (sql) {
         res.redirect('/directorats');
