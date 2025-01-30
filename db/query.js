@@ -618,7 +618,7 @@ const kdeks_fe_photos = async (req, res) => {
 }
 
 const kdeks_fe_opini = async (req, res) => {
-    const id_dirs = req.params.id;
+    const id_kdk = req.params.id;
     const sql = await executeQuery("SELECT * FROM opini where id_province = $1", [id_kdk]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
@@ -628,7 +628,7 @@ const kdeks_fe_opini = async (req, res) => {
 }
 
 const kdeks_fe_files = async (req, res) => {
-    const id_dirs = req.params.id;
+    const id_kdk = req.params.id;
     const sql = await executeQuery("SELECT * FROM files where id_province = $1", [id_kdk]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
