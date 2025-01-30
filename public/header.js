@@ -61,7 +61,7 @@ document.write(`<header class="nxl-header">
                             </div>
                             <a href="/cp" class="dropdown-item">
                                 <i class="feather-user"></i>
-                                <span>Ubah Password</span>
+                                <span>Ubah Kata Sandi</span>
                             </a>
 
                             <a href="#" onclick="logout()" class="dropdown-item">
