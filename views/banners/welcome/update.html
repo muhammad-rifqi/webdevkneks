@@ -117,7 +117,16 @@
                     },
                     { "data": "name" },
                     { "data": "date_created" },
-                    { "data": "status" },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            if(row?.status == 'on'){
+                                return `Aktif`;
+                            }else{
+                                return `Non Aktif`;
+                            }   
+                        }
+                    },
                     {
                         "data": null,
                         "render": function (data, type, row) {

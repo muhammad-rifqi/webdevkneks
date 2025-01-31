@@ -98,8 +98,12 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Publish</label>
-                                            <input name="is_published" id="publish" type="radio" value="1" checked> publish
-                                            <input name="is_published" id="publish" type="radio" value="0"> not publish
+                                            <!-- <input name="is_published" id="publish" type="radio" value="1" checked> publish
+                                            <input name="is_published" id="publish" type="radio" value="0"> not publish -->
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch" name="is_published" id="publish" checked>
+                                                <label class="form-check-label" for="publish"></label>
+                                              </div>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -110,7 +114,10 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">KDEKS</label>
-                                            <select class="form-control" name="kdeks" id="provinces" required>
+                                            <!-- <select class="form-control" name="kdeks" id="provinces" required>
+                                                <option value="0"></option>
+                                            </select> -->
+                                            <select class="form-control" name="kdeks" id="mySelect2" multiple required>
                                                 <option value="0"></option>
                                             </select>
                                         </div>
@@ -164,6 +171,7 @@
     <script>
         $(document).ready(function () {
             $('#mySelect').select2();
+            $('#mySelect2').select2();
         });
     </script>
     <script>
@@ -206,7 +214,7 @@
                         const ddd = document.createElement('option')
                         ddd.value = `${element?.id}`;
                         ddd.text = `${element?.province_name}`;
-                        document.getElementById("provinces").append(ddd);
+                        document.getElementById("mySelect2").append(ddd);
                     });
                 })
         }

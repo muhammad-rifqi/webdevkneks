@@ -140,7 +140,10 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">KDEKS</label>
-                                            <select class="form-control" name="kdeks" id="provinces" required>
+                                            <!-- <select class="form-control" name="kdeks" id="provinces" required>
+                                                <option value="0"></option>
+                                            </select> -->
+                                            <select class="form-control" name="kdeks" id="mySelect2" multiple required>
                                                 <option value="0"></option>
                                             </select>
                                         </div>
@@ -185,6 +188,7 @@
     <script>
         $(document).ready(function () {
             $('#mySelect').select2();
+            $('#mySelect2').select2();
         });
     </script>
     <script>
@@ -219,11 +223,15 @@
                     news_category_id = rows[0]?.category_id;
                     province_id = rows[0]?.category_id;
                     // document.getElementById("listtag").innerHTML = `<b>[${rows[0]?.tag}]</b>`;
-                    if (rows[0]?.is_publish == 1) {
-                        document.getElementById("publishs").innerHTML = `<input name="is_publish" id="publish" type="radio" value="1" checked> Publish <input name="is_publish" id="publish" type="radio" value="0"> Not Publish`;
-                    } else {
-                        document.getElementById("publishs").innerHTML = `<input name="is_publish" id="publish" type="radio" value="1"> Publish <input name="is_publish" id="publish" type="radio" value="0" checked> Not Publish`;
-                    }
+                    // if (rows[0]?.is_publish == 1) {
+                    document.getElementById("publishs").innerHTML = `
+                                             <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch" name="is_publish" id="publish" checked>
+                                                <label class="form-check-label" for="publish"></label>
+                                              </div>`;
+                    // } else {
+                    //     document.getElementById("publishs").innerHTML = `<input name="is_publish" id="publish" type="radio" value="1"> Publish <input name="is_publish" id="publish" type="radio" value="0" checked> Not Publish`;
+                    // }
                     document.getElementById("news_datetime").value = rows[0]?.news_datetime.split('.')[0];
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.image}" width="180"/>`;
                 })
@@ -290,18 +298,22 @@
                 .then(response => response.json())
                 .then((data) => {
                     data.forEach(element => {
-                        if (element?.id == province_id) {
-                            const ddd = document.createElement('option')
-                            ddd.value = `${element?.id}`;
-                            ddd.text = `${element?.province_name}`;
-                            ddd.selected = true;
-                            document.getElementById("provinces").append(ddd);
-                        } else {
-                            const ddd = document.createElement('option')
-                            ddd.value = `${element?.id}`;
-                            ddd.text = `${element?.province_name}`;
-                            document.getElementById("provinces").append(ddd);
-                        }
+                        // if (element?.id == province_id) {
+                        //     const ddd = document.createElement('option')
+                        //     ddd.value = `${element?.id}`;
+                        //     ddd.text = `${element?.province_name}`;
+                        //     ddd.selected = true;
+                        //     document.getElementById("provinces").append(ddd);
+                        // } else {
+                        //     const ddd = document.createElement('option')
+                        //     ddd.value = `${element?.id}`;
+                        //     ddd.text = `${element?.province_name}`;
+                        //     document.getElementById("provinces").append(ddd);
+                        // }
+                        const ddd = document.createElement('option')
+                        ddd.value = `${element?.id}`;
+                        ddd.text = `${element?.province_name}`;
+                        document.getElementById("mySelect2").append(ddd);
                     });
                 })
         }

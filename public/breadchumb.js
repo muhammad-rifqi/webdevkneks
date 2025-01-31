@@ -204,19 +204,19 @@ if(path == 's_logo_add'){
 //------------------------------- End Of Struktur -----------------------------
 //-------------------------------- Start Of Opini ----------------------
 if(path == 'opini'){
-    breadcrumb1 = "Opini";
+    breadcrumb0 = "Opini";
     breadcrumb1 = "Data";
     breadcrumb2 = "List Opini";
 }
 
 if(path == 'opini_add'){
-    breadcrumb1 = "Opini";
+    breadcrumb0 = "Opini";
     breadcrumb1 = "Data";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'opini_edit'){
-    breadcrumb1 = "Opini";
+    breadcrumb0 = "Opini";
     breadcrumb1 = "Data";
     breadcrumb2 = "Edit";
 }
@@ -706,27 +706,39 @@ if( path == 'submenu_edit'){
 //-----------------------End Of Sub Menu -----------------------------
 //---------------------------- Welcome Banner --------------------------------
 if(path == 'welcomebanner'){
-    breadcrumb0 = "Data";
+    breadcrumb0 = "Banner";
     breadcrumb1 = "Welcome Banners";
     breadcrumb2 = "List Banner";
 }
 
 if(path == 'welcomebanner_add'){
-    breadcrumb0 = "Data";
+    breadcrumb0 = "Banner";
     breadcrumb1 = "Welcome Banners";
     breadcrumb2 = "Tambah";
 }
+
+if(path == 'edit_welcome_page'){
+    breadcrumb0 = "Banner";
+    breadcrumb1 = "Welcome Banners";
+    breadcrumb2 = "Edit";
+}
 //------------------------ Login Banner----------------------
 if(path == 'login_banner'){
-    breadcrumb0 = "Data";
+    breadcrumb0 = "Banner";
     breadcrumb1 = "Login Banners";
     breadcrumb2 = "List Banner";
 }
 
 if(path == 'login_banner_add'){
-    breadcrumb0 = "Data";
+    breadcrumb0 = "Banner";
     breadcrumb1 = "Login Banner";
     breadcrumb2 = "Tambah";
+}
+
+if(path == 'login_banner_edit'){
+    breadcrumb0 = "Banner";
+    breadcrumb1 = "Login Banner";
+    breadcrumb2 = "Edit";
 }
 //-----------------------End Of Login Banner-----------------------------
 if(path == 'cp'){

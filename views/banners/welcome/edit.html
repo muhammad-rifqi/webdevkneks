@@ -72,9 +72,9 @@
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Status Welcome Banners )*</label>
-                                            <span id="radio_buttons">
+                                            <div id="radio_buttons">
 
-                                            </span>
+                                            </div>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -127,14 +127,10 @@
                     document.getElementById("nma").value = rows[0]?.name;
                     document.getElementById("previews").innerHTML = `<img src="${rows[0]?.path}" width="150" alt="Gambar Banner Welcome">`;
                     document.getElementById("tanggal_publish").value = rows[0]?.date_created.split('T')[0];
-                    if (rows[0]?.status == 'aktif') {
-                        document.getElementById("radio_buttons").innerHTML = `
-                         <input type="radio" name="status" id="status" value="aktif" checked>Aktif
-                         <input type="radio" name="status" id="status" value="non_aktif">Non Aktif`;
+                    if (rows[0]?.status == 'on') {
+                        document.getElementById("radio_buttons").innerHTML = `<div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="status" id="status" checked> <label class="form-check-label" for="status"></label></div>`;
                     } else {
-                        document.getElementById("radio_buttons").innerHTML = `
-                         <input type="radio" name="status" id="status" value="aktif">Aktif
-                         <input type="radio" name="status" id="status" value="non_aktif" checked>Non Aktif`;
+                        document.getElementById("radio_buttons").innerHTML = `<div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="status" id="status"> <label class="form-check-label" for="status"></label></div>`;
                     }
                 })
         }

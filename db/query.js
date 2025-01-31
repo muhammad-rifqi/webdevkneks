@@ -600,7 +600,7 @@ const directorats_fe_files = async (req, res) => {
 
 const kdeks_fe_news = async (req, res) => {
     const id_kdk = req.params.id;
-    const sql = await executeQuery("SELECT * FROM news where id_province = $1", [id_kdk]);
+    const sql = await executeQuery("SELECT * FROM news where id_province LIKE '%" + id_kdk + "%' order by id ASC");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -610,7 +610,7 @@ const kdeks_fe_news = async (req, res) => {
 
 const kdeks_fe_photos = async (req, res) => {
     const id_kdk = req.params.id;
-    const sql = await executeQuery("SELECT * FROM news_photos where id_province = $1 ", [id_kdk]);
+    const sql = await executeQuery("SELECT * FROM news_photos where id_province LIKE '%" + id_kdk + "%' order by id ASC");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -620,7 +620,7 @@ const kdeks_fe_photos = async (req, res) => {
 
 const kdeks_fe_opini = async (req, res) => {
     const id_kdk = req.params.id;
-    const sql = await executeQuery("SELECT * FROM opini where id_province = $1", [id_kdk]);
+    const sql = await executeQuery("SELECT * FROM opini where id_province LIKE '%" + id_kdk + "%' order by id ASC");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -630,7 +630,7 @@ const kdeks_fe_opini = async (req, res) => {
 
 const kdeks_fe_files = async (req, res) => {
     const id_kdk = req.params.id;
-    const sql = await executeQuery("SELECT * FROM files where id_province = $1", [id_kdk]);
+    const sql = await executeQuery("SELECT * FROM files where id_province LIKE '%" + id_kdk + "%' order by id ASC");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -2502,7 +2502,7 @@ const updateslideshow = async (req, res) => {
 //:::::::::::::::::::::::::::::::::::::::::::: End Of SlideShow :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::::::: Login Banner ::::::::::::::::::::::::::::::::::::::::::::::::
 const login_banners = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM banner where flag = 'login' and status = 'aktif'");
+    const sql = await executeQuery("SELECT * FROM banner where flag = 'login'");
     const array = [];
     sql.forEach((element, index) => {
         const rrr = {
@@ -2592,7 +2592,7 @@ const delete_login_banner = async (req, res) => {
 //::::::::::::::::::::::::::::::::::::::::::::::::::: End Login Banner :::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::::::::::::::: Start Struktur Logo Banner :::::::::::::::::::::::::::::::::::::::::::
 const slogo = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM banner where flag = 's_logo' and status = 'aktif'");
+    const sql = await executeQuery("SELECT * FROM banner where flag = 's_logo'");
     const array = [];
     sql.forEach((element, index) => {
         const rrr = {
@@ -2681,7 +2681,7 @@ const delete_slogos = async (req, res) => {
 //::::::::::::::::::::::::::::::::::::::::::::::::::: End Of Struktur Logo :::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::::::::::::::: Start Of Welcome Banner ::::::::::::::::::::::::::::::::::::::
 const welcome_pages = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM banner where flag = 'welcome' and status = 'aktif'");
+    const sql = await executeQuery("SELECT * FROM banner where flag = 'welcome'");
     const array = [];
     sql.forEach((element, index) => {
         const rrr = {
