@@ -310,8 +310,8 @@ if (cookie["roles_id"] == 1) {
                             <li class="nxl-item"><a class="nxl-link" href="/es">Profile Ekonomi Syariah</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/i">Anggota KNEKS</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/sm">Media Sosial</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/c">Kontak</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/m">Peta</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/c_edit/1">Kontak</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/m_edit/1">Peta</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/scp">Skup</a></li>
                          </ul>
                     </li>
