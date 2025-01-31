@@ -2502,7 +2502,7 @@ const updateslideshow = async (req, res) => {
 //:::::::::::::::::::::::::::::::::::::::::::: End Of SlideShow :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::::::: Login Banner ::::::::::::::::::::::::::::::::::::::::::::::::
 const login_banners = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM banner where flag = 'login'");
+    const sql = await executeQuery("SELECT * FROM banner where flag = 'login' and status = 'aktif'");
     const array = [];
     sql.forEach((element, index) => {
         const rrr = {
@@ -2592,7 +2592,7 @@ const delete_login_banner = async (req, res) => {
 //::::::::::::::::::::::::::::::::::::::::::::::::::: End Login Banner :::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::::::::::::::: Start Struktur Logo Banner :::::::::::::::::::::::::::::::::::::::::::
 const slogo = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM banner where flag = 's_logo'");
+    const sql = await executeQuery("SELECT * FROM banner where flag = 's_logo' and status = 'aktif'");
     const array = [];
     sql.forEach((element, index) => {
         const rrr = {
