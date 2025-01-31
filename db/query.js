@@ -2426,7 +2426,7 @@ const deleteslideshow = async (req, res) => {
 const insertslideshow = async (req, res) => {
     if (req.file) {
         const filesimage = site_url + "/uploads/slideshow/" + req.file.originalname.replace(" ", "");
-        const sql = await executeQuery('INSERT INTO slideshow (title,title_en,image, date_created,status, content,content)values($1,$2,$3,$4,$5,$6,$7) ', [req.body.title, req.body.title_en, filesimage, req.body.tanggal, req.body.status, req.body.content, req.body.content_en]);
+        const sql = await executeQuery('INSERT INTO slideshow (title,title_en,image, date_created,status, content,content_en)values($1,$2,$3,$4,$5,$6,$7) ', [req.body.title, req.body.title_en, filesimage, req.body.tanggal, req.body.status, req.body.content, req.body.content_en]);
         if (sql) {
             res.redirect('/b');
         } else {

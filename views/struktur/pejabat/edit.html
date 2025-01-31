@@ -76,13 +76,6 @@
                                                 required>
                                         </div>
 
-                                        
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Publish</label>
-                                           <span id="publish_pejabat"></span>
-                                        </div>
-
-
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Photo/Gambar Preview</label>
                                             <p id="preview"></p>
@@ -103,6 +96,11 @@
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Keterangan [EN] </label>
                                             <textarea class="form-control" name="description_en" id="editor2"></textarea>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Publish</label>
+                                           <span id="publish_pejabat"></span>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -159,10 +157,15 @@
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.photo}" width="180">`;
                     nicEditors.findEditor("editor1").setContent(rows[0]?.description);
                     nicEditors.findEditor("editor2").setContent(rows[0]?.description_en);
-                    if (rows[0]?.is_publish == 1) {
-                        document.getElementById("publish_pejabat").innerHTML = `<input name="is_published" id="publish" type="radio" value="1" checked> Publish <input name="is_published" id="publish" type="radio" value="0"> Not Publish`;
+                    // if (rows[0]?.is_publish == 1) {
+                    //     document.getElementById("publish_pejabat").innerHTML = `<input name="is_published" id="publish" type="radio" value="1" checked> Publish <input name="is_published" id="publish" type="radio" value="0"> Not Publish`;
+                    // } else {
+                    //     document.getElementById("publish_pejabat").innerHTML = `<input name="is_published" id="publish" type="radio" value="1"> Publish <input name="is_published" id="publish" type="radio" value="0" checked> Not Publish`;
+                    // }
+                    if (rows[0]?.is_publish == 'on') {
+                        document.getElementById("publish_pejabat").innerHTML = `<div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="is_published" id="publish" checked> <label class="form-check-label" for="publish"></label></div>`;
                     } else {
-                        document.getElementById("publish_pejabat").innerHTML = `<input name="is_published" id="publish" type="radio" value="1"> Publish <input name="is_published" id="publish" type="radio" value="0" checked> Not Publish`;
+                        document.getElementById("publish_pejabat").innerHTML = `<div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="is_published" id="publish"> <label class="form-check-label" for="publish"></label></div>`;
                     }
                 })
         }

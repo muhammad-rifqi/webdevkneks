@@ -154,14 +154,19 @@
                     nicEditors.findEditor( "editor4" ).setContent( rows[0]?.content_en );
                     document.getElementById("previews").innerHTML = `<img src="${rows[0]?.image}" width="180"/>`;
                     document.getElementById("tanggal_publish").value = rows[0]?.date_created.split('T')[0];
-                    if (rows[0]?.status == 'aktif') {
-                        document.getElementById("radio_buttons").innerHTML = `
-                         <input type="radio" name="status" id="status" value="aktif" checked>Aktif
-                         <input type="radio" name="status" id="status" value="non_aktif">Non Aktif`;
+                    // if (rows[0]?.status == 'aktif') {
+                    //     document.getElementById("radio_buttons").innerHTML = `
+                    //      <input type="radio" name="status" id="status" value="aktif" checked>Aktif
+                    //      <input type="radio" name="status" id="status" value="non_aktif">Non Aktif`;
+                    // } else {
+                    //     document.getElementById("radio_buttons").innerHTML = `
+                    //      <input type="radio" name="status" id="status" value="aktif">Aktif
+                    //      <input type="radio" name="status" id="status" value="non_aktif" checked>Non Aktif`;
+                    // }
+                    if (rows[0]?.status == 'on') {
+                        document.getElementById("radio_buttons").innerHTML = `<div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="status" id="status" checked> <label class="form-check-label" for="status"></label></div>`;
                     } else {
-                        document.getElementById("radio_buttons").innerHTML = `
-                         <input type="radio" name="status" id="status" value="aktif">Aktif
-                         <input type="radio" name="status" id="status" value="non_aktif" checked>Non Aktif`;
+                        document.getElementById("radio_buttons").innerHTML = `<div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="status" id="status"> <label class="form-check-label" for="status"></label></div>`;
                     }
                 })
         }

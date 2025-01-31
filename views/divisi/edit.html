@@ -129,13 +129,13 @@
                             const aaa = document.createElement('option')
                             aaa.value = `${items?.id}`;
                             aaa.text = `${items?.title}`;
-                            aaa.checked = true;
+                            aaa.selected = true;
                             document.getElementById("directorats_id").append(aaa);
                         } else {
                             const aaa = document.createElement('option')
                             aaa.value = `${items?.id}`;
                             aaa.text = `${items?.title}`;
-                            aaa.checked = false;
+                            aaa.selected = false;
                             document.getElementById("directorats_id").append(aaa);
                         }
                     });
