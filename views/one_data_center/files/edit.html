@@ -156,7 +156,10 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">KDEKS</label>
-                                            <select class="form-control" name="kdeks" id="provinces" required>
+                                            <!-- <select class="form-control" name="kdeks" id="provinces" required>
+                                                <option value="0"></option>
+                                            </select> -->
+                                            <select class="form-control" name="kdeks" id="mySelect2" required>
                                                 <option value="0"></option>
                                             </select>
                                         </div>
@@ -210,6 +213,7 @@
     <script>
         $(document).ready(function () {
             $('#mySelect').select2();
+            $('#mySelect2').select2();
         });
     </script>
     <script>
@@ -306,18 +310,22 @@
                 .then(response => response.json())
                 .then((data) => {
                     data.forEach(element => {
-                        if (element?.id == prove_id) {
-                            const ddd = document.createElement('option')
+                        // if (element?.id == prove_id) {
+                        //     const ddd = document.createElement('option')
+                        //     ddd.value = `${element?.id}`;
+                        //     ddd.text = `${element?.province_name}`;
+                        //     ddd.selected = true;
+                        //     document.getElementById("provinces").append(ddd);
+                        // } else {
+                        //     const ddd = document.createElement('option')
+                        //     ddd.value = `${element?.id}`;
+                        //     ddd.text = `${element?.province_name}`;
+                        //     document.getElementById("provinces").append(ddd);
+                        // }
+                        const ddd = document.createElement('option')
                             ddd.value = `${element?.id}`;
                             ddd.text = `${element?.province_name}`;
-                            ddd.selected = true;
-                            document.getElementById("provinces").append(ddd);
-                        } else {
-                            const ddd = document.createElement('option')
-                            ddd.value = `${element?.id}`;
-                            ddd.text = `${element?.province_name}`;
-                            document.getElementById("provinces").append(ddd);
-                        }
+                            document.getElementById("mySelect2").append(ddd);
                     });
                 })
         }
