@@ -600,18 +600,18 @@ if(path == 'scp_edit'){
 if(path == 'b'){
     breadcrumb0 = "Banners";
     breadcrumb1 = "Data";
-    breadcrumb2 = "List Banner";
+    breadcrumb2 = "List Slide Show Banner";
 }
 
 if(path == 'b_add'){
     breadcrumb0 = "Banners";
-    breadcrumb1 = "List Banners";
+    breadcrumb1 = "Slide Show Banners";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'b_edit'){
     breadcrumb0 = "Banners";
-    breadcrumb1 = "List Banners";
+    breadcrumb1 = "Slide Show Banners";
     breadcrumb2 = "Edit";
 }
 //-----------------------End Of Banners-----------------------------
@@ -708,7 +708,7 @@ if( path == 'submenu_edit'){
 if(path == 'welcomebanner'){
     breadcrumb0 = "Banner";
     breadcrumb1 = "Welcome Banners";
-    breadcrumb2 = "List Banner";
+    breadcrumb2 = "List Welcome Banner";
 }
 
 if(path == 'welcomebanner_add'){
@@ -726,7 +726,7 @@ if(path == 'edit_welcome_page'){
 if(path == 'login_banner'){
     breadcrumb0 = "Banner";
     breadcrumb1 = "Login Banners";
-    breadcrumb2 = "List Banner";
+    breadcrumb2 = "List Login Banner";
 }
 
 if(path == 'login_banner_add'){
