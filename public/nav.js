@@ -279,13 +279,13 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                             `);
     // <li class="nxl-item"><a class="nxl-link" href="/cp">Change Password</a></li>
 }
-if (cookie["roles_id"] == 1) {
+if (cookie["roles_id"] == 2) {
     document.write(`
                             <li class="nxl-item"><a class="nxl-link" href="/u">Users</a></li>
                            `);
 }
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
-    document.write(`
+if (cookie["roles_id"] == 1) {
+    document.write(`        <li class="nxl-item"><a class="nxl-link" href="/u">Users</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/whitelist">Persetujuan User Baru</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/ip_address">Persetujuan Whitelist IP</a></li>
                            `);

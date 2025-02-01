@@ -2179,7 +2179,7 @@ const insertusers = async (req, res) => {
     const time_datetime = date + ' ' + time;
     const pw = md5(req.body.password);
     const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at,ip_address, directorat_id, id_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9)",
-        [req.body.name.replace(/\s/g, ''), req.body.email, pw, req.body.role_id, time_datetime, time_datetime, req.body.ip_address, req.body.directorat_id, req.body.id_province]);
+        [req.body.name.replace(/\s/g, ''), req.body.email, pw, req.body.role_id, time_datetime, time_datetime, '0.0.0.0', req.body.directorat_id, req.body.id_province]);
     if (sql) {
         res.redirect('/u');
     } else {
@@ -2226,10 +2226,10 @@ const deleteuser = async (req, res) => {
 const updateusers = async (req, res) => {
     const id_user = req.body.id;
     if (req.body.passwords == "" || req.body.passwords == null) {
-        await executeQuery("UPDATE users SET name=$1 , email=$2 ,  role_id = $3 , ip_address = $4 , directorat_id = $5, id_province=$6 WHERE id=$7 ", [req.body.names.replace(/\s/g, ''), req.body.emails, req.body.roles_id, req.body.ip_address, req.body.directorat_id, req.body.id_province, id_user]);
+        await executeQuery("UPDATE users SET name=$1 , email=$2 ,  role_id = $3 , ip_address = $4 , directorat_id = $5, id_province=$6 WHERE id=$7 ", [req.body.names.replace(/\s/g, ''), req.body.emails, req.body.roles_id, '0.0.0.0', req.body.directorat_id, req.body.id_province, id_user]);
         res.redirect('/u');
     } else {
-        await executeQuery("UPDATE users SET name=$1 , email=$2 , password = $3 , role_id = $4, ip_address = $5, directorat_id = $6, id_province = $7 WHERE id=$8 ", [req.body.names.replace(/\s/g, ''), req.body.emails, md5(req.body.passwords), req.body.roles_id, req.body.ip_address, req.body.directorat_id, req.body.id_province, id_user]);
+        await executeQuery("UPDATE users SET name=$1 , email=$2 , password = $3 , role_id = $4, ip_address = $5, directorat_id = $6, id_province = $7 WHERE id=$8 ", [req.body.names.replace(/\s/g, ''), req.body.emails, md5(req.body.passwords), req.body.roles_id, '0.0.0.0', req.body.directorat_id, req.body.id_province, id_user]);
         res.redirect('/u');
     }
 }
