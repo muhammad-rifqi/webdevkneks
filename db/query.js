@@ -2901,6 +2901,31 @@ const data_menus = async (req, res) => {
     }
 }
 
+
+const dropdown_menu = async (req, res) => {
+    const result = await executeQuery("SELECT * FROM menu ORDER BY id ASC ");
+    let promises = result.map(async (item) => {
+        return new Promise(async (resolve, reject) => {
+            let r = await executeQuery("SELECT * FROM menu_sub WHERE id = $1", [item.menu_id]);
+            let sub_menux = r[0];
+            let row = {
+                "id": item?.id,
+                "menu_name": item?.menu_name,
+                "menu_link": item?.menu_link,
+                "menu_sub": sub_menux
+            };
+            resolve(row);
+        });
+    });
+    Promise.all(promises)
+        .then((rows) => {
+            res.status(200).json(rows);
+        })
+        .catch((error) => {
+            res.status(500).json({ error: error.message });
+        });
+}
+
 const detail_data_menus = async (req, res) => {
     const id_dm = req.params.id;
     const sql = await executeQuery('SELECT * FROM data_menu where id = $1', [id_dm]);
@@ -3071,7 +3096,7 @@ const insertsourcesdata = async (req, res) => {
 
 const updatesourcedata = async (req, res) => {
     const sql = await executeQuery("update sourcedata set dataset=$1,source=$2,date_created=$3,dataset_en=$4,description=$5,produsen_data=$6,tanggal_update=$7,api_data=$8 where id=$9",
-        [req.body.dataset, req.body.source, '2025-01-01 00:00:00', req.body.dataset_en, req.body.descriptions, req.body.produsen_data, req.body.tanggal_update, req.body.api_database,req.body.idd]);
+        [req.body.dataset, req.body.source, '2025-01-01 00:00:00', req.body.dataset_en, req.body.descriptions, req.body.produsen_data, req.body.tanggal_update, req.body.api_database, req.body.idd]);
     if (sql) {
         res.redirect('/dataset');
     } else {
@@ -3492,6 +3517,7 @@ module.exports = {
     emptyapidashboard,
     updateapidashboard,
     data_menus,
+    dropdown_menu,
     detail_data_menus,
     deletedatamenus,
     insertdatamenus,
