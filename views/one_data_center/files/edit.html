@@ -50,6 +50,8 @@
                         <form action="/updatefileupload" method="post" enctype="multipart/form-data">
                             <input type="hidden" id="max_id" name="MAX_FILE_SIZE" value="2548000" />
                             <input type="hidden" name="id" id="id" value="">
+                            <input type="hidden" id="users_name" name="users_name">
+                            <input type="hidden" id="users_id" name="users_id">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
@@ -85,7 +87,9 @@
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Upload Berkas</label>
                                             <input class="form-control" name="file_data" id="file_data" type="file"
-                                            accept="application/pdf,application/vnd.ms-excel.doc,.docx" onchange="upload_check()"> )* Max Upload 2.5 MB , tipe data  : pdf,xls, .doc, .docx
+                                                accept="application/pdf,application/vnd.ms-excel.doc,.docx"
+                                                onchange="upload_check()"> )* Max Upload 2.5 MB , tipe data : pdf,xls,
+                                            .doc, .docx
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Keterangan [ID]</label>
@@ -112,7 +116,7 @@
                                             </div>
                                         </div>
 
-                                    
+
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Penulis</label>
                                             <input class="form-control" name="writer" id="writers" type="text" required>
@@ -149,7 +153,7 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Direktorat</label>
-                                            <select class="form-control" name="directorat" id="mySelect" multiple
+                                            <select class="form-control" name="directorat" id="mySelect2" multiple
                                                 required>
                                             </select>
                                         </div>
@@ -159,8 +163,7 @@
                                             <!-- <select class="form-control" name="kdeks" id="provinces" required>
                                                 <option value="0"></option>
                                             </select> -->
-                                            <select class="form-control" name="kdeks" id="mySelect2" multiple required>
-                                                <option value="0"></option>
+                                            <select class="form-control" name="kdeks" id="mySelect3" multiple required>
                                             </select>
                                         </div>
 
@@ -211,22 +214,82 @@
     <script src="/assets/vendors/js/tagify.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
+
+        function getProvinces() {
+            fetch('/provinces')
+                .then(response => response.json())
+                .then((data) => {
+                    const getArrays = localStorage.getItem("prov_idfiles");
+                    let arrays = [];
+                    if (getArrays.length <= 1) {
+                        arrays.push(getArrays);
+                    } else {
+                        const str = getArrays.replace(/[{}"]/g, "").split(",")
+                            .map(Number)
+                            .join(",");
+                        let chars = str.split(",").map(Number);
+                        arrays.push(chars)
+                    }
+                    var opt = [];
+                    data.forEach(element => {
+                        opt.push('<option value="' + element?.id + '">' + element?.province_name + '</option>');
+                    });
+                    $('#mySelect3').empty().append(opt).trigger('change');
+                    $('#mySelect3').val(arrays[0]).trigger('change');
+
+                })
+        }
+
+        function getDirectorats() {
+            $.ajax({
+                url: '/directorat_fe',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    const getArray = localStorage.getItem("object_dir_files");
+                    let array = [];
+                    if (getArray.length <= 1) {
+                        array.push(getArray[0]);
+                    } else {
+                        const strings = getArray.replace(/[{}"]/g, "").split(",")
+                            .map(Number)
+                            .join(",");
+                        for (let char of strings) {
+                            if (char !== ',') {
+                                array.push(char);
+                            }
+                        }
+                    }
+                    var options = [];
+                    $.each(data, function (index, value) {
+                        options.push('<option value="' + value.id + '">' + value.title + '</option>');
+                    });
+                    $('#mySelect2').empty().append(options).trigger('change');
+                    $('#mySelect2').val(array).trigger('change');
+                }
+            });
+        }
+
         $(document).ready(function () {
-            $('#mySelect').select2();
+            const inputElm = document.querySelector('input.tagify');
+            new Tagify(inputElm);
             $('#mySelect2').select2();
+            $('#mySelect3').select2();
+            getProvinces();
+            getDirectorats();
+
         });
     </script>
     <script>
+        document.getElementById("users_name").value = `${cookie['name']}`;
+        document.getElementById("users_id").value = `${cookie['id']}`;
+
         window.addEventListener("load", async () => {
-            const inputElm = document.querySelector('input.tagify');
-            new Tagify(inputElm);
             let file_category_id;
             let prove_id;
             await getUrlById();
             await getCategory();
             await getTagging();
-            await getDirectorats();
-            await getProvinces();
             await upload_check();
         })
 
@@ -247,6 +310,9 @@
                     // } else {
                     //     document.getElementById("is_publish").setAttribute('checked', false);
                     // }
+                    localStorage.setItem("object_dir_files", rows[0]?.directorat)
+                    localStorage.setItem("prov_idfiles", rows[0]?.id_province);
+
                     document.getElementById("publish_files").innerHTML = `
                                              <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" role="switch" name="is_publish" id="id_publish" checked>
@@ -289,44 +355,6 @@
                     });
                     document.getElementById("tag").innerHTML = ttt;
                     document.getElementById("tagify").value = ttt;
-                })
-        }
-
-        function getDirectorats() {
-            fetch('/directorat_fe')
-                .then(res => res.json())
-                .then((qqq) => {
-                    qqq.forEach(items => {
-                        const aaa = document.createElement('option')
-                        aaa.value = `${items?.id}`;
-                        aaa.text = `${items?.title}`;
-                        document.getElementById("mySelect").append(aaa);
-                    });
-                })
-        }
-
-        function getProvinces() {
-            fetch('/provinces')
-                .then(response => response.json())
-                .then((data) => {
-                    data.forEach(element => {
-                        // if (element?.id == prove_id) {
-                        //     const ddd = document.createElement('option')
-                        //     ddd.value = `${element?.id}`;
-                        //     ddd.text = `${element?.province_name}`;
-                        //     ddd.selected = true;
-                        //     document.getElementById("provinces").append(ddd);
-                        // } else {
-                        //     const ddd = document.createElement('option')
-                        //     ddd.value = `${element?.id}`;
-                        //     ddd.text = `${element?.province_name}`;
-                        //     document.getElementById("provinces").append(ddd);
-                        // }
-                        const ddd = document.createElement('option')
-                            ddd.value = `${element?.id}`;
-                            ddd.text = `${element?.province_name}`;
-                            document.getElementById("mySelect2").append(ddd);
-                    });
                 })
         }
 

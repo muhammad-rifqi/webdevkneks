@@ -1433,8 +1433,8 @@ const insertfileupload = async (req, res) => {
     const file_date = req.body.date;
     const fileuploads = site_url + "/uploads/filesupload/" + req.file.originalname.replace(" ", "");
     const bbb = req.body.file_category_id.split('-');
-    const sql = await executeQuery("insert into files(title,title_en,content,content_en,file,is_publish,date,report_category_id,report_category_name,writer,publisher,synopsis,isbn,number_of_pages,width,height,tagging,directorat,id_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19)",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.kdeks]);
+    const sql = await executeQuery("insert into files(title,title_en,content,content_en,file,is_publish,date,report_category_id,report_category_name,writer,publisher,synopsis,isbn,number_of_pages,width,height,tagging,directorat,id_province,users_id,users_name) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.users_id, req.body.users_name]);
     if (sql) {
         res.redirect('/f');
     } else {
@@ -1447,8 +1447,8 @@ const updatefileupload = async (req, res) => {
     const file_date = req.body.date;
     const bbb = req.body.file_category_id.split('-');
     if (!req.file || req.file == undefined || req.file == "") {
-        const sql = await executeQuery("update files set title=$1,title_en=$2,content=$3,content_en=$4,is_publish=$5,date=$6,report_category_id=$7,report_category_name=$8,writer=$9,publisher=$10,synopsis=$11,isbn=$12,number_of_pages=$13,width=$14,height=$15,tagging=$16,directorat=$17 where id = $18",
-            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.id]);
+        const sql = await executeQuery("update files set title=$1,title_en=$2,content=$3,content_en=$4,is_publish=$5,date=$6,report_category_id=$7,report_category_name=$8,writer=$9,publisher=$10,synopsis=$11,isbn=$12,number_of_pages=$13,width=$14,height=$15,tagging=$16,directorat=$17,id_province=$18,users_id=$19,users_name=$20 where id = $21",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.users_id, req.body.users_name, req.body.id]);
         if (sql) {
             res.redirect('/f');
         } else {
@@ -1456,8 +1456,8 @@ const updatefileupload = async (req, res) => {
         }
     } else {
         const fileuploads = site_url + "/uploads/filesupload/" + req.file.originalname.replace(" ", "");
-        const sql = await executeQuery("update files set title=$1,title_en=$2,content=$3,content_en=$4, file=$5, is_publish=$6,date=$7,report_category_id=$8,report_category_name=$9,writer=$10,publisher=$11,synopsis=$12,isbn=$13,number_of_pages=$14,width=$15,height=$16,tagging=$17,directorat=$18 where id = $19",
-            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.id]);
+        const sql = await executeQuery("update files set title=$1,title_en=$2,content=$3,content_en=$4, file=$5, is_publish=$6,date=$7,report_category_id=$8,report_category_name=$9,writer=$10,publisher=$11,synopsis=$12,isbn=$13,number_of_pages=$14,width=$15,height=$16,tagging=$17,directorat=$18,id_province=$19,users_id=$20,users_name=$21 where id = $22",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.users_id, req.body.users_name, req.body.id]);
         if (sql) {
             res.redirect('/f');
         } else {
@@ -1959,8 +1959,8 @@ const categories = async (req, res) => {
 const insertphoto = async (req, res) => {
     const photos_datetime = req.body.photo_datetime.replace("T", " ");
     const photoupload = site_url + "/uploads/photo/" + req.file.originalname.replace(" ", "");
-    const sql = await executeQuery("insert into news_photos(title,title_en,content,content_en,photo,photos_datetime,tag,directorat,id_province,is_publish) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photoupload, photos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published])
+    const sql = await executeQuery("insert into news_photos(title,title_en,content,content_en,photo,photos_datetime,tag,directorat,id_province,is_publish,users_id,users_name) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photoupload, photos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published, req.body.users_id, req.body.users_name])
     if (sql) {
         res.redirect('/ph');
     } else {
@@ -2008,8 +2008,8 @@ const deletephoto = async (req, res) => {
 const updatephoto = async (req, res) => {
     const photos_datetime = req.body.photo_datetime.replace("T", " ");
     if (!req.file || req.file == undefined || req.file == "") {
-        const sql = await executeQuery("UPDATE news_photos set  title=$1,title_en=$2,content=$3,content_en=$4,photos_datetime=$5,tag=$6,directorat=$7,id_province=$8,is_publish=$9 where id = $10",
-            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published, req.body.id]);
+        const sql = await executeQuery("UPDATE news_photos set  title=$1,title_en=$2,content=$3,content_en=$4,photos_datetime=$5,tag=$6,directorat=$7,id_province=$8,is_publish=$9,users_id=$10,users_name=$11 where id = $12",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published, req.body.users_id, req.body.users_name, req.body.id]);
         if (sql) {
             res.redirect('/ph');
         } else {
@@ -2018,8 +2018,8 @@ const updatephoto = async (req, res) => {
         }
     } else {
         const fileuploads = site_url + "/uploads/photo/" + req.file.originalname.replace(" ", "");
-        const sql = await executeQuery("UPDATE news_photos set  title=$1,title_en=$2,content=$3,content_en=$4,photo=$5, photos_datetime=$6,tag=$7,directorat=$8,id_province=$9,is_publish=$10 where id = $11",
-            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, photos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published, req.body.id]);
+        const sql = await executeQuery("UPDATE news_photos set  title=$1,title_en=$2,content=$3,content_en=$4,photo=$5, photos_datetime=$6,tag=$7,directorat=$8,id_province=$9,is_publish=$10,users_id=$11,users_name=$12 where id = $13",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, photos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published, req.body.users_id, req.body.users_name, req.body.id]);
         if (sql) {
             res.redirect('/ph');
         } else {
@@ -2032,8 +2032,8 @@ const updatephoto = async (req, res) => {
 //::::::::::::::::::::::::::::::Start Of Videos:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const insertvideo = async (req, res) => {
     const videos_datetime = req.body.video_datetime.replace("T", " ");
-    const sql = await executeQuery("insert into news_videos(title,title_en,content,content_en,video,duration,videos_datetime,tag,directorat,id_province,is_publish) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.video, req.body.duration, videos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published]);
+    const sql = await executeQuery("insert into news_videos(title,title_en,content,content_en,video,duration,videos_datetime,tag,directorat,id_province,is_publish,users_id,users_name) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.video, req.body.duration, videos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published, req.body.users_id, req.body.users_name]);
     if (sql) {
         res.redirect('/v');
     } else {
@@ -2066,8 +2066,8 @@ const deletevideo = async (req, res) => {
 const updatevideos = async (req, res) => {
     // const videos_datetime = req.body.video_datetime.replace("T", " ");
     const videos_datetime = req.body.video_datetime.replace("T", " ");
-    const sql = await executeQuery("update news_videos set title=$1,title_en=$2,content=$3,content_en=$4,video=$5,duration=$6,videos_datetime=$7,tag=$8,directorat=$9,id_province=$10,is_publish=$11 where id = $12",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.video, req.body.duration, videos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published, req.body.id]);
+    const sql = await executeQuery("update news_videos set title=$1,title_en=$2,content=$3,content_en=$4,video=$5,duration=$6,videos_datetime=$7,tag=$8,directorat=$9,id_province=$10,is_publish=$11,users_id=$12,users_name=$13 where id = $14",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.video, req.body.duration, videos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published, req.body.users_id, req.body.users_name, req.body.id]);
     if (sql) {
         res.redirect('/v');
     } else {

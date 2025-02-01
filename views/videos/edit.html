@@ -49,6 +49,8 @@
                     <div class="col-lg-12">
                         <form action="/updatevideo" method="post">
                             <input type="hidden" name="id" id="id" value="">
+                            <input type="hidden" id="users_name" name="users_name">
+                            <input type="hidden" id="users_id" name="users_id">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
@@ -114,7 +116,7 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Pilih Direktorat</label>
-                                            <select class="form-control" name="directorat" id="mySelect" multiple
+                                            <select class="form-control" name="directorat" id="mySelect2" multiple
                                                 required>
                                             </select>
                                         </div>
@@ -124,7 +126,7 @@
                                             <!-- <select class="form-control" name="kdeks" id="provinces" required>
                                                 <option value="0"></option>
                                             </select> -->
-                                            <select class="form-control" name="kdeks" id="mySelect2" multiple required>
+                                            <select class="form-control" name="kdeks" id="mySelect3" multiple required>
                                                 <option value="0"></option>
                                             </select>
                                         </div>
@@ -176,53 +178,27 @@
     <script src="/assets/vendors/js/tagify.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#mySelect').select2();
-            $('#mySelect2').select2();
-        });
-    </script>
-    <script>
-        window.addEventListener("load", async () => {
-            const inputElm = document.querySelector('input.tagify');
-            new Tagify(inputElm);
-            let provinces_id;
-            await getUrlById();
-            await getTagging();
-            await getDireactorat();
-            await getProvinces();
-        })
+
+
+        document.getElementById("users_name").value = `${cookie['name']}`;
+        document.getElementById("users_id").value = `${cookie['id']}`;
 
         function getUrlById() {
             const URLS = new URL(window.location.href);
             fetch('/videodetail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
-                    // var uuu = rows[0]?.directorat;
-                    // const array = uuu.replace(/[{}]/g, '').split(',');
-                    // const toarray = array.map(item => item.replace(/"/g, ''));
-                    // const cleanedString = rows[0]?.directorat.slice(1, -1);
-                    // const arrayWithNumbers = cleanedString.split(',');
-                    // const finalArray = arrayWithNumbers.map(item => item.substring(item.indexOf('-') + 1));
-                    // const finalArray = arrayWithNumbers.map(item => {
-                    //     const parts = item.split('-');
-                    //     return {
-                    //         number: parts[0],
-                    //         text: parts[1]
-                    //     };
-                    // });
-                    // console.log(finalArray);
                     provinces_id = rows[0]?.id_province;
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    // document.getElementById("val3").innerHTML = rows[0]?.content;
-                    // document.getElementById("val4").innerHTML = rows[0]?.content_en;
                     nicEditors.findEditor("editor3").setContent(rows[0]?.content);
                     nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
                     document.getElementById("videos").value = rows[0]?.video;
                     document.getElementById("durations").value = rows[0]?.duration;
                     document.getElementById("video_datetimes").value = rows[0]?.videos_datetime.split('.')[0];
-                    // document.getElementById("directorat_val").innerHTML = finalArray.toString().replace('\"','').replace('"','');
+                    localStorage.setItem("object_dir_videos", rows[0]?.directorat)
+                    localStorage.setItem("prov_idvideos", rows[0]?.id_province);
                     // if (rows[0]?.is_publish == 1) {
                     document.getElementById("publish_video").innerHTML = `
                                              <div class="form-check form-switch">
@@ -249,44 +225,71 @@
                 })
         }
 
-        function getDireactorat() {
-            fetch('/directorat_fe')
-                .then(res => res.json())
-                .then((qqq) => {
-                    qqq.forEach(items => {
-                        const aaa = document.createElement('option')
-                        aaa.value = `${items?.id}`;
-                        aaa.text = `${items?.title}`;
-                        document.getElementById("mySelect").append(aaa);
-                    });
-                })
-        }
-
         function getProvinces() {
             fetch('/provinces')
                 .then(response => response.json())
                 .then((data) => {
+                    const getArrays = localStorage.getItem("prov_idvideos");
+                    let arrays = [];
+                    if (getArrays.length <= 1) {
+                        arrays.push(getArrays);
+                    } else {
+                        const str = getArrays.replace(/[{}"]/g, "").split(",")
+                            .map(Number)
+                            .join(",");
+                        let chars = str.split(",").map(Number);
+                        arrays.push(chars)
+                    }
+                    var opt = [];
                     data.forEach(element => {
-                        // if (element?.id == provinces_id) {
-                        //     const ddd = document.createElement('option')
-                        //     ddd.value = `${element?.id}`;
-                        //     ddd.text = `${element?.province_name}`;
-                        //     ddd.selected = true;
-                        //     document.getElementById("provinces").append(ddd);
-                        // } else {
-                        //     const ddd = document.createElement('option')
-                        //     ddd.value = `${element?.id}`;
-                        //     ddd.text = `${element?.province_name}`;
-                        //     document.getElementById("provinces").append(ddd);
-                        // }
-                        const ddd = document.createElement('option')
-                            ddd.value = `${element?.id}`;
-                            ddd.text = `${element?.province_name}`;
-                            document.getElementById("mySelect2").append(ddd);
+                        opt.push('<option value="' + element?.id + '">' + element?.province_name + '</option>');
                     });
+                    $('#mySelect3').empty().append(opt).trigger('change');
+                    $('#mySelect3').val(arrays[0]).trigger('change');
+
                 })
         }
 
+        function getDirectorats() {
+            $.ajax({
+                url: '/directorat_fe',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    const getArray = localStorage.getItem("object_dir_videos");
+                    let array = [];
+                    if (getArray.length <= 1) {
+                        array.push(getArray[0]);
+                    } else {
+                        const strings = getArray.replace(/[{}"]/g, "").split(",")
+                            .map(Number)
+                            .join(",");
+                        for (let char of strings) {
+                            if (char !== ',') {
+                                array.push(char);
+                            }
+                        }
+                    }
+                    var options = [];
+                    $.each(data, function (index, value) {
+                        options.push('<option value="' + value.id + '">' + value.title + '</option>');
+                    });
+                    $('#mySelect2').empty().append(options).trigger('change');
+                    $('#mySelect2').val(array).trigger('change');
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            const inputElm = document.querySelector('input.tagify');
+            new Tagify(inputElm);
+            getUrlById();
+            getTagging();
+            getDirectorats();
+            getProvinces();
+            $('#mySelect2').select2();
+            $('#mySelect3').select2();
+        });
     </script>
 </body>
 
