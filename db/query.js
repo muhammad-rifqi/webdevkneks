@@ -680,8 +680,9 @@ const directorat_devisi = async (req, res) => {
 }
 
 const directorat_devisi_add = async (req, res) => {
-    const sql = await executeQuery("insert into devisi(title,description,directorats_id)values($1,$2,$3)",
-        [req.body.title, req.body.description, req.body.directorats_id]);
+    const bbb = req.body.directorats_id.split('-');
+    const sql = await executeQuery("insert into devisi(title,description,directorats_id,directorats_name)values($1,$2,$3,$4)",
+        [req.body.title, req.body.description, bbb[0], bbb[1]]);
     if (sql) {
         res.redirect('/devision');
     } else {
@@ -710,8 +711,9 @@ const directorat_devisi_detail = async (req, res) => {
 }
 
 const directorat_devisi_update = async (req, res) => {
-    const sql = await executeQuery("update devisi set title = $1, description = $2, directorats_id = $3 where id = $4",
-        [req.body.title, req.body.description, req.body.directorats_id, req.body.id]);
+    const bbb = req.body.directorats_id.split('-');
+    const sql = await executeQuery("update devisi set title = $1, description = $2, directorats_id = $3 , directorats_name = $4 where id = $5",
+        [req.body.title, req.body.description, bbb[0], bbb[1], req.body.id]);
     if (sql) {
         res.redirect('/devision');
     } else {

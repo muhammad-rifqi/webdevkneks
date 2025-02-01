@@ -127,13 +127,13 @@
                     qqq.forEach(items => {
                         if (items?.id == dir_id) {
                             const aaa = document.createElement('option')
-                            aaa.value = `${items?.id}`;
+                            aaa.value = `${items?.id}-${items?.title}`;
                             aaa.text = `${items?.title}`;
                             aaa.selected = true;
                             document.getElementById("directorats_id").append(aaa);
                         } else {
                             const aaa = document.createElement('option')
-                            aaa.value = `${items?.id}`;
+                            aaa.value = `${items?.id}-${items?.title}`;
                             aaa.text = `${items?.title}`;
                             aaa.selected = false;
                             document.getElementById("directorats_id").append(aaa);
