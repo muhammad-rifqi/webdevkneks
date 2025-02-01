@@ -2906,7 +2906,7 @@ const dropdown_menu = async (req, res) => {
     const result = await executeQuery("SELECT * FROM menu ORDER BY id ASC ");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
-            let r = await executeQuery("SELECT * FROM menu_sub WHERE id = $1", [item.menu_id]);
+            let r = await executeQuery("SELECT * FROM menu_sub WHERE menu_id = $1", [item.id]);
             let sub_menux = r[0];
             let row = {
                 "id": item?.id,
