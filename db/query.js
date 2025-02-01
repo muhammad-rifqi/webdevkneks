@@ -1029,7 +1029,7 @@ const deletehotissue = async (req, res) => {
 //::::::::::::::::::::::::::::::End Of ISSUE :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of institutions :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const institutions = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  institutions');
+    const sql = await executeQuery('SELECT * FROM  institutions order by id ASC');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
