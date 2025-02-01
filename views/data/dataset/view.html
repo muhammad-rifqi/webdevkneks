@@ -142,7 +142,7 @@
                     document.getElementById("dataset_en").value = rows[0]?.dataset_en;
                     document.getElementById("source").value = rows[0]?.source;
                     document.getElementById("produsen_data").value = rows[0]?.produsen_data;
-                    document.getElementById("tanggal_update").value = rows[0]?.tanggal_update;
+                    document.getElementById("tanggal_update").value = rows[0]?.tanggal_update.split('T')[0];
                     document.getElementById("descriptions").value = rows[0]?.description;
                     document.getElementById("api_database").value = rows[0]?.api_data;
                 })
