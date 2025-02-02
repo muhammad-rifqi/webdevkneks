@@ -231,7 +231,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 
 //kdeks master
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
     document.write(`
-                            <li class="nxl-item"><a class="nxl-link" href="/kdeks">Profile</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/kdeks">Profil</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/province">Provinsi Kdeks</a></li>
                            `);
 }
@@ -306,8 +306,8 @@ if (cookie["roles_id"] == 1) {
                             <span class="nxl-mtext">Profil</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="/tk">Profile KNEKS</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/es">Profile Ekonomi Syariah</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/tk">Profil KNEKS</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/es">Profil Ekonomi Syariah</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/i">Anggota KNEKS</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/sm">Media Sosial</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/c_edit/1">Kontak</a></li>
