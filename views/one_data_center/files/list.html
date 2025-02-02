@@ -41,10 +41,25 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/f_add'"> Tambah e-Pustaka
-                            </button>
-                        </p>
+
+                        <div class="row p-2">
+                            <div class="col-md-6 text-left">
+                                <p>
+                                    <button class="btn btn-primary" onclick="window.location.href = '/f_add'"> Tambah
+                                        e-Pustaka
+                                    </button>
+                                </p>
+                            </div>
+
+                            <div class="col-md-6 text-right">
+                                Filter Kategori:<select id="search_kategori" name="search_kategori" class="form-control"
+                                    style="width: 300px;">
+                                    <option value="null">--</option>
+                                </select>
+                            </div>
+
+                        </div>
+
                         <div class="card stretch stretch-full">
                             <div class="card-body p-3">
                                 <div class="table-responsive">
@@ -104,7 +119,7 @@
     <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
-            $('#files').DataTable({
+            const tables = $('#files').DataTable({
                 "ajax": {
                     "url": "/files",
                     "dataSrc": ""
@@ -179,7 +194,29 @@
                         }
                     });
             });
+
+            $('#search_kategori').on('change', function () {
+                tables.column(2).search(this.value).draw();
+            });
         });
+    </script>
+
+    <script>
+        window.addEventListener("load", async () => {
+            await fileCategory();
+        })
+        function fileCategory() {
+            fetch('/files_category')
+                .then(response => response.json())
+                .then((data) => {
+                    data.forEach(element => {
+                        const ddd = document.createElement('option')
+                        ddd.value = `${element?.id}-${element?.title}`;
+                        ddd.text = `${element?.title}`;
+                        document.getElementById("search_kategori").append(ddd);
+                    });
+                })
+        }
     </script>
 
 </body>
