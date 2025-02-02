@@ -56,8 +56,12 @@
                                             </select>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Nama SubMenu*</label>
+                                            <label class="form-label">Nama SubMenu ID*</label>
                                             <input class="form-control" type="text" name="submenu_name" id="submenu_name" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Nama SubMenu En*</label>
+                                            <input class="form-control" type="text" name="submenu_name_en" id="submenu_name_en" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Link SubMenu*</label>
@@ -109,7 +113,7 @@
             .then((data) => {
                 data.forEach(element => {
                     const ddd = document.createElement('option')                    
-                    ddd.value = `${element?.id}`;
+                    ddd.value = `${element?.id}-${element?.menu_name}`;
                     ddd.text = `${element?.menu_name}`;
                     document.getElementById("menu_id").append(ddd);
                 });

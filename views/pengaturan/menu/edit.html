@@ -56,6 +56,10 @@
                                                 required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Nama Menu EN*</label>
+                                            <input class="form-control" type="text" name="menu_name_en" id="menu_names_en" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
                                             <label class="form-label">Link Menu*</label>
                                             <input class="form-control" type="text" name="menu_link" id="menu_links"
                                                 required>
@@ -112,6 +116,7 @@
                 .then((rows) => {
                     document.getElementById("ids").value = rows[0]?.id;
                     document.getElementById("menu_names").value = rows[0]?.menu_name;
+                    document.getElementById("menu_names_en").value = rows[0]?.menu_name_en;
                     document.getElementById("menu_links").value = rows[0]?.menu_link;
                     document.getElementById("orderss").value = rows[0]?.orders;
                 })

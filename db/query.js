@@ -3249,8 +3249,8 @@ const menu = async (req, res) => {
 }
 
 const insertmenu = async (req, res) => {
-    const sql = await executeQuery("insert into menu(menu_name,menu_link,orders) values($1,$2,$3)",
-        [req.body.menu_name, req.body.menu_link, req.body.orders]);
+    const sql = await executeQuery("insert into menu(menu_name,menu_link,orders,menu_name_en) values($1,$2,$3,$4)",
+        [req.body.menu_name, req.body.menu_link, req.body.orders, req.body.menu_name_en]);
     if (sql) {
         res.redirect('/menu');
     } else {
@@ -3260,8 +3260,8 @@ const insertmenu = async (req, res) => {
 }
 
 const updatemenu = async (req, res) => {
-    const sql = await executeQuery("update menu set menu_name=$1, menu_link=$2, orders=$3 where id = $4",
-        [req.body.menu_name, req.body.menu_link, req.body.orders, req.body.id]);
+    const sql = await executeQuery("update menu set menu_name=$1, menu_link=$2, orders=$3, menu_name_en=$4 where id = $5",
+        [req.body.menu_name, req.body.menu_link, req.body.orders, req.body.menu_name_en, req.body.id]);
     if (sql) {
         res.redirect('/menu');
     } else {
@@ -3290,8 +3290,9 @@ const submenu = async (req, res) => {
 }
 
 const insertsubmenu = async (req, res) => {
-    const sql = await executeQuery("insert into menu_sub(menu_id,submenu_name,submenu_link,orders) values($1,$2,$3,$4)",
-        [req.body.menu_id, req.body.submenu_name, req.body.submenu_link, req.body.orders]);
+    const mn_id = req.body.menu_id.split('-');
+    const sql = await executeQuery("insert into menu_sub(menu_id,submenu_name,submenu_link,orders,submenu_name_en,menu_name) values($1,$2,$3,$4,$5,$6)",
+        [mn_id[0], req.body.submenu_name, req.body.submenu_link, req.body.orders, req.body.submenu_name_en, mn_id[1]]);
     if (sql) {
         res.redirect('/submenu');
     } else {
@@ -3301,8 +3302,9 @@ const insertsubmenu = async (req, res) => {
 }
 
 const updatesubmenu = async (req, res) => {
-    const sql = await executeQuery("update menu_sub set menu_id = $1, submenu_name=$2, submenu_link=$3, orders=$4 where id = $5",
-        [req.body.menu_id, req.body.submenu_name, req.body.submenu_link, req.body.orders, req.body.id]);
+    const mn_id = req.body.menu_id.split('-');
+    const sql = await executeQuery("update menu_sub set menu_id = $1, submenu_name=$2, submenu_link=$3, orders=$4, submenu_name_en=$5, menu_name=$6 where id = $7",
+        [mn_id[0], req.body.submenu_name, req.body.submenu_link, req.body.orders, req.body.submenu_name_en, mn_id[1], req.body.id]);
     if (sql) {
         res.redirect('/submenu');
     } else {
