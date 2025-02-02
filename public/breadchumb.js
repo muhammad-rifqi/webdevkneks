@@ -175,18 +175,18 @@ if(path == 'nc_edit'){
 if(path == 's'){
     breadcrumb0 = "Struktur";
     breadcrumb1 = "Data";
-    breadcrumb2 = "Struktur Organisasi";
+    breadcrumb2 = "Pejabat";
 }
 
 if(path == 's_add'){
     breadcrumb0 = "Struktur";
-    breadcrumb1 = "Struktur Organisasi";
+    breadcrumb1 = "Pejabat";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 's_edit'){
     breadcrumb0 = "Struktur";
-    breadcrumb1 = "Struktur Organisasi";
+    breadcrumb1 = "Pejabat";
     breadcrumb2 = "Edit";
 }
 
