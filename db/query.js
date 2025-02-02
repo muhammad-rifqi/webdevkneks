@@ -2912,6 +2912,7 @@ const dropdown_menu = async (req, res) => {
                 "id": item?.id,
                 "menu_name": item?.menu_name,
                 "menu_link": item?.menu_link,
+                "menu_orders": item?.orders,
                 "menu_sub": sub_menux
             };
             resolve(row);
