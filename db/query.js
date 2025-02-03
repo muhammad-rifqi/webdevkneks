@@ -1569,6 +1569,7 @@ const posts = async (req, res) => {
                     "img": item?.image?.split('/')[5],
                     "category_id": item?.category_id,
                     "tagging": item?.tag,
+                    "users_name" : item?.users_name,
                     "detail": detail
                 };
                 resolve(row);
@@ -1603,6 +1604,7 @@ const posts = async (req, res) => {
                     "img": item?.image?.split('/')[5],
                     "category_id": item?.category_id,
                     "tagging": item?.tag,
+                    "users_name" : item?.users_name,
                     "detail": detail
                 };
                 resolve(row);
@@ -1639,6 +1641,7 @@ const seacrh_posts = async (req, res) => {
                 "image": item?.image,
                 "category_id": item?.category_id,
                 "tagging": item?.tag,
+                "users_name" : item?.users_name,
                 "detail": detail
             };
             resolve(row);
@@ -1685,6 +1688,7 @@ const news_kdeks = async (req, res) => {
                 "excerpt_en": item?.excerpt_en,
                 "is_publish": item?.is_publish,
                 "image": item?.image,
+                "users_name" : item?.users_name,
                 "img": item?.image?.split('/')[5],
                 "category_id": item?.category_id,
                 "detail": detail
