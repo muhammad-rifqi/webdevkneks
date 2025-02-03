@@ -12,7 +12,7 @@ if(path == 'dashboard' || path == 'home'){
 if(path == 'dashboard'){
     breadcrumb0 = "Data"
     breadcrumb1 = "Dashboard";
-    breadcrumb2 = "List Data";
+    breadcrumb2 = "";
 }
 if(path == 'narations'){
     breadcrumb1 = "Data";
@@ -27,7 +27,7 @@ if(path == 'dashboard_add'){
 if(path == 'dataset'){
     breadcrumb0 = "Data"
     breadcrumb1 = "Dataset";
-    breadcrumb2 = "List Data";
+    breadcrumb2 = "";
 }
 
 if(path == 'dataset_add'){
@@ -44,49 +44,49 @@ if(path == 'dataset_detail'){
 
 if(path == 'sliderdata'){
     breadcrumb0 = "Data";
-    breadcrumb1 = "Slider";
-    breadcrumb2 = "List Data";
+    breadcrumb1 = "Slide";
+    breadcrumb2 = "";
 }
 
 if(path == 'sliderdata_add'){
     breadcrumb1 = "Data";
-    breadcrumb2 = "Slider";
+    breadcrumb2 = "Slide";
     breadcrumb2 = "Tambah";
 }
 if(path == 'menu_data'){
-    breadcrumb0 = "Menu";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "List Menu";
+    breadcrumb0 = "Data";
+    breadcrumb1 = "Menu";
+    breadcrumb2 = "";
 }
 
 if(path == 'menudata_add'){
-    breadcrumb0 = "Menu";
-    breadcrumb1 = "Data";
+    breadcrumb0 = "Data";
+    breadcrumb1 = "Menu";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'menudata_edit'){
-    breadcrumb0 = "Menu";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Edit";
+    breadcrumb0 = "Data";
+    breadcrumb1 = "Menu";
+    breadcrumb2 = "Ubah";
 }
 
 if(path == 'submenu_data'){
-    breadcrumb0 = "Sub Menu";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "List Sub Menu";
+    breadcrumb0 = "Data";
+    breadcrumb1 = "Sub Menu";
+    breadcrumb2 = "";
 }
 
 if(path == 'submenudata_add'){
-    breadcrumb0 = "Sub Menu";
-    breadcrumb1 = "Data";
+    breadcrumb0 = "Data";
+    breadcrumb1 = "Sub Menu";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'submenudata_edit'){
-    breadcrumb0 = "Sub Menu";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Edit";
+    breadcrumb0 = "Data";
+    breadcrumb1 = "Sub Menu";
+    breadcrumb2 = "Ubah";
 }
 
 //------------------------------- End Of Data -----------------------------
@@ -210,40 +210,40 @@ if(path == 's_logo_add'){
 //-------------------------------- Start Of Opini ----------------------
 if(path == 'opini'){
     breadcrumb0 = "Opini";
-    breadcrumb1 = "Data";
+    breadcrumb1 = "";
     breadcrumb2 = "";
 }
 
 if(path == 'opini_add'){
     breadcrumb0 = "Opini";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Buat";
+    breadcrumb1 = "Buat";
+    breadcrumb2 = "";
 }
 
 if(path == 'opini_edit'){
     breadcrumb0 = "Opini";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Edit";
+    breadcrumb1 = "Ubah";
+    breadcrumb2 = "";
 }
 
 //------------------------------- End Of Opini -----------------------------
 //------------------------------Start Of Isu Terkini ----------------------
 if(path == 'hi'){
     breadcrumb0 = "Isu Terkini";
-    breadcrumb1 = "List Data";
+    breadcrumb1 = "Isu Terkini";
     breadcrumb2 = "";
 }
 
 if(path == 'hi_add'){
     breadcrumb0 = "Isu Terkini";
-    breadcrumb1 = "Data";
+    breadcrumb1 = "Isu Terkini";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'hi_edit'){
     breadcrumb0 = "Isu Terkini";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Edit";
+    breadcrumb1 = "Isu Terkini";
+    breadcrumb2 = "Ubah";
 }
 //------------------------------- End Of Isu Terkini -----------------------------
 //------------------------------Start Of Isu Terkini Kategori----------------------
@@ -286,85 +286,85 @@ if(path == 'hisc_edit'){
 //------------------------------- End Of Isu Terkini Sub Kategori -----------------------------
 //------------------------------Start Of Photo ----------------------
 if(path == 'ph'){
-    breadcrumb0 = "Photo";
-    breadcrumb1 = "List Photo";
+    breadcrumb0 = "Foto";
+    breadcrumb1 = "";
     breadcrumb2 = "";
 }
 
 if(path == 'ph_add'){
-    breadcrumb0 = "Photo";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Tambah";
+    breadcrumb0 = "Foto";
+    breadcrumb1 = "Tambah";
+    breadcrumb2 = "";
 }
 
 if(path == 'ph_edit'){
-    breadcrumb0 = "Photo";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Edit";
+    breadcrumb0 = "Foto";
+    breadcrumb1 = "Ubah";
+    breadcrumb2 = "";
 }
 //------------------------------- End Of Photo -----------------------------
 //------------------------------Start Of Video ----------------------
 if(path == 'v'){
     breadcrumb0 = "Video";
-    breadcrumb1 = "List Video";
+    breadcrumb1 = "";
     breadcrumb2 = "";
 }
 
 if(path == 'v_add'){
     breadcrumb0 = "Video";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Tambah";
+    breadcrumb1 = "Tambah";
+    breadcrumb2 = "";
 }
 
 if(path == 'v_edit'){
     breadcrumb0 = "Video";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Edit";
+    breadcrumb1 = "Ubah";
+    breadcrumb2 = "";
 }
 //------------------------------- End Of Video -----------------------------
 //------------------------------Agenda ----------------------
 if(path == 'a'){
     breadcrumb0 = "Agenda";
-    breadcrumb1 = "List Agenda";
+    breadcrumb1 = "";
     breadcrumb2 = "";
 }
 
 if(path == 'a_add'){
     breadcrumb0 = "Agenda";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Tambah";
+    breadcrumb1 = "Tambah";
+    breadcrumb2 = "";
 }
 
 if(path == 'a_edit'){
     breadcrumb0 = "Agenda";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Edit";
+    breadcrumb1 = "Ubah";
+    breadcrumb2 = "";
 }
 //-----------------------End Of Agenda -----------------------------
 //------------------------------Agenda ----------------------
 if(path == 'f'){
     breadcrumb0 = "e-Pustaka";
-    breadcrumb1 = "List e-Pustaka";
+    breadcrumb1 = "e-Pustaka";
     breadcrumb2 = "";
 }
 
 if(path == 'f_add'){
     breadcrumb0 = "e-Pustaka";
-    breadcrumb1 = "Data";
+    breadcrumb1 = "e-Pustaka";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'f_edit'){
     breadcrumb0 = "e-Pustaka";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Edit";
+    breadcrumb1 = "e-Pustaka";
+    breadcrumb2 = "Ubah";
 }
 //-----------------------End Of Agenda -----------------------------
 //------------------------------Agenda ----------------------
 if(path == 'fc'){
     breadcrumb0 = "e-Pustaka";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Kategori";
+    breadcrumb1 = "Kategori";
+    breadcrumb2 = "";
 }
 
 if(path == 'fc_add'){
@@ -376,7 +376,7 @@ if(path == 'fc_add'){
 if(path == 'fc_edit'){
     breadcrumb0 = "e-Pustaka";
     breadcrumb1 = "Kategori";
-    breadcrumb2 = "Edit";
+    breadcrumb2 = "Ubah";
 }
 //-----------------------End Of Agenda -----------------------------
 //------------------------ Tentang Kami ----------------------
@@ -385,124 +385,149 @@ if(path == 'tk'){
     breadcrumb1 = "Kneks";
     breadcrumb2 = "";
 }
+
+if(path == 'tk_edit'){
+    breadcrumb0 = "Profil";
+    breadcrumb1 = "Kneks";
+    breadcrumb2 = "Ubah";
+}
+
 //-----------------------End Of KDEKS -----------------------------
 //------------------------ KDEKS Master----------------------
 if(path == 'master'){
     breadcrumb0 = "Kdeks";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Master";
+    breadcrumb1 = "Kdeks";
+    breadcrumb2 = "";
 }
 
 if(path == 'master_add'){
     breadcrumb0 = "Kdeks";
-    breadcrumb1 = "Master";
+    breadcrumb1 = "Kdeks";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'master_edit'){
     breadcrumb0 = "Kdeks";
-    breadcrumb1 = "Master";
-    breadcrumb2 = "Edit";
+    breadcrumb1 = "Kdeks";
+    breadcrumb2 = "Ubah";
 }
 //-----------------------End Of KDEKS Master-----------------------------
 if(path == 'es'){
     breadcrumb0 = "Profil";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Ekonomi Syariah";
+    breadcrumb1 = "Ekonomi Syariah";
+    breadcrumb2 = "";
 }
 
 if(path == 'es_edit'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Ekonomi Syariah";
-    breadcrumb2 = "Edit";
+    breadcrumb2 = "Ubah";
 }
 //-----------------------End Of KDEKS Master-----------------------------
 if(path == 'kdeks'){
     breadcrumb0 = "Kdeks";
-    breadcrumb1 = "List Data";
+    breadcrumb1 = "Profil";
     breadcrumb2 = "";
 }
 
 if(path == 'kdeks_add'){
     breadcrumb0 = "Kdeks";
-    breadcrumb1 = "Data";
+    breadcrumb1 = "Profil";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'kdeks_edit'){
     breadcrumb0 = "Kdeks";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Edit";
+    breadcrumb1 = "Profil";
+    breadcrumb2 = "Ubah";
+}
+
+if(path == 'province'){
+    breadcrumb0 = "Kdeks";
+    breadcrumb1 = "Provinsi";
+    breadcrumb2 = "";
+}
+
+if(path == 'province_add'){
+    breadcrumb0 = "Kdeks";
+    breadcrumb1 = "Provinsi";
+    breadcrumb2 = "Tambah";
+}
+
+if(path == 'province_edit'){
+    breadcrumb0 = "Kdeks";
+    breadcrumb1 = "Provinsi";
+    breadcrumb2 = "Ubah";
 }
 //-----------------------End Of KDEKS Master-----------------------------
 //------------------------ Zona Khas----------------------
 if(path == 'zk'){
     breadcrumb0 = "Zona Khas";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "List Data";
+    breadcrumb1 = "";
+    breadcrumb2 = "";
 }
 
 if( path == 'zk_add'){
     breadcrumb0 = "Zona Khas";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Tambah";
+    breadcrumb1 = "Tambah";
+    breadcrumb2 = "";
 }
 
 if(path == 'zk_edit'){
     breadcrumb0 = "Zona Khas";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Edit";
+    breadcrumb1 = "Ubah";
+    breadcrumb2 = "";
 }
 //-----------------------End Of Zona Khas-----------------------------
 //------------------------ Tagging----------------------
 if(path == 'tg'){
     breadcrumb0 = "Tagging";
-    breadcrumb1 = "List Data";
+    breadcrumb1 = "";
     breadcrumb2 = "";
 }
 
 if(path == 'tg_add'){
     breadcrumb0 = "Tagging";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Tambah";
+    breadcrumb1 = "Tambah";
+    breadcrumb2 = "";
 }
 
 if(path == 'tg_edit'){
     breadcrumb0 = "Tagging";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Edit";
+    breadcrumb1 = "Ubah";
+    breadcrumb2 = "";
 }
 //-----------------------End Of Tagging-----------------------------
 //------------------------ Users ----------------------
 if(path == 'u'){
-    breadcrumb0 = "Users";
-    breadcrumb1 = "List Users";
+    breadcrumb0 = "User";
+    breadcrumb1 = "User";
     breadcrumb2 = "";
 }
 
 if(path == 'u_add'){
-    breadcrumb0 = "Users";
-    breadcrumb1 = "Data";
+    breadcrumb0 = "User";
+    breadcrumb1 = "User";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'u_edit'){
-    breadcrumb0 = "Users";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Edit";
+    breadcrumb0 = "User";
+    breadcrumb1 = "User";
+    breadcrumb2 = "Ubah";
 }
 //-----------------------End Of Users-----------------------------
 //------------------------ New User ----------------------
 if(path == 'new_user'){
-    breadcrumb0 = "Users";
-    breadcrumb1 = "New Users";
+    breadcrumb0 = "User";
+    breadcrumb1 = "User Baru";
     breadcrumb2 = "";
 }
 //-----------------------End Of New Users-----------------------------
 //------------------------ Whitelist----------------------
 if(path == 'whitelist'){
     breadcrumb0 = "User";
-    breadcrumb1 = "Whitelist";
+    breadcrumb1 = "User Baru";
     breadcrumb2 = "";
 }
 //-----------------------End Of Whitelist-----------------------------
@@ -515,14 +540,14 @@ if(path == 'i'){
 
 if(path == 'i_add' ){
     breadcrumb0 = "Profil"
-    breadcrumb1 = "Anggota";
+    breadcrumb1 = "Anggota Kneks";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'i_edit'){
     breadcrumb0 = "Profil"
-    breadcrumb1 = "Anggota";
-    breadcrumb2 = "Edit";
+    breadcrumb1 = "Anggota Kneks";
+    breadcrumb2 = "Ubah";
 }
 //-----------------------End Of Institusi -----------------------------
 //------------------------ Sosmed----------------------
@@ -753,7 +778,7 @@ if(path == 'cp'){
 }
 //-----------------------End Of Whitelist-----------------------------
 if(path == 'ip_address'){
-    breadcrumb0 = "Data";
+    breadcrumb0 = "User";
     breadcrumb1 = "IP Address";
     breadcrumb2 = "";
 }
