@@ -29,9 +29,9 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                             <span class="nxl-mtext">Banner</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                        <li class="nxl-item"><a class="nxl-link" href="/welcomebanner">Welcome Banner</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/login_banner">Login Banner</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/b">Slide Show Banner</a></li>
+                        <li class="nxl-item"><a class="nxl-link" href="/welcomebanner">Welcome</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/login_banner">Login</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/b">SlideShow</a></li>
                          </ul>
                     </li>`);
 }
