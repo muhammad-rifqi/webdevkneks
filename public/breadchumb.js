@@ -212,7 +212,7 @@ if(path == 'opini'){
 if(path == 'opini_add'){
     breadcrumb0 = "Opini";
     breadcrumb1 = "Data";
-    breadcrumb2 = "Tambah";
+    breadcrumb2 = "Buat";
 }
 
 if(path == 'opini_edit'){
