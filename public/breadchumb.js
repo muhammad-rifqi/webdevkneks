@@ -92,33 +92,33 @@ if(path == 'submenudata_edit'){
 //------------------------------- End Of Data -----------------------------
 //------------------------------Start Of Direktorat----------------------
 if(path == 'directorats' ){
-    breadcrumb0 = "Direktorat";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "List Direktorat";
+    breadcrumb0 = "Direktorat Master";
+    breadcrumb1 = "Direktorat";
+    breadcrumb2 = "";
 }
 
 if(path == 'directorats_add'){
-    breadcrumb0 = "Direktorat";
-    breadcrumb1 = "Data";
+    breadcrumb0 = "Direktorat Master";
+    breadcrumb1 = "Direktorat";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'directorats_edit' ){
-    breadcrumb0 = "Direktorat";
-    breadcrumb1 = "Data";
+    breadcrumb0 = "Direktorat Master";
+    breadcrumb1 = "Direktorat";
     breadcrumb2 = "Edit";
 }
 
 if(path == 'directorats_detail'){
-    breadcrumb0 = "Direktorat";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Detail";
+    breadcrumb0 = "Direktorat Master";
+    breadcrumb1 = "Direktorat";
+    breadcrumb2 = "Icon-Banner";
 }
 
 if(path == 'devision'){
     breadcrumb0 = "Direktorat";
     breadcrumb1 = "Divisi";
-    breadcrumb2 = "List Divisi";
+    breadcrumb2 = "";
 }
 
 if(path == 'devision_add'){
@@ -130,25 +130,25 @@ if(path == 'devision_add'){
 if(path == 'devision_edit'){
     breadcrumb0 = "Direktorat";
     breadcrumb1 = "Divisi";
-    breadcrumb2 = "Edit";
+    breadcrumb2 = "Ubah";
 }
 //------------------------------- End Of Direktorat -----------------------------
 //------------------------------Start Of Berita----------------------
 if(path == 'n'){
     breadcrumb0 = "Berita";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "List Berita";
+    breadcrumb1 = "Berita";
+    breadcrumb2 = "";
 }
 
 if(path == 'n_add'){
     breadcrumb0 = "Berita";
-    breadcrumb1 = "Data";
+    breadcrumb1 = "Berita";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'n_edit'){
     breadcrumb0 = "Berita";
-    breadcrumb1 = "Data";
+    breadcrumb1 = "Berita";
     breadcrumb2 = "Edit";
 }
 //------------------------------- End Of Berita -----------------------------
@@ -156,7 +156,7 @@ if(path == 'n_edit'){
 if(path == 'nc'){
     breadcrumb0 = "Berita";
     breadcrumb1 = "Kategori";
-    breadcrumb2 = "List Berita";
+    breadcrumb2 = "";
 }
 
 if(path == 'nc_add'){
@@ -175,7 +175,7 @@ if(path == 'nc_edit'){
 if(path == 's'){
     breadcrumb0 = "Struktur";
     breadcrumb1 = "Pejabat";
-    breadcrumb2 = "Struktur";
+    breadcrumb2 = "";
 }
 
 if(path == 's_add'){
@@ -187,18 +187,23 @@ if(path == 's_add'){
 if(path == 's_edit'){
     breadcrumb0 = "Struktur";
     breadcrumb1 = "Pejabat";
-    breadcrumb2 = "Edit";
+    breadcrumb2 = "Ubah";
 }
 
 if(path == 's_logo'){
     breadcrumb0 = "Struktur";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Logo";
+    breadcrumb1 = "Struktur";
+    breadcrumb2 = "";
 }
 
+if(path == 's_logo_edit'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Struktur";
+    breadcrumb2 = "Ubah";
+}
 if(path == 's_logo_add'){
     breadcrumb0 = "Struktur";
-    breadcrumb1 = "Logo";
+    breadcrumb1 = "Struktur";
     breadcrumb2 = "Tambah";
 }
 //------------------------------- End Of Struktur -----------------------------

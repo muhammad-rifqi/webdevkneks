@@ -170,10 +170,10 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 
     document.write(` <li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
-                            <span class="nxl-mtext">E-Pustaka</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
+                            <span class="nxl-mtext">e-Pustaka</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                            <li class="nxl-item"><a class="nxl-link" href="/f">E-Pustaka</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/f">e-Pustaka</a></li>
                             `);
 }
 //e-pustaka kategori
