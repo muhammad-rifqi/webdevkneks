@@ -5,8 +5,8 @@ let breadcrumb1;
 let breadcrumb2;
 //------------------------------Start Of Data----------------------
 if(path == 'dashboard' || path == 'home'){
-    breadcrumb0 = "Beranda"
-    breadcrumb1 = "Home";
+    breadcrumb0 = "Home"
+    breadcrumb1 = "";
     breadcrumb2 = "";
 }
 if(path == 'dashboard'){
@@ -707,38 +707,38 @@ if( path == 'submenu_edit'){
 //---------------------------- Welcome Banner --------------------------------
 if(path == 'welcomebanner'){
     breadcrumb0 = "Banner";
-    breadcrumb1 = "Welcome Banners";
+    breadcrumb1 = "Welcome";
     breadcrumb2 = "";
 }
 
 if(path == 'welcomebanner_add'){
     breadcrumb0 = "Banner";
-    breadcrumb1 = "Welcome Banners";
+    breadcrumb1 = "Welcome";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'edit_welcome_page'){
     breadcrumb0 = "Banner";
-    breadcrumb1 = "Welcome Banners";
-    breadcrumb2 = "Edit";
+    breadcrumb1 = "Welcome";
+    breadcrumb2 = "Ubah";
 }
 //------------------------ Login Banner----------------------
 if(path == 'login_banner'){
     breadcrumb0 = "Banner";
-    breadcrumb1 = "Login Banners";
+    breadcrumb1 = "Login";
     breadcrumb2 = "";
 }
 
 if(path == 'login_banner_add'){
     breadcrumb0 = "Banner";
-    breadcrumb1 = "Login Banner";
+    breadcrumb1 = "Login";
     breadcrumb2 = "Tambah";
 }
 
 if(path == 'login_banner_edit'){
     breadcrumb0 = "Banner";
-    breadcrumb1 = "Login Banner";
-    breadcrumb2 = "Edit";
+    breadcrumb1 = "Login";
+    breadcrumb2 = "Ubah";
 }
 //-----------------------End Of Login Banner-----------------------------
 if(path == 'cp'){
@@ -759,7 +759,7 @@ document.write(`<div class="page-header">
                         <h5 class="m-b-10">${breadcrumb0}</h5>
                     </div>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/dashboard">${breadcrumb1}</a></li>
+                        <li class="breadcrumb-item"><a href="#">${breadcrumb1}</a></li>
                         <li class="breadcrumb-item">${breadcrumb2}</li>
                     </ul>
                 </div>
