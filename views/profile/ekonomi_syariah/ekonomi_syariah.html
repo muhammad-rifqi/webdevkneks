@@ -111,7 +111,9 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='edit-btn-abouts btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button></p>`;
+                            return `<p><button class='edit-btn-abouts btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
+                                        <button class='delete-btn-abouts btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
+                                    </p>`;  
                         }
                     }
                 ],
@@ -129,6 +131,24 @@
             $('#es_abouts').on('click', '.edit-btn-abouts', function () {
                 var id = $(this).data('id');
                 window.location.href = '/es_edit/' + id;
+            });
+
+            $('#es_abouts').on('click', '.delete-btn-abouts', function () {
+                var id = $(this).data('id');
+                swal({
+                    title: "Are you sure?",
+                    text: "To Delete this Data ??",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willOut) => {
+                        if (willOut) {
+                            window.location = '/delete_esabouts/' + id;
+                        } else {
+                            console.log('NaN')
+                        }
+                    });
             });
         });
     </script>
