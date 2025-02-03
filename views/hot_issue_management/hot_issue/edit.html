@@ -55,19 +55,19 @@
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
                                         <h5 class="fw-bold mb-0 me-4">
-                                            <span class="d-block mb-2">Ubah Isu Kategori :</span>
+                                            <span class="d-block mb-2">Ubah Isu Terkini :</span>
                                             <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
                                                 Ubah
-                                                Data Isu Kategori Di Bawah Ini</span>
+                                                Isu Terkini Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Judul [ID] </label>
+                                            <label class="form-label">Judul [ID] )* </label>
                                             <input class="form-control" type="text" name="title" id="title">
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Judul [EN]</label>
+                                            <label class="form-label">Judul [EN] )*</label>
                                             <input class="form-control" type="text" name="title_en" id="title_en"
                                                 required>
                                         </div>
@@ -78,25 +78,25 @@
                                             </select>
                                         </div> -->
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Sub Kategori</label>
+                                            <label class="form-label">Sub Kategori )*</label>
                                             <select class="form-control" name="sub_category_id" id="catid">
                                                 <option value="0"> Pilih </option>
                                             </select>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Kutipan [ID]</label>
+                                            <label class="form-label">Kutipan [ID] )*</label>
                                             <textarea class="form-control" name="excerpt" id="editor1"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Kutipan [EN]</label>
+                                            <label class="form-label">Kutipan [EN] )*</label>
                                             <textarea class="form-control" name="excerpt_en" id="editor2"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Keterangan [ID] </label>
+                                            <label class="form-label">Keterangan [ID] )*</label>
                                             <textarea class="form-control" name="content" id="editor3"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Keterangan [EN]</label>
+                                            <label class="form-label">Keterangan [EN] )*</label>
                                             <textarea class="form-control" name="content_en" id="editor4"></textarea>
                                         </div>
 
@@ -106,12 +106,16 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Photo</label>
+                                            <label class="form-label">Photo )*</label>
                                             <input class="form-control" name="photo" id="photo" type="file">
+                                            <p>Masukkan dengan file type jpg, jpeg, png. </p>
+                                            <p>Min. Size: width 400px & height 300px.</p>
+                                            <p>Max. Size: width 800px & height 600px.</p>
+                                            <p>Max Upload 1 MB</p>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Publish</label>
+                                            <label class="form-label">Tayang / Konsep</label>
                                             <!-- <input name="is_publish" id="is_publish" type="checkbox" value="1">
                                             Publish -->
                                             <div id="publish_hot_issue"></div>

@@ -51,9 +51,8 @@
                                         <thead>
                                             <tr>
                                                 <th>NO</th>
-                                                <th>Logo Kdeks</th>
-                                                <th>Nama Kdeks [ID]</th>
-                                                <th>Nama Kdeks [EN]</th>
+                                                <th>Nama</th>
+                                                <th>Provinsi</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -119,14 +118,8 @@
                             return meta.row + 1;
                         }
                     },
-                    {
-                        "data": null,
-                        "render": function (data, type, row) {
-                            return `<img src="${data?.images}" width="100px">`;
-                        }
-                    },
                     { "data": "title" },
-                    { "data": "title_en" },
+                    { "data": "province_name" },
                     {
                         "data": null,
                         "render": function (data, type, row) {

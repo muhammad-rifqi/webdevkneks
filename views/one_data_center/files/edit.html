@@ -59,21 +59,21 @@
                                             <span class="d-block mb-2">Ubah e-Pustaka :</span>
                                             <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
                                                 Ubah
-                                                Data e-Pustaka Di Bawah Ini</span>
+                                                e-Pustaka Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Judul [ID]</label>
+                                            <label class="form-label">Judul [ID] )*</label>
                                             <input class="form-control" type="text" name="title" id="title" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Judul [EN]</label>
+                                            <label class="form-label">Judul [EN] )*</label>
                                             <input class="form-control" type="text" name="title_en" id="title_en"
                                                 required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Kategori</label>
+                                            <label class="form-label">Kategori )*</label>
                                             <select class="form-control" name="file_category_id" id="file_category_id"
                                                 required>
                                                 <option value="0"> Pilih </option>
@@ -85,23 +85,25 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Upload Berkas</label>
+                                            <label class="form-label">Upload Berkas )*</label>
                                             <input class="form-control" name="file_data" id="file_data" type="file"
                                                 accept="application/pdf,application/vnd.ms-excel.doc,.docx"
-                                                onchange="upload_check()"> )* Max Upload 2.5 MB , tipe data : pdf,xls,
+                                                onchange="upload_check()"> 
+                                            <p>Masukkan dengan tipe file pdf , xls, .doc, .docx </p>
+                                            <p>Max Upload 50 MB</p>
                                             .doc, .docx
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Deskripsi [ID] )* </label>
+                                            <label class="form-label">Konten [ID] )* </label>
                                             <textarea class="form-control" name="content" id="editor3"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Keterangan [EN] )*</label>
+                                            <label class="form-label">Konten [EN] )*</label>
                                             <textarea class="form-control" name="content_en" id="editor4"></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tanggal Publish</label>
+                                            <label class="form-label">Tanggal Publish )*</label>
                                             <input class="form-control" name="date" id="date" type="datetime-local"
                                                 required>
                                         </div>
@@ -111,55 +113,55 @@
                                             <!-- <input name="is_publish" id="is_publish" type="checkbox" value="1" required>
                                             Publish -->
                                             <div class="col-lg-12 mb-4">
-                                                <label class="form-label">Publish</label>
+                                                <label class="form-label">Tayang/Konsep</label>
                                                 <span id="publish_files"></span>
                                             </div>
                                         </div>
 
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Penulis</label>
+                                            <label class="form-label">Penulis )*</label>
                                             <input class="form-control" name="writer" id="writers" type="text" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Penerbit</label>
+                                            <label class="form-label">Penerbit )*</label>
                                             <input class="form-control" name="publisher" id="publishers" type="text"
                                                 required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Sinopsis</label>
+                                            <label class="form-label">Sinopsis )*</label>
                                             <input class="form-control" name="synopsis" id="synopsist" type="text"
                                                 required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Isbn</label>
+                                            <label class="form-label">Isbn )*</label>
                                             <input class="form-control" name="isbn" id="isbns" type="text" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Jumlah Halaman</label>
+                                            <label class="form-label">Jumlah Halaman )*</label>
                                             <input class="form-control" name="number_of_pages" id="number_of_pagest"
                                                 type="number" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Lebar</label>
+                                            <label class="form-label">Lebar )*</label>
                                             <input class="form-control" name="width" id="widths" type="number" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tinggi</label>
+                                            <label class="form-label">Tinggi )*</label>
                                             <input class="form-control" name="height" id="heights" type="number"
                                                 required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Direktorat</label>
+                                            <label class="form-label">Direktorat )*</label>
                                             <select class="form-control" name="directorat" id="mySelect2" multiple
                                                 required>
                                             </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">KDEKS</label>
+                                            <label class="form-label">KDEKS )*</label>
                                             <!-- <select class="form-control" name="kdeks" id="provinces" required>
                                                 <option value="0"></option>
                                             </select> -->
@@ -168,7 +170,7 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tagging</label>
+                                            <label class="form-label">Tagging )*</label>
                                             <span id="tag">
 
                                             </span>

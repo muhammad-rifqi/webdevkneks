@@ -68,6 +68,7 @@
                                                 <th>Judul</th>
                                                 <th>Kategori</th>
                                                 <th>Tanggal</th>
+                                                <th>Penulis</th>
                                                 <th>Publish</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -151,6 +152,7 @@
                             return `${formatDateTime(row?.news_datetime)}`;
                         }
                     },
+                    { "data": "users_name" },
                     {
                         "data": null,
                         "render": function (data, type, row) {

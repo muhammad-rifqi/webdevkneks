@@ -43,22 +43,22 @@
                     <div class="col-lg-12">
                         <div class="row p-2">
                             <div class="col-md-4 text-left">
-                            <br />
+                                <br />
                                 <button class="btn btn-primary" onclick="window.location.href = '/hi_add'"> Tambah Isu
                                     Terkini
                                 </button>
                             </div>
 
                             <div class="col-md-4 text-right">
-                                Filter Kategori:<select id="search_sub_kategori" name="search_kategori" class="form-control"
-                                    style="width: 300px;">
+                                Filter Kategori:<select id="search_sub_kategori" name="search_kategori"
+                                    class="form-control" style="width: 300px;">
                                     <option value="null">--</option>
                                 </select>
                             </div>
-                           
+
                             <div class="col-md-4 text-right">
-                                Filter Sub Kategori:<select id="search_sub_kategori" name="search_sub_kategori" class="form-control"
-                                    style="width: 300px;">
+                                Filter Sub Kategori:<select id="search_sub_kategori" name="search_sub_kategori"
+                                    class="form-control" style="width: 300px;">
                                     <option value="null">--</option>
                                 </select>
                             </div>
@@ -122,6 +122,16 @@
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
+        function formatDateTime(isoDate, timezoneOffset = 0) {
+            const date = new Date(isoDate);
+            date.setHours(date.getHours() + timezoneOffset);
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${day}/${month}/${year} ${hours}:${minutes}`;
+        }
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
             const tables = $('#hotissue').DataTable({
@@ -138,14 +148,19 @@
                     },
                     { "data": "title" },
                     { "data": "hot_subcategory_name" },
-                    { "data": "hot_issue_datetime" },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            return `${formatDateTime(row?.hot_issue_datetime)}`;
+                        }
+                    },
                     {
                         "data": null,
                         "render": function (data, type, row) {
                             if (data?.is_publish == 'on') {
-                                return `Published`;
+                                return `Tayang`;
                             } else {
-                                return `Not Published`;
+                                return `Konsep`;
                             }
                         }
                     },
@@ -205,23 +220,23 @@
 
         });
     </script>
-<script>
-    window.addEventListener("load", async () => {
-        await getHotIssueSubCategory();
-    })
-    function getHotIssueSubCategory() {
-        fetch('/hotissuesubcategory')
-            .then(data => data.json())
-            .then((rows) => {
-                rows.forEach((element, index) => {
-                    const ddd = document.createElement('option')
-                    ddd.value = `${element?.title}`;
-                    ddd.text = `${element?.title}`;
-                    document.getElementById("search_sub_kategori").append(ddd);
+    <script>
+        window.addEventListener("load", async () => {
+            await getHotIssueSubCategory();
+        })
+        function getHotIssueSubCategory() {
+            fetch('/hotissuesubcategory')
+                .then(data => data.json())
+                .then((rows) => {
+                    rows.forEach((element, index) => {
+                        const ddd = document.createElement('option')
+                        ddd.value = `${element?.title}`;
+                        ddd.text = `${element?.title}`;
+                        document.getElementById("search_sub_kategori").append(ddd);
+                    })
                 })
-            })
-    }
-</script>
+        }
+    </script>
 
 </body>
 
