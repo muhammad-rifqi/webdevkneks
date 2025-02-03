@@ -174,8 +174,8 @@ if(path == 'nc_edit'){
 //--------------------------------Start Of Struktur----------------------
 if(path == 's'){
     breadcrumb0 = "Struktur";
-    breadcrumb1 = "Data";
-    breadcrumb2 = "Pejabat";
+    breadcrumb1 = "Pejabat";
+    breadcrumb2 = "Struktur";
 }
 
 if(path == 's_add'){
@@ -206,7 +206,7 @@ if(path == 's_logo_add'){
 if(path == 'opini'){
     breadcrumb0 = "Opini";
     breadcrumb1 = "Data";
-    breadcrumb2 = "List Opini";
+    breadcrumb2 = "";
 }
 
 if(path == 'opini_add'){
