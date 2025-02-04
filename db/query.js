@@ -681,8 +681,8 @@ const directorat_devisi = async (req, res) => {
 
 const directorat_devisi_add = async (req, res) => {
     const bbb = req.body.directorats_id.split('-');
-    const sql = await executeQuery("insert into devisi(title,description,directorats_id,directorats_name)values($1,$2,$3,$4)",
-        [req.body.title, req.body.description, bbb[0], bbb[1]]);
+    const sql = await executeQuery("insert into devisi(title,title_en,description,description_en,directorats_id,directorats_name)values($1,$2,$3,$4,$5,$6)",
+        [req.body.title, req.body.title_en,req.body.description, req.body.description_en, bbb[0], bbb[1]]);
     if (sql) {
         res.redirect('/devision');
     } else {
@@ -712,8 +712,8 @@ const directorat_devisi_detail = async (req, res) => {
 
 const directorat_devisi_update = async (req, res) => {
     const bbb = req.body.directorats_id.split('-');
-    const sql = await executeQuery("update devisi set title = $1, description = $2, directorats_id = $3 , directorats_name = $4 where id = $5",
-        [req.body.title, req.body.description, bbb[0], bbb[1], req.body.id]);
+    const sql = await executeQuery("update devisi set title = $1, description = $2, directorats_id = $3 , directorats_name = $4, title_en = $5, description_en = $6 where id = $7",
+        [req.body.title, req.body.description, bbb[0], bbb[1], req.body.title_en, req.body.description_en, req.body.id]);
     if (sql) {
         res.redirect('/devision');
     } else {

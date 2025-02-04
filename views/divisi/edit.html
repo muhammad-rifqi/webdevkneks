@@ -50,6 +50,16 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Nama Divisi [ID]</label>
+                                            <input class="form-control" type="text" name="title" id="titles">
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Nama Divisi [EN]</label>
+                                            <input class="form-control" type="text" name="title_en" id="titles_en">
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
                                             <label class="form-label">Direktorat</label>
                                             <select class="form-control" name="directorats_id" id="directorats_id"
                                                 required>
@@ -57,13 +67,15 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Nama Divisi</label>
-                                            <input class="form-control" type="text" name="title" id="titles">
-                                        </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Keterangan</label>
+                                            <label class="form-label">Deskripsi [ID] </label>
                                             <textarea class="form-control" type="text" name="description"
                                                 id="descriptions"></textarea>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Deskripsi [EN] </label>
+                                            <textarea class="form-control" type="text" name="description_en"
+                                                id="descriptions_en"></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -115,7 +127,9 @@
                 .then((rows) => {
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("titles").value = rows[0]?.title;
+                    document.getElementById("titles_en").value = rows[0]?.title_en;
                     document.getElementById("descriptions").value = rows[0]?.description;
+                    document.getElementById("descriptions_en").value = rows[0]?.description_en;
                     dir_id = rows[0]?.directorats_id;
                 })
         }
