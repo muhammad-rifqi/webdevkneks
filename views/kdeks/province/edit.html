@@ -51,7 +51,14 @@
                                     <div class="row">
                                       
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label"> Provinsi </label>
+                                            <label class="form-label"> Kode Provinsi </label>
+                                            <input class="form-control" type="number" name="code" id="code"
+                                                required>
+                                        </div>
+
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Nama Provinsi </label>
                                             <input class="form-control" name="province_name" id="province_name"
                                                 required>
                                         </div>
@@ -101,6 +108,7 @@
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("id").value = rows[0]?.id;
+                    document.getElementById("code").value = rows[0]?.code;
                     document.getElementById("province_name").value = rows[0]?.province_name;
                 })
         }

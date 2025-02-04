@@ -703,9 +703,9 @@ apps.get('/api_kdeks', db.kdeks);
 
 apps.get('/detail_kdeks/:id', db.detailkdeks);
 
-apps.post('/insertkdeks', kdeks_logo_province.single('photo'), db.insertkdeks);
+apps.post('/insertkdeks', kdeks_logo_province.fields([{ name: "photo", maxCount: 1 }, { name: "sk_mentri", maxCount: 1 }]), db.insertkdeks);
 
-apps.post('/updatekdeks', kdeks_logo_province.single('photo'), db.updatekdeks);
+apps.post('/updatekdeks', kdeks_logo_province.fields([{ name: "photo", maxCount: 1 }, { name: "sk_mentri", maxCount: 1 }]), db.updatekdeks);
 
 apps.get('/kdeks_delete/:id/:foto', db.deletekdeks);
 
@@ -883,7 +883,7 @@ apps.post('/insertdirectorats', db.insertdirectorats);
 
 apps.post('/directorats_update', db.update_directorats);
 
-apps.post('/directorats_upload', directorats_images.fields([{ name: "images", maxCount: 1 }, { name: "banners", maxCount: 1 },]), db.directorats_uploads);
+apps.post('/directorats_upload', directorats_images.fields([{ name: "images", maxCount: 1 }, { name: "banners", maxCount: 1 }]), db.directorats_uploads);
 
 apps.get('/directorats_delete/:id', db.delete_direactorats);
 
@@ -985,8 +985,6 @@ apps.post('/questbook', db.questbook);
 //::::::::::::::: Api & Query DB FILES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/files', db.files);
-
-apps.get('/deletefilesdb', db.deletefiledb);
 
 apps.post('/insertfiles', files_path.single('file_data'), db.insertfileupload);
 

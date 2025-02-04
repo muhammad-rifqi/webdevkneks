@@ -19,54 +19,12 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id", sql[0]?.id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("name", sql[0]?.name, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("roles_id", sql[0]?.role_id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id_province", sql[0]?.id_province, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("directorat_id", sql[0]?.directorat_id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+            res.cookie("islogin", isLogin);
+            res.cookie("id", sql[0]?.id);
+            res.cookie("name", sql[0]?.name);
+            res.cookie("roles_id", sql[0]?.role_id);
+            res.cookie("id_province", sql[0]?.id_province);
+            res.cookie("directorat_id", sql[0]?.directorat_id);
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -1493,18 +1451,6 @@ const deletefileupload = async (req, res) => {
 
 }
 
-const deletefiledb = async (req, res) => {
-
-    const sql = await executeQuery('DELETE FROM news where id BETWEEN 41 AND 131');
-    const sql2 = await executeQuery('DELETE FROM news_photos where id BETWEEN 55 AND 100');
-    if (sql && sql2) {
-        res.status(200).json("OK")
-    } else {
-        res.status(200).json("GAGAL")
-    }
-
-}
-
 const files_category = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  files_categories');
     if (sql?.length > 0) {
@@ -2319,7 +2265,7 @@ const provinces_detail = async (req, res) => {
 }
 
 const insertprovinces = async (req, res) => {
-    const sql = await executeQuery('INSERT INTO province(province_name)values($1)', [req.body.provinces]);
+    const sql = await executeQuery('INSERT INTO province(province_name,code)values($1,$2)', [req.body.provinces,req.body.code]);
     if (sql?.length > 0) {
         res.redirect('/province');
     } else {
@@ -2328,7 +2274,7 @@ const insertprovinces = async (req, res) => {
 }
 
 const updateprovinces = async (req, res) => {
-    const sql = await executeQuery('UPDATE province set province_name=$1 where id = $2', [req.body.province_name, req.body.id]);
+    const sql = await executeQuery('UPDATE province set province_name=$1,code=$2 where id = $3', [req.body.province_name, req.body.code, req.body.id]);
     if (sql?.length > 0) {
         res.redirect('/province');
     } else {
@@ -3465,7 +3411,6 @@ module.exports = {
     updatefileupload,
     deletefileupload,
     files_category,
-    deletefiledb,
     files_category_details,
     updatefilescategory,
     insertfilecategorydetails,
