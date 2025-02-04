@@ -126,7 +126,7 @@ let data_slide_path = multer({ storage: data_slide });
 //:::::::::::::::::::::::::: Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 let kdeks_logo = multer.diskStorage(
     {
-        destination: './public/uploads/kdeks/provinsi/',
+        destination: './public/uploads/kdeks/',
         filename: function (req, file, cb) {
             cb(null, file.originalname.replace(" ", ""));
         }
@@ -703,11 +703,11 @@ apps.get('/api_kdeks', db.kdeks);
 
 apps.get('/detail_kdeks/:id', db.detailkdeks);
 
-apps.post('/insertkdeks', kdeks_logo_province.fields([{ name: "photo", maxCount: 1 }, { name: "sk_mentri", maxCount: 1 }]), db.insertkdeks);
+apps.post('/insertkdeks', kdeks_logo_province.fields([{ name: "photo", maxCount: 1 }, { name: "sk", maxCount: 1 }]), db.insertkdeks);
 
-apps.post('/updatekdeks', kdeks_logo_province.fields([{ name: "photo", maxCount: 1 }, { name: "sk_mentri", maxCount: 1 }]), db.updatekdeks);
+apps.post('/updatekdeks', kdeks_logo_province.fields([{ name: "photo", maxCount: 1 }, { name: "sk", maxCount: 1 }]), db.updatekdeks);
 
-apps.get('/kdeks_delete/:id/:foto', db.deletekdeks);
+apps.get('/deletekdeks/:id/:foto', db.deletekdeks);
 
 apps.get('/api_kdeks_list', db.abouts_kdeks_list);
 

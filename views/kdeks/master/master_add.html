@@ -51,25 +51,104 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Judul [ID]</label>
+                                            <label class="form-label"> Nama </label>
                                             <input class="form-control" type="text" name="title" id="title" required>
                                         </div>
+
                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Provinsi )*</label>
+                                            <select class="form-control" name="id_province" id="provinces" required>
+                                                <option value="0"> Pilih </option>
+                                            </select>
+                                            <!-- <div class="col-lg-12 mb-4">
                                             <label class="form-label">Judul [EN]</label>
                                             <input class="form-control" type="text" name="title_en" id="title_en"
                                                 required>
-                                        </div>
+                                        </div> -->
 
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label"> Logo )* </label>
-                                            <input type="file" class="form-control" name="photo" id="photo" required>
-                                            <p>Masukkan dengan tipe file jpg, jpeg, png. </p>
-                                            <p>Min. Size: width 400px & height 300px.</p>
-                                            <p>Max Upload 1 MB</p>
-                                        </div>
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label"> Logo )* </label>
+                                                <input type="file" class="form-control" name="photo" id="photo"
+                                                    required>
+                                                <p>Masukkan dengan tipe file jpg, jpeg, png. </p>
+                                                <p>Min. Size: width 400px & height 300px.</p>
+                                                <p>Max Upload 1 MB</p>
+                                            </div>
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">Struktur [Url])*</label>
+                                                <input class="form-control" type="text" name="structure" id="structure"
+                                                required>
+                                            </div>
 
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">Sk )*</label>
+                                                <input class="form-control" type="file" name="sk" id="sk" accept="application/pdf"
+                                                required>
+                                                <p>Masukkan dengan tipe file pdf</p>
+                                                <p>Max Upload 5 MB</p>
+                                            </div>
 
-                                        <div class="col-lg-12 mb-4">
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">Twitter )*</label>
+                                                <input class="form-control" type="text" name="twitter" id="twitter"
+                                                required>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">Facebook )*</label>
+                                                <input class="form-control" type="text" name="facebook" id="facebook"
+                                                required>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">Linkedin )*</label>
+                                                <input class="form-control" type="text" name="linkedin" id="linkedin"
+                                                required>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">Instagram )*</label>
+                                                <input class="form-control" type="text" name="instagram" id="instagram"
+                                                required>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">Youtube )*</label>
+                                                <input class="form-control" type="text" name="youtube" id="youtube"
+                                                required>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">Alamat )*</label>
+                                                <input class="form-control" type="text" name="address" id="address"
+                                                required>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">No. Telepon )*</label>
+                                                <input class="form-control" type="text" name="phone_number" id="phone_number"
+                                                required>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">No. Fax )*</label>
+                                                <input class="form-control" type="text" name="fax" id="fax"
+                                                required>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">Email )*</label>
+                                                <input class="form-control" type="email" name="email" id="email"
+                                                required>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">Maps )*</label>
+                                                <input class="form-control" type="text" name="maps" id="maps"
+                                                required>
+                                            </div>
+                                            
+                                            <!-- <div class="col-lg-12 mb-4">
                                             <label class="form-label">Tentang [ID] )*</label>
                                             <textarea class="form-control" name="abouts"></textarea>
                                         </div>
@@ -85,14 +164,17 @@
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Sejarah [EN] )*</label>
                                             <textarea class="form-control" name="historys_en"></textarea>
+                                        </div> -->
+
                                         </div>
 
-                                        <div class="col-lg-12 mb-4">
+
+                                        <!-- <div class="col-lg-12 mb-4">
                                             <label class="form-label">Provinsi )*</label>
                                             <select class="form-control" name="id_province" id="provinces" required>
                                                 <option value="0"> Pilih </option>
                                             </select>
-                                        </div>
+                                        </div> -->
 
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
@@ -140,7 +222,7 @@
                 .then((data) => {
                     data.forEach(element => {
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
+                        ddd.value = `${element?.id}-${element?.province_name}`;
                         ddd.text = `${element?.province_name}`;
                         document.getElementById("provinces").append(ddd);
                     });

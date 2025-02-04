@@ -123,8 +123,13 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='edit-btn-kdeks btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
-                                    <button class='delete-btn-kdeks btn btn-danger' data-id='${row.id}' data-photo='${row.images}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button></p>`;
+                            if (row.images == null) {
+                                return `<p><button class='edit-btn-kdeks btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
+                                    <button class='delete-btn-kdeks btn btn-danger' data-id='${row.id}' data-photo='${row?.images}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button></p>`;
+                            } else {
+                                return `<p><button class='edit-btn-kdeks btn btn-warning' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-edit"></i></button>
+                                    <button class='delete-btn-kdeks btn btn-danger' data-id='${row.id}' data-photo='${row?.images.split('/')[5]}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button></p>`;
+                            }
                         }
                     }
                     // .split('/')[5]
@@ -165,7 +170,7 @@
                 })
                     .then((willOut) => {
                         if (willOut) {
-                            window.location = '/master_delete/' + id + '/' + photo;
+                            window.location = '/deletekdeks/' + id + '/' + photo;
                         } else {
                             console.log('NaN')
                         }
