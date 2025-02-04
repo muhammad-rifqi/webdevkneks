@@ -5,7 +5,7 @@ let breadcrumb1;
 let breadcrumb2;
 //------------------------------Start Of Data----------------------
 if(path == 'dashboard' || path == 'home'){
-    breadcrumb0 = "Home"
+    breadcrumb0 = "Beranda"
     breadcrumb1 = "";
     breadcrumb2 = "";
 }
