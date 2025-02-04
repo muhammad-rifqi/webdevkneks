@@ -1495,7 +1495,7 @@ const deletefileupload = async (req, res) => {
 
 const deletefiledb = async (req, res) => {
 
-    const sql = await executeQuery('DELETE FROM agenda where id BETWEEN 80 AND 126 ');
+    const sql = await executeQuery('DELETE FROM agendas where id BETWEEN 80 AND 126 ');
     if (sql) {
         res.status(200).json("OK")
     } else {
