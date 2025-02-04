@@ -682,7 +682,7 @@ const directorat_devisi = async (req, res) => {
 const directorat_devisi_add = async (req, res) => {
     const bbb = req.body.directorats_id.split('-');
     const sql = await executeQuery("insert into devisi(title,title_en,description,description_en,directorats_id,directorats_name)values($1,$2,$3,$4,$5,$6)",
-        [req.body.title, req.body.title_en,req.body.description, req.body.description_en, bbb[0], bbb[1]]);
+        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, bbb[0], bbb[1]]);
     if (sql) {
         res.redirect('/devision');
     } else {
@@ -1435,8 +1435,8 @@ const insertfileupload = async (req, res) => {
     const file_date = req.body.date;
     const fileuploads = site_url + "/uploads/filesupload/" + req.file.originalname.replace(" ", "");
     const bbb = req.body.file_category_id.split('-');
-    const sql = await executeQuery("insert into files(title,title_en,content,content_en,file,is_publish,date,report_category_id,report_category_name,writer,publisher,synopsis,isbn,number_of_pages,width,height,tagging,directorat,id_province,users_id,users_name) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21)",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.users_id, req.body.users_name]);
+    const sql = await executeQuery("insert into files(title,title_en,content,content_en,file,is_publish,date,report_category_id,report_category_name,writer,publisher,synopsis,isbn,number_of_pages,width,height,tagging,directorat,id_province,users_id,users_name,passcode,downloadable) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.users_id, req.body.users_name, req.body.passcode, req.body.downloadable]);
     if (sql) {
         res.redirect('/f');
     } else {
@@ -1449,8 +1449,8 @@ const updatefileupload = async (req, res) => {
     const file_date = req.body.date;
     const bbb = req.body.file_category_id.split('-');
     if (!req.file || req.file == undefined || req.file == "") {
-        const sql = await executeQuery("update files set title=$1,title_en=$2,content=$3,content_en=$4,is_publish=$5,date=$6,report_category_id=$7,report_category_name=$8,writer=$9,publisher=$10,synopsis=$11,isbn=$12,number_of_pages=$13,width=$14,height=$15,tagging=$16,directorat=$17,id_province=$18,users_id=$19,users_name=$20 where id = $21",
-            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.users_id, req.body.users_name, req.body.id]);
+        const sql = await executeQuery("update files set title=$1,title_en=$2,content=$3,content_en=$4,is_publish=$5,date=$6,report_category_id=$7,report_category_name=$8,writer=$9,publisher=$10,synopsis=$11,isbn=$12,number_of_pages=$13,width=$14,height=$15,tagging=$16,directorat=$17,id_province=$18,users_id=$19,users_name=$20,passcode=$21, downloadable=$22 where id = $23",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.users_id, req.body.users_name, req.body.passcode, req.body.downloadable, req.body.id]);
         if (sql) {
             res.redirect('/f');
         } else {
@@ -1458,8 +1458,8 @@ const updatefileupload = async (req, res) => {
         }
     } else {
         const fileuploads = site_url + "/uploads/filesupload/" + req.file.originalname.replace(" ", "");
-        const sql = await executeQuery("update files set title=$1,title_en=$2,content=$3,content_en=$4, file=$5, is_publish=$6,date=$7,report_category_id=$8,report_category_name=$9,writer=$10,publisher=$11,synopsis=$12,isbn=$13,number_of_pages=$14,width=$15,height=$16,tagging=$17,directorat=$18,id_province=$19,users_id=$20,users_name=$21 where id = $22",
-            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.users_id, req.body.users_name, req.body.id]);
+        const sql = await executeQuery("update files set title=$1,title_en=$2,content=$3,content_en=$4, file=$5, is_publish=$6,date=$7,report_category_id=$8,report_category_name=$9,writer=$10,publisher=$11,synopsis=$12,isbn=$13,number_of_pages=$14,width=$15,height=$16,tagging=$17,directorat=$18,id_province=$19,users_id=$20,users_name=$21,passcode=$22, downloadable=$23 where id = $24",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.users_id, req.body.users_name, req.body.passcode, req.body.downloadable, req.body.id]);
         if (sql) {
             res.redirect('/f');
         } else {
@@ -1569,7 +1569,7 @@ const posts = async (req, res) => {
                     "img": item?.image?.split('/')[5],
                     "category_id": item?.category_id,
                     "tagging": item?.tag,
-                    "users_name" : item?.users_name,
+                    "users_name": item?.users_name,
                     "detail": detail
                 };
                 resolve(row);
@@ -1604,7 +1604,7 @@ const posts = async (req, res) => {
                     "img": item?.image?.split('/')[5],
                     "category_id": item?.category_id,
                     "tagging": item?.tag,
-                    "users_name" : item?.users_name,
+                    "users_name": item?.users_name,
                     "detail": detail
                 };
                 resolve(row);
@@ -1641,7 +1641,7 @@ const seacrh_posts = async (req, res) => {
                 "image": item?.image,
                 "category_id": item?.category_id,
                 "tagging": item?.tag,
-                "users_name" : item?.users_name,
+                "users_name": item?.users_name,
                 "detail": detail
             };
             resolve(row);
@@ -1688,7 +1688,7 @@ const news_kdeks = async (req, res) => {
                 "excerpt_en": item?.excerpt_en,
                 "is_publish": item?.is_publish,
                 "image": item?.image,
-                "users_name" : item?.users_name,
+                "users_name": item?.users_name,
                 "img": item?.image?.split('/')[5],
                 "category_id": item?.category_id,
                 "detail": detail

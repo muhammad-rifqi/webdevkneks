@@ -88,7 +88,7 @@
                                             <label class="form-label">Upload Berkas )*</label>
                                             <input class="form-control" name="file_data" id="file_data" type="file"
                                                 accept="application/pdf,application/vnd.ms-excel.doc,.docx"
-                                                onchange="upload_check()"> 
+                                                onchange="upload_check()">
                                             <p>Masukkan dengan tipe file pdf , xls, .doc, .docx </p>
                                             <p>Max Upload 50 MB</p>
                                             .doc, .docx
@@ -176,6 +176,22 @@
                                             </span>
                                             <input name="taggings" type="text" class="tagify" id="tagify" required>
                                         </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Passcode )*</label>
+                                            <input class="form-control" name="passcode" id="passcode" type="text"
+                                                required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Downloadable</label>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    name="downloadable" id="downloadable" checked>
+                                                <label class="form-check-label" for="downloadable"></label>
+                                            </div>
+                                        </div>
+
 
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
@@ -329,6 +345,12 @@
                     document.getElementById("number_of_pagest").value = rows[0]?.number_of_pages;
                     document.getElementById("widths").value = rows[0]?.width;
                     document.getElementById("heights").value = rows[0]?.height;
+                    document.getElementById("passcode").value = rows[0]?.passcode;
+                    document.getElementById("downloadable").innerHTML = `
+                                             <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch" name="downloadable" id="downloadable" checked>
+                                                <label class="form-check-label" for="downloadable"></label>
+                                              </div>`;
                 })
         }
 
