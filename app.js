@@ -986,6 +986,8 @@ apps.post('/questbook', db.questbook);
 
 apps.get('/files', db.files);
 
+apps.get('/deletefilesdb', db.deletefiledb);
+
 apps.post('/insertfiles', files_path.single('file_data'), db.insertfileupload);
 
 apps.post('/updatefileupload', files_path.single('file_data'), db.updatefileupload);
