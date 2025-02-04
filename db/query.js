@@ -313,13 +313,22 @@ const insertkdeks = async (req, res) => {
 
 const updatekdeks = async (req, res) => {
     const ggg = req.body.id_province.split('-');
-    const fileuploads = site_url + "/uploads/kdeks/" + req.files['photo'][0].originalname.replace(" ", "");
-    const skuploads = site_url + "/uploads/kdeks/" + req.files['sk'][0].originalname.replace(" ", "");
-    const sql = await executeQuery("UPDATE kdeks set title=$1,images=$2,id_province=$3,province_name=$4,structure=$5,sk=$6,twitter=$7,facebook=$8,linkedin=$9,instagram=$10,youtube=$11,address=$12,phone_number=$13,fax=$14,email=$15,maps=$16 where id =$17  ", [req.body.title, fileuploads, ggg[0], ggg[1], req.body.structure, skuploads, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.maps, req.body.id]);
-    if (sql) {
-        res.redirect('/master');
-    } else {
-        res.redirect('/master');
+    if(!req.files.photo || !req.files.sk){
+        const sql = await executeQuery("UPDATE kdeks set title=$1,id_province=$2,province_name=$3,structure=$4,twitter=$5,facebook=$6,linkedin=$7,instagram=$8,youtube=$9,address=$10,phone_number=$11,fax=$12,email=$13,maps=$14 where id =$15  ", [req.body.title, ggg[0], ggg[1], req.body.structure, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.maps, req.body.id]);
+        if (sql) {
+            res.redirect('/master');
+        } else {
+            res.redirect('/master');
+        }
+    }else{
+        const fileuploads = site_url + "/uploads/kdeks/" + req.files['photo'][0].originalname.replace(" ", "");
+        const skuploads = site_url + "/uploads/kdeks/" + req.files['sk'][0].originalname.replace(" ", "");
+        const sql = await executeQuery("UPDATE kdeks set title=$1,images=$2,id_province=$3,province_name=$4,structure=$5,sk=$6,twitter=$7,facebook=$8,linkedin=$9,instagram=$10,youtube=$11,address=$12,phone_number=$13,fax=$14,email=$15,maps=$16 where id =$17  ", [req.body.title, fileuploads, ggg[0], ggg[1], req.body.structure, skuploads, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.maps, req.body.id]);
+        if (sql) {
+            res.redirect('/master');
+        } else {
+            res.redirect('/master');
+        }
     }
 }
 
