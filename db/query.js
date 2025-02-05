@@ -1893,7 +1893,8 @@ const categories = async (req, res) => {
                     "tag": items?.tag,
                     "directorat": items?.directorat,
                     "id_province": items?.id_province,
-                    "is_publish": items?.is_publish
+                    "is_publish": items?.is_publish,
+                    "users_name": items?.users_name,
                 };
                 array.push(bbb);
             })
