@@ -19,54 +19,12 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id", sql[0]?.id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("name", sql[0]?.name, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("roles_id", sql[0]?.role_id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id_province", sql[0]?.id_province, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("directorat_id", sql[0]?.directorat_id, {
-                maxAge: 900000,
-                domain: '.rifhandi.com',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+            res.cookie("islogin", isLogin);
+            res.cookie("id", sql[0]?.id);
+            res.cookie("name", sql[0]?.name);
+            res.cookie("roles_id", sql[0]?.role_id);
+            res.cookie("id_province", sql[0]?.id_province);
+            res.cookie("directorat_id", sql[0]?.directorat_id);
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -180,7 +138,6 @@ const es_abouts = async (req, res) => {
     }
 }
 
-
 const es_detailabouts = async (req, res) => {
     const id_abouts = req.params.id;
     const sql = await executeQuery('SELECT *  FROM  abouts where id = $1', [id_abouts]);
@@ -201,10 +158,6 @@ const es_updateabouts = async (req, res) => {
     }
 
 }
-
-
-
-
 //:::::::::::::::::::::::::::::::::: End Of Ekonomi Syariah ::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Abouts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const abouts = async (req, res) => {
@@ -254,19 +207,37 @@ const abouts_kdeks_list = async (req, res) => {
     res.status(200).json(sql)
 }
 
-
 const abouts_kdeks = async (req, res) => {
     const sql = await executeQuery("SELECT * FROM abouts where web_identity = 'kdeks' and tag = 'about'");
     res.status(200).json(sql)
 }
 
 const history_kdeks = async (req, res) => {
-    //9
     const sql = await executeQuery("SELECT * FROM abouts where web_identity = 'kdeks' and tag = 'history'");
     res.status(200).json(sql)
 }
 
-//::::::::::::::::::::::::::::::::::::::::::::::::::: END KDEKS ABOUT :::::::::::::::::::::::::::::::::::::::::::::::
+const updateaboutskdeks = async (req, res) => {
+    const sql = await executeQuery('UPDATE abouts set title = $1 , title_en = $2, tag = $3 , content = $4 , content_en = $5 where id = $6', [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.id]);
+    if (sql) {
+        res.redirect('/kdeks');
+    } else {
+        console.log(sql)
+        res.redirect('/kdeks');
+    }
+}
+
+const deleteaboutkdeks = async (req, res) => {
+    const sql = await executeQuery('DELETE FROM abouts where id = $1', [req.params.id]);
+    if (sql) {
+        res.redirect('/kdeks');
+    } else {
+        console.log(sql)
+        res.redirect('/kdeks');
+    }
+}
+//::::::::::::::::::::::::::::::End Of Abouts :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::::::::::::::::::::::: Start KDEKS:::::::::::::::::::::::::::::::::::::::::::::::
 
 const kdeks = async (req, res) => {
     //rifqi
@@ -404,28 +375,7 @@ const history_province_kdeks = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
-
-const updateaboutskdeks = async (req, res) => {
-    const sql = await executeQuery('UPDATE abouts set title = $1 , title_en = $2, tag = $3 , content = $4 , content_en = $5 where id = $6', [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.id]);
-    if (sql) {
-        res.redirect('/kdeks');
-    } else {
-        console.log(sql)
-        res.redirect('/kdeks');
-    }
-}
-
-const deleteaboutkdeks = async (req, res) => {
-    const sql = await executeQuery('DELETE FROM abouts where id = $1', [req.params.id]);
-    if (sql) {
-        res.redirect('/kdeks');
-    } else {
-        console.log(sql)
-        res.redirect('/kdeks');
-    }
-}
-
-//::::::::::::::::::::::::::::::End Of Abouts :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::End Of Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const structure = async (req, res) => {
     const sql = await executeQuery("SELECT * FROM  pejabat");
