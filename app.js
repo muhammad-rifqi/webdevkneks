@@ -879,17 +879,11 @@ apps.get('/kdeks_fe_opini/:id', db.kdeks_fe_opini);
 
 apps.get('/directorat_path/:id', db.directorat_path);
 
-apps.post('/insertdirectorats', db.insertdirectorats);
+apps.post('/insertdirectorats', directorats_images.fields([{ name: "images", maxCount: 1 }, { name: "banners", maxCount: 1 }]), db.insertdirectorats);
 
-apps.post('/directorats_update', db.update_directorats);
+apps.post('/directorats_update', directorats_images.fields([{ name: "images", maxCount: 1 }, { name: "banners", maxCount: 1 }]), db.update_directorats);
 
-apps.post('/directorats_upload', directorats_images.fields([{ name: "images", maxCount: 1 }, { name: "banners", maxCount: 1 }]), db.directorats_uploads);
-
-apps.get('/directorats_delete/:id', db.delete_direactorats);
-
-apps.get('/images_direactorat_delete/:id/:foto', db.delete_images_direactorats);
-
-apps.get('/banners_direactorat_delete/:id/:foto', db.delete_banners_direactorats);
+apps.get('/directorats_delete/:id/:dir/:banner', db.delete_direactorats);
 
 apps.get('/directorat_detail/:id', db.directorat_details);
 

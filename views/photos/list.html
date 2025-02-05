@@ -55,6 +55,7 @@
                                                 <th>Foto</th>
                                                 <th>Judul</th>
                                                 <th>Tanggal</th>
+                                                <th>Penulis</th>
                                                 <th>Tayang/Konsep</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -139,6 +140,7 @@
                             return `${formatDateTime(row?.photos_datetime)}`;
                         }
                     },
+                    { "data": "users_name" },
                     {
                         "data": null,
                         "render": function (data, type, row) {

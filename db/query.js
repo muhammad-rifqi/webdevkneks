@@ -19,12 +19,54 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin);
-            res.cookie("id", sql[0]?.id);
-            res.cookie("name", sql[0]?.name);
-            res.cookie("roles_id", sql[0]?.role_id);
-            res.cookie("id_province", sql[0]?.id_province);
-            res.cookie("directorat_id", sql[0]?.directorat_id);
+            res.cookie("islogin", isLogin, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id", sql[0]?.id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("name", sql[0]?.name, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("roles_id", sql[0]?.role_id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id_province", sql[0]?.id_province, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("directorat_id", sql[0]?.directorat_id, {
+                maxAge: 900000,
+                domain: '.rifhandi.com',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -271,14 +313,14 @@ const insertkdeks = async (req, res) => {
 
 const updatekdeks = async (req, res) => {
     const ggg = req.body.id_province.split('-');
-    if(!req.files.photo || !req.files.sk){
+    if (!req.files.photo || !req.files.sk) {
         const sql = await executeQuery("UPDATE kdeks set title=$1,id_province=$2,province_name=$3,structure=$4,twitter=$5,facebook=$6,linkedin=$7,instagram=$8,youtube=$9,address=$10,phone_number=$11,fax=$12,email=$13,maps=$14 where id =$15  ", [req.body.title, ggg[0], ggg[1], req.body.structure, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.maps, req.body.id]);
         if (sql) {
             res.redirect('/master');
         } else {
             res.redirect('/master');
         }
-    }else{
+    } else {
         const fileuploads = site_url + "/uploads/kdeks/" + req.files['photo'][0].originalname.replace(" ", "");
         const skuploads = site_url + "/uploads/kdeks/" + req.files['sk'][0].originalname.replace(" ", "");
         const sql = await executeQuery("UPDATE kdeks set title=$1,images=$2,id_province=$3,province_name=$4,structure=$5,sk=$6,twitter=$7,facebook=$8,linkedin=$9,instagram=$10,youtube=$11,address=$12,phone_number=$13,fax=$14,email=$15,maps=$16 where id =$17  ", [req.body.title, fileuploads, ggg[0], ggg[1], req.body.structure, skuploads, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.maps, req.body.id]);
@@ -461,7 +503,7 @@ const detailstructure = async (req, res) => {
 const updatestructure = async (req, res) => {
     if (!req.file || req.file == "" || req.file == undefined) {
         const sql = await executeQuery("update pejabat set name=$1,position=$2,position_en=$3,description=$4,description_en=$5,is_publish=$6,level=$7 where id = $8",
-            [req.body.name, req.body.position, req.body.position_en, req.body.description, req.body.description_en, req.body.is_published,  req.body.level, req.body.id]);
+            [req.body.name, req.body.position, req.body.position_en, req.body.description, req.body.description_en, req.body.is_published, req.body.level, req.body.id]);
         if (sql) {
             res.redirect('/s');
         } else {
@@ -686,7 +728,9 @@ const directorat_devisi_update = async (req, res) => {
 const insertdirectorats = async (req, res) => {
     // const a = req.body.daerah.split('-');
     // const sql = await executeQuery('INSERT INTO directorats(title,title_en,description,description_en,id_province,province_name)values($1,$2,$3,$4,$5,$6)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, a[0], a[1]]);
-    const sql = await executeQuery('INSERT INTO directorats(title,title_en,description,description_en)values($1,$2,$3,$4)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en]);
+    const fileupload1 = site_url + "/uploads/directorat/images/" + req.files['images'][0].originalname.replace(" ", "");
+    const fileupload2 = site_url + "/uploads/directorat/images/" + req.files['banners'][0].originalname.replace(" ", "");
+    const sql = await executeQuery('INSERT INTO directorats(title,title_en,description,description_en,images,directiorat_banner)values($1,$2,$3,$4,$5,$6)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, fileupload1, fileupload2]);
     if (sql?.length > 0) {
         res.redirect('/directorats');
     } else {
@@ -709,88 +753,57 @@ const update_directorats = async (req, res) => {
     // const a = req.body.daerah.split('-');
     // const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4,id_province=$5,province_name=$6 where id = $7",
     //     [req.body.title, req.body.title_en, req.body.description, req.body.description_en, a[0], a[1], req.body.id]);
-    const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4 where id = $7",
-        [req.body.title, req.body.title_en, req.body.description, req.body.description_en, req.body.id]);
 
-    if (sql) {
-        res.redirect('/directorats');
-    } else {
-        console.log(sql)
-        res.redirect('/directorats');
-    }
-}
+    if (!req.files.images || !req.files.banners) {
+        const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4 where id = $5",
+            [req.body.title, req.body.title_en, req.body.description, req.body.description_en, req.body.id]);
 
-const delete_direactorats = async (req, res) => {
-    const idcat = req.params.id;
-    const sql = await executeQuery('DELETE FROM  directorats where id=$1', [idcat]);
-    if (sql) {
-        res.redirect('/directorats');
-    } else {
-        console.log(sql)
-        res.redirect('/directorats');
-    }
-}
-
-const directorats_uploads = async (req, res) => {
-    const fileupload1 = site_url + "/uploads/directorat/images/" + req.files['images'][0].originalname.replace(" ", "");
-    const fileupload2 = site_url + "/uploads/directorat/images/" + req.files['banners'][0].originalname.replace(" ", "");
-    const sql = await executeQuery("update directorats set images = $1 ,  directiorat_banner = $2 where id = $3",
-        [fileupload1, fileupload2, req.body.id]);
-    if (sql) {
-        res.redirect('/directorats_detail/' + req.body.id);
-    } else {
-        res.redirect('/directorats_detail/' + req.body.id);
-    }
-}
-
-const delete_images_direactorats = async (req, res) => {
-    const id_dir = req.params.id;
-    const foto_dir = req.params.foto;
-
-    if (fs.existsSync(fileslinux + 'directorat/images/' + foto_dir)) {
-        fs.unlink(fileslinux + 'directorat/images/' + foto_dir, async function (err) {
-            if (err) return console.log(err);
-            const sql = await executeQuery('UPDATE directorats set images = $1 where id = $2 ', ['NULL', id_dir]);
-            if (sql) {
-                res.redirect('/directorats_detail/' + id_dir);
-            } else {
-                console.log(sql);
-                res.redirect('/directorats_detail/' + id_dir);
-            }
-        });
-    } else {
-        const sql = await executeQuery('UPDATE directorats set images = $1 where id = $2 ', ['NULL', id_dir]);
         if (sql) {
-            res.redirect('/directorats_detail/' + id_dir);
+            res.redirect('/directorats');
         } else {
-            console.log(sql);
-            res.redirect('/directorats_detail/' + id_dir);
+            console.log(sql)
+            res.redirect('/directorats');
+        }
+    } else {
+        const fileupload1 = site_url + "/uploads/directorat/images/" + req.files['images'][0].originalname.replace(" ", "");
+        const fileupload2 = site_url + "/uploads/directorat/images/" + req.files['banners'][0].originalname.replace(" ", "");
+        const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4,images=$5,directiorat_banner=$6 where id = $7",
+            [req.body.title, req.body.title_en, req.body.description, req.body.description_en, fileupload1, fileupload2, req.body.id]);
+
+        if (sql) {
+            res.redirect('/directorats');
+        } else {
+            console.log(sql)
+            res.redirect('/directorats');
         }
     }
 }
 
-const delete_banners_direactorats = async (req, res) => {
-    const id_dirct = req.params.id;
-    const foto_dirct = req.params.foto;
-
-    if (fs.existsSync(fileslinux + 'directorat/images/' + foto_dirct)) {
-        fs.unlink(fileslinux + 'directorat/images/' + foto_dirct, async function (err) {
+const delete_direactorats = async (req, res) => {
+    const idparam1 = req.params.id;
+    const idparam2 = req.params.dir;
+    const idparam3 = req.params.banner;
+    if (fs.existsSync(fileslinux + 'directorat/images/' + idparam2) && fs.existsSync(fileslinux + 'directorat/images/' + idparam3)) {
+        fs.unlink(fileslinux + 'directorat/images/' + idparam2, async function (err) {
             if (err) return console.log(err);
-            const sql = await executeQuery('UPDATE directorats set directiorat_banner = $1 where id = $2 ', ['NULL', id_dirct]);
-            if (sql) {
-                res.redirect('/directorats_detail/' + id_dirct);
-            } else {
-                console.log(sql);
-                res.redirect('/directorats_detail/' + id_dirct);
-            }
+            fs.unlink(fileslinux + 'directorat/images/' + idparam3, async function (err) {
+                if (err) return console.log(err);
+                const sql = await executeQuery('DELETE FROM  directorats where id=$1', [idparam1]);
+                if (sql) {
+                    res.redirect('/directorats');
+                } else {
+                    console.log(sql)
+                    res.redirect('/directorats');
+                }
+            });
         });
     } else {
-        const sql = await executeQuery('UPDATE directorats set directiorat_banner = $1 where id = $2 ', ['NULL', id_dirct]);
+        const sql = await executeQuery('DELETE FROM  directorats where id=$1', [idparam1]);
         if (sql) {
-            res.redirect('/directorats_detail/' + id_dirct);
+            res.redirect('/directorats');
         } else {
-            console.log(sql);
-            res.redirect('/directorats_detail/' + id_dirct);
+            console.log(sql)
+            res.redirect('/directorats');
         }
     }
 }
@@ -1340,6 +1353,7 @@ const files = async (req, res) => {
                     "tagging": items?.tagging,
                     "directorat": items?.directorat,
                     "id_province": items?.id_province,
+                    "users_name": items?.users_name
                 };
                 array.push(bbb);
             })
@@ -1373,6 +1387,7 @@ const files = async (req, res) => {
                     "tagging": items?.tagging,
                     "directorat": items?.directorat,
                     "id_province": items?.id_province,
+                    "users_name": items?.users_name
                 };
                 array.push(bbb);
             })
@@ -1742,18 +1757,11 @@ const insertnews = async (req, res) => {
 }
 
 const updatenews = async (req, res) => {
-
-    const today = new Date();
-    const month = (today.getMonth() + 1);
-    const mmm = month.length < 2 ? "0" + month : month;
-    const date = today.getFullYear() + '-' + mmm + '-' + today.getDate();
-    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-    // const timeupdate = date + ' ' + time;
+    const users_name = req.cookies.name;
     const news_datetime = req.body.news_datetime.replace("T", " ");
-    console.log(req.body);
     if (!req.file || req.file == undefined || req.file == "") {
-        const sql = await executeQuery("UPDATE news set  title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,is_publish=$7,news_datetime=$8,category_id=$9,tag=$10,directorat=$11,id_province=$12 where id = $13",
-            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, req.body.is_publish, news_datetime, req.body.news_category_id, req.body.taggings, req.body.directorat_id, req.body.kdeks, req.body.id]);
+        const sql = await executeQuery("UPDATE news set  title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,is_publish=$7,news_datetime=$8,category_id=$9,tag=$10,directorat=$11,id_province=$12,users_name=$13 where id = $14",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, req.body.is_publish, news_datetime, req.body.news_category_id, req.body.taggings, req.body.directorat_id, req.body.kdeks, users_name, req.body.id]);
         if (sql) {
             res.redirect('/n');
         } else {
@@ -1762,8 +1770,8 @@ const updatenews = async (req, res) => {
         }
     } else {
         const fileupload = site_url + "/uploads/news/" + req.file.originalname.replace(" ", "");
-        const sql = await executeQuery("UPDATE news set  title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,image=$7,is_publish=$8,news_datetime=$9,category_id=$10, tag=$11,directorat=$12,id_province=$13 where id = $14",
-            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, req.body.news_category_id, req.body.taggings, req.body.directorat_id, req.body.kdeks, req.body.id]);
+        const sql = await executeQuery("UPDATE news set  title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,image=$7,is_publish=$8,news_datetime=$9,category_id=$10, tag=$11,directorat=$12,id_province=$13,users_name=$14 where id = $15",
+            [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, req.body.news_category_id, req.body.taggings, req.body.directorat_id, req.body.kdeks, users_name, req.body.id]);
         if (sql) {
             res.redirect('/n');
         } else {
@@ -1907,7 +1915,8 @@ const categories = async (req, res) => {
                     "tag": items?.tag,
                     "directorat": items?.directorat,
                     "id_province": items?.id_province,
-                    "is_publish": items?.is_publish
+                    "is_publish": items?.is_publish,
+                    "users_name": items?.users_name,
                 };
                 array.push(bbb);
             })
@@ -3351,13 +3360,10 @@ module.exports = {
     inserthotissuecategory,
     updatehotissuecategory,
     update_directorats,
-    delete_banners_direactorats,
-    delete_images_direactorats,
     detailhotissuecategory,
     hotissuesubcategory,
     deletehotissuecategory,
     delete_direactorats,
-    directorats_uploads,
     directorat_devisi_add,
     directorat_devisi,
     directorat_devisi_detail,
