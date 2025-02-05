@@ -232,7 +232,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
     document.write(`
                             <li class="nxl-item"><a class="nxl-link" href="/kdeks">Profil</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/province">Provinsi</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/province">Master Provinsi</a></li>
                            `);
 }
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {

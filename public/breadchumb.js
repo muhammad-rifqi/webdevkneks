@@ -21,13 +21,13 @@ if(path == 'narations'){
     breadcrumb0 = "Data";
     breadcrumb1 = "Dashboard";
     breadcrumb2 = "Narasi";
-    linkto = "#";
+    linkto = "/dashboard";
 }
 if(path == 'dashboard_add'){
     breadcrumb0 = "Data"
     breadcrumb1 = "Dashboard";
     breadcrumb2 = "Tambah Dashboard";
-    linkto = "#";
+    linkto = "/dashboard";
 }
 if(path == 'dataset'){
     breadcrumb0 = "Data"
@@ -40,14 +40,14 @@ if(path == 'dataset_add'){
     breadcrumb0 = "Data"
     breadcrumb1 = "Dataset";
     breadcrumb2 = "Tambah Dataset";
-    linkto = "#";
+    linkto = "/dataset";
 }
 
 if(path == 'dataset_detail'){
     breadcrumb0 = "Data"
     breadcrumb1 = "Dataset";
-    breadcrumb2 = "Detail";
-    linkto = "#";
+    breadcrumb2 = "Ubah";
+    linkto = "/dataset";
 }
 
 if(path == 'sliderdata'){
@@ -61,7 +61,7 @@ if(path == 'sliderdata_add'){
     breadcrumb0 = "Data";
     breadcrumb1 = "Slide";
     breadcrumb2 = "Tambah Slide";
-    linkto = "#";
+    linkto = "/sliderdata";
 }
 if(path == 'menu_data'){
     breadcrumb0 = "Data";
@@ -74,14 +74,14 @@ if(path == 'menudata_add'){
     breadcrumb0 = "Data";
     breadcrumb1 = "Menu";
     breadcrumb2 = "Tambah Menu";
-    linkto = "#";
+    linkto = "/menu_data";
 }
 
 if(path == 'menudata_edit'){
     breadcrumb0 = "Data";
     breadcrumb1 = "Menu";
     breadcrumb2 = "Ubah Menu";
-    linkto = "#";
+    linkto = "/menu_data";
 }
 
 if(path == 'submenu_data'){
@@ -95,14 +95,14 @@ if(path == 'submenudata_add'){
     breadcrumb0 = "Data";
     breadcrumb1 = "Sub Menu";
     breadcrumb2 = "Tambah Sub Menu";
-    linkto = "#";
+    linkto = "/submenu_data";
 }
 
 if(path == 'submenudata_edit'){
     breadcrumb0 = "Data";
     breadcrumb1 = "Sub Menu";
     breadcrumb2 = "Ubah Sub Menu";
-    linkto = "#";
+    linkto = "/submenu_data";
 }
 
 //------------------------------- End Of Data -----------------------------
@@ -111,21 +111,21 @@ if(path == 'directorats' ){
     breadcrumb0 = "Direktorat Master";
     breadcrumb1 = "Direktorat";
     breadcrumb2 = "";
-    linkto = "#";
+    linkto = "/directorats";
 }
 
 if(path == 'directorats_add'){
     breadcrumb0 = "Direktorat Master";
     breadcrumb1 = "Direktorat";
     breadcrumb2 = "Tambah Direktorat";
-    linkto = "#";
+    linkto = "/directorats";
 }
 
 if(path == 'directorats_edit' ){
     breadcrumb0 = "Direktorat Master";
     breadcrumb1 = "Direktorat";
     breadcrumb2 = "Ubah Direktorat";
-    linkto = "#";
+    linkto = "/directorats";
 }
 
 if(path == 'directorats_detail'){
@@ -146,14 +146,14 @@ if(path == 'devision_add'){
     breadcrumb0 = "Direktorat";
     breadcrumb1 = "Divisi";
     breadcrumb2 = "Tambah Divisi";
-    linkto = "#";
+    linkto = "/devision";
 }
 
 if(path == 'devision_edit'){
     breadcrumb0 = "Direktorat";
     breadcrumb1 = "Divisi";
     breadcrumb2 = "Ubah Divisi";
-    linkto = "#";
+    linkto = "/devision";
 }
 //------------------------------- End Of Direktorat -----------------------------
 //------------------------------Start Of Berita----------------------
@@ -168,14 +168,14 @@ if(path == 'n_add'){
     breadcrumb0 = "Berita";
     breadcrumb1 = "Berita";
     breadcrumb2 = "Tambah Berita";
-    linkto = "#";
+    linkto = "/n";
 }
 
 if(path == 'n_edit'){
     breadcrumb0 = "Berita";
     breadcrumb1 = "Berita";
     breadcrumb2 = "Ubah Berita";
-    linkto = "#";
+    linkto = "/n";
 }
 //------------------------------- End Of Berita -----------------------------
 //------------------------------Start Of Barita Kategori----------------------
@@ -183,21 +183,21 @@ if(path == 'nc'){
     breadcrumb0 = "Berita";
     breadcrumb1 = "Kategori";
     breadcrumb2 = "";
-    linkto = "#";
+    linkto = "/nc";
 }
 
 if(path == 'nc_add'){
     breadcrumb0 = "Berita";
     breadcrumb1 = "Kategori";
     breadcrumb2 = "Tambah Kategori";
-    linkto = "nc_add";
+    linkto = "/nc";
 }
 
 if(path == 'nc_edit'){
     breadcrumb0 = "Berita";
     breadcrumb1 = "Kategori";
     breadcrumb2 = "Ubah Kategori";
-    linkto = "nc_edit";
+    linkto = "/nc";
 }
 //------------------------------- End Of Berita Kategori -----------------------------
 //--------------------------------Start Of Struktur----------------------
@@ -213,14 +213,14 @@ if(path == 's_add'){
     breadcrumb0 = "Struktur";
     breadcrumb1 = "Pejabat";
     breadcrumb2 = "Tambah Pejabat";
-    linkto = "s_add";
+    linkto = "/s";
 }
 
 if(path == 's_edit'){
     breadcrumb0 = "Struktur";
     breadcrumb1 = "Pejabat";
     breadcrumb2 = "Ubah Pejabat";
-    linkto = "#";
+    linkto = "/s";
 }
 
 if(path == 's_logo'){
@@ -234,13 +234,13 @@ if(path == 's_logo_edit'){
     breadcrumb0 = "Struktur";
     breadcrumb1 = "Struktur";
     breadcrumb2 = "Ubah Struktur";
-    linkto = "#";
+    linkto = "/s_logo";
 }
 if(path == 's_logo_add'){
     breadcrumb0 = "Struktur";
     breadcrumb1 = "Struktur";
     breadcrumb2 = "Tambah Struktur";
-    linkto = "#";
+    linkto = "/s_logo";
 }
 //------------------------------- End Of Struktur -----------------------------
 //-------------------------------- Start Of Opini ----------------------
@@ -255,14 +255,14 @@ if(path == 'opini_add'){
     breadcrumb0 = "Opini";
     breadcrumb1 = "Tambah Opini";
     breadcrumb2 = "";
-    linkto = "#";
+    linkto = "/opini";
 }
 
 if(path == 'opini_edit'){
     breadcrumb0 = "Opini";
     breadcrumb1 = "Ubah Opini";
     breadcrumb2 = "";
-    linkto = "#";
+    linkto = "/opini";
 }
 
 //------------------------------- End Of Opini -----------------------------
@@ -278,14 +278,14 @@ if(path == 'hi_add'){
     breadcrumb0 = "Isu Terkini";
     breadcrumb1 = "Isu Terkini";
     breadcrumb2 = "Tambah Isu Terkini";
-    linkto = "#";
+    linkto = "/hi";
 }
 
 if(path == 'hi_edit'){
     breadcrumb0 = "Isu Terkini";
     breadcrumb1 = "Isu Terkini";
     breadcrumb2 = "Ubah Isu Terkini";
-    linkto = "#";
+    linkto = "/hi";
 }
 //------------------------------- End Of Isu Terkini -----------------------------
 //------------------------------Start Of Isu Terkini Kategori----------------------
@@ -300,14 +300,14 @@ if(path == 'hic_add'){
     breadcrumb0 = "Isu Terkini";
     breadcrumb1 = "Kategori";
     breadcrumb2 = "Tambah Kategori";
-    linkto = "#";
+    linkto = "/hic";
 }
 
 if(path == 'hic_edit'){
     breadcrumb0 = "Isu Terkini";
     breadcrumb1 = "Kategori";
     breadcrumb2 = "Ubah Kategori";
-    linkto = "#";
+    linkto = "/hic";
 }
 //------------------------------- End Of Isu Terkini Kategori-----------------------------
 //------------------------------Start Of Isu Terkini Sub Kategori ----------------------
@@ -322,14 +322,14 @@ if(path == 'hisc_add'){
     breadcrumb0 = "Isu Terkini";
     breadcrumb1 = "Sub Kategori";
     breadcrumb2 = "Tambah Sub Kategori";
-    linkto = "#";
+    linkto = "/hisc";
 }
 
 if(path == 'hisc_edit'){
     breadcrumb0 = "Isu Terkini";
     breadcrumb1 = "Sub Kategori";
     breadcrumb2 = "Ubah Sub Kategori";
-    linkto = "#";
+    linkto = "/hisc";
 }
 //------------------------------- End Of Isu Terkini Sub Kategori -----------------------------
 //------------------------------Start Of Photo ----------------------
@@ -344,14 +344,14 @@ if(path == 'ph_add'){
     breadcrumb0 = "Foto";
     breadcrumb1 = "Tambah Foto";
     breadcrumb2 = "";
-    linkto = "#";
+    linkto = "/ph";
 }
 
 if(path == 'ph_edit'){
     breadcrumb0 = "Foto";
     breadcrumb1 = "Ubah Foto";
     breadcrumb2 = "";
-    linkto = "#";
+    linkto = "/ph";
 }
 //------------------------------- End Of Photo -----------------------------
 //------------------------------Start Of Video ----------------------
@@ -366,14 +366,14 @@ if(path == 'v_add'){
     breadcrumb0 = "Video";
     breadcrumb1 = "Tambah Video";
     breadcrumb2 = "";
-    linkto = "#";
+    linkto = "/v";
 }
 
 if(path == 'v_edit'){
     breadcrumb0 = "Video";
     breadcrumb1 = "Ubah Video";
     breadcrumb2 = "";
-    linkto = "#";
+    linkto = "/v";
 }
 //------------------------------- End Of Video -----------------------------
 //------------------------------Agenda ----------------------
@@ -388,14 +388,14 @@ if(path == 'a_add'){
     breadcrumb0 = "Agenda";
     breadcrumb1 = "Tambah Agenda";
     breadcrumb2 = "";
-    linkto = "#";
+    linkto = "/a";
 }
 
 if(path == 'a_edit'){
     breadcrumb0 = "Agenda";
     breadcrumb1 = "Ubah Agenda";
     breadcrumb2 = "";
-    linkto = "#";
+    linkto = "/a";
 }
 //-----------------------End Of Agenda -----------------------------
 //------------------------------Agenda ----------------------
@@ -403,7 +403,7 @@ if(path == 'f'){
     breadcrumb0 = "e-Pustaka";
     breadcrumb1 = "e-Pustaka";
     breadcrumb2 = "";
-    linkto = "#";
+    linkto = "/a";
 }
 
 if(path == 'f_add'){
@@ -417,7 +417,7 @@ if(path == 'f_edit'){
     breadcrumb0 = "e-Pustaka";
     breadcrumb1 = "e-Pustaka";
     breadcrumb2 = "Ubah e-Pustaka";
-    linkto = "#";
+    linkto = "/f";
 }
 //-----------------------End Of Agenda -----------------------------
 //------------------------------Agenda ----------------------
@@ -432,14 +432,14 @@ if(path == 'fc_add'){
     breadcrumb0 = "e-Pustaka";
     breadcrumb1 = "Kategori";
     breadcrumb2 = "Tambah Kategori";
-    linkto = "#";
+    linkto = "/fc";
 }
 
 if(path == 'fc_edit'){
     breadcrumb0 = "e-Pustaka";
     breadcrumb1 = "Kategori";
     breadcrumb2 = "Ubah Kategori";
-    linkto = "#";
+    linkto = "/fc";
 }
 //-----------------------End Of Agenda -----------------------------
 //------------------------ Tentang Kami ----------------------
@@ -454,7 +454,7 @@ if(path == 'tk_edit'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Profil Kneks";
     breadcrumb2 = "Ubah Profil Kneks";
-    linkto = "#";
+    linkto = "/tk";
 }
 
 //-----------------------End Of KDEKS -----------------------------
@@ -470,14 +470,14 @@ if(path == 'master_add'){
     breadcrumb0 = "Kdeks";
     breadcrumb1 = "Kdeks";
     breadcrumb2 = "Tambah Kdeks";
-    linkto = "#";
+    linkto = "/master";
 }
 
 if(path == 'master_edit'){
     breadcrumb0 = "Kdeks";
     breadcrumb1 = "Kdeks";
     breadcrumb2 = "Ubah Kdeks";
-    linkto = "#";
+    linkto = "/master";
 }
 //-----------------------End Of KDEKS Master-----------------------------
 if(path == 'es'){
@@ -491,7 +491,7 @@ if(path == 'es_edit'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Ekonomi Syariah";
     breadcrumb2 = "Ubah";
-    linkto = "#";
+    linkto = "/es";
 }
 //-----------------------End Of KDEKS Master-----------------------------
 if(path == 'kdeks'){
@@ -517,23 +517,23 @@ if(path == 'kdeks_edit'){
 
 if(path == 'province'){
     breadcrumb0 = "Kdeks";
-    breadcrumb1 = "Provinsi";
+    breadcrumb1 = "Master Provinsi";
     breadcrumb2 = "";
     linkto = "#";
 }
 
 if(path == 'province_add'){
     breadcrumb0 = "Kdeks";
-    breadcrumb1 = "Provinsi";
+    breadcrumb1 = "Master Provinsi";
     breadcrumb2 = "Tambah Provinsi";
-    linkto = "#";
+    linkto = "/province";
 }
 
 if(path == 'province_edit'){
     breadcrumb0 = "Kdeks";
-    breadcrumb1 = "Provinsi";
+    breadcrumb1 = "Master Provinsi";
     breadcrumb2 = "Ubah Provinsi";
-    linkto = "#";
+    linkto = "/province";
 }
 //-----------------------End Of KDEKS Master-----------------------------
 //------------------------ Zona Khas----------------------

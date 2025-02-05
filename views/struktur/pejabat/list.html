@@ -55,6 +55,7 @@
                                                 <th>Photo</th>
                                                 <th>Nama</th>
                                                 <th>Jabatan</th>
+                                                <th>Level</th>
                                                 <th>Tayang/Konsep</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -123,6 +124,18 @@
                     },
                     { "data": "name" },
                     { "data": "position" },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            if (data?.level == 1) {
+                                return `ME/SET.KNEKS`;
+                            } else if (data?.level == 2) {
+                                return `Direktorat/Kepala/Direktur/Kadiv`;
+                            } else {
+                                return `Sub Kepala/Direktur/Kadiv`;
+                            }
+                        }
+                    },
                     {
                         "data": null,
                         "render": function (data, type, row) {
