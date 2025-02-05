@@ -505,14 +505,14 @@ if(path == 'kdeks_add'){
     breadcrumb0 = "Kdeks";
     breadcrumb1 = "Profil";
     breadcrumb2 = "Tambah Profil";
-    linkto = "#";
+    linkto = "/kdeks";
 }
 
 if(path == 'kdeks_edit'){
     breadcrumb0 = "Kdeks";
     breadcrumb1 = "Profil";
     breadcrumb2 = "Ubah Profil";
-    linkto = "#";
+    linkto = "/kdeks";
 }
 
 if(path == 'province'){
@@ -592,14 +592,14 @@ if(path == 'u_add'){
     breadcrumb0 = "User";
     breadcrumb1 = "User";
     breadcrumb2 = "Tambah User";
-    linkto = "#";
+    linkto = "/u";
 }
 
 if(path == 'u_edit'){
     breadcrumb0 = "User";
     breadcrumb1 = "User";
     breadcrumb2 = "Ubah User";
-    linkto = "#";
+    linkto = "/u";
 }
 //-----------------------End Of Users-----------------------------
 //------------------------ New User ----------------------
@@ -630,14 +630,14 @@ if(path == 'i_add' ){
     breadcrumb0 = "Profil"
     breadcrumb1 = "Anggota Kneks";
     breadcrumb2 = "Tambah Anggota Kneks";
-    linkto = "#";
+    linkto = "/i";
 }
 
 if(path == 'i_edit'){
     breadcrumb0 = "Profil"
     breadcrumb1 = "Anggota Kneks";
     breadcrumb2 = "Ubah Anggota Kneks";
-    linkto = "#";
+    linkto = "/i";
 }
 //-----------------------End Of Institusi -----------------------------
 //------------------------ Sosmed----------------------
@@ -652,14 +652,14 @@ if(path == 'sm_add' ){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Sosial Media";
     breadcrumb2 = "Tambah Sosial Media";
-    linkto = "#";
+    linkto = "/sm";
 }
 
 if(path == 'sm_edit'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Sosial Media";
     breadcrumb2 = "Ubah Sosial Media";
-    linkto = "#";
+    linkto = "/sm";
 }
 //-----------------------End Of sosmed-----------------------------
 //------------------------ KOntak----------------------
@@ -674,14 +674,14 @@ if(path == 'c_add'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Kontak";
     breadcrumb2 = "Tambah Kontak";
-    linkto = "#";
+    linkto = "/c";
 }
 
 if(path == 'c_edit'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Kontak";
     breadcrumb2 = "Ubah Kontak";
-    linkto = "#";
+    linkto = "/c";
 }
 //-----------------------End Of Kontak-----------------------------
 //------------------------ Maps----------------------
@@ -696,14 +696,14 @@ if(path == 'm_add'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Maps";
     breadcrumb2 = "Tambah Maps";
-    linkto = "#";
+    linkto = "/m";
 }
 
 if(path == 'm_edit'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Maps";
     breadcrumb2 = "Ubah Maps";
-    linkto = "#";
+    linkto = "/m";
 }
 //-----------------------End Of Maps-----------------------------
 //------------------------ SKup ----------------------
@@ -718,14 +718,14 @@ if(path == 'scp_add'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Skup";
     breadcrumb2 = "Tambah Skup";
-    linkto = "#";
+    linkto = "/scp";
 }
 
 if(path == 'scp_edit'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Skup";
     breadcrumb2 = "Ubah Skup";
-    linkto = "#";
+    linkto = "/scp";
 }
 //-----------------------End Of Skup-----------------------------
 //------------------------ Banners ----------------------
@@ -740,14 +740,14 @@ if(path == 'b_add'){
     breadcrumb0 = "Banners";
     breadcrumb1 = "Slide Show";
     breadcrumb2 = "Tambah Slide Show";
-    linkto = "#";
+    linkto = "/b";
 }
 
 if(path == 'b_edit'){
     breadcrumb0 = "Banners";
     breadcrumb1 = "Slide Show";
     breadcrumb2 = "Ubah Slide Show";
-    linkto = "#";
+    linkto = "/b";
 }
 //-----------------------End Of Banners-----------------------------
 //------------------------ Judul----------------------
@@ -822,13 +822,13 @@ if(path == 'menu_add'){
     breadcrumb0 = "Pengaturan";
     breadcrumb1 = "Menu";
     breadcrumb2 = "Tambah Menu";
-    linkto = "#";
+    linkto = "/menu";
 }
 if( path == 'menu_edit'){
     breadcrumb0 = "Pengaturan";
     breadcrumb1 = "Menu";
     breadcrumb2 = "Ubah Menu";
-    linkto = "#";
+    linkto = "/menu";
 }
 //-----------------------End Of Menu-----------------------------
 //------------------------ Sub Menu ----------------------
@@ -836,21 +836,21 @@ if(path == 'submenu'){
     breadcrumb0 = "Pengaturan";
     breadcrumb1 = "Sub Menu";
     breadcrumb2 = "";
-    linkto = "#";
+    linkto = "/submenu";
 }
 
 if(path == 'submenu_add'){
     breadcrumb0 = "Pengaturan";
     breadcrumb1 = "Sub Menu";
     breadcrumb2 = "Tambah Sub Menu";
-    linkto = "#";
+    linkto = "/submenu";
 }
 
 if( path == 'submenu_edit'){
     breadcrumb0 = "Pengaturan";
     breadcrumb1 = "Sub Menu";
     breadcrumb2 = "Ubah Sub Menu";
-    linkto = "#";
+    linkto = "/submenu";
 }
 //-----------------------End Of Sub Menu -----------------------------
 //---------------------------- Welcome Banner --------------------------------
@@ -865,14 +865,14 @@ if(path == 'welcomebanner_add'){
     breadcrumb0 = "Banner";
     breadcrumb1 = "Welcome";
     breadcrumb2 = "Tambah Welcome";
-    linkto = "#";
+    linkto = "/welcomebanner";
 }
 
 if(path == 'edit_welcome_page'){
     breadcrumb0 = "Banner";
     breadcrumb1 = "Welcome";
     breadcrumb2 = "Ubah Welcome";
-    linkto = "#";
+    linkto = "/welcomebanner";
 }
 //------------------------ Login Banner----------------------
 if(path == 'login_banner'){
@@ -886,21 +886,21 @@ if(path == 'login_banner_add'){
     breadcrumb0 = "Banner";
     breadcrumb1 = "Login";
     breadcrumb2 = "Tambah Login";
-    linkto = "#";
+    linkto = "/login_banner";
 }
 
 if(path == 'login_banner_edit'){
     breadcrumb0 = "Banner";
     breadcrumb1 = "Login";
     breadcrumb2 = "Ubah Login";
-    linkto = "#";
+    linkto = "/login_banner";
 }
 //-----------------------End Of Login Banner-----------------------------
 if(path == 'cp'){
     breadcrumb0 = "Data";
     breadcrumb1 = "Pengguna";
     breadcrumb2 = "Ubah Kata Sandi";
-    linkto = "#";
+    linkto = "/cp";
 }
 //-----------------------End Of Whitelist-----------------------------
 if(path == 'ip_address'){

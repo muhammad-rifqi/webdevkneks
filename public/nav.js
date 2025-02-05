@@ -218,30 +218,27 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 
 }
 
 //kdeks
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {
+if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {
     document.write(`<li class="nxl-item nxl-hasmenu">
                         <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
                             <span class="nxl-mtext">KDEKS</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
                         <ul class="nxl-submenu">
-                             <li class="nxl-item"><a class="nxl-link" href="/master">KDEKS</a></li>
-                        `);
-}
-//kdeks master
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
-    document.write(`
                             <li class="nxl-item"><a class="nxl-link" href="/kdeks">Profil</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/province">Master Provinsi</a></li>
-                           `);
-}
-if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {
-    document.write(`
-                            
+                            <li class="nxl-item"><a class="nxl-link" href="/master">KDEKS</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/province">Master Provinsi</a></li>     
                             </ul>
-                    </li>
-                           `);
+                    </li>`);
+}
 
+if (cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {
+    document.write(`li class="nxl-item nxl-hasmenu">
+                        <a href="/master" class="nxl-link">
+                            <span class="nxl-micon"><i class="feather-bookmark"></i></span>
+                            KDEKS
+                        </a>
+                    </li>`);
 }
 
 //Zona Kh6s
