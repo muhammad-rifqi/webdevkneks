@@ -191,7 +191,7 @@ const es_detailabouts = async (req, res) => {
 }
 
 const es_updateabouts = async (req, res) => {
-    const sql = await executeQuery('UPDATE abouts set title = $1 , title_en = $2, tag = $3 , content = $4 , content_en = $5 where id = $6', [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.id]);
+    const sql = await executeQuery('UPDATE abouts set about = $1,about_en = $2,history=$3 , history_en = $4 , about_content = $5, about_content_en = $6 , history_content = $7, history_content_en = $8 , legal_foundation = $9 , legal_foundation_en = $10, legal_foundation_content = $11 , legal_foundation_content_en = $12, logo_philosophy = $13 , logo_philosophy_en = $14 , logo_philosophy_content = $15, logo_philosophy_content_en = $16 , kneks_task = $17, kneks_task_en = $18 , kneks_task_content = $19 , kneks_task_content_en = $20, function = $21 , function_en = $22, function_content = $23 , function_content_en = $24 where id = $25', [req.body.about, req.body.about_en, req.body.history, req.body.history_en, req.body.about_content, req.body.about_content_en, req.body.history_content, req.body.history_content_en, req.body.legal_foundation, req.body.legal_foundation_en, req.body.legal_foundation_content, req.body.legal_foundation_content_en, req.body.logo_philosophy, req.body.logo_philosophy_en,req.body.logo_philosophy_content, req.body.logo_philosophy_content_en, req.body.kneks_task, req.body.kneks_task_en, req.body.kneks_task_content, req.body.kneks_task_content_en, req.body.function, req.body.function_en, req.body.function_content, req.body.function_content_en, req.body.id]);
     if (sql) {
         res.redirect('/es');
     } else {
@@ -223,7 +223,7 @@ const detailabout = async (req, res) => {
 }
 
 const updateabouts = async (req, res) => {
-    const sql = await executeQuery('UPDATE abouts set title = $1 , title_en = $2, tag = $3 , content = $4 , content_en = $5 where id = $6', [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.id]);
+    const sql = await executeQuery('UPDATE abouts set about = $1,about_en = $2,history=$3 , history_en = $4 , about_content = $5, about_content_en = $6 , history_content = $7, history_content_en = $8 , legal_foundation = $9 , legal_foundation_en = $10, legal_foundation_content = $11 , legal_foundation_content_en = $12, logo_philosophy = $13 , logo_philosophy_en = $14 , logo_philosophy_content = $15, logo_philosophy_content_en = $16 , kneks_task = $17, kneks_task_en = $18 , kneks_task_content = $19 , kneks_task_content_en = $20, function = $21 , function_en = $22, function_content = $23 , function_content_en = $24 where id = $25', [req.body.about, req.body.about_en, req.body.history, req.body.history_en, req.body.about_content, req.body.about_content_en, req.body.history_content, req.body.history_content_en, req.body.legal_foundation, req.body.legal_foundation_en, req.body.legal_foundation_content, req.body.legal_foundation_content_en, req.body.logo_philosophy, req.body.logo_philosophy_en,req.body.logo_philosophy_content, req.body.logo_philosophy_content_en, req.body.kneks_task, req.body.kneks_task_en, req.body.kneks_task_content, req.body.kneks_task_content_en, req.body.function, req.body.function_en, req.body.function_content, req.body.function_content_en, req.body.id]);
     if (sql) {
         res.redirect('/tk');
     } else {
@@ -260,7 +260,7 @@ const history_kdeks = async (req, res) => {
 }
 
 const updateaboutskdeks = async (req, res) => {
-    const sql = await executeQuery('UPDATE abouts set title = $1 , title_en = $2, tag = $3 , content = $4 , content_en = $5 where id = $6', [req.body.title, req.body.title_en, req.body.tag, req.body.content, req.body.content_en, req.body.id]);
+    const sql = await executeQuery('UPDATE abouts set about = $1,about_en = $2,history=$3 , history_en = $4 , about_content = $5, about_content_en = $6 , history_content = $7, history_content_en = $8 , legal_foundation = $9 , legal_foundation_en = $10, legal_foundation_content = $11 , legal_foundation_content_en = $12, logo_philosophy = $13 , logo_philosophy_en = $14 , logo_philosophy_content = $15, logo_philosophy_content_en = $16 , kneks_task = $17, kneks_task_en = $18 , kneks_task_content = $19 , kneks_task_content_en = $20, function = $21 , function_en = $22, function_content = $23 , function_content_en = $24 where id = $25', [req.body.about, req.body.about_en, req.body.history, req.body.history_en, req.body.about_content, req.body.about_content_en, req.body.history_content, req.body.history_content_en, req.body.legal_foundation, req.body.legal_foundation_en, req.body.legal_foundation_content, req.body.legal_foundation_content_en, req.body.logo_philosophy, req.body.logo_philosophy_en,req.body.logo_philosophy_content, req.body.logo_philosophy_content_en, req.body.kneks_task, req.body.kneks_task_en, req.body.kneks_task_content, req.body.kneks_task_content_en, req.body.function, req.body.function_en, req.body.function_content, req.body.function_content_en, req.body.id]);
     if (sql) {
         res.redirect('/kdeks');
     } else {
@@ -1170,10 +1170,10 @@ const maps = async (req, res) => {
 const updatemaps = async (req, res) => {
     const sql = await executeQuery('UPDATE map set embed=$1 where id=$2', [req.body.embed, req.body.id]);
     if (sql) {
-        res.redirect('/m');
+        res.redirect('/m_edit/' + req.body.id);
     } else {
         console.log(sql);
-        res.redirect('/m');
+        res.redirect('/mm_edit/' + req.body.id);
     }
 }
 //::::::::::::::::::::::::::::::End Of Maps :::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1191,10 +1191,10 @@ const contacts = async (req, res) => {
 const updatecontacts = async (req, res) => {
     const sql = await executeQuery('UPDATE contacts set address_building=$1, address=$2, phone_number=$3, fax_number=$4, email=$5 where id=$6', [req.body.address_building, req.body.address, req.body.phone_number, req.body.fax_number, req.body.email, req.body.id]);
     if (sql) {
-        res.redirect('/c');
+        res.redirect('/c_edit/' + req.body.id);
     } else {
         console.log(sql);
-        res.redirect('/c');
+        res.redirect('/c_edit/' + req.body.id);
     }
 }
 
