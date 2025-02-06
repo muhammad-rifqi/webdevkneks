@@ -1669,7 +1669,7 @@ const news_categories_menu = async (req, res) => {
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
-        res.status(200).json({ "success": false })
+        res.status(200).json([])
     }
 }
 
