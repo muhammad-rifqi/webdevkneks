@@ -550,7 +550,7 @@ apps.get('/tk_edit/:id', (req, res) => {
 //:::::::::::::::::::::::::::::::::::::::: End Tentang Kami :::::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::::: Start Of Ekonomi Syariah :::::::::::::::::::::::::::::::::::::::
 apps.get('/es', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/ekonomi_syariah/ekonomi_syariah_edit.html'));
+    res.sendFile(path.resolve('./views/profile/ekonomi_syariah/ekonomi_syariah_form.html'));
 })
 
 apps.get('/es_form', (req, res) => {

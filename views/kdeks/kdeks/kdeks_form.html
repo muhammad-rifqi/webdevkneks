@@ -16,8 +16,18 @@
     <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor1');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor2');
             new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
             new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor5');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor6');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor7');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor8');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor9');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor10');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor11');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor12');
         });
     </script>
 </head>
@@ -58,29 +68,141 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Judul [ID]</label>
-                                            <input class="form-control" type="text" name="title" id="title" required>
+                                            <label class="form-label">Tentang Kami [ID]</label>
+                                            <input class="form-control" type="text" name="about" id="about" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Judul [EN]</label>
-                                            <input class="form-control" type="text" name="title_en" id="title_en"
+                                            <label class="form-label">Tentang Kami [EN]</label>
+                                            <input class="form-control" type="text" name="about_en" id="about_en"
                                                 required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Konten [ID]</label>
-                                            <textarea class="form-control" name="content" id="editor3"
-                                                ></textarea>
+                                            <label class="form-label">Konten Tentang Kami [ID]</label>
+                                            <textarea class="form-control" name="about_content" id="editor1"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Konten [EN]</label>
-                                            <textarea class="form-control" name="content_en" id="editor4"
-                                                ></textarea>
+                                            <label class="form-label">Konten Tentang Kami [EN]</label>
+                                            <textarea class="form-control" name="about_content_en"
+                                                id="editor2"></textarea>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tag</label>
-                                            <input  type="hidden" class="form-control" name="tag" id="tag" />
+                                            <label class="form-label">Sejarah [ID]</label>
+                                            <input class="form-control" type="text" name="history" id="history"
+                                                required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Sejarah [EN]</label>
+                                            <input class="form-control" type="text" name="history_en" id="history_en"
+                                                required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Konten Sejarah [ID]</label>
+                                            <textarea class="form-control" name="history_content"
+                                                id="editor3"></textarea>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Konten Sejarah [EN]</label>
+                                            <textarea class="form-control" name="history_content_en"
+                                                id="editor4"></textarea>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Landasan Hukum [ID]</label>
+                                            <input class="form-control" type="text" name="legal_foundation"
+                                                id="legal_foundation" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Landasan Hukum [EN]</label>
+                                            <input class="form-control" type="text" name="legal_foundation_en"
+                                                id="legal_foundation_en" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Konten Landasan Hukum [ID]</label>
+                                            <textarea class="form-control" name="legal_foundation_content"
+                                                id="editor5"></textarea>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Konten Landasan Hukum [EN]</label>
+                                            <textarea class="form-control" name="legal_foundation_content_en"
+                                                id="editor6"></textarea>
+                                        </div>
+
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Filosofi Logo [ID]</label>
+                                            <input class="form-control" type="text" name="logo_philosophy"
+                                                id="logo_philosophy" required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Filosofi Logo [EN]</label>
+                                            <input class="form-control" type="text" name="logo_philosophy_en"
+                                                id="logo_philosophy_en" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Konten Filosofi Logo [ID]</label>
+                                            <textarea class="form-control" name="logo_philosophy_content"
+                                                id="editor7"></textarea>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Konten Filosofi Logo [EN]</label>
+                                            <textarea class="form-control" name="logo_philosophy_content_en"
+                                                id="editor8"></textarea>
+                                        </div>
+
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tugas KNEKS [ID]</label>
+                                            <input class="form-control" type="text" name="kneks_task" id="kneks_task"
+                                                required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Tugas KNEKS [EN]</label>
+                                            <input class="form-control" type="text" name="kneks_task_en"
+                                                id="kneks_task_en" required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Konten Tugas KNEKS [ID]</label>
+                                            <textarea class="form-control" name="kneks_task_content"
+                                                id="editor9"></textarea>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Konten Tugas KNEKS [EN]</label>
+                                            <textarea class="form-control" name="kneks_task_content_en"
+                                                id="editor10"></textarea>
+                                        </div>
+
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Fungsi KNEKS [ID]</label>
+                                            <input class="form-control" type="text" name="function" id="function"
+                                                required>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Fungsi KNEKS [EN]</label>
+                                            <input class="form-control" type="text" name="function_en" id="function_en"
+                                                required>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Konten Fungsi KNEKS [ID]</label>
+                                            <textarea class="form-control" name="function_content"
+                                                id="editor11"></textarea>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Konten Fungsi KNEKS [EN]</label>
+                                            <textarea class="form-control" name="function_content_en"
+                                                id="editor12"></textarea>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"></label>
+                                            <input type="hidden" class="form-control" name="tag" id="tag" />
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -124,14 +246,24 @@
 
         function getUrlById() {
             const URLS = new URL(window.location.href);
-            fetch('/detailabouts/' + URLS.pathname.split('/')[2])
+            fetch('/detailabouts')
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("id").value = rows[0]?.id;
-                    document.getElementById("title").value = rows[0]?.title;
-                    document.getElementById("title_en").value = rows[0]?.title_en;
-                    nicEditors.findEditor( "editor3" ).setContent( rows[0]?.content );
-                    nicEditors.findEditor( "editor4" ).setContent( rows[0]?.content_en );
+                    document.getElementById("about").value = rows[0]?.about;
+                    document.getElementById("about_en").value = rows[0]?.about_en;
+                    nicEditors.findEditor("editor1").setContent(rows[0]?.about_content);
+                    nicEditors.findEditor("editor2").setContent(rows[0]?.about_content_en);
+                    nicEditors.findEditor("editor3").setContent(rows[0]?.history_content);
+                    nicEditors.findEditor("editor4").setContent(rows[0]?.history_content_en);
+                    nicEditors.findEditor("editor5").setContent(rows[0]?.legal_foundation_content);
+                    nicEditors.findEditor("editor6").setContent(rows[0]?.legal_foundation_content_en);
+                    nicEditors.findEditor("editor7").setContent(rows[0]?.logo_philosophy_content);
+                    nicEditors.findEditor("editor8").setContent(rows[0]?.logo_philosophy_content_en);
+                    nicEditors.findEditor("editor9").setContent(rows[0]?.kneks_task_content);
+                    nicEditors.findEditor("editor10").setContent(rows[0]?.kneks_task_content_en);
+                    nicEditors.findEditor("editor11").setContent(rows[0]?.function_content);
+                    nicEditors.findEditor("editor12").setContent(rows[0]?.function_content_en);
                     document.getElementById("tag").value = rows[0]?.tag;
                 })
         }
