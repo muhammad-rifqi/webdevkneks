@@ -13,6 +13,15 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
+    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript">
+        bkLib.onDomLoaded(function () {
+            // new nicEditor({ maxHeight: 100 }).panelInstance('editor1');
+            // new nicEditor({ maxHeight: 100 }).panelInstance('editor2');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
+            new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
+        });
+    </script>
 </head>
 
 <body>
@@ -67,6 +76,16 @@
                                         </div> -->
 
                                             <div class="col-lg-12 mb-4">
+                                                <label class="form-label"> Tentang </label>
+                                                <textarea class="form-control" name="abouts" id="editor3"></textarea>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label"> Sejarah  </label>
+                                                <textarea class="form-control" name="historys" id="editor4"></textarea>
+                                            </div>
+
+                                            <div class="col-lg-12 mb-4">
                                                 <label class="form-label"> Logo )* </label>
                                                 <input type="file" class="form-control" name="photo" id="photo"
                                                     required>
@@ -77,13 +96,13 @@
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label">Struktur [Url])*</label>
                                                 <input class="form-control" type="text" name="structure" id="structure"
-                                                required>
+                                                    required>
                                             </div>
 
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label">Sk )*</label>
-                                                <input class="form-control" type="file" name="sk" id="sk" accept="application/pdf"
-                                                required>
+                                                <input class="form-control" type="file" name="sk" id="sk"
+                                                    accept="application/pdf" required>
                                                 <p>Masukkan dengan tipe file pdf</p>
                                                 <p>Max Upload 5 MB</p>
                                             </div>
@@ -91,80 +110,78 @@
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label">Twitter )*</label>
                                                 <input class="form-control" type="text" name="twitter" id="twitter"
-                                                required>
+                                                    required>
                                             </div>
 
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label">Facebook )*</label>
                                                 <input class="form-control" type="text" name="facebook" id="facebook"
-                                                required>
+                                                    required>
                                             </div>
 
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label">Linkedin )*</label>
                                                 <input class="form-control" type="text" name="linkedin" id="linkedin"
-                                                required>
+                                                    required>
                                             </div>
 
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label">Instagram )*</label>
                                                 <input class="form-control" type="text" name="instagram" id="instagram"
-                                                required>
+                                                    required>
                                             </div>
 
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label">Youtube )*</label>
                                                 <input class="form-control" type="text" name="youtube" id="youtube"
-                                                required>
+                                                    required>
                                             </div>
 
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label">Alamat )*</label>
                                                 <input class="form-control" type="text" name="address" id="address"
-                                                required>
+                                                    required>
                                             </div>
 
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label">No. Telepon )*</label>
-                                                <input class="form-control" type="text" name="phone_number" id="phone_number"
-                                                required>
+                                                <input class="form-control" type="text" name="phone_number"
+                                                    id="phone_number" required>
                                             </div>
 
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label">No. Fax )*</label>
-                                                <input class="form-control" type="text" name="fax" id="fax"
-                                                required>
+                                                <input class="form-control" type="text" name="fax" id="fax" required>
                                             </div>
 
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label">Email )*</label>
                                                 <input class="form-control" type="email" name="email" id="email"
-                                                required>
+                                                    required>
                                             </div>
 
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label">Maps )*</label>
-                                                <input class="form-control" type="text" name="maps" id="maps"
-                                                required>
+                                                <input class="form-control" type="text" name="maps" id="maps" required>
                                             </div>
-                                            
+
                                             <!-- <div class="col-lg-12 mb-4">
                                             <label class="form-label">Tentang [ID] )*</label>
                                             <textarea class="form-control" name="abouts"></textarea>
-                                        </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tentang [EN] )*</label>
-                                            <textarea class="form-control" name="abouts_en"></textarea>
-                                        </div>
+                                            </div>
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">Tentang [EN] )*</label>
+                                                <textarea class="form-control" name="abouts_en"></textarea>
+                                            </div>
 
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Sejarah [ID] )*</label>
-                                            <textarea class="form-control" name="historys"></textarea>
-                                        </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Sejarah [EN] )*</label>
-                                            <textarea class="form-control" name="historys_en"></textarea>
-                                        </div> -->
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">Sejarah [ID] )*</label>
+                                                <textarea class="form-control" name="historys"></textarea>
+                                            </div>
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label">Sejarah [EN] )*</label>
+                                                <textarea class="form-control" name="historys_en"></textarea>
+                                            </div> -->
 
                                         </div>
 
