@@ -111,9 +111,27 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Level</label>
-                                            <p id="levels">
-
+                                            <p> <br>
+                                                <select name="level1" id="level1" class="form-control">
+                                                    <option value="--">Organisasi</option>
+                                                    <option value="ME">ME</option>
+                                                    <option value="SET">SET</option>
+                                                </select>
                                             </p>
+                                            <p>
+                                                <select name="level2" id="level2" class="form-control">
+                                                    <option value="--">Direktorat</option>
+                                                    <option value="Kepala">Kepala</option>
+                                                    <option value="Direktur">Direktur</option>
+                                                    <option value="Kadiv">Kadiv</option>
+                                                </select>
+                                            <p>
+                                                <select name="level3" id="level3" class="form-control">
+                                                    <option value="--">Head</option>
+                                                    <option value="Direktorat">Kepala</option>
+                                                    <option value="Kepala">Direktur</option>
+                                                    <option value="Direktur">Kadiv</option>
+                                                </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -170,28 +188,6 @@
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.photo}" width="180">`;
                     nicEditors.findEditor("editor1").setContent(rows[0]?.description);
                     nicEditors.findEditor("editor2").setContent(rows[0]?.description_en);
-                    if (rows[0]?.level == 1) {
-                        document.getElementById("levels").innerHTML = `
-                                <br> <input name="level" id="level" type="radio" value="1" checked> ME / SET. KNEKS</p>
-                                    <p><input name="level" id="level" type="radio" value="2"> Direktorat/ Kepala
-                                / Direktur / Kadiv</p>
-                                <p><input name="level" id="level" type="radio" value="3"> Sub Kepala /
-                                Direktur / Kadiv`;
-                    } else if (rows[0]?.level == 2) {
-                        document.getElementById("levels").innerHTML = `
-                                <br> <input name="level" id="level" type="radio" value="1"> ME / SET. KNEKS</p>
-                                    <p><input name="level" id="level" type="radio" value="2" checked> Direktorat/ Kepala
-                                / Direktur / Kadiv</p>
-                                <p><input name="level" id="level" type="radio" value="3"> Sub Kepala /
-                                Direktur / Kadiv`;
-                    } else {
-                        document.getElementById("levels").innerHTML = `
-                                <br> <input name="level" id="level" type="radio" value="1"> ME / SET. KNEKS</p>
-                                    <p><input name="level" id="level" type="radio" value="2"> Direktorat/ Kepala
-                                / Direktur / Kadiv</p>
-                                <p><input name="level" id="level" type="radio" value="3" checked> Sub Kepala /
-                                Direktur / Kadiv`;
-                    }
                     if (rows[0]?.is_publish == 'on') {
                         document.getElementById("publish_pejabat").innerHTML = `<div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="is_published" id="publish" checked> <label class="form-check-label" for="publish"></label></div>`;
                     } else {
