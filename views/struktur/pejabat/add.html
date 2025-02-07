@@ -96,25 +96,42 @@
 
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tayang/Konsep</label>
+                                            <label class="form-label">Tayang</label>
                                             <!-- <input name="is_published" id="publish" type="radio" value="1" checked> publish
                                             <input name="is_published" id="publish" type="radio" value="0"> not publish -->
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" role="switch"
-                                                    name="is_published" id="publish" checked>
+                                                    name="is_published" id="publish">
                                                 <label class="form-check-label" for="publish"></label>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Level</label>
-                                            <p> <br> <input name="level" id="level" type="radio" value="1"> ME / SET.
-                                                KNEKS</p>
-                                            <p><input name="level" id="level" type="radio" value="2"> Direktorat/ Kepala
-                                                / Direktur / Kadiv</p>
-                                            <p><input name="level" id="level" type="radio" value="3" checked> Sub Kepala
-                                                /
-                                                Direktur / Kadiv</p>
+                                            <p> <br>
+                                                <select name="level1" id="level1" onchange="pilih1()"
+                                                    class="form-control">
+                                                    <option value="--">Level 1</option>
+                                                    <option value="ME">ME</option>
+                                                    <option value="SET">SET</option>
+                                                </select>
+                                            </p>
+                                            <p>
+                                                <select name="level2" id="level2" onchange="pilih2()"
+                                                    class="form-control">
+                                                    <option value="--">Level 2</option>
+                                                    <option value="Direktorat">Direktorat</option>
+                                                    <option value="Kepala">Kepala</option>
+                                                    <option value="Direktur">Direktur</option>
+                                                    <option value="Kadiv">Kadiv</option>
+                                                </select>
+                                            <p>
+                                                <select name="level3" id="level3" class="form-control">
+                                                    <option value="--">Level 3</option>
+                                                    <option value="Direktorat">Kepala</option>
+                                                    <option value="Kepala">Direktur</option>
+                                                    <option value="Direktur">Kadiv</option>
+                                                </select>
                                         </div>
 
 
