@@ -172,11 +172,20 @@
                     document.getElementById("tanggal_opini").value = rows[0]?.date_created.split('T')[0];
                     localStorage.setItem("object_dir", rows[0]?.directorat)
                     localStorage.setItem("prov_idkdeks", rows[0]?.id_province);
-                    document.getElementById("publish_opini").innerHTML = ` 
+                    if (rows[0]?.is_publish == 'on') {
+                        document.getElementById("publish_opini").innerHTML = ` 
                                              <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" role="switch" name="is_published" id="publish" checked>
                                                 <label class="form-check-label" for="publish"></label>
                                               </div>`;
+                    } else {
+                        document.getElementById("publish_opini").innerHTML = ` 
+                                             <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch" name="is_published" id="publish" checked>
+                                                <label class="form-check-label" for="publish"></label>
+                                              </div>`;
+                    }
+                    
 
                 })
         }
