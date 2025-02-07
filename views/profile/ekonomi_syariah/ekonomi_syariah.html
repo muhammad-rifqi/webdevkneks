@@ -104,8 +104,8 @@
                 },
                 "columns": [
                     { "data": "id" },
-                    { "data": "title" },
-                    { "data": "title_en" },
+                    { "data": "about" },
+                    { "data": "about_en" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
@@ -128,7 +128,7 @@
 
             $('#es_abouts').on('click', '.edit-btn-abouts', function () {
                 var id = $(this).data('id');
-                window.location.href = '/es_edit/' + id;
+                window.location.href = '/es_form/' + id;
             });
 
             $('#es_abouts').on('click', '.delete-btn-abouts', function () {

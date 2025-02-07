@@ -63,7 +63,7 @@
                                             <span class="d-block mb-2">Ubah Ekonomi Syariah:</span>
                                             <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
                                                 Ubah
-                                                Data Ekonomi Syariah Di Bawah Ini</span>
+                                                Tentang Ekonomi Syariah Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
@@ -246,7 +246,7 @@
 
         function getUrlById() {
             const URLS = new URL(window.location.href);
-            fetch('/es_abouts')
+            fetch('/es_detailabouts/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("id").value = rows[0]?.id;

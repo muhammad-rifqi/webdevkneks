@@ -50,7 +50,6 @@
                                                 <th>ID</th>
                                                 <th>Judul [ID]</th>
                                                 <th>Judul [EN]</th>
-                                                <th>Tag</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -105,9 +104,8 @@
                 },
                 "columns": [
                     { "data": "id" },
-                    { "data": "title" },
-                    { "data": "title_en" },
-                    { "data": "tag" },
+                    { "data": "about" },
+                    { "data": "about_en" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
@@ -130,7 +128,7 @@
             // 3. Event Listener untuk Tombol Edit
             $('#abouts').on('click', '.edit-btn-abouts', function () {
                 var id = $(this).data('id');
-                window.location.href = '/kdeks_edit/' + id;
+                window.location.href = '/kdeks_form/' + id;
             });
 
             // 4. Event Listener untuk Tombol Hapus

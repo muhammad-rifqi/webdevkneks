@@ -441,11 +441,11 @@ apps.get('/submenudata_edit/:id', (req, res) => {
 });
 //:::::::::::::::::::::::::::::::::::::::: End Of Data :::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::::::::::::::::::::::::::::::::::::::::::::: Start Of Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::
-apps.get('/kdeks', (req, res) => {
+apps.get('/kdeks_form/:id', (req, res) => {
     res.sendFile(path.resolve('./views/kdeks/kdeks/kdeks_form.html'));
 })
 
-apps.get('/kdeks_form', (req, res) => {
+apps.get('/kdeks', (req, res) => {
     res.sendFile(path.resolve('./views/kdeks/kdeks/kdeks.html'));
 })
 
@@ -536,11 +536,11 @@ apps.get('/ip_address', (req, res) => {
 //:::::::::::::::::::::::::::::::::::::::::::::::::: End Of  User Management ::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::: Start Profile :::::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::: Start Of Tentang Kami :::::::::::::::::::::::::::::::::::::::::
-apps.get('/tk', (req, res) => {
+apps.get('/tk_form/:id', (req, res) => {
     res.sendFile(path.resolve('./views/profile/tentang_kami/tentang_kami_form.html'));
 })
 
-apps.get('/tk_form', (req, res) => {
+apps.get('/tk', (req, res) => {
     res.sendFile(path.resolve('./views/profile/tentang_kami/tentang_kami.html'));
 })
 
@@ -549,11 +549,11 @@ apps.get('/tk_edit/:id', (req, res) => {
 })
 //:::::::::::::::::::::::::::::::::::::::: End Tentang Kami :::::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::::: Start Of Ekonomi Syariah :::::::::::::::::::::::::::::::::::::::
-apps.get('/es', (req, res) => {
+apps.get('/es_form/:id', (req, res) => {
     res.sendFile(path.resolve('./views/profile/ekonomi_syariah/ekonomi_syariah_form.html'));
 })
 
-apps.get('/es_form', (req, res) => {
+apps.get('/es', (req, res) => {
     res.sendFile(path.resolve('./views/profile/ekonomi_syariah/ekonomi_syariah.html'));
 })
 

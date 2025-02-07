@@ -104,8 +104,8 @@
                 },
                 "columns": [
                     { "data": "id" },
-                    { "data": "title" },
-                    { "data": "title_en" },
+                    { "data": "about" },
+                    { "data": "about_en" },
                     {
                         "data": null,
                         "render": function (data, type, row) {
@@ -128,7 +128,7 @@
             // 3. Event Listener untuk Tombol Edit
             $('#abouts').on('click', '.edit-btn-abouts', function () {
                 var id = $(this).data('id');
-                window.location.href = '/tk_edit/' + id;
+                window.location.href = '/tk_form/' + id;
             });
 
             // 4. Event Listener untuk Tombol Hapus
