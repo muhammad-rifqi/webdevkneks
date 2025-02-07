@@ -349,8 +349,8 @@ const deletekdeks = async (req, res) => {
     const id_kdeks = req.params.id;
     const foto_kdeks = req.params.foto;
 
-    if (fs.existsSync(fileslinux + 'kdeks/' + foto_kdeks)) {
-        fs.unlink(fileslinux + 'kdeks/' + foto_kdeks, async function (err) {
+    if (fs.existsSync(fileslinux + 'kdeks/provinsi/' + foto_kdeks)) {
+        fs.unlink(fileslinux + 'kdeks/provinsi/' + foto_kdeks, async function (err) {
             if (err) return console.log(err);
             const sql = await executeQuery("DELETE FROM  kdeks where id=$1", [id_kdeks]);
             if (sql) {
