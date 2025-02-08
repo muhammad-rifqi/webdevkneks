@@ -316,7 +316,7 @@ const insertkdeks = async (req, res) => {
     const fileuploads = site_url + "/uploads/kdeks/" + req.files['photo'][0].originalname.replace(" ", "");
     const skuploads = site_url + "/uploads/kdeks/" + req.files['sk'][0].originalname.replace(" ", "");
     const ggg = req.body.id_province.split('-');
-    const sql = await executeQuery("INSERT into kdeks (title,images,id_province,province_name,structure,sk,twitter,facebook,linkedin,instagram,youtube,address,phone_number,fax,email,maps,abouts,historys)values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) ", [req.body.title, fileuploads, ggg[0], ggg[1], req.body.structure, skuploads, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.abouts, req.body.historys, req.body.maps]);
+    const sql = await executeQuery("INSERT into kdeks (title,images,id_province,province_name,structure,sk,twitter,facebook,linkedin,instagram,youtube,address,phone_number,fax,email,historys,abouts,maps)values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) ", [req.body.title, fileuploads, ggg[0], ggg[1], req.body.structure, skuploads, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.abouts, req.body.historys, req.body.maps]);
     if (sql) {
         res.redirect('/master');
     } else {
