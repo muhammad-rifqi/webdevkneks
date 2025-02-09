@@ -62,7 +62,7 @@
                                 Filter Menu: <select id="search_menu" name="search_menu" class="form-control"
                                     style="width: 300px;">
                                     <option value="null">--</option>
-                                    
+
                                 </select>
                             </div>
                             <div class="col-md-4 text-right">
@@ -83,6 +83,7 @@
                                             <th>NAMA PANJANG</th>
                                             <th>MENU</th>
                                             <th>SUB MENU</th>
+                                            <th>TAYANG</th>
                                             <th>AKSI</th>
                                         </tr>
                                     </thead>
@@ -150,6 +151,16 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
+                            if (data?.publish == 'on') {
+                                return `Tayang`;
+                            } else {
+                                return `Konsep`;
+                            }
+                        }
+                    },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
                             return `<p>
                                         <button class='edit-btn btn btn-warning' data-id='${row.id}' data-name="${row.statistic_name}" style="padding:2px; float: left; margin: 2px">Narasi</button>
                                         <button class='delete-btn btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px"><i class="feather-trash"></i></button>
@@ -212,9 +223,9 @@
     </script>
 
     <script>
-        window.addEventListener("load", async() => {
-           await getMenu()
-           await getSubMenu();
+        window.addEventListener("load", async () => {
+            await getMenu()
+            await getSubMenu();
         })
 
         function getMenu() {
