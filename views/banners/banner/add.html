@@ -59,17 +59,17 @@
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Judul [ID] )*</label>
-                                            <input class="form-control" type="text" name="title" id="title" required> 
+                                            <input class="form-control" type="text" name="title" id="title" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Judul [EN] )*</label>
                                             <input class="form-control" type="text" name="title_en" id="title_en"
-                                                required> 
+                                                required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Deskripsi [ID] )*</label>
-                                            <textarea class="form-control" name="content" id="editor3"></textarea> 
+                                            <textarea class="form-control" name="content" id="editor3"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Deskripsi [EN] )*</label>
@@ -80,15 +80,17 @@
                                             <label class="form-label">Gambar Slide Show )* </label>
                                             <input type="file" class="form-control" name="images" id="images"
                                                 accept="image/*" onchange="upload_check()" />
-                                                <p>Masukkan dengan tipe file jpg, jpeg, png. </p>
-                                                <p>Min. Size: width 1200px & height 800px.</p>
-                                                <p>Max Upload 1 MB</p>
+                                            <p>Masukkan dengan tipe file jpg, jpeg, png. </p>
+                                            <p>Min. Size: width 1200px & height 800px.</p>
+                                            <p>Max Upload 1 MB</p>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Tanggal SlideShow )*</label>
-                                            <input class="form-control" type="date" name="tanggal" id="tanggal_publish"
-                                                value="2025-01-12" required> 
+                                            <p>
+                                                <input class="form" type="date" name="tanggal" id="tanggal_publish"
+                                                    required>
+                                            </p>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -140,8 +142,16 @@
     <script>
 
         window.addEventListener("load", async () => {
+            await getDates();
             await upload_check();
         })
+
+
+        function getDates() {
+            var today = new Date();
+            document.getElementById("tanggal_publish").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+        }
+
 
         function upload_check() {
             var upl = document.getElementById("images");

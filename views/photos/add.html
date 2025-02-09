@@ -197,8 +197,14 @@
                 })
             await getDireactorat();
             await getProvinces();
+            await getDates();
             await upload_check();
         })
+
+        function getDates() {
+            var today = new Date();
+            document.getElementById("photo_datetime").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2) + "T00:00";
+        }
 
         function getDireactorat() {
             fetch('/directorat_fe')

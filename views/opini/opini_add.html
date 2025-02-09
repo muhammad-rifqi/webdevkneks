@@ -189,7 +189,13 @@
 
             await getCategoryDirectorat();
             await getProvinces();
+            await getDates();
         })
+
+        function getDates() {
+            var today = new Date();
+            document.getElementById("tanggal_opini").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2) + "T00:00";
+        }
 
 
         function getCategoryDirectorat() {

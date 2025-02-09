@@ -55,7 +55,7 @@
                                             <input class="form-control" type="text" name="names" id="names" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Gambar Welcome Banner  )*</label>
+                                            <label class="form-label">Gambar Welcome Banner )*</label>
                                             <input class="form-control" name="files_image" id="files_image" type="file"
                                                 accept="image/*" onchange="upload_check()" required>
                                             <p>Masukkan dengan tipe file jpg, jpeg, png. </p>
@@ -64,8 +64,8 @@
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Tanggal )*</label>
-                                            <input class="form-control" type="date" name="tanggal" id="tanggal_publish"
-                                                value="2025-01-12" required>
+                                            <p><input class="form" type="date" name="tanggal" id="tanggal_published"
+                                                    value="" required></p>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Status Welcome Banners )*</label>
@@ -116,8 +116,14 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         window.addEventListener("load", async () => {
+            await getDates();
             await upload_check();
         })
+
+        function getDates() {
+            var today = new Date();
+            document.getElementById("tanggal_published").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+        }
 
         function upload_check() {
             var upl = document.getElementById("images");
@@ -127,7 +133,6 @@
                 upl.value = "";
                 return false;
             }
-
             return true;
         };
     </script>
