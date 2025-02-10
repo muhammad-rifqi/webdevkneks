@@ -109,28 +109,22 @@
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Level</label>
                                             <p> <br>
-                                                <select name="organization" id="organization"
-                                                    class="form-control">
+                                                <select name="organization" id="organization" class="form-control"
+                                                    onchange="pilihdirektorat()">
                                                     <option value="--">-Organisasi-</option>
                                                     <option value="me">ME</option>
                                                     <option value="set">SET</option>
                                                 </select>
                                             </p>
                                             <p>
-                                                <select name="directorat" id="directorat"
-                                                    class="form-control">
+                                                <select name="directorat" id="directorat" class="form-control"
+                                                    onchange="pilihhead(this.value)">
                                                     <option value="--">-Direktorat-</option>
-                                                    <option value="kepala">Kepala</option>
-                                                    <option value="direktur">Direktur</option>
-                                                    <option value="kadiv">Kadiv</option>
                                                 </select>
                                             <p>
-                                            <p>    
+                                            <p>
                                                 <select name="head" id="head" class="form-control">
                                                     <option value="--">-Head-</option>
-                                                    <option value="kepala">Kepala</option>
-                                                    <option value="direktur">Direktur</option>
-                                                    <option value="kadiv">Kadiv</option>
                                                 </select>
                                             </p>
                                         </div>
@@ -176,6 +170,28 @@
         window.addEventListener("load", async () => {
             await upload_check();
         })
+
+        function pilihdirektorat() {
+            document.getElementById("directorat").innerHTML = `
+                <option value="null">-Direktorat-</option>
+                <option value="kepala">Kepala</option>
+                <option value="direktur">Direktur</option>
+                <option value="kadiv">Kadiv</option>`;
+        }
+
+        function pilihhead(e) {
+            if (e == 'kadiv') {
+                document.getElementById("head").innerHTML = `
+                <option value="null">-Head-</option>
+                <option value="kepala">Kepala</option>
+                <option value="direktur">Direktur</option>
+                <option value="kadiv">Kadiv</option>
+            `;
+            } else {
+                document.getElementById("head").innerHTML = `<option value="null">-Head-</option>`;
+            }
+        }
+
 
         function upload_check() {
             var upl = document.getElementById("photo");

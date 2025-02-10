@@ -117,7 +117,8 @@
                                                 </select>
                                             </p>
                                             <p>
-                                                <select name="directorat" id="directorat" class="form-control">
+                                                <select name="directorat" id="directorat" class="form-control"
+                                                    onchange="pilihdir(this.value)">
                                                     <option value="--">-Direktorat-</option>
                                                 </select>
                                             <p>
@@ -170,7 +171,6 @@
             await getUrlById();
             orgs();
             dir();
-            heads();
             await upload_check();
         })
 
@@ -214,13 +214,17 @@
             }
         }
 
-        function heads() {
-            var array3 = ["kepala", "direktur", "kadiv"];
-            for (let indexs = 0; indexs < array3.length; indexs++) {
-                const opt3 = document.createElement('option');
-                opt3.value = array3[indexs];
-                opt3.text = array3[indexs];;
-                document.getElementById("head").append(opt3);
+        function pilihdir(e) {
+            if (e == 'kadiv') {
+                var array3 = ["kepala", "direktur", "kadiv"];
+                for (let indexs = 0; indexs < array3.length; indexs++) {
+                    const opt3 = document.createElement('option');
+                    opt3.value = array3[indexs];
+                    opt3.text = array3[indexs];;
+                    document.getElementById("head").append(opt3);
+                }
+            } else {
+                
             }
         }
 
