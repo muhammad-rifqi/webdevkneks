@@ -434,7 +434,7 @@ const history_province_kdeks = async (req, res) => {
 //::::::::::::::::::::::::::::::End Of Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const structure = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM  pejabat");
+    const sql = await executeQuery("SELECT * FROM  pejabat order by id ASC");
     if (sql?.length > 0) {
         const array = [];
         sql?.forEach((items, index) => {
