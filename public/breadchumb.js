@@ -673,14 +673,14 @@ if(path == 'c'){
 if(path == 'c_add'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Kontak";
-    breadcrumb2 = "Tambah Kontak";
+    breadcrumb2 = "";
     linkto = "/c";
 }
 
 if(path == 'c_edit'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Kontak";
-    breadcrumb2 = "Ubah Kontak";
+    breadcrumb2 = "";
     linkto = "/c";
 }
 //-----------------------End Of Kontak-----------------------------
@@ -695,14 +695,14 @@ if(path == 'm'){
 if(path == 'm_add'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Maps";
-    breadcrumb2 = "Tambah Maps";
+    breadcrumb2 = "";
     linkto = "/m";
 }
 
 if(path == 'm_edit'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Maps";
-    breadcrumb2 = "Ubah Maps";
+    breadcrumb2 = "";
     linkto = "/m";
 }
 //-----------------------End Of Maps-----------------------------
