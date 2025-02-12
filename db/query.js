@@ -2879,6 +2879,30 @@ const data_menus = async (req, res) => {
     }
 }
 
+const data_menu_fe = async (req, res) => {
+    const result = await executeQuery("SELECT * FROM data_menu ORDER BY id ASC ");
+    let promises = result.map(async (item) => {
+        return new Promise(async (resolve, reject) => {
+            let r = await executeQuery("SELECT * FROM data_submenu WHERE id_statistic = $1", [item.id]);
+            let data_submenux = r;
+            let row = {
+                "id": item?.id,
+                "title": item?.title,
+                "title_en": item?.title_en,
+                "data_submenu": data_submenux
+            };
+            resolve(row);
+        });
+    });
+    Promise.all(promises)
+        .then((rows) => {
+            res.status(200).json(rows);
+        })
+        .catch((error) => {
+            res.status(500).json({ error: error.message });
+        });
+}
+
 
 const dropdown_menu = async (req, res) => {
     const result = await executeQuery("SELECT * FROM menu ORDER BY id ASC ");
@@ -3496,6 +3520,7 @@ module.exports = {
     emptyapidashboard,
     updateapidashboard,
     data_menus,
+    data_menu_fe,
     dropdown_menu,
     detail_data_menus,
     deletedatamenus,

@@ -1142,6 +1142,8 @@ apps.post('/updateapidashboards', db.updateapidashboard);
 
 apps.get('/data_menu', db.data_menus);
 
+apps.get('/data_menu_fe', db.data_menu_fe);
+
 apps.get('/menu_fe', db.dropdown_menu);
 
 apps.get('/detail_data_menus/:id', db.detail_data_menus);
