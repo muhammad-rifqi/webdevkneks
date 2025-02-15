@@ -217,7 +217,7 @@
         })
 
         function getDashboards() {
-            fetch('/dashboards')
+            fetch('/analitic')
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("jumlah1").innerHTML = rows?.news;

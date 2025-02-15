@@ -177,7 +177,7 @@ const analitics = async (req, res) => {
     const jumlah2 = videos_mounts.length;
     const photos_mounts = await executeQuery('SELECT * FROM news_photos');
     const jumlah3 = photos_mounts.length;
-    const files_mounts = await executeQuery('SELECT * FROM reports');
+    const files_mounts = await executeQuery('SELECT * FROM files');
     const jumlah4 = files_mounts.length;
 
     const mounted = {
