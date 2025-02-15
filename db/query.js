@@ -170,14 +170,15 @@ const do_logout = (req, res) => {
 }
 
 const analitics = async (req, res) => {
+    const id_users = req.cookies.id;
 
-    const news_mounts = await executeQuery('SELECT * FROM news');
+    const news_mounts = await executeQuery('SELECT * FROM news where users_id = $1', [id_users]);
     const jumlah1 = news_mounts.length;
-    const videos_mounts = await executeQuery('SELECT * FROM news_videos');
+    const videos_mounts = await executeQuery('SELECT * FROM news_videos where users_id = $1', [id_users]);
     const jumlah2 = videos_mounts.length;
-    const photos_mounts = await executeQuery('SELECT * FROM news_photos');
+    const photos_mounts = await executeQuery('SELECT * FROM news_photos where users_id = $1', [id_users]);
     const jumlah3 = photos_mounts.length;
-    const files_mounts = await executeQuery('SELECT * FROM files');
+    const files_mounts = await executeQuery('SELECT * FROM files where users_id = $1', [id_users]);
     const jumlah4 = files_mounts.length;
 
     const mounted = {
