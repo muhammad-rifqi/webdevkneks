@@ -762,6 +762,8 @@ apps.post('/act_login', db.do_login);
 
 apps.get("/logout", db.do_logout);
 
+apps.get("/analitics", db.analitics);
+
 //::::::::::::::: Api & Query DB BANNERS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/slideshow', db.slideshows);

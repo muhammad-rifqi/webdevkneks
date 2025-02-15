@@ -169,6 +169,27 @@ const do_logout = (req, res) => {
     res.redirect("/");
 }
 
+const analitics = async (req, res) => {
+
+    const news_mounts = await executeQuery('SELECT * FROM news');
+    const jumlah1 = news_mounts.length;
+    const videos_mounts = await executeQuery('SELECT * FROM news_videos');
+    const jumlah2 = videos_mounts.length;
+    const photos_mounts = await executeQuery('SELECT * FROM news_photos');
+    const jumlah3 = photos_mounts.length;
+    const files_mounts = await executeQuery('SELECT * FROM reports');
+    const jumlah4 = files_mounts.length;
+
+    const mounted = {
+        "news": jumlah1,
+        "videos": jumlah2,
+        "photos": jumlah3,
+        "files": jumlah4,
+    }
+
+    res.status(200).json(mounted)
+}
+
 //::::::::::::::::::::::::::::::End Of Login :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::: Ekonomi Syraiah ::::::::::::::::::::::::::::::::::::::::::::::::
 const es_abouts = async (req, res) => {
@@ -3330,6 +3351,7 @@ module.exports = {
     do_login,
     do_logout,
     user_register,
+    analitics,
     slideshows,
     insertslideshow,
     updateslideshow,
