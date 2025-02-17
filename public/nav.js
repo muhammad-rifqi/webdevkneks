@@ -181,10 +181,14 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
 
 if(cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6){
     document.write(` <li class="nxl-item nxl-hasmenu">
-                        <a href="/f" class="nxl-link">
+                        <a href="javascript:void(0);" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
-                            e-Pustaka
+                            <span class="nxl-mtext">e-Pustaka</span><span class="nxl-arrow"><i class="feather-chevron-right"></i></span>
                         </a>
+                        <ul class="nxl-submenu">
+                            <li class="nxl-item"><a class="nxl-link" href="/f">e-Pustaka</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/fc">Kategori</a></li>
+                        </ul>
                     </li>`);
 
 }
