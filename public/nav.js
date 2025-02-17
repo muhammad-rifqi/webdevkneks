@@ -180,7 +180,7 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
 }
 
 if(cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6){
-    document.write(` <li class="nxl-item nxl-hasmenu">
+    document.write(` <li class="nxl-item">
                         <a href="/f" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
                            e-Pustaka
@@ -209,9 +209,9 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
 }
 
 //e-pustaka kategori
-if (cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {
-    document.write(`<li class="nxl-item"><a class="nxl-link" href="/dashboard">Dashboard</a></li>`);
-}
+// if (cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {
+//     document.write(`<li class="nxl-item"><a class="nxl-link" href="/dashboard">Dashboard</a></li>`);
+// }
 
 if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2 || cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6) {
     document.write(`</ul>
