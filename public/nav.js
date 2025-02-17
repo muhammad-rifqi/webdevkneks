@@ -183,7 +183,7 @@ if(cookie["roles_id"] == 3 || cookie["roles_id"] == 4 || cookie["roles_id"] == 6
     document.write(` <li class="nxl-item nxl-hasmenu">
                         <a href="/f" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
-                            Opini
+                            e-Pustaka
                         </a>
                     </li>`);
 
