@@ -133,13 +133,13 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `${formatDateTime(row?.date_created)}`;
+                            return `${row?.date_created}`;
                         }
                     },
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            if (row?.publish == 1) {
+                            if (row?.publish == 'on') {
                                 return `Tayang`;
                             } else {
                                 return `Konsep`;

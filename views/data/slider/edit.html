@@ -81,6 +81,10 @@
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Image </label>
                                             <input class="form-control" type="file" name="image" id="images" required>
+                                            <p>Masukkan dengan file type jpg, jpeg, png. </p>
+                                            <p>Min. Size: width 400px & height 300px.</p>
+                                            <p>Max. Size: width 800px & height 600px.</p>
+                                            <p>Max Upload 1 MB</p>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -145,10 +149,20 @@
                     document.getElementById("dates_created").value = rows[0]?.date_created.split('T')[0];
                     document.getElementById("images").innerHTML = `<img src="${rows[0]?.image}" width="100" alt="image slider data">`;
                     document.getElementById("links").value = rows[0]?.link;
-                    if (rows[0]?.publish == 1) {
-                        document.getElementById("publishs").innerHTML = `<input name="is_published" id="pub" type="checkbox" value="1" checked>`;
+                    if (rows[0]?.publish == 'on') {
+                        document.getElementById("publishs").innerHTML = `
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    name="status" id="status" checked>
+                                                <label class="form-check-label" for="status"></label>
+                                            </div>`;
                     } else {
-                        document.getElementById("publishs").innerHTML = `<input name="is_published" id="pub" type="checkbox" value="0">`;
+                        document.getElementById("publishs").innerHTML = `
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    name="status" id="status">
+                                                <label class="form-check-label" for="status"></label>
+                                            </div>`;
                     }
                 })
         }
