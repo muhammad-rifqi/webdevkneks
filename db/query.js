@@ -2180,8 +2180,8 @@ const insertusers = async (req, res) => {
     const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     const time_datetime = date + ' ' + time;
     const pw = md5(req.body.password);
-    const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at,ip_address, directorat_id, id_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9)",
-        [req.body.name.replace(/\s/g, ''), req.body.email, pw, req.body.role_id, time_datetime, time_datetime, '0.0.0.0', req.body.directorat_id, req.body.id_province]);
+    const sql = await executeQuery("insert into users(name,email,password,role_id,created_at,updated_at,approve, ip_address, directorat_id, id_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
+        [req.body.name.replace(/\s/g, ''), req.body.email, pw, req.body.role_id, time_datetime, time_datetime, 'Y', '0.0.0.0', req.body.directorat_id, req.body.id_province]);
     if (sql) {
         res.redirect('/u');
     } else {

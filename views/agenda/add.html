@@ -12,6 +12,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
 </head>
 
@@ -187,6 +189,27 @@
                                             </select>
                                         </div>
 
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Direktorat</label>
+                                            <select class="form-control" name="directorat" id="mySelect" multiple
+                                                required>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">KDEKS</label>
+                                            <select class="form-control" name="kdeks" id="mySelect2" multiple required>
+                                                <option value="0"></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Instansi</label>
+                                            <select class="form-control" name="instansi" id="instansi" required>
+                                                <option value="0"></option>
+                                            </select>
+                                        </div>
+
 
                                         <!-- // ////////////////////////////////////////////////////////////////  -->
 
@@ -223,10 +246,20 @@
     <script src="/assets/vendors/js/vendors.min.js"></script>
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
+    <script src="/assets/vendors/js/select2.min.js"></script>
+    <script src="/assets/vendors/js/select2-active.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#mySelect').select2();
+            $('#mySelect2').select2();
+        });
+    </script>
+
     <script>
         window.addEventListener("load", async ()=>{
-            await prov();
+            await getProvinces();
             await kbli();
             await peserta();
             await pembuka();
@@ -234,6 +267,8 @@
             await usia();
             await area();
             await prioritas();
+            await getCategoryDirectorat();
+            await getInstansi();
         })
 
         function prov(){
@@ -339,8 +374,45 @@
                 });
             })
         }
- 
         
+        function getCategoryDirectorat() {
+            fetch('/directorat_fe')
+                .then(res => res.json())
+                .then((qqq) => {
+                    qqq.forEach(items => {
+                        const aaa = document.createElement('option')
+                        aaa.value = `${items?.id}`;
+                        aaa.text = `${items?.title}`;
+                        document.getElementById("mySelect").append(aaa);
+                    });
+                })
+        }
+
+        function getProvinces() {
+            fetch('/provinces')
+                .then(response => response.json())
+                .then((data) => {
+                    data.forEach(element => {
+                        const ddd = document.createElement('option')
+                        ddd.value = `${element?.id}`;
+                        ddd.text = `${element?.province_name}`;
+                        document.getElementById("mySelect2").append(ddd);
+                    });
+                })
+        }
+
+        function getInstansi() {
+            fetch('/institutions')
+                .then(response => response.json())
+                .then((data) => {
+                    data.forEach(element => {
+                        const ddd = document.createElement('option')
+                        ddd.value = `${element?.id}`;
+                        ddd.text = `${element?.name}`;
+                        document.getElementById("instansi").append(ddd);
+                    });
+                })
+        }
     </script>
 
 </body>
