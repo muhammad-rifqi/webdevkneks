@@ -2485,7 +2485,7 @@ const updateslideshow = async (req, res) => {
     const id_slidshowss = req.body.id;
     if (req.file) {
         const filesimage = site_url + "/uploads/slideshow/" + req.file.originalname.replace(" ", "");
-        const sql = await executeQuery('UPDATE slideshow set title=$1, title_en=$2, image=$3,content = $4 ,content_en = $5 , date_created=$6, status=$7  where  id = $8 ', [req.body.title, req.body.title_en, filesimage, req.body.tanggal, req.body.status, id_slidshowss]);
+        const sql = await executeQuery('UPDATE slideshow set title=$1, title_en=$2, image=$3,content = $4 ,content_en = $5 , status=$6  where  id = $7 ', [req.body.title, req.body.title_en, filesimage, req.body.content, req.body.content_en, req.body.status, id_slidshowss]);
         if (sql) {
             res.redirect('/b');
         } else {
