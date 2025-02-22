@@ -142,7 +142,7 @@
                 window.location.href = "/home";
           } else if (data?.success == "false") {
             swal({
-              title: "Login False",
+              title: "Login Gagal",
               text: "Login Gagal , Data Tidak Dapat Di Ambil Dari API!",
               icon: "error",
             }).then(function () {
@@ -150,7 +150,7 @@
             });
           } else if (data?.success == "pending") {
             swal({
-              title: "Login Pending",
+              title: "Login Tertunda",
               text: "Saat ini Anda belum dapat login karena alamat IP Anda belum terdaftar ( whitelist ) di sistem kami. Silakan menekan tombol di bawah ini untuk melakukan permintaan whitelist alamat IP. Anda dapat login jika permintaan Anda sudah disetujui oleh administrator sistem.",
               icon: "error",
             }).then(function () {
@@ -158,7 +158,7 @@
             });
           } else if (data?.success == "eror") {
             swal({
-              title: "Login Error",
+              title: "Terjadi Kesalahan Error",
               text: "Login Gagal , Gagal Insert Ip Address",
               icon: "error",
             }).then(function () {

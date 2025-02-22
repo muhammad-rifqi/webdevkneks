@@ -114,8 +114,8 @@ if (cookies['name'] == "" || cookies['name'] == undefined) {
 
 function logout(){
     swal({
-        title: "Are you sure?",
-        text: "To Leave this Page ??",
+        title: "Apakah Kamu Yakin ?",
+        text: "Untuk Keluar Dari Aplikasi ??",
         icon: "warning",
         buttons: true,
         dangerMode: true,
