@@ -1670,9 +1670,27 @@ const newsdetail = async (req, res) => {
     const id_n = req.params.id;
     const sql = await executeQuery('SELECT * FROM  news where id=$1', [id_n]);
     if (sql?.length > 0) {
-        res.status(200).json(sql)
+        const jsonArray = JSON.parse(sql[0]?.tag);
+        const result = jsonArray.map(item => item.value).join(',');
+        let row = {
+            "id": sql[0]?.id,
+            "title": sql[0]?.title,
+            "title_en": sql[0]?.title_en,
+            "news_datetime": sql[0]?.news_datetime,
+            "content": sql[0]?.content,
+            "content_en": sql[0]?.content_en,
+            "excerpt": sql[0]?.excerpt,
+            "excerpt_en": sql[0]?.excerpt_en,
+            "is_publish": sql[0]?.is_publish,
+            "image": sql[0]?.image,
+            "img": sql[0]?.image?.split('/')[5],
+            "category_id": sql[0]?.category_id,
+            "tagging": result,
+            "users_name": sql[0]?.users_name
+        };
+        res.status(200).json(row)
     } else {
-        res.status(200).json({ "success": false })
+        res.status(200).json([])
     }
 }
 
@@ -2886,6 +2904,7 @@ const emptyapidashboard = async (req, res) => {
 const updateapidashboard = async (req, res) => {
     const sql = await executeQuery('UPDATE data_dashboard set naration = $1, month = $2 where id = $3', [req.body.naration, req.body.month, req.body.id]);
     if (sql) {
+        await executeQuery("INSERT INTO naration(dashboard_id,dashboard_name,description,month)values($1,$2,$3,$4)", [req.body.id, req.body.urls_name, req.body.naration, req.body.month]);
         res.status(200).json({ "message": true });
     } else {
         res.status(200).json({ "message": false });

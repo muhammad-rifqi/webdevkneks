@@ -198,7 +198,7 @@
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ "id": ids, "naration": naration, "month": monthss })
+            body: JSON.stringify({ "id": ids, "naration": naration, "month": monthss, "urls_name" : urls_name })
         })
             .then(response => response.json())
             .then((data) => {
