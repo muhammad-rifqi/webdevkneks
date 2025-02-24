@@ -1560,6 +1560,8 @@ const posts = async (req, res) => {
         let promises = result.map(async (item) => {
             return new Promise(async (resolve, reject) => {
                 let r = await executeQuery("SELECT * FROM news_categories WHERE id = $1", [item.category_id]);
+                const jsonArray = JSON.parse(sql?.tag);
+                const result = jsonArray.map(elements => elements.value).join(',');
                 let detail = r[0];
                 let row = {
                     "id": item?.id,
@@ -1574,6 +1576,7 @@ const posts = async (req, res) => {
                     "image": item?.image,
                     "img": item?.image?.split('/')[5],
                     "category_id": item?.category_id,
+                    "tags": result ?? [],
                     "tagging": item?.tag,
                     "users_name": item?.users_name,
                     "detail": detail
@@ -1595,6 +1598,8 @@ const posts = async (req, res) => {
         let promises = result.map(async (item) => {
             return new Promise(async (resolve, reject) => {
                 let r = await executeQuery("SELECT * FROM news_categories WHERE id = $1", [item.category_id]);
+                const jsonArray = JSON.parse(sql?.tag);
+                const result = jsonArray.map(elements => elements.value).join(',');
                 let detail = r[0];
                 let row = {
                     "id": item?.id,
@@ -1610,6 +1615,7 @@ const posts = async (req, res) => {
                     "img": item?.image?.split('/')[5],
                     "category_id": item?.category_id,
                     "tagging": item?.tag,
+                    "tags": result ?? [],
                     "users_name": item?.users_name,
                     "detail": detail
                 };
@@ -1633,6 +1639,8 @@ const seacrh_posts = async (req, res) => {
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
             let r = await executeQuery("SELECT * FROM news_categories WHERE id = $1", [item.category_id]);
+            const jsonArray = JSON.parse(sql?.tag);
+            const result = jsonArray.map(elements => elements.value).join(',');
             let detail = r[0];
             let row = {
                 "id": item?.id,
@@ -1647,6 +1655,7 @@ const seacrh_posts = async (req, res) => {
                 "image": item?.image,
                 "category_id": item?.category_id,
                 "tagging": item?.tag,
+                "tags": result ?? [],
                 "users_name": item?.users_name,
                 "detail": detail
             };
@@ -1685,7 +1694,8 @@ const newsdetail = async (req, res) => {
             "image": sql[0]?.image,
             "img": sql[0]?.image?.split('/')[5],
             "category_id": sql[0]?.category_id,
-            "tagging": result ?? [],
+            "tagging": sql[0]?.tag,
+            "tags": result ?? [],
             "users_name": sql[0]?.users_name
         };
         res.status(200).json(row)
