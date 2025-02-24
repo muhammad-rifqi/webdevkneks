@@ -1670,8 +1670,8 @@ const newsdetail = async (req, res) => {
     const id_n = req.params.id;
     const sql = await executeQuery('SELECT * FROM  news where id=$1', [id_n]);
     if (sql?.length > 0) {
-        const jsonArray = JSON.parse(sql[0]?.tag);
-        const result = jsonArray.map(item => item.value).join(',');
+        // const jsonArray = JSON.parse(sql[0]?.tag);
+        // const result = jsonArray.map(item => item.value).join(',');
         let row = {
             "id": sql[0]?.id,
             "title": sql[0]?.title,
@@ -1686,7 +1686,6 @@ const newsdetail = async (req, res) => {
             "img": sql[0]?.image?.split('/')[5],
             "category_id": sql[0]?.category_id,
             "tagging": sql[0]?.tag,
-            "tags": result ?? [],
             "users_name": sql[0]?.users_name
         };
         res.status(200).json([row])
