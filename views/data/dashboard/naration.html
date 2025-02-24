@@ -162,10 +162,10 @@
                 var aaa = '';
                 for (var i = 0; i < rrrs.length; i++) {
                     aaa += `<tr>
-                            <th scope="row">${rrrs[0]?.dashboard_id}</th>
-                            <td>${rrr[0]?.dashboard_name}</td>
-                            <td>${rrr[0]?.description}</td>
-                            <td>${rrr[0]?.month}</td>
+                            <th scope="row">${rrrs[i]?.dashboard_id}</th>
+                            <td>${rrrs[i]?.dashboard_name}</td>
+                            <td>${rrrs[i]?.description}</td>
+                            <td>${rrrs[i]?.month}</td>
                         </tr>`;
                 }
                 document.getElementById("dashboard_narations").innerHTML = aaa;
