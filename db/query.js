@@ -1685,7 +1685,7 @@ const newsdetail = async (req, res) => {
             "image": sql[0]?.image,
             "img": sql[0]?.image?.split('/')[5],
             "category_id": sql[0]?.category_id,
-            "tagging": result,
+            "tagging": result ?? [],
             "users_name": sql[0]?.users_name
         };
         res.status(200).json(row)
@@ -2892,6 +2892,17 @@ const insertapidashboards = async (req, res) => {
 }
 
 
+const dashboard_naration = async (req, res) => {
+    const id_db = req.params.id;
+    const sql = await executeQuery('select * from naration where dashboard_id = $1', [id_db]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "message": false })
+    }
+}
+
+
 const emptyapidashboard = async (req, res) => {
     const sql = await executeQuery('UPDATE data_dashboard set naration = $1, month = $2 where id = $3', ['', '', req.body.id]);
     if (sql) {
@@ -3560,6 +3571,7 @@ module.exports = {
     data_dashboard_delete,
     insertapidashboards,
     emptyapidashboard,
+    dashboard_naration,
     updateapidashboard,
     data_menus,
     data_menu_fe,

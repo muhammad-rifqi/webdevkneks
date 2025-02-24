@@ -1207,6 +1207,8 @@ apps.post('/updatesubmenu', db.updatesubmenu);
 
 //::::::::::::::: Api & Query CUSTOM DATA NARATION PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+apps.get('/dashboard_naration/:id', db.dashboard_naration);
+
 apps.post('/insertprovince', db.insertprovinces);
 
 apps.post('/updateprovince', db.updateprovinces);

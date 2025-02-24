@@ -92,16 +92,13 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Bulan/Tahun</th>
+                                                <th scope="col">Nama Narasi</th>
                                                 <th scope="col">Keterangan</th>
+                                                <th scope="col">Bulan/Tahun</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">#</th>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                        <tbody id="dashboard_narations">
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -138,6 +135,7 @@
 <script>
     window.addEventListener("load", async () => {
         await getMetabaseDetail();
+        await getDashboardNaration();
     })
 
     function getMetabaseDetail() {
@@ -153,6 +151,24 @@
                 document.getElementById("narations").value = rrr[0]?.naration;
                 // document.getElementById("months").value = ddd[0] + '-' + '0'+mmmm;
                 document.getElementById("months").value = rrr[0]?.month;
+            })
+    }
+
+    function getDashboardNaration() {
+        const URLST = new URL(window.location.href);
+        fetch('/dashboard_naration/' + URLST.pathname.split('/')[2])
+            .then(datas => datas.json())
+            .then((rrrs) => {
+                var aaa = '';
+                for (var i = 0; i < rrrs.length; i++) {
+                    aaa += `<tr>
+                            <th scope="row">${rrrs[0]?.dashboard_id}</th>
+                            <td>${rrr[0]?.dashboard_name}</td>
+                            <td>${rrr[0]?.description}</td>
+                            <td>${rrr[0]?.month}</td>
+                        </tr>`;
+                }
+                document.getElementById("dashboard_narations").innerHTML = aaa;
             })
     }
 
@@ -198,7 +214,7 @@
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ "id": ids, "naration": naration, "month": monthss, "urls_name" : urls_name })
+            body: JSON.stringify({ "id": ids, "naration": naration, "month": monthss, "urls_name": urls_name })
         })
             .then(response => response.json())
             .then((data) => {
