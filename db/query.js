@@ -1689,7 +1689,7 @@ const newsdetail = async (req, res) => {
             "tags": result ?? [],
             "users_name": sql[0]?.users_name
         };
-        res.status(200).json(row)
+        res.status(200).json([row])
     } else {
         res.status(200).json([])
     }
