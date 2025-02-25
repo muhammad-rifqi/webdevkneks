@@ -82,54 +82,12 @@ const do_login = async (req, res) => {
             if (sql?.length > 0) {
                 u_id = sql[0]?.id;
                 const isLogin = true;
-                res.cookie("islogin", isLogin, {
-                    maxAge: 900000,
-                    domain: '.rifhandi.com',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("id", sql[0]?.id, {
-                    maxAge: 900000,
-                    domain: '.rifhandi.com',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("name", sql[0]?.name, {
-                    maxAge: 900000,
-                    domain: '.rifhandi.com',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("roles_id", sql[0]?.role_id, {
-                    maxAge: 900000,
-                    domain: '.rifhandi.com',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("id_province", sql[0]?.id_province, {
-                    maxAge: 900000,
-                    domain: '.rifhandi.com',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("directorat_id", sql[0]?.directorat_id, {
-                    maxAge: 900000,
-                    domain: '.rifhandi.com',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
+                res.cookie("islogin", isLogin);
+                res.cookie("id", sql[0]?.id);
+                res.cookie("name", sql[0]?.name);
+                res.cookie("roles_id", sql[0]?.role_id);
+                res.cookie("id_province", sql[0]?.id_province);
+                res.cookie("directorat_id", sql[0]?.directorat_id);
                 // res.redirect("/dashboard");
                 res.status(200).json({ "success": "true" })
             } else {
@@ -1590,10 +1548,11 @@ const posts = async (req, res) => {
             });
 
     } else {
-
         const result = await executeQuery("SELECT * FROM news  where web_identity = 'kneks'  ORDER BY id ASC");
         let promises = result.map(async (item) => {
             return new Promise(async (resolve, reject) => {
+                const jsonArray = JSON.parse(item?.tag);
+                const hasil = jsonArray.map(elems => elems.value).join(',');
                 let r = await executeQuery("SELECT * FROM news_categories WHERE id = $1", [item.category_id]);
                 let detail = r[0];
                 let row = {
@@ -1610,6 +1569,7 @@ const posts = async (req, res) => {
                     "img": item?.image?.split('/')[5],
                     "category_id": item?.category_id,
                     "tagging": item?.tag,
+                    "tags": hasil,
                     "users_name": item?.users_name,
                     "detail": detail
                 };
@@ -1632,6 +1592,8 @@ const seacrh_posts = async (req, res) => {
     const videos = await executeQuery("SELECT * FROM news_videos where title LIKE '%" + req.query.cari + "%' or title_en LIKE '%" + req.query.cari + "%' ORDER BY id ASC limit 5 ");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
+            const jsonArray = JSON.parse(item?.tag);
+            const hasil = jsonArray.map(elems => elems.value).join(',');
             let r = await executeQuery("SELECT * FROM news_categories WHERE id = $1", [item.category_id]);
             let detail = r[0];
             let row = {
@@ -1646,6 +1608,7 @@ const seacrh_posts = async (req, res) => {
                 "is_publish": item?.is_publish,
                 "image": item?.image,
                 "category_id": item?.category_id,
+                "tag" : hasil,
                 "tagging": item?.tag,
                 "users_name": item?.users_name,
                 "detail": detail
