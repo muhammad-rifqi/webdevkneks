@@ -1892,6 +1892,9 @@ const categories = async (req, res) => {
         if (names == 'photos') {
             const array = [];
             sql?.forEach((items, index) => {
+                const parse = '[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]';
+                const jsonArray = JSON.parse(parse);
+                const hasil = jsonArray.map(elems => elems.value).join(',');
                 const bbb = {
                     "id": items?.id,
                     "title": items?.title,
@@ -1902,6 +1905,7 @@ const categories = async (req, res) => {
                     "content_en": items?.content_en,
                     "ph": items?.photo?.split('/')[5],
                     "web_identity": items?.web_identity,
+                    "tagging" : hasil,
                     "tag": items?.tag,
                     "directorat": items?.directorat,
                     "id_province": items?.id_province,
