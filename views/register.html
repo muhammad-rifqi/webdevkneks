@@ -157,6 +157,7 @@
             <h2>Selamat Datang</h2>
             <h3>PENDAFTARAN</h3>
             <!-- <form class="sign-in-form" action="/insertusers" method="post"> -->
+            <p id="errorMessage"></p>
             <form class="sign-in-form" method="post" onsubmit="cekRegistered(); return false;">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
@@ -172,19 +173,25 @@
                 </div>
 
                 <div class="input-group">
-                    <select placeholder="Direktorat" name="direktorat" id="direktorat"  style="width: 100%; padding: 7px; border-radius: 10px;" required>
+                    <select placeholder="Direktorat" name="direktorat" id="direktorat"
+                        style="width: 100%; padding: 7px; border-radius: 10px; border: 1px solid #1a73e8; color: #1a73e8;"
+                        required>
                         <option value="--">Pilih Ditrektorat</option>
                     </select>
                 </div>
 
                 <div class="input-group">
-                    <select placeholder="Kdeks" name="kdeks" id="kdeks" style="width: 100%; padding: 7px; border-radius: 10px;" required>
+                    <select placeholder="Kdeks" name="kdeks" id="kdeks"
+                        style="width: 100%; padding: 7px; border-radius: 10px; border: 1px solid #1a73e8; color: #1a73e8;"
+                        required>
                         <option value="--">Pilih KDEKS</option>
                     </select>
                 </div>
 
                 <div class="input-group">
-                    <select placeholder="Instansi" name="instansi" id="instansi" style="width: 100%; padding: 7px; border-radius: 10px;" required>
+                    <select placeholder="Instansi" name="instansi" id="instansi"
+                        style="width: 100%; padding: 7px; border-radius: 10px; border: 1px solid #1a73e8; color: #1a73e8;"
+                        required>
                         <option value="--">Pilih Instansi</option>
                     </select>
                 </div>
@@ -198,45 +205,99 @@
 </body>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    function cekRegistered() {
-        const usernames = document.getElementById("username").value;
-        const email = document.getElementById("email");
-        const password = document.getElementById("password").value;
-        var username = usernames;
-        try {
-            fetch('/insertreg', {
-                method: "POST",
-                headers: { "Access-Control-Allow-Origin": "*", "Content-type": "application/json" },
-                body: JSON.stringify({ username: username, email: email, password: password }),
+    window.addEventListener("load", async () => {
+        await getInstansi();
+        await getProvinces();
+        await getCategoryDirectorat();
+    })
+
+    function getCategoryDirectorat() {
+        fetch('/directorat_fe')
+            .then(res => res.json())
+            .then((qqq) => {
+                qqq.forEach(items => {
+                    const aaa = document.createElement('option')
+                    aaa.value = `${items?.id}`;
+                    aaa.text = `${items?.title}`;
+                    document.getElementById("direktorat").append(aaa);
+                });
             })
-                .then(response => response.json())
-                .then((data) => {
-                    if (data?.success) {
-                        swal({
-                            title: "Register Succes",
-                            text: "Silahkan Tunggu Validasi atau Approval Data Dari Admin, Untuk Mengakses Aplikasi",
-                            icon: "success",
-                        }).then(function () {
-                            window.location.reload();
-                        });
-                    } else {
-                        swal({
-                            title: "Login Failed",
-                            text: "Failed!",
-                            icon: "error",
-                        }).then(function () {
-                            window.location.reload();
-                        });
-                    }
+    }
+
+    function getInstansi() {
+        const URLS = new URL(window.location.href);
+        fetch('/institutions')
+            .then(data => data.json())
+            .then((rows) => {
+                rows.forEach(items => {
+                    const aaa = document.createElement('option')
+                    aaa.value = `${items?.id}`;
+                    aaa.text = `${items?.name}`;
+                    document.getElementById("instansi").append(aaa);
+                });
+            })
+    }
+
+    function getProvinces() {
+        fetch('/provinces')
+            .then(response => response.json())
+            .then((data) => {
+                data.forEach(element => {
+                    const ddd = document.createElement('option')
+                    ddd.value = `${element?.id}`;
+                    ddd.text = `${element?.province_name}`;
+                    document.getElementById("kdeks").append(ddd);
+                });
+            })
+    }
+
+
+    function cekRegistered() {
+        const passwd = document.getElementById("password").value;
+        const errorMessages = document.getElementById("errorMessage");
+        const alphanumericRegex = /^[a-zA-Z0-9]{3,10}$/;
+        if (passwd && !alphanumericRegex.test(passwd)) {
+            errorMessages.innerHTML = `<font color="red">Hanya huruf dan angka yang diperbolehkan / Panjang Karakter Antara Min,3 Max,10</font>`;
+        } else {
+            const usernames = document.getElementById("username").value;
+            const email = document.getElementById("email");
+            const password = document.getElementById("password").value;
+            var username = usernames;
+            try {
+                fetch('/insertreg', {
+                    method: "POST",
+                    headers: { "Access-Control-Allow-Origin": "*", "Content-type": "application/json" },
+                    body: JSON.stringify({ username: username, email: email, password: password }),
                 })
-        } catch (error) {
-            swal({
-                title: "Login Failed",
-                text: error.message,
-                icon: "error",
-            }).then(function () {
-                window.location.reload();
-            });
+                    .then(response => response.json())
+                    .then((data) => {
+                        if (data?.success) {
+                            swal({
+                                title: "Register Succes",
+                                text: "Silahkan Tunggu Validasi atau Approval Data Dari Admin, Untuk Mengakses Aplikasi",
+                                icon: "success",
+                            }).then(function () {
+                                window.location.reload();
+                            });
+                        } else {
+                            swal({
+                                title: "Login Failed",
+                                text: "Failed!",
+                                icon: "error",
+                            }).then(function () {
+                                window.location.reload();
+                            });
+                        }
+                    })
+            } catch (error) {
+                swal({
+                    title: "Login Failed",
+                    text: error.message,
+                    icon: "error",
+                }).then(function () {
+                    window.location.reload();
+                });
+            }
         }
     }
 </script>
