@@ -41,6 +41,7 @@
           <h5>LOGIN PENGGUNA</h5>
           <!-- <h6 id="ips" align="center"></h6> -->
           <!-- <form class="sign-in-form" action="/act_login" method="post"> -->
+          <p id="errorMessage"></p>
           <form class="sign-in-form" method="POST" onsubmit="do_login(); return false;">
             <input type="hidden" id="ip_address" name="ip_address" value="" />
             <div class="input-field mb-4"><i class="fas fa-user"></i><input type="text" placeholder="Masukkan Email"
@@ -127,61 +128,68 @@
 
 
   async function do_login() {
-    const em = document.getElementById("email").value;
-    const pw = document.getElementById("password").value;
-    const ips_address = document.getElementById("ip_address").value;
-    try {
-      await fetch('/do_login', {
-        method: "POST",
-        headers: { "Access-Control-Allow-Origin": "*", "Content-type": "application/json" },
-        body: JSON.stringify({ email: em, password: pw, ip_address: ips_address }),
-      })
-        .then(response => response.json())
-        .then((data) => {
-          if (data?.success == "true") {
-                window.location.href = "/home";
-          } else if (data?.success == "false") {
-            swal({
-              title: "Login Gagal",
-              text: "Login Gagal , Data Tidak Dapat Di Ambil Dari API!",
-              icon: "error",
-            }).then(function () {
-              window.location.href = "/";
-            });
-          } else if (data?.success == "pending") {
-            swal({
-              title: "Login Tertunda",
-              text: "Saat ini Anda belum dapat login karena alamat IP Anda belum terdaftar ( whitelist ) di sistem kami. Silakan menekan tombol di bawah ini untuk melakukan permintaan whitelist alamat IP. Anda dapat login jika permintaan Anda sudah disetujui oleh administrator sistem.",
-              icon: "error",
-            }).then(function () {
-              window.location.href = "/";
-            });
-          } else if (data?.success == "eror") {
-            swal({
-              title: "Terjadi Kesalahan Error",
-              text: "Login Gagal , Gagal Insert Ip Address",
-              icon: "error",
-            }).then(function () {
-              window.location.href = "/";
-            });
-          } else if (data?.success == "super") {
-            swal({
-              title: "Login Super Admin",
-              text: "Silahkan Klik Tombol Di Bawah Untuk Redirect Ke URL Super Admin",
-              icon: "success",
-            }).then(function () {
-              window.location.href = "https://superadmin.rifhandi.com";
-            });
-          }
+    const passwd = document.getElementById("password").value;
+    const errorMessages = document.getElementById("errorMessage");
+    const alphanumericRegex = /^[a-zA-Z0-9]{3,10}$/;
+    if (passwd && !alphanumericRegex.test(passwd)) {
+      errorMessages.innerHTML = `<font color="red">Hanya huruf dan angka yang diperbolehkan / Panjang Karakter Antara Min,3 Max,10</font>`;
+    } else {
+      const em = document.getElementById("email").value;
+      const pw = document.getElementById("password").value;
+      const ips_address = document.getElementById("ip_address").value;
+      try {
+        await fetch('/do_login', {
+          method: "POST",
+          headers: { "Access-Control-Allow-Origin": "*", "Content-type": "application/json" },
+          body: JSON.stringify({ email: em, password: pw, ip_address: ips_address }),
         })
-    } catch (error) {
-      swal({
-        title: "Login Failed",
-        text: error.message,
-        icon: "error",
-      }).then(function () {
-        window.location.href = "/";
-      });
+          .then(response => response.json())
+          .then((data) => {
+            if (data?.success == "true") {
+              window.location.href = "/home";
+            } else if (data?.success == "false") {
+              swal({
+                title: "Login Gagal",
+                text: "Login Gagal , Data Tidak Dapat Di Ambil Dari API!",
+                icon: "error",
+              }).then(function () {
+                window.location.href = "/";
+              });
+            } else if (data?.success == "pending") {
+              swal({
+                title: "Login Tertunda",
+                text: "Saat ini Anda belum dapat login karena alamat IP Anda belum terdaftar ( whitelist ) di sistem kami. Silakan menekan tombol di bawah ini untuk melakukan permintaan whitelist alamat IP. Anda dapat login jika permintaan Anda sudah disetujui oleh administrator sistem.",
+                icon: "error",
+              }).then(function () {
+                window.location.href = "/";
+              });
+            } else if (data?.success == "eror") {
+              swal({
+                title: "Terjadi Kesalahan Error",
+                text: "Login Gagal , Gagal Insert Ip Address",
+                icon: "error",
+              }).then(function () {
+                window.location.href = "/";
+              });
+            } else if (data?.success == "super") {
+              swal({
+                title: "Login Super Admin",
+                text: "Silahkan Klik Tombol Di Bawah Untuk Redirect Ke URL Super Admin",
+                icon: "success",
+              }).then(function () {
+                window.location.href = "https://superadmin.rifhandi.com";
+              });
+            }
+          })
+      } catch (error) {
+        swal({
+          title: "Login Failed",
+          text: error.message,
+          icon: "error",
+        }).then(function () {
+          window.location.href = "/";
+        });
+      }
     }
   }
 
