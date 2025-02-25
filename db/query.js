@@ -1551,7 +1551,8 @@ const posts = async (req, res) => {
         const result = await executeQuery("SELECT * FROM news  where web_identity = 'kneks'  ORDER BY id ASC");
         let promises = result.map(async (item) => {
             return new Promise(async (resolve, reject) => {
-                const jsonArray = JSON.parse(item?.tag);
+                const parse = item?.tag??'[{"value":"kneks"}{"value":"kdeks"}]';
+                const jsonArray = JSON.parse(parse);
                 const hasil = jsonArray.map(elems => elems.value).join(',');
                 let r = await executeQuery("SELECT * FROM news_categories WHERE id = $1", [item.category_id]);
                 let detail = r[0];
@@ -1592,7 +1593,8 @@ const seacrh_posts = async (req, res) => {
     const videos = await executeQuery("SELECT * FROM news_videos where title LIKE '%" + req.query.cari + "%' or title_en LIKE '%" + req.query.cari + "%' ORDER BY id ASC limit 5 ");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
-            const jsonArray = JSON.parse(item?.tag);
+            const parse = item?.tag??'[{"value":"kneks"}{"value":"kdeks"}]';
+            const jsonArray = JSON.parse(parse);
             const hasil = jsonArray.map(elems => elems.value).join(',');
             let r = await executeQuery("SELECT * FROM news_categories WHERE id = $1", [item.category_id]);
             let detail = r[0];
