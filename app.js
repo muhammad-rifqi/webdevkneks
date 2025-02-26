@@ -844,6 +844,10 @@ apps.get('/approveusers/:id', db.approveusers);
 
 apps.get('/approveipaddress/:id', db.approveipaddress);
 
+apps.get('/users_ipaddress', db.users_ipaddress);
+
+apps.get('/deleteipaddress/:id', db.deleteipaddress);
+
 apps.post('/insertusers', db.insertusers);
 
 apps.post('/updateusers', db.updateusers);
