@@ -115,7 +115,10 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<p><button class='whitelist-btn-users btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Approve Ip Address</button></p>`;
+                            return `<p>
+                                        <button class='whitelist-btn-users btn btn-primary' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Approve Ip Address</button>
+                                        <button class='whitelist-btn-delete_users btn btn-danger' data-id='${row.id}' style="padding:2px; float: left; margin: 2px">Delete Ip Address</button>
+                                    </p>`;
                         }
                     }
                 ],
@@ -147,6 +150,25 @@
                         }
                     });
             });
+
+            $('#ipaddress').on('click', '.whitelist-btn-delete_users', function () {
+                var id = $(this).data('id');
+                swal({
+                    title: "Are you sure?",
+                    text: "To Remove this IP Address ??",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willOut) => {
+                        if (willOut) {
+                            window.location = '/deleteipaddress/'+id;
+                        } else {
+                            console.log('NaN')
+                        }
+                    });
+            });
+
         });
     </script>
 
