@@ -302,6 +302,9 @@
                     // }
                     document.getElementById("news_datetime").value = rows[0]?.news_datetime.split('.')[0];
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.image}" width="180"/>`;
+                    const jsonArray = JSON.parse(rows[0]?.tag);
+                    const hasil = jsonArray.map(elems => elems.value).join(',');
+                    document.getElementById("tagify").value = hasil;
                 })
         }
 
@@ -336,7 +339,6 @@
                         tttt += `${items?.tagging},`;
                     });
                     document.getElementById("tag").innerHTML = tttt;
-                    document.getElementById("tagify").value = tttt;
                 })
         }
 
