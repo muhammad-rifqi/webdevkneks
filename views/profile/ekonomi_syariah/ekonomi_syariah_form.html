@@ -54,7 +54,7 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/es_updateabout" method="post">
+                        <form action="/es_updateabout" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" id="id" value="">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
@@ -134,8 +134,8 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Filosofi Logo [ID]</label>
-                                            <input class="form-control" type="text" name="logo_philosophy"
-                                                id="logo_philosophy" required>
+                                            <input class="form-control" type="file" name="logo_philosophy"
+                                                id="logo_philosophy" accept="image/png, image/jpeg">
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Filosofi Logo [EN]</label>

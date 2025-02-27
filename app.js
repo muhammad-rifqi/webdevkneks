@@ -134,6 +134,16 @@ let kdeks_logo = multer.diskStorage(
 );
 let kdeks_logo_province = multer({ storage: kdeks_logo });
 //::::::::::::::: Start Of Page ::::::::::::::::::::::::::::::::::
+let profile_logo = multer.diskStorage(
+    {
+        destination: './public/uploads/profile/',
+        filename: function (req, file, cb) {
+            cb(null, file.originalname.replace(" ", ""));
+        }
+    }
+);
+let profile_path = multer({ storage: profile_logo });
+//::::::::::::::: Start Of Page ::::::::::::::::::::::::::::::::::
 
 apps.get('/', (req, res) => {
     res.sendFile(path.resolve('./views/login.html'));
@@ -687,7 +697,7 @@ apps.get('/es_abouts', db.es_abouts);
 
 apps.get('/es_detailabouts/:id', db.es_detailabouts);
 
-apps.post('/es_updateabout', db.es_updateabouts);
+apps.post('/es_updateabout', profile_path.single('logo_philosophy'), db.es_updateabouts);
 
 // :::::::::::::::::::::::::: Api Frontend ::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -697,7 +707,7 @@ apps.get('/abouts', db.abouts);
 
 apps.get('/detailabouts/:id', db.detailabout);
 
-apps.post('/updateabout', db.updateabouts);
+apps.post('/updateabout',  profile_path.single('logo_philosophy_images'), db.updateabouts);
 
 apps.get('/deleteabouts/:id', db.deleteabout);
 

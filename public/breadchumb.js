@@ -450,7 +450,7 @@ if(path == 'tk'){
     linkto = "#";
 }
 
-if(path == 'tk_edit'){
+if(path == 'tk_form'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Profil Kneks";
     breadcrumb2 = "Ubah Profil Kneks";
@@ -487,7 +487,7 @@ if(path == 'es'){
     linkto = "#";
 }
 
-if(path == 'es_edit'){
+if(path == 'es_form'){
     breadcrumb0 = "Profil";
     breadcrumb1 = "Ekonomi Syariah";
     breadcrumb2 = "Ubah";

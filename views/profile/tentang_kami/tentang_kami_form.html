@@ -54,7 +54,7 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/updateabout" method="post">
+                        <form action="/updateabout" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" id="id" value="">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
@@ -135,7 +135,7 @@
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Filosofi Logo Upload </label>
                                             <input class="form-control" type="file" name="logo_philosophy_images"
-                                                id="logo_philosophy_images" required>
+                                                id="logo_philosophy_images" accept="image/png, image/jpeg">
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
