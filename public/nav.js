@@ -287,7 +287,7 @@ if (cookie["roles_id"] == 1) {
     document.write(`        <li class="nxl-item"><a class="nxl-link" href="/u">User</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/whitelist">User Baru</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/ip_address_approve">Approve Whitelist IP</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/ip_address">Pending Pending Whitelist IP</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/ip_address">Pending Whitelist IP</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/ip_address_rejects">Tolak Whitelist IP</a></li>                            
                            `);
     //    <li class="nxl-item"><a class="nxl-link" href="/new_user">User Baru</a></li>
