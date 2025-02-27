@@ -1652,7 +1652,7 @@ const seacrh_posts = async (req, res) => {
                 "is_publish": item?.is_publish,
                 "image": item?.image,
                 "category_id": item?.category_id,
-                "tag" : hasil,
+                "tag": hasil,
                 "tagging": item?.tag,
                 "users_name": item?.users_name,
                 "detail": detail
@@ -2131,6 +2131,24 @@ const users_new = async (req, res) => {
         res.status(200).json(sql)
     } else {
         res.status(200).json({ "success": false })
+    }
+};
+
+const ip_address_reject = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM users WHERE approve = 'N' ORDER BY created_at DESC");
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
+    }
+};
+
+const ip_address_approve = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM users WHERE approve = 'Y' ORDER BY created_at DESC");
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json([])
     }
 };
 
@@ -3530,6 +3548,8 @@ module.exports = {
     users_detail,
     users_new,
     users_whitelist,
+    ip_address_reject,
+    ip_address_approve,
     users_ipaddress,
     approveusers,
     approveipaddress,

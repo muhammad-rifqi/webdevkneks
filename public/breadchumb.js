@@ -910,6 +910,20 @@ if(path == 'ip_address'){
     linkto = "#";
 }
 
+if(path == 'ip_address_approve'){
+    breadcrumb0 = "User";
+    breadcrumb1 = "Approve IP Address";
+    breadcrumb2 = "";
+    linkto = "#";
+}
+
+if(path == 'ip_address_rejects'){
+    breadcrumb0 = "User";
+    breadcrumb1 = "Rejected IP Address";
+    breadcrumb2 = "";
+    linkto = "#";
+}
+
 document.write(`<div class="page-header">
                 <div class="page-header-left d-flex align-items-center">
                     <div class="page-header-title">

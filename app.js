@@ -533,6 +533,14 @@ apps.get('/whitelist', (req, res) => {
 apps.get('/ip_address', (req, res) => {
     res.sendFile(path.resolve('./views/user_management/whitelist/ipaddress.html'));
 })
+
+apps.get('/ip_address_approve', (req, res) => {
+    res.sendFile(path.resolve('./views/user_management/approve/list.html'));
+})
+
+apps.get('/ip_address_rejects', (req, res) => {
+    res.sendFile(path.resolve('./views/user_management/rejected/list.html'));
+})
 //:::::::::::::::::::::::::::::::::::::::::::::::::: End Of  User Management ::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::: Start Profile :::::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::: Start Of Tentang Kami :::::::::::::::::::::::::::::::::::::::::
@@ -835,6 +843,10 @@ apps.get('/users_detail/:id', db.users_detail);
 apps.get('/users_new', db.users_new);
 
 apps.get('/users_whitelist', db.users_whitelist);
+
+apps.get('/ip_address_approved', db.ip_address_approve);
+
+apps.get('/ip_address_rejected', db.ip_address_reject);
 
 apps.get('/users_ipaddress', db.users_ipaddress);
 
