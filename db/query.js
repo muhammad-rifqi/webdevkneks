@@ -19,14 +19,14 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin), {
+            res.cookie("islogin", isLogin, {
                 maxAge: 900000,
                 domain: '.rifhandi.com',
                 secure: true,
                 httpOnly: false,
                 sameSite: 'None',
                 overwrite: true,
-            };
+            });
             res.cookie("id", sql[0]?.id, {
                 maxAge: 900000,
                 domain: '.rifhandi.com',
@@ -355,21 +355,27 @@ const detailkdeks = async (req, res) => {
 }
 
 const insertkdeks = async (req, res) => {
-    const fileuploads = site_url + "/uploads/kdeks/" + req.files['photo'][0].originalname.replace(" ", "");
-    const skuploads = site_url + "/uploads/kdeks/" + req.files['sk'][0].originalname.replace(" ", "");
-    const ggg = req.body.id_province.split('-');
-    const sql = await executeQuery("INSERT into kdeks (title,images,id_province,province_name,structure,sk,twitter,facebook,linkedin,instagram,youtube,address,phone_number,fax,email,historys,abouts,maps)values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) ", [req.body.title, fileuploads, ggg[0], ggg[1], req.body.structure, skuploads, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.abouts, req.body.historys, req.body.maps]);
-    if (sql) {
+    if (!req.files.photo && !req.files.sk && !req.files.structure) {
         res.redirect('/master');
     } else {
-        res.redirect('/master');
+        const fileuploads = site_url + "/uploads/kdeks/" + req.files['photo'][0].originalname.replace(" ", "");
+        const skuploads = site_url + "/uploads/kdeks/" + req.files['sk'][0].originalname.replace(" ", "");
+        const str = site_url + "/uploads/kdeks/" + req.files['structure'][0].originalname.replace(" ", "");
+        const ggg = req.body.id_province.split('-');
+        const sql = await executeQuery("INSERT into kdeks (title,images,id_province,province_name,structure,sk,twitter,facebook,linkedin,instagram,youtube,address,phone_number,fax,email,historys,abouts,maps)values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) ", [req.body.title, fileuploads, ggg[0], ggg[1], str, skuploads, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.abouts, req.body.historys, req.body.maps]);
+        if (sql) {
+            res.redirect('/master');
+        } else {
+            res.redirect('/master');
+        }
+
     }
 }
 
 const updatekdeks = async (req, res) => {
     const ggg = req.body.id_province.split('-');
-    if (!req.files.photo || !req.files.sk) {
-        const sql = await executeQuery("UPDATE kdeks set title=$1,id_province=$2,province_name=$3,structure=$4,twitter=$5,facebook=$6,linkedin=$7,instagram=$8,youtube=$9,address=$10,phone_number=$11,fax=$12,email=$13,maps=$14,abouts=$15,historys=$16 where id =$17  ", [req.body.title, ggg[0], ggg[1], req.body.structure, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.maps, req.body.abouts, req.body.historys, req.body.id]);
+    if (!req.files.photo || !req.files.sk || !req.files.structure) {
+        const sql = await executeQuery("UPDATE kdeks set title=$1,id_province=$2,province_name=$3,twitter=$4,facebook=$5,linkedin=$6,instagram=$7,youtube=$8,address=$9,phone_number=$10,fax=$11,email=$12,maps=$13,abouts=$14,historys=$15 where id =$16  ", [req.body.title, ggg[0], ggg[1], req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.maps, req.body.abouts, req.body.historys, req.body.id]);
         if (sql) {
             res.redirect('/master');
         } else {
@@ -378,7 +384,8 @@ const updatekdeks = async (req, res) => {
     } else {
         const fileuploads = site_url + "/uploads/kdeks/" + req.files['photo'][0].originalname.replace(" ", "");
         const skuploads = site_url + "/uploads/kdeks/" + req.files['sk'][0].originalname.replace(" ", "");
-        const sql = await executeQuery("UPDATE kdeks set title=$1,images=$2,id_province=$3,province_name=$4,structure=$5,sk=$6,twitter=$7,facebook=$8,linkedin=$9,instagram=$10,youtube=$11,address=$12,phone_number=$13,fax=$14,email=$15,maps=$16,abouts=$17,historys=$18 where id =$19  ", [req.body.title, fileuploads, ggg[0], ggg[1], req.body.structure, skuploads, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.maps, req.body.abouts, req.body.historys, req.body.id]);
+        const str = site_url + "/uploads/kdeks/" + req.files['structure'][0].originalname.replace(" ", "");
+        const sql = await executeQuery("UPDATE kdeks set title=$1,images=$2,id_province=$3,province_name=$4,structure=$5,sk=$6,twitter=$7,facebook=$8,linkedin=$9,instagram=$10,youtube=$11,address=$12,phone_number=$13,fax=$14,email=$15,maps=$16,abouts=$17,historys=$18 where id =$19  ", [req.body.title, fileuploads, ggg[0], ggg[1], str, skuploads, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.maps, req.body.abouts, req.body.historys, req.body.id]);
         if (sql) {
             res.redirect('/master');
         } else {
@@ -1085,9 +1092,9 @@ const deleteinstitution = async (req, res) => {
 }
 
 const updateinstitution = async (req, res) => {
-
-    if (req.body.logo != "" || req.body.logo == undefined || !req.body.logo) {
-        const sql = await executeQuery('UPDATE institutions set tag=$1, name=$2, logo=$3, link=$4 where id = $5 ', [req.body.tag, req.body.name, req.body.logo, req.body.link, req.body.id]);
+    if (req.file) {
+        const fileuploads = site_url + "/uploads/institusi/" + req.file.originalname.replace(" ", "");
+        const sql = await executeQuery('UPDATE institutions set tag=$1, name=$2, logo=$3, link=$4 where id = $5 ', [req.body.tag, req.body.name, fileuploads, req.body.link, req.body.id]);
         if (sql) {
             res.redirect('/i');
         } else {
@@ -1106,12 +1113,23 @@ const updateinstitution = async (req, res) => {
 }
 
 const insertinstitution = async (req, res) => {
-    const sql = await executeQuery('INSERT into institutions(tag,name,logo,link)values($1,$2,$3,$4)', [req.body.tag, req.body.name, req.body.logo, req.body.link]);
-    if (sql) {
-        res.redirect('/i');
+    if (!req.file) {
+        const sql = await executeQuery('INSERT into institutions(tag,name,link)values($1,$2,$3)', [req.body.tag, req.body.name, req.body.link]);
+        if (sql) {
+            res.redirect('/i');
+        } else {
+            console.log(sql);
+            res.redirect('/i');
+        }
     } else {
-        console.log(sql);
-        res.redirect('/i');
+        const fileuploads = site_url + "/uploads/institusi/" + req.file.originalname.replace(" ", "");
+        const sql = await executeQuery('INSERT into institutions(tag,name,logo,link)values($1,$2,$3,$4)', [req.body.tag, req.body.name, fileuploads, req.body.link]);
+        if (sql) {
+            res.redirect('/i');
+        } else {
+            console.log(sql);
+            res.redirect('/i');
+        }
     }
 }
 

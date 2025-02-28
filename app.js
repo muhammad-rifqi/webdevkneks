@@ -144,6 +144,16 @@ let profile_logo = multer.diskStorage(
 );
 let profile_path = multer({ storage: profile_logo });
 //::::::::::::::: Start Of Page ::::::::::::::::::::::::::::::::::
+let i_logo = multer.diskStorage(
+    {
+        destination: './public/uploads/institusi/',
+        filename: function (req, file, cb) {
+            cb(null, file.originalname.replace(" ", ""));
+        }
+    }
+);
+let institutions_path = multer({ storage: i_logo });
+//::::::::::::::: Start Of Page ::::::::::::::::::::::::::::::::::
 
 apps.get('/', (req, res) => {
     res.sendFile(path.resolve('./views/login.html'));
@@ -733,9 +743,9 @@ apps.get('/api_kdeks', db.kdeks);
 
 apps.get('/detail_kdeks/:id', db.detailkdeks);
 
-apps.post('/insertkdeks', kdeks_logo_province.fields([{ name: "photo", maxCount: 1 }, { name: "sk", maxCount: 1 }]), db.insertkdeks);
+apps.post('/insertkdeks', kdeks_logo_province.fields([{ name: "photo", maxCount: 1 }, { name: "sk", maxCount: 1 }, { name: "structure", maxCount: 1 }]), db.insertkdeks);
 
-apps.post('/updatekdeks', kdeks_logo_province.fields([{ name: "photo", maxCount: 1 }, { name: "sk", maxCount: 1 }]), db.updatekdeks);
+apps.post('/updatekdeks', kdeks_logo_province.fields([{ name: "photo", maxCount: 1 }, { name: "sk", maxCount: 1 }, { name: "structure", maxCount: 1 }]), db.updatekdeks);
 
 apps.get('/deletekdeks/:id/:foto', db.deletekdeks);
 
@@ -981,9 +991,9 @@ apps.get('/detailinstitutions/:id', db.detailinstitutions);
 
 apps.get('/deleteinstitutions/:id', db.deleteinstitution);
 
-apps.post('/updateinstitution', db.updateinstitution);
+apps.post('/updateinstitution', institutions_path.single('logo_member'),  db.updateinstitution);
 
-apps.post('/insertinstitution', db.insertinstitution);
+apps.post('/insertinstitution', institutions_path.single('logo_member'), db.insertinstitution);
 //::::::::::::::: Api & Query DB SOSMED ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/sosmed', db.sosmed);
