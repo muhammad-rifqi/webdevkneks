@@ -165,537 +165,1162 @@ apps.get('/home', (req, res) => {
 //::::::::::::::: Start Of Banner ::::::::::::::::::::::::::::::::::::::::
 // :::::::::::::::::: Welcome Banners ::::::::::::::::::::::::::::::::::::
 apps.get('/welcomebanner', (req, res) => {
-    res.sendFile(path.resolve('./views/banners/welcome/update.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/banners/welcome/update.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/welcomebanner_add', (req, res) => {
-    res.sendFile(path.resolve('./views/banners/welcome/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/banners/welcome/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/edit_welcome_page/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/banners/welcome/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/banners/welcome/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //::::::::::::::::::::::::: End Of Welcome Banners :::::::::::::::::::::::::::::
 //::::::::::::::::::::::::: Start Of Login Banners :::::::::::::::::::::::::::::
 apps.get('/login_banner', (req, res) => {
-    res.sendFile(path.resolve('./views/banners/login_banner/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/banners/login_banner/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/login_banner_add', (req, res) => {
-    res.sendFile(path.resolve('./views/banners/login_banner/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/banners/login_banner/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/login_banner_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/banners/login_banner/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/banners/login_banner/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //::::::::::::::::::::::::: End Of Login Banners :::::::::::::::::::::::::::::
 //::::::::::::::::::::::::: Start Of Slide Show Banners :::::::::::::::::::::::::::::
 apps.get('/b', (req, res) => {
-    res.sendFile(path.resolve('./views/banners/banner/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/banners/banner/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/b_add', (req, res) => {
-    res.sendFile(path.resolve('./views/banners/banner/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/banners/banner/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/b_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/banners/banner/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/banners/banner/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //::::::::::::::::::::::::: End Of Slide Show Banners :::::::::::::::::::::::::::::
 //::::::::::::::::::::::::: End Of Banners ::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::: Start Of Direktorat ::::::::::::::::::::::::::::::::::
 apps.get('/directorats', (req, res) => {
-    res.sendFile(path.resolve('./views/directorat/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/directorat/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/directorats_add', (req, res) => {
-    res.sendFile(path.resolve('./views/directorat/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+        res.sendFile(path.resolve('./views/directorat/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/directorats_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/directorat/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+        res.sendFile(path.resolve('./views/directorat/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/directorats_detail/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/directorat/detail.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+        res.sendFile(path.resolve('./views/directorat/detail.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/devision', (req, res) => {
-    res.sendFile(path.resolve('./views/divisi/devisi.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/divisi/devisi.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/devision_add', (req, res) => {
-    res.sendFile(path.resolve('./views/divisi/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+        res.sendFile(path.resolve('./views/divisi/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/devision_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/divisi/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/divisi/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //:::::::::::::::::::::::::: End Of Direktorat ::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::: Start Of Struktur  ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/s', (req, res) => {
-    res.sendFile(path.resolve('./views/struktur/pejabat/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/struktur/pejabat/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/s_add', (req, res) => {
-    res.sendFile(path.resolve('./views/struktur/pejabat/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/struktur/pejabat/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/s_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/struktur/pejabat/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/struktur/pejabat/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/s_logo', (req, res) => {
-    res.sendFile(path.resolve('./views/struktur/struktur/s_logo.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/struktur/struktur/s_logo.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/s_logo_add', (req, res) => {
-    res.sendFile(path.resolve('./views/struktur/struktur/add_s_logo.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/struktur/struktur/add_s_logo.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/s_logo_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/struktur/struktur/edit_s_logo.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/struktur/struktur/edit_s_logo.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 //:::::::::::::::::::::::::::: End Of Struktur ::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::Start Of Berita ::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/n', (req, res) => {
-    res.sendFile(path.resolve('./views/news_management/news/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/news_management/news/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/n_add', (req, res) => {
-    res.sendFile(path.resolve('./views/news_management/news/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/news_management/news/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/n_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/news_management/news/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/news_management/news/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/nc', (req, res) => {
-    res.sendFile(path.resolve('./views/news_management/news_category/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+        res.sendFile(path.resolve('./views/news_management/news_category/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/nc_add', (req, res) => {
-    res.sendFile(path.resolve('./views/news_management/news_category/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/news_management/news_category/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/nc_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/news_management/news_category/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/news_management/news_category/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 //::::::::::::::::::::::::::::: End Of Berita :::::::::::::::::::::::::::::::::::::::::::::::::::::
 // :::::::::::::::::::::::::::: Opini ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/opini', (req, res) => {
-    res.sendFile(path.resolve('./views/opini/opini.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6 || role_id_users == 7) { // kondisi.
+        res.sendFile(path.resolve('./views/opini/opini.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/opini_add', (req, res) => {
-    res.sendFile(path.resolve('./views/opini/opini_add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6 || role_id_users == 7) { // kondisi.
+        res.sendFile(path.resolve('./views/opini/opini_add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/opini_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/opini/opini_edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6 || role_id_users == 7) { // kondisi.
+        res.sendFile(path.resolve('./views/opini/opini_edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //::::::::::::::::::::::::::::::: End Of Opini :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::: Start Of Isu Terkini :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/hi', (req, res) => {
-    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4 ) { // kondisi.
+        res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/hi_add', (req, res) => {
-    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4 ) { // kondisi.
+        res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/hi_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4 ) { // kondisi.
+        res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/hic', (req, res) => {
-    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+        res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/hic_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+        res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/hic_add', (req, res) => {
-    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+        res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/hisc', (req, res) => {
-    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+        res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/hisc_add', (req, res) => {
-    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+        res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/hisc_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+        res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //:::::::::::::::::::::::::::::::::::::::: End Of Isu Terkini :::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::: Start Of Photo :::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/ph', (req, res) => {
-    res.sendFile(path.resolve('./views/photos/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/photos/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/ph_add', (req, res) => {
-    res.sendFile(path.resolve('./views/photos/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/photos/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/ph_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/photos/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/photos/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //:::::::::::::::::::::::::::::::::::::::: End Of Photo ::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::: Start Of Video :::::::::::::::::::::::::::::::::::::::
 apps.get('/v', (req, res) => {
-    res.sendFile(path.resolve('./views/videos/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/videos/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/v_add', (req, res) => {
-    res.sendFile(path.resolve('./views/videos/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/videos/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/v_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/videos/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/videos/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //:::::::::::::::::::::::::::::::::::::::: End Of Video ::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::Start Of Agenda ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/a', (req, res) => {
-    res.sendFile(path.resolve('./views/agenda/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/agenda/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/a_add', (req, res) => {
-    res.sendFile(path.resolve('./views/agenda/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/agenda/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/a_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/agenda/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/agenda/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 // ::::::::::::::::::::::::::::::::::: End Of Agenda :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::: Start Of E-Pustaka :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/f', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/files/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/one_data_center/files/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/f_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/files/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/one_data_center/files/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/f_add', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/files/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/one_data_center/files/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/fc', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/files_category/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+        res.sendFile(path.resolve('./views/one_data_center/files_category/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/fc_add', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/files_category/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+        res.sendFile(path.resolve('./views/one_data_center/files_category/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/fc_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/one_data_center/files_category/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/one_data_center/files_category/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //:::::::::::::::::::::::::::::::::::::::  End Of E-Pustaka ::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::: Start Of Data :::::::::::::::::::::::::::::::::::::
 apps.get('/menu_data', (req, res) => {
-    res.sendFile(path.resolve('./views/data/menu/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/data/menu/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/menudata_add', (req, res) => {
-    res.sendFile(path.resolve('./views/data/menu/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/data/menu/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/menudata_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/data/menu/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/data/menu/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/sliderdata', (req, res) => {
-    res.sendFile(path.resolve('./views/data/slider/data.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/data/slider/data.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/sliderdata_add', (req, res) => {
-    res.sendFile(path.resolve('./views/data/slider/add_data.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/data/slider/add_data.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/sliderdata_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/data/slider/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/data/slider/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/dataset', (req, res) => {
-    res.sendFile(path.resolve('./views/data/dataset/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/data/dataset/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/dataset_add', (req, res) => {
-    res.sendFile(path.resolve('./views/data/dataset/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/data/dataset/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/dataset_detail/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/data/dataset/view.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/data/dataset/view.html'));
+    } else {
+        res.redirect('/');
+    }
 });
 
 apps.get('/narations/:id/:name', (req, res) => {
-    res.sendFile(path.resolve('./views/data/dashboard/naration.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/data/dashboard/naration.html'));
+    } else {
+        res.redirect('/');
+    }
 });
 
 apps.get('/dashboard', (req, res) => {
-    res.sendFile(path.resolve('./views/data/dashboard/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4 || role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/data/dashboard/list.html'));
+    } else {
+        res.redirect('/');
+    }
 });
 
 apps.get('/dashboard_add', (req, res) => {
-    res.sendFile(path.resolve('./views/data/dashboard/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 ) { // kondisi.
+        res.sendFile(path.resolve('./views/data/dashboard/add.html'));
+    } else {
+        res.redirect('/');
+    }
 });
 
 apps.get('/submenu_data', (req, res) => {
-    res.sendFile(path.resolve('./views/data/submenu/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 ) { // kondisi.
+        res.sendFile(path.resolve('./views/data/submenu/list.html'));
+    } else {
+        res.redirect('/');
+    }
 });
 
 apps.get('/submenudata_add', (req, res) => {
-    res.sendFile(path.resolve('./views/data/submenu/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 ) { // kondisi.
+        res.sendFile(path.resolve('./views/data/submenu/add.html'));
+    } else {
+        res.redirect('/');
+    }
 });
 
 apps.get('/submenudata_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/data/submenu/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 ) { // kondisi.
+        res.sendFile(path.resolve('./views/data/submenu/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 });
 //:::::::::::::::::::::::::::::::::::::::: End Of Data :::::::::::::::::::::::::::::::::::::::::::::::::
 // ::::::::::::::::::::::::::::::::::::::::::::::: Start Of Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/kdeks_form/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/kdeks/kdeks/kdeks_form.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4|| role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/kdeks/kdeks_form.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/kdeks', (req, res) => {
-    res.sendFile(path.resolve('./views/kdeks/kdeks/kdeks.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4|| role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/kdeks/kdeks.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/kdeks_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/kdeks/kdeks/kdeks_edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4|| role_id_users == 6) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/kdeks/kdeks_edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //::::::::::::::::::::::::::::::::::::::::::::::::::End Of Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::::::::::::::Start Of Master  Kdeks ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/master', (req, res) => {
-    res.sendFile(path.resolve('./views/kdeks/master/master.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/master/master.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/master_add', (req, res) => {
-    res.sendFile(path.resolve('./views/kdeks/master/master_add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/master/master_add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/master_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/kdeks/master/master_edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/master/master_edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::End Of Master Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::Start Of Province Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/province', (req, res) => {
-    res.sendFile(path.resolve('./views/kdeks/province/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/province/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/province_add', (req, res) => {
-    res.sendFile(path.resolve('./views/kdeks/province/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/province/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/province_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/kdeks/province/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/province/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::End Of Province Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // :::::::::::::::::::::::::::::::::::::::::::::::::::: Start Of Zona Khas :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/zk', (req, res) => {
-    res.sendFile(path.resolve('./views/zona_khas/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/zona_khas/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/zk_add', (req, res) => {
-    res.sendFile(path.resolve('./views/zona_khas/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/zona_khas/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/zk_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/zona_khas/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/zona_khas/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //::::::::::::::::::::::::::::::::::::::::::::::::::::: End Of Zona Khas :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::::::::::::::::: Start Of Tagging :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/tg', (req, res) => {
-    res.sendFile(path.resolve('./views/tagging/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/tagging/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/tg_add', (req, res) => {
-    res.sendFile(path.resolve('./views/tagging/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 ) { // kondisi.
+        res.sendFile(path.resolve('./views/tagging/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/tg_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/tagging/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 ) { // kondisi.
+        res.sendFile(path.resolve('./views/tagging/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //::::::::::::::::::::::::::::::::::::: End Of Tagging ::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::: Start Of Users ::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/u', (req, res) => {
-    res.sendFile(path.resolve('./views/user_management/users/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1  ) { // kondisi.
+        res.sendFile(path.resolve('./views/user_management/users/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/u_add', (req, res) => {
-    res.sendFile(path.resolve('./views/user_management/users/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 ) { // kondisi.
+        res.sendFile(path.resolve('./views/user_management/users/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/u_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/user_management/users/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 ) { // kondisi.
+        res.sendFile(path.resolve('./views/user_management/users/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/cp', (req, res) => {
-    res.sendFile(path.resolve('./views/user_management/change_password/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/user_management/change_password/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/new_user', (req, res) => {
-    res.sendFile(path.resolve('./views/user_management/new_user/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/user_management/new_user/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/whitelist', (req, res) => {
-    res.sendFile(path.resolve('./views/user_management/whitelist/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/user_management/whitelist/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/ip_address', (req, res) => {
-    res.sendFile(path.resolve('./views/user_management/whitelist/ipaddress.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/user_management/whitelist/ipaddress.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/ip_address_approve', (req, res) => {
-    res.sendFile(path.resolve('./views/user_management/approve/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/user_management/approve/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/ip_address_rejects', (req, res) => {
-    res.sendFile(path.resolve('./views/user_management/rejected/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/user_management/rejected/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //:::::::::::::::::::::::::::::::::::::::::::::::::: End Of  User Management ::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::: Start Profile :::::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::: Start Of Tentang Kami :::::::::::::::::::::::::::::::::::::::::
 apps.get('/tk_form/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/tentang_kami/tentang_kami_form.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/tentang_kami/tentang_kami_form.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/tk', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/tentang_kami/tentang_kami.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/tentang_kami/tentang_kami.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/tk_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/tentang_kami/tentang_kami_edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/tentang_kami/tentang_kami_edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //:::::::::::::::::::::::::::::::::::::::: End Tentang Kami :::::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::::: Start Of Ekonomi Syariah :::::::::::::::::::::::::::::::::::::::
 apps.get('/es_form/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/ekonomi_syariah/ekonomi_syariah_form.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/ekonomi_syariah/ekonomi_syariah_form.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/es', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/ekonomi_syariah/ekonomi_syariah.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/ekonomi_syariah/ekonomi_syariah.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/es_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/ekonomi_syariah/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/ekonomi_syariah/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //:::::::::::::::::::::::::::::::::::::::::: End Of Ekonomi Syariah :::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::::::::::::: Start Of Institusi ::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/i', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/institution/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/institution/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/i_add', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/institution/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/institution/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/i_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/institution/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/institution/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //::::::::::::::::::::::::::::::::::::::::::: End Of Insitusi ::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::::::: Start Of Social Media ::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/sm', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/social_media/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/social_media/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/sm_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/social_media/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/social_media/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 //::::::::::::::::::::::::::::::::::::::::::: End Of Social Media ::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::::::: Contact ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/c', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/contacts/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/contacts/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/c_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/contacts/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/contacts/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //::::::::::::::::::::::::::::::::::::::::::: End Contact ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::::::: Maps ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/m', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/maps/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/maps/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/m_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/maps/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/maps/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //::::::::::::::::::::::::::::::::::::::::::: End Of Maps ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::::::: Scope ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/scp', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/scope/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/scope/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/scp_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/profile/scope/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/scope/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 //::::::::::::::::::::::::::::::::::::::::::: End Of Scope ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::::::::::End Of Profile ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::;:::::::Start Of Pengaturan ::::::::::::::::::::::::::::
 apps.get('/titleweb', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/identitas_web/title.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/identitas_web/title.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/web_title_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/identitas_web/edit_title.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/identitas_web/edit_title.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/logo', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/identitas_web/logo.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/identitas_web/logo.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/web_logo_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/identitas_web/edit_logo.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/identitas_web/edit_logo.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/header', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/identitas_web/header.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/identitas_web/header.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/web_header_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/identitas_web/edit_header.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/identitas_web/edit_header.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/color', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/identitas_web/color.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/identitas_web/color.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/web_color_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/identitas_web/edit_color.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/identitas_web/edit_color.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/menu', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/menu/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/menu/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/menu_add', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/menu/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/menu/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/menu_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/menu/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/menu/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/submenu', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/sub_menu/list.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/sub_menu/list.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/submenu_add', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/sub_menu/add.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/sub_menu/add.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 apps.get('/submenu_edit/:id', (req, res) => {
-    res.sendFile(path.resolve('./views/pengaturan/sub_menu/edit.html'));
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/pengaturan/sub_menu/edit.html'));
+    } else {
+        res.redirect('/');
+    }
 })
 
 //::::::::::::::: Api & Query DB :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
