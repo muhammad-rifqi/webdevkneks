@@ -2253,6 +2253,26 @@ const deleteipaddress = async (req, res) => {
     }
 }
 
+const deleteapproveip = async (req, res) => {
+    const id_params_user = req.params.id;
+    const sql = await executeQuery("DELETE from ip_address WHERE id = $1 ", [id_params_user]);
+    if (sql) {
+        res.redirect('/ip_address_approve');
+    } else {
+        res.redirect('/ip_address_approve')
+    }
+}
+
+const deleterejectedip = async (req, res) => {
+    const id_params_user = req.params.id;
+    const sql = await executeQuery("DELETE from ip_address WHERE id = $1 ", [id_params_user]);
+    if (sql) {
+        res.redirect('/ip_address_rejects');
+    } else {
+        res.redirect('/ip_address_rejects')
+    }
+}
+
 const userroles = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  roles');
     if (sql?.length > 0) {
@@ -3592,6 +3612,8 @@ module.exports = {
     approveusers,
     approveipaddress,
     deleteipaddress,
+    deleteapproveip,
+    deleterejectedip,
     userroles,
     insertusers,
     updateusers,

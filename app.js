@@ -1505,6 +1505,10 @@ apps.get('/users_ipaddress', db.users_ipaddress);
 
 apps.get('/deleteipaddress/:id', db.deleteipaddress);
 
+apps.get('/deleteapproveip/:id', db.deleteapproveip);
+
+apps.get('/deleterejectedip/:id', db.deleterejectedip);
+
 apps.post('/insertusers', db.insertusers);
 
 apps.post('/updateusers', db.updateusers);
