@@ -189,81 +189,8 @@
     <script src="/assets/vendors/js/tagify.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        function getProvinces() {
-            fetch('/provinces')
-                .then(response => response.json())
-                .then((data) => {
-                    const getArrays = localStorage.getItem("prov_idnews");
-                    let arrays = [];
-                    if (getArrays.length <= 1) {
-                        arrays.push(getArrays);
-                    } else {
-                        const str = getArrays.replace(/[{}"]/g, "").split(",")
-                            .map(Number)
-                            .join(",");
-                        let chars = str.split(",").map(Number);
-                        arrays.push(chars)
-                    }
-                    var opt = [];
-                    data.forEach(element => {
-                        opt.push('<option value="' + element?.id + '">' + element?.province_name + '</option>');
-                    });
-                    $('#mySelect3').empty().append(opt).trigger('change');
-                    $('#mySelect3').val(arrays[0]).trigger('change');
-
-                })
-        }
-
-        function getDirectorats() {
-            $.ajax({
-                url: '/directorat_fe',
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    const getArray = localStorage.getItem("object_dir_news");
-                    let array = [];
-                    if (getArray.length <= 1) {
-                        array.push(getArray[0]);
-                    } else {
-                        const strings = getArray.replace(/[{}"]/g, "").split(",")
-                            .map(Number)
-                            .join(",");
-                        for (let char of strings) {
-                            if (char !== ',') {
-                                array.push(char);
-                            }
-                        }
-                    }
-                    var options = [];
-                    $.each(data, function (index, value) {
-                        options.push('<option value="' + value.id + '">' + value.title + '</option>');
-                    });
-                    $('#mySelect2').empty().append(options).trigger('change');
-                    $('#mySelect2').val(array).trigger('change');
-                }
-            });
-        }
-        $(document).ready(function () {
-            const inputElm = document.querySelector('input.tagify');
-            new Tagify(inputElm);
-            $('#mySelect2').select2();
-            $('#mySelect3').select2();
-            getProvinces()
-            getDirectorats();
-        });
-    </script>
-    <script>
-        window.addEventListener("load", async () => {
-            let news_category_id;
-            let province_id;
-            await getUrlById();
-            await getCategoryNews();
-            await getTagging();
-            // await handleClick();
-            await upload_check();
-
-        })
-
+        document.getElementById("users_name").value = `${cookie['name']}`;
+        document.getElementById("users_id").value = `${cookie['id']}`;
         function getUrlById() {
             const URLS = new URL(window.location.href);
             fetch('/newsdetail/' + URLS.pathname.split('/')[2])
@@ -361,6 +288,77 @@
             return true;
         };
 
+
+
+        function getProvinces() {
+            fetch('/provinces')
+                .then(response => response.json())
+                .then((data) => {
+                    const getArrays = localStorage.getItem("prov_idnews");
+                    let arrays = [];
+                    if (getArrays.length <= 1) {
+                        arrays.push(getArrays);
+                    } else {
+                        const str = getArrays.replace(/[{}"]/g, "").split(",")
+                            .map(Number)
+                            .join(",");
+                        let chars = str.split(",").map(Number);
+                        arrays.push(chars)
+                    }
+                    var opt = [];
+                    data.forEach(element => {
+                        opt.push('<option value="' + element?.id + '">' + element?.province_name + '</option>');
+                    });
+                    $('#mySelect3').empty().append(opt).trigger('change');
+                    $('#mySelect3').val(arrays[0]).trigger('change');
+
+                })
+        }
+
+        function getDirectorats() {
+            $.ajax({
+                url: '/directorat_fe',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    const getArray = localStorage.getItem("object_dir_news");
+                    let array = [];
+                    if (getArray.length <= 1) {
+                        array.push(getArray[0]);
+                    } else {
+                        const strings = getArray.replace(/[{}"]/g, "").split(",")
+                            .map(Number)
+                            .join(",");
+                        for (let char of strings) {
+                            if (char !== ',') {
+                                array.push(char);
+                            }
+                        }
+                    }
+                    var options = [];
+                    $.each(data, function (index, value) {
+                        options.push('<option value="' + value.id + '">' + value.title + '</option>');
+                    });
+                    $('#mySelect2').empty().append(options).trigger('change');
+                    $('#mySelect2').val(array).trigger('change');
+                }
+            });
+        }
+        $(document).ready(function () {
+            const inputElm = document.querySelector('input.tagify');
+            new Tagify(inputElm);
+            let news_category_id;
+            let province_id;
+            $('#mySelect2').select2();
+            $('#mySelect3').select2();
+            getUrlById();
+            getCategoryNews();
+            getTagging();
+            getProvinces();
+            getDirectorats();
+            upload_check();
+            // await handleClick();
+        });
     </script>
 </body>
 
