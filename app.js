@@ -36,7 +36,11 @@ let storage = multer.diskStorage(
         }
     }
 );
-let hotissue_path = multer({ storage: storage });
+let hotissue_path = multer({
+    storage: storage, fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+});
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 let storages = multer.diskStorage(
     {
@@ -46,7 +50,11 @@ let storages = multer.diskStorage(
         }
     }
 );
-let news_path = multer({ storage: storages });
+let news_path = multer({
+    storage: storages, fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+});
 //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 let disks = multer.diskStorage(
     {
@@ -56,7 +64,11 @@ let disks = multer.diskStorage(
         }
     }
 );
-let photo_path = multer({ storage: disks });
+let photo_path = multer({
+    storage: disks, fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+});
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 let drive = multer.diskStorage(
     {
@@ -66,7 +78,11 @@ let drive = multer.diskStorage(
         }
     }
 );
-let structure_path = multer({ storage: drive });
+let structure_path = multer({
+    storage: drive, fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+});
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 let drives = multer.diskStorage(
@@ -89,7 +105,11 @@ let banner_page = multer.diskStorage(
         }
     }
 );
-let page_path = multer({ storage: banner_page });
+let page_path = multer({
+    storage: banner_page, fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+});
 // :::::::::::::::::::::::::::::::::: Slide Show Path ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 let directorat_images = multer.diskStorage(
@@ -100,7 +120,11 @@ let directorat_images = multer.diskStorage(
         }
     }
 );
-let directorats_images = multer({ storage: directorat_images });
+let directorats_images = multer({
+    storage: directorat_images, fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+});
 
 //:::::::::::::::::::::::::::::::::::::::::::::End Of Direktorat Images :::::::::::::::::::::::::::::::::::::::
 let slideshow_page = multer.diskStorage(
@@ -111,7 +135,11 @@ let slideshow_page = multer.diskStorage(
         }
     }
 );
-let slide_path = multer({ storage: slideshow_page });
+let slide_path = multer({
+    storage: slideshow_page, fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+});
 
 // :::::::::::::::: Start Of Data Slide ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 let data_slide = multer.diskStorage(
@@ -122,7 +150,11 @@ let data_slide = multer.diskStorage(
         }
     }
 );
-let data_slide_path = multer({ storage: data_slide });
+let data_slide_path = multer({
+    storage: data_slide, fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+});
 //:::::::::::::::::::::::::: Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 let kdeks_logo = multer.diskStorage(
     {
@@ -132,7 +164,11 @@ let kdeks_logo = multer.diskStorage(
         }
     }
 );
-let kdeks_logo_province = multer({ storage: kdeks_logo });
+let kdeks_logo_province = multer({
+    storage: kdeks_logo, fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+});
 //::::::::::::::: Start Of Page ::::::::::::::::::::::::::::::::::
 let profile_logo = multer.diskStorage(
     {
@@ -142,7 +178,11 @@ let profile_logo = multer.diskStorage(
         }
     }
 );
-let profile_path = multer({ storage: profile_logo });
+let profile_path = multer({
+    storage: profile_logo, fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+});
 //::::::::::::::: Start Of Page ::::::::::::::::::::::::::::::::::
 let i_logo = multer.diskStorage(
     {
@@ -153,6 +193,18 @@ let i_logo = multer.diskStorage(
     }
 );
 let institutions_path = multer({ storage: i_logo });
+//::::::::::::::: Config::::::::::::::::::::::::::::::::::
+function checkFileType(file, cb) {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = filetypes.test(file.mimetype);
+
+    if (mimetype && extname) {
+        return cb(null, true);
+    } else {
+        cb('Error: Images only! (jpeg, jpg, png, gif)');
+    }
+}
 //::::::::::::::: Start Of Page ::::::::::::::::::::::::::::::::::
 
 apps.get('/', (req, res) => {
@@ -260,7 +312,7 @@ apps.get('/directorats', (req, res) => {
 
 apps.get('/directorats_add', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
         res.sendFile(path.resolve('./views/directorat/add.html'));
     } else {
         res.redirect('/');
@@ -269,7 +321,7 @@ apps.get('/directorats_add', (req, res) => {
 
 apps.get('/directorats_edit/:id', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
         res.sendFile(path.resolve('./views/directorat/edit.html'));
     } else {
         res.redirect('/');
@@ -278,7 +330,7 @@ apps.get('/directorats_edit/:id', (req, res) => {
 
 apps.get('/directorats_detail/:id', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
         res.sendFile(path.resolve('./views/directorat/detail.html'));
     } else {
         res.redirect('/');
@@ -296,7 +348,7 @@ apps.get('/devision', (req, res) => {
 
 apps.get('/devision_add', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
         res.sendFile(path.resolve('./views/divisi/add.html'));
     } else {
         res.redirect('/');
@@ -398,7 +450,7 @@ apps.get('/n_edit/:id', (req, res) => {
 
 apps.get('/nc', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
         res.sendFile(path.resolve('./views/news_management/news_category/list.html'));
     } else {
         res.redirect('/');
@@ -455,7 +507,7 @@ apps.get('/opini_edit/:id', (req, res) => {
 //::::::::::::::::::::::::::::::: Start Of Isu Terkini :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/hi', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4) { // kondisi.
         res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/list.html'));
     } else {
         res.redirect('/');
@@ -464,7 +516,7 @@ apps.get('/hi', (req, res) => {
 
 apps.get('/hi_add', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4) { // kondisi.
         res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/add.html'));
     } else {
         res.redirect('/');
@@ -473,7 +525,7 @@ apps.get('/hi_add', (req, res) => {
 
 apps.get('/hi_edit/:id', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4) { // kondisi.
         res.sendFile(path.resolve('./views/hot_issue_management/hot_issue/edit.html'));
     } else {
         res.redirect('/');
@@ -482,7 +534,7 @@ apps.get('/hi_edit/:id', (req, res) => {
 
 apps.get('/hic', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
         res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/list.html'));
     } else {
         res.redirect('/');
@@ -491,7 +543,7 @@ apps.get('/hic', (req, res) => {
 
 apps.get('/hic_edit/:id', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
         res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/edit.html'));
     } else {
         res.redirect('/');
@@ -500,7 +552,7 @@ apps.get('/hic_edit/:id', (req, res) => {
 
 apps.get('/hic_add', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
         res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_category/add.html'));
     } else {
         res.redirect('/');
@@ -509,7 +561,7 @@ apps.get('/hic_add', (req, res) => {
 
 apps.get('/hisc', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
         res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/list.html'));
     } else {
         res.redirect('/');
@@ -518,7 +570,7 @@ apps.get('/hisc', (req, res) => {
 
 apps.get('/hisc_add', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
         res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/add.html'));
     } else {
         res.redirect('/');
@@ -527,7 +579,7 @@ apps.get('/hisc_add', (req, res) => {
 
 apps.get('/hisc_edit/:id', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
         res.sendFile(path.resolve('./views/hot_issue_management/hot_issue_sub_category/edit.html'));
     } else {
         res.redirect('/');
@@ -649,7 +701,7 @@ apps.get('/f_add', (req, res) => {
 
 apps.get('/fc', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
         res.sendFile(path.resolve('./views/one_data_center/files_category/list.html'));
     } else {
         res.redirect('/');
@@ -658,7 +710,7 @@ apps.get('/fc', (req, res) => {
 
 apps.get('/fc_add', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2 ) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
         res.sendFile(path.resolve('./views/one_data_center/files_category/add.html'));
     } else {
         res.redirect('/');
@@ -776,7 +828,7 @@ apps.get('/dashboard', (req, res) => {
 
 apps.get('/dashboard_add', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 ) { // kondisi.
+    if (role_id_users == 1) { // kondisi.
         res.sendFile(path.resolve('./views/data/dashboard/add.html'));
     } else {
         res.redirect('/');
@@ -785,7 +837,7 @@ apps.get('/dashboard_add', (req, res) => {
 
 apps.get('/submenu_data', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 ) { // kondisi.
+    if (role_id_users == 1) { // kondisi.
         res.sendFile(path.resolve('./views/data/submenu/list.html'));
     } else {
         res.redirect('/');
@@ -794,7 +846,7 @@ apps.get('/submenu_data', (req, res) => {
 
 apps.get('/submenudata_add', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 ) { // kondisi.
+    if (role_id_users == 1) { // kondisi.
         res.sendFile(path.resolve('./views/data/submenu/add.html'));
     } else {
         res.redirect('/');
@@ -803,7 +855,7 @@ apps.get('/submenudata_add', (req, res) => {
 
 apps.get('/submenudata_edit/:id', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 ) { // kondisi.
+    if (role_id_users == 1) { // kondisi.
         res.sendFile(path.resolve('./views/data/submenu/edit.html'));
     } else {
         res.redirect('/');
@@ -813,7 +865,7 @@ apps.get('/submenudata_edit/:id', (req, res) => {
 // ::::::::::::::::::::::::::::::::::::::::::::::: Start Of Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/kdeks_form/:id', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4|| role_id_users == 6) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4 || role_id_users == 6) { // kondisi.
         res.sendFile(path.resolve('./views/kdeks/kdeks/kdeks_form.html'));
     } else {
         res.redirect('/');
@@ -822,7 +874,7 @@ apps.get('/kdeks_form/:id', (req, res) => {
 
 apps.get('/kdeks', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4|| role_id_users == 6) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4 || role_id_users == 6) { // kondisi.
         res.sendFile(path.resolve('./views/kdeks/kdeks/kdeks.html'));
     } else {
         res.redirect('/');
@@ -831,7 +883,7 @@ apps.get('/kdeks', (req, res) => {
 
 apps.get('/kdeks_edit/:id', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4|| role_id_users == 6) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4 || role_id_users == 6) { // kondisi.
         res.sendFile(path.resolve('./views/kdeks/kdeks/kdeks_edit.html'));
     } else {
         res.redirect('/');
@@ -897,7 +949,7 @@ apps.get('/province_edit/:id', (req, res) => {
 // :::::::::::::::::::::::::::::::::::::::::::::::::::: Start Of Zona Khas :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/zk', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4) { // kondisi.
         res.sendFile(path.resolve('./views/zona_khas/list.html'));
     } else {
         res.redirect('/');
@@ -906,7 +958,7 @@ apps.get('/zk', (req, res) => {
 
 apps.get('/zk_add', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4) { // kondisi.
         res.sendFile(path.resolve('./views/zona_khas/add.html'));
     } else {
         res.redirect('/');
@@ -915,7 +967,7 @@ apps.get('/zk_add', (req, res) => {
 
 apps.get('/zk_edit/:id', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4) { // kondisi.
         res.sendFile(path.resolve('./views/zona_khas/edit.html'));
     } else {
         res.redirect('/');
@@ -925,7 +977,7 @@ apps.get('/zk_edit/:id', (req, res) => {
 //::::::::::::::::::::::::::::::::::::::::::::::::::::: Start Of Tagging :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/tg', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 || role_id_users == 2|| role_id_users == 4) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4) { // kondisi.
         res.sendFile(path.resolve('./views/tagging/list.html'));
     } else {
         res.redirect('/');
@@ -934,7 +986,7 @@ apps.get('/tg', (req, res) => {
 
 apps.get('/tg_add', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 ) { // kondisi.
+    if (role_id_users == 1) { // kondisi.
         res.sendFile(path.resolve('./views/tagging/add.html'));
     } else {
         res.redirect('/');
@@ -943,7 +995,7 @@ apps.get('/tg_add', (req, res) => {
 
 apps.get('/tg_edit/:id', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 ) { // kondisi.
+    if (role_id_users == 1) { // kondisi.
         res.sendFile(path.resolve('./views/tagging/edit.html'));
     } else {
         res.redirect('/');
@@ -953,7 +1005,7 @@ apps.get('/tg_edit/:id', (req, res) => {
 //::::::::::::::::::::::::::::::::::::: Start Of Users ::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/u', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1  ) { // kondisi.
+    if (role_id_users == 1) { // kondisi.
         res.sendFile(path.resolve('./views/user_management/users/list.html'));
     } else {
         res.redirect('/');
@@ -962,7 +1014,7 @@ apps.get('/u', (req, res) => {
 
 apps.get('/u_add', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 ) { // kondisi.
+    if (role_id_users == 1) { // kondisi.
         res.sendFile(path.resolve('./views/user_management/users/add.html'));
     } else {
         res.redirect('/');
@@ -971,7 +1023,7 @@ apps.get('/u_add', (req, res) => {
 
 apps.get('/u_edit/:id', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1 ) { // kondisi.
+    if (role_id_users == 1) { // kondisi.
         res.sendFile(path.resolve('./views/user_management/users/edit.html'));
     } else {
         res.redirect('/');
@@ -1342,7 +1394,7 @@ apps.get('/abouts', db.abouts);
 
 apps.get('/detailabouts/:id', db.detailabout);
 
-apps.post('/updateabout',  profile_path.single('logo_philosophy_images'), db.updateabouts);
+apps.post('/updateabout', profile_path.single('logo_philosophy_images'), db.updateabouts);
 
 apps.get('/deleteabouts/:id', db.deleteabout);
 
@@ -1620,7 +1672,7 @@ apps.get('/detailinstitutions/:id', db.detailinstitutions);
 
 apps.get('/deleteinstitutions/:id', db.deleteinstitution);
 
-apps.post('/updateinstitution', institutions_path.single('logo_member'),  db.updateinstitution);
+apps.post('/updateinstitution', institutions_path.single('logo_member'), db.updateinstitution);
 
 apps.post('/insertinstitution', institutions_path.single('logo_member'), db.insertinstitution);
 //::::::::::::::: Api & Query DB SOSMED ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
