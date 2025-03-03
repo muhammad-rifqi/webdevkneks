@@ -210,7 +210,8 @@
                     province_id = rows[0]?.category_id;
                     // document.getElementById("listtag").innerHTML = `<b>[${rows[0]?.tag}]</b>`;
                     // if (rows[0]?.is_publish == 1) {
-
+                    console.log(rows[0]?.directorat)
+                    console.log(rows[0]?.id_province)
                     localStorage.setItem("object_dir_news", rows[0]?.directorat)
                     localStorage.setItem("prov_idnews", rows[0]?.id_province);
                     if (rows[0]?.is_publish == 'on') {
