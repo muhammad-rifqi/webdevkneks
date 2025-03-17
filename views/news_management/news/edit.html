@@ -282,8 +282,8 @@
         function upload_check() {
             var upl = document.getElementById("photo");
             var max = document.getElementById("max_id").value;
-            if (upl.files[0].size > max) {
-                alert("File too big!");
+            if (upl.files[0].size > max || !upl.files[0].type.startsWith('image/')) {
+                alert("File too big! Or File Not Image");
                 upl.value = "";
                 return false;
             }
