@@ -254,9 +254,9 @@
     function cekRegistered() {
         const passwd = document.getElementById("password").value;
         const errorMessages = document.getElementById("errorMessage");
-        const alphanumericRegex = /^[a-zA-Z0-9]{3,10}$/;
+        const alphanumericRegex = /^[a-zA-Z0-9@#$]{3,10}$/;
         if (passwd && !alphanumericRegex.test(passwd)) {
-            errorMessages.innerHTML = `<font color="red">Hanya huruf dan angka yang diperbolehkan / Panjang Karakter Antara Min,3 Max,10</font>`;
+            errorMessages.innerHTML = `<font color="red">Panjang Karakter Antara Min,3 Max,10 dan Gunakan Simbol Untuk Memperkuat Password Anda</font>`;
         } else {
             const usernames = document.getElementById("username").value;
             const email = document.getElementById("email").value;
