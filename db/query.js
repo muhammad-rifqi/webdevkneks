@@ -5,8 +5,8 @@ const axios = require('axios');
 
 
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
-let fileslinux = '/var/www/html/webdev.rifhandi.com/public_html/webdevkneks/public/uploads/';
-let site_url = "https://webdev.rifhandi.com";
+let fileslinux = '/var/www/html/webdevkneks/public/uploads/';
+let site_url = "https://cms-dev.kneks.go.id";
 // const decodeHex = (encodedStr) => Buffer.from(encodedStr, 'hex').toString('utf8');
 // const encodeHex = (str) => Buffer.from(str).toString('hex');
 //::::::::::::::::::::::::::::::Start Of LOGIN LOGOUT :::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -21,7 +21,7 @@ const do_login = async (req, res) => {
             const isLogin = true;
             res.cookie("islogin", isLogin, {
                 maxAge: 900000,
-                domain: '.rifhandi.com',
+                domain: '.kneks.go.id',
                 secure: true,
                 httpOnly: false,
                 sameSite: 'None',
@@ -29,7 +29,7 @@ const do_login = async (req, res) => {
             });
             res.cookie("id", sql[0]?.id, {
                 maxAge: 900000,
-                domain: '.rifhandi.com',
+                domain: '.kneks.go.id',
                 secure: true,
                 httpOnly: false,
                 sameSite: 'None',
@@ -37,7 +37,7 @@ const do_login = async (req, res) => {
             });
             res.cookie("name", sql[0]?.name, {
                 maxAge: 900000,
-                domain: '.rifhandi.com',
+                domain: '.kneks.go.id',
                 secure: true,
                 httpOnly: false,
                 sameSite: 'None',
@@ -45,7 +45,7 @@ const do_login = async (req, res) => {
             });
             res.cookie("roles_id", sql[0]?.role_id, {
                 maxAge: 900000,
-                domain: '.rifhandi.com',
+                domain: '.kneks.go.id',
                 secure: true,
                 httpOnly: false,
                 sameSite: 'None',
@@ -53,7 +53,7 @@ const do_login = async (req, res) => {
             });
             res.cookie("id_province", sql[0]?.id_province, {
                 maxAge: 900000,
-                domain: '.rifhandi.com',
+                domain: '.kneks.go.id',
                 secure: true,
                 httpOnly: false,
                 sameSite: 'None',
@@ -61,7 +61,7 @@ const do_login = async (req, res) => {
             });
             res.cookie("directorat_id", sql[0]?.directorat_id, {
                 maxAge: 900000,
-                domain: '.rifhandi.com',
+                domain: '.kneks.go.id',
                 secure: true,
                 httpOnly: false,
                 sameSite: 'None',
@@ -84,7 +84,7 @@ const do_login = async (req, res) => {
                 const isLogin = true;
                 res.cookie("islogin", isLogin, {
                     maxAge: 900000,
-                    domain: '.rifhandi.com',
+                    domain: '.kneks.go.id',
                     secure: true,
                     httpOnly: false,
                     sameSite: 'None',
@@ -92,7 +92,7 @@ const do_login = async (req, res) => {
                 });
                 res.cookie("id", sql[0]?.id, {
                     maxAge: 900000,
-                    domain: '.rifhandi.com',
+                    domain: '.kneks.go.id',
                     secure: true,
                     httpOnly: false,
                     sameSite: 'None',
@@ -100,7 +100,7 @@ const do_login = async (req, res) => {
                 });
                 res.cookie("name", sql[0]?.name, {
                     maxAge: 900000,
-                    domain: '.rifhandi.com',
+                    domain: '.kneks.go.id',
                     secure: true,
                     httpOnly: false,
                     sameSite: 'None',
@@ -108,7 +108,7 @@ const do_login = async (req, res) => {
                 });
                 res.cookie("roles_id", sql[0]?.role_id, {
                     maxAge: 900000,
-                    domain: '.rifhandi.com',
+                    domain: '.kneks.go.id',
                     secure: true,
                     httpOnly: false,
                     sameSite: 'None',
@@ -116,7 +116,7 @@ const do_login = async (req, res) => {
                 });
                 res.cookie("id_province", sql[0]?.id_province, {
                     maxAge: 900000,
-                    domain: '.rifhandi.com',
+                    domain: '.kneks.go.id',
                     secure: true,
                     httpOnly: false,
                     sameSite: 'None',
@@ -124,7 +124,7 @@ const do_login = async (req, res) => {
                 });
                 res.cookie("directorat_id", sql[0]?.directorat_id, {
                     maxAge: 900000,
-                    domain: '.rifhandi.com',
+                    domain: '.kneks.go.id',
                     secure: true,
                     httpOnly: false,
                     sameSite: 'None',
@@ -160,12 +160,12 @@ const user_register = async (req, res) => {
 }
 
 const do_logout = (req, res) => {
-    res.clearCookie("islogin", { domain: ".rifhandi.com" });
-    res.clearCookie("name", { domain: ".rifhandi.com" });
-    res.clearCookie("id", { domain: ".rifhandi.com" });
-    res.clearCookie("roles_id", { domain: ".rifhandi.com" });
-    res.clearCookie("id_province", { domain: ".rifhandi.com" });
-    res.clearCookie("directorat_id", { domain: ".rifhandi.com" });
+    res.clearCookie("islogin", { domain: ".kneks.go.id" });
+    res.clearCookie("name", { domain: ".kneks.go.id" });
+    res.clearCookie("id", { domain: ".kneks.go.id" });
+    res.clearCookie("roles_id", { domain: ".kneks.go.id" });
+    res.clearCookie("id_province", { domain: ".kneks.go.id" });
+    res.clearCookie("directorat_id", { domain: ".kneks.go.id" });
     res.redirect("/");
 }
 
