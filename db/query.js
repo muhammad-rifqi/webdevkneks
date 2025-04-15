@@ -169,6 +169,85 @@ const do_logout = (req, res) => {
     res.redirect("/");
 }
 
+
+const api_login = async (req, res) => {
+    const email = req?.body?.email;
+    const uri = req.body.url;
+    // const password = md5(req?.body?.password);
+    // password = $2
+    const sql = await executeQuery("SELECT * FROM users where email = $1 AND users.approve = 'Y' ", [email])
+    if (sql?.length > 0) {
+        const isLogin = true;
+        res.cookie("islogin", isLogin, {
+            expires: new Date(Date.now() + 86400000 * 24),
+            domain: '.kneks.go.id',
+            secure: true,
+            httpOnly: false,
+            sameSite: 'None',
+            overwrite: true,
+        });
+        res.cookie("id", sql[0]?.id, {
+            expires: new Date(Date.now() + 86400000 * 24),
+            domain: '.kneks.go.id',
+            secure: true,
+            httpOnly: false,
+            sameSite: 'None',
+            overwrite: true,
+        });
+        res.cookie("name", sql[0]?.name, {
+            expires: new Date(Date.now() + 86400000 * 24),
+            domain: '.kneks.go.id',
+            secure: true,
+            httpOnly: false,
+            sameSite: 'None',
+            overwrite: true,
+        });
+        res.cookie("roles_id", sql[0]?.role_id, {
+            expires: new Date(Date.now() + 86400000 * 24),
+            domain: '.kneks.go.id',
+            secure: true,
+            httpOnly: false,
+            sameSite: 'None',
+            overwrite: true,
+        });
+        res.cookie("id_province", sql[0]?.id_province, {
+            expires: new Date(Date.now() + 86400000 * 24),
+            domain: '.kneks.go.id',
+            secure: true,
+            httpOnly: false,
+            sameSite: 'None',
+            overwrite: true,
+        });
+        res.cookie("directorat_id", sql[0]?.directorat_id, {
+            expires: new Date(Date.now() + 86400000 * 24),
+            domain: '.kneks.go.id',
+            secure: true,
+            httpOnly: false,
+            sameSite: 'None',
+            overwrite: true,
+        });
+        // res.redirect(uri + '/dashboard');
+        res.status(200).json({ "success": true, "callback": uri + '/dashboard' });
+    } else {
+        res.status(200).json({ "success": false, "callback": uri + '/dashboard' })
+    }
+
+}
+
+const api_logout = (req, res) => {
+
+    const uri_local = "http://localhost:3005";
+    const uri_dev = "https://sso-dev.kneks.go.id";
+
+    res.clearCookie("islogin", { domain: ".kneks.go.id" });
+    res.clearCookie("name", { domain: ".kneks.go.id" });
+    res.clearCookie("id", { domain: ".kneks.go.id" });
+    res.clearCookie("roles_id", { domain: ".kneks.go.id" });
+    res.clearCookie("id_province", { domain: ".kneks.go.id" });
+    res.clearCookie("directorat_id", { domain: ".kneks.go.id" });
+    res.redirect(uri_dev + '/login');
+}
+
 const analitics = async (req, res) => {
     const id_users = req.cookies.id;
 
@@ -3709,6 +3788,8 @@ module.exports = {
     insertsubmenu,
     updatesubmenu,
     menu_detail,
-    submenu_detail
+    submenu_detail,
+    api_login,
+    api_logout,
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::

@@ -1932,6 +1932,10 @@ apps.post('/updateprovince', db.updateprovinces);
 
 apps.get('/province_delete/:id', db.deleteprovinces);
 
+apps.post('/acts_login', db.api_login);
+
+apps.get("/acts_logout", db.api_logout);
+
 //::::::::::::::::: End Of KDEKS ::::::::::::::::::::::::::
 
 apps.listen(28789);
