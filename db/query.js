@@ -647,7 +647,7 @@ const updatestructure = async (req, res) => {
     } else {
         const fileuploads = site_url + "/uploads/structure/" + req.file.originalname.replace(" ", "");
         const sql = await executeQuery("update pejabat set name=$1,position=$2,position_en=$3,photo=$4,description=$5, description_en=$6,is_publish=$7,organization=$8,directorat=$9,head=$10  where id=$11",
-            [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.directorat, req.body.head, req.body.id]);
+            [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published,  req.body.organization, req.body.directorat, req.body.head, req.body.id]);
         if (sql) {
             res.redirect('/s');
         } else {
