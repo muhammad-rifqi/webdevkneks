@@ -19,12 +19,54 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin);
-            res.cookie("id", sql[0]?.id);
-            res.cookie("name", sql[0]?.name);
-            res.cookie("roles_id", sql[0]?.role_id);
-            res.cookie("id_province", sql[0]?.id_province);
-            res.cookie("directorat_id", sql[0]?.directorat_id);
+            res.cookie("islogin", isLogin, {
+                maxAge: 900000,
+                domain: '.kneks.go.id',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id", sql[0]?.id, {
+                maxAge: 900000,
+                domain: '.kneks.go.id',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("name", sql[0]?.name, {
+                maxAge: 900000,
+                domain: '.kneks.go.id',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("roles_id", sql[0]?.role_id, {
+                maxAge: 900000,
+                domain: '.kneks.go.id',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("id_province", sql[0]?.id_province, {
+                maxAge: 900000,
+                domain: '.kneks.go.id',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
+            res.cookie("directorat_id", sql[0]?.directorat_id, {
+                maxAge: 900000,
+                domain: '.kneks.go.id',
+                secure: true,
+                httpOnly: false,
+                sameSite: 'None',
+                overwrite: true,
+            });
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
