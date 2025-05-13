@@ -19,54 +19,12 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id", sql[0]?.id, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("name", sql[0]?.name, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("roles_id", sql[0]?.role_id, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id_province", sql[0]?.id_province, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("directorat_id", sql[0]?.directorat_id, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+            res.cookie("islogin", isLogin);
+            res.cookie("id", sql[0]?.id);
+            res.cookie("name", sql[0]?.name);
+            res.cookie("roles_id", sql[0]?.role_id);
+            res.cookie("id_province", sql[0]?.id_province);
+            res.cookie("directorat_id", sql[0]?.directorat_id);
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -2996,8 +2954,8 @@ const detail_submenus_edit = async (req, res) => {
 
 const insert_submenus = async (req, res) => {
     const ddd = req.body.menu_id.split('-');
-    const sql = await executeQuery("INSERT INTO data_submenu (id_statistic,short_name,long_name,short_name_en,long_name_en,statistic_name)values($1,$2,$3,$4,$5,$6)",
-        [ddd[0], req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en, ddd[1]]);
+    const sql = await executeQuery("INSERT INTO data_submenu (id_statistic,short_name,long_name,short_name_en,long_name_en,statistic_name,link_data)values($1,$2,$3,$4,$5,$6,$7)",
+        [ddd[0], req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en, ddd[1], req.body.link_data]);
     if (sql) {
         res.redirect('/submenu_data');
     } else {
@@ -3006,7 +2964,7 @@ const insert_submenus = async (req, res) => {
 }
 
 const update_submenus = async (req, res) => {
-    const sql = await executeQuery('UPDATE data_submenu set short_name = $1, short_name_en = $2, long_name = $3, long_name_en = $4  where id = $5', [req.body.short_name, req.body.short_name_en, req.body.long_name, req.body.long_name_en, req.body.id]);
+    const sql = await executeQuery('UPDATE data_submenu set short_name = $1, short_name_en = $2, long_name = $3, long_name_en = $4, link_data = $5  where id = $6', [req.body.short_name, req.body.short_name_en, req.body.long_name, req.body.long_name_en, req.body.link_data, req.body.id]);
     if (sql) {
         res.redirect('/submenu_data');
     } else {
@@ -3111,7 +3069,7 @@ const data_menus = async (req, res) => {
 }
 
 const data_menu_fe = async (req, res) => {
-    const result = await executeQuery("SELECT * FROM data_menu ORDER BY id ASC ");
+    const result = await executeQuery("SELECT * FROM data_menu ORDER BY id DESC ");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
             let r = await executeQuery("SELECT * FROM data_submenu WHERE id_statistic = $1", [item.id]);
