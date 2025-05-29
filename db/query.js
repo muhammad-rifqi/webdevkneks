@@ -532,7 +532,7 @@ const about_province_kdeks = async (req, res) => {
         arr.push(rows);
         res.status(200).json(arr)
     } else {
-        res.status(200).json({ "success": false })
+        res.status(200).json([])
     }
 }
 
@@ -556,7 +556,7 @@ const history_province_kdeks = async (req, res) => {
         arr.push(rows);
         res.status(200).json(arr)
     } else {
-        res.status(200).json({ "success": false })
+        res.status(200).json([])
     }
 }
 //::::::::::::::::::::::::::::::End Of Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::
