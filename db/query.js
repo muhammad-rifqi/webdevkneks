@@ -935,16 +935,44 @@ const update_directorats = async (req, res) => {
             res.redirect('/directorats');
         }
     } else {
-        const fileupload1 = site_url + "/uploads/directorat/images/" + req.files['images'][0].filename;
-        const fileupload2 = site_url + "/uploads/directorat/images/" + req.files['banners'][0].filename;
-        const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4,images=$5,directiorat_banner=$6 where id = $7",
-            [req.body.title, req.body.title_en, req.body.description, req.body.description_en, fileupload1, fileupload2, req.body.id]);
+        if (req.files.images) {
+            const fileupload1 = site_url + "/uploads/directorat/images/" + req.files['images'][0].filename;
+            const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4,images=$5 where id = $6",
+                [req.body.title, req.body.title_en, req.body.description, req.body.description_en, fileupload1, req.body.id]);
 
-        if (sql) {
-            res.redirect('/directorats');
-        } else {
-            console.log(sql)
-            res.redirect('/directorats');
+            if (sql) {
+                res.redirect('/directorats');
+            } else {
+                console.log(sql)
+                res.redirect('/directorats');
+            }
+        }
+
+        if (req.files.banners) {
+            const fileupload2 = site_url + "/uploads/directorat/images/" + req.files['banners'][0].filename;
+            const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4,directiorat_banner=$5 where id = $6",
+                [req.body.title, req.body.title_en, req.body.description, req.body.description_en, fileupload2, req.body.id]);
+
+            if (sql) {
+                res.redirect('/directorats');
+            } else {
+                console.log(sql)
+                res.redirect('/directorats');
+            }
+        }
+
+        if (req.files.images && req.files.banners) {
+            const fileupload1 = site_url + "/uploads/directorat/images/" + req.files['images'][0].filename;
+            const fileupload2 = site_url + "/uploads/directorat/images/" + req.files['banners'][0].filename;
+            const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4,images=$5,directiorat_banner=$6 where id = $7",
+                [req.body.title, req.body.title_en, req.body.description, req.body.description_en, fileupload1, fileupload2, req.body.id]);
+
+            if (sql) {
+                res.redirect('/directorats');
+            } else {
+                console.log(sql)
+                res.redirect('/directorats');
+            }
         }
     }
 }
