@@ -32,7 +32,7 @@ let storage = multer.diskStorage(
     {
         destination: './public/uploads/hot_issue/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ", ""));
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
         }
     }
 );
@@ -46,7 +46,7 @@ let storages = multer.diskStorage(
     {
         destination: './public/uploads/news/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ", ""));
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
         }
     }
 );
@@ -60,7 +60,7 @@ let disks = multer.diskStorage(
     {
         destination: './public/uploads/photo/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ", ""));
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
         }
     }
 );
@@ -74,7 +74,7 @@ let drive = multer.diskStorage(
     {
         destination: './public/uploads/structure/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ", ""));
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
         }
     }
 );
@@ -89,7 +89,7 @@ let drives = multer.diskStorage(
     {
         destination: './public/uploads/filesupload/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ", ""));
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
         }
     }
 );
@@ -101,7 +101,7 @@ let banner_page = multer.diskStorage(
     {
         destination: './public/uploads/banner/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ", ""));
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
         }
     }
 );
@@ -116,7 +116,7 @@ let directorat_images = multer.diskStorage(
     {
         destination: './public/uploads/directorat/images/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ", ""));
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
         }
     }
 );
@@ -131,7 +131,7 @@ let slideshow_page = multer.diskStorage(
     {
         destination: './public/uploads/slideshow/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ", ""));
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
         }
     }
 );
@@ -146,7 +146,7 @@ let data_slide = multer.diskStorage(
     {
         destination: './public/uploads/data/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ", ""));
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
         }
     }
 );
@@ -174,7 +174,7 @@ let profile_logo = multer.diskStorage(
     {
         destination: './public/uploads/profile/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ", ""));
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
         }
     }
 );
@@ -188,7 +188,7 @@ let i_logo = multer.diskStorage(
     {
         destination: './public/uploads/institusi/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ", ""));
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
         }
     }
 );
@@ -200,7 +200,7 @@ function checkFileType(file, cb) {
     // const mimetype = filetypes.test(file.mimetype);
     // if (mimetype && extname) {
     
-    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/gif' || file.mimetype === 'application/pdf'){    
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/gif' || file.mimetype === 'application/pdf' || file.mimetype === 'image/svg+xml'){    
         return cb(null, true);
     } else {
         // console.log(mimetype,extname)

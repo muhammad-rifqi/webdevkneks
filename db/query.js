@@ -19,14 +19,7 @@ const do_login = async (req, res) => {
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
+            res.cookie("islogin", isLogin);
             res.cookie("id", sql[0]?.id, {
                     maxAge: 900000,
                     domain: '.kneks.go.id',
@@ -35,38 +28,10 @@ const do_login = async (req, res) => {
                     sameSite: 'None',
                     overwrite: true,
                 });
-            res.cookie("name", sql[0]?.name, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-            res.cookie("roles_id", sql[0]?.role_id, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-            res.cookie("id_province", sql[0]?.id_province, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-            res.cookie("directorat_id", sql[0]?.directorat_id, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
+            res.cookie("name", sql[0]?.name);
+            res.cookie("roles_id", sql[0]?.role_id);
+            res.cookie("id_province", sql[0]?.id_province);
+            res.cookie("directorat_id", sql[0]?.directorat_id);
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -301,7 +266,7 @@ const es_updateabouts = async (req, res) => {
             res.redirect('/es');
         }
     } else {
-        const fileuploads = site_url + "/uploads/profile/" + req.file.originalname.replace(" ", "");
+        const fileuploads = site_url + "/uploads/profile/" + req.file.filename;
         const sql = await executeQuery('UPDATE abouts set about = $1,about_en = $2,history=$3 , history_en = $4 , about_content = $5, about_content_en = $6 , history_content = $7, history_content_en = $8 , legal_foundation = $9 , legal_foundation_en = $10, legal_foundation_content = $11 , legal_foundation_content_en = $12, logo_philosophy = $13 , logo_philosophy_en = $14 , logo_philosophy_content = $15, logo_philosophy_content_en = $16 , kneks_task = $17, kneks_task_en = $18 , kneks_task_content = $19 , kneks_task_content_en = $20, function = $21 , function_en = $22, function_content = $23 , function_content_en = $24, images=$25 where id = $26', [req.body.about, req.body.about_en, req.body.history, req.body.history_en, req.body.about_content, req.body.about_content_en, req.body.history_content, req.body.history_content_en, req.body.legal_foundation, req.body.legal_foundation_en, req.body.legal_foundation_content, req.body.legal_foundation_content_en, req.body.logo_philosophy, req.body.logo_philosophy_en, req.body.logo_philosophy_content, req.body.logo_philosophy_content_en, req.body.kneks_task, req.body.kneks_task_en, req.body.kneks_task_content, req.body.kneks_task_content_en, req.body.function, req.body.function_en, req.body.function_content, req.body.function_content_en, fileuploads, req.body.id]);
         if (sql) {
             res.redirect('/es');
@@ -343,7 +308,7 @@ const updateabouts = async (req, res) => {
             res.redirect('/es');
         }
     } else {
-        const fileuploads = site_url + "/uploads/profile/" + req.file.originalname.replace(" ", "");
+        const fileuploads = site_url + "/uploads/profile/" + req.file.filename;
         const sql = await executeQuery('UPDATE abouts set about = $1,about_en = $2,history=$3 , history_en = $4 , about_content = $5, about_content_en = $6 , history_content = $7, history_content_en = $8 , legal_foundation = $9 , legal_foundation_en = $10, legal_foundation_content = $11 , legal_foundation_content_en = $12, logo_philosophy = $13 , logo_philosophy_en = $14 , logo_philosophy_content = $15, logo_philosophy_content_en = $16 , kneks_task = $17, kneks_task_en = $18 , kneks_task_content = $19 , kneks_task_content_en = $20, function = $21 , function_en = $22, function_content = $23 , function_content_en = $24, images=$25 where id = $26', [req.body.about, req.body.about_en, req.body.history, req.body.history_en, req.body.about_content, req.body.about_content_en, req.body.history_content, req.body.history_content_en, req.body.legal_foundation, req.body.legal_foundation_en, req.body.legal_foundation_content, req.body.legal_foundation_content_en, req.body.logo_philosophy, req.body.logo_philosophy_en, req.body.logo_philosophy_content, req.body.logo_philosophy_content_en, req.body.kneks_task, req.body.kneks_task_en, req.body.kneks_task_content, req.body.kneks_task_content_en, req.body.function, req.body.function_en, req.body.function_content, req.body.function_content_en, fileuploads, req.body.id]);
         if (sql) {
             res.redirect('/es');
@@ -467,9 +432,9 @@ const updatekdeks = async (req, res) => {
             res.redirect('/master');
         }
     } else {
-        const fileuploads = site_url + "/uploads/kdeks/" + req.files['photo'][0].originalname.replace(" ", "");
-        const skuploads = site_url + "/uploads/kdeks/" + req.files['sk'][0].originalname.replace(" ", "");
-        const str = site_url + "/uploads/kdeks/" + req.files['structure'][0].originalname.replace(" ", "");
+        const fileuploads = site_url + "/uploads/kdeks/" + req.files['photo'][0].filename;
+        const skuploads = site_url + "/uploads/kdeks/" + req.files['sk'][0].filename;
+        const str = site_url + "/uploads/kdeks/" + req.files['structure'][0].filename;
         const sql = await executeQuery("UPDATE kdeks set title=$1,images=$2,id_province=$3,province_name=$4,structure=$5,sk=$6,twitter=$7,facebook=$8,linkedin=$9,instagram=$10,youtube=$11,address=$12,phone_number=$13,fax=$14,email=$15,maps=$16,abouts=$17,historys=$18 where id =$19  ", [req.body.title, fileuploads, ggg[0], ggg[1], str, skuploads, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.maps, req.body.abouts, req.body.historys, req.body.id]);
         if (sql) {
             res.redirect('/master');
@@ -594,7 +559,7 @@ const structure = async (req, res) => {
 }
 
 const inserstructure = async (req, res) => {
-    const fileuploads = site_url + "/uploads/structure/" + req.file.originalname.replace(" ", "");
+    const fileuploads = site_url + "/uploads/structure/" + req.file.filename;
     const sql = await executeQuery("insert into pejabat(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
         [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization??"", req.body.directorat??"", req.body.head??""]);
     if (sql) {
@@ -651,7 +616,7 @@ const updatestructure = async (req, res) => {
             res.redirect('/s');
         }
     } else {
-        const fileuploads = site_url + "/uploads/structure/" + req.file.originalname.replace(" ", "");
+        const fileuploads = site_url + "/uploads/structure/" + req.file.filename;
         const sql = await executeQuery("update pejabat set name=$1,position=$2,position_en=$3,photo=$4,description=$5, description_en=$6,is_publish=$7,organization=$8,directorat=$9,head=$10  where id=$11",
             [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published,  req.body.organization??"", req.body.directorat??"", req.body.head??"", req.body.id]);
         if (sql) {
@@ -869,8 +834,8 @@ const directorat_devisi_update = async (req, res) => {
 const insertdirectorats = async (req, res) => {
     // const a = req.body.daerah.split('-');
     // const sql = await executeQuery('INSERT INTO directorats(title,title_en,description,description_en,id_province,province_name)values($1,$2,$3,$4,$5,$6)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, a[0], a[1]]);
-    const fileupload1 = site_url + "/uploads/directorat/images/" + req.files['images'][0].originalname.replace(" ", "");
-    const fileupload2 = site_url + "/uploads/directorat/images/" + req.files['banners'][0].originalname.replace(" ", "");
+    const fileupload1 = site_url + "/uploads/directorat/images/" + req.files['images'][0].filename;
+    const fileupload2 = site_url + "/uploads/directorat/images/" + req.files['banners'][0].filename;
     const sql = await executeQuery('INSERT INTO directorats(title,title_en,description,description_en,images,directiorat_banner)values($1,$2,$3,$4,$5,$6)', [req.body.title, req.body.title_en, req.body.description, req.body.description_en, fileupload1, fileupload2]);
     if (sql?.length > 0) {
         res.redirect('/directorats');
@@ -895,7 +860,7 @@ const update_directorats = async (req, res) => {
     // const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4,id_province=$5,province_name=$6 where id = $7",
     //     [req.body.title, req.body.title_en, req.body.description, req.body.description_en, a[0], a[1], req.body.id]);
 
-    if (!req.files.images || !req.files.banners) {
+    if (!req.files.images && !req.files.banners) {
         const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4 where id = $5",
             [req.body.title, req.body.title_en, req.body.description, req.body.description_en, req.body.id]);
 
@@ -906,8 +871,8 @@ const update_directorats = async (req, res) => {
             res.redirect('/directorats');
         }
     } else {
-        const fileupload1 = site_url + "/uploads/directorat/images/" + req.files['images'][0].originalname.replace(" ", "");
-        const fileupload2 = site_url + "/uploads/directorat/images/" + req.files['banners'][0].originalname.replace(" ", "");
+        const fileupload1 = site_url + "/uploads/directorat/images/" + req.files['images'][0].filename;
+        const fileupload2 = site_url + "/uploads/directorat/images/" + req.files['banners'][0].filename;
         const sql = await executeQuery("update directorats set title=$1,title_en=$2,description=$3,description_en=$4,images=$5,directiorat_banner=$6 where id = $7",
             [req.body.title, req.body.title_en, req.body.description, req.body.description_en, fileupload1, fileupload2, req.body.id]);
 
@@ -1084,7 +1049,7 @@ const hotissue_detail = async (req, res) => {
 }
 const inserthotissue = async (req, res) => {
     const issue_datetime = req.body.issue_datetime.replace("T", " ");
-    const fileupload = site_url + "/uploads/hot_issue/" + req.file.originalname.replace(" ", "");
+    const fileupload = site_url + "/uploads/hot_issue/" + req.file.filename;
     const rrr = req.body.sub_category_id.split('-');
     const sql = await executeQuery("insert into hot_issues(title,title_en,excerpt,excerpt_en,content,content_en,image,is_publish,hot_issue_datetime,hot_subcategory_id,tag,directorat,id_province,hot_subcategory_name) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",
         [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, rrr[0], req.body.taggings, req.body.directorat, req.body.kdeks, rrr[1]]);
@@ -1108,7 +1073,7 @@ const updatehotissue = async (req, res) => {
             res.redirect('/hi');
         }
     } else {
-        const fileupload = site_url + "/uploads/hot_issue/" + req.file.originalname.replace(" ", "");
+        const fileupload = site_url + "/uploads/hot_issue/" + req.file.filename;
         const sql = await executeQuery("update hot_issues set title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6, image=$7, is_publish=$8,hot_issue_datetime=$9,hot_subcategory_id=$10,tag=$11,directorat=$12,id_province=$13,hot_subcategory_name=$14 where id = $15",
             [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, issue_datetime, rrr[0], req.body.taggings, req.body.directorat, req.body.kdeks, rrr[1], req.body.id]);
         if (sql) {
@@ -1178,7 +1143,7 @@ const deleteinstitution = async (req, res) => {
 
 const updateinstitution = async (req, res) => {
     if (req.file) {
-        const fileuploads = site_url + "/uploads/institusi/" + req.file.originalname.replace(" ", "");
+        const fileuploads = site_url + "/uploads/institusi/" + req.file.filename;
         const sql = await executeQuery('UPDATE institutions set tag=$1, name=$2, logo=$3, link=$4 where id = $5 ', [req.body.tag, req.body.name, fileuploads, req.body.link, req.body.id]);
         if (sql) {
             res.redirect('/i');
@@ -1207,7 +1172,7 @@ const insertinstitution = async (req, res) => {
             res.redirect('/i');
         }
     } else {
-        const fileuploads = site_url + "/uploads/institusi/" + req.file.originalname.replace(" ", "");
+        const fileuploads = site_url + "/uploads/institusi/" + req.file.filename;
         const sql = await executeQuery('INSERT into institutions(tag,name,logo,link)values($1,$2,$3,$4)', [req.body.tag, req.body.name, fileuploads, req.body.link]);
         if (sql) {
             res.redirect('/i');
@@ -1562,7 +1527,7 @@ const filesdetails = async (req, res) => {
 
 const insertfileupload = async (req, res) => {
     const file_date = req.body.date;
-    const fileuploads = site_url + "/uploads/filesupload/" + req.file.originalname.replace(" ", "");
+    const fileuploads = site_url + "/uploads/filesupload/" + req.file.filename;
     const bbb = req.body.file_category_id.split('-');
     const sql = await executeQuery("insert into files(title,title_en,content,content_en,file,is_publish,date,report_category_id,report_category_name,writer,publisher,synopsis,isbn,number_of_pages,width,height,tagging,directorat,id_province,users_id,users_name,passcode,downloadable) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23)",
         [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.users_id, req.body.users_name, req.body.passcode, req.body.downloadable]);
@@ -1586,7 +1551,7 @@ const updatefileupload = async (req, res) => {
             res.redirect('/f');
         }
     } else {
-        const fileuploads = site_url + "/uploads/filesupload/" + req.file.originalname.replace(" ", "");
+        const fileuploads = site_url + "/uploads/filesupload/" + req.file.filename;
         const sql = await executeQuery("update files set title=$1,title_en=$2,content=$3,content_en=$4, file=$5, is_publish=$6,date=$7,report_category_id=$8,report_category_name=$9,writer=$10,publisher=$11,synopsis=$12,isbn=$13,number_of_pages=$14,width=$15,height=$16,tagging=$17,directorat=$18,id_province=$19,users_id=$20,users_name=$21,passcode=$22, downloadable=$23 where id = $24",
             [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, req.body.is_publish, file_date, bbb[0], bbb[1], req.body.writer, req.body.publisher, req.body.synopsis, req.body.isbn, req.body.number_of_pages, req.body.width, req.body.height, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.users_id, req.body.users_name, req.body.passcode, req.body.downloadable, req.body.id]);
         if (sql) {
@@ -1927,7 +1892,7 @@ const pagingnews = async (req, res) => {
 
 const insertnews = async (req, res) => {
     const news_datetime = req.body.news_datetime.replace("T", " ");
-    const fileupload = site_url + "/uploads/news/" + req.file.originalname.replace(" ", "");
+    const fileupload = site_url + "/uploads/news/" + req.file.filename;
     const id_user = req.cookies.id;
     const users_name = req.cookies.name;
     const wei = (req.cookies.roles_id == '6') ? 'kdeks' : 'kneks';
@@ -1954,7 +1919,7 @@ const updatenews = async (req, res) => {
             res.redirect('/n');
         }
     } else {
-        const fileupload = site_url + "/uploads/news/" + req.file.originalname.replace(" ", "");
+        const fileupload = site_url + "/uploads/news/" + req.file.filename;
         const sql = await executeQuery("UPDATE news set  title=$1,title_en=$2,excerpt=$3,excerpt_en=$4,content=$5,content_en=$6,image=$7,is_publish=$8,news_datetime=$9,category_id=$10, tag=$11,directorat=$12,id_province=$13,users_name=$14 where id = $15",
             [req.body.title, req.body.title_en, req.body.excerpt, req.body.excerpt_en, req.body.content, req.body.content_en, fileupload, req.body.is_publish, news_datetime, req.body.news_category_id, req.body.taggings, req.body.directorat_id, req.body.kdeks, users_name, req.body.id]);
         if (sql) {
@@ -2116,7 +2081,7 @@ const categories = async (req, res) => {
 
 const insertphoto = async (req, res) => {
     const photos_datetime = req.body.photo_datetime.replace("T", " ");
-    const photoupload = site_url + "/uploads/photo/" + req.file.originalname.replace(" ", "");
+    const photoupload = site_url + "/uploads/photo/" + req.file.filename;
     const sql = await executeQuery("insert into news_photos(title,title_en,content,content_en,photo,photos_datetime,tag,directorat,id_province,is_publish,users_id,users_name) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
         [req.body.title, req.body.title_en, req.body.content, req.body.content_en, photoupload, photos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published, req.body.users_id, req.body.users_name])
     if (sql) {
@@ -2175,7 +2140,7 @@ const updatephoto = async (req, res) => {
             res.redirect('/ph');
         }
     } else {
-        const fileuploads = site_url + "/uploads/photo/" + req.file.originalname.replace(" ", "");
+        const fileuploads = site_url + "/uploads/photo/" + req.file.filename;
         const sql = await executeQuery("UPDATE news_photos set  title=$1,title_en=$2,content=$3,content_en=$4,photo=$5, photos_datetime=$6,tag=$7,directorat=$8,id_province=$9,is_publish=$10,users_id=$11,users_name=$12 where id = $13",
             [req.body.title, req.body.title_en, req.body.content, req.body.content_en, fileuploads, photos_datetime, req.body.taggings, req.body.directorat, req.body.kdeks, req.body.is_published, req.body.users_id, req.body.users_name, req.body.id]);
         if (sql) {
@@ -2672,7 +2637,7 @@ const deleteslideshow = async (req, res) => {
 
 const insertslideshow = async (req, res) => {
     if (req.file) {
-        const filesimage = site_url + "/uploads/slideshow/" + req.file.originalname.replace(" ", "");
+        const filesimage = site_url + "/uploads/slideshow/" + req.file.filename;
         const sql = await executeQuery('INSERT INTO slideshow (title,title_en,image, date_created,status, content,content_en)values($1,$2,$3,$4,$5,$6,$7) ', [req.body.title, req.body.title_en, filesimage, req.body.tanggal, req.body.status, req.body.content, req.body.content_en]);
         if (sql) {
             res.redirect('/b');
@@ -2687,7 +2652,7 @@ const insertslideshow = async (req, res) => {
 const updateslideshow = async (req, res) => {
     const id_slidshowss = req.body.id;
     if (req.file) {
-        const filesimage = site_url + "/uploads/slideshow/" + req.file.originalname.replace(" ", "");
+        const filesimage = site_url + "/uploads/slideshow/" + req.file.filename;
         const sql = await executeQuery('UPDATE slideshow set title=$1, title_en=$2, image=$3,content = $4 ,content_en = $5 , status=$6  where  id = $7 ', [req.body.title, req.body.title_en, filesimage, req.body.content, req.body.content_en, req.body.status, id_slidshowss]);
         if (sql) {
             res.redirect('/b');
@@ -2739,7 +2704,7 @@ const detail_login_banners = async (req, res) => {
 }
 
 const insertloginbanner = async (req, res) => {
-    const filesimage = site_url + "/uploads/banner/" + req.file.originalname.replace(" ", "");
+    const filesimage = site_url + "/uploads/banner/" + req.file.filename;
     const sql = await executeQuery('insert into banner(name,path,flag,date_created,status) values ($1,$2,$3,$4,$5)', [req.body.names, filesimage, req.body.flag, req.body.tanggal, req.body.status]);
     if (sql) {
         res.redirect('/login_banner');
@@ -2758,7 +2723,7 @@ const updateloginbanners = async (req, res) => {
             res.redirect('/login_banner');
         }
     } else {
-        const fileuploads = site_url + "/uploads/banner/" + req.file.originalname.replace(" ", "");
+        const fileuploads = site_url + "/uploads/banner/" + req.file.filename;
         const sql = await executeQuery("UPDATE banner set  name=$1, path=$2, date_created=$3, status=$4 where id = $5",
             [req.body.names, fileuploads, req.body.tanggal, req.body.status, req.body.id_login_banner]);
         if (sql) {
@@ -2829,7 +2794,7 @@ const detail_slogo = async (req, res) => {
 }
 
 const inserts_slogo = async (req, res) => {
-    const filesimage = site_url + "/uploads/banner/" + req.file.originalname.replace(" ", "");
+    const filesimage = site_url + "/uploads/banner/" + req.file.filename;
     const sql = await executeQuery('insert into banner(name,path,flag,date_created,status) values ($1,$2,$3,$4,$5)', [req.body.names, filesimage, req.body.flag, req.body.tanggal, req.body.status]);
     if (sql?.length > 0) {
         res.redirect('/s_logo');
@@ -2848,7 +2813,7 @@ const updates_slogo = async (req, res) => {
             res.redirect('/s_logo');
         }
     } else {
-        const fileuploads = site_url + "/uploads/banner/" + req.file.originalname.replace(" ", "");
+        const fileuploads = site_url + "/uploads/banner/" + req.file.filename;
         const sql = await executeQuery("UPDATE banner set  name=$1, path=$2, date_created=$3, status=$4 where id = $5",
             [req.body.names, fileuploads, req.body.tanggal, req.body.status, req.body.id_s_logo_banner]);
         if (sql) {
@@ -2908,7 +2873,7 @@ const welcome_pages = async (req, res) => {
 }
 
 const insert_welcome_pages = async (req, res) => {
-    const filesimage = site_url + "/uploads/banner/" + req.file.originalname.replace(" ", "");
+    const filesimage = site_url + "/uploads/banner/" + req.file.filename;
     const sql = await executeQuery('insert into banner(name,path,flag,date_created,status) values ($1,$2,$3,$4,$5)', [req.body.names, filesimage, req.body.flag, req.body.tanggal, req.body.status]);
     if (sql) {
         res.redirect('/welcomebanner');
@@ -2936,7 +2901,7 @@ const update_welcome_pages = async (req, res) => {
             res.redirect('/welcomebanner');
         }
     } else {
-        const fileuploads = site_url + "/uploads/banner/" + req.file.originalname.replace(" ", "");
+        const fileuploads = site_url + "/uploads/banner/" + req.file.filename;
         const sql = await executeQuery("UPDATE banner set  name=$1, path=$2, date_created=$3, status=$4 where id = $5",
             [req.body.names, fileuploads, req.body.tanggal, req.body.status, req.body.id_welcome]);
         if (sql) {
@@ -3226,7 +3191,7 @@ const sliders_data_fe = async (req, res) => {
 }
 
 const insertsliderdata = async (req, res) => {
-    const filesimage = site_url + "/uploads/data/" + req.file.originalname.replace(" ", "");
+    const filesimage = site_url + "/uploads/data/" + req.file.filename;
     const sql = await executeQuery('insert into data_slider(title,title_en,amount,date_created,image,link,publish) values ($1,$2,$3,$4,$5,$6,$7)', [req.body.title, req.body.title_en, req.body.amount, req.body.date_created, filesimage, req.body.link, req.body.publish]);
     if (sql) {
         res.redirect('/sliderdata');
@@ -3255,7 +3220,7 @@ const updateslidersdata = async (req, res) => {
             res.redirect('/sliderdata');
         }
     } else {
-        const fileuploads = site_url + "/uploads/data/" + req.file.originalname.replace(" ", "");
+        const fileuploads = site_url + "/uploads/data/" + req.file.filename;
         const sql = await executeQuery("UPDATE data_slider set  title=$1, title_en=$2, amount=$3, date_created=$4, image = $5, link=$6, publish=$7 where id = $8",
             [req.body.title, req.body.title_en, req.body.amount, req.body.date_created, fileuploads, req.body.link, req.body.is_published, req.body.id_sliders]);
         if (sql) {
