@@ -138,59 +138,59 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Twitter )*</label>
-                                            <input class="form-control" type="text" name="twitter" id="twitter"
+                                            <input class="form-control" type="text" name="twitter" id="twitter1"
                                                 required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Facebook )*</label>
-                                            <input class="form-control" type="text" name="facebook" id="facebook"
+                                            <input class="form-control" type="text" name="facebook" id="facebook1"
                                                 required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Linkedin )*</label>
-                                            <input class="form-control" type="text" name="linkedin" id="linkedin"
+                                            <input class="form-control" type="text" name="linkedin" id="linkedin1"
                                                 required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Instagram )*</label>
-                                            <input class="form-control" type="text" name="instagram" id="instagram"
+                                            <input class="form-control" type="text" name="instagram" id="instagram1"
                                                 required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Youtube )*</label>
-                                            <input class="form-control" type="text" name="youtube" id="youtube"
+                                            <input class="form-control" type="text" name="youtube" id="youtube1"
                                                 required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Alamat )*</label>
-                                            <input class="form-control" type="text" name="address" id="address"
+                                            <input class="form-control" type="text" name="address" id="address1"
                                                 required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">No. Telepon )*</label>
-                                            <input class="form-control" type="text" name="phone_number"
+                                            <input class="form-control" type="text" name="phone_number1"
                                                 id="phone_number" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">No. Fax )*</label>
-                                            <input class="form-control" type="text" name="fax" id="fax" required>
+                                            <input class="form-control" type="text" name="fax" id="fax1" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Email )*</label>
-                                            <input class="form-control" type="email" name="email" id="email" required>
+                                            <input class="form-control" type="email" name="email" id="email1" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Maps )*</label>
-                                            <input class="form-control" type="text" name="maps" id="maps" required>
+                                            <input class="form-control" type="text" name="maps" id="maps1" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -241,6 +241,7 @@
             .then(data => data.json())
             .then((rows) => {
                 console.log(rows[0]?.id_province)
+                console.log(rows)
                 id_prov = rows[0]?.id_province;
                 document.getElementById("id").value = rows[0]?.id;
                 document.getElementById("title").value = rows[0]?.title;
@@ -252,16 +253,16 @@
                 document.getElementById("images").innerHTML = `<img src="${rows[0]?.images}" width="100" alt="image logo kdeks">`;
                 document.getElementById("structure").value = rows[0]?.structure;
                 document.getElementById("sk_preview").innerHTML = rows[0]?.sk;
-                document.getElementById("twitter").value = rows[0]?.twitter;
-                document.getElementById("facebook").value = rows[0]?.facebook;
-                document.getElementById("linkedin").value = rows[0]?.linkedin;
-                document.getElementById("instagram").value = rows[0]?.instagram;
-                document.getElementById("youtube").value = rows[0]?.youtube;
-                document.getElementById("address").value = rows[0]?.address;
-                document.getElementById("phone_number").value = rows[0]?.phone_number;
-                document.getElementById("fax").value = rows[0]?.fax;
-                document.getElementById("email").value = rows[0]?.email;
-                document.getElementById("maps").value = rows[0]?.maps;
+                document.getElementById("twitter1").value = rows[0]?.twitter;
+                document.getElementById("facebook1").value = rows[0]?.facebook;
+                document.getElementById("linkedin1").value = rows[0]?.linkedin;
+                document.getElementById("instagram1").value = rows[0]?.instagram;
+                document.getElementById("youtube1").value = rows[0]?.youtube;
+                document.getElementById("address1").value = rows[0]?.address;
+                document.getElementById("phone_number1").value = rows[0]?.phone_number;
+                document.getElementById("fax1").value = rows[0]?.fax;
+                document.getElementById("email1").value = rows[0]?.email;
+                document.getElementById("maps1").value = rows[0]?.maps;
 
                 // if (rows[0]?.tag == 'about') {
                 //     document.getElementById("tags").innerHTML = `

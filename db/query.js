@@ -20,53 +20,53 @@ const do_login = async (req, res) => {
             u_id = sql[0]?.id;
             const isLogin = true;
             res.cookie("islogin", isLogin, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
             res.cookie("id", sql[0]?.id, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
             res.cookie("name", sql[0]?.name, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
             res.cookie("roles_id", sql[0]?.role_id, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
             res.cookie("id_province", sql[0]?.id_province, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
             res.cookie("directorat_id", sql[0]?.directorat_id, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -435,11 +435,17 @@ const detailkdeks = async (req, res) => {
 
 const insertkdeks = async (req, res) => {
     if (!req.files.photo && !req.files.sk && !req.files.structure) {
-        res.redirect('/master');
+        const ggg = req.body.id_province.split('-');
+        const sql = await executeQuery("INSERT into kdeks (title,id_province,province_name,twitter,facebook,linkedin,instagram,youtube,address,phone_number,fax,email,historys,abouts,maps)values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) ", [req.body.title, ggg[0], ggg[1], req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.abouts, req.body.historys, req.body.maps]);
+        if (sql) {
+            res.redirect('/master');
+        } else {
+            res.redirect('/master');
+        }
     } else {
-        const fileuploads = site_url + "/uploads/kdeks/" + req.files['photo'][0].originalname.replace(" ", "");
-        const skuploads = site_url + "/uploads/kdeks/" + req.files['sk'][0].originalname.replace(" ", "");
-        const str = site_url + "/uploads/kdeks/" + req.files['structure'][0].originalname.replace(" ", "");
+        const fileuploads = site_url + "/uploads/kdeks/" + req.files['photo'][0].filename;
+        const skuploads = site_url + "/uploads/kdeks/" + req.files['sk'][0].filename ;
+        const str = site_url + "/uploads/kdeks/" + req.files['structure'][0].filename ;
         const ggg = req.body.id_province.split('-');
         const sql = await executeQuery("INSERT into kdeks (title,images,id_province,province_name,structure,sk,twitter,facebook,linkedin,instagram,youtube,address,phone_number,fax,email,historys,abouts,maps)values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) ", [req.body.title, fileuploads, ggg[0], ggg[1], str, skuploads, req.body.twitter, req.body.facebook, req.body.linkedin, req.body.instagram, req.body.youtube, req.body.address, req.body.phone_number, req.body.fax, req.body.email, req.body.abouts, req.body.historys, req.body.maps]);
         if (sql) {

@@ -160,7 +160,7 @@ let kdeks_logo = multer.diskStorage(
     {
         destination: './public/uploads/kdeks/',
         filename: function (req, file, cb) {
-            cb(null, file.originalname.replace(" ", ""));
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
         }
     }
 );
@@ -195,13 +195,15 @@ let i_logo = multer.diskStorage(
 let institutions_path = multer({ storage: i_logo });
 //::::::::::::::: Config::::::::::::::::::::::::::::::::::
 function checkFileType(file, cb) {
-    const filetypes = /jpeg|jpg|png|gif/;
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = filetypes.test(file.mimetype);
-
-    if (mimetype && extname) {
+    // const filetypes = /jpeg|jpg|png|gif/;
+    // const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    // const mimetype = filetypes.test(file.mimetype);
+    // if (mimetype && extname) {
+    
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/gif' || file.mimetype === 'application/pdf'){    
         return cb(null, true);
     } else {
+        // console.log(mimetype,extname)
         cb('Error: Images only! (jpeg, jpg, png, gif)');
     }
 }
