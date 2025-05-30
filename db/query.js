@@ -2405,7 +2405,7 @@ const deleteipaddress = async (req, res) => {
 
 const deleteapproveip = async (req, res) => {
     const id_params_user = req.params.id;
-    const sql = await executeQuery("DELETE from ip_address WHERE id = $1 ", [id_params_user]);
+    const sql = await executeQuery("DELETE from users WHERE id = $1 ", [id_params_user]);
     if (sql) {
         res.redirect('/ip_address_approve');
     } else {

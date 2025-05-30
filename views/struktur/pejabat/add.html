@@ -181,15 +181,16 @@
 
         function pilihhead(e) {
             if (e == 'kadiv') {
-                fetch('/structure')
-                    .then(response => response.json())
-                    .then((data) => {
-                        var aaa = '';
-                        data.forEach(element => {
-                            aaa += '<option value=' + element?.name + '>' + element?.name + '</option>';
-                        });
-                        document.getElementById("head").innerHTML = aaa;
-                    })
+                // fetch('/structure')
+                //     .then(response => response.json())
+                //     .then((data) => {
+                //         var aaa = '';
+                //         data.forEach(element => {
+                //             aaa += '<option value=' + element?.name + '>' + element?.name + '</option>';
+                //         });
+                //         document.getElementById("head").innerHTML = aaa;
+                //     })
+                document.getElementById("head").innerHTML = `<option value="kadiv">Head</option>`;  
             } else {
                 document.getElementById("head").innerHTML = `<option value="null">-Head-</option>`;
             }
