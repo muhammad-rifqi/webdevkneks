@@ -3183,6 +3183,7 @@ const data_menu_fe = async (req, res) => {
                 "id": item?.id,
                 "title": item?.title,
                 "title_en": item?.title_en,
+                "link_menu_data": item?.link_menu_data,
                 "data_submenu": data_submenux
             };
             resolve(row);
