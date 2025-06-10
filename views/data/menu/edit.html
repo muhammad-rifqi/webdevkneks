@@ -70,6 +70,12 @@
                                             <input class="form-control" type="text" name="long_title_en" id="long_title_en" required>
                                         </div>
 
+                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Link Data </label>
+                                            <input class="form-control" type="text" name="link_menu_data" id="link_menu_data"
+                                                required>
+                                        </div>
+
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -120,6 +126,7 @@
                     document.getElementById("title_en").value = rows[0]?.title_en;
                     document.getElementById("long_title").value = rows[0]?.long_title;
                     document.getElementById("long_title_en").value = rows[0]?.long_title_en;
+                     document.getElementById("link_menu_data").value = rows[0]?.link_data;
                 })
         }
 
