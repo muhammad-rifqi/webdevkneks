@@ -3174,7 +3174,7 @@ const data_menus = async (req, res) => {
 }
 
 const data_menu_fe = async (req, res) => {
-    const result = await executeQuery("SELECT * FROM data_menu ORDER BY id DESC ");
+    const result = await executeQuery("SELECT * FROM data_menu ORDER BY data_sort ASC ");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
             let r = await executeQuery("SELECT * FROM data_submenu WHERE id_statistic = $1", [item.id]);
@@ -3184,6 +3184,7 @@ const data_menu_fe = async (req, res) => {
                 "title": item?.title,
                 "title_en": item?.title_en,
                 "link_menu_data": item?.link_menu_data,
+                "data_sort": item?.data_sort,
                 "data_submenu": data_submenux
             };
             resolve(row);
@@ -3200,7 +3201,7 @@ const data_menu_fe = async (req, res) => {
 
 
 const dropdown_menu = async (req, res) => {
-    const result = await executeQuery("SELECT * FROM menu ORDER BY data_sort ASC ");
+    const result = await executeQuery("SELECT * FROM menu ORDER BY id ASC ");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
             let r = await executeQuery("SELECT * FROM menu_sub WHERE menu_id = $1", [item.id]);
@@ -3211,7 +3212,6 @@ const dropdown_menu = async (req, res) => {
                 "menu_link": item?.menu_link,
                 "menu_orders": item?.orders,
                 "menu_name_en": item?.menu_name_en,
-                "data_sort": item?.data_sort,
                 "menu_sub": sub_menux
             };
             resolve(row);
