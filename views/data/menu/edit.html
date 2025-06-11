@@ -52,28 +52,32 @@
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Nama Pendek [ID] </label>
-                                            <input class="form-control" type="text" name="title" id="title" required>
+                                            <input class="form-control" type="text" name="title" id="title">
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Nama Pendek [EN] </label>
-                                            <input class="form-control" type="text" name="title_en" id="title_en" required>
+                                            <input class="form-control" type="text" name="title_en" id="title_en">
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Nama Panjang [ID] </label>
-                                            <input class="form-control" type="text" name="long_title" id="long_title" required>
+                                            <input class="form-control" type="text" name="long_title" id="long_title">
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Nama Panjang [EN] </label>
-                                            <input class="form-control" type="text" name="long_title_en" id="long_title_en" required>
+                                            <input class="form-control" type="text" name="long_title_en" id="long_title_en">
                                         </div>
 
-                                         <div class="col-lg-12 mb-4">
+                                        <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Link Data </label>
-                                            <input class="form-control" type="text" name="link_menu_data" id="link_menu_data"
-                                                required>
+                                            <input class="form-control" type="text" name="link_menu_data" id="link_menu_data">
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Urutan Data </label>
+                                            <input class="form-control" type="number" name="data_sort" id="data_sort">
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -127,6 +131,7 @@
                     document.getElementById("long_title").value = rows[0]?.long_title;
                     document.getElementById("long_title_en").value = rows[0]?.long_title_en;
                     document.getElementById("link_menu_data").value = rows[0]?.link_menu_data;
+                    document.getElementById("data_sort").value = rows[0]?.data_sort;
                 })
         }
 
