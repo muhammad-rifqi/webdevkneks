@@ -3200,7 +3200,7 @@ const data_menu_fe = async (req, res) => {
 
 
 const dropdown_menu = async (req, res) => {
-    const result = await executeQuery("SELECT * FROM menu ORDER BY id ASC ");
+    const result = await executeQuery("SELECT * FROM menu ORDER BY data_sort ASC ");
     let promises = result.map(async (item) => {
         return new Promise(async (resolve, reject) => {
             let r = await executeQuery("SELECT * FROM menu_sub WHERE menu_id = $1", [item.id]);
