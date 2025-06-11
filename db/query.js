@@ -3631,6 +3631,7 @@ const download_image_base64 = async (req, res) => {
     const urls = req.body.puppeteer;
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
+    await page.setViewport({ width: 1280, height: 2000});
     await page.goto(urls, { waitUntil: 'networkidle2' });
     const screenshot = await page.screenshot({ fullPage: false, encoding: 'base64' });
     await browser.close();
