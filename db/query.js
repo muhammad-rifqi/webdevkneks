@@ -3180,22 +3180,16 @@ const data_menu_fe = async (req, res) => {
         return new Promise(async (resolve, reject) => {
             let r = await executeQuery("SELECT * FROM data_submenu WHERE id_statistic = $1", [item.id]);
             let data_submenux = r;
-            // const browser = await puppeteer.launch();
-            // const page = await browser.newPage();
-            // await page.goto(item?.link_menu_data, { waitUntil: 'networkidle2' });
-            // const screenshot = await page.screenshot({ fullPage: true, encoding: 'base64' });
-            // await browser.close();
-            // "ss": `data:image/png;base64,${screenshot}`,
-                let row = {
-                    "id": item?.id,
-                    "title": item?.title,
-                    "title_en": item?.title_en,
-                    "long_title": item?.long_title,
-                    "long_title_en": item?.long_title_en,
-                    "link_menu_data": item?.link_menu_data,
-                    "data_sort": item?.data_sort,
-                    "data_submenu": data_submenux
-                };
+            let row = {
+                "id": item?.id,
+                "title": item?.title,
+                "title_en": item?.title_en,
+                "long_title": item?.long_title,
+                "long_title_en": item?.long_title_en,
+                "link_menu_data": item?.link_menu_data,
+                "data_sort": item?.data_sort,
+                "data_submenu": data_submenux
+            };
             resolve(row);
         });
     });
@@ -3630,6 +3624,19 @@ const submenu_detail = async (req, res) => {
         res.status(200).json({ "success": false })
     }
 }
+
+//:::::::::::::::::::::::::::::::::::: Puppeteer :::::::::::::::::::::::::::::::::::::::::::::::::::
+
+const download_image_base64 = async (req, res) => {
+    const urls = req.body.puppeteer;
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(urls, { waitUntil: 'networkidle2' });
+    const screenshot = await page.screenshot({ fullPage: false, encoding: 'base64' });
+    await browser.close();
+    res.status(200).json({ "ss": `data:image/png;base64,${screenshot}`})
+}
+
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
 module.exports = {
     do_login,
@@ -3863,6 +3870,7 @@ module.exports = {
     updatesubmenu,
     menu_detail,
     submenu_detail,
+    download_image_base64,
     api_login,
     api_logout,
 }

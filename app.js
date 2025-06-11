@@ -1924,6 +1924,8 @@ apps.post('/insertsubmenu', db.insertsubmenu);
 
 apps.post('/updatesubmenu', db.updatesubmenu);
 
+apps.post('/post_puppeteer',db.download_image_base64);
+
 //::::::::::::::: Api & Query CUSTOM DATA NARATION PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/dashboard_naration/:id', db.dashboard_naration);
