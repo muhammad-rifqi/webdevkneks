@@ -3183,6 +3183,8 @@ const data_menu_fe = async (req, res) => {
                 "id": item?.id,
                 "title": item?.title,
                 "title_en": item?.title_en,
+                "long_title": item?.long_title,
+                "long_title_en": item?.long_title_en,
                 "link_menu_data": item?.link_menu_data,
                 "data_sort": item?.data_sort,
                 "data_submenu": data_submenux
