@@ -2,6 +2,7 @@ const md5 = require('md5');
 const { executeQuery } = require('./postgres');
 const fs = require('fs');
 const axios = require('axios');
+const puppeteer = require('puppeteer');
 
 
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
@@ -3179,6 +3180,11 @@ const data_menu_fe = async (req, res) => {
         return new Promise(async (resolve, reject) => {
             let r = await executeQuery("SELECT * FROM data_submenu WHERE id_statistic = $1", [item.id]);
             let data_submenux = r;
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+            await page.goto(item?.link_menu_data, { waitUntil: 'networkidle2' });
+            const screenshot = await page.screenshot({ fullPage: true, encoding: 'base64' });
+            await browser.close();
             let row = {
                 "id": item?.id,
                 "title": item?.title,
@@ -3186,6 +3192,7 @@ const data_menu_fe = async (req, res) => {
                 "long_title": item?.long_title,
                 "long_title_en": item?.long_title_en,
                 "link_menu_data": item?.link_menu_data,
+                "ss": `data:image/png;base64,${screenshot}`,
                 "data_sort": item?.data_sort,
                 "data_submenu": data_submenux
             };
@@ -3240,7 +3247,7 @@ const detail_data_menus = async (req, res) => {
 
 const insertdatamenus = async (req, res) => {
     const sql = await executeQuery("insert into data_menu(title,title_en,long_title,long_title_en,link_menu_data,data_sort) values($1,$2,$3,$4,$5,$6)",
-        [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en,req.body.link_menu_data,req.body.data_sort]);
+        [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en, req.body.link_menu_data, req.body.data_sort]);
     if (sql) {
         res.redirect('/menu_data');
     } else {
