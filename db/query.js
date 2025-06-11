@@ -3629,13 +3629,16 @@ const submenu_detail = async (req, res) => {
 
 const download_image_base64 = async (req, res) => {
     const urls = req.body.puppeteer;
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
     const page = await browser.newPage();
-    await page.setViewport({ width: 1280, height: 768});
+    await page.setViewport({ width: 1280, height: 768 });
     await page.goto(urls, { waitUntil: 'networkidle2' });
     const screenshot = await page.screenshot({ fullPage: false, encoding: 'base64' });
     await browser.close();
-    res.status(200).json({ "ss": `data:image/png;base64,${screenshot}`})
+    res.status(200).json({ "ss": `data:image/png;base64,${screenshot}` })
 }
 
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
