@@ -3626,19 +3626,19 @@ const submenu_detail = async (req, res) => {
 }
 
 //:::::::::::::::::::::::::::::::::::: Puppeteer :::::::::::::::::::::::::::::::::::::::::::::::::::
- 
+
 const download_image_base64 = async (req, res) => {
     const urls = req.body.puppeteer;
     const browser = await puppeteer.launch({
-      headless: true, 
-      args: ['--no-sandbox', '--disable-setuid-sandbox'], 
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 768 });
-    await page.goto(urls, { waitUntil: 'networkidle2' });
+    await page.goto(urls, { waitUntil: 'networkidle2', timeout: 60000 });
     const screenshot = await page.screenshot({ fullPage: false, encoding: 'base64' });
     await browser.close();
-    res.status(200).json({ "ss": `${screenshot}`})
+    res.status(200).json({ "ss": `${screenshot}` })
 }
 
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
