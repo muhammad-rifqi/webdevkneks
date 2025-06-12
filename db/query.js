@@ -3633,6 +3633,7 @@ const download_image_base64 = async (req, res) => {
         executablePath: '/usr/bin/chromium-browser', 
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        dumpio: true
     });
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 768 });
