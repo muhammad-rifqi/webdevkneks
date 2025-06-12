@@ -3630,6 +3630,7 @@ const submenu_detail = async (req, res) => {
 const download_image_base64 = async (req, res) => {
     const urls = req.body.puppeteer;
     const browser = await puppeteer.launch({
+        executablePath: '/usr/bin/chromium-browser', 
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
