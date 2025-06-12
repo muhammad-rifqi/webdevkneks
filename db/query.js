@@ -3628,7 +3628,7 @@ const submenu_detail = async (req, res) => {
 //:::::::::::::::::::::::::::::::::::: Puppeteer :::::::::::::::::::::::::::::::::::::::::::::::::::
 
 const download_image_base64 = async (req, res) => {
-    const urls = req.body.puppeteer;
+    const urls = req.body.domain;
     // const browser = await puppeteer.launch({
     //     executablePath: '/usr/bin/chromium-browser', 
     //     headless: true,
