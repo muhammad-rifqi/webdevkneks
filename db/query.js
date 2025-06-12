@@ -3632,8 +3632,7 @@ const download_image_base64 = async (req, res) => {
     const browser = await puppeteer.launch({
         executablePath: '/usr/bin/chromium-browser', 
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        dumpio: true
+        args: ['--no-sandbox', '--disable-setuid-sandbox','--disable-dev-shm-usage']
     });
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 768 });
