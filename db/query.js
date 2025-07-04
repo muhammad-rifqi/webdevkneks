@@ -3188,7 +3188,7 @@ const data_menu_fe = async (req, res) => {
                 "long_title_en": item?.long_title_en,
                 "link_menu_data": item?.link_menu_data,
                 "data_sort": item?.data_sort,
-                "narations": item?.narations,
+                "narations_menu": item?.narations_menu,
                 "data_submenu": data_submenux
             };
             resolve(row);
