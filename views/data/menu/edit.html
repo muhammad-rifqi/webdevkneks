@@ -82,6 +82,12 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Narasi En </label>
+                                            <textarea class="form-control" type="text" name="narations_menu_en"
+                                                id="narations_menu_en" cols="45"></textarea>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Urutan Data </label>
                                             <input class="form-control" type="number" name="data_sort" id="data_sort">
                                         </div>
@@ -139,6 +145,7 @@
                     document.getElementById("link_menu_data").value = rows[0]?.link_menu_data;
                     document.getElementById("data_sort").value = rows[0]?.data_sort;
                     document.getElementById("narations_menu").value = rows[0]?.narations_menu;
+                    document.getElementById("narations_menu_en").value = rows[0]?.narations_menu_en;
                 })
         }
 

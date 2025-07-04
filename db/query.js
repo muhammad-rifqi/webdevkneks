@@ -3060,8 +3060,8 @@ const detail_submenus_edit = async (req, res) => {
 
 const insert_submenus = async (req, res) => {
     const ddd = req.body.menu_id.split('-');
-    const sql = await executeQuery("INSERT INTO data_submenu (id_statistic,short_name,long_name,short_name_en,long_name_en,statistic_name,link_data,sub_narations)values($1,$2,$3,$4,$5,$6,$7,$8)",
-        [ddd[0], req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en, ddd[1], req.body.link_data, req.body.narations_submenu]);
+    const sql = await executeQuery("INSERT INTO data_submenu (id_statistic,short_name,long_name,short_name_en,long_name_en,statistic_name,link_data,sub_narations,sub_narations_en)values($1,$2,$3,$4,$5,$6,$7,$8,$9)",
+        [ddd[0], req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en, ddd[1], req.body.link_data, req.body.narations_submenu,req.body.narations_submenu_en]);
     if (sql) {
         res.redirect('/submenu_data');
     } else {
@@ -3070,7 +3070,7 @@ const insert_submenus = async (req, res) => {
 }
 
 const update_submenus = async (req, res) => {
-    const sql = await executeQuery('UPDATE data_submenu set short_name = $1, short_name_en = $2, long_name = $3, long_name_en = $4, link_data = $5, sub_narations= $6  where id = $7', [req.body.short_name, req.body.short_name_en, req.body.long_name, req.body.long_name_en, req.body.link_data, req.body.narations_submenu, req.body.id]);
+    const sql = await executeQuery('UPDATE data_submenu set short_name = $1, short_name_en = $2, long_name = $3, long_name_en = $4, link_data = $5, sub_narations= $6, sub_narations_en = $7  where id = $8', [req.body.short_name, req.body.short_name_en, req.body.long_name, req.body.long_name_en, req.body.link_data, req.body.narations_submenu, req.body.narations_submenu_en, req.body.id]);
     if (sql) {
         res.redirect('/submenu_data');
     } else {
@@ -3189,6 +3189,7 @@ const data_menu_fe = async (req, res) => {
                 "link_menu_data": item?.link_menu_data,
                 "data_sort": item?.data_sort,
                 "narations_menu": item?.narations_menu,
+                "narations_menu_en": item?.narations_menu_en,   
                 "data_submenu": data_submenux
             };
             resolve(row);
@@ -3241,8 +3242,8 @@ const detail_data_menus = async (req, res) => {
 }
 
 const insertdatamenus = async (req, res) => {
-    const sql = await executeQuery("insert into data_menu(title,title_en,long_title,long_title_en,link_menu_data,data_sort,narations_menu) values($1,$2,$3,$4,$5,$6,$7)",
-        [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en, req.body.link_menu_data, req.body.data_sort, req.body.narations_menu]);
+    const sql = await executeQuery("insert into data_menu(title,title_en,long_title,long_title_en,link_menu_data,data_sort,narations_menu,narations_menu_en) values($1,$2,$3,$4,$5,$6,$7,$8)",
+        [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en, req.body.link_menu_data, req.body.data_sort, req.body.narations_menu,req.body.narations_menu_en]);
     if (sql) {
         res.redirect('/menu_data');
     } else {
@@ -3252,7 +3253,7 @@ const insertdatamenus = async (req, res) => {
 }
 
 const updatedatamenus = async (req, res) => {
-    const sql = await executeQuery('UPDATE data_menu set title = $1, title_en = $2, long_title = $3, long_title_en = $4, link_menu_data = $5, data_sort = $6, narations_menu = $7  where id = $8', [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en, req.body.link_menu_data, req.body.data_sort, req.body.narations_menu, req.body.id]);
+    const sql = await executeQuery('UPDATE data_menu set title = $1, title_en = $2, long_title = $3, long_title_en = $4, link_menu_data = $5, data_sort = $6, narations_menu = $7, narations_menu_en = $8  where id = $9', [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en, req.body.link_menu_data, req.body.data_sort, req.body.narations_menu, req.body.narations_menu_en, req.body.id]);
     if (sql) {
         res.redirect('/menu_data');
     } else {

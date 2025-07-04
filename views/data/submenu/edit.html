@@ -87,6 +87,12 @@
                                                 id="narations_submenu" cols="45"></textarea>
                                         </div>
 
+                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Narasi En </label>
+                                            <textarea class="form-control" type="text" name="narations_submenu_en"
+                                                id="narations_submenu_en" cols="45"></textarea>
+                                        </div>
+
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -139,6 +145,7 @@
                     document.getElementById("long_name_en").value = rows[0]?.long_name_en;
                     document.getElementById("link_data").value = rows[0]?.link_data;
                     document.getElementById("narations_submenu").value = rows[0]?.sub_narations;
+                    document.getElementById("narations_submenu_en").value = rows[0]?.narations_submenu_en;
                 })
         }
 
