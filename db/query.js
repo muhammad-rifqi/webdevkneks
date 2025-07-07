@@ -3061,7 +3061,7 @@ const detail_submenus_edit = async (req, res) => {
 const insert_submenus = async (req, res) => {
     const ddd = req.body.menu_id.split('-');
     const sql = await executeQuery("INSERT INTO data_submenu (id_statistic,short_name,long_name,short_name_en,long_name_en,statistic_name,link_data,sub_narations,sub_narations_en)values($1,$2,$3,$4,$5,$6,$7,$8,$9)",
-        [ddd[0], req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en, ddd[1], req.body.link_data, req.body.narations_submenu,req.body.narations_submenu_en]);
+        [ddd[0], req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en, ddd[1], req.body.link_data, req.body.narations_submenu, req.body.narations_submenu_en]);
     if (sql) {
         res.redirect('/submenu_data');
     } else {
@@ -3189,7 +3189,7 @@ const data_menu_fe = async (req, res) => {
                 "link_menu_data": item?.link_menu_data,
                 "data_sort": item?.data_sort,
                 "narations_menu": item?.narations_menu,
-                "narations_menu_en": item?.narations_menu_en,   
+                "narations_menu_en": item?.narations_menu_en,
                 "data_submenu": data_submenux
             };
             resolve(row);
@@ -3243,7 +3243,7 @@ const detail_data_menus = async (req, res) => {
 
 const insertdatamenus = async (req, res) => {
     const sql = await executeQuery("insert into data_menu(title,title_en,long_title,long_title_en,link_menu_data,data_sort,narations_menu,narations_menu_en) values($1,$2,$3,$4,$5,$6,$7,$8)",
-        [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en, req.body.link_menu_data, req.body.data_sort, req.body.narations_menu,req.body.narations_menu_en]);
+        [req.body.title, req.body.title_en, req.body.long_title, req.body.long_title_en, req.body.link_menu_data, req.body.data_sort, req.body.narations_menu, req.body.narations_menu_en]);
     if (sql) {
         res.redirect('/menu_data');
     } else {
@@ -3631,20 +3631,33 @@ const submenu_detail = async (req, res) => {
 
 const download_image_base64 = async (req, res) => {
     const urls = req.body.domain;
-    // let browser = await puppeteer.launch();
-    // const browserVersion = await browser.version();
-    const browser = await puppeteer.launch({
-        executablePath: '/usr/bin/chromium-browser', 
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
-    });
-    const page = await browser.newPage();
-    await page.setViewport({ width: 1280, height: 768 });
-    await page.goto(urls, { waitUntil: 'networkidle2' });
-    const screenshot = await page.screenshot({ fullPage: false, encoding: 'base64' });
-    await browser.close();
-    res.status(200).json({ "ss": `${screenshot}` })
-    // res.status(200).json({ "version": browserVersion, "url": urls });
+
+    if (!urls || typeof urls !== 'string') {
+        return res.status(400).json({ error: "Domain URL tidak valid atau kosong." });
+    }
+
+    let browser;
+    try {
+        browser = await puppeteer.launch({
+            executablePath: '/usr/bin/chromium-browser',
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
+
+        const page = await browser.newPage();
+        await page.setViewport({ width: 1280, height: 768 });
+
+        // Coba akses halaman
+        await page.goto(urls, { waitUntil: 'domcontentloaded', timeout: 60000 });
+
+        const screenshot = await page.screenshot({ fullPage: false, encoding: 'base64' });
+        res.status(200).json({ ss: screenshot });
+    } catch (err) {
+        console.error("Puppeteer error:", err.message);
+        res.status(500).json({ error: "Gagal mengambil screenshot." });
+    } finally {
+        if (browser) await browser.close();
+    }
 }
 
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
