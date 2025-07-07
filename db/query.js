@@ -3639,7 +3639,7 @@ const download_image_base64 = async (req, res) => {
     let browser;
     try {
         browser = await puppeteer.launch({
-            executablePath: '/usr/bin/chromium-browser',
+            executablePath: '/root/.cache/puppeteer/chrome/linux-137.0.7151.55/chrome-linux64/chrome',
             headless: true,
             args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
