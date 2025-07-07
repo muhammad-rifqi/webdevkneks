@@ -3648,7 +3648,7 @@ const download_image_base64 = async (req, res) => {
         await page.setViewport({ width: 1280, height: 768 });
 
         // Coba akses halaman
-        await page.goto(urls, { waitUntil: 'domcontentloaded', timeout: 60000 });
+        await page.goto(urls, { waitUntil: 'domcontentloaded', timeout: 120000 });
 
         const screenshot = await page.screenshot({ fullPage: false, encoding: 'base64' });
         res.status(200).json({ ss: screenshot });
