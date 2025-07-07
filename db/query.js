@@ -3645,12 +3645,12 @@ const download_image_base64 = async (req, res) => {
         });
 
         const page = await browser.newPage();
-        await page.setViewport({ width: 1280, height: 768 });
+        // await page.setViewport({ width: 1280, height: 768 });
 
         // Coba akses halaman
         await page.goto(urls);
 
-        const screenshot = await page.screenshot({ fullPage: false, encoding: 'base64' });
+        const screenshot = await page.screenshot({ fullPage: true, encoding: 'base64' });
         res.status(200).json({ ss: `data:image/png;base64,${screenshot}` });
     } catch (err) {
         console.error("Puppeteer error:", err.message);
