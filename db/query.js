@@ -3651,7 +3651,7 @@ const download_image_base64 = async (req, res) => {
         await page.goto(urls, { waitUntil: 'domcontentloaded', timeout: 120000 });
 
         const screenshot = await page.screenshot({ fullPage: false, encoding: 'base64' });
-        res.status(200).json({ ss: screenshot });
+        res.status(200).json({ ss: `data:image/png;base64,${screenshot}` });
     } catch (err) {
         console.error("Puppeteer error:", err.message);
         res.status(500).json({ error: "Gagal mengambil screenshot." });
