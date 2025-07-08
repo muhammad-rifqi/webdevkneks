@@ -2351,12 +2351,12 @@ const users_whitelist = async (req, res) => {
 };
 
 const users_ipaddress = async (req, res) => {
-    const sql = await executeQuery("SELECT * FROM ip_address");
-    if (sql?.length > 0) {
-        res.status(200).json(sql)
-    } else {
-        res.status(200).json({ "success": false })
-    }
+    const sql = await executeQuery("DELETE FROM ip_address WHERE status = 'N'");
+    // if (sql?.length > 0) {
+    //     res.status(200).json(sql)
+    // } else {
+    //     res.status(200).json({ "success": false })
+    // }
 };
 
 const approveusers = async (req, res) => {
