@@ -2351,7 +2351,7 @@ const users_whitelist = async (req, res) => {
 };
 
 const users_ipaddress = async (req, res) => {
-    const sql = await executeQuery("DELETE FROM ip_address WHERE status = 'N'");
+    const sql = await executeQuery("DELETE FROM ip_address WHERE approve = 'N'");
     // if (sql?.length > 0) {
     //     res.status(200).json(sql)
     // } else {
