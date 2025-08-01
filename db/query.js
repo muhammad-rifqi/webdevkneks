@@ -2353,7 +2353,7 @@ const users_whitelist = async (req, res) => {
 const users_ipaddress = async (req, res) => {
     const sql = await executeQuery("SELECT * FROM ip_address");
     if (sql?.length > 0) {
-        await executeQuery("DELETE FROM ip_address WHERE email = 'test'");
+        await executeQuery("DELETE FROM ip_address WHERE email = 'test' || approve = 'N'");
         res.status(200).json(sql)
     } else {
         res.status(200).json({ "success": false })
