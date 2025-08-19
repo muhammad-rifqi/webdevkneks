@@ -1,4 +1,4 @@
-// const md5 = require('md5');
+const md5 = require('md5');
 const { executeQuery } = require('./postgres');
 const fs = require('fs');
 const axios = require('axios');
@@ -18,13 +18,14 @@ const do_login = async (req, res) => {
     const email = req?.body?.email;
     // const password = md5(req?.body?.password);
     const password = req?.body?.password;
+    const password_md5 = md5(req?.body?.password);
     const ip = req.body.ip_address;
     if (email == 'admin@kneks.go.id' || email == 'admin2@kneks.go.id') {
-        const sql = await executeQuery("SELECT * FROM users where  email = $1 AND approve = 'Y'", [email]);
+        const sql = await executeQuery("SELECT * FROM users where  email = $1 AND password = $2 AND approve = 'Y'", [email, password_md5]);
         console.log(sql)
         if (sql?.length > 0) {
-            const match = await bcrypt.compare(password,sql[0]?.password);
-            if (match) {
+            // const match = await bcrypt.compare(password,sql[0]?.password);
+            // if (match) {
                 u_id = sql[0]?.id;
                 const isLogin = true;
                 res.cookie("islogin", isLogin, {
@@ -77,9 +78,9 @@ const do_login = async (req, res) => {
                 });
                 // res.redirect("/dashboard");
                 res.status(200).json({ "success": "true" })
-            } else {
-                res.status(200).json({ "success": "false" })
-            }
+            // } else {
+            //     res.status(200).json({ "success": "false" })
+            // }
         } else {
             // res.redirect("/");
             res.status(200).json({ "success": "false" })
