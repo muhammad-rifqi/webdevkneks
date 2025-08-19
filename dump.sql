@@ -2,13 +2,13 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 12.19
--- Dumped by pg_dump version 12.19
+-- Dumped from database version 12.22 (Ubuntu 12.22-0ubuntu0.20.04.4)
+-- Dumped by pg_dump version 12.22 (Ubuntu 12.22-0ubuntu0.20.04.4)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'SQL_ASCII';
+SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
@@ -21,7 +21,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: abouts; Type: TABLE; Schema: public; Owner: postgres
+-- Name: abouts; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.abouts (
@@ -57,10 +57,10 @@ CREATE TABLE public.abouts (
 );
 
 
-ALTER TABLE public.abouts OWNER TO postgres;
+ALTER TABLE public.abouts OWNER TO kneks;
 
 --
--- Name: abouts_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: abouts_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.abouts_id_seq
@@ -72,17 +72,17 @@ CREATE SEQUENCE public.abouts_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.abouts_id_seq OWNER TO postgres;
+ALTER TABLE public.abouts_id_seq OWNER TO kneks;
 
 --
--- Name: abouts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: abouts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.abouts_id_seq OWNED BY public.abouts.id;
 
 
 --
--- Name: agendas; Type: TABLE; Schema: public; Owner: postgres
+-- Name: agendas; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.agendas (
@@ -113,14 +113,18 @@ CREATE TABLE public.agendas (
     kbli character varying(255),
     age character varying(255),
     gender character varying(255),
-    province character varying(255)
+    province character varying(255),
+    directorat character varying(255) DEFAULT 'null'::character varying,
+    kdeks character varying(255) DEFAULT 'null'::character varying,
+    institution_id integer DEFAULT 0,
+    institution_name character varying(255) DEFAULT 'null'::character varying
 );
 
 
-ALTER TABLE public.agendas OWNER TO postgres;
+ALTER TABLE public.agendas OWNER TO kneks;
 
 --
--- Name: agendas_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: agendas_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.agendas_id_seq
@@ -132,17 +136,17 @@ CREATE SEQUENCE public.agendas_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.agendas_id_seq OWNER TO postgres;
+ALTER TABLE public.agendas_id_seq OWNER TO kneks;
 
 --
--- Name: agendas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: agendas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.agendas_id_seq OWNED BY public.agendas.id;
 
 
 --
--- Name: data_dashboard; Type: TABLE; Schema: public; Owner: postgres
+-- Name: data_dashboard; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.data_dashboard (
@@ -165,10 +169,10 @@ CREATE TABLE public.data_dashboard (
 );
 
 
-ALTER TABLE public.data_dashboard OWNER TO postgres;
+ALTER TABLE public.data_dashboard OWNER TO kneks;
 
 --
--- Name: api_meta_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: api_meta_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.api_meta_id_seq
@@ -180,17 +184,17 @@ CREATE SEQUENCE public.api_meta_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.api_meta_id_seq OWNER TO postgres;
+ALTER TABLE public.api_meta_id_seq OWNER TO kneks;
 
 --
--- Name: api_meta_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: api_meta_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.api_meta_id_seq OWNED BY public.data_dashboard.id;
 
 
 --
--- Name: banner; Type: TABLE; Schema: public; Owner: postgres
+-- Name: banner; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.banner (
@@ -203,10 +207,10 @@ CREATE TABLE public.banner (
 );
 
 
-ALTER TABLE public.banner OWNER TO postgres;
+ALTER TABLE public.banner OWNER TO kneks;
 
 --
--- Name: slideshow; Type: TABLE; Schema: public; Owner: postgres
+-- Name: slideshow; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.slideshow (
@@ -222,10 +226,10 @@ CREATE TABLE public.slideshow (
 );
 
 
-ALTER TABLE public.slideshow OWNER TO postgres;
+ALTER TABLE public.slideshow OWNER TO kneks;
 
 --
--- Name: banners_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: banners_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.banners_id_seq
@@ -237,17 +241,17 @@ CREATE SEQUENCE public.banners_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.banners_id_seq OWNER TO postgres;
+ALTER TABLE public.banners_id_seq OWNER TO kneks;
 
 --
--- Name: banners_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: banners_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.banners_id_seq OWNED BY public.slideshow.id;
 
 
 --
--- Name: contacts; Type: TABLE; Schema: public; Owner: postgres
+-- Name: contacts; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.contacts (
@@ -264,10 +268,10 @@ CREATE TABLE public.contacts (
 );
 
 
-ALTER TABLE public.contacts OWNER TO postgres;
+ALTER TABLE public.contacts OWNER TO kneks;
 
 --
--- Name: contacts_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: contacts_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.contacts_id_seq
@@ -279,17 +283,17 @@ CREATE SEQUENCE public.contacts_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.contacts_id_seq OWNER TO postgres;
+ALTER TABLE public.contacts_id_seq OWNER TO kneks;
 
 --
--- Name: contacts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: contacts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.contacts_id_seq OWNED BY public.contacts.id;
 
 
 --
--- Name: custom_page_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: custom_page_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.custom_page_id_seq
@@ -301,17 +305,17 @@ CREATE SEQUENCE public.custom_page_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.custom_page_id_seq OWNER TO postgres;
+ALTER TABLE public.custom_page_id_seq OWNER TO kneks;
 
 --
--- Name: custom_page_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: custom_page_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.custom_page_id_seq OWNED BY public.banner.id;
 
 
 --
--- Name: data_menu; Type: TABLE; Schema: public; Owner: postgres
+-- Name: data_menu; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.data_menu (
@@ -319,14 +323,18 @@ CREATE TABLE public.data_menu (
     title character varying(255),
     title_en character varying(255),
     long_title character varying(255) DEFAULT 'null'::character varying,
-    long_title_en character varying(255) DEFAULT 'null'::character varying
+    long_title_en character varying(255) DEFAULT 'null'::character varying,
+    link_menu_data character varying(255) DEFAULT 'null'::character varying,
+    data_sort integer DEFAULT 0,
+    narations_menu text DEFAULT 'null'::text,
+    narations_menu_en text DEFAULT 'null'::text
 );
 
 
-ALTER TABLE public.data_menu OWNER TO postgres;
+ALTER TABLE public.data_menu OWNER TO kneks;
 
 --
--- Name: data_slider; Type: TABLE; Schema: public; Owner: postgres
+-- Name: data_slider; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.data_slider (
@@ -337,14 +345,14 @@ CREATE TABLE public.data_slider (
     date_created character varying(255) DEFAULT 'null'::character varying,
     image character varying(255) DEFAULT 'null'::character varying,
     link character varying(255) DEFAULT 'null'::character varying,
-    publish integer DEFAULT 0
+    publish character varying(50) DEFAULT 50
 );
 
 
-ALTER TABLE public.data_slider OWNER TO postgres;
+ALTER TABLE public.data_slider OWNER TO kneks;
 
 --
--- Name: data_submenu; Type: TABLE; Schema: public; Owner: postgres
+-- Name: data_submenu; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.data_submenu (
@@ -354,14 +362,17 @@ CREATE TABLE public.data_submenu (
     id_statistic integer DEFAULT 0,
     short_name_en character varying(255) DEFAULT 'null'::character varying,
     long_name_en character varying(255) DEFAULT 'null'::character varying,
-    statistic_name character varying(255) DEFAULT 'null'::character varying
+    statistic_name character varying(255) DEFAULT 'null'::character varying,
+    link_data character varying(255) DEFAULT NULL::character varying,
+    sub_narations text DEFAULT 'null'::text,
+    sub_narations_en text DEFAULT 'null'::text
 );
 
 
-ALTER TABLE public.data_submenu OWNER TO postgres;
+ALTER TABLE public.data_submenu OWNER TO kneks;
 
 --
--- Name: db_event; Type: TABLE; Schema: public; Owner: postgres
+-- Name: db_event; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.db_event (
@@ -370,10 +381,10 @@ CREATE TABLE public.db_event (
 );
 
 
-ALTER TABLE public.db_event OWNER TO postgres;
+ALTER TABLE public.db_event OWNER TO kneks;
 
 --
--- Name: db_event_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: db_event_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.db_event_id_seq
@@ -385,17 +396,17 @@ CREATE SEQUENCE public.db_event_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.db_event_id_seq OWNER TO postgres;
+ALTER TABLE public.db_event_id_seq OWNER TO kneks;
 
 --
--- Name: db_event_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: db_event_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.db_event_id_seq OWNED BY public.db_event.id;
 
 
 --
--- Name: devisi; Type: TABLE; Schema: public; Owner: postgres
+-- Name: devisi; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.devisi (
@@ -409,10 +420,10 @@ CREATE TABLE public.devisi (
 );
 
 
-ALTER TABLE public.devisi OWNER TO postgres;
+ALTER TABLE public.devisi OWNER TO kneks;
 
 --
--- Name: devisi_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: devisi_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.devisi_id_seq
@@ -424,17 +435,17 @@ CREATE SEQUENCE public.devisi_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.devisi_id_seq OWNER TO postgres;
+ALTER TABLE public.devisi_id_seq OWNER TO kneks;
 
 --
--- Name: devisi_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: devisi_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.devisi_id_seq OWNED BY public.devisi.id;
 
 
 --
--- Name: directorats; Type: TABLE; Schema: public; Owner: postgres
+-- Name: directorats; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.directorats (
@@ -451,17 +462,17 @@ CREATE TABLE public.directorats (
 );
 
 
-ALTER TABLE public.directorats OWNER TO postgres;
+ALTER TABLE public.directorats OWNER TO kneks;
 
 --
--- Name: TABLE directorats; Type: COMMENT; Schema: public; Owner: postgres
+-- Name: TABLE directorats; Type: COMMENT; Schema: public; Owner: kneks
 --
 
 COMMENT ON TABLE public.directorats IS 'direktorats';
 
 
 --
--- Name: directorats_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: directorats_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.directorats_id_seq
@@ -473,17 +484,17 @@ CREATE SEQUENCE public.directorats_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.directorats_id_seq OWNER TO postgres;
+ALTER TABLE public.directorats_id_seq OWNER TO kneks;
 
 --
--- Name: directorats_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: directorats_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.directorats_id_seq OWNED BY public.directorats.id;
 
 
 --
--- Name: files; Type: TABLE; Schema: public; Owner: postgres
+-- Name: files; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.files (
@@ -515,10 +526,10 @@ CREATE TABLE public.files (
 );
 
 
-ALTER TABLE public.files OWNER TO postgres;
+ALTER TABLE public.files OWNER TO kneks;
 
 --
--- Name: files_categories; Type: TABLE; Schema: public; Owner: postgres
+-- Name: files_categories; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.files_categories (
@@ -529,10 +540,10 @@ CREATE TABLE public.files_categories (
 );
 
 
-ALTER TABLE public.files_categories OWNER TO postgres;
+ALTER TABLE public.files_categories OWNER TO kneks;
 
 --
--- Name: hot_categories; Type: TABLE; Schema: public; Owner: postgres
+-- Name: hot_categories; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.hot_categories (
@@ -543,10 +554,10 @@ CREATE TABLE public.hot_categories (
 );
 
 
-ALTER TABLE public.hot_categories OWNER TO postgres;
+ALTER TABLE public.hot_categories OWNER TO kneks;
 
 --
--- Name: hot_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: hot_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.hot_categories_id_seq
@@ -558,17 +569,17 @@ CREATE SEQUENCE public.hot_categories_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.hot_categories_id_seq OWNER TO postgres;
+ALTER TABLE public.hot_categories_id_seq OWNER TO kneks;
 
 --
--- Name: hot_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: hot_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.hot_categories_id_seq OWNED BY public.hot_categories.id;
 
 
 --
--- Name: hot_issues; Type: TABLE; Schema: public; Owner: postgres
+-- Name: hot_issues; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.hot_issues (
@@ -592,10 +603,10 @@ CREATE TABLE public.hot_issues (
 );
 
 
-ALTER TABLE public.hot_issues OWNER TO postgres;
+ALTER TABLE public.hot_issues OWNER TO kneks;
 
 --
--- Name: hot_issues_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: hot_issues_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.hot_issues_id_seq
@@ -607,17 +618,17 @@ CREATE SEQUENCE public.hot_issues_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.hot_issues_id_seq OWNER TO postgres;
+ALTER TABLE public.hot_issues_id_seq OWNER TO kneks;
 
 --
--- Name: hot_issues_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: hot_issues_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.hot_issues_id_seq OWNED BY public.hot_issues.id;
 
 
 --
--- Name: hot_subcategories; Type: TABLE; Schema: public; Owner: postgres
+-- Name: hot_subcategories; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.hot_subcategories (
@@ -630,10 +641,10 @@ CREATE TABLE public.hot_subcategories (
 );
 
 
-ALTER TABLE public.hot_subcategories OWNER TO postgres;
+ALTER TABLE public.hot_subcategories OWNER TO kneks;
 
 --
--- Name: hot_subcategories_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: hot_subcategories_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.hot_subcategories_id_seq
@@ -645,37 +656,37 @@ CREATE SEQUENCE public.hot_subcategories_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.hot_subcategories_id_seq OWNER TO postgres;
+ALTER TABLE public.hot_subcategories_id_seq OWNER TO kneks;
 
 --
--- Name: hot_subcategories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: hot_subcategories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.hot_subcategories_id_seq OWNED BY public.hot_subcategories.id;
 
 
 --
--- Name: institutions; Type: TABLE; Schema: public; Owner: postgres
+-- Name: institutions; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.institutions (
     id integer NOT NULL,
     tag character varying(100),
     name character varying(100),
-    logo character varying(100),
+    logo character varying(255),
     link text,
     created_at timestamp without time zone,
-    "updated_at	" timestamp without time zone,
+    updated_at timestamp without time zone,
     deleted_at timestamp without time zone,
     "order" integer DEFAULT 0,
     web_identity character varying(100) DEFAULT 'kneks'::character varying
 );
 
 
-ALTER TABLE public.institutions OWNER TO postgres;
+ALTER TABLE public.institutions OWNER TO kneks;
 
 --
--- Name: institutions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: institutions_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.institutions_id_seq
@@ -687,17 +698,17 @@ CREATE SEQUENCE public.institutions_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.institutions_id_seq OWNER TO postgres;
+ALTER TABLE public.institutions_id_seq OWNER TO kneks;
 
 --
--- Name: institutions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: institutions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.institutions_id_seq OWNED BY public.institutions.id;
 
 
 --
--- Name: ip_address; Type: TABLE; Schema: public; Owner: postgres
+-- Name: ip_address; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.ip_address (
@@ -710,10 +721,10 @@ CREATE TABLE public.ip_address (
 );
 
 
-ALTER TABLE public.ip_address OWNER TO postgres;
+ALTER TABLE public.ip_address OWNER TO kneks;
 
 --
--- Name: ip_address_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: ip_address_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.ip_address_id_seq
@@ -725,17 +736,17 @@ CREATE SEQUENCE public.ip_address_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.ip_address_id_seq OWNER TO postgres;
+ALTER TABLE public.ip_address_id_seq OWNER TO kneks;
 
 --
--- Name: ip_address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: ip_address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.ip_address_id_seq OWNED BY public.ip_address.id;
 
 
 --
--- Name: kdeks; Type: TABLE; Schema: public; Owner: postgres
+-- Name: kdeks; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.kdeks (
@@ -765,17 +776,17 @@ CREATE TABLE public.kdeks (
 );
 
 
-ALTER TABLE public.kdeks OWNER TO postgres;
+ALTER TABLE public.kdeks OWNER TO kneks;
 
 --
--- Name: TABLE kdeks; Type: COMMENT; Schema: public; Owner: postgres
+-- Name: TABLE kdeks; Type: COMMENT; Schema: public; Owner: kneks
 --
 
 COMMENT ON TABLE public.kdeks IS 'kdeks';
 
 
 --
--- Name: kdeks_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: kdeks_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.kdeks_id_seq
@@ -787,17 +798,17 @@ CREATE SEQUENCE public.kdeks_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.kdeks_id_seq OWNER TO postgres;
+ALTER TABLE public.kdeks_id_seq OWNER TO kneks;
 
 --
--- Name: kdeks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: kdeks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.kdeks_id_seq OWNED BY public.kdeks.id;
 
 
 --
--- Name: khas_zone; Type: TABLE; Schema: public; Owner: postgres
+-- Name: khas_zone; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.khas_zone (
@@ -811,10 +822,10 @@ CREATE TABLE public.khas_zone (
 );
 
 
-ALTER TABLE public.khas_zone OWNER TO postgres;
+ALTER TABLE public.khas_zone OWNER TO kneks;
 
 --
--- Name: khas_zone_city_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: khas_zone_city_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.khas_zone_city_seq
@@ -826,17 +837,17 @@ CREATE SEQUENCE public.khas_zone_city_seq
     CACHE 1;
 
 
-ALTER TABLE public.khas_zone_city_seq OWNER TO postgres;
+ALTER TABLE public.khas_zone_city_seq OWNER TO kneks;
 
 --
--- Name: khas_zone_city_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: khas_zone_city_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.khas_zone_city_seq OWNED BY public.khas_zone.city;
 
 
 --
--- Name: khas_zone_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: khas_zone_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.khas_zone_id_seq
@@ -848,17 +859,17 @@ CREATE SEQUENCE public.khas_zone_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.khas_zone_id_seq OWNER TO postgres;
+ALTER TABLE public.khas_zone_id_seq OWNER TO kneks;
 
 --
--- Name: khas_zone_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: khas_zone_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.khas_zone_id_seq OWNED BY public.khas_zone.id;
 
 
 --
--- Name: khas_zone_inaugurated_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: khas_zone_inaugurated_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.khas_zone_inaugurated_seq
@@ -870,17 +881,17 @@ CREATE SEQUENCE public.khas_zone_inaugurated_seq
     CACHE 1;
 
 
-ALTER TABLE public.khas_zone_inaugurated_seq OWNER TO postgres;
+ALTER TABLE public.khas_zone_inaugurated_seq OWNER TO kneks;
 
 --
--- Name: khas_zone_inaugurated_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: khas_zone_inaugurated_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.khas_zone_inaugurated_seq OWNED BY public.khas_zone.inaugurated;
 
 
 --
--- Name: khas_zone_inauguration_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: khas_zone_inauguration_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.khas_zone_inauguration_seq
@@ -892,17 +903,17 @@ CREATE SEQUENCE public.khas_zone_inauguration_seq
     CACHE 1;
 
 
-ALTER TABLE public.khas_zone_inauguration_seq OWNER TO postgres;
+ALTER TABLE public.khas_zone_inauguration_seq OWNER TO kneks;
 
 --
--- Name: khas_zone_inauguration_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: khas_zone_inauguration_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.khas_zone_inauguration_seq OWNED BY public.khas_zone.inauguration;
 
 
 --
--- Name: khas_zone_khas_zone_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: khas_zone_khas_zone_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.khas_zone_khas_zone_seq
@@ -914,17 +925,17 @@ CREATE SEQUENCE public.khas_zone_khas_zone_seq
     CACHE 1;
 
 
-ALTER TABLE public.khas_zone_khas_zone_seq OWNER TO postgres;
+ALTER TABLE public.khas_zone_khas_zone_seq OWNER TO kneks;
 
 --
--- Name: khas_zone_khas_zone_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: khas_zone_khas_zone_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.khas_zone_khas_zone_seq OWNED BY public.khas_zone.khas_zone;
 
 
 --
--- Name: khas_zone_province_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: khas_zone_province_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.khas_zone_province_seq
@@ -936,17 +947,17 @@ CREATE SEQUENCE public.khas_zone_province_seq
     CACHE 1;
 
 
-ALTER TABLE public.khas_zone_province_seq OWNER TO postgres;
+ALTER TABLE public.khas_zone_province_seq OWNER TO kneks;
 
 --
--- Name: khas_zone_province_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: khas_zone_province_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.khas_zone_province_seq OWNED BY public.khas_zone.province;
 
 
 --
--- Name: khas_zone_tenant_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: khas_zone_tenant_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.khas_zone_tenant_seq
@@ -958,17 +969,17 @@ CREATE SEQUENCE public.khas_zone_tenant_seq
     CACHE 1;
 
 
-ALTER TABLE public.khas_zone_tenant_seq OWNER TO postgres;
+ALTER TABLE public.khas_zone_tenant_seq OWNER TO kneks;
 
 --
--- Name: khas_zone_tenant_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: khas_zone_tenant_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.khas_zone_tenant_seq OWNED BY public.khas_zone.tenant;
 
 
 --
--- Name: map; Type: TABLE; Schema: public; Owner: postgres
+-- Name: map; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.map (
@@ -980,10 +991,10 @@ CREATE TABLE public.map (
 );
 
 
-ALTER TABLE public.map OWNER TO postgres;
+ALTER TABLE public.map OWNER TO kneks;
 
 --
--- Name: map_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: map_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.map_id_seq
@@ -995,17 +1006,17 @@ CREATE SEQUENCE public.map_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.map_id_seq OWNER TO postgres;
+ALTER TABLE public.map_id_seq OWNER TO kneks;
 
 --
--- Name: map_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: map_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.map_id_seq OWNED BY public.map.id;
 
 
 --
--- Name: menu; Type: TABLE; Schema: public; Owner: postgres
+-- Name: menu; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.menu (
@@ -1017,10 +1028,10 @@ CREATE TABLE public.menu (
 );
 
 
-ALTER TABLE public.menu OWNER TO postgres;
+ALTER TABLE public.menu OWNER TO kneks;
 
 --
--- Name: menu_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: menu_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.menu_id_seq
@@ -1032,17 +1043,17 @@ CREATE SEQUENCE public.menu_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.menu_id_seq OWNER TO postgres;
+ALTER TABLE public.menu_id_seq OWNER TO kneks;
 
 --
--- Name: menu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: menu_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.menu_id_seq OWNED BY public.menu.id;
 
 
 --
--- Name: menu_sub; Type: TABLE; Schema: public; Owner: postgres
+-- Name: menu_sub; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.menu_sub (
@@ -1056,10 +1067,10 @@ CREATE TABLE public.menu_sub (
 );
 
 
-ALTER TABLE public.menu_sub OWNER TO postgres;
+ALTER TABLE public.menu_sub OWNER TO kneks;
 
 --
--- Name: menu_sub_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: menu_sub_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.menu_sub_id_seq
@@ -1071,17 +1082,17 @@ CREATE SEQUENCE public.menu_sub_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.menu_sub_id_seq OWNER TO postgres;
+ALTER TABLE public.menu_sub_id_seq OWNER TO kneks;
 
 --
--- Name: menu_sub_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: menu_sub_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.menu_sub_id_seq OWNED BY public.menu_sub.id;
 
 
 --
--- Name: naration; Type: TABLE; Schema: public; Owner: postgres
+-- Name: naration; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.naration (
@@ -1093,10 +1104,10 @@ CREATE TABLE public.naration (
 );
 
 
-ALTER TABLE public.naration OWNER TO postgres;
+ALTER TABLE public.naration OWNER TO kneks;
 
 --
--- Name: naration_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: naration_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.naration_id_seq
@@ -1108,17 +1119,17 @@ CREATE SEQUENCE public.naration_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.naration_id_seq OWNER TO postgres;
+ALTER TABLE public.naration_id_seq OWNER TO kneks;
 
 --
--- Name: naration_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: naration_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.naration_id_seq OWNED BY public.naration.id;
 
 
 --
--- Name: news; Type: TABLE; Schema: public; Owner: postgres
+-- Name: news; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.news (
@@ -1142,10 +1153,10 @@ CREATE TABLE public.news (
 );
 
 
-ALTER TABLE public.news OWNER TO postgres;
+ALTER TABLE public.news OWNER TO kneks;
 
 --
--- Name: news_categories; Type: TABLE; Schema: public; Owner: postgres
+-- Name: news_categories; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.news_categories (
@@ -1158,10 +1169,10 @@ CREATE TABLE public.news_categories (
 );
 
 
-ALTER TABLE public.news_categories OWNER TO postgres;
+ALTER TABLE public.news_categories OWNER TO kneks;
 
 --
--- Name: news_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: news_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.news_categories_id_seq
@@ -1173,17 +1184,17 @@ CREATE SEQUENCE public.news_categories_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.news_categories_id_seq OWNER TO postgres;
+ALTER TABLE public.news_categories_id_seq OWNER TO kneks;
 
 --
--- Name: news_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: news_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.news_categories_id_seq OWNED BY public.news_categories.id;
 
 
 --
--- Name: news_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: news_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.news_id_seq
@@ -1195,17 +1206,17 @@ CREATE SEQUENCE public.news_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.news_id_seq OWNER TO postgres;
+ALTER TABLE public.news_id_seq OWNER TO kneks;
 
 --
--- Name: news_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: news_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.news_id_seq OWNED BY public.news.id;
 
 
 --
--- Name: news_photos; Type: TABLE; Schema: public; Owner: postgres
+-- Name: news_photos; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.news_photos (
@@ -1226,10 +1237,10 @@ CREATE TABLE public.news_photos (
 );
 
 
-ALTER TABLE public.news_photos OWNER TO postgres;
+ALTER TABLE public.news_photos OWNER TO kneks;
 
 --
--- Name: news_photos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: news_photos_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.news_photos_id_seq
@@ -1241,17 +1252,17 @@ CREATE SEQUENCE public.news_photos_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.news_photos_id_seq OWNER TO postgres;
+ALTER TABLE public.news_photos_id_seq OWNER TO kneks;
 
 --
--- Name: news_photos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: news_photos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.news_photos_id_seq OWNED BY public.news_photos.id;
 
 
 --
--- Name: news_videos; Type: TABLE; Schema: public; Owner: postgres
+-- Name: news_videos; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.news_videos (
@@ -1273,10 +1284,10 @@ CREATE TABLE public.news_videos (
 );
 
 
-ALTER TABLE public.news_videos OWNER TO postgres;
+ALTER TABLE public.news_videos OWNER TO kneks;
 
 --
--- Name: news_videos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: news_videos_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.news_videos_id_seq
@@ -1288,17 +1299,17 @@ CREATE SEQUENCE public.news_videos_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.news_videos_id_seq OWNER TO postgres;
+ALTER TABLE public.news_videos_id_seq OWNER TO kneks;
 
 --
--- Name: news_videos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: news_videos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.news_videos_id_seq OWNED BY public.news_videos.id;
 
 
 --
--- Name: opini; Type: TABLE; Schema: public; Owner: postgres
+-- Name: opini; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.opini (
@@ -1318,10 +1329,10 @@ CREATE TABLE public.opini (
 );
 
 
-ALTER TABLE public.opini OWNER TO postgres;
+ALTER TABLE public.opini OWNER TO kneks;
 
 --
--- Name: opini_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: opini_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.opini_id_seq
@@ -1333,17 +1344,17 @@ CREATE SEQUENCE public.opini_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.opini_id_seq OWNER TO postgres;
+ALTER TABLE public.opini_id_seq OWNER TO kneks;
 
 --
--- Name: opini_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: opini_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.opini_id_seq OWNED BY public.opini.id;
 
 
 --
--- Name: pejabat; Type: TABLE; Schema: public; Owner: postgres
+-- Name: pejabat; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.pejabat (
@@ -1355,17 +1366,17 @@ CREATE TABLE public.pejabat (
     description text,
     is_publish character varying(255) DEFAULT 'null'::character varying,
     position_en character varying(255) DEFAULT 'null'::character varying,
-    description_en character varying(255) DEFAULT 'null'::character varying,
+    description_en text DEFAULT 'null'::character varying,
     organization character varying(255) DEFAULT 'null'::character varying,
     directorat character varying(255) DEFAULT 'null'::character varying,
     head character varying(255) DEFAULT 'null'::character varying
 );
 
 
-ALTER TABLE public.pejabat OWNER TO postgres;
+ALTER TABLE public.pejabat OWNER TO kneks;
 
 --
--- Name: province; Type: TABLE; Schema: public; Owner: postgres
+-- Name: province; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.province (
@@ -1375,10 +1386,10 @@ CREATE TABLE public.province (
 );
 
 
-ALTER TABLE public.province OWNER TO postgres;
+ALTER TABLE public.province OWNER TO kneks;
 
 --
--- Name: province_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: province_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.province_id_seq
@@ -1390,17 +1401,17 @@ CREATE SEQUENCE public.province_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.province_id_seq OWNER TO postgres;
+ALTER TABLE public.province_id_seq OWNER TO kneks;
 
 --
--- Name: province_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: province_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.province_id_seq OWNED BY public.province.id;
 
 
 --
--- Name: questbook; Type: TABLE; Schema: public; Owner: postgres
+-- Name: questbook; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.questbook (
@@ -1413,10 +1424,10 @@ CREATE TABLE public.questbook (
 );
 
 
-ALTER TABLE public.questbook OWNER TO postgres;
+ALTER TABLE public.questbook OWNER TO kneks;
 
 --
--- Name: questbook_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: questbook_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.questbook_id_seq
@@ -1428,17 +1439,17 @@ CREATE SEQUENCE public.questbook_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.questbook_id_seq OWNER TO postgres;
+ALTER TABLE public.questbook_id_seq OWNER TO kneks;
 
 --
--- Name: questbook_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: questbook_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.questbook_id_seq OWNED BY public.questbook.id;
 
 
 --
--- Name: report_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: report_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.report_categories_id_seq
@@ -1450,17 +1461,17 @@ CREATE SEQUENCE public.report_categories_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.report_categories_id_seq OWNER TO postgres;
+ALTER TABLE public.report_categories_id_seq OWNER TO kneks;
 
 --
--- Name: report_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: report_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.report_categories_id_seq OWNED BY public.files_categories.id;
 
 
 --
--- Name: reports_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: reports_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.reports_id_seq
@@ -1472,17 +1483,17 @@ CREATE SEQUENCE public.reports_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.reports_id_seq OWNER TO postgres;
+ALTER TABLE public.reports_id_seq OWNER TO kneks;
 
 --
--- Name: reports_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: reports_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.reports_id_seq OWNED BY public.files.id;
 
 
 --
--- Name: roles; Type: TABLE; Schema: public; Owner: postgres
+-- Name: roles; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.roles (
@@ -1494,10 +1505,10 @@ CREATE TABLE public.roles (
 );
 
 
-ALTER TABLE public.roles OWNER TO postgres;
+ALTER TABLE public.roles OWNER TO kneks;
 
 --
--- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.roles_id_seq
@@ -1509,17 +1520,17 @@ CREATE SEQUENCE public.roles_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.roles_id_seq OWNER TO postgres;
+ALTER TABLE public.roles_id_seq OWNER TO kneks;
 
 --
--- Name: roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.roles_id_seq OWNED BY public.roles.id;
 
 
 --
--- Name: scopes; Type: TABLE; Schema: public; Owner: postgres
+-- Name: scopes; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.scopes (
@@ -1537,10 +1548,10 @@ CREATE TABLE public.scopes (
 );
 
 
-ALTER TABLE public.scopes OWNER TO postgres;
+ALTER TABLE public.scopes OWNER TO kneks;
 
 --
--- Name: scopes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: scopes_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.scopes_id_seq
@@ -1552,17 +1563,17 @@ CREATE SEQUENCE public.scopes_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.scopes_id_seq OWNER TO postgres;
+ALTER TABLE public.scopes_id_seq OWNER TO kneks;
 
 --
--- Name: scopes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: scopes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.scopes_id_seq OWNED BY public.scopes.id;
 
 
 --
--- Name: sk; Type: TABLE; Schema: public; Owner: postgres
+-- Name: sk; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.sk (
@@ -1575,10 +1586,10 @@ CREATE TABLE public.sk (
 );
 
 
-ALTER TABLE public.sk OWNER TO postgres;
+ALTER TABLE public.sk OWNER TO kneks;
 
 --
--- Name: sk_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: sk_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.sk_id_seq
@@ -1590,17 +1601,17 @@ CREATE SEQUENCE public.sk_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sk_id_seq OWNER TO postgres;
+ALTER TABLE public.sk_id_seq OWNER TO kneks;
 
 --
--- Name: sk_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: sk_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.sk_id_seq OWNED BY public.sk.id;
 
 
 --
--- Name: social_medias; Type: TABLE; Schema: public; Owner: postgres
+-- Name: social_medias; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.social_medias (
@@ -1615,10 +1626,10 @@ CREATE TABLE public.social_medias (
 );
 
 
-ALTER TABLE public.social_medias OWNER TO postgres;
+ALTER TABLE public.social_medias OWNER TO kneks;
 
 --
--- Name: social_medias_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: social_medias_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.social_medias_id_seq
@@ -1630,17 +1641,17 @@ CREATE SEQUENCE public.social_medias_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.social_medias_id_seq OWNER TO postgres;
+ALTER TABLE public.social_medias_id_seq OWNER TO kneks;
 
 --
--- Name: social_medias_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: social_medias_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.social_medias_id_seq OWNED BY public.social_medias.id;
 
 
 --
--- Name: sourcedata; Type: TABLE; Schema: public; Owner: postgres
+-- Name: sourcedata; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.sourcedata (
@@ -1652,14 +1663,16 @@ CREATE TABLE public.sourcedata (
     description text DEFAULT 'null'::text,
     produsen_data character varying(255) DEFAULT 'null'::character varying,
     tanggal_update date,
-    api_data character varying(255) DEFAULT 'null'::character varying
+    api_data character varying(255) DEFAULT 'null'::character varying,
+    id_data_menu integer DEFAULT 0,
+    id_data_submenu integer DEFAULT 0
 );
 
 
-ALTER TABLE public.sourcedata OWNER TO postgres;
+ALTER TABLE public.sourcedata OWNER TO kneks;
 
 --
--- Name: sourcedata_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: sourcedata_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.sourcedata_id_seq
@@ -1671,17 +1684,17 @@ CREATE SEQUENCE public.sourcedata_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sourcedata_id_seq OWNER TO postgres;
+ALTER TABLE public.sourcedata_id_seq OWNER TO kneks;
 
 --
--- Name: sourcedata_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: sourcedata_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.sourcedata_id_seq OWNED BY public.sourcedata.id;
 
 
 --
--- Name: statistic_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: statistic_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.statistic_id_seq
@@ -1693,17 +1706,17 @@ CREATE SEQUENCE public.statistic_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.statistic_id_seq OWNER TO postgres;
+ALTER TABLE public.statistic_id_seq OWNER TO kneks;
 
 --
--- Name: statistic_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: statistic_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.statistic_id_seq OWNED BY public.data_menu.id;
 
 
 --
--- Name: statistic_slide_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: statistic_slide_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.statistic_slide_id_seq
@@ -1715,17 +1728,17 @@ CREATE SEQUENCE public.statistic_slide_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.statistic_slide_id_seq OWNER TO postgres;
+ALTER TABLE public.statistic_slide_id_seq OWNER TO kneks;
 
 --
--- Name: statistic_slide_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: statistic_slide_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.statistic_slide_id_seq OWNED BY public.data_slider.id;
 
 
 --
--- Name: structure_assets_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: structure_assets_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.structure_assets_id_seq
@@ -1737,17 +1750,17 @@ CREATE SEQUENCE public.structure_assets_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.structure_assets_id_seq OWNER TO postgres;
+ALTER TABLE public.structure_assets_id_seq OWNER TO kneks;
 
 --
--- Name: structure_assets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: structure_assets_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.structure_assets_id_seq OWNED BY public.pejabat.id;
 
 
 --
--- Name: sub_slide_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: sub_slide_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.sub_slide_id_seq
@@ -1759,17 +1772,17 @@ CREATE SEQUENCE public.sub_slide_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sub_slide_id_seq OWNER TO postgres;
+ALTER TABLE public.sub_slide_id_seq OWNER TO kneks;
 
 --
--- Name: sub_slide_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: sub_slide_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.sub_slide_id_seq OWNED BY public.data_submenu.id;
 
 
 --
--- Name: tagging; Type: TABLE; Schema: public; Owner: postgres
+-- Name: tagging; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.tagging (
@@ -1778,10 +1791,10 @@ CREATE TABLE public.tagging (
 );
 
 
-ALTER TABLE public.tagging OWNER TO postgres;
+ALTER TABLE public.tagging OWNER TO kneks;
 
 --
--- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.tags_id_seq
@@ -1793,17 +1806,17 @@ CREATE SEQUENCE public.tags_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.tags_id_seq OWNER TO postgres;
+ALTER TABLE public.tags_id_seq OWNER TO kneks;
 
 --
--- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.tags_id_seq OWNED BY public.tagging.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: postgres
+-- Name: users; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.users (
@@ -1828,10 +1841,10 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO postgres;
+ALTER TABLE public.users OWNER TO kneks;
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.users_id_seq
@@ -1843,17 +1856,17 @@ CREATE SEQUENCE public.users_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.users_id_seq OWNER TO postgres;
+ALTER TABLE public.users_id_seq OWNER TO kneks;
 
 --
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- Name: web_identity; Type: TABLE; Schema: public; Owner: postgres
+-- Name: web_identity; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.web_identity (
@@ -1866,10 +1879,10 @@ CREATE TABLE public.web_identity (
 );
 
 
-ALTER TABLE public.web_identity OWNER TO postgres;
+ALTER TABLE public.web_identity OWNER TO kneks;
 
 --
--- Name: web_identity_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: web_identity_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.web_identity_id_seq
@@ -1881,17 +1894,17 @@ CREATE SEQUENCE public.web_identity_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.web_identity_id_seq OWNER TO postgres;
+ALTER TABLE public.web_identity_id_seq OWNER TO kneks;
 
 --
--- Name: web_identity_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: web_identity_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.web_identity_id_seq OWNED BY public.web_identity.id;
 
 
 --
--- Name: web_profile; Type: TABLE; Schema: public; Owner: postgres
+-- Name: web_profile; Type: TABLE; Schema: public; Owner: kneks
 --
 
 CREATE TABLE public.web_profile (
@@ -1903,10 +1916,10 @@ CREATE TABLE public.web_profile (
 );
 
 
-ALTER TABLE public.web_profile OWNER TO postgres;
+ALTER TABLE public.web_profile OWNER TO kneks;
 
 --
--- Name: web_profile_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: web_profile_id_seq; Type: SEQUENCE; Schema: public; Owner: kneks
 --
 
 CREATE SEQUENCE public.web_profile_id_seq
@@ -1918,401 +1931,401 @@ CREATE SEQUENCE public.web_profile_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.web_profile_id_seq OWNER TO postgres;
+ALTER TABLE public.web_profile_id_seq OWNER TO kneks;
 
 --
--- Name: web_profile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: web_profile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kneks
 --
 
 ALTER SEQUENCE public.web_profile_id_seq OWNED BY public.web_profile.id;
 
 
 --
--- Name: abouts id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: abouts id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.abouts ALTER COLUMN id SET DEFAULT nextval('public.abouts_id_seq'::regclass);
 
 
 --
--- Name: agendas id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: agendas id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.agendas ALTER COLUMN id SET DEFAULT nextval('public.agendas_id_seq'::regclass);
 
 
 --
--- Name: banner id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: banner id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.banner ALTER COLUMN id SET DEFAULT nextval('public.custom_page_id_seq'::regclass);
 
 
 --
--- Name: contacts id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: contacts id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.contacts ALTER COLUMN id SET DEFAULT nextval('public.contacts_id_seq'::regclass);
 
 
 --
--- Name: data_dashboard id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: data_dashboard id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.data_dashboard ALTER COLUMN id SET DEFAULT nextval('public.api_meta_id_seq'::regclass);
 
 
 --
--- Name: data_menu id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: data_menu id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.data_menu ALTER COLUMN id SET DEFAULT nextval('public.statistic_id_seq'::regclass);
 
 
 --
--- Name: data_slider id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: data_slider id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.data_slider ALTER COLUMN id SET DEFAULT nextval('public.statistic_slide_id_seq'::regclass);
 
 
 --
--- Name: data_submenu id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: data_submenu id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.data_submenu ALTER COLUMN id SET DEFAULT nextval('public.sub_slide_id_seq'::regclass);
 
 
 --
--- Name: db_event id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: db_event id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.db_event ALTER COLUMN id SET DEFAULT nextval('public.db_event_id_seq'::regclass);
 
 
 --
--- Name: devisi id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: devisi id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.devisi ALTER COLUMN id SET DEFAULT nextval('public.devisi_id_seq'::regclass);
 
 
 --
--- Name: directorats id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: directorats id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.directorats ALTER COLUMN id SET DEFAULT nextval('public.directorats_id_seq'::regclass);
 
 
 --
--- Name: files id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: files id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.files ALTER COLUMN id SET DEFAULT nextval('public.reports_id_seq'::regclass);
 
 
 --
--- Name: files_categories id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: files_categories id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.files_categories ALTER COLUMN id SET DEFAULT nextval('public.report_categories_id_seq'::regclass);
 
 
 --
--- Name: hot_categories id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: hot_categories id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.hot_categories ALTER COLUMN id SET DEFAULT nextval('public.hot_categories_id_seq'::regclass);
 
 
 --
--- Name: hot_issues id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: hot_issues id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.hot_issues ALTER COLUMN id SET DEFAULT nextval('public.hot_issues_id_seq'::regclass);
 
 
 --
--- Name: hot_subcategories id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: hot_subcategories id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.hot_subcategories ALTER COLUMN id SET DEFAULT nextval('public.hot_subcategories_id_seq'::regclass);
 
 
 --
--- Name: institutions id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: institutions id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.institutions ALTER COLUMN id SET DEFAULT nextval('public.institutions_id_seq'::regclass);
 
 
 --
--- Name: ip_address id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: ip_address id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.ip_address ALTER COLUMN id SET DEFAULT nextval('public.ip_address_id_seq'::regclass);
 
 
 --
--- Name: kdeks id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: kdeks id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.kdeks ALTER COLUMN id SET DEFAULT nextval('public.kdeks_id_seq'::regclass);
 
 
 --
--- Name: khas_zone id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: khas_zone id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.khas_zone ALTER COLUMN id SET DEFAULT nextval('public.khas_zone_id_seq'::regclass);
 
 
 --
--- Name: map id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: map id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.map ALTER COLUMN id SET DEFAULT nextval('public.map_id_seq'::regclass);
 
 
 --
--- Name: menu id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: menu id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.menu ALTER COLUMN id SET DEFAULT nextval('public.menu_id_seq'::regclass);
 
 
 --
--- Name: menu_sub id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: menu_sub id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.menu_sub ALTER COLUMN id SET DEFAULT nextval('public.menu_sub_id_seq'::regclass);
 
 
 --
--- Name: naration id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: naration id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.naration ALTER COLUMN id SET DEFAULT nextval('public.naration_id_seq'::regclass);
 
 
 --
--- Name: news id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: news id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.news ALTER COLUMN id SET DEFAULT nextval('public.news_id_seq'::regclass);
 
 
 --
--- Name: news_categories id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: news_categories id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.news_categories ALTER COLUMN id SET DEFAULT nextval('public.news_categories_id_seq'::regclass);
 
 
 --
--- Name: news_photos id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: news_photos id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.news_photos ALTER COLUMN id SET DEFAULT nextval('public.news_photos_id_seq'::regclass);
 
 
 --
--- Name: news_videos id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: news_videos id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.news_videos ALTER COLUMN id SET DEFAULT nextval('public.news_videos_id_seq'::regclass);
 
 
 --
--- Name: opini id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: opini id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.opini ALTER COLUMN id SET DEFAULT nextval('public.opini_id_seq'::regclass);
 
 
 --
--- Name: pejabat id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: pejabat id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.pejabat ALTER COLUMN id SET DEFAULT nextval('public.structure_assets_id_seq'::regclass);
 
 
 --
--- Name: province id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: province id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.province ALTER COLUMN id SET DEFAULT nextval('public.province_id_seq'::regclass);
 
 
 --
--- Name: questbook id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: questbook id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.questbook ALTER COLUMN id SET DEFAULT nextval('public.questbook_id_seq'::regclass);
 
 
 --
--- Name: roles id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: roles id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.roles ALTER COLUMN id SET DEFAULT nextval('public.roles_id_seq'::regclass);
 
 
 --
--- Name: scopes id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: scopes id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.scopes ALTER COLUMN id SET DEFAULT nextval('public.scopes_id_seq'::regclass);
 
 
 --
--- Name: sk id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: sk id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.sk ALTER COLUMN id SET DEFAULT nextval('public.sk_id_seq'::regclass);
 
 
 --
--- Name: slideshow id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: slideshow id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.slideshow ALTER COLUMN id SET DEFAULT nextval('public.banners_id_seq'::regclass);
 
 
 --
--- Name: social_medias id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: social_medias id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.social_medias ALTER COLUMN id SET DEFAULT nextval('public.social_medias_id_seq'::regclass);
 
 
 --
--- Name: sourcedata id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: sourcedata id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.sourcedata ALTER COLUMN id SET DEFAULT nextval('public.sourcedata_id_seq'::regclass);
 
 
 --
--- Name: tagging id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: tagging id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.tagging ALTER COLUMN id SET DEFAULT nextval('public.tags_id_seq'::regclass);
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
--- Name: web_identity id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: web_identity id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.web_identity ALTER COLUMN id SET DEFAULT nextval('public.web_identity_id_seq'::regclass);
 
 
 --
--- Name: web_profile id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: web_profile id; Type: DEFAULT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.web_profile ALTER COLUMN id SET DEFAULT nextval('public.web_profile_id_seq'::regclass);
 
 
 --
--- Data for Name: abouts; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: abouts; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.abouts (id, about, about_en, tag, history, history_en, web_identity, id_province, images, about_content, about_content_en, history_content, history_content_en, legal_foundation, legal_foundation_en, legal_foundation_content, legal_foundation_content_en, logo_philosophy, logo_philosophy_en, logo_philosophy_content, logo_philosophy_content_en, kneks_task, kneks_task_en, kneks_task_content, kneks_task_content_en, function, function_en, function_content, function_content_en) FROM stdin;
-1	Tentang KNEKS	About KNEKS	about	Sejarah KNEKS	history KNEKS	kneks	0	\N	null	null	<p>Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) merupakan perubahan dari KNKS untuk peningkatan pembangunan ekosistem ekonomi dan keuangan syariah serta menjadikan Indonesia sebagai Pusat Halal Dunia.</p>\n\n<p>Pencanangan titik awal untuk memposisikan Indonesia sebagai salah satu pelaku utama dan hub ekonomi syariah dunia dilakukan seiring dengan peluncuran Masterplan Ekonomi Syariah Indonesia pada bulan Mei 2019.</p>	null	Landasan Hukum	Legal Foundation	null	null	Filosopi Logo	Logo Philosophy	null	null	Tugas KNEKS	KNEKS Task	null	null	Fungsi	Function	null	null
-65	Tentang KDEKS	About KNEKS	about	Sejarah KDEKS	History KDEKS	kdeks	0	NULL	null	null	<p>Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) merupakan perubahan dari KNKS untuk peningkatan pembangunan ekosistem ekonomi dan keuangan syariah serta menjadikan Indonesia sebagai Pusat Halal Dunia.</p>\n\n<p>Pencanangan titik awal untuk memposisikan Indonesia sebagai salah satu pelaku utama dan hub ekonomi syariah dunia dilakukan seiring dengan peluncuran Masterplan Ekonomi Syariah Indonesia pada bulan Mei 2019.</p>	null	Landasan Hukum	Legal Foundation	null	null	Filosofi Logo	Logo Philosophy	null	null	Tugas KDEKS	KDEKS Task	null	null	Fungsi	Function	null	null
-67	Tentang EKONOMI Syariah	About EKONOMI Syariah	about	Sejarah EKONOMI Syariah	History Sharia ECONOMIC	ekonomi_syariah	0		null	null	<p>Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) merupakan perubahan dari KNKS untuk peningkatan pembangunan ekosistem ekonomi dan keuangan syariah serta menjadikan Indonesia sebagai Pusat Halal Dunia.</p>\n\n<p>Pencanangan titik awal untuk memposisikan Indonesia sebagai salah satu pelaku utama dan hub ekonomi syariah dunia dilakukan seiring dengan peluncuran Masterplan Ekonomi Syariah Indonesia pada bulan Mei 2019.</p>	null	Landasan Hukum	Legal Foundation	null	null	Logo Filosofi	Logo Philosophy	null	null	Tugas KNEKS	KNEKS TASK	null	null	Fungsi 	Function	null	null
+65	Tentang KDEKS	About KNEKS	about	Sejarah KDEKS	History KDEKS	kdeks	0	NULL	<br>	<br>	<p>Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) merupakan perubahan dari KNKS untuk peningkatan pembangunan ekosistem ekonomi dan keuangan syariah serta menjadikan Indonesia sebagai Pusat Halal Dunia.</p>\r\n\r\n<p>Pencanangan titik awal untuk memposisikan Indonesia sebagai salah satu pelaku utama dan hub ekonomi syariah dunia dilakukan seiring dengan peluncuran Masterplan Ekonomi Syariah Indonesia pada bulan Mei 2019.</p>	<br>	-	-	<br>	<br>	-	-	<br>	<br>	-	-	<br>	<br>	-	-	<br>	<br>
+67	Tentang EKONOMI Syariah	About EKONOMI Syariah	about	-	-	ekonomi_syariah	0		<p style="font-size: 16px;"><font color="#000000" style="" face="arial">Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) merupakan perubahan dari KNKS untuk peningkatan pembangunan ekosistem ekonomi dan keuangan syariah serta menjadikan Indonesia sebagai Pusat Halal Dunia.</font></p><p style="font-size: 16px;"><font color="#000000" style="" face="arial">Pencanangan titik awal untuk memposisikan Indonesia sebagai salah satu pelaku utama dan hub ekonomi syariah dunia dilakukan seiring dengan peluncuran Masterplan Ekonomi Syariah Indonesia pada bulan Mei 2019.</font></p>	-	<p><font color="#000000" face="arial">Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) merupakan perubahan dari KNKS untuk peningkatan pembangunan ekosistem ekonomi dan keuangan syariah serta menjadikan Indonesia sebagai Pusat Halal Dunia.</font></p>\r\n\r\n<p><font color="#000000" face="arial">Pencanangan titik awal untuk memposisikan Indonesia sebagai salah satu pelaku utama dan hub ekonomi syariah dunia dilakukan seiring dengan peluncuran Masterplan Ekonomi Syariah Indonesia pada bulan Mei 2019.</font></p>	-	-	-	<div><font color="#000000" face="arial">Peraturan Presiden RI No. 28 tahun 2020</font></div>	-	\N	-	<div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Filosofi Logo</font></span></div><div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Huruf N</font></span></div><div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Huruf N dari KNEKS ini dimodifikasi sedemikian rupa menjadi unique point dari logo. Penempatannya yang sejajar dengan dan menjadi kesatuan dalam huruf KNEKS dimaksudkan agar logo terlihat lebih sederhana. Agar perhatian atau point of view audience langsung tertuju pada KNEKS. Sehingga hal ini membuat audience mengenali logo KNEKS dengan tepat dan seketika. Huruf N ini kemudian dimodIfikasi menjadi garis bersudut dengan tiga titik, yang menggambarkan tiga tugas utama KNEKS, yaitu mempercepat, memperluas dan memajukan pengembangan ekonomi dan keuangan syariah dalam rangka memperkuat ketahanan ekonomi nasional.</font></span></div><div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Pintu Gerbang</font></span></div><div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Sengaja dirancang agar menyerupai pintu gerbang yang berarti keterbukaan. KNEKS terbuka terhadap pemangku kepentingan untuk pengembangan ekonomi dan keuangan syariah. Pintu gerbang ini juga melambangkan keterbukaan terhadap investor asing untuk menanamkan modalnya di Indonesia.</font></span></div><div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Arah</font></span></div><div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Arah panah ke samping kanan atas adalah simbol dari progresif. Arah panah ke samping kanan atas ini mampu memberikan kesan positif. Melalui simbol ini ingin dikomunikasikan fungsi-fungsi KNEKS yang progresif, seperti pemberian rekomendasi arah kebijakan dan program strategis pembangunan nasional, dan lain-lain.</font></span></div>	-	-	-	<span style="font-size: 16px;"><font color="#000000" style="" face="arial">KNEKS bertugas mempercepat, memperluas dan memajukan pengembangan ekonomi dan keuangan syariah dalam rangka mendukung ketahanan ekonomi nasional</font></span>	-	-	-	<ul><li><font color="#000000" face="arial">Pemberian rekomendasi arah kebijakan dan program strategis pembangunan nasional di sektor ekonomi dan keuangan syariah</font></li><li><font color="#000000" face="arial">Pelaksanaan koordinasi, sinkronisasi, sinergisitas penyusunan dan pelaksanaan rencana araha kebijakan dan program strategis pada sektor ekonomi dan keuangan syariah</font></li><li><font color="#000000" face="arial">Perumusan dan pemberian rekomendasi atas penyelesaian masalah di sektor ekonomi dan keuangan syariah</font></li><li><font color="#000000" face="arial">Pemantauan dan evaluasi atas pelaksanaan arah kebijakan dan program strategis di sektor ekonomi dan keuangan syariah</font></li></ul>	-
+1	Tentang KNEKS	About KNEKS	about	-	-	kneks	0	\N	<p style="color: rgb(51, 51, 51); font-size: 16px;"><font face="arial">Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) merupakan perubahan dari KNKS untuk peningkatan pembangunan ekosistem ekonomi dan keuangan syariah serta menjadikan Indonesia sebagai Pusat Halal Dunia.</font></p><p style="color: rgb(51, 51, 51); font-size: 16px;"><font face="arial">Pencanangan titik awal untuk memposisikan Indonesia sebagai salah satu pelaku utama dan hub ekonomi syariah dunia dilakukan seiring dengan peluncuran Masterplan Ekonomi Syariah Indonesia pada bulan Mei 2019.</font></p>	<font color="#000000">-</font>	<p><font color="#000000" face="arial">Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) merupakan perubahan dari KNKS untuk peningkatan pembangunan ekosistem ekonomi dan keuangan syariah serta menjadikan Indonesia sebagai Pusat Halal Dunia.</font></p>\r\n\r\n<p><font color="#000000" face="arial">Pencanangan titik awal untuk memposisikan Indonesia sebagai salah satu pelaku utama dan hub ekonomi syariah dunia dilakukan seiring dengan peluncuran Masterplan Ekonomi Syariah Indonesia pada bulan Mei 2019.</font></p>	<font color="#000000">-</font>	-	-	<div><font color="#000000" face="arial">Peraturan Presiden RI No. 28 tahun 2020</font></div>	-	-	-	<div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Filosofi Logo</font></span></div><div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Huruf N</font></span></div><div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Huruf N dari KNEKS ini dimodifikasi sedemikian rupa menjadi unique point dari logo. Penempatannya yang sejajar dengan dan menjadi kesatuan dalam huruf KNEKS dimaksudkan agar logo terlihat lebih sederhana. Agar perhatian atau point of view audience langsung tertuju pada KNEKS. Sehingga hal ini membuat audience mengenali logo KNEKS dengan tepat dan seketika. Huruf N ini kemudian dimodIfikasi menjadi garis bersudut dengan tiga titik, yang menggambarkan tiga tugas utama KNEKS, yaitu mempercepat, memperluas dan memajukan pengembangan ekonomi dan keuangan syariah dalam rangka memperkuat ketahanan ekonomi nasional.</font></span></div><div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Pintu Gerbang</font></span></div><div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Sengaja dirancang agar menyerupai pintu gerbang yang berarti keterbukaan. KNEKS terbuka terhadap pemangku kepentingan untuk pengembangan ekonomi dan keuangan syariah. Pintu gerbang ini juga melambangkan keterbukaan terhadap investor asing untuk menanamkan modalnya di Indonesia.</font></span></div><div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Arah</font></span></div><div><span style="font-size: 13.44px;"><font color="#000000" face="arial">Arah panah ke samping kanan atas adalah simbol dari progresif. Arah panah ke samping kanan atas ini mampu memberikan kesan positif. Melalui simbol ini ingin dikomunikasikan fungsi-fungsi KNEKS yang progresif, seperti pemberian rekomendasi arah kebijakan dan program strategis pembangunan nasional, dan lain-lain.</font></span></div>	-	-	-	<span style="font-size: 16px;"><font color="#000000" style="" face="arial">KNEKS bertugas mempercepat, memperluas dan memajukan pengembangan ekonomi dan keuangan syariah dalam rangka mendukung ketahanan ekonomi nasional</font></span>	-	-	-	<ul><li>Pemberian rekomendasi arah kebijakan dan program strategis pembangunan nasional di sektor ekonomi dan keuangan syariah</li><li>Pelaksanaan koordinasi, sinkronisasi, sinergisitas penyusunan dan pelaksanaan rencana araha kebijakan dan program strategis pada&nbsp; sektor ekonomi dan keuangan syariah</li><li>Perumusan dan pemberian rekomendasi atas penyelesaian masalah di sektor ekonomi dan keuangan syariah</li><li>Pemantauan dan evaluasi atas pelaksanaan arah kebijakan dan program strategis di sektor ekonomi dan keuangan syariah</li></ul>	-
 \.
 
 
 --
--- Data for Name: agendas; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: agendas; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
-COPY public.agendas (id, title, title_en, url, agenda_datetime, created_at, updated_at, deleted_at, place, organizer, web_identity, link, project, description, agenda_endtime, manager, contributor, indicator, impact, opening, participants, area, loc, priority_participants, kbli, age, gender, province) FROM stdin;
-71	ToT Pasar Modal Syariah	\N	https://www.instagram.com/p/BvbhHAXlbB1/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Bogor	MES Bogor-IDX	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-72	Investor Gathering Syariah 2019	\N	https://www.instagram.com/p/BwBGRZNliUX/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Pekalongan	MES Pekalongan-IDX	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-73	Temu Ilmiah Nasional	\N	http://fossei.org/temilnas-2019/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jakarta	FoSSEI	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-74	Topi Diksi Edisi Digital Millenial	\N	https://www.instagram.com/p/BwTVeABFdBy/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jakarta	MES-BNIS	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-75	Kuliah Umum EKIS UNPAD	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Bandung	Prodi EKIS FEB UNPAD	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-76	Roadshow Multifinance Syariah 2019	\N	https://www.instagram.com/p/BwKZRBbFeMd/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jawa Timur	MES Jatim-BFI Syariah	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-77	Indonesia Islamic Economy Festival	\N	https://www.eventbrite.com/e/indonesia-islamic-economy-festival-tickets-59939129550	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jakarta	KNKS	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-78	Peluncuran Wakaf Saham	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jakarta	IDX-BWI	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-79	Temu Ilmiah Nasional	\N	http://fossei.org/temilnas-2019/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jakarta	FoSSEI	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-169	Road to FESyar Sumatera	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42		BI	kneks	\N	\N	Rangkaian kegiatan di berbagai kantor perwakilan BI wilayah Sumatera	\N	\N	KNEKS	SNLIEKSI 1 Literasi (Ekonomi Syariah)		Eselon II/Pejabat Setingkat		Regional	\N					\N
-170	IN2MF in Paris	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Luar Negeri	BI	kneks	\N	\N	Rangkaian awareness, promosi perdagangan, fashion show dan trade showproduk modest fashion di wilayah Eropa	\N	\N	Kemendag	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Tinggi	Eselon III/Pejabat Setingkat	200-300 orang	Internasional	\N	Tinggi	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-171	IN2MF in Kuala Lumpur	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Luar Negeri	BI	kneks	\N	\N	Rangkaian awareness, promosi perdagangan, fashion show dan trade showproduk modest fashion di wilayah asia tenggara	\N	\N	kemendag	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Tinggi	Eselon I/Pejabat Setingkat	200-300 orang	Internasional	\N	Tinggi	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-172	Road to FESyar KTI 2024	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42			kneks	\N	\N	Rangkaian kegiatan di berbagai kantor perwakilan BI wilayah KTI	\N	\N							\N					\N
-173	Festival Ekonomi Syariah Jawa	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42			kneks	\N	\N	Rangkaian agenda Fesyar Jawa	\N	\N			#N/A				\N	#N/A				\N
-174	Training of Trainer Eksyar bagi Dai dan Daiyah Wilayah Jawa Barat, Jawa Tengah dan DKI Jakarta	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Pelatihan bagi Dai dan Daiyah dalam rangka akselerasi peningkatan literasi ekonomi syariah	\N	\N	MUI	SNLIEKSI 1 Literasi (Ekonomi Syariah)	Rendah	Eselon III/Pejabat Setingkat	75	Regional	\N	Rendah	J - Informasi dan Komunikasi	36-55 Tahun	Semua	\N
-175	Sharia Economic and Financial Outlook	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42		BI	kneks	\N	\N	Peluncuran Kajian Ekonomi dan Keuangan Syariah 2023 dan Seminar Nasional untuk mendiseminasikan kinerja, tantangan dan arah kebijakan pengembangan ekonomi dan keuangan syariah	\N	\N	KNEKS	SNLIEKSI 1 Literasi (Ekonomi Syariah)	Menengah	Eselon I/Pejabat Setingkat		Nasional	\N	Menengah				\N
-176	Festival Ekonomi Syariah KTI	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42			kneks	\N	\N	Rangkaian agenda Fesyar KTI	\N	\N			#N/A				\N	#N/A				\N
-128	Bootcamp Coaching anggota IKRA 2024	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Capacity Bulding anggota IKRA 2024 menuju ISEF, IN2MF dan IN2HCC 2024	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Menengah	Eselon III/Pejabat Setingkat	136	Nasional	\N	Menengah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-132	International Conference on Women and Sharia Community Empowerment	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Capacity Bulding pelaku usaha syariah binaan Komunitas perempuan menuju ISEF 2024	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat		Nasional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-134	Pelatihan Komunitas Perempuan Sektor Makanan dan Minuman Halal	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Capacity Bulding pelaku usaha syariah binaan Komunitas perempuan menuju ISEF 2024	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat		Nasional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-138	IN2HCC competition di Fesyar Jawa	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jawa Timur	BI	kneks	\N	\N	Kompetisi halal chef wilayah Jawa	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat	39	Regional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-142	Modest Fashion designer competition pada rangkaian Fesyar wilayah Jawa	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jawa Timur	BI	kneks	\N	\N	Kompetisi modest fashion designer wilayah Jawa	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat	26	Regional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-127	Diseminasi Panduan Fasilitasi Desa Peduli Pendidikan	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	PMK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-129	Kick Off Bootcamp anggota IKRA 2024	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Capacity Bulding anggota IKRA 2024 menuju ISEF, IN2MF dan IN2HCC 2024	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Menengah	Eselon III/Pejabat Setingkat	136	Nasional	\N	Menengah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-133	Pelatihan Komunitas Perempuan Sektor Modest Fashion	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Capacity Bulding pelaku usaha syariah binaan Komunitas perempuan menuju ISEF 2024	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat		Nasional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-135	Kick Off Kolaborasi BI dengan Komunitas Perempuan	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Capacity Bulding pelaku usaha syariah binaan Komunitas perempuan menuju ISEF 2024	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat		Nasional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-139	Modest Fashion designer competition pada rangkaian Fesyar wilayah KTI	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Sulawesi Barat	BI	kneks	\N	\N	Kompetisi modest fashion designer wilayah KTI	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat	38	Regional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-143	Seleksi Calon Anggota IKRA 2024 wilayah KTI	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Sulawesi Selatan	BI	kneks	\N	\N	Seleksi pelaku usaha syariah wilayah KTI terhadap binaan BI, binaan komunitas perempuan, dan umum untuk mempersiapkan seluruh kegiatan yang akan diselenggarakan dan yang akan diikuti oleh BI baiuk di dalam maupun di luar negeri.	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Tinggi	Eselon III/Pejabat Setingkat	91	Nasional	\N	Tinggi	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-130	Ekosistem Pondok Pesantren Inklusif Keuangan Syariah (EPIKS)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Banten	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-136	IN2HCC competition di Fesyar KTI	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Sulawesi Barat	BI	kneks	\N	\N	Kompetisi halal chef wilayah KTI	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat	57	Regional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-141	Modest Fashion designer competition pada rangkaian Fesyar wilayah Sumatera	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Kepulauan Riau	BI	kneks	\N	\N	Kompetisi modest fashion designer wilayah Sumatera	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat	26	Regional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-144	Seleksi Calon Anggota IKRA 2024 wilayah Sumatera	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Sumatera Selatan	BI	kneks	\N	\N	Seleksi pelaku usaha syariah wilayah Sumatera terhadap binaan BI, binaan komunitas perempuan, dan umum untuk mempersiapkan seluruh kegiatan yang akan diselenggarakan dan yang akan diikuti oleh BI baiuk di dalam maupun di luar negeri.	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Tinggi	Eselon III/Pejabat Setingkat	92	Nasional	\N	Tinggi	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-131	Santri Cakap Keuangan Syariah (SAKINAH)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Sulawesi Selatan	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-137	IN2HCC competition di Fesyar Sumatera	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Kepulauan Riau	BI	kneks	\N	\N	Kompetisi halal chef wilayah Sumatera	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat	39	Regional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-140	Duta Keuangan melalui Program Merdeka \vBelajar - Kampus Merdeka (MBKM)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-145	Santri Cakap Keuangan Syariah (SAKINAH)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Banten	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-146	Gebyar Ramadan Keuangan Syariah (GERAK Syariah)	Gebyar Ramadan Keuangan Syariah (GERAK Syariah)	https://mukisi.com/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	OJK	kneks	https://www.ekon.go.id/	Gebyar Ramadhan Keuangan Syariah	Merupakan kampanye nasional keuangan syariah yang terdiri dari rangkaian kegiatan edukasi dan kompetisi. Kegiatan ini diselenggarakan selama bulan Ramadan dan menyasar target masyarakat umum	\N	OJK	OJK	SNLIEKSI 8 Inklusi (Penggunaan Keuangan Syariah)	Impact	Menteri/Pejabat Setingkat	3000	https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253868.62250444127!2d106.53315569453123!3d-6.171279399999983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5cbd72035e3%3A0x78a3dc4ef4719cb8!2sKementerian%20Keuangan%20Republik%20Indonesia!5e0!3m2!1sid!2sid!4v1731637418355!5m2!1sid!2sid	100%	Priority	7 - Keuangan Syariah	Semua Usia	Semua	DKI Jakarta
-147	Indonesia Sharia Financial Olympiad  (ISFO)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-148	Sahabat Ibu Cakap Literasi Keuangan Syariah (SICANTIKS)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Aceh	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-149	Ekosistem Pondok Pesantren Inklusif Keuangan Syariah (EPIKS)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Sulawesi Selatan	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-150	IN2MF in Istanbul x Istanbul Fashion Connection	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Luar Negeri	BI	kneks	\N	\N	Rangkaian awareness, promosi perdagangan, fashion show dan trade showproduk modest fashion di wilayah Eropa dan Asia (rank 1 dalam SGIE)	\N	\N	Kemendag	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Tinggi	Eselon III/Pejabat Setingkat	200-300 orang	Internasional	\N	Tinggi	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-152	Festival Ekonomi Syariah Sumatera	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42			kneks	\N	\N	Rangkaian agenda Fesyar Sumatera	\N	\N			#N/A				\N	#N/A				\N
-153	Lelang Wakaf	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jawa Timur	BI	kneks	\N	\N	Lelang wakaf pada kegiatan FESyar Jawa 2024	\N	\N	KemenkopUKM; BWI; Kemenko Perekonomian; Kemenperin	SNLIEKSI 3 Literasi (Produk dan Jasa Halal); SNLIEKSI 5 Literasi (Kemampuan Numerik Ekonomi Syariah)	Menengah	Eselon I/Pejabat Setingkat	150	Nasional	\N	Menengah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-156	Sertifikasi Kompetensi Nazir	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jawa Timur	BI	kneks	\N	\N	Pelatihan dan sertifikasi kompetensi nazir wakaf pada rangkaian kegiatan FESyar Jawa 2024	\N	\N	BWI	SNLIEKSI 2 Literasi (Lembaga Pengelola Dana Sosial Syariah)	Rendah	Eselon II/Pejabat Setingkat	40	Regional	\N	Rendah	B - Pertambangan dan Penggalian	24-35 Tahun	Semua	\N
-157	Opening Ceremony	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Pembukaan rangkaian kegiatan ISEF 2024	\N	\N	Kemenko Maritim; Kemenko Perekonomian; Kemenko PMK; Kementerian PPN/Bappenas; Kemenag; LPS	SNLIEKSI 1 Literasi (Ekonomi Syariah)	Tinggi	Presiden/Wakil Presiden	1000	Internasional	\N	Tinggi	A - Pertanian, Kehutanan, dan Perikanan; B - Pertambangan dan Penggalian	Semua Usia	Semua	\N
-160	Syariah Capital Market Goes to Office kepada Komunitas Aisyiyah	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-162	Workshop terkait penerbitan Sukuk	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-163	Roadshow Pasar Modal Syariah dengan diaspora	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-166	Dialog Percepatan Pertumbuhan Ekonomi Syariah melalui HVC Project	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	Kadin	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-168	ssss	sss	sss	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	sss	sss	kdeks	sss	Kurang alert pada form pertama yaitu title ID	Kurang alert pada form pertama yaitu title ID	2024-12-17 23:42:00	Kurang alert pada form pertama yaitu title ID	Kurang alert pada form pertama yaitu title ID	Kurang alert pada form pertama yaitu title ID	Kurang alert pada form pertama yaitu title ID	0	0	0	Kurang alert pada form pertama yaitu title ID\tUndone	0	0	0	0	0
-151	Kurasi IN2MF Global 2024	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Rangkaian persiapan calon anggota IKRA menuju IN2MF Global	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Menengah	Eselon III/Pejabat Setingkat	89	Nasional	\N	Menengah	C - Industri Pengolahan	36-55 Tahun	Semua	\N
-154	Bulan Pembiayaan Syariah	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42		BI	kneks	\N	\N	Rangkaian business meeting, matching dan linkage	\N	\N			#N/A				\N	#N/A				\N
-155		\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42		BI	kneks	\N	\N	Pelatihan dan sertifikasi kompetensi nazir wakaf pada rangkaian kegiatan FESyar Jawa 2024	\N	\N	BWI; Kemenag		#N/A				\N	#N/A				\N
-158	Gebyar Ramadan Keuangan Syariah (GERAK Syariah)	Main Agenda ISEF 2024	https://mukisi.com/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	https://www.ekon.go.id/	Gebyar Ramadhan Keuangan Syariah	Merupakan kampanye nasional keuangan syariah yang terdiri dari rangkaian kegiatan edukasi dan kompetisi. Kegiatan ini diselenggarakan selama bulan Ramadan dan menyasar target masyarakat umum	\N	OJK	OJK	SNLIEKSI 8 Inklusi (Penggunaan Keuangan Syariah)	Impact	Menteri/Pejabat Setingkat	3000	https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d253739.48794953182!2d106.5807456!3d-6.4351966!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5cbd72035e3%3A0x78a3dc4ef4719cb8!2sKementerian%20Keuangan%20Republik%20Indonesia!5e0!3m2!1sid!2sid!4v1731639217808!5m2!1sid!2sid	100%	Priority	7 - Keuangan Syariah	Semua Usia	Semua	DKI Jakarta
-159	Publikasi Podcast Pasar Modal Syariah	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-161	ToT Pasar Modal Syariah bagi Guru dan Tenaga Pendidik Pondok Pesantren	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-164	Coaching Clinic terkait penerbitan Sukuk	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-165	Workshop Optimalisasi Peran Perbankan Syariah Pada Program Pemerintah Daerah	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-167	Optimalisasi Dana Sosial Islam dalam Pengembangan Sektor Industri Halal dan Implementasi Undang Undang Halal	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	Kadin	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N
-177	tes	test	2	2025-01-09 10:35:00	2025-01-09 03:37:00	2025-01-09 03:37:00	\N	12	12	kneks	12	12	12	2025-01-09 10:35:00	12	12	12	12	0	0	0	12	0	0	0	0	0
+COPY public.agendas (id, title, title_en, url, agenda_datetime, created_at, updated_at, deleted_at, place, organizer, web_identity, link, project, description, agenda_endtime, manager, contributor, indicator, impact, opening, participants, area, loc, priority_participants, kbli, age, gender, province, directorat, kdeks, institution_id, institution_name) FROM stdin;
+71	ToT Pasar Modal Syariah	\N	https://www.instagram.com/p/BvbhHAXlbB1/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Bogor	MES Bogor-IDX	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+72	Investor Gathering Syariah 2019	\N	https://www.instagram.com/p/BwBGRZNliUX/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Pekalongan	MES Pekalongan-IDX	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+73	Temu Ilmiah Nasional	\N	http://fossei.org/temilnas-2019/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jakarta	FoSSEI	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+74	Topi Diksi Edisi Digital Millenial	\N	https://www.instagram.com/p/BwTVeABFdBy/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jakarta	MES-BNIS	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+75	Kuliah Umum EKIS UNPAD	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Bandung	Prodi EKIS FEB UNPAD	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+76	Roadshow Multifinance Syariah 2019	\N	https://www.instagram.com/p/BwKZRBbFeMd/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jawa Timur	MES Jatim-BFI Syariah	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+77	Indonesia Islamic Economy Festival	\N	https://www.eventbrite.com/e/indonesia-islamic-economy-festival-tickets-59939129550	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jakarta	KNKS	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+78	Peluncuran Wakaf Saham	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jakarta	IDX-BWI	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+79	Temu Ilmiah Nasional	\N	http://fossei.org/temilnas-2019/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jakarta	FoSSEI	kneks	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+169	Road to FESyar Sumatera	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42		BI	kneks	\N	\N	Rangkaian kegiatan di berbagai kantor perwakilan BI wilayah Sumatera	\N	\N	KNEKS	SNLIEKSI 1 Literasi (Ekonomi Syariah)		Eselon II/Pejabat Setingkat		Regional	\N					\N	null	null	0	null
+170	IN2MF in Paris	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Luar Negeri	BI	kneks	\N	\N	Rangkaian awareness, promosi perdagangan, fashion show dan trade showproduk modest fashion di wilayah Eropa	\N	\N	Kemendag	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Tinggi	Eselon III/Pejabat Setingkat	200-300 orang	Internasional	\N	Tinggi	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+171	IN2MF in Kuala Lumpur	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Luar Negeri	BI	kneks	\N	\N	Rangkaian awareness, promosi perdagangan, fashion show dan trade showproduk modest fashion di wilayah asia tenggara	\N	\N	kemendag	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Tinggi	Eselon I/Pejabat Setingkat	200-300 orang	Internasional	\N	Tinggi	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+172	Road to FESyar KTI 2024	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42			kneks	\N	\N	Rangkaian kegiatan di berbagai kantor perwakilan BI wilayah KTI	\N	\N							\N					\N	null	null	0	null
+173	Festival Ekonomi Syariah Jawa	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42			kneks	\N	\N	Rangkaian agenda Fesyar Jawa	\N	\N			#N/A				\N	#N/A				\N	null	null	0	null
+174	Training of Trainer Eksyar bagi Dai dan Daiyah Wilayah Jawa Barat, Jawa Tengah dan DKI Jakarta	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Pelatihan bagi Dai dan Daiyah dalam rangka akselerasi peningkatan literasi ekonomi syariah	\N	\N	MUI	SNLIEKSI 1 Literasi (Ekonomi Syariah)	Rendah	Eselon III/Pejabat Setingkat	75	Regional	\N	Rendah	J - Informasi dan Komunikasi	36-55 Tahun	Semua	\N	null	null	0	null
+175	Sharia Economic and Financial Outlook	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42		BI	kneks	\N	\N	Peluncuran Kajian Ekonomi dan Keuangan Syariah 2023 dan Seminar Nasional untuk mendiseminasikan kinerja, tantangan dan arah kebijakan pengembangan ekonomi dan keuangan syariah	\N	\N	KNEKS	SNLIEKSI 1 Literasi (Ekonomi Syariah)	Menengah	Eselon I/Pejabat Setingkat		Nasional	\N	Menengah				\N	null	null	0	null
+176	Festival Ekonomi Syariah KTI	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42			kneks	\N	\N	Rangkaian agenda Fesyar KTI	\N	\N			#N/A				\N	#N/A				\N	null	null	0	null
+128	Bootcamp Coaching anggota IKRA 2024	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Capacity Bulding anggota IKRA 2024 menuju ISEF, IN2MF dan IN2HCC 2024	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Menengah	Eselon III/Pejabat Setingkat	136	Nasional	\N	Menengah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+132	International Conference on Women and Sharia Community Empowerment	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Capacity Bulding pelaku usaha syariah binaan Komunitas perempuan menuju ISEF 2024	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat		Nasional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+134	Pelatihan Komunitas Perempuan Sektor Makanan dan Minuman Halal	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Capacity Bulding pelaku usaha syariah binaan Komunitas perempuan menuju ISEF 2024	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat		Nasional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+138	IN2HCC competition di Fesyar Jawa	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jawa Timur	BI	kneks	\N	\N	Kompetisi halal chef wilayah Jawa	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat	39	Regional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+142	Modest Fashion designer competition pada rangkaian Fesyar wilayah Jawa	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jawa Timur	BI	kneks	\N	\N	Kompetisi modest fashion designer wilayah Jawa	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat	26	Regional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+127	Diseminasi Panduan Fasilitasi Desa Peduli Pendidikan	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	PMK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+129	Kick Off Bootcamp anggota IKRA 2024	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Capacity Bulding anggota IKRA 2024 menuju ISEF, IN2MF dan IN2HCC 2024	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Menengah	Eselon III/Pejabat Setingkat	136	Nasional	\N	Menengah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+133	Pelatihan Komunitas Perempuan Sektor Modest Fashion	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Capacity Bulding pelaku usaha syariah binaan Komunitas perempuan menuju ISEF 2024	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat		Nasional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+135	Kick Off Kolaborasi BI dengan Komunitas Perempuan	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Capacity Bulding pelaku usaha syariah binaan Komunitas perempuan menuju ISEF 2024	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat		Nasional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+139	Modest Fashion designer competition pada rangkaian Fesyar wilayah KTI	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Sulawesi Barat	BI	kneks	\N	\N	Kompetisi modest fashion designer wilayah KTI	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat	38	Regional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+143	Seleksi Calon Anggota IKRA 2024 wilayah KTI	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Sulawesi Selatan	BI	kneks	\N	\N	Seleksi pelaku usaha syariah wilayah KTI terhadap binaan BI, binaan komunitas perempuan, dan umum untuk mempersiapkan seluruh kegiatan yang akan diselenggarakan dan yang akan diikuti oleh BI baiuk di dalam maupun di luar negeri.	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Tinggi	Eselon III/Pejabat Setingkat	91	Nasional	\N	Tinggi	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+130	Ekosistem Pondok Pesantren Inklusif Keuangan Syariah (EPIKS)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Banten	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+136	IN2HCC competition di Fesyar KTI	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Sulawesi Barat	BI	kneks	\N	\N	Kompetisi halal chef wilayah KTI	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat	57	Regional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+141	Modest Fashion designer competition pada rangkaian Fesyar wilayah Sumatera	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Kepulauan Riau	BI	kneks	\N	\N	Kompetisi modest fashion designer wilayah Sumatera	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat	26	Regional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+144	Seleksi Calon Anggota IKRA 2024 wilayah Sumatera	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Sumatera Selatan	BI	kneks	\N	\N	Seleksi pelaku usaha syariah wilayah Sumatera terhadap binaan BI, binaan komunitas perempuan, dan umum untuk mempersiapkan seluruh kegiatan yang akan diselenggarakan dan yang akan diikuti oleh BI baiuk di dalam maupun di luar negeri.	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Tinggi	Eselon III/Pejabat Setingkat	92	Nasional	\N	Tinggi	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+131	Santri Cakap Keuangan Syariah (SAKINAH)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Sulawesi Selatan	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+137	IN2HCC competition di Fesyar Sumatera	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Kepulauan Riau	BI	kneks	\N	\N	Kompetisi halal chef wilayah Sumatera	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Rendah	Eselon III/Pejabat Setingkat	39	Regional	\N	Rendah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+140	Duta Keuangan melalui Program Merdeka \vBelajar - Kampus Merdeka (MBKM)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+145	Santri Cakap Keuangan Syariah (SAKINAH)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Banten	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+146	Gebyar Ramadan Keuangan Syariah (GERAK Syariah)	Gebyar Ramadan Keuangan Syariah (GERAK Syariah)	https://mukisi.com/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	OJK	kneks	https://www.ekon.go.id/	Gebyar Ramadhan Keuangan Syariah	Merupakan kampanye nasional keuangan syariah yang terdiri dari rangkaian kegiatan edukasi dan kompetisi. Kegiatan ini diselenggarakan selama bulan Ramadan dan menyasar target masyarakat umum	\N	OJK	OJK	SNLIEKSI 8 Inklusi (Penggunaan Keuangan Syariah)	Impact	Menteri/Pejabat Setingkat	3000	https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253868.62250444127!2d106.53315569453123!3d-6.171279399999983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5cbd72035e3%3A0x78a3dc4ef4719cb8!2sKementerian%20Keuangan%20Republik%20Indonesia!5e0!3m2!1sid!2sid!4v1731637418355!5m2!1sid!2sid	100%	Priority	7 - Keuangan Syariah	Semua Usia	Semua	DKI Jakarta	null	null	0	null
+147	Indonesia Sharia Financial Olympiad  (ISFO)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+148	Sahabat Ibu Cakap Literasi Keuangan Syariah (SICANTIKS)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Aceh	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+149	Ekosistem Pondok Pesantren Inklusif Keuangan Syariah (EPIKS)	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Sulawesi Selatan	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+150	IN2MF in Istanbul x Istanbul Fashion Connection	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Luar Negeri	BI	kneks	\N	\N	Rangkaian awareness, promosi perdagangan, fashion show dan trade showproduk modest fashion di wilayah Eropa dan Asia (rank 1 dalam SGIE)	\N	\N	Kemendag	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Tinggi	Eselon III/Pejabat Setingkat	200-300 orang	Internasional	\N	Tinggi	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+152	Festival Ekonomi Syariah Sumatera	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42			kneks	\N	\N	Rangkaian agenda Fesyar Sumatera	\N	\N			#N/A				\N	#N/A				\N	null	null	0	null
+153	Lelang Wakaf	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jawa Timur	BI	kneks	\N	\N	Lelang wakaf pada kegiatan FESyar Jawa 2024	\N	\N	KemenkopUKM; BWI; Kemenko Perekonomian; Kemenperin	SNLIEKSI 3 Literasi (Produk dan Jasa Halal); SNLIEKSI 5 Literasi (Kemampuan Numerik Ekonomi Syariah)	Menengah	Eselon I/Pejabat Setingkat	150	Nasional	\N	Menengah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+156	Sertifikasi Kompetensi Nazir	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	Jawa Timur	BI	kneks	\N	\N	Pelatihan dan sertifikasi kompetensi nazir wakaf pada rangkaian kegiatan FESyar Jawa 2024	\N	\N	BWI	SNLIEKSI 2 Literasi (Lembaga Pengelola Dana Sosial Syariah)	Rendah	Eselon II/Pejabat Setingkat	40	Regional	\N	Rendah	B - Pertambangan dan Penggalian	24-35 Tahun	Semua	\N	null	null	0	null
+157	Opening Ceremony	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Pembukaan rangkaian kegiatan ISEF 2024	\N	\N	Kemenko Maritim; Kemenko Perekonomian; Kemenko PMK; Kementerian PPN/Bappenas; Kemenag; LPS	SNLIEKSI 1 Literasi (Ekonomi Syariah)	Tinggi	Presiden/Wakil Presiden	1000	Internasional	\N	Tinggi	A - Pertanian, Kehutanan, dan Perikanan; B - Pertambangan dan Penggalian	Semua Usia	Semua	\N	null	null	0	null
+160	Syariah Capital Market Goes to Office kepada Komunitas Aisyiyah	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+162	Workshop terkait penerbitan Sukuk	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+163	Roadshow Pasar Modal Syariah dengan diaspora	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+166	Dialog Percepatan Pertumbuhan Ekonomi Syariah melalui HVC Project	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	Kadin	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+168	ssss	sss	sss	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	sss	sss	kdeks	sss	Kurang alert pada form pertama yaitu title ID	Kurang alert pada form pertama yaitu title ID	2024-12-17 23:42:00	Kurang alert pada form pertama yaitu title ID	Kurang alert pada form pertama yaitu title ID	Kurang alert pada form pertama yaitu title ID	Kurang alert pada form pertama yaitu title ID	0	0	0	Kurang alert pada form pertama yaitu title ID\tUndone	0	0	0	0	0	null	null	0	null
+151	Kurasi IN2MF Global 2024	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	\N	\N	Rangkaian persiapan calon anggota IKRA menuju IN2MF Global	\N	\N	BI	SNLIEKSI 3 Literasi (Produk dan Jasa Halal)	Menengah	Eselon III/Pejabat Setingkat	89	Nasional	\N	Menengah	C - Industri Pengolahan	36-55 Tahun	Semua	\N	null	null	0	null
+154	Bulan Pembiayaan Syariah	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42		BI	kneks	\N	\N	Rangkaian business meeting, matching dan linkage	\N	\N			#N/A				\N	#N/A				\N	null	null	0	null
+155		\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42		BI	kneks	\N	\N	Pelatihan dan sertifikasi kompetensi nazir wakaf pada rangkaian kegiatan FESyar Jawa 2024	\N	\N	BWI; Kemenag		#N/A				\N	#N/A				\N	null	null	0	null
+158	Gebyar Ramadan Keuangan Syariah (GERAK Syariah)	Main Agenda ISEF 2024	https://mukisi.com/	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	DKI Jakarta	BI	kneks	https://www.ekon.go.id/	Gebyar Ramadhan Keuangan Syariah	Merupakan kampanye nasional keuangan syariah yang terdiri dari rangkaian kegiatan edukasi dan kompetisi. Kegiatan ini diselenggarakan selama bulan Ramadan dan menyasar target masyarakat umum	\N	OJK	OJK	SNLIEKSI 8 Inklusi (Penggunaan Keuangan Syariah)	Impact	Menteri/Pejabat Setingkat	3000	https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d253739.48794953182!2d106.5807456!3d-6.4351966!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5cbd72035e3%3A0x78a3dc4ef4719cb8!2sKementerian%20Keuangan%20Republik%20Indonesia!5e0!3m2!1sid!2sid!4v1731639217808!5m2!1sid!2sid	100%	Priority	7 - Keuangan Syariah	Semua Usia	Semua	DKI Jakarta	null	null	0	null
+159	Publikasi Podcast Pasar Modal Syariah	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+161	ToT Pasar Modal Syariah bagi Guru dan Tenaga Pendidik Pondok Pesantren	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+164	Coaching Clinic terkait penerbitan Sukuk	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+165	Workshop Optimalisasi Peran Perbankan Syariah Pada Program Pemerintah Daerah	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	OJK	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+167	Optimalisasi Dana Sosial Islam dalam Pengembangan Sektor Industri Halal dan Implementasi Undang Undang Halal	\N		2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	Kadin	kneks	\N	\N	\N	\N	\N	\N	\N	Impact	\N	\N	\N	\N	\N	\N	\N	\N	\N	null	null	0	null
+177	tes	test	2	2025-01-09 10:35:00	2025-01-09 03:37:00	2025-01-09 03:37:00	\N	12	12	kneks	12	12	12	2025-01-09 10:35:00	12	12	12	12	0	0	0	12	0	0	0	0	0	null	null	0	null
 \.
 
 
 --
--- Data for Name: banner; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: banner; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.banner (id, name, path, flag, date_created, status) FROM stdin;
-2	Opening Ceremony	https://webdev.rifhandi.com/uploads/custompage/Iklan.svg	welcome	2025-12-12	on
-1	Login Page Web Kneks	https://webdev.rifhandi.com/uploads/custompage/gbr-login.png	login	2025-12-12	on
-3	Struktur Organisasi	https://webdev.rifhandi.com/uploads/banner/struktur1.svg	s_logo	2025-01-12	on
+1	Login Page Web Kneks	https://cms-dev.kneks.go.id/uploads/banner/gbr-login.png	login	2025-12-12	on
+3	Struktur Organisasi	https://cms-dev.kneks.go.id/uploads/banner/struktur1.png	s_logo	2025-01-12	on
+2	Opening Ceremony	https://cms-dev.kneks.go.id/uploads/banner/Iklan.png	welcome	2025-12-12	on
 \.
 
 
 --
--- Data for Name: contacts; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: contacts; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.contacts (id, address_building, address, phone_number, fax_number, email, created_at, updated_at, deleted_at, web_identity) FROM stdin;
@@ -2321,51 +2334,87 @@ COPY public.contacts (id, address_building, address, phone_number, fax_number, e
 
 
 --
--- Data for Name: data_dashboard; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: data_dashboard; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.data_dashboard (id, api, statistic_id, statistic_name, short_name, long_name, sub_statistic, short_name_en, long_name_en, naration, tagging, directorat, kdeks, publish, dataset, month) FROM stdin;
-2	https://metabase.kneks.go.id/public/dashboard/76abbee6-24af-43e5-96ea-8c6bfdee48c7	1	RPH	ASAAAA	null	null	null	null	simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem	null	null	0	on	null	2025-07
+2	https://metabase.kneks.go.id/public/dashboard/76abbee6-24af-43e5-96ea-8c6bfdee48c7	1	RPH	ASAAAA	null	null	null	null	simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem	null	null	0	on	null	2025-06
 \.
 
 
 --
--- Data for Name: data_menu; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: data_menu; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
-COPY public.data_menu (id, title, title_en, long_title, long_title_en) FROM stdin;
-1	RPH	RPH	null	null
-2	IPH	IPH	null	null
-3	JKS	JKS	null	null
-4	KSS	KSS	null	null
-5	BIWIS	BIWIS	BIWISSSSS	BIWISSSSSS
+COPY public.data_menu (id, title, title_en, long_title, long_title_en, link_menu_data, data_sort, narations_menu, narations_menu_en) FROM stdin;
+8	Ekonomi Syariah Hijau	Green Sharia Economy	Ekonomi Syariah Hijau	Green Sharia Economy	https://metabase.kneks.go.id/public/dashboard/f85c27c5-89f1-42b8-bace-543b335ae4e2	5	null	null
+3	Regulasi & Kelembagaan	Regulation and Institutions	Regulasi & Kelembagaan	Regulation and Institutions	null	4	null	null
+2	Inklusi & Literasi Syariah	Sharia Inclusion & Literacy	Inklusi & Literasi Syariah	Sharia Inclusion & Literacy	null	3	null	null
+10	Beranda	Executive Dashboard	Dashboard Eksekutif	Executive Dashboard	https://metabase.kneks.go.id/public/dashboard/f85c27c5-89f1-42b8-bace-543b335ae4e2	1	ini beranda isinya ada Indikator Ekonomi Islam Global berdasarkan Total Indikator dan 6 Indikator lainnya	this is home
+5	Layanan Digital & Data Syariah	Digital Services & Sharia Data	Layanan Digital & Data Syariah	Digital Services & Sharia Data	https://metabase.kneks.go.id/public/dashboard/f85c27c5-89f1-42b8-bace-543b335ae4e2	3	null	null
+4	Inovasi Industri Halal	Halal Industry Innovation	Inovasi Industri Halal	Halal Industry Innovation	null	4	null	null
 \.
 
 
 --
--- Data for Name: data_slider; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: data_slider; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.data_slider (id, title, title_en, amount, date_created, image, link, publish) FROM stdin;
-2	IPH	IPH	100	2019-05-09	https://webdev.rifhandi.com/uploads/data/abc.jpg	https://metabase.kneks.go.id/public/dashboard/7caec5a5-4e6f-45c2-8d38-00286d5dc3ed	1
-3	JKS	JKS	100	2019-05-09	https://webdev.rifhandi.com/uploads/data/abc.jpg	https://metabase.kneks.go.id/public/dashboard/7caec5a5-4e6f-45c2-8d38-00286d5dc3ed	1
-4	KSS	KSS	100	2019-05-09	https://webdev.rifhandi.com/uploads/data/abc.jpg	https://metabase.kneks.go.id/public/dashboard/7caec5a5-4e6f-45c2-8d38-00286d5dc3ed	1
-5	BIWIS	BIWIS	100	2019-05-09	https://webdev.rifhandi.com/uploads/data/abc.jpg	https://metabase.kneks.go.id/public/dashboard/7caec5a5-4e6f-45c2-8d38-00286d5dc3ed	1
-1	Marketshare	Marketshare	6	2025-01-14	https://webdev.rifhandi.com/uploads/data/abc.jpg	https://metabase.kneks.go.id/public/dashboard/7caec5a5-4e6f-45c2-8d38-00286d5dc3ed	1
+4	Ekspor Produk Halal (USD Ribu)	Halal Product Export (USD Thousand)	4416820	2025-02-09	https://cms-dev.kneks.go.id/uploads/data/download.png	https://metabase.kneks.go.id/public/dashboard/7caec5a5-4e6f-45c2-8d38-00286d5dc3ed	\N
+5	Total Asset Pasar Modal Syariah ( Rp Triliun )	Islamic Capital Market Asset Value (Rp Trillion)	8176	2025-03-09	https://cms-dev.kneks.go.id/uploads/data/download.png	https://metabase.kneks.go.id/public/dashboard/7caec5a5-4e6f-45c2-8d38-00286d5dc3ed	\N
+2	Literasi Ekonomi Syariah ( % )	Islamic Economic Literation ( % )	42	2024-05-09	https://cms-dev.kneks.go.id/uploads/data/download.png	https://metabase.kneks.go.id/public/dashboard/7caec5a5-4e6f-45c2-8d38-00286d5dc3ed	\N
+3	Jumlah Sertifikasi Halal	Halal Certified Amount	2114663	2025-03-09	https://cms-dev.kneks.go.id/uploads/data/download.png	https://metabase.kneks.go.id/public/dashboard/7caec5a5-4e6f-45c2-8d38-00286d5dc3ed	\N
 \.
 
 
 --
--- Data for Name: data_submenu; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: data_submenu; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
-COPY public.data_submenu (id, short_name, long_name, id_statistic, short_name_en, long_name_en, statistic_name) FROM stdin;
-2	ASAAAA	Submenu_Panjang_1	1	ASAAAA	Submenu_Panjang_2	RPH
+COPY public.data_submenu (id, short_name, long_name, id_statistic, short_name_en, long_name_en, statistic_name, link_data, sub_narations, sub_narations_en) FROM stdin;
+21	PDES	Pusat Data Ekonomi Syariah	5	PDES	Sharia Economic Data Center	Layanan Digital & Data Syariah	https://metabase.kneks.go.id/public/dashboard/46c87885-88a3-426f-bb74-52d96987ad7f	null	null
+22	Landscape Keuangan Syariah 2	Landscape Keuangan Syariah 2	5	Islamic Financial Landscape 2	Islamic Financial Landscape 2	Layanan Digital & Data Syariah	https://metabase.kneks.go.id/public/dashboard/bc1f2934-5a73-4779-9917-0ca1c0b76f46	null	null
+25	Pembiayaan BPRS, LPDB dan PIP	Pembiayaan BPRS, LPDB dan PIP	2	BPRS, LPDB and PIP Financing	BPRS, LPDB and PIP Financing	Inklusi & Literasi Syariah	https://metabase.kneks.go.id/public/dashboard/70a2d29a-4609-4487-a707-2f7745d61134	null	null
+27	Sertifikasi Halal UMK	Taskforce Lintas K/L Percepatan Implementasi Sertifikasi Halal UMK​ 	3	Halal Certification of UMK	Cross-Ministry/Institution Taskforce Accelerates Implementation of UMK Halal Certification	Regulasi & Kelembagaan	https://metabase.kneks.go.id/public/dashboard/7b524b74-4694-4642-bec3-d4b77619d576	null	null
+28	Lembaga Pemeriksa Halal	Lembaga Pemeriksa Halal Nasional​ 	3	Halal Inspection Agency	National Halal Inspection Agency	Regulasi & Kelembagaan	https://metabase.kneks.go.id/public/dashboard/69e6ccca-5f40-4d82-a1f3-26428b420bf3	null	null
+29	KPBU Syariah	Kerjasama Pemerintah dan Badan Usaha Syariah	3	Sharia KPBU	Cooperation between Government and Sharia Business Entities	Regulasi & Kelembagaan	https://metabase.kneks.go.id/public/dashboard/81cf15dd-c0f1-49f5-bc66-d5c99ebc1994	null	null
+31	Wakaf Nasional	Transformasi Pengelolaan Wakaf Nasional	3	National Endowment	Transformation of National Waqf Management	Regulasi & Kelembagaan	https://metabase.kneks.go.id/public/dashboard/f6979ea6-cf8f-47f3-b13a-2047ca72c6f7	null	null
+32	ZIS Nasional	 Transformasi Pengelolaan Zakat Nasional	3	National ZIS	Transformation of National Zakat Management	Regulasi & Kelembagaan	https://metabase.kneks.go.id/public/dashboard/97c94432-e341-4c29-817d-921859338ef2	null	null
+33	Sektor Unggulan HVC	Sektor Unggulan HVC	4	HVC Leading Sectors	HVC Leading Sectors	Inovasi Industri Halal	https://metabase.kneks.go.id/public/dashboard/68659a94-e65e-4aab-b7d3-9a95970f3279	null	null
+34	Perbankan Syariah	Perkembangan Perbankan Syariah	3	Islamic Banking	Development of Islamic Banking	Regulasi & Kelembagaan	https://metabase.kneks.go.id/public/dashboard/dd93a221-b672-41a3-bf38-dd7a6f4a102e	null	null
+14	Kawasan Industri Halal	Pembangunan Zona Industri dan Kawasan Industri Halal 	4	Halal Industrial Area	Development of Halal Industrial Zones and Industrial Areas	Inovasi Industri Halal	https://metabase.kneks.go.id/public/dashboard/77af5253-75cd-4b55-9180-afbc5bfb498d	null	null
+15	Logistik Halal/Pelabuhan	Pengembangan Logistik Prioritas Halal/Pelabuhan (Laut dan Udara)	4	Halal Logistics/Ports	Halal Priority Logistics/Ports Development (Sea and Air)	Inovasi Industri Halal	https://metabase.kneks.go.id/public/dashboard/dbd028db-603a-4389-8371-ce9b5b27a032	null	null
+17	Industri Kesehatan Syariah	Pengembangan Industri Kesehatan Syariah	4	Sharia Health Industry	Development of the Sharia Health Industry	Inovasi Industri Halal	https://metabase.kneks.go.id/public/dashboard/b13da959-5c1e-4357-b081-0514b8ddaf37	null	null
+18	Percepatan Ekspor Halal	Percepatan Ekspor Industri Halal	4	Acceleration of Halal Exports	Acceleration of Halal Industry Exports	Inovasi Industri Halal	https://metabase.kneks.go.id/public/dashboard/ce46adac-1bb6-41e2-b66e-4e207013821b	null	null
+35	Rumah Potong Hewan	Modernisasi Rumah Potong Hewan (RPH) Halal	4	Slaughterhouse	Modernization of Halal Slaughterhouses (RPH)	Inovasi Industri Halal	https://metabase.kneks.go.id/public/dashboard/5bc0184c-4a37-444e-b2ef-695588b5518d	null	null
+36	Riset & Inovasi Produk Halal	Riset dan Inovasi Produk Halal Berbasis Teknologi	4	Halal Product Research & Innovation	Technology-Based Halal Product Research and Innovation	Inovasi Industri Halal	https://metabase.kneks.go.id/public/dashboard/90aaae48-9de6-4e58-8d76-c73c13be83ac	null	null
+37	SDM Ekonomi Syariah	SDM Unggul Sektor Ekonomi dan Keuangan Syariah	4	Sharia Economics HR	Superior Human Resources in the Sharia Economic and Financial Sector	Inovasi Industri Halal	https://metabase.kneks.go.id/public/dashboard/5d8d852a-bb2a-4b2d-ba86-ccea3657cd63	null	null
+38	Kodifikasi Produk Halal	Kodifikasi Data Industri Produk Halal​	5	Halal Product Codification	Codification of Halal Product Industry Data	Layanan Digital & Data Syariah	https://metabase.kneks.go.id/public/dashboard/5d56cd39-5d0b-4596-9c58-c475fa15094b	null	null
+40	Pariwisata Ramah Muslim	Pengembangan Pariwisata Ramah Muslim	2	Muslim Friendly Tourism	Muslim Friendly Tourism Development	Inklusi & Literasi Syariah	https://metabase.kneks.go.id/public/dashboard/d0217134-482e-4025-bc89-4ce68633a236	null	null
+30	Pengembangan Dapen Syariah	Pengembangan Dana Pensiun Syariah	3	Development of Sharia Pension Fund	Development of Sharia Pension Funds	Regulasi & Kelembagaan	https://metabase.kneks.go.id/public/dashboard/beb105b4-0f7e-4514-a17e-2ed066894162	Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.	Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+26	KOLAKS-ULKS	Koordinasi Pengembangan Layanan Keuangan Syariah Berbasis Pesantren dan Komunitas	2	KOLAKS-ULKS	Coordination of Development of Islamic Financial Services Based on Islamic Boarding Schools and Communities	Inklusi & Literasi Syariah	https://metabase.kneks.go.id/public/dashboard/bba19a87-93b5-4e78-96fa-127ed84ef5f2		
+24	Payroll ASN Bank Syariah	Penyaluran Gaji ASN melalui Bank Syariah	2	Payroll ASN Bank Syariah	Distribution of ASN Salaries through Sharia Banks	Inklusi & Literasi Syariah	https://metabase.kneks.go.id/public/dashboard/44dfa019-dcd9-47a2-bf08-1ca1f1873441	Ini adalah grafik Payroll sampai juni 2025	null
+42	PSS UMKM	Pendanaan Sosial Syariah bagi UMKM	2	ISF for MSMEs	Islamic Social Finance for MSMEs	Inklusi & Literasi Syariah	https://metabase.kneks.go.id/public/dashboard/7f69c822-b82e-42e0-a78a-196a4b24b7da	null	null
+41	PBS UMKM	Pembiayaan Perbankan Syariah (BUS, UUS & BPRS) bagi UMKM	2	IBF for MSMEs	Islamic Banking Financing (BUS, UUS & BPRS) for MSMEs	Inklusi & Literasi Syariah	https://metabase.kneks.go.id/public/dashboard/f42d9597-cd77-403d-88bf-42189ab76003	null	null
+43	IJKS UMKM	Pembiayaan IJKS Syariah Lainnya bagi UMKM	2	Islamic NBFI for MSMEs	Other Islamic NBFI Financing for MSMEs	Inklusi & Literasi Syariah	https://metabase.kneks.go.id/public/dashboard/22fb6ca5-2975-40cf-a3e8-81a1c199ae45	null	null
+45	Sosialisasi Brand	Sosialisasi Lanjutan Brand Ekonomi Syariah	2	Brand Campaign	Extended Promotion of the Islamic Economy Brand	Inklusi & Literasi Syariah	https://metabase.kneks.go.id/public/dashboard/63966889-a98b-4efb-bf53-103e4bdfb3fc	null	null
+48	Penguatan Asuransi Syariah	Penguatan Industri Asuransi Syariah	3	Islamic Insurance Boost	Strengthening the Islamic Insurance Industry	Regulasi & Kelembagaan	https://metabase.kneks.go.id/public/dashboard/21b7c319-79c8-4666-83e1-a71857f5d949	null	null
+49	Inovasi Keuangan Syariah	Inovasi Produk dan Layanan Keuangan Syariah	3	Islamic Finance Innovation	Innovation of Islamic Financial Products and Services	Regulasi & Kelembagaan	https://metabase.kneks.go.id/public/dashboard/cc8baf5b-1db9-4390-953a-187f8ccb3e22	null	null
+51	Pasar Modal Syariah	Pertumbuhan Pasar Modal Syariah	3	Islamic Capital Market Growth	Growth of the Islamic Capital Market	Regulasi & Kelembagaan	https://metabase.kneks.go.id/public/dashboard/c848816c-ab9e-44b3-a352-089b4c688c7c	null	null
+52	Reksadana Syariah	Komposisi Reksadana Syariah	3	Islamic Fund Composition	Composition of Islamic Mutual Funds	Regulasi & Kelembagaan	https://metabase.kneks.go.id/public/dashboard/97cfbad2-d89d-4980-a170-d002becd5fcc	null	null
+20	Aktivitas Usaha Syariah	Indikator Aktivitas Usaha Syariah	5	Sharia Business Activity	Sharia Business Activity Indicators	Layanan Digital & Data Syariah	https://metabase.kneks.go.id/public/dashboard/b0bedf29-1481-40db-938b-e2ce37ee6da9	Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\r\n\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.	Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\r\n\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+53	Tren Pasar Modal Syariah	Perkembangan Pasar Modal Syariah	3	Islamic Capital Market Trends	Development of the Islamic Capital Market	Regulasi & Kelembagaan	https://metabase.kneks.go.id/public/dashboard/c2dc30a7-6dda-4486-827c-35295078878c	Narasi dari Perkembangan Pasar Modal Syariah	Narrative of the Development of the Islamic Capital Market
+19	Zona KHAS	Zona Kuliner Halal, Aman dan Sehat	4	KHAS Zone	Halal, Safe and Healthy Culinary Zone	Inovasi Industri Halal	https://metabase.kneks.go.id/public/dashboard/37bb280a-1ab1-4acc-ac8b-8a0be0e8150a	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan metus eu purus mollis lacinia. Pellentesque luctus ipsum et odio vestibulum, quis rhoncus ligula laoreet. Suspendisse auctor diam quis enim elementum faucibus. Nunc sit amet varius nisi, quis faucibus magna. Ut eleifend lobortis pulvinar. Maecenas molestie, justo vel bibendum blandit, elit odio imperdiet mauris, eget lobortis erat ante commodo nisl. Aliquam mattis ex congue mauris sagittis lobortis. Duis venenatis, augue ut suscipit commodo, elit leo suscipit massa, vitae dictum purus libero id felis.\r\n\r\nEtiam est urna, tristique sit amet elit sit amet, tempus porta urna. Cras id pellentesque metus. Etiam viverra consequat cursus. Proin tempus tellus a justo lobortis, vel venenatis leo maximus. Ut eget nibh tincidunt nulla posuere ullamcorper. Curabitur fermentum vel tortor id vulputate. Cras pharetra nulla id odio interdum, non accumsan ligula congue. Proin mi sapien, gravida eget elit eu, ornare maximus risus. Cras at posuere diam. Nunc porta maximus mi, eleifend ullamcorper eros consectetur a. Suspendisse potenti. Pellentesque augue ipsum, tincidunt vehicula justo eget, dignissim euismod diam. Vivamus et neque tempus, viverra odio ut, viverra lacus. Morbi dignissim tellus lacus, vitae dapibus nisl ultricies et. Nulla gravida condimentum leo nec congue. Nunc lacinia sem a ex condimentum, quis elementum dui feugiat.\r\n\r\nMorbi arcu nunc, gravida in tellus id, maximus congue nunc. Etiam tincidunt molestie ante vitae feugiat. Suspendisse sit amet bibendum turpis, id congue neque. Morbi posuere convallis magna quis pellentesque. Mauris dapibus metus sed magna posuere, a pretium mi lobortis. Pellentesque vel consequat nulla. Quisque mollis dolor dui. Curabitur viverra quis nibh ac semper. Praesent finibus porttitor sapien. Sed pulvinar diam sed quam ornare, at lacinia diam blandit. Vestibulum suscipit pulvinar magna vel molestie. Curabitur fringilla tortor ac nibh feugiat, a rutrum nunc tristique. Aliquam efficitur sollicitudin dui porttitor lacinia. Integer tempor orci quis massa interdum rutrum in et mi.\r\n\r\nMauris dapibus sem felis, id hendrerit erat tempus ut. Vestibulum nec lacinia lectus, ut fermentum erat. Sed imperdiet dictum ex, a dapibus augue mollis nec. Nullam sed odio ac quam volutpat dignissim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam pulvinar at justo a porta. Suspendisse tincidunt justo eu neque porttitor pulvinar. Pellentesque egestas cursus faucibus. Aenean nec turpis bibendum, congue quam eu, tempor odio. Vivamus viverra lorem eu felis ullamcorper ultricies. Cras in velit a mauris sollicitudin fringilla. Morbi dignissim sem neque.	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan metus eu purus mollis lacinia. Pellentesque luctus ipsum et odio vestibulum, quis rhoncus ligula laoreet. Suspendisse auctor diam quis enim elementum faucibus. Nunc sit amet varius nisi, quis faucibus magna. Ut eleifend lobortis pulvinar. Maecenas molestie, justo vel bibendum blandit, elit odio imperdiet mauris, eget lobortis erat ante commodo nisl. Aliquam mattis ex congue mauris sagittis lobortis. Duis venenatis, augue ut suscipit commodo, elit leo suscipit massa, vitae dictum purus libero id felis.\r\n\r\nEtiam est urna, tristique sit amet elit sit amet, tempus porta urna. Cras id pellentesque metus. Etiam viverra consequat cursus. Proin tempus tellus a justo lobortis, vel venenatis leo maximus. Ut eget nibh tincidunt nulla posuere ullamcorper. Curabitur fermentum vel tortor id vulputate. Cras pharetra nulla id odio interdum, non accumsan ligula congue. Proin mi sapien, gravida eget elit eu, ornare maximus risus. Cras at posuere diam. Nunc porta maximus mi, eleifend ullamcorper eros consectetur a. Suspendisse potenti. Pellentesque augue ipsum, tincidunt vehicula justo eget, dignissim euismod diam. Vivamus et neque tempus, viverra odio ut, viverra lacus. Morbi dignissim tellus lacus, vitae dapibus nisl ultricies et. Nulla gravida condimentum leo nec congue. Nunc lacinia sem a ex condimentum, quis elementum dui feugiat.\r\n\r\nMorbi arcu nunc, gravida in tellus id, maximus congue nunc. Etiam tincidunt molestie ante vitae feugiat. Suspendisse sit amet bibendum turpis, id congue neque. Morbi posuere convallis magna quis pellentesque. Mauris dapibus metus sed magna posuere, a pretium mi lobortis. Pellentesque vel consequat nulla. Quisque mollis dolor dui. Curabitur viverra quis nibh ac semper. Praesent finibus porttitor sapien. Sed pulvinar diam sed quam ornare, at lacinia diam blandit. Vestibulum suscipit pulvinar magna vel molestie. Curabitur fringilla tortor ac nibh feugiat, a rutrum nunc tristique. Aliquam efficitur sollicitudin dui porttitor lacinia. Integer tempor orci quis massa interdum rutrum in et mi.\r\n\r\nMauris dapibus sem felis, id hendrerit erat tempus ut. Vestibulum nec lacinia lectus, ut fermentum erat. Sed imperdiet dictum ex, a dapibus augue mollis nec. Nullam sed odio ac quam volutpat dignissim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam pulvinar at justo a porta. Suspendisse tincidunt justo eu neque porttitor pulvinar. Pellentesque egestas cursus faucibus. Aenean nec turpis bibendum, congue quam eu, tempor odio. Vivamus viverra lorem eu felis ullamcorper ultricies. Cras in velit a mauris sollicitudin fringilla. Morbi dignissim sem neque.
+44	Sukuk/Saham UMKM Halal	Pengembangan Penerbitan Saham/Sukuk UMKM Industri Halal	2	MSME Halal Sukuk/Equity	Development of Halal MSME Equity/Sukuk Issuance	Inklusi & Literasi Syariah	https://metabase.kneks.go.id/public/dashboard/6e86bfd1-7451-48c2-b193-4dfc2dc172eb	null	null
+46	Literasi Ekonomi Syariah	Peningkatan Literasi Ekonomi dan Keuangan Syariah	2	Islamic Economy Financial	Enhancing Islamic Economic and Financial Literacy	Inklusi & Literasi Syariah	https://metabase.kneks.go.id/public/dashboard/8efb2204-72d3-440c-98bd-fa74cf7156f0	null	null
+50	KDEKS	Kelembagaan Ekonomi dan Keuangan Syariah Daerah	3	RIEFI	Regional Islamic Economic and Financial Institutions	Regulasi & Kelembagaan	https://metabase.kneks.go.id/public/dashboard/913199c4-e338-4658-8a59-045ff140bb3d	null	null
+23	Layanan Syariah Jamsosnaker	Layanan Syariah Jaminan Sosial Ketenagakerjaan	2	Jamsosnaker Sharia Services	Sharia Social Security Employment Services	Inklusi & Literasi Syariah	https://metabase.kneks.go.id/public/dashboard/469415bf-3a6d-4365-a12a-6c186f723529	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan metus eu purus mollis lacinia.	undefined
 \.
 
 
 --
--- Data for Name: db_event; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: db_event; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.db_event (id, name) FROM stdin;
@@ -2390,17 +2439,31 @@ COPY public.db_event (id, name) FROM stdin;
 
 
 --
--- Data for Name: devisi; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: devisi; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.devisi (id, title, description, directorats_id, directorats_name, title_en, description_en) FROM stdin;
-1	Divisi Baru	Test divisi baru	3	Keuangan Sosial Syariah	null	null
-2	Test Divisi Baru Lagi	Test Divisi Baru Lagi	3	Keuangan Sosial Syariah	null	null
+3	Pasar Modal Syariah	-	2	Jasa Keuangan Syariah	Sharia Capital Market	-
+2	Jasa Keuangan Non-Bank Syariah	-	2	Jasa Keuangan Syariah	Sharia Non-Bank Financial Services	-
+1	Perbankan Syariah	-	2	Jasa Keuangan Syariah	Islamic Banking	-
+4	Dana Sosial Syariah 	-	3	Keuangan Sosial Syariah	Sharia Social Fund	-
+5	Lembaga Keuangan Mikro Syariah 	-	3	Keuangan Sosial Syariah	Islamic Microfinance Institution	-
+6	Inklusi Keuangan Syariah	-                         	3	Keuangan Sosial Syariah	Islamic Financial Inclusion	-                                            
+7	Kemitraan dan Akselerasi Usaha Syariah 	-                                            	4	Bisnis dan Kewirausahaan Syariah	Partnership and Acceleration of Sharia Business	-                                            
+8	Inkubasi Bisnis Syariah 	-                                           	4	Bisnis dan Kewirausahaan Syariah	Sharia Business Incubation	-                                            
+9	Bisnis Digital dan Pusat Data Ekonomi Syariah	  -                                         	4	Bisnis dan Kewirausahaan Syariah	Digital Business and Islamic Economic Data Center	-                                            
+10	Hukum Pengembangan Ekonomi Syariah 	-                                            	5	Infrastruktur Ekosistem Syariah	Sharia Economic Development Law	-                                     
+11	Promosi dan Kerja Sama Strategis	-                                            	5	Infrastruktur Ekosistem Syariah	Promotion and Strategic Cooperation	-                                            
+12	Pengembagan SDM Ekonomi Syariah	-                                            	5	Infrastruktur Ekosistem Syariah	Development of Sharia Economic Human Resources	-                                            
+13	Riset Ekonomi Syariah	 -                                           	5	Infrastruktur Ekosistem Syariah	Islamic Economic Research	 -                                           
+14	Pengembangan Halal Assurance System	 -                                          	1	Industri Produk Halal	Halal Assurance System Development	-                                            
+15	 Infrastruktur Industri Halal	-                                            	1	Industri Produk Halal	Halal Industry Infrastructure	  -                                         
+16	Divisi Rantai Nilai Produk Halal	-                                            	1	Industri Produk Halal	Halal Product Value Chain Division	 -                                       
 \.
 
 
 --
--- Data for Name: directorats; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: directorats; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.directorats (id, title, title_en, description, description_en, web_identity, images, directiorat_banner, id_province, province_name) FROM stdin;
@@ -2408,12 +2471,12 @@ COPY public.directorats (id, title, title_en, description, description_en, web_i
 3	Keuangan Sosial Syariah	Sharia Social Finance	Pengembangan Keuangan Sosial Syariah	Sharia Social Finance	kneks	https://webdev.rifhandi.com/uploads/directorat/images/sosial.svg	https://webdev.rifhandi.com/uploads/directorat/images/1.png	19	Kalimantan Barat
 5	Infrastruktur Ekosistem Syariah	Sharia Ecosystem Infrastructure	Infrastruktur Ekosistem Syariah	Sharia Ecosystem Infrastructure	kneks	https://webdev.rifhandi.com/uploads/directorat/images/infra.svg	https://webdev.rifhandi.com/uploads/directorat/images/2.png	11	DKI Jakarta
 1	Industri Produk Halal	Halal Product Industry	Pengembangan Produk Industri Halal	Halal Product Industry	kneks	https://webdev.rifhandi.com/uploads/directorat/images/halal.svg	https://webdev.rifhandi.com/uploads/directorat/images/4.png	17	Nusa Tenggara Barat
-4	Bisnis dan Wirausaha Syariah	Sharia Business and Entrepreneur	Bisnis dan Kewirausahaan Syariah	Sharia Business and Entrepreneur	kneks	https://webdev.rifhandi.com/uploads/directorat/images/sme.svg	https://webdev.rifhandi.com/uploads/directorat/images/3.png	10	Banten
+4	Bisnis dan Kewirausahaan Syariah	Sharia Business and Entrepreneur	Bisnis dan Kewirausahaan Syariah	Sharia Business and Entrepreneur	kneks	https://webdev.rifhandi.com/uploads/directorat/images/sme.svg	https://webdev.rifhandi.com/uploads/directorat/images/3.png	10	Banten
 \.
 
 
 --
--- Data for Name: files; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: files; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.files (id, title, date, file, content, is_publish, report_category_id, title_en, content_en, web_identity, writer, publisher, synopsis, isbn, number_of_pages, width, height, tagging, directorat, id_province, report_category_name, users_id, users_name, passcode, downloadable) FROM stdin;
@@ -2441,6 +2504,8 @@ COPY public.files (id, title, date, file, content, is_publish, report_category_i
 44	Buku Kerangka Acuan Akademik Program Studi S1 Ekonomi Syariah	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Buku Kerangka Acuan&nbsp;Akademik Program Studi S1 Ekonomi Syariah adalah acuan standard minimal kurikulum program studi S1 Ekonomi Syariah yang berisi tinjauan kurikulum prodi ekonomi syariah dari 10 Perguruan Tinggi, RPS 10 Mata Kuliah Inti Ekonomi Syariah, dan Capaian Pembelajaran Lulusan. Penyusunan ini melibatkan 10 Perguruan Tinggi yang termasuk dalam <em>working group</em> KNKS dalam penyusunan kerangka acuan kurikulum prodi S1 Ekonomi Syariah. Buku ini dapat dijadikan referensi untuk diimplementasikan oleh&nbsp;perguruan tinggi dalam menyusun kurikulum prodi S1 ekonomi syariah.</p>	1	7	\N	\N	kneks	null                                                                                                                                                                                                                                                           	null	\N	null	0	0	0	null	null	0	null	0	null	null	0
 45	Rekomendasi Kebijakan: Strategi Pengembangan Keuangan Mikro Syariah di Indonesia	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Buku rekomendasi kebijakan yang disusun oleh KNKS berisi tentang gambaran yang jelas mengenai lanskap dan kelembagaan keuangan mikro syariah secara umum di Indonesia, serta strategi pengembangan dan penguatan keuangan mikro syariah yang merupakan jawaban dari berbagai tantangan yang selama ini dihadapi dalam mendorong pertumbuhan dan peran serta keuangan mikro syariah dalam penanggulangan kemiskinan dan menjaga sustainabilitas atau keberlanjutan institusi keuangan mikro syariah di Indonesia.</p>	1	3	\N	\N	kneks	null                                                                                                                                                                                                                                                           	null	\N	null	0	0	0	null	null	0	null	0	null	null	0
 47	Kajian Pemetaan Potensi Pengembangan Aset Wakaf dan Analisis Proses SIWAK Kemenag di DKI Jakarta, Kota Bandung, dan Kabupaten Bogor	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Kajian ini memaparkan kondisi data aset wakaf, konsep metodologi pendataan, dan pemetaan pengembangan aset wakaf yang tersebar di tiga wilayah, yaitu Provinsi DKI Jakarta, Kota Bandung dan Kabupaten Bogor. Analisis hasil temuan lapangan berupa proses pendataan dan pemetaan pengembangan aset wakaf, khususnya yang ada pada SIWAK Kemenag, menjadi salah satu aspek yang dipresentasikan di dalam dokumen kajian. Di dalam kajian ini juga telah disusun&nbsp;rekomendasi pengembangan aset wakaf menjadi produktif serta rekomendasi atas pengembangan aplikasi SIWAK dan ekosistem wakaf produktif di Indonesia secara umum.</p>	1	3	\N	\N	kneks	null                                                                                                                                                                                                                                                           	null	\N	null	0	0	0	null	null	0	null	0	null	null	0
+224	Pustaka Baru	2020-10-20	https://webdev.rifhandi.com/uploads/filesupload/Notulensi_RapatProgress Pengembangan Website KNEKS_04 Feb 2025.docx.pdf	Berisi testing sajaa	\N	2	New 	Testttt	kneks	magang                                                                                                                                                                                                                                                         	kneks	pidato mengenai blabal	12-10A	199	23	34	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	1	1	Pidato/Paparan	18	SuperAdmin	123456	on
+225	What is Lorem Ipsum?	2025-02-26	https://webdev.rifhandi.com/uploads/filesupload/1708088860-.hphp	<strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>	\N	0	What is Lorem Ipsum?	<strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>	kneks	Blabla                                                                                                                                                                                                                                                         	Blabla	pidato mengenai blabla	012345	12	12	12	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	1	1	\N	15	Co-Admin	0	on
 187	Panduan Pendamping PPH (Proses Produk Halal)	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Buku ini bertujuan untuk memberikan informasi, khsususnya kepada Pendamping PPH, terkait prosedur dan persyaratan untuk memperoleh Sertifikasi Halal bagi UMK melalui jalur self-declare. Buku ini memuat petunjuk teknis bagi Pendamping PPH dalam melaksanakan verifikasi dan validasi pernyataan kehalalan produk yang dibuat oleh pelaku usaha mikro dan kecil. Panduan ini memandu pendamping PPH melaksanakan tugas di tempat proses produksi. Penggunaan panduan praktis ini akan memudahkan Pendamping PPH menilai penerapan kehalalan produk pelaku usaha sehingga proses pelaksaaan sertifikasi halal melalui pernyataan pelaku usaha (self-declare) dapat berjalan dengan baik.&nbsp;</p>	0	7	\N	\N	kneks	null                                                                                                                                                                                                                                                           	null	\N	null	0	0	0	null	null	0	null	0	null	null	0
 188	Rekomendasi Kebijakan Pengembangan dan Pendalaman Pasar BPRS	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Rekomendasi Kebijakan Pengembangan dan Pendalaman Pasar BPRS</p>	1	3	\N	\N	kneks	null                                                                                                                                                                                                                                                           	null	\N	null	0	0	0	null	null	0	null	0	null	null	0
 189	Kajian Pengembangan Fungsi Sosial Pada Institusi Keuangan Mikro Syariah	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Kajian Pengembangan Fungsi Sosial Pada Institusi Keuangan Mikro Syariah&nbsp;</p>	1	3	\N	\N	kneks	null                                                                                                                                                                                                                                                           	null	\N	null	0	0	0	null	null	0	null	0	null	null	0
@@ -2463,12 +2528,11 @@ COPY public.files (id, title, date, file, content, is_publish, report_category_i
 205	Modul 6 Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Modul 6 Pelatihan Berbasis Kompetensi (PBK) - Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan</p>	1	7	\N	\N	kneks	null                                                                                                                                                                                                                                                           	null	\N	null	0	0	0	null	null	0	null	0	null	null	0
 207	Modul 8 Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>Modul 8 Pelatihan Berbasis Kompetensi (PBK) - Melaksanakan Prinsip-Prinsip Syariah dalam Pembiayaan dan Pendanaan</p>	1	7	\N	\N	kneks	null                                                                                                                                                                                                                                                           	null	\N	null	0	0	0	null	null	0	null	0	null	null	0
 208	Masterplan Industri Halal Indonesia 2023-2029	2019-05-09	https://webdev.rifhandi.com/uploads/filesupload/sample.pdf	<p>MPIHI 2023-2029 merupakan road map pengembangan industri halal dari tahun 2023 sampai dengan tahun 2029, dengan 4 strategi utama, yaitu 1) peningkatan produktivitas dan daya saing; 2) penerapan serta penguatan kebijakan dan regulasi; 3) penguatan keuangan dan infrastruktur; serta 4) penguatan halal brand and awareness, yang didukung juga dengan 11 program utama, dan 8 indikator yang akan dipantau perkembangannya secara berkala.</p>	1	1	\N	\N	kneks	null                                                                                                                                                                                                                                                           	null	\N	null	0	0	0	null	null	0	null	0	null	null	0
-221	ss	2222-02-12	https://webdev.rifhandi.com/uploads/filesupload/aribiya@gmail.com.pdf	ss	on	9	ss	ss	kneks	sss                                                                                                                                                                                                                                                            	ss	ss	ss	22	2	33	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	5	3	avce	15	Co-Admin	null	0
 \.
 
 
 --
--- Data for Name: files_categories; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: files_categories; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.files_categories (id, title, title_en, web_identity) FROM stdin;
@@ -2479,26 +2543,22 @@ COPY public.files_categories (id, title, title_en, web_identity) FROM stdin;
 4	Data Statistik	Data Statistik	kneks
 5	Regulasi	Regulasi	kneks
 6	Siaran Pers	Siaran Pers	kneks
-9	avce	avcc	kneks
-10	Tes Kategori	Test Kategori	kneks
 \.
 
 
 --
--- Data for Name: hot_categories; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: hot_categories; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.hot_categories (id, title, title_en, web_identity) FROM stdin;
 2	Pengembangan Jasa Keuangan Syariah	Pengembangan Jasa Keuangan Syariah	kneks
 3	Pengembangan Keuangan Sosial Syariah	Pengembangan Keuangan Sosial Syariah	kneks
 1	Pengembangan Industri Produk Halal	Pengembangan Produk Industri Halal	kneks
-6	ss	ss	kneks
-7	Tes Kategori Baru	Tes Kategori Baru	kneks
 \.
 
 
 --
--- Data for Name: hot_issues; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: hot_issues; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.hot_issues (id, title, title_en, excerpt, excerpt_en, content, content_en, image, is_publish, hot_issue_datetime, hot_subcategory_id, web_identity, hot_issue_category, tag, id_province, hot_subcategory_name, directorat) FROM stdin;
@@ -2507,6 +2567,7 @@ COPY public.hot_issues (id, title, title_en, excerpt, excerpt_en, content, conte
 4	Tantangan Aspel Legal Keuangan Syariah	\N	\N	\N	<p>Indonesia memiliki lebih banyak peraturan yang terkait dengan keuangan syariah dibandingkan negara-negara lain. Peraturan-peraturan ini tersebar dan terbagi di antara banyak regulator. Segmen industri keuangan syariah yang terdiri dari institusi formal dan informal merupakan tantangan tersendiri dalam membuat peraturan keuangan syariah yang komprehensif. Struktur pasar keuangan syariah Indonesia yang terdiri dari beberapa lapisan juga menjadikan segmen yang tumpang tindih dan saling bergantung, sehingga berdampak pada inefektifitas dan inefisiensi hukum ekonomi syariah Indonesia. Hal ini berpangaruh signifikan pada peraturan turunan yang dipakai oleh lembaga-lembaga pemangku kepentingan terkait dan berimplikasi pada teknis implementasi industri keuangan syariah itu sendiri.<br />\n<br />\nMunculnya sengketa-sengketa hukum yang ditangani oleh Pengadilan Agama Indonesia menunjukkan besarnya tantangan dalam mengembangkan instrumen-instrumen keuangan syariah di Indonesia yang mencakup industri perbankan maupun non perbankan. Seiring berkembangnya inovasi-inovasi produk keuangan di Indonesia serta pengembangan pada sektor ril maka dibutuhkan payung-payung hukum yang dapat mendukung dan mendorong Indonesia untuk menjadi pemain utama pengembangan ekonomi syariah di Indonesia.<br />\n<br />\nDengan demikian diperlukan konsolidasi dan harmonisasi pada peraturan-peraturan terkait keuangan syariah, serta meningkatkan kerangka peraturan umum ataupun kebijakan khusus dan standar pengelolaan keuangan syariah untuk mendukung pengembangan ekonomi dan keuangan syariah di<br />\n<br />\nSebelumnya pemerintah melantik lima direktur Komite Nasional Keuangan Syariah atau KNKS sebagai Manajemen Eksekutif KNKS pada Kamis (3/1/2018). Manajemen Eksekutif KNKS akan melaksanakan tugas-tugas harian yang sebelumnya dilakukan oleh Dewan Pengarah KNKS.<br />\n<br />\nBerikut jajaran Direksi Manajemen eksekutif KNKS:<br />\n<br />\n1.Ventje Rahardjo Soedigno sebagai Direktur Eksekutif,<br />\n<br />\n2.Taufiq Hidayat sebagai Direktur Bidang Hukum dan Standar Pengelolaan Keuangan Syariah,<br />\n<br />\n3. Ronald Rulindo sebagai Direktur Bidang Inovasi Produk, Pendalaman Pasar, dan Pengembangan Infrastruktur Sistem Keuangan Syariah,<br />\n<br />\n4. Ahmad Juwaini sebagai Direktur Bidang Keuangan Inklusif, Dana Sosial Keagamaan, dan Keuangan Mikro Syariah serta 5.<br />\n<br />\nAfdhal Aliasar sebagai Direktur Bidang Promosi dan hubungan Eksternal. Pelantikan Manajemen Eksekutif KNKS diharapkan dapat menjadikan Indonesia sebagai global hub dari global&nbsp;Islamic finance.<br />\n<br />\n(R/R10/P1) (sumber : minanews.net)</p>	\N	1557470172-foto-isu-4_resized.png	1	2019-04-01 01:01:01	2	kneks	\N	\N	0	null	null
 5	Upaya Membentuk Sharing Platform Zakat Nasional	\N	\N	\N	<p>Perkembangan zakat nasional mengalami perkembangan yang cukup baik. Namun di sisi lainnya, masih banyak permasalahan yang perlu dibenahi bersama. Salah satu masalah tersebut adalah belum adanya integrasi data zakat nasional. Saat ini belum ada database zakat terpadu dan menyeluruh yang mencakup statistik data muzakki, amil dan mustahik secara nasional. Hal ini berdampak pada kurang akuratnya perhitungan data zakat nasional. Selain masalah data zakat nasional, saat ini banyak amil yang masih mengelola zakat dengan cara sederhana; melakukan transaksi secara manual dan belum menggunakan teknologi yang memadai sehingga menyebabkan rendahnya akuntabilitas, transparansi, dan profesionalisme lembaga amil zakat.<br />\n<br />\nKomite Nasional Keuangan Syariah (KNKS) melalui divisi Dana Sosial Keagamaan telah menyadari masalah tersebut. Pembentukan Sharing Platform Zakat nasional dimasukan ke dalam program prioritas KNKS tahun 2019. Beberapa upaya sudah dilakukan oleh KNKS. Pada bulan Maret 2019, KNKS telah melakukan audiensi dan Focus Group Discussion (FGD) dengan beberapa stakeholder zakat nasional seperti BAZNAS, Forum Zakat, perwakilan Lembaga Amil Zakat Nasional, Kementerian Agama, Bank Indonesia, hingga UNDP. KNKS sedang berupaya me-mapping masalah dan potensi yang ada di lapangan. Ke depan, KNKS akan merumuskan sebuah solusi sehingga bisa mewujudkan cita-cita kita bersama memiliki integrasi data zakat nasional dan sekaligus dapat meningkatkan akuntabilitas dan transparansi pelaporan lembaga amil zakat.<br />\n<br />\nKonsep sharing platform zakat yang disusun dengan memenuhi standar PSAK 109 dan Zakat Core Principles ini akan dihubungan dengan data kependudukan dan pencatatan sipil (Dukcapil) dari Kementerian Dalam Negeri (Kemendagri). Selain itu, platform zakat ini juga dihubungkan dengan data kelompok masyarakat miskin secara nasional seperti Program Keluarga Harapan (PKH) dari Kementerian Sosial. Dengan database terintegrasi tersebut akan didapatkan data muzakki, data mustahik, data pengelola zakat (BAZNAS dan LAZ), jumlah zakat terkumpul, jumlah mustahik yang terbantu dengan zakat, jumlah mustahik yang sudah berubah menjadi muzakki, dan masih banyak data-data lainnya yang diperlukan.<br />\n<br />\nSharing platform zakat juga diharapkan dapat mencegah penumpukan bantuan zakat pada seorang mustahik, dan menghindari menumpuknya bantuan zakat di suatu daerah, sementara masih banyak mustahik atau daerah lain yang sangat memerlukan. Dengan database zakat nasional, proses panyelarasan program pembangunan secara nasional yang dilakukan pemerintah dengan program pemanfataan zakat akan lebih mudah dilakukan sehingga dapat mewujudkan pengurangan angka kemiskinan dan tentu dapat meningkatkan kesejahteraan umat.</p>	\N	1557470187-foto-isu-5_resized.png	1	2019-04-01 01:01:01	7	kneks	1	\N	0	null	null
 6	Penyusunan Roadmap Pengembangan Baitul Maal Wat Tamwil (BMT) di Indonesia	\N	\N	\N	<p>Indonesia hingga saat ini telah menjadi salah satu negara yang memiliki perkembangan penerapan ekonomi syariah yang baik. Hal ini tentu saja didorong oleh faktor populasi Muslim yang mayoritas di Indonesia dan menjadi yang terbesar di dunia. Dua aspek yang berkontribusi penting akan tumbuh dan berkembangnya ekonomi syariah di Indonesia adalah pada sektor sosial dan keuangan mikronya.<br />\n<br />\nWorld Giving Index menyebutkan bahwa Indonesia menjadi salah satu negara yang paling dermawan dalam menyumbangkan donasi berbentuk tunai, bahkan praktik pengelolaan dana sosial Islam melalui lembaga filantropi Islam dan masjid-masjid sudah sangat menyebar dan menjadi bagian penting dari pembangunan dan penciptaan kesejahateraan di Indonesia. Pada sisi lainnya, sektor keuangan mikro syariah juga terus tumbuh melalui koperasi-koperasi dan lembaga pembiayaan mikro syariah, khususnya BMT, lembaga keuangan mikro syariah yang murni lahir dengan kekhasan Indonesia yang memiliki dua fungsi, yaitu fungsi amil (Baitul Maal) dan fungsi pembiayaan (Baitut Tamwil). Akan tetapi, meski perkembangan dan praktik BMT sudah sangat meluas di Indonesia, ditandai dengan sudah berdirinya sekitar 4.500 unit BMT di seluruh Indonesia (PBMT, 2018), masih banyak masalah dan tantangan yang dihadapi oleh sektor ini, khususnya terkait sustainability lembaga, sehingga kebermanfaatannya dalam mengentaskan kemiskinan dan memandirikan ekonomi masyarakat menjadi tidak optimal.<br />\n<br />\nDidasari oleh latar belakang tersebut, Komite Nasional Keuangan Syariah (KNKS) saat ini sedang bekerja untuk secara komprehensif memetakan seluruh permasalahan dan tantangan yang dihadapi BMT, mengkaji ulang praktiknya di lapangan, untuk kemudian menyusun strategi yang tepat dalam mengembangkan sektor keuangan mikro syariah melalui peran BMT agar terjadi perbaikan dan menjadi lebih kuat. Berbagai proses tersebut nantinya akan disusun menjadi sebuah dokumen Roadmap Pengembangan BMT di Indonesia. Direncanakan roadmap ini akan menjadi acuan KNKS bersama dengan seluruh stakeholder ekonomi syariah dalam mengembangkan keuangan mikro syariah sebagai bagian dari upaya peningkatan inklusifitas keuangan syariah yang berujung pada peningkatan kesejahteraan masyarakat.</p>	\N	1557470200-foto-isu-6_resized.jpg	1	2019-04-01 01:01:01	3	kneks	1	\N	0	null	null
+35	Pembiayaan Sindikasi Syariah Onshore Terbesar di Indonesia dalam USD	\N	<p>Pembiayaan Sindikasi Syariah <em>Onshore </em>Terbesar di Indonesia dalam USD oleh PT SMI dan PermataBank Syariah</p>	\N	<p>Pada Jumat (4/3) lalu,&nbsp;PT Sarana Multi Infrastruktur (Persero) (PT SMI) dan PT Bank Permata Tbk - Unit Usaha Syariah (UUS) melakukan kerja sama berupa pembiayaan syariah secara sindikasi sebesar USD231,9 juta kepada PT Armada Gema Nusantara (PT AGN) untuk dimanfaatkan perusahaan dalam memperkuat struktur pendanaan perusahaan. Pembiayaan sindikasi ini menjadi pembiayaan syariah <em>onshore </em>terbesar di Indonesia dalam mata uang USD.</p>\n\n<p>PT AGN merupakan pemilik dan operator kapal tanker <em>Floating Production Storage and Offloading </em>yang beroperasi di Lapangan BD Selat Madura, wilayah yang memiliki peranan dalam memasok gas di provinsi Jawa Timur. Pembiayaan syariah tersebut menggunakan akad <em>Musyarakah Mutanaqisah</em> (MMQ) dengan skema <em>refinancing </em>dari perbankan luar negeri. PT SMI selaku <em>Mandated Lead Arranger and Bookrunner </em>memiliki porsi pembiayaan sebesar USD150 juta, sementara UUS Bank Permata selaku <em>Arranger </em>sebesar USD81,9 juta.</p>\n\n<p>Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) sebagai katalisator penguatan dan pengembangan ekonomi dan keuangan syariah di Indonesia sangat menyambut baik kerja sama pembiayaan sindikasi ini. Direktur Eksekutif KNEKS, Ventje Rahardjo, menyampaikan bahwa industri keuangan syariah secara bertahap menunjukkan kapasitasnya dalam memberikan <em>corporate financing </em>dan <em>infrastructure financing </em>dengan skala pembiayaan besar. Kondisi ini memberikan posisi Lembaga Keuangan Syariah sebagai aktor Pemulihan Ekonomi Nasional (PEN) sekaligus kontributor dalam pertumbuhan dan pembangunan ekonomi Indonesia.</p>\n\n<p>Pada acara penandatanganan fasilitas pembiayaan di kantor SMI (4/3), Direktur Pembiayaan dan Investasi PT SMI, Sylvi J. Gani, menyampaikan bahwa <em>financial close </em>ini merupakan perwujudan komitmen PT SMI untuk mendukung kemajuan ekonomi syariah di Indonesia yang memiliki potensi ruang tumbuh sangat besar. Pemberian fasilitas pembiayaan syariah kepada PT AGN diharapkan menjadi langkah awal bagi pembiayaan syariah berikutnya di sektor minyak dan gas di Indonesia.</p>\n\n<p>Direktur Unit Usaha Syariah PT Bank Permata Tbk, Herwin Bustaman, menegaskan bahwa PermataBank Syariah akan terus mendorong pembiayaan korporasi yang sejalan dengan arahan pemerintah agar terlibat dalam pembangunan infrastruktur di Indonesia, sekaligus menjadi <em>ecosystem partner </em>bagi para nasabah.</p>\n\n<p>Sementara itu, Presiden Direktur PT Armada Gema Nusantara, Agumg Priyo Sembodo, menyampaikan bahwa pemberian fasilitas pembiayaan oleh Lembaga Keuangan Syariah ini menjadi salah satu parameter nyata atas bangkitnya keuangan syariah di Indonesia, khususnya di masa pandemi. Hal tersebut diharapkan menjadi angin segar bagi perkembangan bisnis di Indonesia.</p>\n\n<p>Penulis: Ziyan Muhammad Farhan, Yosita Nur Wirdayanti<br />\nRedaktur Pelaksana: Ishmah Qurratu&#39;ain</p>	\N	1647397875-pexels-nappy-9359791.jpg	1	2022-03-11 15:21:47	6	kneks	4	\N	0	null	null
 7	Pengembangan Ekonomi Masjid	\N	\N	\N	<p>Indonesia hingga saat ini telah menjadi salah satu negara yang memiliki perkembangan penerapan ekonomi syariah yang baik. Hal ini tentu saja didorong oleh faktor populasi Muslim yang mayoritas di Indonesia dan menjadi yang terbesar di dunia. Dua aspek yang berkontribusi penting akan tumbuh dan berkembangnya ekonomi syariah di Indonesia adalah pada sektor sosial dan keuangan mikronya.<br />\n<br />\nWorld Giving Index menyebutkan bahwa Indonesia menjadi salah satu negara yang paling dermawan dalam menyumbangkan donasi berbentuk tunai, bahkan praktik pengelolaan dana sosial Islam melalui lembaga filantropi Islam dan masjid-masjid sudah sangat menyebar dan menjadi bagian penting dari pembangunan dan penciptaan kesejahateraan di Indonesia. Pada sisi lainnya, sektor keuangan mikro syariah juga terus tumbuh melalui koperasi-koperasi dan lembaga pembiayaan mikro syariah, khususnya BMT, lembaga keuangan mikro syariah yang murni lahir dengan kekhasan Indonesia yang memiliki dua fungsi, yaitu fungsi amil (Baitul Maal) dan fungsi pembiayaan (Baitut Tamwil). Akan tetapi, meski perkembangan dan praktik BMT sudah sangat meluas di Indonesia, ditandai dengan sudah berdirinya sekitar 4.500 unit BMT di seluruh Indonesia (PBMT, 2018), masih banyak masalah dan tantangan yang dihadapi oleh sektor ini, khususnya terkait sustainability lembaga, sehingga kebermanfaatannya dalam mengentaskan kemiskinan dan memandirikan ekonomi masyarakat menjadi tidak optimal.<br />\n<br />\nDidasari oleh latar belakang tersebut, Komite Nasional Keuangan Syariah (KNKS) saat ini sedang bekerja untuk secara komprehensif memetakan seluruh permasalahan dan tantangan yang dihadapi BMT, mengkaji ulang praktiknya di lapangan, untuk kemudian menyusun strategi yang tepat dalam mengembangkan sektor keuangan mikro syariah melalui peran BMT agar terjadi perbaikan dan menjadi lebih kuat. Berbagai proses tersebut nantinya akan disusun menjadi sebuah dokumen Roadmap Pengembangan BMT di Indonesia. Direncanakan roadmap ini akan menjadi acuan KNKS bersama dengan seluruh stakeholder ekonomi syariah dalam mengembangkan keuangan mikro syariah sebagai bagian dari upaya peningkatan inklusifitas keuangan syariah yang berujung pada peningkatan kesejahteraan masyarakat.</p>	\N	1557470222-foto-isu-7_resized.png	1	2019-04-01 01:01:01	3	kneks	1	\N	0	null	null
 8	Sharing Platform Keuangan Mikro Syariah Berbasis Baitul Maal Wat Tamwil (BMT)	\N	\N	\N	<p>Sektor keuangan mikro syariah dapat dibilang menjadi aspek penting dan unggul dari perkembangan ekonomi syariah di Indonesia. BMT sebagai bentuk lembaga keuangan mikro syariah yang terlahir murni dari masyarakat Indonesia, telah menjadi primadona ekonomi syariah nasional yang kini juga telah dikenal di dunia.<br />\n<br />\nProgresifnya perkembangan BMT di Indonesia tidak terlepas dari besarnya porsi masyarakat kelas menengah dan bawah di Indonesia. Dari total sekitar 265 juta penduduk, 40% merupakan masyarakat kelas menengah dan 20% digolongkan sebagai kelas bawah, ditambah sebanyak kurang lebih 25,67 juta jiwa dikategorikan sebagai penduduk miskin atau 9,66% jumlah penduduk. Berdasarkan angka tersebut maka diperlukan pengembangan ekonomi umat yang sesuai untuk mayoritas masyarakat, yaitu melalui KUMKM dan optimalisasi dana sosial Islam. Inilah yang menjadikan keberadaan BMT relevan dan sangat diterima oleh masyarakat Indonesia.<br />\n<br />\nPertumbuhan jumlah BMT saat ini bisa dibilang cukup pesat, dimana saat ini sudah berdiri sekitar 4.500 unit, meskipun angka tersebut masih diragukan faktanya di lapangan. Pertumbuhan dan persebaran BMT yang luas tidak diimbangi dengan pendataan yang baik. Hal ini berawal dari belum jelasnya pengaturan BMT di Indonesia, dimana regulasi dan pengawasannya masih tumpang tindih antara antar regulator terkait. Lebih jauh terkait hal tersebut, tidak ada kesesuaian data jumlah BMT yang ada di seluruh Indonesia, baik yang aktif maupun yang sudah tidak aktif, termasuk mengenai posisi keuangannya masing-masing. Selain itu, banyak juga ditemukan BMT yang tidak dapat mempertahankan performa dan eksistensinya.<br />\n<br />\nBerdasarkan latar belakang tersebut, Komite Nasional Keuangan Syariah (KNKS) sedang berupaya mendorong pembenahan BMT agar menjadi lebih profesional dan terkelola dengan baik. Langkah awal yang akan dilakukan adalah dengan mengembangkan platform digital berupa core system BMT. Strategi ini diambil oleh KNKS karena faktanya di lapangan masih banyak BMT yang keuangan dan operasionalnya belum menggunakan digital core system padahal dapat memudahkan dan menjadikannya lebih efisien. Harapannya, dengan teraplikasinya sistem tersebut di seluruh BMT di Indonesia, pendataan pun akan jauh lebih baik dan terintegrasi satu sama lain.<br />\n<br />\nHingga saat ini, KNKS sedang beraudiensi dengan berbagai pemangku kepentingan sektor keuangan mikro syariah khususnya BMT untuk mematangkan dan merealisasikan rencana tersebut.</p>	\N	1557470241-foto-isu-4_resized.png	1	2019-04-01 01:01:01	3	kneks	1	\N	0	null	null
 9	Standardisasi Kurikulum Pendidikan Ekonomi Syariah	\N	\N	\N	<p>Ekonomi syariah di Indonesia menunjukkan perkembangan yang positif selama lebih dari 3 dekade. Dewasa ini, banyak perguruan tinggi negeri maupun swasta yang membuka departemen atau program studi ekonomi syariah dan terkait. Namun kurikulum ekonomi syariah dan terkait di Indonesia masih belum terstandardisasi terutama antara perguruan tinggi umum dengan perguruan tinggi berbasis keagamaan. Direktorat Pendidikan dan Riset mempunyaai program untuk menjadi coordinator dalam standardisasi kurikulum pembelajaran ekonomi syariah baik untuk Vokasi (D3), S1, dan S2. KNKS akan berkoordinasi dengan DIKTI (di bawah Kemenristek Dikti), DIKTIS (di bawah Kementerian Agama), berbagai universitas dan stakeholder lainnya untuk merealisasikan program ini.</p>	\N	1557470260-foto-isu-9_resized.png	1	2019-04-01 01:01:01	4	kneks	1	\N	0	null	null
@@ -2535,7 +2596,6 @@ COPY public.hot_issues (id, title, title_en, excerpt, excerpt_en, content, conte
 32	BP Tapera Menghadirkan Pembiayaan Rumah Berprinsip Syariah	\N	\N	\N	<p>Badan Pengelola Tabungan Perumahan Rakyat (BP Tapera) sebagai badan hukum publik yang dibentuk berdasarkan Undang-undang memiliki visi untuk memenuhi kebutuhan masyarakat mendapatkan rumah yang layak huni melalui pembiayaan terjangkau. BP Tapera menghadirkan Tapera Syariah untuk berkomitmen menjadi solusi yang menarik bagi peserta untuk mendapat pembiayaan rumah yang lebih terjangkau serta pengelolaan dana yang optimal berdasarkan prinsip Syariah.</p>\n\n<p>Tapera Syariah pada dasarnya adalah model bisnis BP Tapera berbasis syariah, di mana penyimpanan yang dilakukan oleh peserta secara periodik dalam jangka waktu tertentu dapat dimanfaatkan untuk pembiayaan perumahan dan/atau dikembalikan berikut hasil pemupukannya setelah kepesertaan berakhir berpedoman pada aturan Syariah. Pengelolaan dana Tapera Syariah secara <em>end-to-end</em> memerhatikan pemenuhan prinsip-prinsip Syariah seperti tidak mengandung unsur <em>maishir, gharar, dan riba.</em> Perserta Tapera akan mendapatkan imbal hasil secara terbuka dan optimal yang dapat terus dipantau secara digital melalui Portal Kepesertaan di sitara.tapera.go.id.</p>\n\n<p>Peserta Tapera Syariah dapat memilih berbagai akad pemanfaatan pembiayaan rumah. Dalam pemanfaatannya, Peserta Tapera Syariah dapat memilih akad yang dikehendaki serta tenor waktu dan angsuran yang dapat disesuaikan oleh kondisi peserta. Tapera menawarkan berbagai skema pilihan akad pembiayaan rumah, yaitu Kredit Pemilikan Rumah (KPR), Kredit Bangun Rumah (KBR), dan Kredit Renovasi Rumah (KRR). Peserta Tapera yang terdaftar sebagai peserta konvensional dapat memanfaatkan Tapera Syariah dengan syarat tabungan perumahan harus dipindahalihkan ke model prinsip syariah.</p>\n\n<p>Tapera Syariah berkomitmen untuk mendukung dan menjadi tempat bagi masyarakat untuk memilih pengelolaan dana dan pembiayaan berprinsip syariah dengan gotong royong, berkeadilan, transparan, aman, serta halal. Tapera Syariah diharapkan dapat mewujudkan pengembangan Indonesia untuk menjadi pusat ekonomi Syariah Dunia dan menjadi proyek strategis keuangan Syariah yang menjadi bagian dari penopang ekosistem ekonomi Syariah.</p>\n\n<p>Penulis: Raihan Aulia Firdausi, Ziyan Muhammad Farhan<br />\nRedaktur Pelaksana: Ishmah Qurratu&#39;ain</p>	\N	1640660413-WhatsApp Image 2021-12-28 at 9.40.29 AM.jpeg	1	2021-12-28 09:54:20	2	kneks	1	\N	0	null	null
 33	Peran Strategis Indonesia Memajukan Zakat dan Wakaf Dunia	\N	\N	\N	<p>Visi menjadikan Indonesia sebagai Pusat Ekonomi Syariah Dunia pada 2024 tidak hanya berfokus pada penguatan ekosistem nasional. Misi menguatkan peran Indonesia dalam kancah ekonomi syariah dunia juga menjadi bagian integral dari visi ini. Berkontribusi dalam kemajuan sektor zakat dan wakaf dunia adalah salah satu langkah strategis yang dapat diprioritaskan mengingat urgensinya dalam mendukung peningkatan kesejahteraan sosial dan ekonomi.</p>\n\n<p>Peranan Indonesia terhadap zakat dan wakaf dunia dapat menjadi satu <em>flagship</em> program mengingat saat ini belum ada negara yang menjadi pusat pengembangan zakat dan wakaf. Terlebih, Indonesia memiliki potensi zakat dan wakaf mencapai 500 trilyun seiring 87% jumlah penduduk muslim, kekhasan ekosistem zakat dan wakaf kolaboratif antara pemerintah dan masyarakat, serta tingkat kedermawanan yang tinggi sebagaimana rilis World Giving Index CAF 2021.</p>\n\n<p>Indonesia sendiri sejatinya telah memainkan peran ini, yang antara lain dapat dilihat dari inisiatif Indonesia dalam mendorong penyusunan standarisasi pengelolaan zakat dan wakaf internasional, yaitu Zakat Core Principles (ZCP) dan Waqf Core Principles (WCP). ZCP diluncurkan pada tahun 2016 dan saat ini telah diterapkan di beberapa negara. Sementara WCP baru diluncurkan pada tahun 2018.</p>\n\n<p>Indonesia juga menjadi negara kunci sejak 2010 dalam penumbuhan dan pengawalan World Zakat Forum (WZF). WZF adalah platform internasional gerakan zakat yang memiliki peran dalam mensinergikan pemangku kepentingan zakat dunia dalam meningkatkan kesejahteraan umat dan pengentasan kemiskinan. Sebagai perkembangan terkini, pada 4-5 Desember 2021 lalu, peserta pertemuan tahunan WZF (World Zakat Forum) kesepuluh telah bersepakat memperluas keanggotaan WZF kepada otoritas dan lembaga wakaf yang ada di dunia. Perwakilan 37 dari 40 negara anggota WZF juga sepakat untuk mengubah nama WZF menjadi WZWF (World Zakat and Waqf Forum), sebagai tanda konsolidasi resmi organisasi pengelola zakat dan wakaf dalam satu payung kelembagaan.</p>\n\n<p>Beberapa resolusi penting lain yang disampaikan dalam pertemuan tahunan ini antara lain perlunya mendorong kolaborasi dan sinergi lembaga zakat dan wakaf dunia dalam mengelola dampak sosial dan ekonomi untuk pemulihan ekonomi pasca covid 19; kolaborasi penguatan dan inovasi teknologi; serta inisiasi proyek percontohan Universitas Online Zakat Wakaf dan Bank Wakaf di Indonesia sebagai upaya mendorong penguatan literasi zakat dan wakaf. Poin resolusi lain adalah inisiasi pengukuran Indikator Zakat Dunia dan penyiapan Indikator Wakaf Dunia pada tahun 2022 sebagai perluasan fungsi WZWF dalam mendukung hadirnya standarisasi pengelolaan zakat dan wakaf dunia.</p>\n\n<p>Hadirnya WZWF memberikan ruang yang lebih luas bagi Indonesia dalam memimpin penguatan kemajuan zakat dan wakaf dunia. Beberapa pekerjaan rumah yang perlu dikelola oleh WZWF ke depan antara lain (1) konsolidasi dan perluasan keanggotaan WZWF, baik secara jumlah lembaga zakat dan wakaf pada negara anggota, serta negara-negara baru yang belum menjadi anggota, (2) konsolidasi program zakat dan wakaf secara kolaboratif, sinergis dan integratif di negara-negara anggota (3) penguatan jejaring WZWF dengan lembaga-lembaga dunia, seperti PBB, Islamic Development Bank, serta lembaga standarisasi ekonomi dan keuangan syariah antara lain IFSB, AAOIFI dan IIFA-OKI <em>(Irfan Syauqi Beik, Republika, 23 Desember 2021)</em>.</p>\n\n<p>Memainkan peran terdepan dalam memajukan zakat dan wakaf dunia tentu memberikan konsekuensi bagi Indonesia. Salah satu konsekuensinya adalah memastikan pengelolaan zakat dan wakaf nasional berjalan dengan sistem tata kelola yang baik, bertumbuh progresif, bermanfaat optimal, berkelanjutan dan terintegrasi dengan pembangunan nasional. Pengarus-utamaan zakat dan wakaf dalam mendukung perekonomian nasional akan melengkapi kontribusi Indonesia tidak hanya dengan kepemimpinan dan inovasi yang cerdas dalam WZFW, tapi juga dengan contoh nyata yang dapat menjadi sumber inspirasi bagi pegiat zakat dan wakaf dunia.</p>\n\n<p>Penulis: Urip Budiarto - Kepala Divisi Dana Sosial Syariah KNEKS</p>	\N	1640769356-care-heart-attend-charity-concern1.jpg	1	2021-12-29 14:10:26	7	kneks	2	\N	0	null	null
 34	Dinamika Tantangan Regulasi dan Kebijakan Pengelolaan Zakat Nasional	\N	\N	\N	<p>Penghimpunan zakat nasional lembaga formal terus bertumbuh dengan baik hingga diestimasikan mencapai Rp 16 trilyun pada tahun 2021 ini. Meski demikian, pengelolaan zakat nasional di bawah payung regulasi Undang-undang No 23 tahun 2011 masih memiliki beragam tantangan implementasi yang perlu mendapat solusi perbaikan kebijakan. Ekosistem pengelolaan zakat yang lebih kondusif, kolaboratif dan integratif diharapkan dapat lebih memperbaiki kinerja organisasi pengelola zakat dan akhirnya meluaskan kebermanfaatan zakat lebih optimal.</p>\n\n<p>Catatan khusus di awal 2021 atas implementasi pengelolaan zakat berbasis UU No 23/2011 ditandai dengan rilis hasil <em>Rapid Assessment </em>Tata Kelola Zakat dari Ombudsman. Kesimpulan Ombudsman memberi penekanan pada lima aspek: (1) fungsi ganda BAZNAS sebagai regulator dan operator yang berpotensi memiliki <em>conflict of interest, </em>(2) birokrasi perizinan lembaga amil zakat (LAZ) khususnya yang berafiliasi dengan pegawai/karyawan perusahaan, (3) beban prosedur pelaporan bagi LAZ, (4) kualitas pembinaan Kementerian Agama terhadap BAZNAS, BAZNAS Daerah dan LAZ, dan (5) belum cukup perhatian Pemerintah dan BAZNAS terhadap pembinaan dan pengawasan LAZ tradisional dan komunitas (masjid, pesantren, majelis taklim, dan lain-lain). Atas kesimpulan ini, Ombudsman memberikan lima saran kepada Kementerian Agama dan tiga saran kepada BAZNAS.</p>\n\n<p>Dalam konteks fungsi ganda BAZNAS sebagai operator dan regulator, Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) juga menemukan bahwa kondisi ini belum ideal. Dalam satu kajian yang dilakukan KNEKS terkait Positioning Dana Sosial Islam dalam Lingkup Negara dan Masyarakat pada akhir 2021, salah satu rekomendasi utama adalah perlunya memisahkan peran operator dan regulator pada BAZNAS. BAZNAS perlu lebih fokus berperan sebagai operator saja, sementara fungsi regulator berada di Kementerian Agama atau pada satu otoritas khusus zakat yang dibentuk kemudian.</p>\n\n<p>Isu fungsi ganda BAZNAS adalah satu dari sekian banyak isu yang perlu mendapat perbaikan regulasi. Pemetaan beberapa masalah yang telah diidentifikasi sebagai urgensi perbaikan regulasi antara lain (1) kewajiban zakat dan entitas wajib zakat, (2) insentif fiskal bagi pembayar zakat, (3) struktur kelembagaan dan pola koordinasi BAZNAS Pusat dengan BAZNAS Daerah, (4) kewenangan Kementerian Agama dalam pembinaan dan pengawasan, (5) pelaporan BAZNAS dan LAZ, (6) peran Pemerintah Daerah dan kolaborasi program, (7) kemandirian penganggaran dan dukungan pendanaan APBN dan APBD untuk BAZNAS, (8) pemanfaatan sistem informasi teknologi dan integrasi data, (9) posisi LAZ dan perizinan LAZ, (10) pengayoman lembaga zakat tradisional dan komunitas, dan (10) pengutamaan keuangan syariah.</p>\n\n<p>Dengan sekian banyak persoalan tata kelola zakat nasional yang telah diidentifikasi, perbaikan regulasi UU No 23/2011 tentang Pengelolaan Zakat memang krusial untuk dilakukan. Perkembangan terkini, perubahan UU No 23/2011 telah masuk daftar Program Legislasi Nasional 2020-2024 atas inisiatif DPR. Pihak BAZNAS dan Forum Zakat, sebagai perwakilan lembaga amil zakat masyarakat, juga telah melakukan rapat dan audiensi dengan DPR untuk menyampaikan substansi perubahan yang diusulkan. Pada Rapat Dengar Pendapat Komisi VIII DPR RI dengan BAZNAS pada 13 September 2021, kesimpulan rapat bahkan telah memuat komitmen Komisi VIII DPR yang akan melakukan revisi UU No 23/2011 untuk optimalisasi zakat.</p>\n\n<p>Atas telah bergulirnya pembahasan substansi dan tahapan proses perbaikan UU No 23/2011, KNEKS selaku katalisator ekonomi dan keuangan syariah nasional selanjutnya akan berupaya mengawal proses yang telah berjalan bersama seluruh pemangku kepentingan zakat. Perbaikan regulasi yang dihasilkan kelak semoga mampu menghadirkan tata kelola ekosistem zakat yang lebih efektif, tinggi partisipasi masyarakat, nyata dan luas maslahat, kolaboratif serta berkelanjutan. Sehingga, zakat dapat berkontribusi lebih signifikan mendukung penanggulangan kemiskinan, peningkatan kesejahteraan dan ketahanan ekonomi nasional.</p>\n\n<p>Penulis:&nbsp;Urip Budiarto - Kepala Divisi Dana Sosial Syariah</p>	\N	1640837109-paper-box-packaging-delivery-concept1.jpg	1	2021-12-30 10:29:45	7	kneks	3	\N	0	null	null
-35	Pembiayaan Sindikasi Syariah Onshore Terbesar di Indonesia dalam USD	\N	<p>Pembiayaan Sindikasi Syariah <em>Onshore </em>Terbesar di Indonesia dalam USD oleh PT SMI dan PermataBank Syariah</p>	\N	<p>Pada Jumat (4/3) lalu,&nbsp;PT Sarana Multi Infrastruktur (Persero) (PT SMI) dan PT Bank Permata Tbk - Unit Usaha Syariah (UUS) melakukan kerja sama berupa pembiayaan syariah secara sindikasi sebesar USD231,9 juta kepada PT Armada Gema Nusantara (PT AGN) untuk dimanfaatkan perusahaan dalam memperkuat struktur pendanaan perusahaan. Pembiayaan sindikasi ini menjadi pembiayaan syariah <em>onshore </em>terbesar di Indonesia dalam mata uang USD.</p>\n\n<p>PT AGN merupakan pemilik dan operator kapal tanker <em>Floating Production Storage and Offloading </em>yang beroperasi di Lapangan BD Selat Madura, wilayah yang memiliki peranan dalam memasok gas di provinsi Jawa Timur. Pembiayaan syariah tersebut menggunakan akad <em>Musyarakah Mutanaqisah</em> (MMQ) dengan skema <em>refinancing </em>dari perbankan luar negeri. PT SMI selaku <em>Mandated Lead Arranger and Bookrunner </em>memiliki porsi pembiayaan sebesar USD150 juta, sementara UUS Bank Permata selaku <em>Arranger </em>sebesar USD81,9 juta.</p>\n\n<p>Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) sebagai katalisator penguatan dan pengembangan ekonomi dan keuangan syariah di Indonesia sangat menyambut baik kerja sama pembiayaan sindikasi ini. Direktur Eksekutif KNEKS, Ventje Rahardjo, menyampaikan bahwa industri keuangan syariah secara bertahap menunjukkan kapasitasnya dalam memberikan <em>corporate financing </em>dan <em>infrastructure financing </em>dengan skala pembiayaan besar. Kondisi ini memberikan posisi Lembaga Keuangan Syariah sebagai aktor Pemulihan Ekonomi Nasional (PEN) sekaligus kontributor dalam pertumbuhan dan pembangunan ekonomi Indonesia.</p>\n\n<p>Pada acara penandatanganan fasilitas pembiayaan di kantor SMI (4/3), Direktur Pembiayaan dan Investasi PT SMI, Sylvi J. Gani, menyampaikan bahwa <em>financial close </em>ini merupakan perwujudan komitmen PT SMI untuk mendukung kemajuan ekonomi syariah di Indonesia yang memiliki potensi ruang tumbuh sangat besar. Pemberian fasilitas pembiayaan syariah kepada PT AGN diharapkan menjadi langkah awal bagi pembiayaan syariah berikutnya di sektor minyak dan gas di Indonesia.</p>\n\n<p>Direktur Unit Usaha Syariah PT Bank Permata Tbk, Herwin Bustaman, menegaskan bahwa PermataBank Syariah akan terus mendorong pembiayaan korporasi yang sejalan dengan arahan pemerintah agar terlibat dalam pembangunan infrastruktur di Indonesia, sekaligus menjadi <em>ecosystem partner </em>bagi para nasabah.</p>\n\n<p>Sementara itu, Presiden Direktur PT Armada Gema Nusantara, Agumg Priyo Sembodo, menyampaikan bahwa pemberian fasilitas pembiayaan oleh Lembaga Keuangan Syariah ini menjadi salah satu parameter nyata atas bangkitnya keuangan syariah di Indonesia, khususnya di masa pandemi. Hal tersebut diharapkan menjadi angin segar bagi perkembangan bisnis di Indonesia.</p>\n\n<p>Penulis: Ziyan Muhammad Farhan, Yosita Nur Wirdayanti<br />\nRedaktur Pelaksana: Ishmah Qurratu&#39;ain</p>	\N	1647397875-pexels-nappy-9359791.jpg	1	2022-03-11 15:21:47	6	kneks	4	\N	0	null	null
 36	Pembentukan Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS)	\N	<p>KDEKS&nbsp;sebagai latalisator percepatan pengembangan ekonomi syariah di daerah</p>	\N	<p>Kelembagaan Ekonomi dan Keuangan Syariah Daerah merupakan salah satu dari 13 Program Prioritas KNEKS Tahun 2022. Program prioritas 2022 ditetapkan pada Rapat Pleno KNEKS, 30 November 2021 lalu, oleh Wakil Presiden selaku Ketua Harian KNEKS. Kelembagaan ini merupakan salah satu infrastruktur pendukung dalam Ekosistem Ekonomi Syariah, yang berfungsi sebagai katalisator untuk mempercepat pengembangan Ekonomi dan Keuangan Syariah di daerah, dalam upaya mencapai visi Indonesia sebagai Pusat Halal Dunia di tahun 2024.</p>\n\n<p>Pada awal 2022 beberapa provinsi telah menginisiasi pembentukan Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) diantaranya Provinsi Sumatera Barat, Jawa Barat, Riau, dan Gorontalo. Provinsi Jawa Barat telah mengesahkan Peraturan Gubernur Jawa Barat No. 1 tahun 2022 tentang Pengembangan Ekonomi dan Keuangan Syariah yang didalamnya mengatur pembentukan KDEKS. Memasuki triwulan kedua ini Pemerintah Provinsi Sumatera Barat telah resmi membentuk Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) Sumatera Barat melalui Keputusan Gubernur Sumatera Barat No. 500-315-2022, tertanggal 7 April 2022.</p>\n\n<p>Pembentukan ini diumumkan pada Acara Launching Gerakan Nasional Bangga Buatan Indonesia (GBBI) di Bukittinggi, Sumatera Barat, 12 April 2022, oleh Gubernur Sumatera Barat dihadapan Wakil Presiden Republik Indonesia, Menteri Koordinator Maritim dan Investasi, Menteri Pariwisata dan Ekonomi Kreatif dan Ketua Dewan Komisioner Otoritas Jasa Keuangan, dan seluruh undangan baik yang hadir secara fisik maupun virtual.</p>\n\n<p>Pembentukan Kelembagaan Ekonomi dan Keuangan Syariah Daerah ini Manajemen Eksekutif KNEKS bersinergi dengan Kementerian/Lembaga baik Anggota dan non-Anggota KNEKS melalui rangkaian pertemuan one on one, Focus Group Discussion, serta rapat terbatas. Beberapa Kementerian/Lembaga yang telah berperan aktif diantaranya Kementerian Dalam Negeri, Kementerian Hukum dan HAM, Kementerian PPN/BAPPENAS, Kementerian Keuangan, Otoritas Jasa Keuangan, Bank Indonesia, Majelis Ulama Indonesia dan Kamar Dagang Indonesia.</p>\n\n<p>Kelembagaan Ekonomi dan Keuangan Syariah Daerah bertujuan menjadi katalisator membangun dan menguatkan sinergi antara para pemangku kepentingan untuk percepatan pengembangan Ekonomi Syariah di daerah dan juga secara nasional. Meningkatnya perkembangan Ekonomi Syariah Indonesia, sebagaimana dituangkan dalam MEKSI, yaitu &lsquo;Indonesia sebagai Pusat Halal Dunia 2024&rsquo; dapat menjadi kontribusi yang signifikan untuk percepatan pemulihan dan penguatan Ekonomi Nasional.</p>\n\n<p>Penulis: Adelina Zuleika, M. Adam Hervanda<br />\nRedaktur Pelaksana: Ishmah Qurratu&#39;ain</p>	\N	1650860107-DSC071191.jpg	1	2022-04-14 10:33:41	13	kneks	5	\N	0	null	null
 37	Simak Fatwa MUI terkait Daging Hewan Berpenyakit Kuku & Mulut (PMK), Halal Kah?	\N	<p>Simak Fatwa MUI terkait Daging Hewan Berpenyakit Kuku &amp; Mulut (PMK), Halal Kah?</p>	\N	<p>Satu bulan menuju Bulan Zulhijah, yaitu umat muslim dunia akan merayakan Bulan Suci Idul Adha. Hari raya tersebut adalah untuk memperingati peristiwa kurban, yaitu ketika Nabi Ibrahim bersedia mengorbankan putranya Isma&#39;il sebagai wujud kepatuhan kepada Allah S.W.T.</p>\n\n<p>Serempak dirayakan oleh seluruh umat muslim dunia, proses penyembelihan, konsumsi, dan distribusi hewan kurban pun menjadi aktivitas rutin umat muslim setiap tahunnya. Baru-baru ini, Penyakit Mulut dan Kuku (PMK) melanda ternak di berbagai wilayah Indonesia. Seperti, di Aceh dan Jawa Timur. Lantas, bagaimana hukumnya bagi umat muslim mengonsumsi produk yang terjangkit penyakit ini, khususnya sebagai hewan kurban?</p>\n\n<p>Perlu dipahami, PMK merupakan penyakit menular akut yang menyerang hewan kuku belah seperti sapi, kerbau, domba, kambing, rusa, babi dan lain-lain dengan tingkat penularan yang cukup tinggi 90-100% (Kementan, 2022).</p>\n\n<p>Meskipun PMK bukan merupakan penyakit <em>zoonosis</em> atau tidak menular ke manusia, namun penyakit ini sangat mudah menular ke sesama hewan. Hal ini dapat menimbulkan dampak kerugian ekonomi yang sangat besar, sehingga perlu dilakukan tindakan pengendalian dan penanggulangan.</p>\n\n<p>Oleh karena itu, pemerintah sigap mengeluarkan surat keputusan terkait penanganan PMK. Surat keputusan tersebut berisikan penetapan wilayah yang terjangkit wabah seperti di Kabupaten Aceh Tamiang, Provinsi Aceh dan Kabutapen Mojokerto, Gresik, Sidoarjo dan Lamongan di Provinsi Jawa Timur, serta pembentukan gugus tugas penanganan PMK.</p>\n\n<ul>\n\t<li>Surat Keputusan Menteri Pertanian Nomor 405/KPTS/OT.050/M/05/2022 Gugus tugas (task force) penanganan PMK</li>\n\t<li>Surat Keputusan Menteri Pertanian Nomor: 403/KPTS/PK.300/M/05/2022 tentang Penetapan Daerah Wabah PMK pada Beberapa Kabupaten di Provinsi Jawa Timur</li>\n\t<li>Surat Keputusan Menteri Pertanian Nomor: 404/KPTS/PK.300/M/05/2022 Penetapan Daerah Wabah PMK di Kabupaten Aceh Tamiang Provinsi Aceh</li>\n\t<li>Surat Edaran Kepala Badan Karantin Pertanian Nomor 12950/KR.120/K/05/2022 Peningkatan Kewaspadaan Terhadap Kejadian PMK</li>\n</ul>\n\n<p>Mewabahnya PMK pada hewan ternak di berbagai wilayah Indonesia, mulai menimbulkan tanda tanya di kalangan masyarakat. Apakah daging hewan yang terjangkit PMK ini thayyib atau baik dan halal untuk dikonsumsi?</p>\n\n<p>Daging yang halal dikonsumsi adalah daging berasal dari hewan yang disembelih secara syariat islam. Pada prinsipnya status kehalalan daging yang berasal dari hewan terjangkit PMK berasal dari hasil pertimbangan, apakah daging tersebut mendatangkan kerugian (mudharat) atau tidak. Untuk menjawab hal ini, pendapat ahli seperti dokter hewan, ahli gizi, dan lainnya, diperlukan.</p>\n\n<p>Menurut Kementerian Kesehatan, berdiskusi dengan World Health Organization (WHO), dan Badan Kesehatan Hewan Dunia (OIE), Kementerian Pertanian, serta pakar kesehatan veteriner, menyatakan daging hewan terjangkit PMK aman untuk di konsumsi sehari-hari.</p>\n\n<p>Namun dengan catatan, daging tersebut harus matang dimasak hingga titik suhu mendidih. Karena, virus PMK akan mati pada suhu 70&deg;C. Serta, melakukan pelayuan yakni menggantungkan daging untuk menurunkan PH daging agar tidak ada virus tersebar. Selain itu perlu untuk menghindari bagian yang terkena PMK secara langsung, seperti kaki, organ dalam atau jeroan, dan bagian mulut seperti bibir dan lidah.</p>\n\n<p>Lalu, bagaimana hukum berkurban dengan hewan yang terkena PMK?</p>\n\n<p>Berbeda dengan hewan sembelihan untuk konsumsi biasa, hewan kurban memiliki persyaratan yang lebih mengikat. Hewan kurban harus sehat secara fisik, cukup umur dan anggota tubuhnya tidak ada yang cacat.</p>\n\n<p>Majelis Ulama Indonesia (MUI) bersama sejumlah ahli dan kementerian terkait telah melakukan pendalaman dan menerbitkan fatwa Nomor 32 Tahun 2022 terkait hewan terinfeksi virus PMK sebagai hewan kurban (Jakarta, 31/05/2022).</p>\n\n<p>Berdasarkan fatwa tersebut, hewan yang terkena PMK dengan gejala klinis kategori ringan, seperti lepuh ringan pada celah kuku, kondisi lesu, tidak nafsu makan, dan keluar air liur lebih dari biasanya hukumnya sah dijadikan hewan kurban.</p>\n\n<p>Sedang hewan yang terkena PMK dengan gejala klinis kategori berat seperti lepuh pada kuku hingga terlepas dan/atau menyebabkan pincang/tidak bisa berjalan, dan sangat kurus hukumnya tidak sah dijadikan hewan kurban.</p>\n\n<p>Adapun jika hewan dengan gejala klinis berat sembuh dari PMK dalam rentang waktu yang diperbolehkan kurban (10 sampai dengan 13 Zulhijah), maka hewan ternak tersebut sah dijadikan hewan kurban. Namun, apabila kesembuhannya melewati rentang waktu yang diperbolehkan kurban, maka hewan tersebut dianggap sedekah, dan bukan kurban.</p>\n\n<p>Selain penyakit, salah satu hal yang bisa menyebabkan hewan ternak tidak sah sebagai hewan kurban adalah kecacatan fisik. Disisi lain, untuk mencegah PMK, maka dilakukan vaksinasi. Hewan yang telah divaksinasi akan dipasang <em>ear tag</em> sebagai tanda. Pemasangan ear tag berpotensi melubangi telinga hewan.</p>\n\n<p>Bagaimana hukumnya?</p>\n\n<p>Ketua Bidang Fatwa MUI menegaskan bahwa pelubangan pada telinga hewan dengan <em>ear tag</em> atau pemberian cap pada tubuhnya sebagai tanda hewan sudah divaksin atau sebagai identitasnya, tidak menghalangi keabsahan hewan kurban.</p>\n\n<p>Penulis: Eva Afifah Tsurayya, Khairana Izzati<br />\nRedaktur Pelaksana: Ishmah Qurratu&#39;ain</p>	\N	1654745619-gorgeous-herd-cattle-with-brown-cow-front1.jpg	1	2022-06-02 10:31:17	10	kneks	1	\N	0	null	null
 38	Pengembangan Pusat Data Ekonomi Syariah KNEKS	\N	\N	\N	<p>Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) tengah mengembangkan Pusat Data Ekonomi Syariah (PDES) sebagai pusat data yang terintegrasi bagi industri ekonomi dan keuangan syariah di Indonesia. Saat ini data ekonomi dan keuangan syariah masih tersebar di beberapa Kementerian/Lembaga, oleh karena itu dibutuhkan suatu pusat data yang bertujuan untuk membantu pemangku kepentingan ekonomi dan keuangan syariah secara publik, juga secara khusus dapat menjadi sarana pemantauan dan evaluasi kinerja serta kemajuan pengembangan ekonomi dan keuangan syariah untuk Ketua, Ketua Harian serta Sekretaris dan anggota KNEKS.</p>\n\n<p>Capaian pengembangan awal PDES telah dilaporkan pada Rapat Pleno KNEKS tanggal 30 Mei 2022 dan mendapat tanggapan positif dari Wakil Presiden serta dukungan dari Kementerian/Lembaga Stakeholders PDES. Selanjutnya Wakil Presiden Republik Indonesia mengamanatkan percepatan penyelesaian data ekonomi dan keuangan syariah pada Pusat Data Ekonomi Syariah. Sesuai arahan percepatan tersebut, ME KNEKS mempersiapkan langkah-langkah <em>quick-wins</em> secara taktis dan implementatif sehingga pengembangan Pusat Data Ekonomi Syariah dapat tercapai dengan baik. KNEKS bersama Sekretariat Wakil Presiden telah melaksanakan rapat lanjutan pengembangan PDES pada 5 Juli 2022 bersama Kementerian/Lembaga terkait seperti Departemen Ekonomi dan Keuangan Syariah Bank Indonesia (DEKS BI), Otoritas Jasa Keuangan (OJK), dan Badan Pusat Statistik (BPS).</p>\n\n<p>KNEKS telah berkoordinasi dengan Sekretariat Forum Satu Data Indonesia terkait penguatan tata kelola data dalam pengembangan PDES. Namun demikian, perlu mengambil langkah-langkah berikutnya untuk mengisi dan mengoptimalkan struktur dan kualitas data yang akan digunakan, juga terkait pertukaran data dengan Kementerian/Lembaga.</p>\n\n<p>Penulis:&nbsp;Anindita Widyaningrum<br />\nRedaktur Pelaksana: Ishmah Qurratu&#39;ain</p>	\N	1658463375-pexels-markus-spiske-20041611.jpg	1	2022-07-22 10:39:13	17	kneks	2	\N	0	null	null
@@ -2546,7 +2606,7 @@ COPY public.hot_issues (id, title, title_en, excerpt, excerpt_en, content, conte
 
 
 --
--- Data for Name: hot_subcategories; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: hot_subcategories; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.hot_subcategories (id, title, title_en, hot_category_id, web_identity, hot_category_name) FROM stdin;
@@ -2558,7 +2618,6 @@ COPY public.hot_subcategories (id, title, title_en, hot_category_id, web_identit
 6	Dana Sosial Syariah	Sharia Social Fund	3	kneks	null
 7	Pasar Modal Syariah	\N	2	kneks	null
 9	Rantai Nilai Produk Halal	Halal Value Chain	1	kneks	null
-10	Infrastruktur Industri Halal	Halal Industry Infrastructure	1	kneks	null
 11	Promosi dan Kerja Sama Strategis	\N	5	kneks	null
 12	Hukum Pengembangan Ekonomi Syariah	\N	5	kneks	null
 13	Inklusi Keuangan Syariah	Sharia Financial Inclusion	3	kneks	null
@@ -2566,85 +2625,108 @@ COPY public.hot_subcategories (id, title, title_en, hot_category_id, web_identit
 15	Inkubasi Bisnis Syariah	\N	4	kneks	null
 16	Bisnis Digital dan Pusat Data Ekonomi Syariah	\N	4	kneks	null
 8	Penguatan Institusi Pendidikan	Penguatan Institusi Pendidikan	5	kneks	Tes Tambah Direktorat
+10	Infrastruktur Industri Halal	Halal Industry Infrastructure	1	kneks	Pengembangan Industri Produk Halal
 \.
 
 
 --
--- Data for Name: institutions; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: institutions; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
-COPY public.institutions (id, tag, name, logo, link, created_at, "updated_at	", deleted_at, "order", web_identity) FROM stdin;
-2	ekon	Kementerian Koordinator Bidang Perekonomian Republik Indonesia	https://kneks.rifhandi.com/assets/image/instansi2.png	https://www.ekon.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	3	kneks
-4	maritim	Kemenko Bidang Kemaritiman dan Investasi	https://kneks.rifhandi.com/assets/image/instansi41.png	https://maritim.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	5	kneks
-6	kemendag	Kementerian Perdagangan Republik Indonesia	https://kneks.rifhandi.com/assets/image/instansi7.png	https://www.kemendag.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	7	kneks
-5	kemenag	Kementerian Agama RI	https://kneks.rifhandi.com/assets/image/instansi5.png	https://kemenag.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	6	kneks
-7	bappenas	Kementerian PPN/Bappenas	https://kneks.rifhandi.com/assets/image/instansi8.png	https://bappenas.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	8	kneks
-3	kemenkopmk	Kementerian Koordinator Bidang Pembangunan Manusia dan Kebudayaan	https://kneks.rifhandi.com/assets/image/instansi32.png	https://www.kemenkopmk.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	4	kneks
-1	kemenkeu	Menteri Keuangan	https://kneks.rifhandi.com/assets/image/kemenkeu.png	https://www.kemenkeu.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	2	kneks
-8	bumn	Badan Usaha Milik Negara	https://kneks.rifhandi.com/assets/image/instansi9.png	https://bumn.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	9	kneks
-9	koperasi	Kementerian Koperasi dan Usaha Kecil dan Menengah	https://kneks.rifhandi.com/assets/image/instansi10.png	https://www.kemenkopukm.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	10	kneks
-10	kemenkraf	Kementerian Pariwisata	https://kneks.rifhandi.com/assets/image/instansi11.png	https://kemenparekraf.go.id/	2022-12-30 10:07:54	2022-12-30 10:07:54	\N	11	kneks
-11	mui	MUI - Majelis Ulama Indonesia	https://kneks.rifhandi.com/assets/image/instansi15.png	https://mui.or.id/	2022-12-30 10:08:05	2022-12-30 10:08:05	\N	12	kneks
-12	kadin	Kamar Dagang dan Industri Indonesia	https://kneks.rifhandi.com/assets/image/instansi17.png	https://kadin.id/	2022-12-30 10:08:25	2022-12-30 10:08:25	\N	13	kneks
-13	bi	Bank Indonesia	https://kneks.rifhandi.com/assets/image/instansi13.png	https://bi.go.id/	2022-12-30 10:08:37	2022-12-30 10:08:37	\N	14	kneks
-14	lps	Lembaga Pinjaman Simpanan	https://kneks.rifhandi.com/assets/image/instansi14.png	https://lps.go.id/	2022-12-30 10:08:50	2022-12-30 10:08:50	\N	15	kneks
-15	kemenprin	Kementrian Perindustrian Republik Indonesia	https://kneks.rifhandi.com/assets/image/instansi6.png	https://www.kemenperin.go.id/	\N	\N	\N	0	kneks
-16	ojk	Otoritas Jasa Keuangan	https://kneks.rifhandi.com/assets/image/instansi12.png	https://ojk.go.id/id/Default.aspx	\N	\N	\N	0	kneks
+COPY public.institutions (id, tag, name, logo, link, created_at, updated_at, deleted_at, "order", web_identity) FROM stdin;
+2	ekon	Kementerian Koordinator Bidang Perekonomian Republik Indonesia	https://dev.kneks.go.id/assets/image/instansi2.png	https://www.ekon.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	3	kneks
+4	maritim	Kemenko Bidang Kemaritiman dan Investasi	https://dev.kneks.go.id/assets/image/instansi41.png	https://maritim.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	5	kneks
+6	kemendag	Kementerian Perdagangan Republik Indonesia	https://dev.kneks.go.id/assets/image/instansi7.png	https://www.kemendag.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	7	kneks
+5	kemenag	Kementerian Agama RI	https://dev.kneks.go.id/assets/image/instansi5.png	https://kemenag.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	6	kneks
+7	bappenas	Kementerian PPN/Bappenas	https://dev.kneks.go.id/assets/image/instansi8.png	https://bappenas.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	8	kneks
+3	kemenkopmk	Kementerian Koordinator Bidang Pembangunan Manusia dan Kebudayaan	https://dev.kneks.go.id/assets/image/instansi32.png	https://www.kemenkopmk.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	4	kneks
+1	kemenkeu	Menteri Keuangan	https://dev.kneks.go.id/assets/image/kemenkeu.png	https://www.kemenkeu.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	2	kneks
+8	bumn	Badan Usaha Milik Negara	https://dev.kneks.go.id/assets/image/instansi9.png	https://bumn.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	9	kneks
+9	koperasi	Kementerian Koperasi dan Usaha Kecil dan Menengah	https://dev.kneks.go.id/assets/image/instansi10.png	https://www.kemenkopukm.go.id/	2019-05-09 08:05:42	2019-05-09 08:05:42	\N	10	kneks
+10	kemenkraf	Kementerian Pariwisata	https://dev.kneks.go.id/assets/image/instansi11.png	https://kemenparekraf.go.id/	2022-12-30 10:07:54	2022-12-30 10:07:54	\N	11	kneks
+11	mui	MUI - Majelis Ulama Indonesia	https://dev.kneks.go.id/assets/image/instansi15.png	https://mui.or.id/	2022-12-30 10:08:05	2022-12-30 10:08:05	\N	12	kneks
+12	kadin	Kamar Dagang dan Industri Indonesia	https://dev.kneks.go.id/assets/image/instansi17.png	https://kadin.id/	2022-12-30 10:08:25	2022-12-30 10:08:25	\N	13	kneks
+13	bi	Bank Indonesia	https://dev.kneks.go.id/assets/image/instansi13.png	https://bi.go.id/	2022-12-30 10:08:37	2022-12-30 10:08:37	\N	14	kneks
+14	lps	Lembaga Pinjaman Simpanan	https://dev.kneks.go.id/assets/image/instansi14.png	https://lps.go.id/	2022-12-30 10:08:50	2022-12-30 10:08:50	\N	15	kneks
+15	kemenprin	Kementrian Perindustrian Republik Indonesia	https://dev.kneks.go.id/assets/image/instansi6.png	https://www.kemenperin.go.id/	\N	\N	\N	0	kneks
+16	ojk	Otoritas Jasa Keuangan	https://dev.kneks.go.id/assets/image/instansi12.png	https://ojk.go.id/id/Default.aspx	\N	\N	\N	0	kneks
+17	komdigi	Komdigi	https://web.komdigi.go.id/resource/dXBsb2Fkcy8yMDI0LzEyLzMwLzZiZWQ0NTJjLTU5NGQtNDBhNi05ZWZmLTIzZTI3OGU2NTM3ZS5wbmc=	https://www.komdigi.go.id	\N	\N	\N	0	kneks
 \.
 
 
 --
--- Data for Name: ip_address; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: ip_address; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.ip_address (id, approve, approve_by, approve_date, ip, email) FROM stdin;
-5	Y	Administrator	2025-01-02 21:48:49	110.138.84.193	kdeks@kneks.go.id
+2983	N	NULL	\N	110.138.84.193	coadmin@kneks.go.id 
+95	Y	Administrator	2025-02-19 06:35:33	114.10.29.218	redaktur@kneks.go.id
+99	Y	Administrator	2025-02-23 09:39:04	110.138.95.189	abc@mail.com
+100	Y	SuperAdmin	2025-02-27 02:58:59	120.188.4.231	anggota@kneks.go.id
 9	Y	Administrator	2025-01-03 11:22:15	112.215.252.223	humas@knks.go.id
 11	Y	Administrator	2025-01-08 06:23:14	36.93.93.154	kdeks@kneks.go.id
 73	Y	Administrator	2025-01-30 12:57:45	114.4.212.250	redaktur@kneks.go.id
 74	Y	Administrator	2025-02-03 01:03:01	120.188.65.134	anggota@kneks.go.id
 75	Y	SuperAdmin	2025-02-03 03:10:14	36.93.93.156	kdeks@kneks.go.id
 71	Y	Administrator	2025-02-03 06:39:34	120.188.7.248	redaktur@kneks.go.id
-76	Y	Administrator	2025-02-03 06:39:38	110.138.90.211	kontributor@kneks.go.id
-77	Y	SuperAdmin	2025-02-03 07:30:04	110.138.90.211	kontributor@kneks.go.id
-78	Y	SuperAdmin	2025-02-03 07:30:41		anggota@kneks.go.id
-79	Y	SuperAdmin	2025-02-03 07:30:48		anggota@kneks.go.id
+101	Y	Administrator	2025-03-03 06:35:29	110.138.89.192	redaktur@kneks.go.id
 1	Y	Co-Admin	2025-02-03 17:36:22	140.213.31.152	admin@kneks.go.id
-80	Y	SuperAdmin	2025-02-06 01:41:41	202.152.31.52	redaktur@kneks.go.id
-81	Y	SuperAdmin	2025-02-10 07:22:16	36.92.218.74	kontributor@kneks.go.id
+77	Y	Administrator	2025-02-12 06:30:42	110.138.90.211	kontributor@kneks.go.id
+76	Y	Administrator	2025-02-12 06:30:47	110.138.90.211	kontributor@kneks.go.id
+90	Y	Administrator	2025-02-15 15:19:02	110.138.84.5	redaktur@kneks.go.id
+92	Y	Administrator	2025-02-17 15:09:38	120.188.94.239	kdeks@kneks.go.id
+552	Y	Administrator	2025-07-30 06:22:05	203.34.118.20	bssn1@kneks.go.id
+553	Y	Administrator	2025-07-30 06:22:14	116.254.120.12	bssn2@kneks.go.id
+557	Y	Administrator	2025-07-30 06:22:21	167.99.72.115	bssn3@gmail.com
+2984	N	NULL	\N	110.138.84.193	coadmin@kneks.go.id 
+2985	N	NULL	\N	36.91.69.162	andicahyono995@gmail.com
+1215	Y	NULL	\N	140.213.137.92	bssn1@kneks.go.id
+1216	Y	NULL	\N	140.213.129.19	bssn2@kneks.go.id
 \.
 
 
 --
--- Data for Name: kdeks; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: kdeks; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.kdeks (id, title, title_en, abouts, abouts_en, web_identity, id_province, images, historys, historys_en, province_name, structure, sk, twitter, facebook, linkedin, instagram, youtube, address, phone_number, fax, email, maps) FROM stdin;
-2	KDEKS Kalimantan Utara 	History of North Kalimantan KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Utara dibentuk berdasarkan Keputusan Gubernur Kalimantan Utara Nomor 188.44/K.401/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.\r\n	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS North Kalimantan was established based on the Governor of North Kalimantan’s Decree Number 188.44/K.401/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.\r\n	kdeks	23	\N	Lorem	Lorem	Kalimantan Utara	null	null	null	null	null	null	null	null	null	null	kaltim@kneks.go.id	null
-4	KDEKS Maluku	History of Maluku KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Maluku dibentuk berdasarkan Keputusan Gubernur Maluku Nomor 1651 Tahun 2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.\r\n	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Maluku was established based on the Governor of Maluku’s Decree Number 1651 of 2024. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.\r\n	kdeks	30	\N	Lorem	Lorem	Maluku 	null	null	null	null	null	null	null	null	null	null	maluku@kneks.go.id	null
-10	KDEKS Banten	History of Banten KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Banten dibentuk berdasarkan Keputusan Gubernur Banten Nomor 500.05/Kep.26-Huk/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Banten was established based on the Governor of Banten’s Decree Number 500.05/Kep.26-Huk/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	10	\N	Lorem	Lorem	Banten	null	null	null	null	null	null	null	null	null	null	banten@kneks.go.id	null
-5	KDEKS Kalimantan Tengah 	History of Central Kalimantan KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Tengah dibentuk berdasarkan Keputusan Gubernur Kalimantan Tengah Nomor 188.44/473/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.\r\n\r\n	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Central Kalimantan was established based on the Governor of Central Kalimantan’s Decree Number 188.44/473/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.\r\n	kdeks	20	\N	Lorem	Lorem	Kalimantan Tengah	null	null	null	null	null	null	null	null	null	null	kalteng@kneks.go.id	null
-7	KDEKS Jawa Barat	History of West Java KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Jawa Barat dibentuk berdasarkan Keputusan Gubernur Jawa Barat Nomor 500.2/Kep.31-Rek/2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS West Java was established based on the Governor of West Java’s Decree Number 500.2/Kep.31-Rek/2024. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	12	\N	Lorem	Lorem	Jawa Barat	null	null	null	null	null	null	null	null	null	null	jabar@kneks.go.id	null
-28	KDEKS Sulawesi Barat	History of West Sulawesi KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Sulawesi Barat dibentuk berdasarkan Keputusan Gubernur Sulawesi Barat Nomor 657 Tahun 2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS West Sulawesi was established based on the Governor of West Sulawesi’s Decree Number 657 of 2024. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	27	\N	Lorem	Lorem	Sulawesi Barat	null	null	null	null	null	null	null	null	null	null	sulbar@kneks.go.id	null
-8	KDEKS Bengkulu	History of Bengkulu KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Bengkulu dibentuk berdasarkan Keputusan Gubernur Bengkulu Nomor K.207.B3 of 2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Bengkulu was established based on the Governor of Bengkulu’s Decree Number K.207.B3 of 2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	6	https://webdev.rifhandi.com/uploads/kdeks/provinsi/bengkulu.jpg	Lorem	Lorem	Bengkulu	null	null	null	null	null	null	null	null	null	null	bengkulu@kneks.go.id	null
-9	KDEKS Sumatera Selatan	History of South Sumatera KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Sumatera Selatan dibentuk berdasarkan Keputusan Gubernur Sumatera Selatan Nomor 583/KPTS/IV/2022. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS South Sumatera was established based on the Governor of South Sumatera’s Decree Number 583/KPTS/IV/2022. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	7	\N	Lorem	Lorem	Sumatera Selatan	null	null	null	null	null	null	null	null	null	null	sumsel@kneks.go.id	null
-12	KDEKS Kalimantan Selatan 	History of South Kalimantan KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Selatan dibentuk berdasarkan Keputusan Gubernur Kalimantan Selatan Nomor 188.44/0143/KUM/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.\r\n	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS South Kalimantan was established based on the Governor of South Kalimantan’s Decree Number 188.44/0143/KUM/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.\r\n	kdeks	21	\N	Lorem	Lorem	Kalimantan Selatan	null	null	null	null	null	null	null	null	null	null	kalsel@kneks.go.id	null
-39	KDEKS DKI Jakarta	History of DKI Jakarta KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS DKI Jakarta dibentuk berdasarkan Keputusan Gubernur DKI Jakarta Nomor 443 Tahun 2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS DKI Jakarta was established based on the Governor of DKI Jakarta’s Decree Number 443 of 2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	11	\N	Lorem	Lorem	DKI Jakarta	null	null	null	null	null	null	null	null	null	null	jakarta@kneks.go.id	null
-16	KDEKS Sumatera Utara	History of North Sumatera KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Sumatera Utara dibentuk berdasarkan Keputusan Gubernur Sumatera Utara Nomor 188.44/121/KPTS/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS North Sumatera was established based on the Governor of North Sumatera’s Decree Number 188.44/121/KPTS/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	2	https://webdev.rifhandi.com/uploads/kdeks/provinsi/sumut.jpg	Lorem	Lorem	Sumatera Utara	null	null	null	null	null	null	null	null	null	null	sumut@kneks.go.id	null
-23	KDEKS Nusa Tenggara Barat	History of West Nusa Tenggara KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Nusa Tenggara Barat dibentuk berdasarkan Keputusan Gubernur Nusa Tenggara Barat Nomor 500-67 Tahun 2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.\r\n	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS West Nusa Tenggara was established based on the Governor of West Nusa Tenggara’s Decree Number 500-67 of 2023.The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.\r\n	kdeks	17	\N	Lorem	Lorem	Nusa Tenggara Barat	null	null	null	null	null	null	null	null	null	null	nusbar@kneks.go.id	null
-26	KDEKS Sumatera Barat	History of West Sumatera KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Sumatera Barat dibentuk berdasarkan Keputusan Gubernur Sumatera Barat Nomor 500/315/2022. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS West Sumatera was established based on the Governor of West Sumatera’s Decree Number 500/315/2022. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	3	\N	Lorem	Lorem	Sumatera Barat	null	null	null	null	null	null	null	null	null	null	sumbar@kneks.go.id	null
-35	KDEKS Aceh	History of Aceh KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Aceh dibentuk berdasarkan Keputusan Gubernur Aceh Nomor 500/1293/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Aceh was established based on the Governor of Aceh’s Decree Number 500/1293/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	1		Lorem	Lorem	Aceh	null	null	null	null	null	null	null	null	null	null	aceh@kneks.go.id	null
-20	KDEKS Kalimantan Barat 	History of West Kalimantan KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Barat dibentuk berdasarkan Keputusan Gubernur Kalimantan Barat Nomor 1563/RO-EKON/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.\r\n	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS West Kalimantan was established based on the Governor of West Kalimantan’s Decree Number 1563/RO-EKON/2023.The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.\r\n	kdeks	19	\N	Lorem	Lorem	Kalimantan Barat	null	null	null	null	null	null	null	null	null	null	kalbar@kneks.go.id	null
-37	KDES Gorontalo 	History of Gorontalo KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Gorontalo dibentuk berdasarkan Keputusan Gubernur Gorontalo Nomor 122/3/III/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Gorontalo was established based on the Governor of Gorontalo’s Decree Number 122/3/III/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	29	\N	Lorem	Lorem	Gorontalo	null	null	null	null	null	null	null	null	null	null	gorontalo@kneks.go.id	null
-58	KDEKS Kalimantan Timur	null	<span style="font-size: 13.44px;">Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Utara dibentuk berdasarkan Keputusan Gubernur Kalimantan Utara Nomor 188.44/K.401/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.</span>	null	kdeks	22	https://webdev.rifhandi.com/uploads/kdeks/kaltim.jpg	<span style="font-size: 13.44px;">Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Utara dibentuk berdasarkan Keputusan Gubernur Kalimantan Utara Nomor 188.44/K.401/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.</span>	null	Kalimantan Timur	https://kneks.go.id/berita/586/pengukuhan-kdeks-provinsi-kalimantan-timur?category=3	https://webdev.rifhandi.com/uploads/kdeks/SK_KDEKS_KEPRI.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	kalimantan timur	097349057304	123456	kaltim@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8171135.92943034!2d111.13155930846011!3d0.09815607687347629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df14710964d9c91%3A0xc4abb01d2fe376d7!2sKalimantan%20Timur!5e0!3m2!1sid!2sid!4v1739028134722!5m2!1sid!2sid" width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-22	KDEKS Bangka Belitung	History of Bangka Belitung KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Bangka Belitung dibentuk berdasarkan Keputusan Gubernur Bangka Belitung Nomor 188.44/1252/IV/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Bangka Belitung was established based on the Governor of Bangka Belitung’s Decree Number 188.44/1252/IV/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	8	\N	Lorem	Lorem	Bangka Belitung	null	null	null	null	null	null	null	null	null	null	babel@kneks.go.id	null
-48	KDEKS DI Yogyakarta	History of DI Yogyakarta KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS DI Yogyakarta dibentuk berdasarkan Keputusan Gubernur DI Yogyakarta Nomor 27/KEP/2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS DI Yogyakarta was established based on the Governor of DI Yogyakarta’s Decree Number 27/KEP/2024. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	14	\N	Lorem	Lorem	DI Yogyakarta	null	null	null	null	null	null	null	null	null	null	yogyakarta@kneks.go.id	null
-24	KDEKS Sulawesi Utara 	History of North Sulawesi KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Sulawesi Utara dibentuk berdasarkan Keputusan Gubernur Sulawesi Utara Nomor 141 Tahun 2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS North Sulawesi was established based on the Governor of North Sulawesi’s Decree Number 141 of 2024. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	26	\N	Lorem	Lorem	Sulawesi Selatan	null	null	null	null	null	null	null	null	null	null	sulsel@kneks.go.id	null
+4	KDEKS Maluku	History of Maluku KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Maluku dibentuk berdasarkan Keputusan Gubernur Maluku Nomor 1651 Tahun 2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.\n	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Maluku was established based on the Governor of Maluku’s Decree Number 1651 of 2024. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.\n	kdeks	30	\N			Maluku 											maluku@kneks.go.id	
+10	KDEKS Banten	History of Banten KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Banten dibentuk berdasarkan Keputusan Gubernur Banten Nomor 500.05/Kep.26-Huk/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Banten was established based on the Governor of Banten’s Decree Number 500.05/Kep.26-Huk/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	10	\N			Banten											banten@kneks.go.id	
+5	KDEKS Kalimantan Tengah 	History of Central Kalimantan KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Tengah dibentuk berdasarkan Keputusan Gubernur Kalimantan Tengah Nomor 188.44/473/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.\n\n	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Central Kalimantan was established based on the Governor of Central Kalimantan’s Decree Number 188.44/473/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.\n	kdeks	20	\N			Kalimantan Tengah											kalteng@kneks.go.id	
+7	KDEKS Jawa Barat	History of West Java KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Jawa Barat dibentuk berdasarkan Keputusan Gubernur Jawa Barat Nomor 500.2/Kep.31-Rek/2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS West Java was established based on the Governor of West Java’s Decree Number 500.2/Kep.31-Rek/2024. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	12	\N			Jawa Barat											jabar@kneks.go.id	
+8	KDEKS Bengkulu	History of Bengkulu KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Bengkulu dibentuk berdasarkan Keputusan Gubernur Bengkulu Nomor K.207.B3 of 2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Bengkulu was established based on the Governor of Bengkulu’s Decree Number K.207.B3 of 2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	6	https://webdev.rifhandi.com/uploads/kdeks/provinsi/bengkulu.jpg			Bengkulu											bengkulu@kneks.go.id	
+28	KDEKS Sulawesi Barat	History of West Sulawesi KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Sulawesi Barat dibentuk berdasarkan Keputusan Gubernur Sulawesi Barat Nomor 657 Tahun 2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS West Sulawesi was established based on the Governor of West Sulawesi’s Decree Number 657 of 2024. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	27	\N			Sulawesi Barat											sulbar@kneks.go.id	
+16	KDEKS Sumatera Utara	History of North Sumatera KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Sumatera Utara dibentuk berdasarkan Keputusan Gubernur Sumatera Utara Nomor 188.44/121/KPTS/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS North Sumatera was established based on the Governor of North Sumatera’s Decree Number 188.44/121/KPTS/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	2	https://webdev.rifhandi.com/uploads/kdeks/provinsi/sumut.jpg			Sumatera Utara											sumut@kneks.go.id	
+23	KDEKS Nusa Tenggara Barat	History of West Nusa Tenggara KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Nusa Tenggara Barat dibentuk berdasarkan Keputusan Gubernur Nusa Tenggara Barat Nomor 500-67 Tahun 2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.\n	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS West Nusa Tenggara was established based on the Governor of West Nusa Tenggara’s Decree Number 500-67 of 2023.The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.\n	kdeks	17	\N			Nusa Tenggara Barat											nusbar@kneks.go.id	
+12	KDEKS Kalimantan Selatan 	History of South Kalimantan KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Selatan dibentuk berdasarkan Keputusan Gubernur Kalimantan Selatan Nomor 188.44/0143/KUM/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.\n	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS South Kalimantan was established based on the Governor of South Kalimantan’s Decree Number 188.44/0143/KUM/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.\n	kdeks	21	\N			Kalimantan Selatan											kalsel@kneks.go.id	
+20	KDEKS Kalimantan Barat 	History of West Kalimantan KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Barat dibentuk berdasarkan Keputusan Gubernur Kalimantan Barat Nomor 1563/RO-EKON/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.\n	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS West Kalimantan was established based on the Governor of West Kalimantan’s Decree Number 1563/RO-EKON/2023.The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.\n	kdeks	19	\N			Kalimantan Barat											kalbar@kneks.go.id	
+37	KDES Gorontalo 	History of Gorontalo KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Gorontalo dibentuk berdasarkan Keputusan Gubernur Gorontalo Nomor 122/3/III/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Gorontalo was established based on the Governor of Gorontalo’s Decree Number 122/3/III/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	29	\N			Gorontalo											gorontalo@kneks.go.id	
+26	KDEKS Sumatera Barat	History of West Sumatera KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Sumatera Barat dibentuk berdasarkan Keputusan Gubernur Sumatera Barat Nomor 500/315/2022. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS West Sumatera was established based on the Governor of West Sumatera’s Decree Number 500/315/2022. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	3	\N			Sumatera Barat											sumbar@kneks.go.id	
+58	KDEKS Kalimantan Timur	KDEKS Kalimantan Timur	<span style="font-size: 13.44px;">Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Utara dibentuk berdasarkan Keputusan Gubernur Kalimantan Utara Nomor 188.44/K.401/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.</span>	<span style="font-size: 13.44px;">Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Utara dibentuk berdasarkan Keputusan Gubernur Kalimantan Utara Nomor 188.44/K.401/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.</span>	kdeks	22	https://webdev.rifhandi.com/uploads/kdeks/kaltim.jpg	<span style="font-size: 13.44px;">Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Utara dibentuk berdasarkan Keputusan Gubernur Kalimantan Utara Nomor 188.44/K.401/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.</span>	<span style="font-size: 13.44px;">Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Utara dibentuk berdasarkan Keputusan Gubernur Kalimantan Utara Nomor 188.44/K.401/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.</span>	Kalimantan Timur	https://kneks.go.id/berita/586/pengukuhan-kdeks-provinsi-kalimantan-timur?category=3	https://webdev.rifhandi.com/uploads/kdeks/SK_KDEKS_KEPRI.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	kalimantan timur	097349057304	123456	kaltim@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8171135.92943034!2d111.13155930846011!3d0.09815607687347629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df14710964d9c91%3A0xc4abb01d2fe376d7!2sKalimantan%20Timur!5e0!3m2!1sid!2sid!4v1739028134722!5m2!1sid!2sid" width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+22	KDEKS Bangka Belitung	History of Bangka Belitung KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Bangka Belitung dibentuk berdasarkan Keputusan Gubernur Bangka Belitung Nomor 188.44/1252/IV/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Bangka Belitung was established based on the Governor of Bangka Belitung’s Decree Number 188.44/1252/IV/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	8	\N			Bangka Belitung											babel@kneks.go.id	
+48	KDEKS DI Yogyakarta	History of DI Yogyakarta KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS DI Yogyakarta dibentuk berdasarkan Keputusan Gubernur DI Yogyakarta Nomor 27/KEP/2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS DI Yogyakarta was established based on the Governor of DI Yogyakarta’s Decree Number 27/KEP/2024. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	14	\N			DI Yogyakarta											yogyakarta@kneks.go.id	
+2	KDEKS Kalimantan Utara 	History of North Kalimantan KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Kalimantan Utara dibentuk berdasarkan Keputusan Gubernur Kalimantan Utara Nomor 188.44/K.401/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.\n	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS North Kalimantan was established based on the Governor of North Kalimantan’s Decree Number 188.44/K.401/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.\n	kdeks	23	\N			Kalimantan Utara											kaltim@kneks.go.id	
+9	KDEKS Sumatera Selatan	History of South Sumatera KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Sumatera Selatan dibentuk berdasarkan Keputusan Gubernur Sumatera Selatan Nomor 583/KPTS/IV/2022. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS South Sumatera was established based on the Governor of South Sumatera’s Decree Number 583/KPTS/IV/2022. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	7	\N			Sumatera Selatan											sumsel@kneks.go.id	
+39	KDEKS DKI Jakarta	History of DKI Jakarta KDEKS	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS DKI Jakarta dibentuk berdasarkan Keputusan Gubernur DKI Jakarta Nomor 443 Tahun 2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS DKI Jakarta was established based on the Governor of DKI Jakarta’s Decree Number 443 of 2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	11	\N			DKI Jakarta											jakarta@kneks.go.id	
+35	KDEKS Aceh	History of Aceh KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Aceh dibentuk berdasarkan Keputusan Gubernur Aceh Nomor 500/1293/2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Committee for Sharia Economy and Finance (KDEKS) is part of the Indonesian government's efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the growing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS Aceh was established based on the Governor of Aceh’s Decree Number 500/1293/2023. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions, involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	1				Aceh											aceh@kneks.go.id	
+64	KDEKS Sulawesi Tengah	null	-	null	kdeks	25	https://cms-dev.kneks.go.id/uploads/kdeks/photo-1748498330151.jpg	-	null	Sulawesi Tengah	https://cms-dev.kneks.go.id/uploads/kdeks/structure-1748498330223.png	https://cms-dev.kneks.go.id/uploads/kdeks/sk-1748498334042.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	Sulawesi Tengah	0812345456	123456	sulteng@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4084789.35769543!2d116.78539306427041!3d-1.1229045477104096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d8809c9659a2d3d%3A0x436e33fd8cdb6299!2sSulawesi%20Tengah!5e0!3m2!1sid!2sid!4v1748498319373!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+59	KDEKS Riau	null	-	null	kdeks	4	https://cms-dev.kneks.go.id/uploads/kdeks/provinsi/photo-1748496464302.jpg	-	null	Riau	https://cms-dev.kneks.go.id/uploads/kdeks/structure-1748496464933.jpg	https://cms-dev.kneks.go.id/uploads/kdeks/sk-1748496466797.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	Riau	0812345678	123456	riau@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8171135.92943034!2d111.13155930846011!3d0.09815607687347629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df14710964d9c91%3A0xc4abb01d2fe376d7!2sKalimantan%20Timur!5e0!3m2!1sid!2sid!4v1739028134722!5m2!1sid!2sid" width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+61	KDEKS Lampung	null	-	null	kdeks	9	https://cms-dev.kneks.go.id/uploads/kdeks/photo-1748497567057.jpg	-	null	Lampung	https://cms-dev.kneks.go.id/uploads/kdeks/structure-1748497567351.png	https://cms-dev.kneks.go.id/uploads/kdeks/sk-1748497575262.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	Lampung	0812345456	123456	lampung@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127101.5753447948!2d105.11483576725513!3d-5.428481195151124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e40da46f3aa6fbf%3A0x3039d80b220cc40!2sBandar%20Lampung%2C%20Kota%20Bandar%20Lampung%2C%20Lampung!5e0!3m2!1sid!2sid!4v1748497553601!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+62	KDEKS Jawa Tengah	null	-	null	kdeks	13	https://cms-dev.kneks.go.id/uploads/kdeks/photo-1748497931185.jpg	-	null	Jawa Tengah	https://cms-dev.kneks.go.id/uploads/kdeks/structure-1748497931370.png	https://cms-dev.kneks.go.id/uploads/kdeks/sk-1748497933303.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	Jawa Tengah	0812345456	123456	jateng@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d150652.89068074478!2d110.01500750017814!3d-7.142343004516277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e65759b9cd518dd%3A0xc377d19d8fedbc46!2sJawa%20Tengah!5e0!3m2!1sid!2sid!4v1748497896956!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+63	KDEKS Jatim	null	-	null	kdeks	15	https://cms-dev.kneks.go.id/uploads/kdeks/photo-1748498184845.jpeg	-	null	Jawa Timur	https://cms-dev.kneks.go.id/uploads/kdeks/structure-1748498185027.png	https://cms-dev.kneks.go.id/uploads/kdeks/sk-1748498187415.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	Jambi	0812345456	123456	jatim@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4055966.7304672725!2d110.94056592637492!3d-6.901962510420225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2da393f79feeb5c5%3A0x1030bfbca7cb850!2sJawa%20Timur!5e0!3m2!1sid!2sid!4v1748498173227!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+65	KDEKS Sulawesi Selatan	null	-	null	kdeks	26	https://cms-dev.kneks.go.id/uploads/kdeks/photo-1748498444507.png	-	null	Sulawesi Selatan	https://cms-dev.kneks.go.id/uploads/kdeks/structure-1748498446116.png	https://cms-dev.kneks.go.id/uploads/kdeks/sk-1748498448153.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	Sulawesi Selatan	0812345456	123456	sulsel@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4071146.6884335!2d116.79662266829784!3d-4.816494619060858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d0cfa80fd6bbe8b%3A0x1030bfbcaf71af0!2sSulawesi%20Selatan!5e0!3m2!1sid!2sid!4v1748498435012!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+68	KDEKS Papua Barat	null	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Maluku dibentuk berdasarkan Keputusan Gubernur Maluku Nomor 1651 Tahun 2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	null	kdeks	33	https://cms-dev.kneks.go.id/uploads/kdeks/photo-1749690323990.png	<br>	null	Papua Barat	https://cms-dev.kneks.go.id/uploads/kdeks/structure-1749690327147.png	https://cms-dev.kneks.go.id/uploads/kdeks/sk-1749690361124.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	papua barat	08123456789	123456	papuabarat@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8167892.851938136!2d126.97947389297074!3d-1.6172998763785178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d540abdb9e20b2d%3A0x5349c1f8c5c7cb62!2sWest%20Papua!5e0!3m2!1sen!2sid!4v1749690306765!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+67	KDEKS Papua	null	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Maluku dibentuk berdasarkan Keputusan Gubernur Maluku Nomor 1651 Tahun 2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	null	kdeks	34	https://cms-dev.kneks.go.id/uploads/kdeks/photo-1749690017254.png	<br>	null	Papua	https://cms-dev.kneks.go.id/uploads/kdeks/structure-1749690017390.png	https://cms-dev.kneks.go.id/uploads/kdeks/sk-1749690018622.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	papua	0812345678	123456	papua@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8141850.880256564!2d132.50976935168362!3d-4.85330752492144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x683b2c04aaff9273%3A0xeba94e9c5eefe673!2sPapua!5e0!3m2!1sid!2sid!4v1749689851306!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+24	KDEKS Sulawesi Utara 	History of North Sulawesi KDEKS 	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Sulawesi Utara dibentuk berdasarkan Keputusan Gubernur Sulawesi Utara Nomor 141 Tahun 2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	The Regional Sharia Economic and Financial Committee (KDEKS) is part of the Indonesian government’s efforts to strengthen the sharia economy at the national and regional levels. The establishment of KDEKS is closely related to the increasing importance of the sharia economy in Indonesia and the drive to expand its implementation to various regions throughout the country. KDEKS North Sulawesi was established based on the Governor of North Sulawesi’s Decree Number 141 of 2024. The establishment of KDEKS is a strategic step to ensure that sharia economic policies and initiatives initiated by KNEKS can be effectively implemented in the regions by involving local governments, sharia financial institutions, the halal industry, and local communities. The background of the establishment of KDEKS is a policy to strengthen the sharia economy in Indonesia, starting with the establishment of the National Sharia Finance Committee (KNKS) in 2016, which was later transformed into KNEKS in 2020. Furthermore, to encourage broader and more comprehensive development of the sharia economy, both in the financial sector and the halal industry, coordination at the regional level is necessary. Therefore, KDEKS was established as an institution that plays a role in supporting the implementation of sharia economic strategies in the regions.	kdeks	24	\N			Sulawesi Utara			https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	sulawesi utara	08123456789	123456	sulsel@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127669.04951185355!2d101.35877352272047!3d0.5139623335264097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d5af90619012d7%3A0xa97d2ab1f8eea436!2sAgro%20Wisata%20Pelangi!5e0!3m2!1sid!2sid!4v1748487825468!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+60	KDEKS Jambi	null	-	null	kdeks	5	https://cms-dev.kneks.go.id/uploads/kdeks/photo-1748497131151.jpg	-	null	Jambi	https://cms-dev.kneks.go.id/uploads/kdeks/structure-1748497131239.png	https://cms-dev.kneks.go.id/uploads/kdeks/sk-1748497140076.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	jambi	0812345678	12345	jambi@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127623.76741174354!2d103.52712603370271!3d-1.610262931409658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e25889ab3e2cd3b%3A0xd15a99c70ab2d90d!2sJambi%2C%20Kota%20Jambi%2C%20Jambi!5e0!3m2!1sid!2sid!4v1749698040602!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+69	KDEKS Nusa Tenggara Timur	null	<br>	null	kdeks	18	https://cms-dev.kneks.go.id/uploads/kdeks/photo-1749695576121.jpg	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Nusa Tenggara Barat dibentuk berdasarkan Keputusan Gubernur Nusa Tenggara Barat Nomor 500-67 Tahun 2023. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	null	Nusa Tenggara Timur	https://cms-dev.kneks.go.id/uploads/kdeks/structure-1749695576326.png	https://cms-dev.kneks.go.id/uploads/kdeks/sk-1749695577734.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	ntt	0812345678	123456	ntt@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127669.04951185355!2d101.35877352272047!3d0.5139623335264097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d5af90619012d7%3A0xa97d2ab1f8eea436!2sAgro%20Wisata%20Pelangi!5e0!3m2!1sid!2sid!4v1748487825468!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+70	KDEKS Kepualaun Riau	null	<br>	null	kdeks	35	https://cms-dev.kneks.go.id/uploads/kdeks/photo-1749716120025.jpg	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Maluku dibentuk berdasarkan Keputusan Gubernur Maluku Nomor 1651 Tahun 2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	null	KEPULAUAN RIAU	https://cms-dev.kneks.go.id/uploads/kdeks/structure-1749716120073.png	https://cms-dev.kneks.go.id/uploads/kdeks/sk-1749716120808.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	riau kepulauan	0812345678	123456	kepriau@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127669.04951185355!2d101.35877352272047!3d0.5139623335264097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d5af90619012d7%3A0xa97d2ab1f8eea436!2sAgro%20Wisata%20Pelangi!5e0!3m2!1sid!2sid!4v1748487825468!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+66	KDEKS Maluku Utara	null	Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) merupakan bagian dari upaya pemerintah Indonesia untuk memperkuat ekonomi syariah di tingkat nasional dan daerah. Pembentukan KDEKS ini terkait erat dengan perkembangan ekonomi syariah yang semakin penting di Indonesia, serta dorongan untuk memperluas implementasi ekonomi syariah ke berbagai daerah di seluruh Indonesia. KDEKS Maluku dibentuk berdasarkan Keputusan Gubernur Maluku Nomor 1651 Tahun 2024. Pembentukan KDEKS merupakan salah satu langkah strategis untuk memastikan bahwa kebijakan dan inisiatif ekonomi syariah yang digagas oleh KNEKS dapat diterapkan secara efektif di daerah-daerah, dengan melibatkan pemerintah daerah, lembaga keuangan syariah, industri halal, serta masyarakat lokal. Latar belakang pembentukan KDEKS merupakan sebuah kebijakan untuk memperkuat ekonomi syariah di Indonesia dimulai dengan pembentukan Komite Nasional Keuangan Syariah (KNKS) pada tahun 2016, yang kemudian bertransformasi menjadi KNEKS pada tahun 2020. Selanjutnya, untuk mendorong perkembangan ekonomi syariah secara lebih luas dan menyeluruh, baik di sektor keuangan maupun industri halal, perlu adanya koordinasi di tingkat daerah. Oleh karena itu, KDEKS dibentuk sebagai lembaga yang memiliki peran dalam mendukung implementasi strategi ekonomi syariah di daerah.	null	kdeks	32	https://cms-dev.kneks.go.id/uploads/kdeks/photo-1748498591107.jpg	-	null	Maluku Utara	https://cms-dev.kneks.go.id/uploads/kdeks/structure-1748498591487.png	https://cms-dev.kneks.go.id/uploads/kdeks/sk-1748498592183.pdf	https://x.com	https://web.facebook.com/	https://www.linkedin.com	https://www.instagram.com/	https://youtube.com	Maluku Utara	0812345456	123456	malut@kneks.go.id	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1214306.3376099658!2d127.15349151008728!3d1.3773380788698546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d9eae8eae2432b3%3A0x1030bfbcaf71ac0!2sMaluku%20Utara!5e0!3m2!1sid!2sid!4v1749720382059!5m2!1sid!2sid" width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 \.
 
 
 --
--- Data for Name: khas_zone; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: khas_zone; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.khas_zone (id, khas_zone, city, province, inauguration, tenant, inaugurated) FROM stdin;
@@ -2655,7 +2737,6 @@ COPY public.khas_zone (id, khas_zone, city, province, inauguration, tenant, inau
 5	Kantin Jawara BI	Bandung	12	2 November 2023	5	ADG BI
 6	Riau Garden	Pekanbaru	4	3 November 2023	24	Gubernur
 7	Kantin Amanah RSAI	Bandung	12	24 November 2023	8	DIrut RSAI
-8	Masjid Istiqlal	Jakarta Pusat	11	22 Desember 20232	24	Imam Besar Masjid Istiqlal
 9	Pasar Mambo	Pangkal Pinang	8	21 Desember 2023	12	Gubernur
 10	Pusat Kuliner Kampung Ujung	Labuan Bajo	18	8 Mei 2023	41	Bupati
 11	Kantin SMAN 1 Slawi	Tegal	13	22 Mei 2024	5	Bupati
@@ -2669,20 +2750,21 @@ COPY public.khas_zone (id, khas_zone, city, province, inauguration, tenant, inau
 19	Solo Square	Solo	13	23 Agustus 2024	18	Walikota
 20	Kediri Town Square	Kediri	15	29 Agustus 2024	13	Walikota
 21	Universitas Jendral Soedirman	Purwokerto	14	14 November 2024	39	Rektor
+8	Masjid Istiqlal	Jakarta Pusat	11	22 Desember 2023	24	Imam Besar Masjid Istiqlal
 \.
 
 
 --
--- Data for Name: map; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: map; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.map (id, embed, created_at, updated_at, web_identity) FROM stdin;
-1	https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7933.418301716268!2d106.8388627!3d-6.1696863!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5cbd72035e3%3A0x78a3dc4ef4719cb8!2sKementerian%20Keuangan%20Republik%20Indonesia!5e0!3m2!1sid!2sid!4v1690270978567!5m2!1sid!2sid	2022-11-18 08:05:26	2022-11-18 08:05:26	kneks
+1	https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.6856026404976!2d106.83639707464101!3d-6.172831993814521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5ca51c6d255%3A0x33d72e2592cf40cb!2sDirektorat%20Jenderal%20Anggaran%20Kementerian%20Keuangan%20Republik%20Indonesia!5e0!3m2!1sen!2sid!4v1745983640650!5m2!1sen!2sid	2022-11-18 08:05:26	2022-11-18 08:05:26	kneks
 \.
 
 
 --
--- Data for Name: menu; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: menu; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.menu (id, menu_name, menu_link, orders, menu_name_en) FROM stdin;
@@ -2699,7 +2781,7 @@ COPY public.menu (id, menu_name, menu_link, orders, menu_name_en) FROM stdin;
 
 
 --
--- Data for Name: menu_sub; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: menu_sub; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.menu_sub (id, menu_id, submenu_name, submenu_link, orders, submenu_name_en, menu_name) FROM stdin;
@@ -2721,23 +2803,21 @@ COPY public.menu_sub (id, menu_id, submenu_name, submenu_link, orders, submenu_n
 
 
 --
--- Data for Name: naration; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: naration; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.naration (id, dashboard_id, dashboard_name, description, month) FROM stdin;
-6	2	RPH	test test	null
+7	2	RPH	simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem	2025-06
 \.
 
 
 --
--- Data for Name: news; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: news; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.news (id, title, excerpt, content, image, news_datetime, is_publish, title_en, excerpt_en, content_en, category_id, web_identity, tag, directorat, users_id, id_province, users_name) FROM stdin;
-29	Ambisi Jokowi: Ada Bank Syariah yang Masuk 10 Besar	Komite Nasional Keuangan Syariah (KNKS) yang diketuai oleh Presiden Joko Widodo berambisi membawa bank syariah masuk dalam 10 total aset perbankan nasional. Hal ini disampaikan dalam konferensi pers peluncuran Masterplan Ekonomi Syariah Indonesia 2019-2024.	<div>Jakarta, CNBC Indonesia- Komite Nasional Keuangan Syariah (KNKS) yang diketuai oleh Presiden Joko Widodo berambisi membawa bank syariah masuk dalam 10 total aset perbankan nasional. Hal ini disampaikan dalam konferensi pers peluncuran Masterplan Ekonomi Syariah Indonesia 2019-2024.</div><div><br></div><div>Direktur Eksekutif KNKS Ventje Rahardjo mengatakan pihaknya sudah memulai beberapa inisiatif yang merujuk pada masterplan, termasuk penguatan bank syariah.</div><div><br></div><div>"Kami berharap ada bank syariah yang bisa masuk dalam 10 besar total aset perbankan nasional. Sisi lain kita mendorong jaminan sosial syariah yg hari ini kita tanda tangan MoU-nya," kata Ventje dalam konferensi pers sebelum peluncuran Masterplan Ekonomi Syariah Indonesia 2019-2024 , Selasa (14/05/2019).</div><div><br></div><div>Menurutnya yang akan digenjot dari sisi ritel banking, agar bisa tumbuh seimbang. Untuk itu, inisiatif dari KNKS adalah memunculkan bank investasi yang berkaitan dengan syariah. Selain itu, dengan persatuan direktur keuangan Indonesia akan membawa ke perbankan syariah.</div><div><br></div><div>Menteri Perencanaan Pembangunan Nasional (PPN) dan Kepala Bappenas sekaligus Sekretaris KNKS Bambang Brodjonegoro mengatakan dalam beberapa tahun ke depan, perlu ada bank syariah berskala besar. Untuk itu Bank syariah yang ada saat ini perlu memperbaiki kinerjanya.</div><div><br></div><div>"Yang kami bayangkan, kita punya industri halal yang kuat yang financing-nya berasal dari lembaga keuangan dan syariah indonesia. Bukan bank syariahnya keliling nawarin atau terima kredit kualitas nomer dua. Itu yang harus kita benahi terlebih dahulu," kata dia.</div><div><br></div><div>Selama ini perbankan syariah di Indonesia banyak yang memberikan pembiayaan uang, tetapi belum menunjang industri halal di Indonesia.</div><div>Padahal, Indonesia berada dalam posisi 10 untuk industri halal dunia berdasarkan laporan Global Islamic Economy Report.</div><div><br></div><div>"Karena itu kami ingin melakukan perbaikan dari sisi permintaan ekonomi syariah sektor riil yakni industri halal," ujarnya.</div><div><br></div><div>(dob/dob)</div><div><br></div><div>Fikri Muhammad &amp; Rahajeng Kusumo Hastuti, CNBC Indonesia</div><div><br></div><div>Sumber : https://www.cnbcindonesia.com/news/20190514165145-4-72431/ambisi-jokowi-ada-bank-syariah-yang-masuk-10-besar</div>	https://webdev.rifhandi.com/uploads/news/1557906344-KonferensiPers.jpg	2019-05-09 08:05:42	\N	Jokowi's Ambition: A Sharia Bank in the Top 10	The National Sharia Finance Committee (KNKS), chaired by President Joko Widodo, aims to position a sharia bank among the top 10 banks in terms of total national banking assets. This ambition was conveyed during the press conference for the launch of the Indonesian Sharia Economic Masterplan 2019-2024.	<div>Jakarta, CNBC Indonesia – The National Sharia Finance Committee (KNKS), chaired by President Joko Widodo, aims to position a sharia bank among the top 10 banks in terms of total national banking assets. This ambition was conveyed during the press conference for the launch of the Indonesian Sharia Economic Masterplan 2019-2024.</div><div><br></div><div>KNKS Executive Director Ventje Rahardjo stated that several initiatives aligned with the masterplan have already begun, including strengthening sharia banks.</div><div><br></div><div>"We hope that a sharia bank can enter the top 10 in terms of total national banking assets. On the other hand, we are also promoting sharia social security, for which we signed an MoU today," said Ventje during the press conference before the launch of the Indonesian Sharia Economic Masterplan 2019-2024, on Tuesday (May 14, 2019).</div><div><br></div><div>He added that efforts would focus on retail banking to achieve balanced growth. To this end, KNKS has initiated plans to establish an investment bank related to sharia finance. Additionally, collaboration with Indonesian financial directors is expected to further strengthen sharia banking.</div><div><br></div><div>Minister of National Development Planning (PPN) and Head of Bappenas, who also serves as KNKS Secretary, Bambang Brodjonegoro, emphasized the need for a large-scale sharia bank in the coming years. Existing sharia banks, he noted, must improve their performance.</div><div><br></div><div>"Our vision is to have a strong halal industry supported by financing from Indonesian sharia financial institutions. It shouldn't be that sharia banks are merely offering or accepting second-rate credit. This is what needs to be addressed first," he said.</div><div><br></div><div>Currently, sharia banks in Indonesia provide significant financing but have yet to fully support the country's halal industry.</div><div><br></div><div>Indonesia ranks 10th in the global halal industry, according to the Global Islamic Economy Report.</div><div><br></div><div>"This is why we aim to improve the demand side of the sharia economy, particularly in the real sector, such as the halal industry," he concluded.</div><div><br></div><div>(dob/dob)</div><div><br></div><div>Fikri Muhammad &amp; Rahajeng Kusumo Hastuti, CNBC Indonesia</div><div><br></div><div>Source:&nbsp;<span style="font-size: 13.44px; color: var(--bs-card-color); background-color: var(--bs-card-bg); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">https://www.cnbcindonesia.com/news/20190514165145-4-72431/ambisi-jokowi-ada-bank-syariah-yang-masuk-10-besar</span></div>	1	kneks	indonesia,kneks	NULL	0	0	null
 31	Masih Jauh, Jokowi Akui Ekonomi Syariah RI di Belakang Malaysia	Presiden Joko Widodo (Jokowi) menyayangkan industri halal Indonesia masih kalah dari negara tetangga seperti Malaysia. Berdasarkan data global Islamic Indicator, pada 2018 Indonesia masih tempati urutan 10 dalam peringkat negara yang selenggarakan ekonomi syariah.	<div>JAKARTA - Presiden Joko Widodo (Jokowi) menyayangkan industri halal Indonesia masih kalah dari negara tetangga seperti Malaysia. Berdasarkan data global Islamic Indicator, pada 2018 Indonesia masih tempati urutan 10 dalam peringkat negara yang selenggarakan ekonomi syariah.</div><div><br></div><div>"Masih jauh, kita masih di belakang Malaysia. Masih di belakang UEA. Masib di belakang Bahrain, di belakang Arab Saudi. Masih di belakang Oman, Jordan, Qatar, Pakistann Kuwait. Inilah pekerjaan besar kita bersama-sama," tuturnya di Gedung Bappenas, Jakarta, Selasa (14/5/2019).</div><div><br></div><div>Kepala Negara pun mengajak untuk membangkitkan potensi ekonomi syariah. Selain itu, dengan diluncurkannya Masterplan Ekonomi Syariah Indonesia (MEKSI) 2019-2024, Indonesia bisa menjadi pusat ekonomi syariah terkemuka dunia.</div><div><br></div><div>"Penduduk muslim kita terbesar. Ekonomi syariah yang bisa turut mengentaskan kemiskinan dan melestarikan lingkungan, dorong kesejahteraan sosial. Dan sejalan dengan pembangunan berkelanjutan kita. Dan kita sudah memulai di tahun awal, Saya selaku presiden bentuk KNKS," ujarnya.</div><div><br></div><div>Jokowi menambahkan, ekonomi syariah Indonesia memiliki potensi besar di tingkat dunia. Seperti disampaikan Bappenas, pada 2023 konsumsi produk halal akan mencapai USD3 triliun.</div><div><br></div><div>"Kalau di rupiahkan berapa, kurang lebih Rp45.000 triliun. Saya tidak bisa bayangkan angka seperti itu. Karena APBN kita Rp2.000 triliun lebih sedikit. Ini sebuah kekuatan besar yang harus kita lihat dan harus kita pikirkan untuk ambil kue ekonomi yang besar ini," tuturnya.</div><div><br></div><div>Reporter : Feby Novalius</div><div><br></div><div>Sumber : https://economy.okezone.com/read/2019/05/14/320/2055644/masih-jauh-jokowi-akui-ekonomi-syariah-ri-di-belakang-malaysia</div>	https://webdev.rifhandi.com/uploads/news/1557909644-potensiindustri halal.png	2019-05-09 08:05:42	\N	Still Far Behind, Jokowi Admits Indonesia's Islamic Economy Lags Behind Malaysia	President Joko Widodo (Jokowi) lamented that Indonesia's halal industry is still lagging behind neighboring countries such as Malaysia. According to the Global Islamic Indicator data, in 2018, Indonesia was ranked 10th among countries implementing an Islamic economy.	<div>JAKARTA – President Joko Widodo (Jokowi) lamented that Indonesia's halal industry is still lagging behind neighboring countries such as Malaysia. According to the Global Islamic Indicator data, in 2018, Indonesia was ranked 10th among countries implementing an Islamic economy.</div><div><br></div><div>“We are still far behind, still trailing Malaysia. Still behind the UAE, Bahrain, Saudi Arabia, Oman, Jordan, Qatar, Pakistan, and Kuwait. This is a big task for all of us to tackle together,” he stated at the National Development Planning Agency (Bappenas) building in Jakarta, Tuesday (May 14, 2019).</div><div><br></div><div>The Head of State also urged efforts to harness the potential of the Islamic economy. Furthermore, with the launch of the Indonesia Islamic Economic Masterplan (MEKSI) 2019-2024, Indonesia could position itself as a leading global hub for Islamic economics.</div><div><br></div><div>“Our Muslim population is the largest. The Islamic economy can contribute to poverty alleviation, environmental sustainability, and the promotion of social welfare. This aligns with our sustainable development goals. We have already started in the early years, and as president, I established the KNKS (National Islamic Finance Committee),” he said.</div><div><br></div><div>Jokowi added that Indonesia's Islamic economy holds significant global potential. As noted by Bappenas, halal product consumption is projected to reach USD 3 trillion by 2023.</div><div><br></div><div>“In rupiah terms, that’s approximately IDR 45,000 trillion. I can’t even imagine a number that large, especially when our state budget (APBN) is just over IDR 2,000 trillion. This is a tremendous strength that we must recognize and strategize to seize a share of this massive economic opportunity,” he concluded.</div><div><br></div><div>Reporter: Feby Novalius</div><div>Source:&nbsp;https://economy.okezone.com/read/2019/05/14/320/2055644/masih-jauh-jokowi-akui-ekonomi-syariah-ri-di-belakang-malaysia</div>	1	kneks	indonesia,kneks	NULL	0	0	null
 32	Program Kerja Prioritas KNEKS - April 2022	<span style="font-size: 13.44px;">Berikut merupakan program kerja prioritas KNEKS yang akan dilaksanalan dalam waktu dekat</span>	<div>Berikut merupakan program kerja prioritas KNEKS yang akan dilaksanalan dalam waktu dekat.</div><div><br></div><div>Sektor Industri Produk Halal</div><div><ul><li>Dalam beberapa tahun terakhir, perkembangan industri halal di Indonesia terus berkembang pesat. Pada laporan the State of Global Islamic Economy Report 2022 yang baru saja dikeluarkan Dinar Standard di Dubai, sektor halal food Indonesia naik ke peringkat 2 dari peringkat 4 di tahun sebelumnya. Saat ini Indonesia terus berbenah diri untuk menjadi Pusat Produsen Halal Dunia sebagaimana yang sudah dicanangkan oleh Presiden Jokowi dan Wakil Presiden KH Ma’ruf Amin. Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) sebagaimana amanah yang diberikan kepadanya untuk mengawal komitmen ini, khususnya Direktorat Industri Produk Halal - KNEKS tengah berfokus membangun ekosistem industri halal Indonesia yang kuat melalui berbagai program prioritas, sekaligus mendukung upaya pemulihan ekonomi nasional pasca pandemi secara inklusif, untuk memenuhi permintaan pasar produk halal dalam dan luar negeri yang jumlahnya terus meningkat tahun ke tahunnya.</li><li>Beberapa program prioritas telah dicanangkan untuk itu. Pertama, kodifikasi data sertifikasi halal pada transaksi perdagangan. Program ini bertujuan untuk mencatat transaksi berikut data sertifikat halalnya atas kegiatan ekspor dan impor produk halal yang terjadi pada sistem Bea Cukai dan lembaga Indonesia National Single Window (INSW) berdasarkan informasi yang valid dari database Badan Penyelenggara Jaminan Produk Halal (BPJPH). Diharapkan Indonesia akan dapat memiliki data statistik perdagangan produk halal yang akurat untuk mendukung pengembangan sektor industri halal ke depannya. Program ini juga memberikan manfaat penguatan sistem ketertelusuran halal dalam perdagangan dalam dan luar negeri, melalui kesiapan untuk pertukaran data sertifikasi halal secara elektronik dan aman antar negara di dunia. Indonesia memulai inisiatif global ini untuk memperkuat integritas halal dalam perdagangan dunia. Diharapkan hal ini segera akan disambut oleh negara-negara pelaku industri halal lainnya, khususnya pasar produk halal dunia seperti negara-negara OKI, Timur Tengah dan Asia. Selanjutnya, untuk mendukung produktivitas industri produk halal melalui kegiatan industrialisasi dalam menghasilkan produk halal Indonesia bernilai tambah, KNEKS juga terus mendorong pengembangan Kawasan Industri Halal (KIH) di Indonesia. Saat ini Indonesia memiliki tiga KIH dan ke depannya KNEKS bersama Kementerian Perindustrian dan sejumlah pelaku industri terkait, menyusun berbagai inisiatif penguatan KIH dalam rangka mendorong hadirnya infrastruktur industri halal yang unggul.</li><li>Dalam mengembangkan ekosistem industri halal di Indonesia, KNEKS berupaya untuk mensinergikan seluruh inisiatif tersebut ke dalam Masterplan Industri Halal Indonesia (MPIHI) 2022-2029 yang sedang disusun dan direncanakan dapat diterbitkan pada tahun ini. Dalam implementasinya nanti, masterplan industri halal ini menjadi salah satu bahan masukan utama dalam pembuatan Rencana Kerja Pemerintah (RKP) 2023 dan seterusnya, serta Rencana Pembangunan Jangka Menengah Nasional (RPJMN) 2025-2029, dan juga Rencana Pembangunan Jangka Panjang Nasional (RPJPN) 2025- 2045.</li></ul><br><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">Sektor Jasa Keuangan Syariah</span><br><ul><li>Dari sektor perbankan syariah, Bank Riau Kepri akan melaksanakan konversi menjadi Bank Umum Syariah (BUS) pada pertengahan tahun 2022. Status saat ini, Kemendagri telah menyetujui RAPERDA atas perubahan bentuk badan BPD Riau dari Perusahaan Daerah (PD) menjadi Perseroan Terbatas (PT) BPD Riau. Setelah RAPERDA tersebut disahkan oleh DPRD Provinsi melalui Rapat Paripurna, selanjutnya pada 23 April 2022 terjadwal akan dilaksanakan Rapat Umum Pemegang Saham (RUPS) dengan salah satu agenda persetujuan perubahan Anggaran Dasar Perseroan dengan kegiatan usaha menjadi Bank Umum Syariah (BUS). Jika prosesnya berjalan lancar, diharapkan soft launching Bank Riau Kepri Syariah dapat dilakukan pada pertengahan 2022.</li></ul></div><div><br></div><div>Sektor Keuangan Sosial Syariah</div><div><ul><li>Penandatanganan MoU antara BPKH dengan KNEKS pada April 2022 (tanggal sedang difiksasi) tentang Pengembangan Ekonomi dan Keuangan Syariah pada sektor keuangan mikro syariah. Dengan MoU ini, akan terbuka peluang penempatan dana BPKH ke BPRS dan BMT serta kerjasama lainnya.</li><li>Penandatanganan MoU Kementerian BUMN - BWI - KNEKS tentang Kolaborasi Penumbuhan Wakaf Uang di Lingkungan BUMN pada Mei 2022 (tanggal sedang difiksasi). Dengan MoU ini, akan dilaksanakan beragam upaya penggerakan partisipasi wakaf uang di lingkungan BUMN serta kolaborasi TJSL BUMN dengan program-program wakaf BWI dan nazhir wakaf resmi terdaftar di BWI.&nbsp;&nbsp;</li><li>Pelatihan BMT 4.0 bagi 15 pesantren di Jawa Barat pada minggu kedua Juni 2022. Pelatihan ini dimaksudkan untuk meningkatkan digitalisasi BMT berbasis Pesantren dalam rangka optimasi perluasan akses layanan keuangan syariah bagi masyarakat.</li></ul></div><div><br></div><div>Sektor Bisnis dan Kewirausahaan Syariah</div><div><ul><li>KNEKS bersama pemangku kepentingan bekerjasama dalam mewujudkan terciptanya kawasan kuliner Zona Kuliner Halal, Aman dan Sehat (Zona KHAS) yang diharapkan menjadi kawasan yang memiliki standar Halalan Thoyyiban yang sesuai. Saat ini telah terdaftar 12 lokasi yang sedang diproses untuk menjadi Zona KHAS. Pilot Project pertama terletak di Kawasan Rasuna Garden Foodstreet, DKI Jakarta telah menyelesaikan tahap standardisasi kesehatan. Stikerisasi Sertifikat Laik Higiene Sanitasi (SLHS) telah dilaksanakan untuk memenuhi persyaratan aspek aman dan sehat bagi 39 tenant/UMKM. Stikerisasi dilakukan oleh Kementerian Kesehatan yang bekerjasama dengan Dinas Kesehatan serta Labkesda DKI Jakarta. Seluruh tenant telah mendapatkan NIB yang didukung oleh Kemenkopukm dan sedang melaksanakan proses sertifikasi halal melalui dukungan BPJPH. Dalam acara pembukaan Gernas BBI di Kota Bukittinggi, Sumatera Barat, Peluncuran (Kick-Off) Zona KHAS Los Lambuang, Bukittinggi telah dilakukan pada tanggal 12 April 2022 yang dihadiri oleh Bapak Wakil Presiden KH. Ma’ruf Amin. Hal ini menjadi dorongan agar pengembangan Zona KHAS dapat dilaksanakan di beberapa titik di seluruh Indonesia.</li><li>Program Akselerasi Digital Usaha Syariah berfokus pada ekosistem Usaha Mikro Kecil dan Menengah (UMKM) yang memiliki peran strategis dalam menopang pertumbuhan ekonomi Nasional setelah terdampak pandemi Covid-19, diantaranya kontribusi pada PDB dan penyerapan tenaga kerja. Namun demikian, pengembangan UMKM di Indonesia, khususnya UMKM Industri Halal dan supaya UMKM Industri Halal naik kelas, dibutuhkan interkonektivitas digital yang merupakan keniscayaan dalam era industry 4.0 ke berbagai sub ekosistem lainnya seperti jasa keuangan, incubator, media sosial, regulator, logistic, riset/perguruan tinggi, pesantren, masjid, supplier, pemasaran dan berbagai sub ekosistem lainnya. Untuk memperkuat itu KNEKS memfasilitasinya dalam bentuk pengembangan platform, sinergi dengan berbagai stakeholder Kementerian Lembaga, termasuk Kemenkopukm sebagai penanggungjawab pengembangan kewirausahaan di Indonesia dan data tunggal UMKM sesuai&nbsp; Perpres No 2 tahun 2022, dan upaya-upaya akselerasi yang dibutuhkan oleh UMKM Industri Halal untuk mendapatkan akses&nbsp; yang bisa difokuskan pada akses pembiayaan, capacity building,&nbsp; inkubasi, kemitraan, pasar digital dan pemberdayaan digital</li><li>Selain itu, salah satu yang saat ini tengah dikembangkan oleh KNEKS adalah melalui Platform Business Matching yang sedang dibangun (https://umkmindustrihalal.id/) dan akan disinergikan dengan ekosistem UMKM nasional. Platform ini bertujuan untuk mendorong UMKM (khususnya UMKM Indusri Halal) yang berdaya saing untuk akselerasi pertumbuhan ekonomi yang inklusif. Diharapkan Platform Business Matching ini dapat bermanfaat bagi para Pelaku UMKM Industri Halal dalam menjalankan usahanya dan secara bertahap Platform Business Matching ini dikembangkan menyesuaikan kebijakan maupun kondisi UMKM Industri Halal terkini dengan teknologi terbarukan.</li><li>Terkait Pusat Data Ekonomi Syariah (PDES), pengembangan yang tengah dilakukan saat ini adalah persiapan pra implementasi untuk menuju sasaran implementasi pada 2023-2024. Bekerjasama dengan produsen data yang terdiri dari berbagai Kementerian/Lembaga, Walidata Pusintek Kementerian Keuangan serta didukung oleh Pusat Data Nasional Kementerian Kominfo. Dalam waktu dekat, Dashboard PDES akan diluncurkan dalam rangka Rapat Pleno pertama tahun 2022.</li></ul></div><div><br></div><div>Sektor Infrastruktur Ekosistem Syariah</div><div><ul><li>Implementasi Program Strategis Peta Jalan SDM Unggul dan Talenta Sektor Ekonomi dan Keuangan Syariah 2022-2024 akan dilakukan dengan menyelenggarakan ToT Pengembangan Kapasitas Guru Pendidikan Agama Islam di Sekolah Menengah dari seluruh Indonesia dan Dosen Ekonomi dan Keuangan Syariah di Provinsi Kalimantan Timur dan Jawa Tengah yang akan diselenggarakan pada bulan Mei dan Juni 2022.</li><li>Program Kelembagaan Ekonomi dan Keuangan Syariah Daerah sebagai salah satu infrastruktur penunjang untuk percepatan pengembagan Ekonomi Syariah Daerah dan Nasional dapat kami infokan sejauh ini, Provinsi Sumatera Barat telah resmi membentuk Komite Daerah Ekonomi dan Keuangan Syariah (KDEKS) Provinsi Sumatera Barat, melalui Keputusan Gubernur Sumatera Barat No. 500-315-2022, tertanggal 7 April 2022, dan telah diumumkan oleh Gubernur Sumatera Barat pada Acara Pembukaan Gerakan Nasional Bangga Buatan Indonesia (GBBI) di Bukittinggi, Sumatera Barat, 12 April 2022. Secara bersamaan beberapa Pemerintah Provinsi lainnya sedang dalam Proses Pembentukan KDEKS diantaranya Provinsi Jawa Barat, sebagai pelaksanaan amanah dari Peraturan Gubernur Jawa Barat No. 1 tahun 2022, Adapun Provinsi Riau dan Gorontalo secara paralel menyusun Peraturan Gubernur tentang Pengembangan Ekonomi dan Keuangan Syariah Daerah dan Pembentukan KDEKS. Kedepannya, Manajemen Eksekutif akan melakukan pendampingan terhadap Provinsi yang akan membentuk KDEKS, bersinergi dengan stakeholder dari Kementerian dan Lembaga yaitu Kemendagri, Kemenkumham, Kemenkeu, BAPPENAS/PPN, BI, OJK, MUI dan KADIN, dalam bentuk Focus Group Discussion (FGD), Rapat Terbatas, serta pertemuan one on one baik virtual maupun offline.</li><li>Penghargaan ekonomi syariah bernama Anugerah Adinata Syariah 2021 akan dilaksanakan pada 14 April 2022. Penghargaan ini memiliki tujuh kategori penilaian, yaitu 1) kategori keuangan syariah, 2) kategori industri halal, 3) kategori keuangan sosial syariah, 4) kategori keuangan mikro, 5) kategori pendidikan ekonomi syariah, 6) kategori ekonomi pesantren, dan 7) kategori ekonomi hijau dan ekonomi berkelanjutan.</li></ul></div>	https://webdev.rifhandi.com/uploads/news/1650890682-alamindo white1.jpg	2019-05-09 08:05:42	\N	Priority Work Program of KNEKS - April 2022	<span style="font-size: 13.44px;">The following are the priority work programs of KNEKS that will be implemented in the near future.</span>	<div><span style="font-size: 13.44px;">The following are the priority work programs of KNEKS that will be implemented in the near future.</span></div><div><span style="font-size: 13.44px;">Halal Product Industry Sector</span></div><div><span style="font-size: 13.44px;">In recent years, the halal industry in Indonesia has continued to develop rapidly. In the recently released State of Global Islamic Economy Report 2022 by Dinar Standard in Dubai, Indonesia's halal food sector rose to rank 2 from rank 4 in the previous year. Currently, Indonesia is continuously improving itself to become the Global Halal Production Center as proclaimed by President Jokowi and Vice President KH Ma'ruf Amin. The National Committee for Islamic Economy and Finance (KNEKS), as per the mandate given to it to oversee this commitment, particularly the Halal Product Industry Directorate - KNEKS is focusing on building a strong Indonesian halal industry ecosystem through various priority programs, while also supporting inclusive national economic recovery post-pandemic, to meet the increasing domestic and international halal product market demand year after year.</span></div><div><span style="font-size: 13.44px;">Several priority programs have been outlined. First, codification of halal certification data in trade transactions. This program aims to record transactions along with halal certificate data for export and import of halal products occurring in the Customs system and Indonesia National Single Window (INSW) based on valid information from the Halal Product Assurance Organizing Agency (BPJPH) database. It is expected that Indonesia will have accurate halal product trade statistical data to support future halal industry sector development. This program also provides benefits in strengthening halal traceability systems in domestic and international trade, through readiness for secure electronic halal certification data exchange between countries worldwide. Indonesia is initiating this global initiative to strengthen halal integrity in world trade. It is hoped that this will soon be welcomed by other halal industry countries, especially global halal product markets like OIC countries, Middle East, and Asia. Furthermore, to support halal product industry productivity through industrialization activities in producing value-added Indonesian halal products, KNEKS continues to encourage the development of Halal Industrial Zones (KIH) in Indonesia. Currently, Indonesia has three KIHs, and moving forward, KNEKS together with the Ministry of Industry and several related industry actors, are preparing various KIH strengthening initiatives to encourage the presence of excellent halal industry infrastructure.</span></div><div><span style="font-size: 13.44px;">In developing the halal industry ecosystem in Indonesia, KNEKS is attempting to synergize all these initiatives into the Indonesian Halal Industry Masterplan (MPIHI) 2022-2029, which is currently being prepared and planned to be published this year. In its future implementation, this halal industry masterplan will become one of the main input materials for the Government Work Plan (RKP) 2023 and onwards, the National Medium-Term Development Plan (RPJMN) 2025-2029, and the National Long-Term Development Plan (RPJPN) 2025-2045.</span></div><div><div style=""><span style="font-size: 13.44px;">Islamic Financial Services Sector</span></div><div style=""><span style="font-size: 13.44px;">From the Islamic banking sector, Bank Riau Kepri will carry out conversion to become a Sharia Commercial Bank (BUS) in mid-2022. Current status: the Ministry of Home Affairs has approved the Draft Regional Regulation (RAPERDA) for changing the form of BPD Riau from a Regional Company (PD) to a Limited Liability Company (PT) BPD Riau. After the RAPERDA is ratified by the Provincial DPRD through a Plenary Meeting, a General Meeting of Shareholders (RUPS) is scheduled for April 23, 2022, with one of the agenda items being approval of changes to the Company's Articles of Association to become a Sharia Commercial Bank (BUS). If the process goes smoothly, it is hoped that the soft launching of Bank Riau Kepri Syariah can be done by mid-2022.</span></div><div style=""><span style="font-size: 13.44px;">Islamic Social Financial Sector</span></div><div style=""><span style="font-size: 13.44px;">Signing of a Memorandum of Understanding (MoU) between BPKH and KNEKS in April 2022 (date to be finalized) regarding the Development of Islamic Economy and Finance in the Islamic microfinance sector. With this MoU, opportunities will open for BPKH fund placement in BPRS and BMT and other collaborations.</span></div><div style=""><span style="font-size: 13.44px;">MoU signing between the Ministry of State-Owned Enterprises - BWI - KNEKS about Collaboration in Generating Cash Waqf in State-Owned Enterprises (BUMN) in May 2022 (date to be finalized). Through this MoU, various efforts will be undertaken to mobilize cash waqf participation in state-owned enterprises and collaborate on Corporate Social Responsibility (TJSL) of BUMN with BWI waqf programs and officially registered waqf nazhir at BWI.</span></div><div style=""><span style="font-size: 13.44px;">BMT 4.0 training for 15 pesantren in West Java in the second week of June 2022. This training is intended to increase the digitalization of pesantren-based BMT to optimize the expansion of Islamic financial service access for the community.</span></div><div style=""><span style="font-size: 13.44px;">Islamic Business and Entrepreneurship Sector</span></div><div style=""><span style="font-size: 13.44px;">KNEKS along with stakeholders are collaborating to create a Halal, Safe, and Healthy Culinary Zone (Zona KHAS) expected to have Halalan Thoyyiban standards. Currently, 12 locations are being processed to become Zona KHAS. The first pilot project is located in the Rasuna Garden Foodstreet Area, DKI Jakarta, which has completed the health standardization stage. Hygiene Sanitation Feasibility Certificate (SLHS) stickering has been carried out to meet the safe and healthy aspects for 39 tenants/MSMEs. Stickering was carried out by the Ministry of Health in collaboration with the DKI Jakarta Health Office and Local Health Laboratory. All tenants have obtained a Business Identification Number (NIB) supported by the Ministry of Cooperatives and are currently implementing halal certification process through BPJPH support. During the opening of Gernas BBI in Bukittinggi City, West Sumatra, the Launch (Kick-Off) of Zona KHAS Los Lambuang, Bukittinggi was conducted on April 12, 2022, attended by Vice President KH. Ma'ruf Amin. This is an encouragement for Zona KHAS development to be implemented at several points throughout Indonesia.</span></div><div style=""><span style="font-size: 13.44px;">Digital Acceleration Program for Islamic Businesses focuses on the Micro, Small, and Medium Enterprises (UMKM) ecosystem, which plays a strategic role in supporting National economic growth after being impacted by the Covid-19 pandemic, including contributions to GDP and labor absorption. However, UMKM development in Indonesia, especially Halal Industry UMKM and to elevate Halal Industry UMKM, digital interconnectivity is a necessity in the Industry 4.0 era to various other sub-ecosystems such as financial services, incubators, social media, regulators, logistics, research/universities, pesantren, mosques, suppliers, marketing, and various other sub-ecosystems. To strengthen this, KNEKS facilitates it through platform development, synergy with various Ministerial Institution stakeholders, including the Ministry of Cooperatives as responsible for entrepreneurship development in Indonesia and single UMKM data according to Presidential Regulation No. 2 of 2022, and acceleration efforts needed by Halal Industry UMKM to obtain access that can be focused on financing access, capacity building, incubation, partnerships, digital markets, and digital empowerment.</span></div><div style=""><span style="font-size: 13.44px;">In addition, one of the things currently being developed by KNEKS is through the Business Matching Platform being built (https://umkmindustrihalal.id/) and will be synergized with the national UMKM ecosystem. This platform aims to encourage competitive MSMEs (especially Halal Industry MSMEs) for inclusive economic growth acceleration. It is hoped that this Business Matching Platform will be beneficial for Halal Industry MSME actors in running their businesses and that the platform will be gradually developed to adapt to the latest Halal Industry MSME policies and conditions with the newest technology.</span></div><div style=""><span style="font-size: 13.44px;">Regarding the Islamic Economic Data Center (PDES), the current development is pre-implementation preparation to reach implementation targets in 2023-2024. Collaborating with data producers consisting of various Ministries/Agencies, Data Custodian of the Ministry of Finance's Information Technology Center, and supported by the National Data Center of the Ministry of Communication and Information. In the near future, the PDES Dashboard will be launched during the first Plenary Meeting of 2022.</span></div><div style=""><span style="font-size: 13.44px;">Islamic Ecosystem Infrastructure Sector</span></div><div style=""><span style="font-size: 13.44px;">Implementation of the Strategic Program for the Roadmap of Superior Human Resources and Talents in the Islamic Economy and Finance Sector 2022-2024 will be carried out by organizing Training of Trainers (ToT) for Capacity Development of Islamic Religious Education Teachers in Secondary Schools from across Indonesia and Lecturers of Islamic Economy and Finance in East Kalimantan and Central Java Provinces, which will be held in May and June 2022.</span></div><div style=""><span style="font-size: 13.44px;">Regarding the Regional Islamic Economy and Finance Institutional Program as one of the supporting infrastructures for accelerating Regional and National Islamic Economic development, it can be reported that West Sumatra Province has officially established the Regional Committee for Islamic Economy and Finance (KDEKS) through Governor's Decree No. 500-315-2022, dated April 7, 2022, and was announced by the West Sumatra Governor at the Opening of the National Movement Proud of Indonesian Products (GBBI) in Bukittinggi, West Sumatra, on April 12, 2022. Simultaneously, several other Provincial Governments are in the process of establishing KDEKS, including West Java Province, as implementation of West Java Governor Regulation No. 1 of 2022. Riau and Gorontalo Provinces are simultaneously preparing Governor Regulations on Regional Islamic Economy and Finance Development and KDEKS Establishment. Moving forward, the Executive Management will provide assistance to Provinces that will establish KDEKS, synergizing with stakeholders from Ministries and Institutions such as the Ministry of Home Affairs, Ministry of Law and Human Rights, Ministry of Finance, BAPPENAS/National Development Planning Agency, Bank Indonesia, OJK, MUI, and KADIN, in the form of Focus Group Discussions (FGD), Limited Meetings, and one-on-one meetings both virtually and offline.</span></div><div style=""><span style="font-size: 13.44px;">The Islamic economic award named Anugerah Adinata Syariah 2021 will be held on April 14, 2022. This award has seven assessment categories: 1) Islamic finance category, 2) halal industry category, 3) Islamic social finance category, 4) microfinance category, 5) Islamic economic education category, 6) pesantren economy category, and 7) green economy and sustainable economy category.</span></div></div><div><span style="font-size: 13.44px;"><br></span></div>	1	kneks	indonesia,kneks	NULL	0	0	null
-26	KDEKS Jatim Siap Kolaborasi Ekonomi dan Keuangan Syariah di Jatim	Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) dan Sekretariat Wakil Presiden (Setwapres) melakukan audiensi pendampingan penyusunan program KDEKS Jawa Timur Tahun 2023 bersama dengan Wakil Gubernur Jawa Timur, Kantor Regional Otoritas Jasa Keungan Jawa Timur, serta Kantor Perwakilan Bank Indonesia Jawa Timur pada 6 Maret 2022.&nbsp;	<div>Surabaya, KNEKS - Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) dan Sekretariat Wakil Presiden (Setwapres) melakukan audiensi pendampingan penyusunan program KDEKS Jawa Timur Tahun 2023 bersama dengan Wakil Gubernur Jawa Timur, Kantor Regional Otoritas Jasa Keungan Jawa Timur, serta Kantor Perwakilan Bank Indonesia Jawa Timur pada 6 Maret 2022.&nbsp;</div><div><br></div><div>Dalam kegiatan ini hadir Wakil Gubernur Jawa Timur selaku Direktur Eksekutif KDEKS Jawa Timur Emil Elestianto Dardak, Wakil Direktur Eksekutif I KDEKS Jawa Timur Muhamad Nafik Hadi Ryandono, Wakil Direktur Eksekutif II KDEKS Jawa Timur Abdul Mongid, Asisten Deputi Ekonomi Setwpres Ahmad Lutfi, dan Kepala Divisi Hukum Pengembangan Ekonomi Syariah KNEKS Dece Kurniadi.&nbsp;</div><div><br></div><div>Emil Dardak, Wakil Gubernur Jawa Timur selaku Direktur Eksekutif KDEKS Jawa Timur menyampaikan bahwa program-program KDEKS akan linier dengan KNEKS. KNEKS memiliki 30 program yang terdiri dari 17 Program Reguler dan 13 Program Prioritas. “Paling tidak, di setiap bidang ada satu program yang dapat dijalankan oleh KDEKS Jawa Timur,” kata Emil.&nbsp;</div><div><br></div><div>Dece Kurniadi, Kepala Divisi Hukum Pengembangan Ekonomi Syariah KNEKS menyampaikan bahwa kunjungan ke Jawa Timur kali ini adalah dalam rangka koordinasi penyiapan program dari KDEKS Jawa Timur.&nbsp;&nbsp;</div><div><br></div><div>“Diharapkan KDEKS dapat membangun sinergi dan kolaborasi Program Strategis Ekonomi Syariah Nasional dan Daerah,” ujar Dece.&nbsp;</div><div><br></div><div>Pertemuan yang juga dihadiri oleh OPD Jawa Timur ini bertujuan untuk membangun kesepahaman bersama tujuan dari pembentukan KDEKS dan penyiapan program dari KDEKS Jawa Timur.&nbsp;</div><div><br></div><div>Ahmad Lutfi, Asisten Deputi Ekonomi Setwpres kemudian mengatakan, “KDEKS menjadi penting, karena dapat mengakselerasi program yang ada di pusat. Harapannya dengan adanya KDEKS dapat mendorong literasi yang saat ini belum signifikan.”&nbsp;</div><div><br></div><div>Saat ini ada 12 (dua belas) KDEKS (Per 6 Maret 2023), yaitu Sumatra Barat, Riau, Sumatra Selatan, Nusa Tenggara Barat (NTB), Sulawesi Selatan, Jawa Timur, Bangka Belitung, Banten, Jawa Tengah, Lampung, Kalimantan Selatan, dan Sumatra Utara.&nbsp;&nbsp;</div><div><br></div><div>Dalam pertemuan yang berbeda, Kantor Regional Otoritas Jasa Keuangan Jawa Timur dan Kantor Perwakilan Bank Indonesia Jawa Timur juga menyambut baik atas terbentuknya KDEKS Jawa Timur. Kedua lembaga tersebutr siap mendukung pengembangan ekonomi dan keuangan syariah di Jawa Timur.&nbsp;</div><div><br></div><div>Penulis: Adam Hervanda, Adelina Zuleika&nbsp;</div><div>Redaktur Pelaksana: Ishmah Qurratu'ain</div>	https://webdev.rifhandi.com/uploads/news/web10.jpg	2019-05-09 08:05:00	on	KDEKS East Java Ready to Collaborate on Sharia Economy and Finance in East Java	<p><font face="arial" size="2"><i>The National Committee on Sharia Economy and Finance (KNEKS) and the Secretariat of the Vice President (Setwapres) held a meeting to support the development of the 2023 KDEKS East Java program, alongside the Vice Governor of East Java, the East Java Regional Office of the Financial Services Authority (OJK), and the East Java Regional Representative Office of Bank Indonesia on March 6, 2022.</i></font></p>	<div>Surabaya, KNEKS - The National Committee on Sharia Economy and Finance (KNEKS) and the Secretariat of the Vice President (Setwapres) held an audience to support the development of the 2023 KDEKS East Java program, along with the Vice Governor of East Java, the East Java Regional Office of the Financial Services Authority (OJK), and the East Java Representative Office of Bank Indonesia on March 6, 2022.</div><div><br></div><div>Present at the event were Emil Elestianto Dardak, the Vice Governor of East Java and Executive Director of KDEKS East Java, Muhamad Nafik Hadi Ryandono, Deputy Executive Director I of KDEKS East Java, Abdul Mongid, Deputy Executive Director II of KDEKS East Java, Ahmad Lutfi, Assistant Deputy for Economics at Setwapres, and Dece Kurniadi, Head of the Sharia Economic Development Legal Division at KNEKS.</div><div><br></div><div>Emil Dardak, the Vice Governor of East Java and Executive Director of KDEKS East Java, stated that the KDEKS programs will align with KNEKS. KNEKS has 30 programs, consisting of 17 regular programs and 13 priority programs. "At least, in each field, there is one program that can be implemented by KDEKS East Java," said Emil.</div><div><br></div><div>Dece Kurniadi, Head of the Sharia Economic Development Legal Division at KNEKS, stated that the visit to East Java was for coordinating the preparation of the KDEKS East Java program.</div><div><br></div><div>"It is expected that KDEKS can build synergy and collaboration between the National and Regional Strategic Sharia Economy Programs," said Dece.</div><div><br></div><div>The meeting, which was also attended by East Java's OPD, aimed to build a mutual understanding of the purpose of establishing KDEKS and the preparation of the KDEKS East Java program.</div><div><br></div><div>Ahmad Lutfi, Assistant Deputy for Economics at Setwapres, then stated, "KDEKS is important because it can accelerate programs at the central level. It is hoped that KDEKS will push for literacy, which is still not significant."</div><div><br></div><div>Currently, there are 12 KDEKS (as of March 6, 2023), namely West Sumatra, Riau, South Sumatra, West Nusa Tenggara (NTB), South Sulawesi, East Java, Bangka Belitung, Banten, Central Java, Lampung, South Kalimantan, and North Sumatra.</div><div><br></div><div>In a separate meeting, the East Java Regional Office of the Financial Services Authority (OJK) and the East Java Representative Office of Bank Indonesia also welcomed the establishment of KDEKS East Java. Both institutions are ready to support the development of the sharia economy and finance in East Java.</div><div><br></div><div>Author: Adam Hervanda, Adelina Zuleika&nbsp;&nbsp;</div><div>Managing Editor: Ishmah Qurratu'ain</div>	0	kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	5	0	4	SuperAdmin
 28	Kepala Bappenas Buka Festival Ekonomi Syariah 2019	Komite Nasional Keuangan Syariah (KNKS) menyelanggarakan Indonesia Islamic Economy Festival (IIEFest) 2019 dengan mengusung tema "Halal Lifestyle di Era Millenial" di Trans Hotel Grand Ballroom, Bandung, Jumat (26/4/2019).	<div>Komite Nasional Keuangan Syariah (KNKS) menyelanggarakan Indonesia Islamic Economy Festival (IIEFest) 2019 dengan mengusung tema "Halal Lifestyle di Era Millenial" di Trans Hotel Grand Ballroom, Bandung, Jumat (26/4/2019).</div><div><br></div><div>Acara ini dihadiri dan diresmikan langsung oleh Menteri PPN/Kepala Bappenas, Bambang Brodjonegoro dan dihadiri sejumlah pelaku perbankan. Dari pantauan Warta Ekonomi hadir Direktur Utama BRI Syariah, Moch Hadi Santoso, dan Direktur Utama BRI, Suprajarto.</div><div><br></div><div>Deputi Bidang Promosi dan Hubungan Eskternal KNKS, Afdhal Aliasar, mengatakan IIEFest 2019 ini merupakan bagian dari rangkaian peluncuran Masterplan Ekonomi Syariah Indonesia 2019-2024 yang akan diresmikan oleh Presiden pada 14 Mei 2019 mendatang.</div><div><br></div><div>"Acara ini bertemakan Halal Lifestyle di Era Millenial. Karena itulah kami memilih Bandung sebagai salah satu ikon dari pertumbuhan lifestyle. Dan juga Bandung baru-baru ini terpilih sebagai salah satu dari 10 destinasi pariwisata halal terbaik pada Indonesia Muslim Travel Index 2019," kata Afdhal.</div><div><br></div><div>Afdhal menambahkan di dalam acara ini akan diisi oleh talkshow dari 19 pembicara dimana diantaranya para pelaku usaha industri halal. Meraka akan membagikan pengalaman bagaimana tantangan serta memulai suatu usaha yang terkait dengan pengembangan industri halal dan ekonomi syariah.</div><div><br></div><div>"Kami juga mengadakan expo oleh para pelaku usaha dan stakeholder yang terkait dengan pengembangan ekonomi syariah. Sudah bergabung dalam expo 19 pelaku usaha," tambahnya.</div><div><br></div><div>Sekedar informasi pemerintah membentuk KNKS dalam rangka mendorong pengembangan keuangan syariah serta menjadikan Indonesia sebagai pemain kunci dalam ekonomi syariah global. Pembentukan KNKS dilakukan melalui Peraturan Presiden Nomor 91/2016 tentang Komite Nasional Keuangan Syariah. Komite ini dipimpin langsung oleh Presiden dan Wakil Presiden.</div><div><br></div><div>KNKS mendapat amanah untuk mempercepat, memperluas, dan memajukan pengembangan keuangan dan ekonomi syariah dalam rangka mendukung pembangunan. KNKS juga berperan untuk menyamakan persepsi dan mewujudkan sinergi antara para regulator, pemerintah, dan industri keuangan syariah untuk menciptakan sistem keuangan syariah yang selaras dan progresif untuk pertumbuhan ekonomi Indonesia.</div>	https://webdev.rifhandi.com/uploads/news/1557450531-foto-11.jpg	2019-05-09 08:05:42	1	Head of Bappenas Opens the 2019 Sharia Economic Festival	The National Sharia Finance Committee (KNKS) organized the 2019 Indonesia Islamic Economy Festival (IIEFest) under the theme "Halal Lifestyle in the Millennial Era" at the Trans Hotel Grand Ballroom, Bandung, on Friday (April 26, 2019).	<div>The National Sharia Finance Committee (KNKS) organized the 2019 Indonesia Islamic Economy Festival (IIEFest) under the theme "Halal Lifestyle in the Millennial Era" at the Trans Hotel Grand Ballroom, Bandung, on Friday (April 26, 2019).</div><div><br></div><div>The event was inaugurated by the Minister of National Development Planning (PPN) and Head of Bappenas, Bambang Brodjonegoro, and was attended by various banking professionals. Warta Ekonomi observed the presence of BRI Syariah President Director Moch Hadi Santoso and BRI President Director Suprajarto.</div><div><br></div><div>Deputy for Promotion and External Relations at KNKS, Afdhal Aliasar, stated that IIEFest 2019 is part of the series of events leading up to the launch of the Indonesian Sharia Economic Masterplan 2019-2024, which will be officiated by the President on May 14, 2019.</div><div><br></div><div>"This event is themed 'Halal Lifestyle in the Millennial Era.' That is why we chose Bandung as one of the icons of lifestyle growth. Additionally, Bandung was recently named one of the top 10 halal tourism destinations in the Indonesia Muslim Travel Index 2019," said Afdhal.</div><div><br></div><div>He added that the event features a talk show with 19 speakers, including halal industry entrepreneurs. They will share their experiences in overcoming challenges and starting businesses related to the development of the halal industry and sharia economy.</div><div><br></div><div>"We are also holding an expo involving businesses and stakeholders related to the development of the sharia economy. So far, 19 businesses have joined the expo," he added.</div><div><br></div><div>For reference, the government established KNKS to promote the development of sharia finance and position Indonesia as a key player in the global sharia economy. KNKS was formed through Presidential Regulation Number 91/2016 concerning the National Sharia Finance Committee. The committee is chaired directly by the President and Vice President.</div><div><br></div><div>KNKS has been mandated to accelerate, expand, and advance the development of sharia finance and economy to support national development. It also plays a role in aligning perspectives and creating synergy among regulators, the government, and the sharia finance industry to establish a harmonious and progressive sharia financial system for Indonesia's economic growth.</div>	1	kneks		4	0	0	null
 37	Ekonomi dan Keuangan Syariah Menjadi Angin Segar Kesejahteraan Aceh	<span style="font-size: 13.44px;">Pj Gubernur Aceh Achmad Marzuki berharap ekonomi dan keuangan syariah dapat menjadi angin segar untuk mengubah kondisi Aceh menjadi salah satu provinsi terkaya di Sumatera. Hal ini disampaikan dalam audiensi Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) di kantor Gubernur Provinsi Aceh di Banda Aceh pada Senin (8/8). Kunjungan ini merupakan salah satu langkah untuk percepatan pengembangan ekonomi dan keuangan syariah di Provinsi Aceh.</span>	<div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">Pj Gubernur Aceh Achmad Marzuki berharap ekonomi dan keuangan syariah dapat menjadi angin segar untuk mengubah kondisi Aceh menjadi salah satu provinsi terkaya di Sumatera. Hal ini disampaikan dalam audiensi Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) di kantor Gubernur Provinsi Aceh di Banda Aceh pada Senin (8/8). Kunjungan ini merupakan salah satu langkah untuk percepatan pengembangan ekonomi dan keuangan syariah di Provinsi Aceh.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Pertemuan dipimpin langsung oleh Gubernur Aceh Achmad Marzuki dan dihadiri oleh pimpinan Provinsi Aceh seperti, Kepala Biro Perekonomian Sekretariat Daerah Aceh Amirullah, Kepala Biro Administrasi Pembangunan Sekretariat Daerah Aceh Robby Irza, Staf Khusus Gubernur Syukri, Kepala Bappeda Aceh Teuku Dadek, serta Wakil Direktur RUSD Zainoel Abidin Abdul Fatah.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Turut hadir Kepala Sekretariat KNEKS sekaligus Staf Ahli Menteri Keuangan Wempi Saputra, Plt. Direktur Eksekutif KNEKS Taufik Hidayat, Asisten Deputi Ekonomi dan Keuangan Sekretariat Wakil Presiden Ahmad Luthfie, Tenaga Ahli Bidang Komunikasi Keuangan Syariah Kementerian Keuangan Indah Pertiwi Nataprawira, Direktur Pemantauan Program Kerja Sekretariat KNEKS Gandy Setiawan, para Kepala Kantor Wilayah Aceh Kementerian Keuangan,&nbsp; Safuadi, Ismed Saputra,&nbsp; Syukriah, serta Imanul Hakim.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Kepala Sekretariat KNEKS yang juga menjabat sebagai Staf Ahli Menteri Keuangan ini juga menyampaikan bahwa Aceh merupakan kakak tertua pelopor ekonomi dan keuangan syariah. Sebagai kakak sulung, Provinsi Aceh patut menjadi daerah percontohan. Hal ini dikarenakan pengembangan ekonomi dan keuangan syariah Aceh sangat baik dan komprehensif.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Taufik Hidayat selaku Plt. Direktur Eksekutif KNEKS menambahkan pernyataan Kepala Sekretariat KNEKS bahwa prestasi Aceh juga sangat menggembirakan. Hal ini terlihat dari status Aceh sebagai Juara Umum Anugerah Adinata Syariah 2022 sekaligus menjadi Juara 1 Kategori Keuangan Syariah, Juara 1 Kategori Industri Halal, dan Juara 2 Kategori Pendidikan Ekonomi Syariah</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Taufik kemudian menuturkan bahwa KNEKS telah berkoordinasi dan bekerja sama dengan berbagai jajaran untuk melakukan berbagai program pengembangan ekonomi dan keuangan syariah di Aceh. Agar ekonomi dan keuangan syariah dapat berkembang lebih baik lagi, dibutuhkan komitmen seluruh pihak terkait untuk bergerak lebih cepat dalam sinergi yang kompak.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Kegiatan audiensi dilakukan sebagai tindak lanjut akselerasi pertumbuhan ekonomi dan keuangan syariah di daerah sebagaimana disampaikan oleh Wakil Presiden KH Ma’ruf Amin dalam Rapat Pleno KNEKS pada Mei 2022 yang mengambil tema “Bergerak Lebih Cepat untuk Mewujudkan Indonesia sebagai Produsen Halal Terkemuka di Dunia”.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Hal-hal strategis yang dibahas dalam pertemuan ini diantaranya:</span></div><div><ul><li><span style="font-size: 13.44px;"><br></span></li><li><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">Diskusi rencana pembangunan RSUD Zainoel Abidin melalui skema KPBU Syariah serta potensinya untuk menjadi Rumah Sakit regional, bahkan internasional.</span></li><li><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">Pasca peluncuran layanan Syariah BP Jamsostek, perlu ditingkatkan peran perusahaan-perusahaan pemberi kerja dalam mendaftarkan pegawainya sebagai peserta Layanan Syariah Jaminan Sosial Ketenagakerjaan (Jamsosnaker).</span></li><li><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">Pelatihan, sertifikasi, dan pelatihan Dewan Pengawas Syariah (DPS) Koperasi Syariah, serta perluasan penerapan digitalisasi Industri Keuangan Mikro Syariah (IKMS).</span></li><li><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">Perlunya dibangun infrastruktur penunjang bisnis dalam meyakinkan investor untuk pengembangan bisnis di Aceh, seperti Pelabuhan dan bandara penunjang yang terintegrasi.</span></li><li><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">Peningkatan kapabilitas produk dan layanan bank syariah untuk memenuhi kebutuhan transaksi dalam rangka Pekan Olahraga Nasional (PON) yang akan diselenggarakan di Aceh penyelenggaraan PON di Aceh.</span></li></ul></div>	https://webdev.rifhandi.com/uploads/news/1659974014-DSC0107911.jpg	2019-05-09 08:05:42	\N	Sharia Economy and Finance: A Breath of Fresh Air for Aceh’s Prosperity	<span style="font-size: 13.44px;">Acting Governor of Aceh, Achmad Marzuki, expressed his hope that the sharia economy and finance could become a breath of fresh air to transform Aceh into one of the richest provinces in Sumatra. This statement was made during an audience with the National Committee for Islamic Economy and Finance (KNEKS) at the Governor’s Office in Banda Aceh on Monday (8/8). The visit was part of efforts to accelerate the development of the sharia economy and finance in Aceh Province.</span>	<div><span style="font-size: 13.44px;">Acting Governor of Aceh, Achmad Marzuki, expressed his hope that the sharia economy and finance could become a breath of fresh air to transform Aceh into one of the richest provinces in Sumatra. This statement was made during an audience with the National Committee for Islamic Economy and Finance (KNEKS) at the Governor’s Office in Banda Aceh on Monday (8/8). The visit was part of efforts to accelerate the development of the sharia economy and finance in Aceh Province.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">The meeting was chaired directly by Governor Achmad Marzuki and attended by key provincial leaders, including the Head of the Economic Bureau of Aceh Regional Secretariat Amirullah, Head of the Development Administration Bureau Robby Irza, Governor’s Special Staff Syukri, Head of Aceh’s Regional Development Planning Agency (Bappeda) Teuku Dadek, and Deputy Director of RSUD Zainoel Abidin Abdul Fatah.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Also in attendance were the Head of the KNEKS Secretariat and Expert Staff to the Minister of Finance Wempi Saputra, Acting Executive Director of KNEKS Taufik Hidayat, Assistant Deputy for Economy and Finance at the Vice President’s Secretariat Ahmad Luthfie, Financial Communication Expert at the Ministry of Finance Indah Pertiwi Nataprawira, Program Monitoring Director at KNEKS Secretariat Gandy Setiawan, as well as Heads of Aceh’s Regional Offices of the Ministry of Finance, Safuadi, Ismed Saputra, Syukriah, and Imanul Hakim.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">The Head of the KNEKS Secretariat, who also serves as Expert Staff to the Minister of Finance, highlighted Aceh's role as the eldest pioneer of the sharia economy and finance. As the oldest sibling, Aceh should be a model region. This is because Aceh’s development in sharia economy and finance has been highly commendable and comprehensive.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Taufik Hidayat, Acting Executive Director of KNEKS, added to the statement by emphasizing Aceh’s remarkable achievements. This was evidenced by Aceh's status as the Grand Champion of the 2022 Adinata Syariah Awards, including 1st place in the Sharia Finance category, 1st place in the Halal Industry category, and 2nd place in the Sharia Economy Education category.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Taufik further explained that KNEKS has coordinated and collaborated with various stakeholders to implement several sharia economy and finance development programs in Aceh. To ensure further growth, a strong commitment from all relevant parties is essential for moving swiftly in a cohesive synergy.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">The audience session was held as a follow-up to the acceleration of sharia economic and financial growth in the region, as conveyed by Vice President KH Ma’ruf Amin during the KNEKS Plenary Meeting in May 2022, themed “Moving Faster to Realize Indonesia as the World’s Leading Halal Producer.”</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">The strategic points discussed during the meeting included:</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Plans for the development of RSUD Zainoel Abidin through a Sharia PPP scheme and its potential to become a regional or even international hospital.</span></div><div><span style="font-size: 13.44px;">Post-launch optimization of BP Jamsostek’s Sharia Services by encouraging employers to register their employees for the Sharia Social Security Employment Services (Jamsosnaker).</span></div><div><span style="font-size: 13.44px;">Training, certification, and education for Sharia Supervisory Boards (DPS) in Sharia Cooperatives, along with expanding digitalization in the Sharia Microfinance Industry (IKMS).</span></div><div><span style="font-size: 13.44px;">Building supportive business infrastructure, such as integrated ports and airports, to attract investors and foster business development in Aceh.</span></div><div><span style="font-size: 13.44px;">Enhancing the capabilities of sharia banking products and services to meet transaction needs in preparation for the National Sports Week (PON) to be held in Aceh.</span></div>	1	kneks	indonesia,kneks	NULL	0	0	null
 38	Presiden Joko Widodo luncurkan Masterplan Ekonomi Syariah Indonesia	Masterplan Ekonomi Syariah Indonesia (MEKSI) 2019-2024 yang akan memberikan pedoman bagi negara Indonesia selama lima tahun ke depan untuk dapat menjadi pelaku utama ekonomi syariah dunia diluncurkan Presiden Joko Widodo di Gedung Saleh Afiff, Kementerian Perencanaan Pembangunan Nasional, Jakarta. Selasa, (14 Mei 2019).	<div>MITRAPOL.com, Jakarta – Masterplan Ekonomi Syariah Indonesia (MEKSI) 2019-2024 yang akan memberikan pedoman bagi negara Indonesia selama lima tahun ke depan untuk dapat menjadi pelaku utama ekonomi syariah dunia diluncurkan Presiden Joko Widodo di Gedung Saleh Afiff, Kementerian Perencanaan Pembangunan Nasional, Jakarta. Selasa, (14 Mei 2019).</div><div><br></div><div>Dalam sambutannya, Presiden Jokowi mengatakan bahwa Indonesia memiliki peluang besar untuk bertransformasi menjadi salah satu negara dengan perekonomian terkuat di dunia pada 2045 mendatang. Sejumlah studi yang telah dilakukan baik di dalam maupun luar negeri menyatakan hal itu.</div><div><br></div><div>“Tapi untuk menuju ke sana juga bukan barang yang mudah. Banyak tantangan, banyak persoalan besar yang harus kita selesaikan,” kata Presiden.</div><div><br></div><div>Kepala Negara melanjutkan, salah satu kunci utama untuk mewujudkan hal itu telah dimiliki Indonesia sebagai negara dengan penduduk muslim terbesar di dunia, yakni ekonomi syariah. Maka, pertumbuhan ekonomi nasional dan penyejahteraan umat harus dilakukan dengan salah satunya memajukan perekonomian syariah di dalam negeri.</div><div><br></div><div>“Kunci itu adalah ekonomi syariah. Ekonomi syariah sebagai motor pertumbuhan ekonomi nasional, ekonomi syariah sebagai sumber kesejahteraan umat,” ujarnya.</div><div><br></div><div>Di tingkat dunia, ekonomi syariah memiliki sumbangan ekonomi global yang sangat besar. Tahun 2023 mendatang, sumbangsih tersebut diperkirakan akan bernilai setidaknya USD3 triliun. Hal itu merupakan potensi yang harus dapat dimanfaatkan oleh negara kita.</div><div><br></div><div>“Sayangnya, ini menurut Global Islamic Economy Indicator, di tahun 2018 Indonesia masih menempati urutan yang ke-10 dalam peringkat negara-negara yang menyelenggarakan ekonomi syariah,” tuturnya.</div><div><br></div><div>“Kita masih di belakang Malaysia, Uni Emirat Arab, Bahrain, Arab Saudi, Oman, Jordania, Qatar, Pakistan, Kuwait. Inilah pekerjaan besar kita bersama-sama,” kata Presiden.</div><div><br></div><div>Oleh karenanya, melalui Komite Nasional Keuangan Syariah yang dibentuk oleh Presiden Joko Widodo pada 2016 lalu, pemerintah berupaya membangkitkan potensi ekonomi syariah nasional dan menjadikan Indonesia sebagai pusat ekonomi syariah di tingkat global.</div><div><br></div><div>“Saatnya sudah tiba bagi kita untuk membangkitkan potensi ekonomi syariah di Indonesia dan menjadikan Indonesia sebagai pusat ekonomi syariah terkemuka di dunia. Karena kita memang negara dengan penduduk muslim terbesar di dunia,” kata Presiden.</div><div><br></div><div>MEKSI 2019-2024 merumuskan empat langkah dan strategi utama untuk mewujudkan hal tersebut. Pertama, menguatkan rantai nilai halal dengan fokus pada sektor yang dinilai potensial dan berdaya saing tinggi. Kedua, menguatkan sektor keuangan syariah di dalam negeri.</div><div><br></div><div>Adapun yang ketiga ialah menguatkan sektor UMKM sebagai penggerak utama rantai nilai halal tersebut. Sementara yang keempat dengan menguatkan ekonomi digital yang utamanya melalui perdagangan elektronik sehingga mendorong pencapaian strategi keuangan syariah lainnya.</div><div><br></div><div>“Kita akan terus menguatkan rantai nilai halal dengan fokus pada sektor makanan dan minuman, fesyen, pariwisata, media, rekreasi, serta farmasi dan kosmetika. Sebagai pendukungnya kita akan kuatkan keuangan syariah, kita akan terus kuatkan UMKM kita, kita kuatkan ekonomi digital kita,” ujar Presiden.</div><div><br></div><div>Dengan MEKSI 2019-2024 yang telah dirumuskan tersebut, Presiden Joko Widodo berharap agar seluruh pihak memiliki semangat dan visi yang sama dalam mengimplementasikan kebijakan pengembangan ekonomi syariah Indonesia untuk mencapai tujuan yang telah dicita-citakan.</div><div><br></div><div>“Saya yakin insyaallah bahwa ketika kita semua berkomitmen menjalankan masterplan ekonomi syariah Indonesia ini maka Indonesia akan segera menjadi pusat ekonomi syariah di dunia,” tandasnya.</div><div><br></div><div>Hms/Yuliana</div><div><br></div><div><br></div><div>Sumber : https://mitrapol.com/2019/05/15/presiden-joko-widodo-luncurkan-masterplan-ekonomi-syariah-indonesia/</div>	https://webdev.rifhandi.com/uploads/news/1557909617-PeluncuranMasterplan.jpg	2019-05-09 08:05:42	\N	President Joko Widodo launches the Indonesia Sharia Economic Masterplan	The Indonesia Sharia Economic Masterplan (MEKSI) 2019-2024, which will serve as a guideline for Indonesia over the next five years to become a key player in the global sharia economy, was launched by President Joko Widodo at the Saleh Afiff Building, Ministry of National Development Planning, Jakarta, on Tuesday, (May 14, 2019).	<div>MITRAPOL.com, Jakarta – The Indonesia Sharia Economic Masterplan (MEKSI) 2019-2024, which will provide guidance for Indonesia over the next five years to become a key player in the global sharia economy, was launched by President Joko Widodo at the Saleh Afiff Building, Ministry of National Development Planning, Jakarta, on Tuesday, May 14, 2019.</div><div><br></div><div>In his speech, President Jokowi stated that Indonesia has a great opportunity to transform into one of the strongest economies in the world by 2045. Several studies, both domestically and internationally, have indicated this.</div><div><br></div><div>"But reaching that point is not an easy task. There are many challenges and major issues that we must resolve," said the President.</div><div><br></div><div>The Head of State continued, one of the key factors to achieving this is already within Indonesia’s reach as the country with the largest Muslim population in the world, namely, the sharia economy. Therefore, national economic growth and the welfare of the people must be advanced, including by promoting the sharia economy domestically.</div><div><br></div><div>"The key is the sharia economy. The sharia economy as a driver of national economic growth, the sharia economy as a source of welfare for the people," he said.</div><div><br></div><div>Globally, the sharia economy contributes significantly to the global economy. In 2023, this contribution is expected to be worth at least USD 3 trillion. This is a potential that Indonesia must tap into.</div><div><br></div><div>"Unfortunately, according to the Global Islamic Economy Indicator, in 2018, Indonesia still ranked 10th in the list of countries that implement sharia economy," he said.</div><div><br></div><div>"We are still behind Malaysia, the United Arab Emirates, Bahrain, Saudi Arabia, Oman, Jordan, Qatar, Pakistan, and Kuwait. This is our big task together," the President added.</div><div><br></div><div>Therefore, through the National Committee for Sharia Finance (KNKS), which was established by President Joko Widodo in 2016, the government is striving to awaken the potential of the national sharia economy and make Indonesia a center for the sharia economy on a global scale.</div><div><br></div><div>"The time has come for us to awaken the potential of the sharia economy in Indonesia and make Indonesia a leading center for the global sharia economy. Because we are indeed the country with the largest Muslim population in the world," said the President.</div><div><br></div><div>MEKSI 2019-2024 outlines four key steps and strategies to achieve this. First, strengthening the halal value chain with a focus on sectors considered to have high potential and competitiveness. Second, strengthening the domestic sharia finance sector.</div><div><br></div><div>Third, strengthening the MSME sector as the main driver of the halal value chain. Fourth, strengthening the digital economy, mainly through electronic commerce to support the achievement of other sharia finance strategies.</div><div><br></div><div>"We will continue to strengthen the halal value chain with a focus on sectors such as food and beverage, fashion, tourism, media, recreation, as well as pharmaceuticals and cosmetics. As support, we will strengthen sharia finance, we will continue to strengthen our MSMEs, and we will strengthen our digital economy," said the President.</div><div><br></div><div>With the MEKSI 2019-2024 having been formulated, President Joko Widodo hopes that all parties will share the same spirit and vision in implementing the policy for the development of the sharia economy in Indonesia to achieve the desired goals.</div><div><br></div><div>"I am confident, God willing, that when we are all committed to implementing this Indonesia Sharia Economic Masterplan, Indonesia will soon become the center of the global sharia economy," he concluded.</div><div><br></div><div>Hms/Yuliana</div><div><br></div><div>Source:&nbsp;<span style="font-size: 13.44px; color: var(--bs-card-color); background-color: var(--bs-card-bg); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">&nbsp;</span><span style="font-size: 13.44px; color: var(--bs-card-color); background-color: var(--bs-card-bg); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">https://mitrapol.com/2019/05/15/presiden-joko-widodo-luncurkan-masterplan-ekonomi-syariah-indonesia/</span></div>	1	kneks	indonesia,kneks	NULL	0	0	null
@@ -2750,6 +2830,7 @@ COPY public.news (id, title, excerpt, content, image, news_datetime, is_publish,
 136	Dorong Jaminan Sosial Ketenagakerjaan Syariah, KNKS Melakukan MoU dengan BPJS Ketenagakerjaan	<p>Hal ini diharapkan mampu mengakomodasi kebutuhan tenaga kerja di Indonesia akan jaminan sosial syariah</p>	<p><strong>Jakarta, KNKS -&nbsp;</strong>Direktur Eksekutif Komite Nasional Keuangan Syariah (KNKS) melakukan penandatanganan <em>Memorandum of Understanding</em> (<em>MoU</em>) dengan BPJS Ketenagakerjaan pada hari Selasa, 14 Mei 2019 yang lalu. Kegiatan ini dilakukan secara bersamaan dengan acara peluncuran Masterplan Ekonomi Syariah (MEKSI) 2019-2024 secara langsung oleh Presiden Republik Indonesia Bapak Ir. Joko Widodo yang juga merupakan Ketua KNKS dan didampingi oleh segenap jajaran Menteri selaku Dewan Pengarah KNKS di Gedung Badan Perencanaan Pembangunan Nasional (Bappenas).</p>\r\n\r\n<p>Dalam MoU tersebut, keduanya telah sepakat untuk bekerjasama dalam pengembangan program jaminan sosial ketenagakerjaan dengan prinsip syariah. Hal ini diharapkan mampu mengakomodasi kebutuhan tenaga kerja di Indonesia akan jaminan sosial syariah, sekaligus mendorong pendalaman pasar keuangan syariah melalui investasi dana BPJS Ketenagakerjaan pada instrumen keuangan syariah.</p>\r\n\r\n<p>Penulis :&nbsp; Cindhi Cintokowati<br />\r\nRedaktur : Taufik Hidayat</p>	https://webdev.rifhandi.com/uploads/news/g.jpg	2019-05-09 08:05:42	1	\N	\N	\N	3	kneks	\N	NULL	0	0	null
 134	KNKS Hadiri Acara “Ngobrol Santai Wisata Halal” di Sumatera Barat	<p>Sumatera Barat dapat dimulai <em>pilot project</em> di wilayah tertentu untuk&nbsp;dijadikan acuan bagi&nbsp;wilayah lainnya</p>	<p><strong>Padang, KNKS</strong> &ndash; Dinas Pariwisata dan Generasi Pesona Indonesia (GenPI) Provinsi Sumatera Barat menyelenggarakan diskusi yang bertajuk &lsquo;Ngobrol Santai Wisata Halal&rsquo; bertempat di Aula Kantor Perwakilan Bank Indonesia Sumatera Barat pada Jumat 24 Mei 2019. Acara diskusi ini menghadirkan berbagai pembicara yang paham akan perkembangan wisata halal baik global maupun nasional, diantaranya yaitu R. Wisnu Rahtomo dari Tim Percepatan Pengembangan Pariwisata Halal Kemenpar RI dan Wahyu Purnama A. selaku Kepala Perwakilan bank Indonesia Sumatera Barat.</p>\r\n\r\n<p>Ketua GenPI Sumatera Barat, Aries Purnama, menjelaskan diskusi santai ini diadakan untuk membahas pengembangan wisata halal di daerah Sumatera Barat dalam rangka menggerakkan perekonomian masyarakat,&rdquo; Ujar Ketua GenPI Sumbar, Aries Purnama.</p>\r\n\r\n<p>Komite Nasional Keuangan Syariah (KNKS) yang diwakili oleh Direktur Pengembangan Ekonomi Syariah dan Industri Halal, Afdhal Aliasar, beserta Analis Kebijakannya, Yopi Nursali turut hadir sebagai narasumber di acara tersebut. &ldquo;Untuk merealisasikan strategi pengembangan pariwisata halal di Sumatera Barat dapat dimulai dengan <em>pilot project</em> di wilayah tertentu untuk kemudian dapat dijadikan acuan bagi pembangunan di wilayah lainnya,&rdquo; jelas Afdhal.</p>\r\n\r\n<p>Diskusi yang dipandu oleh Sari Lenggogeni, Ketua Pusat Studi Pariwisata dan Kebudayaan Universitas Andalas, juga membahas pentingnya sertifikasi halal yang menjadi cerminan kualitas produk yang lebih terjamin bagi wisatawan, yang pada akhirnya akan mendorong para pelaku industri di Sumatera Barat dalam memperbesar cakupan target konsumennya, baik lokal maupun luar negeri.</p>\r\n\r\n<p>Adapun dalam ruang diskusi tersebut diungkapkan pula pentingnya pembangunan infrastruktur dan fasilitas yang dapat menunjang kenyamanan wisatawan di Sumatera Barat.</p>\r\n\r\n<p>Penulis : Khairana Izzati<br />\r\nRedaktur Pelaksana : Achmad Iqbal</p>	https://webdev.rifhandi.com/uploads/news/g.jpg	2019-05-09 08:05:42	1	KNKS Attended The Halal Tourism Talk Show in West Sumatera	<p>KNKS and GenPI&nbsp;discuss the potential of Halal Tourism in West Sumatera</p>	<p>PADANG &ndash; Tourism Agency of West Sumatera Province and&nbsp;<em>Generasi Pesona Indonesia</em>(GenPI) held a talk show to discuss the potential of Halal Tourism in West Sumatera. The event was held on Friday, May 24<sup>th</sup>2019 and located at the Hall of Bank Indonesia Representative Office in West Sumatera. The organiser brought prominent speakers in the development of Halal Tourism in Indonesia namely R. Wisnu Rahtomo from the Indonesian Halal Tourism Development Acceleration Team of Ministry of Tourism and Wahyu Purnama as Chief Representative of Bank Indonesia in West Sumatra.</p>\r\n\r\n<p>The chief of GenPI of West Sumatera, Aries Purnama, explained that the discussion was held to explore the development of halal tourism in West Sumatera will be activate the community&rsquo;s economy.&rdquo;&nbsp;</p>\r\n\r\n<p>Afdhal Aliasar, Director of The Development of Economy and Halal Industry of National Islamic Finance Committee (KNKS), contributed on the event as one of the invited speaker. &ldquo;To realizing the halal tourism development strategy, it can be initiated by a &lsquo;pilot project&rsquo; applied on certain areas of West Sumatera. It would stimulate the other regions to do so and make West Sumatra as one of the top-list of muslim-friendly destinations&rdquo;, said Afdhal.</p>\r\n\r\n<p>The discussion guided by Sari Lenggogeni, Chairman of the Andalas University&#39;s Center for Tourism and Culture Studies, also discussed the importance of halal certification as a reflection of the more guaranteed quality products that can attract tourists, which in turn will encourage industry players in West Sumatra to enlarge the scope of their target consumers, both local and overseas.</p>\r\n\r\n<p>The discussion also revealed the importance of building the infrastructure and facilities to support the convenience of tourist in West Sumatera</p>\r\n\r\n<p>&nbsp;</p>	3	kneks	\N	NULL	0	0	null
 138	KNKS Jalin Kerja Sama dengan 5 Perguruan Tinggi dan LIPI	<p>Diharapkan KNKS dapat menjalankan fungsi <em>link and match</em>&nbsp;pengembangan pendidikan, riset, dan pengabdian masyarakat</p>	<p>JAKARTA &ndash; Komite Nasional Keuangan Syariah (KNKS) melakukan penandatangan nota kesepahaman dengan 5 Perguruan Tinggi dan Lembaga Ilmu Pengetahuan Indonesia (LIPI) di Ruang Djuanedi Hadisumarto, Kantor Bappenas, dalam Acara Launching Masterplan Ekonomi Syariah Indonesia (MEKSI) 2019-2024.</p>\r\n\r\n<p>Kesepakatan kerja sama ini ditandatangani oleh rektor dari masing-masing Perguruan Tinggi, Kepala LIPI, dan Direktur Eksekutif KNKS yang disaksikan langsung oleh Presiden Jokowi pada Selasa (14/05/19).</p>\r\n\r\n<p>Penandatangan nota kesepahaman atau Memorandum of Understanding (MoU) dilaksanakan oleh Perguruan Tinggi yang telah membuka program studi ekonomi syariah/Islam. Diantaranya Institut Pertanian Bogor, STEI Tazkia, Universitas Airlangga (UNAIR), Universitas Indonesia (UI), dan UIN Ar-Raniry.</p>\r\n\r\n<p>KNKS dan perguruan tinggi bekerja sama untuk pengembangan pendidikan, riset, dan pengabdian kepada masyarakat dalam bidang Ekonomi Syariah. Sedangkan KNKS dan LIPI bekerja sama dalam bidang penelitian dan pengembangan ekonomi syariah nasional.</p>\r\n\r\n<p>&nbsp;&ldquo;Langkah terdekat kami pasca penandatangan MoU ini adalah koordinasi dengan para pihak untuk menyiapkan <em>pilot project</em> program. Harapannya Masterplan Ekonomi Syariah Indonesia 2019-2024 dapat menjadi pedoman untuk mewujudkan tujuan bersama dalam hal pengembangan ekonomi syariah pada lembaga pendidikan di Indonesia,&rdquo; ucap Emir, Direktur Pendidikan dan Riset Keuangan Syariah KNKS.</p>\r\n\r\n<p>Emir mengatakan, dengan terciptanya kesepakatan kerja sama ini, KNKS dapat menjalankan fungsi <em>link and match</em> dalam rangka pengembangan pendidikan, riset, dan pengabdian masyarakat dalam bidang ekonomi syariah dan industri halal.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Penulis: Annissa Permata</p>\r\n\r\n<p>Redaktur Pelaksana: Achmad Iqbal</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>	https://webdev.rifhandi.com/uploads/news/g.jpg	2019-05-09 08:05:42	1	KNKS Collaborates with 5 Universities and LIPI	<p>Expected KNKS to carry out its link and match function&nbsp;of education, research, and community service</p>	<p>JAKARTA &ndash; The National Islamic Finance Committee (KNKS) signed Memorandum of Understandings (MoUs) with 5 Universities and Indonesia Institute of Sciences (LIPI) at Djuanedi Hadisumarto Room, The Ministry of National Development Planning (Bappenas) Office,&nbsp;in the launching event of The Masterplan for Indonesian Islamic Economy 2019-2024.</p>\r\n\r\n<p>On Tuesday (14/05/19), the MoUs were signed by the Rectors of each university, Head of LIPI, and Executive Director of KNKS that were witnessed directly by the President of the Republic Indonesia, Jokowi.</p>\r\n\r\n<p>The signing of MoUs were carried out by KNKS and universities that have Islamic/sharia economics as one of their study programs. The 5 Universities are IPB University, STEI Tazkia, University of Airlangga, University of Indonesia, and UIN Ar-Raniry. These MoUs were&nbsp;signed as a framework of cooperation in the development of education, research, and community service in the field of Islamic economy and halal industry.</p>\r\n\r\n<p>The other MoU was carried out by KNKS and LIPI in the context of national Islamic economy research and development.</p>\r\n\r\n<p>&ldquo;The next step to be taken after the signing of these MoUs is to prepare a pilot project program. It is expected that the Masterplan for Indonesian Islamic Economy 2019-2024 can be a guideline to realize the common goals of Islamic economy development&nbsp;in those educational institutions.&rdquo; said Sutan Emir, the Director of Islamic Financial Education and Research of KNKS.</p>\r\n\r\n<p>Sutan Emir said that, the establishment of the MoUs between KNKS and the 5 Universities and also LIPI, is expected to help KNKS to carry out its link and match function especially in the areas of education, research, and community service related to the Islamic economy and halal industry.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Reporter: Annissa Permata</p>\r\n\r\n<p>Chief Editor: Achmad Iqbal</p>	3	kneks	\N	NULL	0	0	null
+192	KNEKS bersama LPPOM Perkuat Ekosistem Halal dari Hulu	<br>	<p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Jakarta, KNEKS - Dalam mendukung ekosistem halal nasional, khususnya bagi para Pengusaha Mikro dan Kecil (UMK) di sektor penggilingan daging&nbsp;Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) turut berpartisipasi dalam acara Puncak Festival Syawal 1446 H&nbsp;yang diselenggarakan oleh Lembaga Pengkajian Pangan, Obat-obatan, dan Kosmetika (LPPOM) pada 6 Mei 2024 di Hotel Gren Alia Jakarta.&nbsp;</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Dengan mengusung tema “Perkuat Halal dari Hulu melalui Penggilingan Daging Halal”, Festival Syawal tahun ini menjadi bagian dari inisiatif strategis LPPOM dalam memfasilitasi proses sertifikasi halal. Beragam kegiatan seperti sosialisasi, edukasi, dan bimbingan teknis diselenggarakan dalam rangka mendorong UMK penggilingan daging untuk memenuhi standar halal yang telah ditetapkan Pemerintah. Hal ini disampaikan oleh Muti Arintawati selaku Direktur Utama LPPOM dalam pembukaan acara.&nbsp;</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">M. Syukron Habiby, Senior Vice President Islamic Ecosystem, Bank Syariah Indonesia (BSI), dalam sambutannya menyampaikan bahwa BSI berkomitmen sangat kuat untuk mendukung industri halal dengan membentuk unit khusus yaitu Islamic Ecosystem Solutions. “BSI mempunyai visi untuk menjadi rumah besar bagi transaksi halal di Indonesia. Kami juga berkolaborasi dengan LPPOM dalam fasilitasi sertifikasi halal reguler dan self-declare, gerakan sadar halal, dan penyediaan layanan perbankan syariah” ujarnya.&nbsp;</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Anna Setyawati, Deputi Direktur Departemen Ekonomi dan Keuangan Syariah Bank Indonesia (DEKS BI) menyampaikan bahwa BI mendukung penguatan ekosistem jaminan produk halal dengan tiga strategi utama, yaitu: penguatan ekosistem hulu melalui fasilitasi RPH (Rumah Potong Hewan) dan juru sembelih halal, penguatan ekosistem di sisi proses, serta perluasan literasi dan edukasi gaya hidup halal.&nbsp;</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">“BI bersama BPJPH telah meluncurkan aplikasi halal traceability yang saat ini masih khusus untuk produk berbahan daging. Aplikasi ini juga untuk membantu BPJPH dalam melakukan pengawasan” tambah Anna.&nbsp;</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Putu Rahwidhiyasa, Direktur Bisnis dan Kewirausahaan Syariah, yang juga sekaligus Plt. Direktur Industri Produk Halal KNEKS, dalam sambutannya menyampaikan apresiasi atas peran aktif LPPOM dalam memperkuat ekosistem halal dari sisi hulu ke hilir. Putu juga menambahkan, bahwa KNEKS terus berupaya mendorong integrasi seluruh sektor dalam rantai nilai halal, mulai dari hulu hingga hilir. Salah satu aspek penting adalah proses penggilingan daging, yang merupakan titik kritis dalam kehalalan dan kehigienisan suatu produk. Oleh karena itu, penguatan sertifikasi halal pada sektor hulu, khususnya penggilingan daging halal, menjadi langkah strategis dalam menjamin kehalalan produk olahan yang beredar di masyarakat.&nbsp;</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">“KNEKS juga akan mendorong pembinaan, sertifikasi halal, serta pemantauan berkelanjutan terhadap Pengusaha Rumah Potong Hewan (RPH) halal yang di dalamnya terdapat penggilingan daging. Upaya ini tidak hanya untuk memastikan kepatuhan terhadap regulasi, tetapi juga untuk membangun kepercayaan publik dan memperkuat posisi Indonesia sebagai pusat industri halal dunia. Mari bersama-sama kita wujudkan rantai nilai produk halal yang kokoh, terintegrasi, dan berkelanjutan” ujar Putu.&nbsp;</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Hadir mewakili Gubernur DK Jakarta, Herman S., Kepala Sub Bagian KMS Biro Dikmental Provinsi Daerah Khusus Jakarta, menyampaikan Pemerintah Provinsi DK Jakarta menjamin daging yang masuk ke pedagang di setiap pasar yang ada di DK Jakarta, sesuai dengan standar mutu dan halal. Pemprov DK Jakarta juga berkomitmen untuk terus memberikan penjaminan mutu dan halal melalui pemeriksaan hewan yang layak untuk disembelih, penyediaan program untuk pengawasan jaminan produk halal melalui audit, serta pelatihan manajemen halal yang dilakukan sekali dalam setahun.&nbsp;</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Herman menegaskan “Dinas KPKP Provinsi DK Jakarta terus berkoordinasi dalam distribusi hewan dan produk hewan terjamin mutu dan halalnya. Hal ini sejalan dengan regulasi dari Kementerian Pertanian terkait kewajiban halal bagi daging impor.”&nbsp;</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Maman Abdurrahman, Menteri Usaha Mikro, Kecil dan Menengah Republik Indonesia juga turut memberikan dukungan penuh atas penyelenggaraan Festival Syawal ini melalui sambutan secara daring. Maman menyampaikan “Pemerintah memiliki target penerbitan sertifikasi halal di tahun 2025 mencapai 3,5 juta. Untuk mencapai target tersebut diperlukan kolaborasi yang kuat dari semua Kementerian dan Lembaga, serta diharapkan muncul kolaborator baru untuk mempercepat target penerbitan sertifikasi halal ini.”&nbsp;</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Dalam rangkaian kegiatan Festival Syawal 1446 H ini, dilakukan juga penyerahan simbolis sertifikat halal kepada para Pengusaha penggilingan daging, sebagai bentuk apresiasi atas komitmen mereka dalam memenuhi standar halal. Selain itu, turut dilakukan penandatanganan nota kesepahaman (MoU) antara LPPOM dan Asosiasi Pedagang Mie dan Bakso (APMISO), untuk mendukung percepatan proses sertifikasi halal. Kegiatan ini ditutup dengan sesi talkshow yang membahas penguatan sistem halal dari hulu, khususnya melalui sektor penggilingan daging.&nbsp;</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Festival Syawal 1446 H diharapkan memberikan dampak nyata bagi pelaku usaha, khususnya UMK, serta masyarakat luas. Selain itu, kegiatan ini diharapkan dapat menjadi inspirasi bagi berbagai pihak untuk terus berkontribusi dalam pengembangan industri halal yang berkelanjutan dan berdaya saing global.&nbsp;</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">&nbsp;</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Penulis : Eva Tsuraya Afifah</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Redaktur Pelaksana : Lidya Dewi N</font></p>	https://cms-dev.kneks.go.id/uploads/news/WhatsAppImage 2025-05-09 at 11.00.03_de0223af.jpg	2025-05-07 00:00:00	on	KNEKS and LPPOM Strengthen the Halal Ecosystem from Upstream	<br>	<p data-start="52" data-end="451" class=""><font face="arial" color="#000000"><strong data-start="52" data-end="70">Jakarta, KNEKS</strong> – In support of the national halal ecosystem, particularly for Micro and Small Enterprises (MSEs) in the meat milling sector, the National Committee for Islamic Economy and Finance (KNEKS) participated in the Peak Event of the 1446 H Syawal Festival. The event was organized by the Institute for Food, Drug, and Cosmetic Studies (LPPOM) on May 6, 2024, at Hotel Gren Alia Jakarta.</font></p>\r\n<p data-start="453" data-end="927" class=""><font face="arial" color="#000000">With the theme <em data-start="468" data-end="529">“Strengthen Halal from Upstream through Halal Meat Milling”</em>, this year’s Syawal Festival is part of LPPOM’s strategic initiative to facilitate the halal certification process. A variety of activities such as socialization, education, and technical guidance were held to encourage meat milling MSEs to comply with the halal standards set by the government. This was stated by Muti Arintawati, President Director of LPPOM, during the event’s opening ceremony.</font></p>\r\n<p data-start="929" data-end="1428" class=""><font face="arial" color="#000000">M. Syukron Habiby, Senior Vice President of Islamic Ecosystem at Bank Syariah Indonesia (BSI), expressed in his remarks that BSI is strongly committed to supporting the halal industry by establishing a special unit called Islamic Ecosystem Solutions. “BSI envisions becoming a central hub for halal transactions in Indonesia. We also collaborate with LPPOM in facilitating regular and self-declared halal certifications, promoting halal awareness, and providing Islamic banking services,” he stated.</font></p>\r\n<p data-start="1430" data-end="1840" class=""><font face="arial" color="#000000">Anna Setyawati, Deputy Director of the Islamic Economy and Finance Department of Bank Indonesia (DEKS BI), conveyed that BI supports the strengthening of the halal product assurance ecosystem through three main strategies: strengthening the upstream ecosystem by facilitating slaughterhouses (RPH) and halal slaughterers, reinforcing the process ecosystem, and expanding halal lifestyle literacy and education.</font></p>\r\n<p data-start="1842" data-end="2027" class=""><font face="arial" color="#000000">“BI, in collaboration with BPJPH, has launched a halal traceability application currently focused on meat-based products. This application also assists BPJPH in monitoring,” Anna added.</font></p>\r\n<p data-start="2029" data-end="2730" class=""><font face="arial" color="#000000">Putu Rahwidhiyasa, Director of Islamic Business and Entrepreneurship and Acting Director of the Halal Product Industry at KNEKS, expressed appreciation for LPPOM's active role in strengthening the halal ecosystem from upstream to downstream. He also emphasized that KNEKS continues to push for integration across all sectors of the halal value chain, from upstream to downstream. One crucial aspect is the meat milling process, which is a critical point in ensuring the halal integrity and hygiene of a product. Therefore, strengthening halal certification in the upstream sector, particularly in halal meat milling, is a strategic step to ensure the halal status of processed products in circulation.</font></p>\r\n<p data-start="2732" data-end="3167" class=""><font face="arial" color="#000000">“KNEKS will also promote development, halal certification, and continuous monitoring of halal slaughterhouse entrepreneurs (RPH), which include meat milling operations. These efforts are not only to ensure regulatory compliance but also to build public trust and reinforce Indonesia’s position as a global halal industry hub. Let’s work together to realize a strong, integrated, and sustainable halal product value chain,” Putu stated.</font></p>\r\n<p data-start="3169" data-end="3732" class=""><font face="arial" color="#000000">Representing the Governor of Jakarta, Herman S., Head of the KMS Subdivision, Bureau of Mental and Spiritual Development (Dikmental), Special Capital Region of Jakarta, stated that the Jakarta Provincial Government ensures that the meat distributed to vendors in all Jakarta markets meets halal and quality standards. The Jakarta government also commits to consistently guaranteeing quality and halal assurance through the inspection of slaughter-worthy animals, implementation of halal product assurance audits, and provision of annual halal management training.</font></p>\r\n<p data-start="3734" data-end="4012" class=""><font face="arial" color="#000000">Herman emphasized, “The KPKP Office of Jakarta Province continues to coordinate in ensuring the quality and halal compliance of animal products and distribution. This is aligned with regulations from the Ministry of Agriculture regarding the halal obligation for imported meat.”</font></p>\r\n<p data-start="4014" data-end="4475" class=""><font face="arial" color="#000000">Maman Abdurrahman, Minister of Micro, Small, and Medium Enterprises of the Republic of Indonesia, also expressed full support for the Syawal Festival through a virtual speech. Maman stated, “The government has set a target of issuing 3.5 million halal certifications by 2025. Achieving this target requires strong collaboration across all ministries and agencies, and the emergence of new collaborators is highly anticipated to accelerate the issuance process.”</font></p>\r\n<p data-start="4477" data-end="5035" class=""><font face="arial" color="#000000">As part of the 1446 H Syawal Festival activities, symbolic handovers of halal certificates were conducted for meat milling entrepreneurs, as a form of appreciation for their commitment to meeting halal standards. Additionally, a memorandum of understanding (MoU) was signed between LPPOM and the Association of Noodle and Meatball Vendors (APMISO) to support the acceleration of the halal certification process. The event concluded with a talk show discussing the strengthening of the halal system from the upstream sector, particularly through meat milling.</font></p>\r\n<p data-start="5037" data-end="5336" class=""><font face="arial" color="#000000">The 1446 H Syawal Festival is expected to have a tangible impact on business actors, especially MSEs, and the general public. Moreover, it is hoped that this event will inspire various stakeholders to continue contributing to the development of a sustainable and globally competitive halal industry.</font></p>\r\n<hr data-start="5338" data-end="5341" class="">\r\n<p data-start="5343" data-end="5409" class=""><font face="arial" color="#000000"><strong data-start="5343" data-end="5354">Writer:</strong> Eva Tsuraya Afifah<br data-start="5373" data-end="5376">\r\n<strong data-start="5376" data-end="5396">Managing Editor:</strong> Lidya Dewi N</font></p>	1	kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	{"1","2","3","4","5"}	\N	11	\N
 141	JICA dan KNKS Menjajaki Kerja Sama Pengembangan Ekonomi Syariah	<p>KNKS&nbsp;dan JICA&nbsp;berdiskusi mengenai ekonomi syariah</p>	<p><strong>JAKARTA, KNKS</strong> &ndash; Komite Nasional Keuangan Syariah (KNKS) dan Japan International Cooperation Agency (JICA) berdiskusi mengenai ekonomi syariah di kantor KNKS, Jakarta, Kamis (4/7/2019).</p>\r\n\r\n<p>Dalam diskusi tersebut hadir JICA Senior Advisor Hirotaka Nakamura, JICA Senior Advisor Masayoshi Ono, Project Coordinator JICA dalam <em>Project Strengthening the Capacity for Social Insurance Operation</em> Saeko Tano, dan perwakilan Dewan Jaminan Sosial Nasional (DJSN). Turut hadir pula Direktur Hukum, Promosi dan Hubungan Eksternal KNKS Taufik Hidayat beserta jajaran analis KNKS.</p>\r\n\r\n<p>Taufik menambahkan, &ldquo;saat ini JICA dan Indonesia sedang dalam penjajakan kerja sama.&rdquo; Kata Taufik yang juga merupakan anggota Dewan Jaminan Sosial Nasional (DJSN) RI. Dari pihak JICA Indonesia telah mempercayakan Hirose untuk melakukan komunikasi intensif dengan KNKS.&nbsp;</p>\r\n\r\n<p>Penulis: Ishmah Qurratu&rsquo;ain<br />\r\nRedaktur Pelaksana: Achmad Iqbal</p>	https://webdev.rifhandi.com/uploads/news/g.jpg	2019-05-09 08:05:42	1	\N	\N	\N	3	kneks	\N	NULL	0	0	null
 142	KNKS Bertemu dengan Ketua BPS Bahas Ekonomi Syariah	<p>BPS berperan penting dalam mengembangkan ekonomi syariah Indonesia</p>	<p>JAKARTA, KNKS &ndash; Komite Nasional Keuangan Syariah (KNKS) bertemu dengan Kepala Badan Pusat Statistik (BPS) Kecuk Suhariyanto di Kantor BPS, Jakarta, Selasa (9/7/2019).</p>\r\n\r\n<p>KNKS diwakilkan oleh Direktur Pengembangan Ekonomi Syariah dan Industri Halal Afdhal Aliasar, Direktur Pendidikan dan Riset Sutan Emir Hidayat, serta Direktur Hukum, Promosi dan Hubungan Eksternal Taufik Hidayat.</p>\r\n\r\n<p>Kunjungan tersebut dimaksudkan untuk diskusi mengenai sinergi KNKS dengan BPS dalam mengembangkan ekonomi syariah di Indonesia. &ldquo;Harapannya BPS dapat mendukung KNKS dalam pengembangan ekonomi syariah di Indonesia. Fungsi BPS adalah dalam mendukung penyediaan dan analisis data statistik yang berhubungan dengan ekonomi dan keuangan syariah,&rdquo; kata Taufik.</p>\r\n\r\n<p>BPS berperan penting melalui pengukuran indikator kinerja ekonomi syariah. &quot;BPS memiliki peran strategis dalam hal formulasi metodologi yang tepat di bidang pendataan dan pengukuran data ekonomi. BPS dapat bekerjasama dengan KNKS untuk menghasilkan indikator-indikator pembangunan di bidang ekonomi syariah&rdquo; ujar Afdhal.&nbsp;&quot;Keakuratan data merupakan suatu hal yang penting dalam semua bidang, tak terkecuali bidang ekonomi syariah, sampai saat ini Indonesia belum punya cara untuk mengukur indikator ekonomi syariah, dan kita tidak mungkin melepas diri dari BPS terkait ini,&quot; ujar Emir menguatkan.</p>\r\n\r\n<p>Penulis: Ishmah Qurratu&rsquo;ain<br />\r\nRedaktur Pelaksana: Achmad Iqbal</p>\r\n\r\n<p style="margin-left:9.9pt">&nbsp;</p>	https://webdev.rifhandi.com/uploads/news/g.jpg	2019-05-09 08:05:42	1	\N	\N	\N	3	kneks	\N	NULL	0	0	null
 143	JICA Berkomitmen Bantu Pengembangan Ekonomi Syariah	<p>KNKS&nbsp;dan JICA&nbsp;berdiskusi mengenai ekonomi syariah</p>	<p>q</p>	https://webdev.rifhandi.com/uploads/news/g.jpg	2019-05-09 08:05:42	0	\N	\N	\N	3	kneks	\N	NULL	0	0	null
@@ -2786,14 +2867,17 @@ COPY public.news (id, title, excerpt, content, image, news_datetime, is_publish,
 175	Diluncurkan Jokowi, Ini 4 Fokus Masterplan Ekonomi Syariah RI	<p>Dengan MEKSI 2019-2024 ini, saya harap pemerintah dan semua pihak memiliki semangat yang sama</p>	<p><strong>akarta, CNBC Indonesia</strong>&nbsp;-&nbsp;Masterplan Ekonomi Syariah Indonesia 2019-2024 merekomendasikan empat langkah dan strategi utama sebagai langkah terobosan dan percepatan pertumbuhan ekonomi syariah di dalam negeri.<br />\r\n<br />\r\nMenteri Bappenas sekaligus Sekretaris KNKS Bambang Brodjonegoro mengatakan langkah pertama adalah penguatan halal value chain dengan fokus pada sektor yang dinilai potensial dan berdaya saing tinggi.<br />\r\n<br />\r\nKedua, penguatan sektor keuangan syariah dengan rencana induk yang sudah dituangkan dalam Masterplan Arsitektur Keuangan Syariah Indonesia (MAKSI) sebelumnya dan disempurnakan ke dalam rencana induk.<br />\r\nLangkah Ketiga adalah penguatan sektor Usaha Mikro, Kecil dan Menengah (UMKM) sebagai penggerak utama halal value chain.&nbsp;<br />\r\n<br />\r\n&quot;Keempat penguatan di bidang ekonomi digital utamanya perdagangan (e-commerce, market place) dan keuangan (teknologi finansial) sehingga dapat mendorong dan mengakselerasi pencapaian strategi lainnya,&quot; jelas Bambang dalam konferensi pers sebelum peluncuran Masterplan Ekonomi Keuangan Syariah Indonesia 2019-2024, Selasa (14/5/2019).<br />\r\n<br />\r\nDia melanjutkan, untuk menjalankan keempat strategi tersebut, ada hal yang harus dilakukan, yaitu peningkatan kesadaran publik, peningkatan kuantitas dan kualitas sumber daya manusia, penguatan kapasitas riset dan pengembangan (R&amp;D), serta penguatan fatwa, regulasi dan tata kelola.</p>\r\n\r\n<p>&quot;Dengan MEKSI 2019-2024 ini, saya harap pemerintah dan semua pihak memiliki semangat yang sama dalam mengimplementasikan rekomendasi strategi kebijakan pengembangan ekonomi syariah di Indonesia untuk mencapai visi yang telah ditetapkan,&quot; ujar Bambang.&nbsp;<br />\r\n<br />\r\nKomite Nasional Keuangan Syariah (KNKS) akan meluncurkan Masterplan Ekonomi Syariah Indonesia pada Selasa hari ini (14/5/2019). Peluncuran akan dilakukan oleh Presiden Joko Widodo (Jokowi) yang juga menjabat sebagai Ketua KNKS.<br />\r\n<strong><strong>(dob/dob)</strong></strong></p>\r\n\r\n<p><em>Sumber :&nbsp;https://www.cnbcindonesia.com/syariah/20190514155317-29-72406/diluncurkan-jokowi-ini-4-fokus-masterplan-ekonomi-syariah-ri</em></p>	https://webdev.rifhandi.com/uploads/news/g.jpg	2019-05-09 08:05:42	1	\N	\N	\N	4	kdeks	\N	NULL	0	0	null
 135	KNKS Kunjungi Sumatera Barat, Dorong Pusat Pariwisata Halal	<p>Sumatera Barat memiliki potensi besar untuk pengembangan industri halal</p>	<p>Padang, KNKS&nbsp;&ndash; KNKS&nbsp;diwakili oleh Direktur Pengembangan Ekonomi Syariah dan Industri Halal, Afdhal Aliasar, beserta Analis Kebijakan Divisi Pengembangan Industri Halal ditemui langsung oleh Wakil Gubernur Sumatera Barat, Nasrul Abit, dan Walikota Padang Mahyeldi Ansharullah. Komite Nasional Keuangan Syariah (KNKS) melakukan kunjungan ke Provinsi Sumatera Barat pada Jumat 24 Mei 2019. Kunjungan ini dilakukan dalam rangka penyampaian inisiatif KNKS untuk menjadikan Sumatera Barat sebagai daerah pertama program pengembangan ekonomi syariah khususnya sektor pariwisata halal di Indonesia.</p>\r\n\r\n<p>Afdhal menjelaskan dengan telah disahkannya Peraturan Pemerintah tentang Jaminan Produk Halal (PP JPH) perlu ditanggapi secara cepat oleh pemerintahan di daerah-daerah. Sumatera Barat memiliki potensi besar untuk pengembangan industri halal namun masih perlu pengelolaan yang lebih kuat.</p>\r\n\r\n<p>Lebih jauh Afdhal mengungkapkan, berdasarkan Undang-Undang, Badan Penyelenggara Jaminan Produk Halal (BPJPH) merupakan pihak yang akan melakukan sertifikasi halal yang hingga saat ini belum memiliki jangkauan sampai ke daerah di luar Jakarta. Oleh karena itu, KNKS mendorong kerjasama yang kuat antara BPJPH dengan LPPOM MUI dan pemerintah setempat.</p>\r\n\r\n<p>&ldquo;Nantinya, LPPOM MUI sebagai Lembaga Pemeriksa Halal (LPH) yang terbesar saat ini perlu didukung oleh LPH-LPH lainnya. Diharapkan LPH-LPH lain di tingkat daerah bisa hadir dan dioptimalkan fungsinya, salah satunya melalui keterlibatan perguruan tinggi. Perguruan tinggi maupun organisasi masyarakat bisa mendirikan <em>Halal Center</em> untuk kemudian menjadi pendamping para UMKM dalam mendapatkan sertifikasi halal,&rsquo;&rsquo; ujar Afdhal. &nbsp;</p>\r\n\r\n<p>Dalam kesempatan tersebut, KNKS juga mendorong Sumatera Barat untuk memiliki pusat <em>showcase </em>produk-produk halal yang dikemas secara terstruktur dan berkualitas.</p>\r\n\r\n<p>&ldquo;Showcase produk-produk halal unggulan ini bisa berbentuk Mall Pariwisata Halal.&nbsp; Jadi, mall ini bisa menjadi destinasi utama para wisatawan yang datang ke Sumatera Barat nantinya&rdquo;, pungkas Afdhal.</p>\r\n\r\n<p>Penulis : Khairana Izzati<br />\r\nRedaktur Pelaksana : Achmad Iqbal</p>	https://webdev.rifhandi.com/uploads/news/g.jpg	2019-05-09 08:05:42	1	Visit West Sumatera, KNKS Encourages Halal Tourism Development	<p>West Sumatera has&nbsp;big potential for the development of Halal Industry</p>	<p>Represented by the Director of Islamic Economic Development and Halal Industry, Afdhal Aliasar, and the Principle Analyst of Islamic Economic Development and Halal Industry, Yopi Nursali, the National Islamic Finance Committee (KNKS) met the Governor of West Sumatera, Nasrul Abit discussed the West Sumatra halal tourism at the Governor&rsquo;s office on Friday, May 24<sup>th</sup>2019. The meeting was also attended by the Mayor of PadangCity, Mahyeldi Ansharullah. The visit was carried out in the context of delivering KNKS initiatives to make West Sumatera the first area of Islamic economic development program, especially halal tourism sector in Indonesia.</p>\r\n\r\n<p>Afdhal explained that by the legalization of the Government Regulation on Halal Product Assurance (PP JPH), the local government is expected to response it quickly. West Sumatra has great potential for the development of halal industry although many improvement on their tourism management is still needed.</p>\r\n\r\n<p>Afdhal further revealed that according to the Law, Badan Penyelenggara Jaminan Produk Halal (BPJPH) is a government institution that responsible to carrying out the halal certification process in Indonesia. However, the fact that BPJPH has not yet operationally cover all areas across Indonesia, has triggered KNKS to encourage strong collaborations between BPJPH and LPPOM MUI and the local government.&nbsp;</p>\r\n\r\n<p>&quot;Later, LPPOM MUI as the largest Halal Inspection Agency (LPH) needs to be supported by other LPHs. It&rsquo;s becoming our expectation to the presence of other LPHs on all areas across Indonesia can be realized and functioned optimally as soon as possible. One of which is through the involvement of universities. Universities and community organizations can establish a Halal Center to become a companion for MSMEs to get halal certification&rdquo;, said Afdhal.</p>\r\n\r\n<p>Author : Khairana Izzati<br />\r\nChief Editor : Achmad Iqbal</p>	3	kneks	\N	NULL	0	0	null
 140	JICA Berkomitmen Bantu Pengembangan Ekonomi Syariah	<p>KNKS&nbsp;dan JICA&nbsp;berdiskusi mengenai ekonomi syariah</p>	<p><span style="font-size: 13.44px;">KNKS&nbsp;dan JICA&nbsp;berdiskusi mengenai ekonomi syariah</span></p>	https://webdev.rifhandi.com/uploads/news/d.jpg	2019-05-09 08:05:00	1	JICA Berkomitmen Bantu Pengembangan Ekonomi Syariah	<span style="font-size: 13.44px;">KNKS&nbsp;dan JICA&nbsp;berdiskusi mengenai ekonomi syariah</span>	<span style="font-size: 13.44px;">KNKS&nbsp;dan JICA&nbsp;berdiskusi mengenai ekonomi syariah</span>	3	kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	2	0	0	null
-27	KNKS Luncurkan Masterplan Keuangan Syariah pada 14 Mei 2019	Menteri Perencanaan dan Pembangunan Nasional dan Kepala Bappenas, Bambang Permadi Soemantri Brodjonegoro menyampaikan, Komite Nasional Keuangan Syariah (KNKS) akan meluncurkan Masterplan Ekonomi Syariah Indonesia 2019-2024 pada 14 Mei 2019.	<div>Sharianews, Bandung ~ Menteri Perencanaan dan Pembangunan Nasional dan Kepala Bappenas, Bambang Permadi Soemantri Brodjonegoro menyampaikan, Komite Nasional Keuangan Syariah (KNKS) akan meluncurkan Masterplan Ekonomi Syariah Indonesia 2019-2024 pada 14 Mei 2019.</div><div><br></div><div>Kerangka Masterplan Ekonomi Syariah Indonesia 2019-2024 merekomendasikan empat strategi utama untuk mengembangkan ekonomi syariah di Tanah Air.</div><div><br></div><div>"Pertama, penguatan rantai nilai halal atau halal value chain (HVC) dengan fokus pada sektor atau klaster yang dinilai potensial dan berdaya saing tinggi," jelasnya menegaskan, di Bandung, Jumat (26/4).</div><div><br></div><div>Kedua, penguatan sektor keuangan syariah, yang rencana induknya sudah dituangkan dalam Masterplan Arsitektur Keuangan Syariah Indonesia dan disempurnakan daIam rencana induk ini.</div><div><br></div><div>Ketiga penguatan Usaha Mikro, kecil dan Menengah (UMKM) sebagai penggerak utama rantai nilai halal.</div><div><br></div><div>Terakhir, yakni pemanfaatan dan penguatan platform ekonomi digital dalam hal perdagangan (e-commerce, market place) dan keuangan (teknologi finansial) yang diharapkan bisa mendorong dan mengakselerasi pencapaian strategi lainnya.</div><div><br></div><div>Pembuatan Masterplan Ekonomi Syariah Indonesia dilatarbelakangi karena melihat dalam tiga dasawarsa terakhir, ekonomi dan keuangan syariah mengalami perkembangan pesat baik secara global maupun nasional.</div><div><br></div><div>Menurut data The State of the Global Islamic Economy Report 2018/2019, pada tahun 2017 besaran pengeluaran makanan dan gaya hidup halal dunia mencapai 2,1 triliun dollar AS dan diperkirakan akan terus tumbuh mencapai 3 triliun dollar AS pada tahun 2023.</div><div><br></div><div>Faktor utama pertumbuhan tersebut adalah peningkatan jumlah penduduk Muslim di dunia yang mencapai 1,84 miliar orang di tahun 2017, dan diperkirakan akan terus meningkat hingga 27,5 persen dari total populasi dunia di tahun 2023. Peningkatan tersebut akan berdampak pada permintaan produk dan jasa halal yang terdiri dari makanan halal, pariwisata halal, fesyen muslim, rekreasi dan travel halal, serta farmasi dan kosmetik halal.</div><div><br></div><div>Indonesia sebagai negara dengan penduduk Muslim terbesar di dunia belum bisa berperan secara optimal dalam memenuhi permintaan tersebut.</div><div><br></div><div>Karenanya, dalam rapat Pleno KNKS pada 5 Februari 2018 lalu, Presiden Joko Widodo memberi arahan untuk menyusun Masterplan Ekonomi Syariah Indonesia 2019-2024 guna menjawab tantangan tersebut, sekaligus menjadi peta jalan dalam mengembangkan ekonomi syariah di Indonesia, sehingga dapat mendukung pengembangan ekonomi nasional.</div><div><br></div><div>Bambang yang juga menjabat sebagai Sekretaris Dewan Pengarah KNKS menjelaskan, sebagai negara dengan populasi Muslim terbanyak, Indonesia menjadi konsumen terbesar produk halal pada pasar internasional. Namun, sumbangsih dalam memproduksi produk halal dunia masih belum optimal.</div><div><br></div><div>"Dalam rangka mendukung pengembangan ekonomi syariah melalui industri halal, diharapkan Indonesia mampu memaksimalkan kearifan lokal dalam menangkap peluang global. Target ekonomi syariah pada tataran domestik mencakup peningkatan skala usaha, kemandirian dan kesejahteraan. Sementara pada tingkat internasional, berupa peningkatan pada peringkat Global Islamic Economy Indicator (GIEI)," ungkap Bambang.</div><div><br></div><div>Sebelum peluncuran Masterplan Ekonomi Syariah, KNKS mengadakan pre-launchlng event yang bernama lndonesia Islamic Economy Festival (IIEFest). Acara ini bertujuan untuk memperkenalkan industri halal di Indonesia kepada masyarakat, sekaligus sebagai bentuk upaya dalam rangka meningkatkan kesadaran masyarakat untuk menjalankan gaya hidup halal. (*)</div>	https://webdev.rifhandi.com/uploads/news/1557450484-foto-10.png	2019-05-09 08:05:42	\N	KNKS Launches the Sharia Finance Masterplan on May 14, 2019	Minister of National Development Planning and Head of Bappenas, Bambang Permadi Soemantri Brodjonegoro, announced that the National Sharia Finance Committee (KNKS) will launch the Indonesian Sharia Economic Masterplan 2019-2024 on May 14, 2019.	<div>Sharianews, Bandung ~ Minister of National Development Planning and Head of Bappenas, Bambang Permadi Soemantri Brodjonegoro, announced that the National Sharia Finance Committee (KNKS) will launch the Indonesian Sharia Economic Masterplan 2019-2024 on May 14, 2019.</div><div><br></div><div>The framework of the 2019-2024 Indonesian Sharia Economic Masterplan recommends four key strategies to develop the sharia economy in the country.</div><div><br></div><div>"First, strengthening the halal value chain (HVC) by focusing on sectors or clusters deemed to have high potential and competitiveness," he stated in Bandung on Friday (April 26).</div><div><br></div><div>Second, enhancing the sharia finance sector, the blueprint of which has been outlined in the Indonesian Sharia Finance Architecture Masterplan and further refined in this masterplan.</div><div><br></div><div>Third, empowering Micro, Small, and Medium Enterprises (MSMEs) as the main drivers of the halal value chain.</div><div><br></div><div>Lastly, leveraging and strengthening digital economic platforms in commerce (e-commerce, marketplaces) and finance (financial technology) to drive and accelerate the achievement of the other strategies.</div><div><br></div><div>The creation of the Indonesian Sharia Economic Masterplan was prompted by the rapid development of the sharia economy and finance globally and nationally over the past three decades.</div><div><br></div><div>According to The State of the Global Islamic Economy Report 2018/2019, global halal food and lifestyle expenditures reached $2.1 trillion in 2017 and are projected to grow to $3 trillion by 2023.</div><div><br></div><div>The primary factor behind this growth is the increasing Muslim population, which reached 1.84 billion in 2017 and is projected to constitute 27.5% of the global population by 2023. This growth drives demand for halal products and services, including halal food, halal tourism, Muslim fashion, halal recreation and travel, as well as halal pharmaceuticals and cosmetics.</div><div><br></div><div>As the country with the largest Muslim population, Indonesia has yet to fully optimize its role in meeting this demand.</div><div><br></div><div>Thus, during a KNKS Plenary Meeting on February 5, 2018, President Joko Widodo directed the formulation of the Indonesian Sharia Economic Masterplan 2019-2024 to address these challenges and serve as a roadmap for developing the sharia economy in Indonesia to support national economic development.</div><div><br></div><div>Bambang, who also serves as the Secretary of the KNKS Steering Council, explained that Indonesia, as the country with the largest Muslim population, is the largest consumer of halal products in the global market. However, its contribution to producing halal products globally remains suboptimal.</div><div><br></div><div>"In supporting the development of the sharia economy through the halal industry, Indonesia is expected to maximize local wisdom in seizing global opportunities. The domestic target of the sharia economy includes scaling up businesses, promoting self-reliance, and improving welfare. On the international level, the goal is to improve Indonesia's ranking on the Global Islamic Economy Indicator (GIEI)," Bambang explained.</div><div><br></div><div>Before the launch of the Sharia Economic Masterplan, KNKS held a pre-launch event called the Indonesia Islamic Economy Festival (IIEFest). This event aimed to introduce Indonesia’s halal industry to the public while raising awareness about adopting a halal lifestyle. (*)</div>	1	kneks	indonesia,kneks	{"2","1"}	0	0	null
 157	KNKS Jalin Kerjasama dengan Kemendes PDTT untuk Pengembangan Layanan Keuangan Syariah Desa	<p>Memberikan layanan jasa keuangan Syariah bagi masyarakat desa</p>	<p><strong>KNKS, Jakarta -</strong> Komite Nasional Keuangan Syariah (KNKS) pada Kamis sore tanggal 14 Mei 2019 telah menandatangani nota kesepahaman atau MoU dengan Kementerian Desa, Pembangunan Daerah Tertinggal, dan Transmigrasi Republik Indonesia (Kemendes PDTT) dalam rangka pengembangan layanan keuangan dan ekonomi Syariah di desa, daerah tertinggal, dan kawasan transmigrasi. Kesepakatan kerjasama ditandatangani langsung oleh Sekretaris Jenderal Kemendes PDTT, Anwar Sanusi, dan Direktur Eksekutif KNKS, Ventje Rahardjo.</p>\n\n<p>Penandatanganan nota kesepahaman ini menjadi salah satu agenda dalam acara peluncuran Masterplan Ekonomi Syariah Indonesia 2019-2024 yang diadakan di Kantor Badan Perencanaan Pembangunan Nasional (Bappenas) yang diresmikan langsung oleh Presiden Republik Indonesia, Joko Widodo.</p>\n\n<p>Kepala Divisi Keuangan Inklusif Syariah KNKS, Jamil Abbas, menjelaskan bahwa kerjasama dengan Kemendes PDTT dilakukan sebagai usaha bersama untuk membantu Badan Usaha Milik Desa (BUMDes) agar dapat memberikan layanan jasa keuangan Syariah yang ideal dan bermanfaat bagi masyarakat desa. Lebih lanjut disebutkan bahwa saat ini tercatat ada lebih dari 40.000 BUMDes di seluruh Indonesia. Hal ini dianggap sebagai aset bangsa yang berpotensi meningkatkan inklusi keuangan Syariah jika dapat dimanfaatkan dengan baik.</p>\n\n<p>Ketika ditanya mengenai langkah terdekat yang akan dilakukan pasca dilakukannya penandatanganan nota kesepahaman ini, Jamil Abbas menuturkan bahwa KNKS akan berkoordinasi dengan Kemendes PDTT untuk menyiapkan <em>pilot project </em>program yang dimaksud. Secara singkat beliau menjelaskan bahwa program tersebut merupakan suatu gerakan yang akan dilakukan dengan cara kolaborasi antara BUMDes dengan lembaga keuangan Syariah formal, termasuk dengan perbankan syariah dan lembaga <em>financial technology </em>(<em>fintech</em>) syariah.</p>\n\n<p>&ldquo;Harapannya ke depan, masyarakat di desa bisa memperoleh akses terhadap produk-produk keuangan syariah yang selama ini umumnya beroperasi di kota-kota besar saja&rdquo;, jelas Jamil.</p>\n\n<p>Penulis : Yodi Izharivan<br />\nRedaktur : Ahmad Juwaini</p>	https://webdev.rifhandi.com/uploads/news/g.jpg	2019-05-09 08:05:42	1	KNKS Establishes Joint Cooperation with the Ministry of Villages, Rural Regions Development, and Transmigration of the Republic of Indonesia	<p>Provide the ideal and beneficial Islamic financial services to people in villages and rural areas</p>	<p><strong>KNKS, Jakarta -</strong> The National Islamic Finance Committee (KNKS) on Thursday evening 14/05/2019 agreed a Memorandum of Understanding (MoU) with the Ministry of Villages, Rural Regions Development, and Transmigration of the Republic of Indonesia (Kemendes PDTT) in order to develop the Islamic economic and financial services in villages, rural, and transmigration areas. The joint cooperation is signed directly by the General Secretary of Kemendes PDTT, Anwar Sanusi, and Executive Director of KNKS, Ventje Rahadrjo.</p>\n\n<p>The signing was part of the whole agenda of the Indonesia Islamic Economy Masterplan 2019-2024 launching event held at the Ministry of National Development Planning (Bappenas) office inaugurated by the current Indonesia&rsquo;s Presiden, Joko Widodo.</p>\n\n<p>The Deputy Director of KNKS&rsquo; Islamic Inclusive Finance Division, Jamil Abbas, explains that the partnership with Kemendes PDTT is done as a mutual effort to support the Village-owned companies (BUMDes) so they could provide the ideal and beneficial Islamic financial services to people in villages and rural areas. In addition he says that currently there are more than 40,000 existing BUMDes across the country. It is considered as the national assets that potentially increase the Islamic financial inclusion if it can be put optimally.</p>\n\n<p>When he is asked about the very next step after the MoU signing, Jamil Abbas says that KNKS will coordinate with Kemendes PDTT to prepare the pilot project of the desired programme. Concisely, he explains that the programme is considered as a movement in form of collaboration between BUMDes and many other formal Islamic financial institutions, involving Islamic banks and financial technology (fintech) companies.</p>\n\n<p>&ldquo;To the next we hope that people in villages and&nbsp;rural areas have access to the Islamic financial products and services that during this time generally operate only in the large urban centres&rdquo;, says Jamil.</p>\n\n<p>Reporter : Yodi Izharivan<br />\nEditor : Ahmad Juwaini</p>	4	kdeks	\N	{"4","2"}	1	14	null
 35	International Webinar Halal Pharmaceutical & Healthcare Ecosystem Industry Forum	<span style="font-size: 13.44px;">Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) menyelenggarakan International Webinar Halal Pharmaceutical and Healthcare Ecosystem Industry Forum 2022 secara daring (06/07). Dalam acara ini hadir Principal Partner &amp; Halal Industry Strategist Rozi Osman International PLT. Roziatul Akmam, Operation Director PT. Bio Farma M. Rahman Roestan, Assosiate Professor ITB Dr. apt. Ilma Nugrahani, MSi., Vice President Business Development PT. Jababeka Onky Martha, Founder &amp; CEO LBB international Dr. Marco Tieman, Managing Director Barakah Taiwan Hub Dr. Nurundin N.H. Ting, sebagai pembicara.</span>	<div><span style="font-size: 13.44px;">Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) menyelenggarakan International Webinar Halal Pharmaceutical and Healthcare Ecosystem Industry Forum 2022 secara daring (06/07). Dalam acara ini hadir Principal Partner &amp; Halal Industry Strategist Rozi Osman International PLT. Roziatul Akmam, Operation Director PT. Bio Farma M. Rahman Roestan, Assosiate Professor ITB Dr. apt. Ilma Nugrahani, MSi., Vice President Business Development PT. Jababeka Onky Martha, Founder &amp; CEO LBB international Dr. Marco Tieman, Managing Director Barakah Taiwan Hub Dr. Nurundin N.H. Ting, sebagai pembicara.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Acara ini merupakan tindak lanjut dari hasil riset KNEKS mengenai Preferensi Pasar Rumah Sakit berkompetensi syariah. Berdasarkan survey, masyarakat Indonesia menganggap nilai syariah sebagai tiga faktor utama dalam memilih layanan kesehatan. Selain itu, permintaan vaksin dan obat pendukung halal lainnya selama pandemi covid-19 menunjukan urgensi terhadap status halal pada produk kesehatan di Indonesia.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Permintaan atas layanan kesehatan berkompetensi syariah dan produk kesehatan halal yang besar di Indonesia serta dunia menjadi urgensi, sekaligus peluang ekonomi, dalam menciptakan layanan kesehatan yang kuat dan inklusif di Indonesia.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">“Acara ini sejalan dengan agenda prioritas G20 yakni memperkuat arsitektur kesehatan global. Agenda tersebut perlu diperkuat melalui koordinasi sektor keuangan dan kebijakan publik dalam rangka Pandemic Prevention, Preparedness and Response. Pandemi covid-19 telah menunjukkan perlunya sistem kesehatan yang lebih kuat, inklusif, dan berkelanjutan. Hal ini pun dapat diwujudkan melalui kolaborasi global dimana setiap negara berperan melalui kapasitas nya masing-masing. Meningkatnya kesadaran konsumen akan status halal pada produk kesehatan pun perlu diperhatikan. Hal ini adalah potensi yang besar bagi manufacturer Indonesia meningkatkan produksi halal nya,” Tutur Wempi Saputra, Staf Ahli Menteri Keuangan Bidang Ekonomi Makro dan Keuangan Internasional yang sekaligus menjabat sebagai Kepala Sekretariat KNEKS, dalam pembukaan webinar ini.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Industri kesehatan syariah merupakan ekosistem yang tidak hanya melibatkan rumah sakit berkompetensi syariah tetapi juga industri yang menyediakan fasilitas seperti alat kesehatan, vaksin, dan obat-obatan. Saat ini, Indonesia masih memiliki ketergantungan yang tinggi dalam memenuhi fasilitas kesehatan yang berasal dari negara non-OKI. Disisi lain, ketersediaan bahan penyusun, bahan pendukung, media kultur, yang tersertifikasi halal di dunia masih sangat rendah.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">“Saat ini Indonesia masih mengimpor 95% bahan penyusun produk dan fasilitas kesehatan. Namun banyak negara dunia yang belum memahami sistem jaminan halal itu sendiri. Untuk membangun ekosistem farmasi dan industri kesehatan yang sustainable yang juga menjamin status halal, diperlukan kolaborasi antar pihak memenuhi sistem jaminan halal dalam keseluruhan rantai suplai nya, mulai dari raw materials, supporting materials, dan supporting equipment. Public private partnerships atau PPP oleh seluruh pihak di dalam ekosistem kesehatan Indonesia bahkan dunia, dapat menjadi kunci sukses dalam mewujudkan hal ini,” tutur Operation Director PT. Bio Farma M. Rahman Roestan</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">“Strategi halal by design, yakni pembangunan produk halal dengan melibatkan aspek management halal di keseluruhan rantai produksi halal, mulai dari planning, pemilihan bahan, dan proses produksi dibawah pengawasan tim manajemen halal, diperlukan. Termasuk didalamnya pengawasan seluruh aktivitas dalam pengelolaan bahan mentah, proses manufaktur, pengemasan, distribusi, hingga pemasaran. Oleh karena itu, langkah awal yang dipastikan adalah internal stakeholders perusahaan, top level management, berpartisipasi dalam menjaga terjaminnya proses halal,” jelas Roziatul Akmam, Principal Partner &amp; Halal Industry Strategist Rozi Osman International PLT.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">“Pembangunan ekosistem layanan kesehatan syariah dunia memerlukan perspektif yang menyeluruh yakni dalam pencegahan, layanan emergency, penyembuhan (after-care), sampai dengan layanan khusus lanjut usia. Keterlibatan pihak dan network pun diperlukan seperti dari dukungan layanan keuangan syariah dalam dunia kesehatan serta kerjasama dan perdagangan internasional dalam rantai pasok halal,” Ujar Dr. Marco Tieman Founder &amp; CEO LBB international</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Dari diskusi yang melibatkan pembicara ahli di bidang layanan kesehatan dunia ini menyimpulkan bahwa harmonisasi standar halal global, pembangunan klaster halal dan network untuk industri farmasi dan layanan kesehatan, penguatan big data, integrasi subjek halal dalam pendidikan dan pelatihan, penguatan research &amp; development, penguatan kerja sama antara institusi riset dan industri, kemudahan aktivitas manufacturing, serta adanya kebijakan insentif, di bidang medicines, science, dan layanan kesehatan, diperlukan dalam membangun ekosistem farmasi dan layanan kesehatan halal di Indonesia dan dunia.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">“Membangun ekosistem farmasi dan layanan kesehatan halal perlu waktu yang tidak sebentar dan perlu biaya, maka perlu kolaborasi yang kuat. Diawali dengan memahami kebutuhan konsumen dan pelaku industri, untuk menghasilkan inisiatif strategis yang dapat mempercepat hadirnya produk dan layanan kesehatan halal dan berkompetensi syariah. Serta menangkap peluang ekonomi dari industri sebesar 129 Miliar US dolar ini,” pungkas Afdhal Aliasar, Direktur Industri Produk Halal KNEKS menutup jalannya diskusi di webinar internasional ini.</span></div>	https://webdev.rifhandi.com/uploads/news/1658223755-WhatsAppImage 2022-07-19 at 4.27.15 PM1.jpg	2019-05-09 08:05:00	0	 International Webinar Halal Pharmaceutical & Healthcare Ecosystem Industry Forum	<span style="font-size: 13.44px;">The National Committee for Islamic Economy and Finance (KNEKS) held the International Webinar Halal Pharmaceutical and Healthcare Ecosystem Industry Forum 2022 virtually (06/07). The event featured prominent speakers, including Principal Partner &amp; Halal Industry Strategist of Rozi Osman International PLT, Roziatul Akmam; Operation Director of PT. Bio Farma, M. Rahman Roestan; Associate Professor at ITB, Dr. apt. Ilma Nugrahani, MSi.; Vice President of Business Development at PT. Jababeka, Onky Martha; Founder &amp; CEO of LBB International, Dr. Marco Tieman; and Managing Director of Barakah Taiwan Hub, Dr. Nurundin N.H. Ting.</span>	<div><span style="font-size: 13.44px;">The National Committee for Islamic Economy and Finance (KNEKS) held the International Webinar Halal Pharmaceutical and Healthcare Ecosystem Industry Forum 2022 virtually (06/07). The event featured prominent speakers, including Principal Partner &amp; Halal Industry Strategist of Rozi Osman International PLT, Roziatul Akmam; Operation Director of PT. Bio Farma, M. Rahman Roestan; Associate Professor at ITB, Dr. apt. Ilma Nugrahani, MSi.; Vice President of Business Development at PT. Jababeka, Onky Martha; Founder &amp; CEO of LBB International, Dr. Marco Tieman; and Managing Director of Barakah Taiwan Hub, Dr. Nurundin N.H. Ting.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">This event was a follow-up to KNEKS' research on the market preferences for sharia-compliant hospitals. According to the survey, Indonesians consider sharia values as one of the three main factors in choosing healthcare services. Additionally, the demand for halal-certified vaccines and other supporting medicines during the COVID-19 pandemic highlighted the urgency of halal status for healthcare products in Indonesia.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">The significant demand for sharia-compliant healthcare services and halal health products in Indonesia and globally presents both an urgency and an economic opportunity to establish a robust and inclusive healthcare system in the country.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">“This event aligns with the G20 priority agenda of strengthening the global health architecture. This agenda must be supported through coordination between the financial sector and public policy to enhance Pandemic Prevention, Preparedness, and Response. The COVID-19 pandemic has underscored the need for a stronger, more inclusive, and sustainable health system. This goal can be achieved through global collaboration, where every country contributes according to its capacity. The growing consumer awareness of halal status in health products must also be addressed. This is a significant potential for Indonesian manufacturers to expand their halal production,” stated Wempi Saputra, Special Advisor to the Minister of Finance on Macroeconomics and International Finance, and Head of the KNEKS Secretariat, during the webinar opening remarks.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">The sharia-compliant healthcare industry is an ecosystem that not only involves sharia-compliant hospitals but also industries providing facilities such as medical devices, vaccines, and medicines. Currently, Indonesia relies heavily on non-OIC countries to meet its healthcare facility needs. On the other hand, the availability of halal-certified raw materials, supporting materials, and culture media worldwide remains very low.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">“Currently, Indonesia imports 95% of the raw materials for healthcare products and facilities. However, many countries still lack understanding of the halal assurance system itself. To build a sustainable pharmaceutical and healthcare industry ecosystem that guarantees halal status, collaboration among stakeholders is needed to implement halal assurance throughout the supply chain, from raw materials and supporting materials to supporting equipment. Public-private partnerships (PPP) involving all stakeholders in the Indonesian and global healthcare ecosystem could be the key to achieving this,” explained M. Rahman Roestan, Operation Director of PT. Bio Farma.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">“A halal-by-design strategy, which involves incorporating halal management aspects throughout the halal production chain — from planning and material selection to production under the supervision of a halal management team — is essential. This includes monitoring all activities related to raw material management, manufacturing processes, packaging, distribution, and marketing. Therefore, the first step to ensure this process is the participation of internal company stakeholders, especially top-level management, in maintaining halal assurance,” elaborated Roziatul Akmam, Principal Partner &amp; Halal Industry Strategist at Rozi Osman International PLT.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">“The development of a global sharia-compliant healthcare ecosystem requires a comprehensive perspective that spans prevention, emergency care, recovery (after-care), and specialized elderly care. The involvement of various stakeholders and networks is also essential, including the support of Islamic financial services in healthcare, as well as international cooperation and trade within the halal supply chain,” stated Dr. Marco Tieman, Founder &amp; CEO of LBB International.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">The discussions involving expert speakers in global healthcare concluded that global halal standard harmonization, the development of halal clusters and networks for the pharmaceutical and healthcare industry, big data strengthening, integration of halal subjects into education and training, R&amp;D enhancement, strengthening cooperation between research institutions and industry, ease of manufacturing activities, and the provision of incentives in medicine, science, and healthcare policies are critical to building the halal pharmaceutical and healthcare ecosystem in Indonesia and globally.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">“Building a halal pharmaceutical and healthcare ecosystem requires significant time and investment, necessitating strong collaboration. It starts with understanding consumer and industry needs to generate strategic initiatives that accelerate the availability of halal and sharia-compliant healthcare products and services while capitalizing on the $129 billion economic opportunity this industry offers,” concluded Afdhal Aliasar, Director of Halal Product Industry at KNEKS, closing the international webinar discussion.</span></div>	1	kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	{"1","5"}	2	1	null
+29	Ambisi Jokowi: Ada Bank Syariah yang Masuk 10 Besar	Komite Nasional Keuangan Syariah (KNKS) yang diketuai oleh Presiden Joko Widodo berambisi membawa bank syariah masuk dalam 10 total aset perbankan nasional. Hal ini disampaikan dalam konferensi pers peluncuran Masterplan Ekonomi Syariah Indonesia 2019-2024.	<div>Jakarta, CNBC Indonesia- Komite Nasional Keuangan Syariah (KNKS) yang diketuai oleh Presiden Joko Widodo berambisi membawa bank syariah masuk dalam 10 total aset perbankan nasional. Hal ini disampaikan dalam konferensi pers peluncuran Masterplan Ekonomi Syariah Indonesia 2019-2024.</div><div><br></div><div>Direktur Eksekutif KNKS Ventje Rahardjo mengatakan pihaknya sudah memulai beberapa inisiatif yang merujuk pada masterplan, termasuk penguatan bank syariah.</div><div><br></div><div>"Kami berharap ada bank syariah yang bisa masuk dalam 10 besar total aset perbankan nasional. Sisi lain kita mendorong jaminan sosial syariah yg hari ini kita tanda tangan MoU-nya," kata Ventje dalam konferensi pers sebelum peluncuran Masterplan Ekonomi Syariah Indonesia 2019-2024 , Selasa (14/05/2019).</div><div><br></div><div>Menurutnya yang akan digenjot dari sisi ritel banking, agar bisa tumbuh seimbang. Untuk itu, inisiatif dari KNKS adalah memunculkan bank investasi yang berkaitan dengan syariah. Selain itu, dengan persatuan direktur keuangan Indonesia akan membawa ke perbankan syariah.</div><div><br></div><div>Menteri Perencanaan Pembangunan Nasional (PPN) dan Kepala Bappenas sekaligus Sekretaris KNKS Bambang Brodjonegoro mengatakan dalam beberapa tahun ke depan, perlu ada bank syariah berskala besar. Untuk itu Bank syariah yang ada saat ini perlu memperbaiki kinerjanya.</div><div><br></div><div>"Yang kami bayangkan, kita punya industri halal yang kuat yang financing-nya berasal dari lembaga keuangan dan syariah indonesia. Bukan bank syariahnya keliling nawarin atau terima kredit kualitas nomer dua. Itu yang harus kita benahi terlebih dahulu," kata dia.</div><div><br></div><div>Selama ini perbankan syariah di Indonesia banyak yang memberikan pembiayaan uang, tetapi belum menunjang industri halal di Indonesia.</div><div>Padahal, Indonesia berada dalam posisi 10 untuk industri halal dunia berdasarkan laporan Global Islamic Economy Report.</div><div><br></div><div>"Karena itu kami ingin melakukan perbaikan dari sisi permintaan ekonomi syariah sektor riil yakni industri halal," ujarnya.</div><div><br></div><div>(dob/dob)</div><div><br></div><div>Fikri Muhammad &amp; Rahajeng Kusumo Hastuti, CNBC Indonesia</div><div><br></div><div>Sumber : https://www.cnbcindonesia.com/news/20190514165145-4-72431/ambisi-jokowi-ada-bank-syariah-yang-masuk-10-besar</div>	https://cms-dev.kneks.go.id/uploads/news/1557906344-KonferensiPers.jpg	2019-05-09 08:05:42	\N	Jokowi's Ambition: A Sharia Bank in the Top 10	The National Sharia Finance Committee (KNKS), chaired by President Joko Widodo, aims to position a sharia bank among the top 10 banks in terms of total national banking assets. This ambition was conveyed during the press conference for the launch of the Indonesian Sharia Economic Masterplan 2019-2024.	<div>Jakarta, CNBC Indonesia – The National Sharia Finance Committee (KNKS), chaired by President Joko Widodo, aims to position a sharia bank among the top 10 banks in terms of total national banking assets. This ambition was conveyed during the press conference for the launch of the Indonesian Sharia Economic Masterplan 2019-2024.</div><div><br></div><div>KNKS Executive Director Ventje Rahardjo stated that several initiatives aligned with the masterplan have already begun, including strengthening sharia banks.</div><div><br></div><div>"We hope that a sharia bank can enter the top 10 in terms of total national banking assets. On the other hand, we are also promoting sharia social security, for which we signed an MoU today," said Ventje during the press conference before the launch of the Indonesian Sharia Economic Masterplan 2019-2024, on Tuesday (May 14, 2019).</div><div><br></div><div>He added that efforts would focus on retail banking to achieve balanced growth. To this end, KNKS has initiated plans to establish an investment bank related to sharia finance. Additionally, collaboration with Indonesian financial directors is expected to further strengthen sharia banking.</div><div><br></div><div>Minister of National Development Planning (PPN) and Head of Bappenas, who also serves as KNKS Secretary, Bambang Brodjonegoro, emphasized the need for a large-scale sharia bank in the coming years. Existing sharia banks, he noted, must improve their performance.</div><div><br></div><div>"Our vision is to have a strong halal industry supported by financing from Indonesian sharia financial institutions. It shouldn't be that sharia banks are merely offering or accepting second-rate credit. This is what needs to be addressed first," he said.</div><div><br></div><div>Currently, sharia banks in Indonesia provide significant financing but have yet to fully support the country's halal industry.</div><div><br></div><div>Indonesia ranks 10th in the global halal industry, according to the Global Islamic Economy Report.</div><div><br></div><div>"This is why we aim to improve the demand side of the sharia economy, particularly in the real sector, such as the halal industry," he concluded.</div><div><br></div><div>(dob/dob)</div><div><br></div><div>Fikri Muhammad &amp; Rahajeng Kusumo Hastuti, CNBC Indonesia</div><div><br></div><div>Source:&nbsp;<span style="font-size: 13.44px; color: var(--bs-card-color); background-color: var(--bs-card-bg); font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);">https://www.cnbcindonesia.com/news/20190514165145-4-72431/ambisi-jokowi-ada-bank-syariah-yang-masuk-10-besar</span></div>	1	kneks	indonesia,kneks	NULL	0	0	null
+183	Kemenperin Gelar Pameran Produk Industri Halal 2023	ini isinya masuk dibagian mana	<p style="margin-right: 0px; margin-bottom: 17px; margin-left: 0px; -webkit-font-smoothing: antialiased;"><font face="arial" style="" size="3" color="#000000"><span style="font-weight: 700;">Jakarta,&nbsp;<a href="http://ibadah.co.id/" style="background-color: transparent; transition-duration: 0.4s; transition-property: all;">Ibadah.co.id</a>&nbsp;–&nbsp;</span>&nbsp;Dalam mendukung pengembangan industri halal, Pusat Pemberdayaan Industri Halal menyelenggarakan Pameran Produk Industri Halal 2023 di Plasa Pameran Industri, Gedung Kementerian Perindustrian. Pameran yang akan berlangsung pada tanggal 9 hingga 12 Mei 2023 tersebut menghadirkan sebanyak 14 industri kecil Penerima Fasilitasi Sertifikasi Halal, 16 penerima penghargaan IHYA serta 13 Lembaga Pemeriksa Halal di Lingkungan Kemenperin. Selanjutnya, untuk memeriahkan pelaksanaan pameran, juga dihadirkan beberapa&nbsp;<em style="">food truck</em>&nbsp;spesialis makanan halal.</font></p><p style="margin-right: 0px; margin-bottom: 17px; margin-left: 0px; -webkit-font-smoothing: antialiased;"><font face="arial" style="" size="3" color="#000000">Pameran yang mengusung tema “Pemberdayaan Industri Halal Nasional Menuju Pusat Produsen Halal Dunia merupakan tindaklanjut peran Kemenperin dalam mendorong industri halal. Dalam pameran, disediakan fasilitas konsultasi, terkait dengan penahapan produk halal dan&nbsp; fasilitasi pembiayaan serta peluang ekspor.</font></p>	https://cms-dev.kneks.go.id/uploads/news/2-1.jpg	2025-02-14 00:00:00	on	Testing	ini juga masuk bagian mana&nbsp;	<p style="margin-right: 0px; margin-bottom: 17px; margin-left: 0px; -webkit-font-smoothing: antialiased;"><font face="arial" size="3" color="#000000"><span style="font-weight: 700;">Jakarta,&nbsp;<a href="http://ibadah.co.id/" style="transition-duration: 0.4s; transition-property: all; background-color: transparent;">Ibadah.co.id</a>&nbsp;–&nbsp;</span>&nbsp;Dalam mendukung pengembangan industri halal, Pusat Pemberdayaan Industri Halal menyelenggarakan Pameran Produk Industri Halal 2023 di Plasa Pameran Industri, Gedung Kementerian Perindustrian. Pameran yang akan berlangsung pada tanggal 9 hingga 12 Mei 2023 tersebut menghadirkan sebanyak 14 industri kecil Penerima Fasilitasi Sertifikasi Halal, 16 penerima penghargaan IHYA serta 13 Lembaga Pemeriksa Halal di Lingkungan Kemenperin. Selanjutnya, untuk memeriahkan pelaksanaan pameran, juga dihadirkan beberapa&nbsp;<em>food truck</em>&nbsp;spesialis makanan halal.</font></p><p style="margin-right: 0px; margin-bottom: 17px; margin-left: 0px; -webkit-font-smoothing: antialiased;"><font face="arial" size="3" color="#000000">Pameran yang mengusung tema “Pemberdayaan Industri Halal Nasional Menuju Pusat Produsen Halal Dunia merupakan tindaklanjut peran Kemenperin dalam mendorong industri halal. Dalam pameran, disediakan fasilitas konsultasi, terkait dengan penahapan produk halal dan&nbsp; fasilitasi pembiayaan serta peluang ekspor.</font></p>	1	kneks	[{"value":"kneks"},{"value":"kdeks"}]	1	18	2	Administrator
+27	KNKS Luncurkan Masterplan Keuangan Syariah pada 14 Mei 2019	Menteri Perencanaan dan Pembangunan Nasional dan Kepala Bappenas, Bambang Permadi Soemantri Brodjonegoro menyampaikan, Komite Nasional Keuangan Syariah (KNKS) akan meluncurkan Masterplan Ekonomi Syariah Indonesia 2019-2024 pada 14 Mei 2019.	<div>Sharianews, Bandung ~ Menteri Perencanaan dan Pembangunan Nasional dan Kepala Bappenas, Bambang Permadi Soemantri Brodjonegoro menyampaikan, Komite Nasional Keuangan Syariah (KNKS) akan meluncurkan Masterplan Ekonomi Syariah Indonesia 2019-2024 pada 14 Mei 2019.</div><div><br></div><div>Kerangka Masterplan Ekonomi Syariah Indonesia 2019-2024 merekomendasikan empat strategi utama untuk mengembangkan ekonomi syariah di Tanah Air.</div><div><br></div><div>"Pertama, penguatan rantai nilai halal atau halal value chain (HVC) dengan fokus pada sektor atau klaster yang dinilai potensial dan berdaya saing tinggi," jelasnya menegaskan, di Bandung, Jumat (26/4).</div><div><br></div><div>Kedua, penguatan sektor keuangan syariah, yang rencana induknya sudah dituangkan dalam Masterplan Arsitektur Keuangan Syariah Indonesia dan disempurnakan daIam rencana induk ini.</div><div><br></div><div>Ketiga penguatan Usaha Mikro, kecil dan Menengah (UMKM) sebagai penggerak utama rantai nilai halal.</div><div><br></div><div>Terakhir, yakni pemanfaatan dan penguatan platform ekonomi digital dalam hal perdagangan (e-commerce, market place) dan keuangan (teknologi finansial) yang diharapkan bisa mendorong dan mengakselerasi pencapaian strategi lainnya.</div><div><br></div><div>Pembuatan Masterplan Ekonomi Syariah Indonesia dilatarbelakangi karena melihat dalam tiga dasawarsa terakhir, ekonomi dan keuangan syariah mengalami perkembangan pesat baik secara global maupun nasional.</div><div><br></div><div>Menurut data The State of the Global Islamic Economy Report 2018/2019, pada tahun 2017 besaran pengeluaran makanan dan gaya hidup halal dunia mencapai 2,1 triliun dollar AS dan diperkirakan akan terus tumbuh mencapai 3 triliun dollar AS pada tahun 2023.</div><div><br></div><div>Faktor utama pertumbuhan tersebut adalah peningkatan jumlah penduduk Muslim di dunia yang mencapai 1,84 miliar orang di tahun 2017, dan diperkirakan akan terus meningkat hingga 27,5 persen dari total populasi dunia di tahun 2023. Peningkatan tersebut akan berdampak pada permintaan produk dan jasa halal yang terdiri dari makanan halal, pariwisata halal, fesyen muslim, rekreasi dan travel halal, serta farmasi dan kosmetik halal.</div><div><br></div><div>Indonesia sebagai negara dengan penduduk Muslim terbesar di dunia belum bisa berperan secara optimal dalam memenuhi permintaan tersebut.</div><div><br></div><div>Karenanya, dalam rapat Pleno KNKS pada 5 Februari 2018 lalu, Presiden Joko Widodo memberi arahan untuk menyusun Masterplan Ekonomi Syariah Indonesia 2019-2024 guna menjawab tantangan tersebut, sekaligus menjadi peta jalan dalam mengembangkan ekonomi syariah di Indonesia, sehingga dapat mendukung pengembangan ekonomi nasional.</div><div><br></div><div>Bambang yang juga menjabat sebagai Sekretaris Dewan Pengarah KNKS menjelaskan, sebagai negara dengan populasi Muslim terbanyak, Indonesia menjadi konsumen terbesar produk halal pada pasar internasional. Namun, sumbangsih dalam memproduksi produk halal dunia masih belum optimal.</div><div><br></div><div>"Dalam rangka mendukung pengembangan ekonomi syariah melalui industri halal, diharapkan Indonesia mampu memaksimalkan kearifan lokal dalam menangkap peluang global. Target ekonomi syariah pada tataran domestik mencakup peningkatan skala usaha, kemandirian dan kesejahteraan. Sementara pada tingkat internasional, berupa peningkatan pada peringkat Global Islamic Economy Indicator (GIEI)," ungkap Bambang.</div><div><br></div><div>Sebelum peluncuran Masterplan Ekonomi Syariah, KNKS mengadakan pre-launchlng event yang bernama lndonesia Islamic Economy Festival (IIEFest). Acara ini bertujuan untuk memperkenalkan industri halal di Indonesia kepada masyarakat, sekaligus sebagai bentuk upaya dalam rangka meningkatkan kesadaran masyarakat untuk menjalankan gaya hidup halal. (*)</div>	https://cms-dev.kneks.go.id/uploads/news/1557450484-foto-10.png	2019-05-09 08:05:00	on	KNKS Launches the Sharia Finance Masterplan on May 14, 2019	Minister of National Development Planning and Head of Bappenas, Bambang Permadi Soemantri Brodjonegoro, announced that the National Sharia Finance Committee (KNKS) will launch the Indonesian Sharia Economic Masterplan 2019-2024 on May 14, 2019.	<div>Sharianews, Bandung ~ Minister of National Development Planning and Head of Bappenas, Bambang Permadi Soemantri Brodjonegoro, announced that the National Sharia Finance Committee (KNKS) will launch the Indonesian Sharia Economic Masterplan 2019-2024 on May 14, 2019.</div><div><br></div><div>The framework of the 2019-2024 Indonesian Sharia Economic Masterplan recommends four key strategies to develop the sharia economy in the country.</div><div><br></div><div>"First, strengthening the halal value chain (HVC) by focusing on sectors or clusters deemed to have high potential and competitiveness," he stated in Bandung on Friday (April 26).</div><div><br></div><div>Second, enhancing the sharia finance sector, the blueprint of which has been outlined in the Indonesian Sharia Finance Architecture Masterplan and further refined in this masterplan.</div><div><br></div><div>Third, empowering Micro, Small, and Medium Enterprises (MSMEs) as the main drivers of the halal value chain.</div><div><br></div><div>Lastly, leveraging and strengthening digital economic platforms in commerce (e-commerce, marketplaces) and finance (financial technology) to drive and accelerate the achievement of the other strategies.</div><div><br></div><div>The creation of the Indonesian Sharia Economic Masterplan was prompted by the rapid development of the sharia economy and finance globally and nationally over the past three decades.</div><div><br></div><div>According to The State of the Global Islamic Economy Report 2018/2019, global halal food and lifestyle expenditures reached $2.1 trillion in 2017 and are projected to grow to $3 trillion by 2023.</div><div><br></div><div>The primary factor behind this growth is the increasing Muslim population, which reached 1.84 billion in 2017 and is projected to constitute 27.5% of the global population by 2023. This growth drives demand for halal products and services, including halal food, halal tourism, Muslim fashion, halal recreation and travel, as well as halal pharmaceuticals and cosmetics.</div><div><br></div><div>As the country with the largest Muslim population, Indonesia has yet to fully optimize its role in meeting this demand.</div><div><br></div><div>Thus, during a KNKS Plenary Meeting on February 5, 2018, President Joko Widodo directed the formulation of the Indonesian Sharia Economic Masterplan 2019-2024 to address these challenges and serve as a roadmap for developing the sharia economy in Indonesia to support national economic development.</div><div><br></div><div>Bambang, who also serves as the Secretary of the KNKS Steering Council, explained that Indonesia, as the country with the largest Muslim population, is the largest consumer of halal products in the global market. However, its contribution to producing halal products globally remains suboptimal.</div><div><br></div><div>"In supporting the development of the sharia economy through the halal industry, Indonesia is expected to maximize local wisdom in seizing global opportunities. The domestic target of the sharia economy includes scaling up businesses, promoting self-reliance, and improving welfare. On the international level, the goal is to improve Indonesia's ranking on the Global Islamic Economy Indicator (GIEI)," Bambang explained.</div><div><br></div><div>Before the launch of the Sharia Economic Masterplan, KNKS held a pre-launch event called the Indonesia Islamic Economy Festival (IIEFest). This event aimed to introduce Indonesia’s halal industry to the public while raising awareness about adopting a halal lifestyle. (*)</div>	1	kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	{"1","2"}	0	{"2","4"}	Administrator
+193	KNEKS Perkuat Kolaborasi untuk Akselerasi Implementasi RP3SI 2023–2027	<font face="arial"><span data-start="122" data-end="438">KNEKS berkomitmen untuk terus mendorong kolaborasi lintas sektor dalam memperkuat industri perbankan syariah. Melalui sinergi antara kementerian, lembaga, dan pelaku industri, kami optimis target pengembangan yang tertuang dalam RP3SI 2023–2027 dapat tercapai, sejalan dengan agenda pembangunan ekonomi nasional,”</span> ujar Plt. Direktur Jasa Keuangan Syariah KNEKS.</font>	<p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Solo - Komite National Ekonomi dan Keuangan Syariah (KNEKS) bersama Otoritas Jasa Keuangan (OJK) dan para pemangku kepentingan keuangan syariah mengadakan rapat koordinasi dan&nbsp;<em style="">monitoring</em>&nbsp;evaluasi&nbsp; terhadap Roadmap Pengembangan Perbankan Syariah Indonesia (RP3SI) 2023-2027 yang diterbitkan OJK pada November 2023. Agenda tersebut bertujuan untuk pemutakhiran data dan informasi perkembangan implementasi RP3SI serta memperkuat sinergi antar pemangku kepentingan dalam mencapai target pengembangan dan penguatan perbankan syariah yang dilaksanakan pada Jumat, 21&nbsp;Februari&nbsp;2024.</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Dalam kesempatan tersebut, Plt. Direktur Jasa Keuangan Syariah KNEKS memaparkan berbagai inisiatif strategis yang telah dilakukan KNEKS bersama Kementerian/Lembaga untuk mendorong penguatan dan pengembangan perbankan syariah. Beberapa inisiatif tersebut meliputi pengembangan inovasi produk&nbsp;<em>Sharia Restricted Investment Account</em>&nbsp;(SRIA),&nbsp;<em>business matching</em>&nbsp;antara UMKM dan lembaga keuangan syariah,&nbsp;<em>business linkage&nbsp;</em>proyek Kerja Sama Pemerintah dan Badan Usaha (KPBU) berbasis syariah, sinergi keuangan syariah dalam ekosistem ekonomi syariah, serta berbagai program literasi dan inklusi keuangan syariah.</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Diskusi menghasilkan beberapa poin penting yang akan ditindaklanjuti bersama, antara lain: peningkatan literasi keuangan syariah bagi pelaku usaha, pelibatan aktif pelaku usaha dalam pengembangan produk perbankan syariah, reaktivasi kerja sama pembayaran ZISWAF melalui jaringan perbankan syariah, serta penguatan sinergi untuk mencapai target keuangan syariah yang telah ditetapkan dalam RPJPN&nbsp;dan&nbsp;RPJMN.</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Acara ini dihadiri oleh perwakilan dari Kementerian Perencanaan Pembangunan Nasional, Kementerian Koordinator Bidang Perekonomian, Kementerian Keuangan, Kementerian Pekerjaan Umum, Kementerian Perumahan dan Kawasan Permukiman, Kementerian Koperasi, Kementerian Usaha Mikro, Kecil, dan Menengah, Kementerian Perindustrian, Kementerian Agama, Badan Amil Zakat Indonesia, Badan Wakaf Indonesia, Kamar Dagang Indonesia , Ikatan Bankir Indonesia (IBI), Perkumpulan Bank Syariah Indonesia (Asbisindo), dan Perhimpunan Bank Perekonomian Rakyat Syariah Seluruh Indonesia (Himbarsi). KNEKS berkomitmen untuk terus mendorong kolaborasi lintas sektor dan memastikan penguatan perbankan syariah berjalan selaras dengan agenda pembangunan ekonomi nasional. Komitmen tersebut diharapkan mampu mempercepat pertumbuhan perbankan syariah serta memperluas inklusi keuangan syariah&nbsp;di&nbsp;Indonesia.</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Penulis :&nbsp;M. Raihan Aulia Firdausi</font></p><p style="color: rgb(51, 51, 51); font-size: 18px; text-align: justify;"><font face="arial">Redaktur : Lidya Dewi N</font></p>	https://cms-dev.kneks.go.id/uploads/news/WhatsAppImage 2025-05-09 at 11.04.38.jpeg	2025-02-24 00:00:00	\N	KNEKS Strengthens Collaboration to Accelerate the Implementation of RP3SI 2023–2027	<font face="arial"><span data-start="70" data-end="411">KNEKS is committed to continuously promoting cross-sector collaboration to strengthen the Islamic banking industry. Through synergy between ministries, institutions, and industry players, we are optimistic that the development targets outlined in the RP3SI 2023–2027 can be achieved in line with the national economic development agenda,”</span> said the Acting Director of Islamic Financial Services at KNEKS.</font>	<p data-start="0" data-end="621" class=""><font face="arial"><span data-start="0" data-end="8">Solo</span>&nbsp;- The National Committee for Islamic Economy and Finance (KNEKS), in collaboration with the Financial Services Authority (OJK) and Islamic finance stakeholders, held a coordination meeting and monitoring and evaluation session on the <em data-start="243" data-end="309">Indonesian Islamic Banking Development Roadmap (RP3SI) 2023–2027</em>, which was issued by OJK in November 2023. The agenda aimed to update data and information regarding the implementation progress of RP3SI and to strengthen synergy among stakeholders in achieving the targets for Islamic banking development and reinforcement. The meeting took place on Friday, February 21, 2024.</font></p>\r\n<p data-start="623" data-end="1289" class=""><font face="arial">On this occasion, the Acting Director of Islamic Financial Services at KNEKS presented various strategic initiatives that KNEKS has undertaken in collaboration with ministries and institutions to support the development and strengthening of Islamic banking. These initiatives include the development of innovative products such as the <em data-start="958" data-end="1003">Sharia Restricted Investment Account (SRIA)</em>, business matching between MSMEs and Islamic financial institutions, business linkages for Sharia-based Public-Private Partnership (PPP) projects, synergy in Islamic finance within the Islamic economic ecosystem, as well as various programs on Islamic financial literacy and inclusion.</font></p>\r\n<p data-start="1291" data-end="1793" class=""><font face="arial">The discussion produced several key points to be followed up collaboratively, including: enhancing Islamic financial literacy among business actors, actively involving businesses in Islamic banking product development, reactivating ZISWAF (zakat, infaq, sadaqah, and waqf) payment partnerships through the Islamic banking network, and strengthening synergy to achieve Islamic finance targets outlined in the National Long-Term Development Plan (RPJPN) and National Medium-Term Development Plan (RPJMN).</font></p>\r\n<p data-start="1795" data-end="2442" class=""><font face="arial">The event was attended by representatives from the Ministry of National Development Planning, Coordinating Ministry for Economic Affairs, Ministry of Finance, Ministry of Public Works, Ministry of Public Housing and Settlements, Ministry of Cooperatives, Ministry of Micro, Small, and Medium Enterprises, Ministry of Industry, Ministry of Religious Affairs, the National Zakat Agency (BAZNAS), the Indonesian Waqf Board (BWI), the Indonesian Chamber of Commerce and Industry (KADIN), the Indonesian Bankers Association (IBI), the Association of Islamic Banks in Indonesia (Asbisindo), and the Indonesian Islamic Rural Bank Association (Himbarsi).</font></p>\r\n<p data-start="2444" data-end="2733" class=""><font face="arial">KNEKS remains committed to promoting cross-sector collaboration and ensuring that the strengthening of Islamic banking aligns with national economic development goals. This commitment is expected to accelerate the growth of Islamic banking and expand financial inclusion across Indonesia.</font></p><p data-start="2444" data-end="2733" class=""><font face="arial"><strong data-start="0" data-end="11" data-is-only-node="">Writer:</strong> M. Raihan Aulia Firdausi<br data-start="36" data-end="39">\r\n<strong data-start="39" data-end="50">Editor:</strong> Lidya Dewi N</font></p>	1	kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	{"1","2"}	\N	11	Administrator
 \.
 
 
 --
--- Data for Name: news_categories; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: news_categories; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.news_categories (id, title, description, title_en, description_en, web_identity) FROM stdin;
@@ -2801,134 +2885,95 @@ COPY public.news_categories (id, title, description, title_en, description_en, w
 2	Liputan Media	tess	Media Coverage	\N	kneks
 3	Siaran Pers	\N	Press Conference	\N	kneks
 4	KDEKS	KDEKS 	KDEKS 	KDEKS 	kneks
-5	ss	ddd	ss	ddd	kneks
 \.
 
 
 --
--- Data for Name: news_photos; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: news_photos; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.news_photos (id, title, photo, content, photos_datetime, title_en, content_en, web_identity, tag, directorat, id_province, is_publish, users_id, users_name) FROM stdin;
-38	Pertemuan KNKS dengan Deloitte - 25 Juni 2019	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Pertemuan KNKS dengan Deloitte - 25 Juni 2019</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-48	Pertemuan KNKS dengan PT Penjaminan Infrastruktur Indonesia (Persero)	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Rabu, 26 Juni 2019 -&nbsp;Pertemuan KNKS dengan PT Penjaminan Infrastruktur Indonesia (Persero)</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-105	Logo Gerakan Nasional Wakaf Uang (GNWU)	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Logo Gerakan Nasional Wakaf Uang (GNWU)</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-110	Wawancara dengan Wakil Presiden	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Wawancara dan meminta arahan&nbsp;Prof. Dr. K. H. Ma&#39;ruf Amin selaku Wakil Presiden Indonesia sekaligus Ketua Harian KNEKS</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-106	Pengembangan dan Penguatan Lembaga Keuangan Mikro Syariah	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Diskusi dan koordinasi terkait Pengembangan dan Penguatan Lembaga Keuangan Mikro Syariah (KSPPS/BMT/Koperasi Syariah) melalui Digitalisasi BMT (BMT 4.0) di wilayah Kabupaten Lombok Utara</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-108	Diskusi dan sosialisasi BMT 4.0 di BMT Nurul Hakim	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Diskusi dan sosialisasi BMT 4.0 untuk memperkuat dan mengembangkan BMT Nurul Hakim yang merupakan BMT berbasis Pondok Pesantren</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-35	Kunjungan KNKS ke Kepala Departemen Ekonomi dan Keuangan Syariah BI	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Taufik Hidayat, Direktur Hukum,&nbsp; Promosi dan Hubuangan Eksternal KNKS melakukan pertemuan dengan Suhaedi, Kepala Departemen Ekonomi dan Keuangan Syariah BI dalam rangka persiapan penyelenggaraan Fesyar dan ISEF 2019.</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-45	Kunjungan KNKS ke Center of Islamic Business and Economic Studies (CIBEST)	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Kunjungan KNKS ke Center of Islamic Business and Economic Studies (CIBEST) IPB dalam rangka sinergi dan kolaborasi penelitian terkait pengukuran kemajuan ekonomi dan keuangan syariah daerah dalam klaster makanan halal. Turut hadir &nbsp;Ketua CIBEST IPB, Dekan Fakultas Ekonomi dan Manajemen IPB, serta Ketua Departemen Ekonomi Syariah IPB. Kolaborasi riset ini melibatkan banyak disiplin ilmu selain Ekonomi Syariah seperti Agribisnis, Manajemen, Pangan, Peternakan, dan Bisnis.</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-54	Pertemuan dengan Direksi BJBS dan Staf Ahli Gubernur Jawa Barat	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Rabu, 26 Juni 2019 -&nbsp;Meeting dengan TIM Percepatan Pembangunan dan BJB &nbsp;Syariah</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-1	KNKS dan IMTI	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>KNKS dan IMTI</p>	2024-11-14 00:38:08	KNKS dan IMTI	KNKS dan IMTI	kneks	\N	null	0	0	0	null
-2	Kopdar KNKS	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Kopdar KNKS</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-3	Kunjungan Dewan Pengarah KNKS 12 April	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Kunjungan Dewan Pengarah KNKS 12 April</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-4	Kunjungan ISTN	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Kunjungan ISTN</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-5	Kunjungan ke Kuala Lumpur	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Kunjungan ke Kuala Lumpur</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-6	Kunjungan KNKS ke Kantor Wapres	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Kunjungan KNKS ke Kantor Wapres</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-7	Kunjungan PEBS	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Kunjungan Pusat Ekonomi dan Bisnis Syariah FEB UI ke kantor KNKS</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-8	Pelantikan Direksi KNKS	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Pelantikan Direksi KNKS</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-37	Pertemuan KNKS dengan Deloitte - 25 Juni 2019	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Pertemuan KNKS dengan Deloitte - 25 Juni 2019</p>	2019-05-09 08:05:00			kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	4	6	1	0	null
-10	Berdiskusi dengan Bank Negara Malaysia	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Berdiskusi dengan Bank Negara Malaysia, untuk membahas Malaysia International Islamic Financial Centre.</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-11	Berdiskusi dengan Kumpulan Wang Persaraan (KWAP)	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Berdiskusi dengan Kumpulan Wang Persaraan (KWAP) terkait Dana Pensiun Syariah di Malaysia</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-12	Berdiskusi dengan Kumpulan Wang Simpanan Pekerja (KWSP)	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Berdiskusi dengan Kumpulan Wang Simpanan Pekerja (KWSP) terkait Simpanan Syariah sebagai produk alternatif berbasis Syariah bagi pekerjapegawai</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-13	Berdiskusi dengan Mr. Rafee Haneef selaku CEO CIMB Islamic Bank	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Berdiskusi dengan Mr. Rafee Haneef selaku CEO CIMB Islamic Bank dalam acara Kuala Lumpur Islamic Finance Forum</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-14	Diskusi Bersama International Islamic Liquidity Management, Malaysia.	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Diskusi Bersama International Islamic Liquidity Management, Kuala Lumpur Malaysia.</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-15	Islamic Finance Leader Talk Bersama MES Malaysia, IIUM 9 April 2019. (2)	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Islamic Finance Leader Talk Bersama MES Malaysia, IIUM 9 April 2019. (2)</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-16	Islamic Finance Leader Talk Bersama MES Malaysia, IIUM 9 April 2019.	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Islamic Finance Leader Talk Bersama MES Malaysia, IIUM 9 April 2019. Menjelaskan program kerja KNKS.</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-17	Islamic Finance Leader Talk Bersama MES Malaysia, IIUM 9 April 2019. (3)	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Islamic Finance Leader Talk Bersama MES Malaysia, IIUM 9 April 2019. Menjelaskan program kerja KNKS. (3)</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-18	Konferensi Pers Peluncuran Masterplan Ekonomi Syariah Indonesia	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Menteri PPN/Bapppenas selaku Sekretaris Komite Nasional Keuangan Syariah (KNKS), Bambang Brodjonegoro,&nbsp;menjelaskan Masterplan Ekonomi Syariah Indonesia didampingi Ventje Rahadrdjo (Direktur Eksekutif KNKS) dan Afdhal Aliasar (Direktur Pengembangan Ekonomi Syariah dan Industri Halal)</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-19	Kunjungan KNKS ke Departemen Ekonomi Syariah	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Direktorat Pendidikan dan Riset Keuangan Syariah KNKS mengunjungi Departemen Ilmu Ekonomi Syariah IPB untuk membahas kerjasama program pelaksanaan KKN Ekonomi Syariah. Hadir dalam kegiatan tersebut Ketua Departemen, Sekretaris Departemen dan beberapa dosen Departemen Ilmu Ekonomi Syariah, Ketua Divisi Pendidikan dan Pengembangan SDM Keuangan Syariah KNKS beserta tim</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-20	Kunjungan Universitas Pendidikan Indonesia (UPI) ke Kantor KNKS - 18/06/2019 (1)	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>KNKS dan Universitas Pendidikan Indonesia (UPI) membahas program pendidikan ekonomi syariah yang efektif untuk level sekolah. Turut hadir &nbsp;Kepala Program Studi Ilmu Ekonomi dan Keuangan Islam UPI, Direktur Pendidikan dan Riset Keuangan Syariah KNKS, dan Kepala Divisi Pendidikan dan Pengembangan SDM Keuangan Syariah KNKS serta tim.</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-21	Islamic Finance Leader Talk Bersama MES Malaysia, IIUM 9 April 2019.	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Islamic Finance Leader Talk Bersama MES Malaysia, IIUM 9 April 2019.</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-22	Pertemuan KNKS dengan DSN-MUI	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Direktur Hukum, Promosi, dan Kerja Sama Strategis KNEKS Taufik Hidayat berdiskusi&nbsp;dengan Ketua Bidang IKNB Syariah DSN-MUI&nbsp;Agus Haryadi</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-23	Pertemuan KNKS dengan DSN-MUI (2)	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Direktur Hukum, Promosi, dan Kerja Sama Strategis KNEKS Taufik Hidayat berdiskusi&nbsp;dengan Ketua Bidang IKNB Syariah DSN-MUI&nbsp;Agus Haryadi</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-24	KNKS dengan KPPIP ( Komite Percepatan Penyediaan Infrastruktur Prioritas)	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Manajemen Eksekutif KNKS dan&nbsp;KPPIP (Komite Percepatan Penyediaan Infrastruktur Prioritas) membahas penjelasan operasional &nbsp;KPPIP dalam percepatan Infrasruktur serta pengelolaan <em>multiple </em>stakeholder</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-25	Pertemuan KNKS dengan DSN-MUI	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Direktur Hukum, Promosi, dan Kerja Sama Strategis KNEKS Taufik Hidayat berdiskusi&nbsp;dengan Ketua Bidang IKNB Syariah DSN-MUI&nbsp;Agus Haryadi</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-26	KNKS bertemu dengan Rektor UIII (Universitas Islam Internasional)	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Senin, 24 Juni 2019 - Manajemen Eksekutif KNKS bertemu dengan KPPIP ( Komite Percepatan Penyediaan Infrastruktur Prioritas ) pertemuan kali ini membahas penjelasan operasional &nbsp;KPPIP dalam percepatan Infrasruktur serta pengelolaan multiple stakeholder</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-27	KNKS bertemu dengan  DJSN	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Pertemuan KNKS dengan DJSN</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-28	KNKS bertemu dengan  DJSN	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Pertemuan KNKS dengan DJSN</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-29	Pertemuan KNKS dengan DSN-MUI (2)	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Direktur Hukum, Promosi, dan Kerja Sama Strategis KNEKS Taufik Hidayat berdiskusi&nbsp;dengan Ketua Bidang IKNB Syariah DSN-MUI&nbsp;Agus Haryadi</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-30	KNKS bertemu dengan  DJSN	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Pertemuan KNKS dengan DJSN</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-31	KNKS bertemu dengan  DJSN	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Pertemuan KNKS dengan DJSN</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-32	Kunjungan KNKS ke Kepala Departemen Ekonomi dan Keuangan Syariah BI	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Taufik Hidayat, Direktur Hukum,&nbsp; Promosi dan Hubuangan Eksternal KNKS melakukan pertemuan dengan Suhaedi, Kepala Departemen Ekonomi dan Keuangan Syariah BI dalam rangka persiapan penyelenggaraan Fesyar dan ISEF 2019.<br />\r\n<br />\r\n&nbsp;</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-33	Pertemuan KNKS dengan Pak Ignatius Warsito (Direktur KPAII)	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Rabu, 19 Juni 2019 - Pertemuan KNKS dengan Pak Ignatius Warsito (Direktur KPAII)&nbsp;&nbsp;</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-36	Pertemuan KNKS dengan Deloitte - 25 Juni 2019	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Pertemuan KNKS dengan Deloitte - 25 Juni 2019</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-39	Silaturahim PT Ussy ke KNKS 25 Juni 2019	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Silaturahim PT Ussy ke KNKS 25 Juni 2019</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-40	Kunjungan P2H ke KNKS	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Kunjungan P2H ke KNKS</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-42	KNKS menghadiri acara Halal bi Halal DSN MUI	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Rabu, 3 Juli 2019 - Seluruh Direksi Komite Nasional Keuangan Syariah menghadiri acara Halal bi Halal DSN MUI yang dihadiri langsung oleh Ketua DSN MUI Bapak Prof. Dr. K.H. Ma&rsquo;ruf Amin.&nbsp;</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-43	Kunjungan JICA (Japan International Cooperation Agency) ke KNKS	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Kamis, 6 Juli 2019 - KNKS mendapat kunjungan dari JICA (Japan International Cooperation Agency) membahas tentang&nbsp;penjajakan kerja sama dan bantuan pengembangan ekonomi syariah Indonesia</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-44	Pertemuan KNKS dengan Bank Indonesia	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Jum&#39;at, 5 Juli 2019 - Pertemuan KNKS dengan pihak Bank Indonesia membahas tentang persiapan&nbsp;Indonesia Sharia Economic Festival (ISEF)</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-46	Media KataData dan KNKS	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Rabu, 3 Juli 2019 - Tapping dengan Media KataData di Kantor Komite Nasional Keuangan Syariah</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-49	Kunjungan ke Departemen Ekonomi Syariah IPB	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Senin, 17 Juni 2019 -&nbsp;KNKS berkunjung ke Departemen Ekonomi Syariah IPB</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-50	Silaturahim PT Sinar Mas ke KNKS	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Kamis, 20 Juni 2019 -&nbsp;Pak Hermawan dari Sinar Mas mengunjungi kantor KNKS&nbsp;</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-52	Silaturahim KNKS ke Islamic Development Bank Group	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Rabu, 26 Juni 2019 -&nbsp;Silaturahim KNKS ke Islamic Development Bank Group</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-53	Diskusi Revisi Perpres No. 91 tahun 2016	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Rabu, 26 Juni 2019 -&nbsp;Diskusi awal Revisi Perpres No. 91 tahun 2016</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-41	Silaturahim Code Base ke KNKS 25 Juni 2019	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Silaturahim Code Base ke KNKS 25 Juni 2019</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-51	KNKS mengunjungi Kampus Trisakti	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Rabu, 19 Juni 2019 - KNKS diwakili oleh Bp. Ronald Rulindo dan Bp. Sutan Emir berkunjung ke Kampus Trisakti dan memberikan kuliah umum tentang Ekonomi dan Keuangan Syariah</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-101	Penandatanganan Nota Kesepahaman Kemenag dan Kementrian Lembaga	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Penandatanganan&nbsp;Nota Kesepahaman dengan Kementerian Agama untuk fasilitas penyelenggaraan sertifikasi halal bagi pelaku Usaha Mikro &amp; Kecil</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-102	Dashboard Sistem Informasi dan Integrasi Data Institusi Keuangan Mikro Syariah	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Diskusi dengan Asdep Pengawasan Koperasi Kemenkop UKM terkait <em>dashboard </em>pelaporan dan pengawasan&nbsp;Sistem Informasi dan Integrasi Data Institusi Keuangan Mikro Syariah (SIID IKMS)</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-103	Dashboard Sistem Informasi dan Integrasi Data Institusi Keuangan Mikro Syariah	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Diskusi dengan Asdep Pengawasan Koperasi Kemenkop UKM terkait dashboard pelaporan dan pengawasan Sistem Informasi dan Integrasi Data Institusi Keuangan Mikro Syariah (SIID IKMS)</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-104	Logo Brand Ekonomi Syariah	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Logo Brand Ekonomi Syariah</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-107	Pengembangan dan Penguatan Lembaga Keuangan Mikro Syariah	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Diskusi dan koordinasi terkait Pengembangan dan Penguatan Lembaga Keuangan Mikro Syariah (KSPPS/BMT/Koperasi Syariah) melalui Digitalisasi BMT (BMT 4.0) di wilayah Kabupaten Lombok Utara</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-109	Diskusi dan sosialisasi BMT 4.0 di BMT Nurul Hakim	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Diskusi dan sosialisasi BMT 4.0 untuk memperkuat dan mengembangkan BMT Nurul Hakim yang merupakan BMT berbasis Pondok Pesantren</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-111	KDEKS Jawa Timur	https://kdeks.rifhandi.com/uploads/photo/IMG-20221216-WA0006.jpg		2019-05-09 08:05:42	East Java KDEKS		kneks	indonesia,kneks	null	0	0	0	null
-114	Diskusi KNKS dengan BP Tapera	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Diskusi dengan BP Tapera terkait pengembangan skema pembiayaan syariah untuk perumahan rakyat dan ASN pada hari Selasa, 20 Agustus 2019</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-115	KNKS Mengisi Kuliah Umum di Universitas Islam Indonesia Jogjakarta	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Senin (19/08/19), Dr. Sutan Emir Hidayat selaku Direktur Pendidikan dan Riset Keuangan Syariah memberikan Kuliah Umum dalam Agenda Studium Generale &quot;The Role of Islamic Finance Graduates in Realizing Economic Prosperity&quot; di Universitas Islam Indonesia, Jogjakarta.</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-116	KNKS  di UIN Sunan Kalijaga Jogjakarta.	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Rabu (21/08/19), Direktur Pendidikan dan Riset Keuangan Syariah KNKS &nbsp;menghadiri undangan sebagai narasumber dalam kegiatan Forum Group Discussion (FGD) dan Penandatangan MoU mewakilkan kehadiran Direktur Eksekutif KNKS di UIN Sunan Kalijaga Jogjakarta.</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-117	Kunjungan KNKS ke Manajemen BJB	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Pertemuan KNKS dengan Dewan Komisaris dan Direksi BJB Syariah dengan pembahasan Kredit Mesra, Sharia Restricted Intermediary Account (SRIA), sukuk daerah &amp; sukuk BUMD, pembiayaan perumahan rakyat &amp; ASN, dan Gerakan Indonesia Ramah Zakat</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-118	KNKS silaturahmi ke Lembaga Amil Zakat (LAZ) Dompet Dhuafa	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Rabu (14/8/19), KNKS silaturahmi ke Lembaga Amil Zakat (LAZ) Dompet Dhuafa. Kunjungan KNKS yang diwakili oleh Analis Kebijakan M. Faris Afif dan M. Quraisy, disambut hangat oleh Direktur Utama DD Filantropi Drg. Imam Rulyawan dan Direktur Penghimpunan DD Filantropi Yuli Pujihardi. Perihal pertemuan tersebut adalah selain untuk diskusi tentang pengelolaan wakaf dan zakat juga wawancara untuk salah satu rubrik bulletin INSIGHT KNKS.</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-119	Kerjasama KNKS dengan Univ Islam Sultan Agung  Semarang	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Selasa (20/08/19), Direktur Pendidikan dan Riset Keuangan Syariah KNKS menghadiri undangan sebagai narasumber dalam kegiatan Workshop Penelitian dan sekaligus seremonial penandatanganan MoU dengan Universitas Islam Sultan Agung di Semarang.</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	null	0	0	0	null
-34	Kunjungan KNKS ke Kepala Departemen Ekonomi dan Keuangan Syariah BI	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Taufik Hidayat, Direktur Hukum,&nbsp; Promosi dan Hubuangan Eksternal KNKS melakukan pertemuan dengan Suhaedi, Kepala Departemen Ekonomi dan Keuangan Syariah BI dalam rangka persiapan penyelenggaraan Fesyar dan ISEF 2019.</p>	2019-05-09 08:05:00	Kunjungan KNKS ke Kepala Departemen Ekonomi dan Keuangan Syariah BI	<span style="font-size: 13.44px;">Taufik Hidayat, Direktur Hukum,&nbsp; Promosi dan Hubuangan Eksternal KNKS melakukan pertemuan dengan Suhaedi, Kepala Departemen Ekonomi dan Keuangan Syariah BI dalam rangka persiapan penyelenggaraan Fesyar dan ISEF 2019.</span>	kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	{"2","4"}	15	1	0	null
-9	Pelantikan Direksi KNKS	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Pelantikan Direksi KNKS</p>	2019-05-09 08:05:42	\N	\N	kneks	\N	{"1","2"}	3	14	0	null
-113	KNKS melakukan diskusi dengan Universitas Muhammadiyah Yogyakarta	https://webdev.rifhandi.com/uploads/photo/sample.jpeg	<p>Senin (19/08/19), KNKS melakukan pertemuan untuk diskusi pembahasan pengembangan ekonomi syariah dengan Universitas Muhammadiyah Yogyakarta di Hotel Cavington. Turut hadir Dekan Fakultas Ekonomi dan Bisnis Islam UMY beserta jajarannya dan Direktur Pendidikan dan Riset Keuangan Syariah KNKS beserta tim.</p>	2019-05-09 08:05:42	\N	\N	kneks	indonesia,kneks	3	0	0	0	null
+103	Dashboard Sistem Informasi dan Integrasi Data Institusi Keuangan Mikro Syariah	https://cms-dev.kneks.go.id/uploads/photo/2.jpeg	<p>Diskusi dengan Asdep Pengawasan Koperasi Kemenkop UKM terkait dashboard pelaporan dan pengawasan Sistem Informasi dan Integrasi Data Institusi Keuangan Mikro Syariah (SIID IKMS)</p>	2019-05-09 08:05:00	Dashboard of Islamic Microfinance Institution Information System and Data Integration		kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	1	11	on	1	Administrator
+109	Diskusi dan sosialisasi BMT 4.0 di BMT Nurul Hakim	https://cms-dev.kneks.go.id/uploads/photo/4.jpeg	<p>Diskusi dan sosialisasi BMT 4.0 untuk memperkuat dan mengembangkan BMT Nurul Hakim yang merupakan BMT berbasis Pondok Pesantren</p>	2019-05-09 08:05:00	Discussion and socialization of BMT 4.0 at BMT Nurul Hakim		kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	1	11	on	1	Administrator
+114	Diskusi KNKS dengan BP Tapera	https://cms-dev.kneks.go.id/uploads/photo/5.jpeg	<p>Diskusi dengan BP Tapera terkait pengembangan skema pembiayaan syariah untuk perumahan rakyat dan ASN pada hari Selasa, 20 Agustus 2019</p>	2019-05-09 08:05:00	KNKS Discussion with BP Tapera		kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	1	11	on	1	Administrator
+115	KNKS Mengisi Kuliah Umum di Universitas Islam Indonesia Jogjakarta	https://cms-dev.kneks.go.id/uploads/photo/6.jpeg	<p>Senin (19/08/19), Dr. Sutan Emir Hidayat selaku Direktur Pendidikan dan Riset Keuangan Syariah memberikan Kuliah Umum dalam Agenda Studium Generale "The Role of Islamic Finance Graduates in Realizing Economic Prosperity" di Universitas Islam Indonesia, Jogjakarta.</p>	2019-05-09 08:05:00	KNEKS Gives Public Lecture at Islamic University of Indonesia Yogyakarta		kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	1	11	on	1	Administrator
+118	KNKS silaturahmi ke Lembaga Amil Zakat (LAZ) Dompet Dhuafa	https://cms-dev.kneks.go.id/uploads/photo/8.jpeg	<p>Rabu (14/8/19), KNKS silaturahmi ke Lembaga Amil Zakat (LAZ) Dompet Dhuafa. Kunjungan KNKS yang diwakili oleh Analis Kebijakan M. Faris Afif dan M. Quraisy, disambut hangat oleh Direktur Utama DD Filantropi Drg. Imam Rulyawan dan Direktur Penghimpunan DD Filantropi Yuli Pujihardi. Perihal pertemuan tersebut adalah selain untuk diskusi tentang pengelolaan wakaf dan zakat juga wawancara untuk salah satu rubrik bulletin INSIGHT KNKS.</p>	2019-05-09 08:05:00	KNKS visits the Zakat Collection Institution (LAZ) Dompet Dhuafa		kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	1	11	on	1	Administrator
+34	Kunjungan KNKS ke Kepala Departemen Ekonomi dan Keuangan Syariah BI	https://cms-dev.kneks.go.id/uploads/photo/10.jpeg	<p>Taufik Hidayat, Direktur Hukum,&nbsp; Promosi dan Hubuangan Eksternal KNKS melakukan pertemuan dengan Suhaedi, Kepala Departemen Ekonomi dan Keuangan Syariah BI dalam rangka persiapan penyelenggaraan Fesyar dan ISEF 2019.</p>	2019-05-09 08:05:00	KNKS Visit to Head of BI's Sharia Economics and Finance Department	<span style="font-size: 13.44px;">Taufik Hidayat, Direktur Hukum,&nbsp; Promosi dan Hubuangan Eksternal KNKS melakukan pertemuan dengan Suhaedi, Kepala Departemen Ekonomi dan Keuangan Syariah BI dalam rangka persiapan penyelenggaraan Fesyar dan ISEF 2019.</span>	kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	{"2","4"}	15	\N	1	Administrator
+104	Diskusi dan sosialisasi BMT 4.0 di BMT Nurul Hakim	https://cms-dev.kneks.go.id/uploads/photo/3.jpeg	<p>Discussion and socialization of BMT 4.0 at BMT Nurul Hakim</p>	2019-05-09 08:05:00	Discussion and socialization of BMT 4.0 at BMT Nurul Hakim	<span style="font-size: 13.44px;">Discussion and socialization of BMT 4.0 at BMT Nurul Hakim</span>	kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	1	11	on	1	Administrator
+107	Pertemuan Direksi KNEKS dengan DEKS BI	https://cms-dev.kneks.go.id/uploads/photo/12.jpeg	<p>Pertemuan Direksi KNEKS dengan DEKS BI</p>	2019-05-09 08:05:00	Meeting of KNEKS Board of Directors with DEKS BI	<span style="font-size: 13.44px;">Pertemuan Direksi KNEKS dengan DEKS BI</span>	kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	1	11	on	1	Administrator
+117	Kunjungan KNKS ke Manajemen BJB	https://cms-dev.kneks.go.id/uploads/photo/7.jpeg	<p>Pertemuan KNKS dengan Dewan Komisaris dan Direksi BJB Syariah dengan pembahasan Kredit Mesra, Sharia Restricted Intermediary Account (SRIA), sukuk daerah &amp; sukuk BUMD, pembiayaan perumahan rakyat &amp; ASN, dan Gerakan Indonesia Ramah Zakat</p>	2019-05-09 08:05:00	KNKS Visit to BJB Management	Pertemuan KNKS dengan Dewan Komisaris dan Direksi BJB Syariah dengan pembahasan Kredit Mesra, Sharia Restricted Intermediary Account (SRIA), sukuk daerah &amp; sukuk BUMD, pembiayaan perumahan rakyat &amp; ASN, dan Gerakan Indonesia Ramah Zakat	kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	{"1","2"}	{"11","12"}	on	1	Administrator
+38	Pertemuan KNKS dengan Deloitte - 25 Juni 2019	https://cms-dev.kneks.go.id/uploads/photo/1.jpeg	<p>Pertemuan KNKS dengan Deloitte - 25 Juni 2019</p>	2019-05-09 08:05:00	KNKS Meeting with Deloitte - June 25, 2019	<span style="font-size: 13.44px;">KNKS Meeting with Deloitte - June 25, 2019</span>	kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	1	11	on	1	Administrator
 \.
 
 
 --
--- Data for Name: news_videos; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: news_videos; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.news_videos (id, title, video, duration, content, videos_datetime, title_en, content_en, web_identity, tag, directorat, id_province, is_publish, users_id, users_name) FROM stdin;
 4	Rapat Pleno Komite Nasional Keuangan Syariah	CcrA0_8UkX0	00:05:41	\N	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
 5	Peluncuran Komite Nasional Keuangan Syariah dan Pembukaan SILAKNAS IAEI	m7QQctvbdEc	00:06:10	\N	2019-05-09 08:05:42	\N	\N	kneks	\N	null	0	0	0	null
-7	BAZNAS News - Sinergi KNKS dengan BAZNAS menuju Indonesia sebagai Pusat Ekonomi Syariah Dunia	bv3uErg_dNs	00:02:11	Pertemuan antara KNKS dan BAZNAS pada 31 Januari, membahas bagaimana pentingnya peran zakat yang signifikan dalam membangun visi Indonesia menjadi pusat ekonomi syariah dunia. Kerjasama yang dilakukan antara lain penelitian, pengembangan regulasi dan pengembangan sistem informasi. Apa yang akan dikerjakan oleh KNKS justru telah banyak dilakukan BAZNAS sehingga kerjasama ini berkomitmen untuk saling memperkuat.	2019-05-09 08:05:42	\N	\N	kneks	\N	{"4","5"}	14	1	0	null
 9	BAZNAS News - Sinergi KNKS dengan BAZNAS menuju Indonesia sebagai Pusat Ekonomi Syariah Dunia	bv3uErg_dNs	00:02:11	<p>Pertemuan antara KNKS dan BAZNAS pada 31 Januari, membahas bagaimana pentingnya peran zakat yang signifikan dalam membangun visi Indonesia menjadi pusat ekonomi syariah dunia. Kerjasama yang dilakukan antara lain penelitian, pengembangan regulasi dan pengembangan sistem informasi. Apa yang akan dikerjakan oleh KNKS justru telah banyak dilakukan BAZNAS sehingga kerjasama ini berkomitmen untuk saling memperkuat.</p>	2019-06-14 03:50:46	\N	\N	kneks	\N	1	5	1	0	null
 3	BANK INDONESIA SIAPKAN ROADMAP EKONOMI SYARIAH	rADjEQkBlXo	00:01:44	IDXCHANNEL - Dalam meningkatkan perekonomian syariah Bank Indonesia tengah menyiapkan roadmap ekonomi syariah yang akan segera diluncurkan dimana potensi ekonomi syariah begitu besar. Ekonomi syariah kedepan diharapkan akan mendorong akselerasi ekonomi syariah dimasyarakat, melihat potensi ini Bank Indonesia terus menginisiasi pengembangan ekonomi dan keuangan syariah dengan bekerjasama dengan pemerintah.   Melalui Komite Nasional Keuangan Syariah (KNKS) Bank Indonesia tengah menyusun roadmap untuk meningkatkan potensi ekonomi keuangan syariah, dalam prosesnya Bank Indonesia mendorong Bussines Matching antara pelaku ekonomi syariah berbasis pesantren dengan pembeli potensial dari negara lainya. Diharapkan cara ini akan lebih mendorong permintaan yang ditujukan kepada produk syariah dalam negeri.   Direktur Departemen Ekonomi dan Keuangan Syariah Bank Indonesia Anwar Bashori menegaskan bahwa Bank Indonesia telah meniapkan tiga pilar tetap yaitu penguatan ekonomi syariah, penguatan sektor keuangan syariah untuk pembiayaan dan penguatan riset assessment dan edukasi.	2019-05-09 08:05:42	\N	\N	kneks	\N	{"2","3"}	3	1	0	null
+15	KPR Syariah	GizcILuxKqE	01:45:49	<strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</span>	2025-02-20 00:00:00	KPR Syariah	<strong style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">Lorem Ipsum</strong><span style="color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</span>	kneks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	1	1	\N	18	SuperAdmin
 \.
 
 
 --
--- Data for Name: opini; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: opini; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.opini (id, title, title_en, content, content_en, web_identity, tagging, directorat, is_publish, date_created, users_id, users_name, id_province) FROM stdin;
+9	Pameran PIH	PIH Exhibition	<p style="margin-right: 0px; margin-bottom: 17px; margin-left: 0px; -webkit-font-smoothing: antialiased;"><font size="3" style="" face="comic sans ms" color="#000000">Dalam mendukung pengembangan industri halal, Pusat Pemberdayaan Industri Halal menyelenggarakan Pameran Produk Industri Halal 2023 di Plasa Pameran Industri, Gedung Kementerian Perindustrian. Pameran yang akan berlangsung pada tanggal 9 hingga 12 Mei 2023 tersebut menghadirkan sebanyak 14 industri kecil Penerima Fasilitasi Sertifikasi Halal, 16 penerima penghargaan IHYA serta 13 Lembaga Pemeriksa Halal di Lingkungan Kemenperin. Selanjutnya, untuk memeriahkan pelaksanaan pameran, juga dihadirkan beberapa&nbsp;<em style="">food truck</em>&nbsp;spesialis makanan halal.</font></p><p style="margin-right: 0px; margin-bottom: 17px; margin-left: 0px; -webkit-font-smoothing: antialiased;"><font size="3" style="" face="comic sans ms" color="#000000">Pameran yang mengusung tema “Pemberdayaan Industri Halal Nasional Menuju Pusat Produsen Halal Dunia merupakan tindaklanjut peran Kemenperin dalam mendorong industri halal. Dalam pameran, disediakan fasilitas konsultasi, terkait dengan penahapan produk halal dan&nbsp; fasilitasi pembiayaan serta peluang ekspor.</font></p>	<div><font face="arial" style="" size="3" color="#000000">In supporting the development of the halal industry, the Halal Industry Empowerment Center is holding the 2023 Halal Industry Product Exhibition at the Industrial Exhibition Plaza, Ministry of Industry Building. The exhibition, which will take place from 9 to 12 May 2023, will present 14 small industries that are recipients of Halal Certification Facilitation, 16 recipients of the IHYA award, and 13 Halal Inspection Institutions within the Ministry of Industry. Furthermore, to enliven the implementation of the exhibition, several food trucks specializing in halal food were also presented.</font></div><div><font face="arial" size="3" color="#000000"><br></font></div><div><font face="arial" style="" size="3" color="#000000">The exhibition, which carries the theme "Empowerment of the National Halal Industry Towards the Center of World Halal Producers, is a follow-up to the role of the Ministry of Industry in encouraging the halal industry. In the exhibition, consultation facilities are provided, related to the stages of halal products and financing facilities as well as export opportunities.</font></div>	\N	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	2	\N	2025-02-14	18	SuperAdmin	3
 1	Opini tentang Isu Lingkungan	Opinion on Environmental Issues	Pemerintah berkomitmen untuk meningkatkan upaya pelestarian lingkungan dengan mengurangi emisi karbon sebesar 30% pada tahun 2030 melalui kebijakan yang mendukung energi terbaharukan dan pelarangan pembakaran hutan secara ilegal.	The government is committed to increasing environmental conservation efforts by reducing carbon emissions by 30% by 2030 through policies that support renewable energy and prohibiting illegal forest burning.	kdeks	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	{"3","5"}	on	2025-01-20	18	SuperAdmin	{"14","15"}
+10	Pelaksanaan Pameran 	Exhibition Do	<p style="margin-right: 0px; margin-bottom: 17px; margin-left: 0px; -webkit-font-smoothing: antialiased;"><font size="3" style="" face="arial" color="#000000">Dalam mendukung pengembangan industri halal, Pusat Pemberdayaan Industri Halal menyelenggarakan Pameran Produk Industri Halal 2023 di Plasa Pameran Industri, Gedung Kementerian Perindustrian. Pameran yang akan berlangsung pada tanggal 9 hingga 12 Mei 2023 tersebut menghadirkan sebanyak 14 industri kecil Penerima Fasilitasi Sertifikasi Halal, 16 penerima penghargaan IHYA serta 13 Lembaga Pemeriksa Halal di Lingkungan Kemenperin. Selanjutnya, untuk memeriahkan pelaksanaan pameran, juga dihadirkan beberapa&nbsp;<em style="">food truck</em>&nbsp;spesialis makanan halal.</font></p><p style="margin-right: 0px; margin-bottom: 17px; margin-left: 0px; -webkit-font-smoothing: antialiased;"><font size="3" style="" face="arial" color="#000000">Pameran yang mengusung tema “Pemberdayaan Industri Halal Nasional Menuju Pusat Produsen Halal Dunia merupakan tindaklanjut peran Kemenperin dalam mendorong industri halal. Dalam pameran, disediakan fasilitas konsultasi, terkait dengan penahapan produk halal dan&nbsp; fasilitasi pembiayaan serta peluang ekspor.</font></p>	<br>	\N	[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]	2	\N	2025-02-20	18	SuperAdmin	3
 \.
 
 
 --
--- Data for Name: pejabat; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: pejabat; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.pejabat (id, name, "position", photo, web_identity, description, is_publish, position_en, description_en, organization, directorat, head) FROM stdin;
-2	Ir. Putu Rahwidhiyasa, MBA, CIPM	Plt. Direktur Industri Produk Halal	https://webdev.rifhandi.com/uploads/structure/Putu_edit.png	kneks	<div>Ir. Putu Rahwidhiyasa, MBA, CIPM adalah salah satu tokoh penting dalam pengembangan ekonomi syariah di Indonesia. Ia memiliki pengalaman luas di berbagai sektor, termasuk keuangan syariah, industri halal, dan pembangunan ekonomi berbasis syariah. Perannya menonjol sebagai penggerak utama dalam mempromosikan Indonesia sebagai pusat ekonomi syariah global.</div><div><br></div><div><b>Pendidikan dan Awal Karier</b></div><div>Afdhal Aliasar memiliki latar belakang pendidikan ekonomi dan keuangan. Ia mendalami ilmu ekonomi syariah serta memulai kariernya di bidang yang terkait dengan pengembangan keuangan syariah dan industri halal.&nbsp;</div><div><br></div><div><b>Karier dan Kontribusi</b></div><div>Ir. Putu Rahwidhiyasa, MBA, CIPM pernah menjabat di sejumlah posisi strategis yang fokus pada pengembangan ekonomi syariah, termasuk:</div><div>1. Direktur Infrastruktur Ekosistem Syariah di Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS)&nbsp;&nbsp;</div><div>&nbsp; &nbsp;Dalam kapasitas ini, ia bertanggung jawab untuk membangun ekosistem ekonomi syariah yang berkelanjutan. Tugas utamanya meliputi:</div><div>&nbsp; &nbsp;- Pengembangan sektor industri halal seperti makanan, kosmetik, dan farmasi.</div><div>&nbsp; &nbsp;- Peningkatan daya saing pariwisata halal di Indonesia.</div><div>&nbsp; &nbsp;- Pemberdayaan usaha mikro, kecil, dan menengah (UMKM) berbasis syariah.</div><div><br></div><div>2. Penggerak Industri Halal Nasional&nbsp;&nbsp;</div><div>&nbsp; &nbsp;Afdhal Aliasar menjadi salah satu tokoh yang mendorong sertifikasi halal di Indonesia, meningkatkan kolaborasi antara pemerintah, pelaku industri, dan lembaga sertifikasi untuk memastikan produk halal Indonesia dapat bersaing di pasar global.</div><div><br></div><div>3. Promotor Inklusi Keuangan Syariah&nbsp;</div><div>&nbsp; &nbsp;Ia aktif dalam mendorong literasi keuangan syariah di masyarakat melalui kolaborasi dengan lembaga keuangan syariah, baik perbankan maupun non-perbankan, untuk meningkatkan akses masyarakat terhadap produk keuangan syariah.</div><div><br></div><div><b>Pencapaian</b></div><div>- Penguatan Ekosistem Halal Nasional*: Afdhal berperan dalam mempromosikan Indonesia sebagai pemain kunci di pasar halal global dengan fokus pada produk halal dan wisata halal.&nbsp;&nbsp;</div><div>- Kolaborasi Global*: Ia aktif menjalin hubungan dengan berbagai negara dan organisasi internasional untuk memperkuat posisi Indonesia di bidang ekonomi syariah.&nbsp;&nbsp;</div><div>- Pengembangan UMKM Syariah*: Afdhal Aliasar banyak mendukung pengembangan UMKM berbasis syariah melalui akses ke pembiayaan dan sertifikasi halal.</div>	0	null	null	null	null	null
-4	Dwi Irianti Hadiningdyah, S.H., M.A.	Direktur Keuangan Sosial Syariah	https://webdev.rifhandi.com/uploads/structure/dwi_edit2.png	kneks	<div>Ahmad Juwaini adalah salah satu tokoh penting dalam pengembangan ekonomi syariah dan pemberdayaan masyarakat di Indonesia. Ia dikenal sebagai praktisi berpengalaman dalam bidang filantropi Islam, keuangan syariah, dan pengembangan sosial. Saat ini, Ahmad Juwaini menjabat sebagai salah satu direktur di <b>Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS)</b>, lembaga yang berfokus pada pengembangan ekonomi syariah di Indonesia.</div><div><br></div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Pendidikan dan Awal Karier</b></span></div><div>Ahmad Juwaini memiliki latar belakang pendidikan yang kuat di bidang ekonomi dan keuangan syariah. Sebelum bergabung dengan KNEKS, ia telah lama aktif dalam organisasi yang bergerak di bidang filantropi dan pemberdayaan masyarakat, dengan fokus pada pengembangan berbasis syariah.</div><div><br></div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Karier dan Kontribusi</b></span></div><div>1. Direktur Eksekutif Dompet Dhuafa (2004–2018)&nbsp;&nbsp;</div><div>&nbsp; &nbsp;Ahmad Juwaini pernah menjabat sebagai Direktur Eksekutif di *Dompet Dhuafa*, salah satu lembaga filantropi Islam terbesar di Indonesia. Dalam perannya, ia berhasil:</div><div>&nbsp; &nbsp;- Mengembangkan program-program pemberdayaan berbasis zakat, infak, sedekah, dan wakaf (ZISWAF).</div><div>&nbsp; &nbsp;- Memperluas jangkauan Dompet Dhuafa hingga ke skala global.</div><div>&nbsp; &nbsp;- Meningkatkan pengelolaan dana filantropi dengan pendekatan profesional.</div><div><br></div><div>2. Peran di KNEKS&nbsp;&nbsp;</div><div>&nbsp; &nbsp;Sebagai salah satu direktur di KNEKS, Ahmad Juwaini bertanggung jawab atas pengembangan infrastruktur dan ekosistem ekonomi syariah, termasuk:</div><div>&nbsp; &nbsp;- <b>Industri Halal</b>: Mendorong penguatan industri halal di sektor makanan, kosmetik, farmasi, dan lainnya.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- <b>Keuangan Syariah</b>: Memperluas akses masyarakat terhadap layanan keuangan berbasis syariah.</div><div>&nbsp; &nbsp;- <b>Pemberdayaan UMKM Syariah</b>: Mendukung pelaku UMKM dalam mendapatkan akses pembiayaan dan sertifikasi halal.</div><div>&nbsp; &nbsp;- <b>Filantropi Islam</b>: Mengintegrasikan konsep filantropi Islam seperti zakat dan wakaf ke dalam pembangunan ekonomi nasional.</div><div><br></div><div>3. <b>Kontribusi Internasional</b>&nbsp;&nbsp;</div><div>&nbsp; &nbsp;Ahmad Juwaini aktif mempromosikan ekonomi syariah Indonesia di kancah internasional. Ia menjalin kolaborasi dengan berbagai organisasi global untuk memperkuat posisi Indonesia sebagai pusat ekonomi syariah dunia.</div>	0	null	null	null	null	null
-3	Dr. Taufik Hidayat, M.Ec	Direktur Jasa Keuangan Syariah	https://webdev.rifhandi.com/uploads/structure/Taufik_edit.png	kneks	<div>aufik Hidayat adalah salah satu tokoh penting dalam pengembangan ekonomi dan keuangan syariah di Indonesia. Saat ini, ia menjabat sebagai *Direktur Jasa Keuangan Syariah di Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS)*. Dalam perannya, Taufik Hidayat bertanggung jawab atas pengembangan sektor keuangan syariah yang mencakup perbankan syariah, pasar modal syariah, dan asuransi syariah, serta mengkoordinasikan upaya untuk memperluas inklusi keuangan syariah di Indonesia.</div><div><br></div><div><b>Pendidikan dan Latar Belakang</b></div><div>Taufik Hidayat memiliki latar belakang pendidikan di bidang ekonomi atau keuangan, dengan fokus pada pengembangan sektor keuangan syariah. Ia memiliki pengalaman panjang di sektor keuangan dan telah terlibat dalam berbagai inisiatif pengembangan ekonomi syariah baik di tingkat nasional maupun internasional.</div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);"><br></span></div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Peran dan Tanggung Jawab di KNEKS</b></span></div><div>Sebagai *Direktur Jasa Keuangan Syariah di KNEKS*, Taufik Hidayat bertanggung jawab atas berbagai inisiatif untuk mengembangkan sektor keuangan syariah di Indonesia. Tanggung jawab utamanya meliputi:</div><div><br></div><div>1. Pengembangan Perbankan Syariah&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Meningkatkan kualitas layanan perbankan syariah melalui inovasi produk dan pengembangan teknologi.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Mendorong pertumbuhan pembiayaan syariah untuk mendukung sektor riil dan UMKM.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Berkolaborasi dengan lembaga perbankan syariah untuk meningkatkan inklusi keuangan syariah.</div><div><br></div><div>2. Pengembangan Pasar Modal Syariah&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Memperkuat ekosistem pasar modal syariah, termasuk sukuk (obligasi syariah) dan instrumen investasi syariah lainnya.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Meningkatkan pemahaman dan daya tarik masyarakat terhadap produk investasi syariah.</div><div><br></div><div>3. Asuransi Syariah&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Mendorong pengembangan produk asuransi syariah yang lebih inklusif dan dapat diakses oleh masyarakat.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Bekerja sama dengan perusahaan asuransi syariah untuk memastikan keberlanjutan industri ini.</div><div><br></div><div>4. Inklusi Keuangan Syariah&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Memperluas akses masyarakat terhadap layanan keuangan syariah melalui edukasi dan penyuluhan.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Meningkatkan literasi keuangan syariah di kalangan masyarakat, termasuk UMKM dan sektor informal.</div><div><br></div><div>5. Pengembangan Infrastruktur Keuangan Syariah&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Berkoordinasi dengan pemangku kepentingan di sektor keuangan dan pemerintah untuk mengembangkan infrastruktur yang mendukung pertumbuhan keuangan syariah, seperti regulasi, standar, dan sertifikasi.</div><div><br></div><div><span style="background-color: var(--bs-card-bg); color: var(--bs-card-color); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Kontribusi dan Pencapaian</b></span></div><div>- Pengembangan Produk Keuangan Syariah&nbsp;&nbsp;</div><div>&nbsp; Taufik Hidayat aktif dalam mendorong inovasi produk keuangan syariah, termasuk kredit syariah, pembiayaan usaha, dan sukuk yang dapat memberikan alternatif bagi masyarakat yang ingin berinvestasi secara syariah.&nbsp;&nbsp;</div><div><br></div><div>- Koordinasi dengan Lembaga Keuangan&nbsp;</div><div>&nbsp; Ia memfasilitasi kerja sama antara lembaga keuangan syariah seperti perbankan, pasar modal, dan asuransi untuk meningkatkan efisiensi dan pelayanan kepada masyarakat.&nbsp;&nbsp;</div><div><br></div><div>- Edukasi dan Inklusi Keuangan Syariah&nbsp;&nbsp;</div><div>&nbsp; Mengembangkan program edukasi dan kampanye literasi keuangan syariah untuk meningkatkan pemahaman masyarakat tentang produk dan layanan keuangan syariah.&nbsp;&nbsp;</div><div><br></div><div>- Pengembangan Regulasi dan Standar&nbsp;&nbsp;</div><div>&nbsp; Bekerja sama dengan otoritas terkait untuk menyusun regulasi dan standar yang mendukung pertumbuhan sektor jasa keuangan syariah di Indonesia.</div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; font-weight: var(--bs-body-font-weight); text-align: var(--bs-body-text-align);"><br></span></div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Visi dan Komitmen</b></span></div><div>Taufik Hidayat memiliki visi untuk:&nbsp;&nbsp;</div><div>1. Menjadikan Indonesia sebagai pusat keuangan syariah global.&nbsp;&nbsp;</div><div>2. Meningkatkan inklusi keuangan syariah dengan memperluas akses masyarakat terhadap layanan keuangan berbasis syariah.&nbsp;&nbsp;</div><div>3. Mendorong pertumbuhan industri perbankan, pasar modal, dan asuransi syariah yang berkelanjutan dan inklusif.&nbsp;&nbsp;</div><div>4. Memperkuat ekosistem ekonomi dan keuangan syariah di Indonesia melalui kerja sama dengan berbagai pemangku kepentingan.</div>	\N	null	null	me	direktur	--
-5	Ir. Putu Rahwidhiyasa, MBA, CIPM	Direktur Bisnis dan Kewirausahaan Syariah	https://webdev.rifhandi.com/uploads/structure/Putu_edit.png	kneks	<div>Putu Rahwidhiyasa adalah seorang profesional yang dikenal memiliki keahlian dalam bidang pengelolaan ekonomi, keuangan, serta pengembangan sistem berbasis syariah di Indonesia. Ia memiliki rekam jejak yang panjang di sektor publik dan swasta, khususnya dalam mendukung transformasi digital dan pengembangan ekonomi berbasis syariah.</div><div><br></div><div><b>Latar Belakang Pendidikan dan Karier</b></div><div>Putu Rahwidhiyasa memiliki latar belakang pendidikan di bidang ekonomi, manajemen, atau keuangan yang menjadi dasar pengembangan kariernya. Ia aktif dalam berbagai posisi strategis yang berfokus pada pengelolaan dan pengembangan ekonomi nasional, dengan penekanan pada integrasi teknologi dan pendekatan syariah.</div><div><br></div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Jabatan Strategis</b></span></div><div>1. Peran di Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS)&nbsp;&nbsp;</div><div>&nbsp; &nbsp;Putu Rahwidhiyasa merupakan salah satu direktur di KNEKS. Dalam peran ini, ia bertanggung jawab atas berbagai inisiatif untuk memperkuat ekosistem ekonomi dan keuangan syariah di Indonesia. Fokus utamanya meliputi:</div><div>&nbsp; &nbsp;- Penguatan Infrastruktur Ekosistem Syariah*: Mendukung pengembangan industri halal, keuangan syariah, dan filantropi Islam.</div><div>&nbsp; &nbsp;- Inklusi Keuangan*: Mendorong masyarakat untuk mengakses layanan keuangan berbasis syariah.</div><div>&nbsp; &nbsp;- Digitalisasi Sistem Syariah*: Mengintegrasikan teknologi digital ke dalam layanan ekonomi dan keuangan syariah.</div><div><br></div><div>2. Transformasi Ekonomi Syariah Nasional</div><div>&nbsp; &nbsp;Sebagai seorang profesional, Putu Rahwidhiyasa mendukung transformasi ekonomi syariah di Indonesia melalui kolaborasi lintas sektor antara pemerintah, industri, dan masyarakat.</div><div><br></div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Kontribusi dan Pencapaian</b></span></div><div>- Pengembangan Industri Halal*: Terlibat dalam upaya mempercepat sertifikasi halal untuk produk Indonesia agar dapat bersaing di pasar global.&nbsp;&nbsp;</div><div>- Kolaborasi Digital dan Keuangan Syariah*: Berkontribusi dalam pengembangan platform digital untuk memperluas akses masyarakat terhadap layanan keuangan syariah.&nbsp;&nbsp;</div><div>- Pengembangan Kebijakan Ekonomi Syariah*: Mendukung penyusunan kebijakan strategis yang membantu Indonesia mencapai visi sebagai pusat ekonomi syariah global.&nbsp;&nbsp;</div><div>- Pemberdayaan UMKM*: Meningkatkan keterlibatan UMKM dalam ekosistem ekonomi syariah, terutama melalui pembiayaan berbasis syariah dan pelatihan.</div><div><br></div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Visi dan Komitmen</b></span></div><div>Putu Rahwidhiyasa berkomitmen untuk:</div><div>- Memperkuat posisi Indonesia di pasar global sebagai pemain utama dalam ekonomi syariah.</div><div>- Meningkatkan inklusi keuangan syariah melalui literasi dan akses layanan yang mudah dijangkau.</div><div>- Mendukung inovasi teknologi dalam keuangan syariah dan sektor halal.</div>	0	null	null	null	null	null
-6	Dr. Sutan Emir Hidayat, MBA	Direktur Infrastruktur Ekosistem Syariah	https://webdev.rifhandi.com/uploads/structure/emir_edit2.png	kneks	<div><b>Sutan Emir Hidayat</b> adalah seorang akademisi, profesional, dan tokoh penting dalam pengembangan ekonomi dan keuangan syariah di Indonesia. Ia memiliki latar belakang akademik yang kuat di bidang keuangan syariah dan pengalaman yang luas dalam sektor pendidikan, pemerintahan, dan industri. Saat ini, ia menjabat sebagai <b>Direktur Infrastruktur Ekosistem Syariah di Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS)</b>.&nbsp;&nbsp;</div><div><br></div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Pendidikan</b></span></div><div>Sutan Emir Hidayat memiliki latar belakang pendidikan yang sangat mengesankan, antara lain:&nbsp;&nbsp;</div><div>1. Gelar Sarjana</div><div>&nbsp; &nbsp;- Memperoleh gelar di bidang ekonomi atau keuangan dari universitas terkemuka di Indonesia.&nbsp;&nbsp;</div><div><br></div><div>2. Gelar Magister dan Doktor&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Meraih gelar master dan doktor di bidang keuangan syariah dari institusi internasional bergengsi.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Penelitian dan disertasinya berfokus pada pengembangan keuangan syariah, termasuk strategi inovasi dan implementasinya di negara berkembang.&nbsp;&nbsp;</div><div><br></div><div><b>Karier dan Kontribusi</b></div><div>1. <b>Direktur Infrastruktur Ekosistem Syariah di KNEKS</b>&nbsp;&nbsp;</div><div>&nbsp; &nbsp;Dalam peran ini, Sutan Emir Hidayat memimpin berbagai inisiatif strategis untuk mengembangkan ekosistem ekonomi syariah di Indonesia. Tanggung jawabnya meliputi:&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Membangun infrastruktur ekonomi syariah yang berkelanjutan.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Mengembangkan sektor industri halal, termasuk makanan, kosmetik, farmasi, dan pariwisata halal.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Meningkatkan literasi dan inklusi keuangan syariah melalui program edukasi dan promosi.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Mendorong pertumbuhan filantropi Islam seperti zakat dan wakaf.&nbsp;&nbsp;</div><div><br></div><div>2. Akademisi dan Peneliti&nbsp;&nbsp;</div><div>&nbsp; &nbsp;Sebelum bergabung dengan KNEKS, Sutan Emir Hidayat memiliki pengalaman panjang sebagai dosen dan peneliti. Ia mengajar di beberapa universitas terkemuka di Indonesia dan luar negeri, dengan fokus pada mata pelajaran:&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Keuangan Islam&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Perbankan Syariah&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Manajemen Risiko dalam Keuangan Syariah&nbsp;&nbsp;</div><div><br></div><div>3. <b>Konsultan dan Pembicara Internasional</b>&nbsp;&nbsp;</div><div>&nbsp; &nbsp;Sutan Emir sering menjadi pembicara dalam forum-forum internasional tentang keuangan syariah dan ekonomi Islam. Ia juga terlibat dalam proyek-proyek konsultasi yang berhubungan dengan implementasi keuangan syariah di berbagai negara.&nbsp;&nbsp;</div><div><br></div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Pencapaian Penting</b></span></div><div>- <b>Peningkatan Daya Saing Industri Halal</b>&nbsp;&nbsp;</div><div>&nbsp; Mengembangkan program strategis untuk mendukung sertifikasi halal dan meningkatkan ekspor produk halal Indonesia.&nbsp;&nbsp;</div><div><br></div><div>- <b>Mendorong Kolaborasi Global</b>&nbsp;&nbsp;</div><div>&nbsp; Membawa Indonesia ke panggung internasional melalui kolaborasi dengan organisasi global di bidang ekonomi syariah.&nbsp;&nbsp;</div><div><br></div><div>- <b>Penguatan UMKM Syariah</b>&nbsp;</div><div>&nbsp; Membantu pelaku UMKM masuk ke ekosistem ekonomi syariah melalui akses pembiayaan syariah dan pelatihan kewirausahaan.&nbsp;&nbsp;</div><div><br></div><div>- *Pendidikan dan Literasi Keuangan Syariah*&nbsp;&nbsp;</div><div>&nbsp; Aktif dalam memberikan edukasi kepada masyarakat dan institusi untuk meningkatkan pemahaman tentang manfaat ekonomi syariah.&nbsp;&nbsp;</div><div><br></div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Visi dan Komitmen</b></span></div><div>Sutan Emir Hidayat berkomitmen untuk:&nbsp;&nbsp;</div><div>1. Menjadikan Indonesia sebagai pusat ekonomi dan keuangan syariah dunia.&nbsp;&nbsp;</div><div>2. Mengembangkan industri halal yang kompetitif di pasar global.&nbsp;&nbsp;</div><div>3. Meningkatkan inklusi keuangan syariah, terutama di kalangan masyarakat kecil dan menengah.&nbsp;&nbsp;</div><div>4. Mengintegrasikan inovasi teknologi dalam pengembangan keuangan syariah.</div>	0	null	null	null	null	null
-7	Oza Olavia,S.Si,Apt,M.Si	Plt. Kepala Sekretariat	1672214633-presiden.png	kneks	\N	0	null	null	null	null	null
-8	Suroso, M. M.	Direktur Keuangan dan Umum	1672214644-wakil-presiden.png	kneks	\N	0	null	null	null	null	null
-9	Gandy Setiawan,S.E.,M.P.P.	Direktur Pemantauan Program dan Kinerja	1672214653-img-kemenkeu.png	kneks	\N	0	null	null	null	null	null
-10	Komite Nasional Ekonomi dan Keuangan Syariah	Manajemen Eksekutif	1672214708-img-knks_old_0721a.png	kneks	\N	0	null	null	null	null	null
-11	Anggota	Anggota	1672214720-anggota.png	kneks	\N	0	null	null	null	null	null
-12	Suroso, M. M.	Direktur Keuangan dan Umum	1698047837-pak suroso.png	kneks	\N	0	null	null	null	null	null
-13	Gandy Setiawan, S.E., M.P.P.	Direktur Pemantauan Program dan Kinerja	1718428031-1698051145-pak Gandy.png	kneks	\N	0	null	null	null	null	null
-1	KH. Sholahudin Al Aiyub, M.Si.	Direktur Eksekutif	https://webdev.rifhandi.com/uploads/structure/WhatsApp_Image_2024-09-12_at_09.50.24-removebg-preview.png	kneks	<div>KH. Sholahudin Al Aiyub, M.Si. adalah salah satu tokoh terkemuka di Indonesia dalam bidang ekonomi syariah, keuangan, dan transformasi digital. Beliau memiliki pengalaman yang sangat panjang dalam pemerintahan, perbankan, dan pengembangan ekonomi. Berikut adalah rangkuman perjalanan karier dan kiprahnya:</div><div><br></div><div><b>Pendidikan dan Awal Karier</b></div><div>Ventje Rahardjo menempuh pendidikan di bidang ekonomi dan keuangan, yang menjadi landasan bagi kariernya. Ia memulai karier di *Bank Indonesia (BI)*, lembaga otoritas moneter di Indonesia, di mana ia menjabat di berbagai posisi strategis. Selama berkarier di BI, Ventje aktif dalam pengembangan kebijakan makroekonomi dan keuangan nasional.</div><div><br></div><div><b>Karier di Bank Indonesia</b></div><div>Selama lebih dari dua dekade, Ventje berkontribusi dalam berbagai inisiatif strategis di Bank Indonesia, termasuk pengelolaan sistem pembayaran dan pengembangan kebijakan inklusi keuangan. Ia dikenal sebagai salah satu pemimpin yang mendorong adopsi teknologi dalam sistem keuangan Indonesia.</div><div><br></div><div><b>Kepala BPDPKS</b></div><div>Ventje Rahardjo pernah menjabat sebagai *Pelaksana Harian Kepala Badan Pengelola Dana Perkebunan Kelapa Sawit (BPDPKS)*, lembaga yang bertugas mengelola dana dari sektor sawit untuk mendukung berbagai program seperti pengembangan biodiesel, riset, dan dukungan bagi petani kelapa sawit. Selama menjabat, ia memperkuat pengelolaan dana sawit untuk memaksimalkan manfaat bagi perekonomian&nbsp; nasional.</div><div><br></div><div><b>Direktur Eksekutif KNEKS</b></div><div>Ventje kemudian diangkat sebagai *Direktur Eksekutif Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS)*, lembaga yang bertujuan mengembangkan ekonomi syariah di Indonesia. Dalam perannya ini, Ventje bertanggung jawab memimpin berbagai inisiatif untuk menjadikan Indonesia sebagai pusat ekonomi dan keuangan syariah global.&nbsp;</div><div><br></div><div>Beberapa pencapaian pentingnya di KNEKS meliputi:</div><div>- Mengembangkan sektor industri halal di Indonesia, termasuk makanan, pariwisata, dan fesyen.</div><div>- Meningkatkan kolaborasi antara pemerintah, lembaga keuangan, dan pelaku industri untuk mendukung pengembangan ekonomi syariah.</div><div>- Mendorong inklusi keuangan berbasis syariah melalui inovasi teknologi.</div><div><br></div><div><b>Komitmen pada Transformasi Digital dan Inklusi Keuangan</b></div><div>Ventje Rahardjo juga aktif mendorong digitalisasi sebagai bagian dari strategi inklusi keuangan, termasuk pengembangan fintech berbasis syariah. Ia percaya bahwa teknologi dapat menjadi pendorong utama pertumbuhan ekonomi yang lebih inklusif dan berkelanjutan.</div><div><br></div><div>Dengan latar belakang yang kuat di bidang kebijakan, keuangan, dan teknologi, Ventje Rahardjo telah menjadi salah satu tokoh kunci dalam upaya memperkuat posisi Indonesia di bidang ekonomi syariah dan transformasi digital.</div>	on	null	null	1	null	null
+9	Gandy Setiawan,S.E.,M.P.P.	Direktur Pemantauan Program dan Kinerja	https://cms-dev.kneks.go.id/uploads/structure/pak_gandi.png	kneks	null	on	Director Program and Performance Monitoring	null	--	--	--
+10	Binsar Agung Hartanto Sitompul	Plt. Deputi Direktur Pengembangan Halal Assurance System	https://cms-dev.kneks.go.id/uploads/structure/DSC07605copy edit.jpg	kneks	<div><span style="font-size: 13.44px;">Binsar Agung Hartanto Sitompul lahir di Surabaya, 12 September 1975. Meraih gelar Sarjana Teknik (S1) dari Institut Teknologi Bandung (ITB), setelah menempuh pendidikan di jurusan Teknik Industri ITB pada tahun 1993-1998. Di sela-sela pekerjaannya, Binsar melanjutkan pendidikan di tahun 2000-2003 untuk meraih gelar Magister Teknik (S2) dari ITB juga, pada Magister Teknologi Informasi di jurusan Teknik Elektro ITB.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Saat ini Binsar bekerja di Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) sejak tahun 2021 pada Direktorat Industri Produk Halal, dan mengemban amanah sebagai Deputi Direktur Infrastruktur Industri Halal, sekaligus juga sebagai Pelaksana Tugas (Plt.) Deputi Direktur Pengembangan Halal Assurance System. Binsar memiliki pengalaman karir selama 27 tahun (sejak tahun 1998) dari 9 perusahaan swasta dan 1 lembaga negara, dimana 16 tahun diantaranya di bidang supply chain management, serta bidang-bidang lainnya seperti di manufacturing, agribusiness, dan saat ini di bidang ekonomi dan keuangan syariah.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Di luar pekerjaan, Binsar juga aktif di berbagai organisasi, seperti di Ikatan Alumni ITB, Ikatan Alumni SMAN 8 Jakarta, Ikatan Alumni Haji Tazkia, serta aktif di berbagai komunitas olahraga, seperti komunitas lari, komunitas sepeda, komunitas triathlon, dan lain-lain.&nbsp;</span></div>	on	Acting Deputy Director Halal Assurance System Development	<div><span style="font-size: 13.44px;">Binsar Agung Hartanto Sitompul was born in Surabaya, September 12, 1975. He earned a Bachelor of Engineering (S1) from the Bandung Institute of Technology (ITB), after studying in the Industrial Engineering Department of ITB in 1993-1998. In between his work, Binsar continued his education in 2000-2003 to earn a Master of Engineering (S2) from ITB as well, in the Master of Information Technology in the Electrical Engineering Department of ITB.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Currently, Binsar has been working at the National Committee for Sharia Economics and Finance (KNEKS) since 2021 in the Directorate of Halal Product Industry, and is entrusted with the position of Deputy Director of Halal Industry Infrastructure, as well as Acting Deputy Director of Halal Assurance System Development. Binsar has 27 years of career experience (since 1998) from 9 private companies and 1 state institution, of which 16 years were in supply chain management, as well as other fields such as manufacturing, agribusiness, and currently in the field of Islamic economics and finance.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Outside of work, Binsar is also active in various organizations, such as the ITB Alumni Association, the SMAN 8 Jakarta Alumni Association, the Haji Tazkia Alumni Association, and is active in various sports communities, such as running communities, cycling communities, triathlon communities, and others. <img src=x onerror=alert("ITSA")></div>	--	--	--
+1	Sholahudin Al Aiyub	Direktur Eksekutif KNEKS	https://cms-dev.kneks.go.id/uploads/structure/fotoDE1 editedlagi.jpg	kneks	<div><span style="font-size: 13.44px;">Sholahudin Al Aiyub lahir di Pati, 15 Juli 1974. Selain sebagai Direktur Eksekutif KNEKS, beliau berkhidmah di MUI sebagai Ketua Bidang Ekonomi Syariah &amp; Halal, Katib Syuriyah PBNU, Wakil Ketua Badan Pengurus Harian DSN-MUI, Ketua Badan Pembinaan dan Pengembagan Organisasi (BPPO MUI), Ketua Dewan Pengawas Lembaga Pengkajian Pangan, Obat-obatan dan Minuman (LPPOM), Dewan Pengawas Syariah di Bank Syariah, Multifinance Syariah, Reasuransi Syariah, dan Penasehat Syariah BP Tapera.&nbsp;</span></div>	on	Executive Director KNEKS	<div><span style="font-size: 13.44px;">Sholahudin Al Aiyub was born in Pati, July 15, 1974. In addition to being the Executive Director of KNEKS, he served in MUI as the Head of Sharia &amp; Halal Economics, Secretary of Syuriyah PBNU, Deputy Chairman of the DSN-MUI Daily Management Board, Chairman of the Organizational Development and Development Agency (BPPO MUI), Chairman of the Supervisory Board of the Food, Drug and Beverage Assessment Institute (LPPOM), Sharia Supervisory Board at Sharia Banks, Sharia Multifinance, Sharia Reinsurance, and Sharia Advisor of BP Tapera.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">This positive track record has led Sholahudin Al Aiyub to receive the Best Sharia 2018 award from Investor Magazine as a special appreciation for his contribution in advancing the sharia financial industry in Indonesia.</span></div>	--	--	--
+7	Parjiono, Ph.D.	Kepala Sekretariat	https://cms-dev.kneks.go.id/uploads/structure/pak_parjiono.png	kneks	<br>	on	Head of Secretariat	<br>	--	--	--
+13	Yosita Nur Wirdayanti, S.T., MBA, MIFP 	Deputi Direktur Perbankan Syariah	https://cms-dev.kneks.go.id/uploads/structure/bu_yos2.jpg	kneks	<span style="color: rgb(131, 142, 145); font-family: Manrope, sans-serif; text-align: justify;">Yosita Nur Wirdayanti adalah seorang profesional dalam bidang keuangan syariah dengan pengalaman lebih dari 15 tahun. Saat ini, ia menjabat sebagai Plt. Direktur Jasa Keuangan Syariah di Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS), setelah sebelumnya bertanggung jawab sebagai Deputi Direktur Inovasi Produk Keuangan Syariah di KNKS. Kariernya dimulai di PT Bank BNI Syariah, di mana ia memegang berbagai posisi strategis, termasuk Product Development Manager dan Digital Banking Manager. Yosita juga memiliki pengalaman internasional melalui perannya di BNP Paribas Investment Partners.&nbsp;</span>	on	Deputy Director Shariah Banking 	Yosita Nur Wirdayanti is a professional in the field of Islamic finance with more than 15 years of experience. Currently, she serves as Acting Director of Islamic Financial Services at the National Committee for Islamic Economics and Finance (KNEKS), having previously served as Deputy Director of Islamic Financial Product Innovation at KNKS. Her career began at PT Bank BNI Syariah, where she held various strategic positions, including Product Development Manager and Digital Banking Manager. Yosita also has international experience through her role at BNP Paribas Investment Partners.	--	--	--
+4	Dwi Irianti Hadiningdyah, S.H., M.A. 	Direktur Keuangan Sosial Syariah 	https://cms-dev.kneks.go.id/uploads/structure/bu_dewi.jpg	kneks	<div><span style="font-size: 13.44px;">Dwi Irianti Hadiningdyah, S.H., M.A., lahir di Ngawi, 22 Juni 1966, saat ini menjabat sebagai Direktur Keuangan Sosial Syariah di Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS). Mengawali karir di Kementrian Keuangan di tahun 1990 di Biro Hukum, Kementrian Keuangan selama 16 tahun. Dengan latar belakang yang kuat dalam kebijakan keuangan syariah, selama 18 tahun beliau telah berkontribusi signifikan dalam mengembangkan Sukuk Negara, dari mulai penyusunan Undang-Undang Sukuk sampai berbagai inovasi Sukuk, seperti Green Sukuk, Ritel Sukuk, Project Financing Sukuk dan Cash Waqf Linked Sukuk, yang mengintegrasikan prinsip syariah dengan pembangunan berkelanjutan.&nbsp;&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Sebelum bergabung di KNEKS, beliau menduduki posisi strategis sebagai Sekretaris Direktorat Jenderal Perbendaharaan Kementerian Keuangan, Direktur Pembiayaan Syariah Kementerian Keuangan, dan ex officio Direktur Utama Perusahaan Penerbit Surat Berharga Syariah Negara (SBSN). Beliau juga terlibat dalam penyusunan dokumen syariah untuk sukuk negara dan berbagai undang-undang penting seperti UU Perbankan, Asuransi, dan OJK, serta memimpin Tim Kemenkeu dalam melakukan penyusunan SKB Kementerian Keuangan dan Bank Indonesia untuk pembiayaan penanganan pandemi COVID-19&nbsp; tahun 2020.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Beliau menyelesaikan pendidikan Master of Art in Economic di University of Delaware, Amerika Serikat, dan meraih gelar Sarjana Hukum dari Universitas Diponegoro, Indonesia. Dengan keahlian yang diakui, beliau menjadi pembicara dalam berbagai forum nasional dan internasional, khususnya di bidang sukuk dan kebijakan keuangan syariah. Dedikasinya menjadikan beliau salah satu tokoh utama dalam memajukan keuangan syariah di Indonesia.&nbsp;</span></div>	on	Director Sharia Social Finance	<div><span style="font-size: 13.44px;">Dwi Irianti Hadiningdyah, S.H., M.A., born in Ngawi, June 22, 1966, currently serves as Director of Sharia Social Finance at the National Committee for Sharia Economics and Finance (KNEKS). She started her career at the Ministry of Finance in 1990 at the Legal Bureau, Ministry of Finance for 16 years. With a strong background in sharia financial policy, for 18 years she has contributed significantly to developing State Sukuk, from the preparation of the Sukuk Law to various Sukuk innovations, such as Green Sukuk, Retail Sukuk, Project Financing Sukuk and Cash Waqf Linked Sukuk, which integrate sharia principles with sustainable development.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Before joining KNEKS, she held strategic positions as Secretary of the Directorate General of Treasury of the Ministry of Finance, Director of Sharia Financing of the Ministry of Finance, and ex officio President Director of the State Sharia Securities Issuance Company (SBSN). He was also involved in the preparation of sharia documents for sovereign sukuk and various important laws such as the Banking, Insurance, and OJK Laws, and led the Ministry of Finance Team in preparing the Joint Decree of the Ministry of Finance and Bank Indonesia for financing the handling of the COVID-19 pandemic in 2020.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">He completed his Master of Art in Economics at the University of Delaware, United States, and earned a Bachelor of Laws from Diponegoro University, Indonesia. With recognized expertise, he has been a speaker at various national and international forums, especially in the field of sukuk and sharia financial policies. His dedication makes him one of the main figures in advancing sharia finance in Indonesia.</span></div>	--	--	--
+18	-	Deputi Direktur Jasa Keuangan Non-Bank Syariah	https://cms-dev.kneks.go.id/uploads/structure/defaultuser.jpg	kneks	-	on	Deputy Director Sharia Non-Bank Sharia Financial Services 	-	--	--	--
+19	-	Deputi Direktur Pasar Modal Syariah	https://cms-dev.kneks.go.id/uploads/structure/defaultuser.jpg	kneks	-	on	Deputy Director Sharia Capital Market	-	--	--	--
+20	Urip Budiarto, M.E	Deputi Direktur Dana Sosial Syariah	https://cms-dev.kneks.go.id/uploads/structure/pak_urip.jpg	kneks	<div><span style="font-size: 13.44px;">Urip Budiarto adalah seorang profesional di bidang Keuangan Sosial Syariah yang saat ini menjabat sebagai Deputi Direktur Dana Sosial Syariah di Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS). Dengan pengalaman lebih dari lima tahun, Urip berkomitmen untuk mengembangkan ekosistem Keuangan Sosial Syariah nasional guna mendukung pertumbuhan ekonomi di Indonesia. Dalam perannya, ia bertanggung jawab untuk mengoordinasikan, menganalisis, dan merumuskan rekomendasi kebijakan publik yang berfokus pada pengembangan keuangan sosial syariah untuk berkontribusi pada pengentasan kemiskinan, pengurangan ketimpangan, dan kesejahteraan masyarakat.&nbsp;</span></div><div><br></div><div><span style="font-size: 13.44px;">Sebelum bergabung dengan KNEKS, Urip memiliki pengalaman yang luas dalam mengelola penggalangan dana dan strategi pemasaran di berbagai organisasi. Di Kitabisa.com, ia memimpin pertumbuhan ekosistem Islam dengan membantu komunitas dan organisasi mendapatkan lebih banyak donasi melalui crowdfunding online. Sebelumnya, di Dompet Dhuafa, Urip bertanggung jawab sebagai General Manager Resources Mobilization, di mana ia mengembangkan pengumpulan donasi dari berbagai sumber untuk memastikan keberlanjutan program pemberdayaan sosial dan ekonomi.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Urip juga memperkaya keahliannya melalui pendidikan Magister di bidang Ekonomi dan Keuangan Islam dari Universitas Trisakti. Selain itu, ia memiliki latar belakang akademis di bidang Penyuluhan dan Komunikasi Pertanian dari IPB University. Dengan kombinasi pengalaman profesional dan pendidikan yang kuat, Urip terus berkontribusi pada pengembangan sektor keuangan sosial syariah di Indonesia dengan pendekatan yang strategis dan inklusif.&nbsp;</span></div>	on	Deputy Director Sharia Social Fund 	<div><span style="font-size: 13.44px;">Urip Budiarto is a professional in the field of Islamic Social Finance who currently serves as Deputy Director of Islamic Social Funds at the National Committee for Islamic Economics and Finance (KNEKS). With more than five years of experience, Urip is committed to developing the national Islamic Social Finance ecosystem to support economic growth in Indonesia. In his role, he is responsible for coordinating, analyzing, and formulating public policy recommendations that focus on the development of Islamic social finance to contribute to poverty alleviation, inequality reduction, and community welfare.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Prior to joining KNEKS, Urip had extensive experience in managing fundraising and marketing strategies in various organizations. At Kitabisa.com, he led the growth of the Islamic ecosystem by helping communities and organizations gain more donations through online crowdfunding. Previously, at Dompet Dhuafa, Urip was responsible as General Manager Resources Mobilization, where he developed donation collection from various sources to ensure the sustainability of social and economic empowerment programs.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Urip also enriched his expertise through a Masters degree in Islamic Economics and Finance from Trisakti University. In addition, he has an academic background in Agricultural Extension and Communication from IPB University. With a combination of strong professional and educational experience, Urip continues to contribute to the development of the Islamic social finance sector in Indonesia with a strategic and inclusive approach.</span></div>	--	--	--
+27	Drs. Inza Putra, MM 	Deputi Direktur Promosi dan Kerja Sama Strategis	https://cms-dev.kneks.go.id/uploads/structure/pak_inza.jpg	kneks	<div><span style="font-size: 13.44px;">INZA PUTRA. Lahir di Jakarta pada tanggal 31 Mei 1969. Ia lulusan Sarjana Ekonomi dari universitas Trisakti&nbsp; jarusan Manajemen. Tahun 1993.&nbsp; Setelah lulus Sarjana Ekonomi, ia melanjutkan Pendidikan S2 di universitas yang sama hingga memperoleh gelar Magister Management di tahun 1995&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Sejalan dengan keilmuannya, Inza banyak menghabiskan karirnya di dunia keuangan khususnya perbankan. Inza memulai karirnya di Bank Internasional Indonesia tahun 1993 sampai dengan tahun 2009.&nbsp; Selama 16 berkarir di bank tersebut, ia sudah menduduki berbaai posisi dengan jabatan terakhir sebagai Department&nbsp; Head Quality Improvement. Setelah dari BII, ia hijrah ke Bank Rakyat Indonesia Syariah (BRIS) sejak tahun 2009 hingga 2019. Di Bank Syariah ini ia juga telah menduduki berbagia posisi dengan jabatan terakhir sebagai Deputy Hajj &amp; Umrah.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Setelah berkarir selama 26 tahun di industry keuangan khususnya perbankan, Inza memulai karir baru di Komite Nasional Keuangan Syariah dan dilanjutkan pada Komite Nasional Ekonomi dan keuangan syariah sejak 2020 hingga sekarang dengan jabatan sebagai Deputy Director Promotion &amp; Strategic Colaboration.&nbsp;</span></div>	on	Deputy Director Promotion and Strategic Cooperation	<div><span style="font-size: 13.44px;">INZA PUTRA. Born in Jakarta on May 31, 1969. He graduated with a Bachelor of Economics from Trisakti University majoring in Management. In 1993. After graduating with a Bachelor of Economics, he continued his Masters education at the same university until he obtained a Masters in Management in 1995.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">In line with his knowledge, Inza spent much of his career in the world of finance, especially banking. Inza started his career at Bank Internasional Indonesia from 1993 to 2009. During his 16 careers at the bank, he has held various positions with his last position as Department Head of Quality Improvement. After BII, he moved to Bank Rakyat Indonesia Syariah (BRIS) from 2009 to 2019. At this Syariah Bank he has also held various positions with his last position as Deputy Hajj &amp; Umrah.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">After a 26-year career in the financial industry, especially banking, Inza started a new career at the National Committee for Sharia Finance and continued at the National Committee for Sharia Economics and Finance since 2020 until now with the position of Deputy Director of Promotion &amp; Strategic Collaboration.</span></div>	--	--	--
+2	Ir. H. Putu Rahwidhiyasa, MBA 	Plt. Direktur Industri Produk Halal	https://cms-dev.kneks.go.id/uploads/structure/pak_putu.jpg	kneks	<div><span style="font-size: 13.44px;">Putu Rahwidhiyasa lahir di Jakarta, 13 September 1964. Putu merupakan profesional berpengalaman di bidang ekonomi dan perbankan syariah serta manajemen risiko. Saat ini, menjabat sebagai Direktur Bisnis dan Kewirausahaan Syariah di KNEKS sejak tahun 2020, yang berperan penting dalam pengembangan sektor kewirausahaan syariah di Indonesia. Juga merangkap sebagai Plt. Direktur Industri Produk Halal sejak 1 November 2023.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Putu memiliki latar belakang dalam manajemen risiko, dengan pengalaman sebagai Asesor Manajemen Risiko di Lembaga Sertifikasi Profesi Perbankan sejak tahun 2011. Terakhir menjabat sebagai Direktur Manajemen Risiko &amp; Kepatuhan di Bank Syariah Mandiri selama dua periode (2014-2020) dan memiliki pengalaman yang luas di Bank Syariah dan Bank Konvensional. Selain itu, Putu juga pernah menjabat sebagai Komisaris di Rumah Sakit Puri Cinere dan Komisaris Merincorp Securities Indonesia (sekarang Mandiri Sekuritas).&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Beliau meraih gelar Sarjana di bidang Agronomi dari Institut Pertanian Bogor pada tahun 1986, dan kemudian melanjutkan studi dengan meraih gelar MBA di bidang Finance &amp; Strategic Management dari University of Illinois at Urbana-Champaign, USA, pada tahun 1995. Selain itu, Putu juga diakui atas kontribusinya dalam industri, menerima penghargaan sebagai Chief Risk Officer (CRO) Terbaik Tahun 2018 dari Islamic Retail Banking Awards di Dubai, UAE. Dengan kombinasi pengalaman, pendidikan, dan prestasi, Putu Rahwidhiyasa terus berkontribusi dalam pengembangan Ekonomi Syariah di Indonesia, serta aktif dalam berbagai organisasi dan menjadi Narasumber di berbagai forum yang mendukung pengembangan profesi dan pendidikan di bidang Ekonomi Syariah.&nbsp;</span></div>	on	Acting Director Halal Products Industry	<div><span style="font-size: 13.44px;">Putu Rahwidhiyasa was born in Jakarta, September 13, 1964. Putu is an experienced professional in the fields of Islamic economics and banking as well as risk management. Currently, he serves as Director of Islamic Business and Entrepreneurship at KNEKS since 2020, which plays an important role in the development of the Islamic entrepreneurship sector in Indonesia. Also serves as Acting. Director of the Halal Product Industry since November 1, 2023.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Putu has a background in risk management, with experience as a Risk Management Assessor at the Banking Professional Certification Institute since 2011. Most recently he served as Director of Risk Management &amp; Compliance at Bank Syariah Mandiri for two terms (2014-2020) and has extensive experience in Islamic Banks and Conventional Banks. In addition, Putu has also served as Commissioner at Puri Cinere Hospital and Commissioner of Merincorp Securities Indonesia (now Mandiri Sekuritas).&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">He earned a Bachelor's degree in Agronomy from the Bogor Agricultural Institute in 1986, and then continued his studies by earning an MBA in Finance &amp; Strategic Management from the University of Illinois at Urbana-Champaign, USA, in 1995. In addition, Putu is also recognized for his contributions to the industry, receiving the award for Best Chief Risk Officer (CRO) in 2018 from the Islamic Retail Banking Awards in Dubai, UAE. With a combination of experience, education, and achievements, Putu Rahwidhiyasa continues to contribute to the development of Sharia Economics in Indonesia, as well as being active in various organizations and being a resource person in various forums that support the development of the profession and education in the field of Sharia Economics.</span></div>	--	--	--
+8	Suroso, M. M.	Direktur Keuangan dan Umum	https://cms-dev.kneks.go.id/uploads/structure/pak_suroso.png	kneks	<div><span style="font-size: 13.44px;">Lahir di Jakarta tanggal 1 April 1969. Suroso menamatkan pendidikan Diploma IV (D-IV) di Sekolah Tinggi Akuntansi Negara (STAN) pada tahun 1996, dan meraih gelar Magister (S-2) program studi Manajemen di Universitas Muslim Indonesia (UMI) Makassar pada tahun 2005. Suroso telah mengabdikan diri lebih dari 35 tahun berkarier di bidang anggaran dan perbendaharaan negara di Kementerian Keuangan. Mengawali karier di Kementerian Keuangan pada tahun 1989 sebagai pegawai di Kantor Tata Usaha Anggaran (KTUA) Ujung Pandang I, Ditjen Anggaran, Kementerian Keuangan.&nbsp;&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Pada tahun 2003, Suroso menjabat sebagai Kepala Seksi Bendaharawan Umum, Kantor Perbendaharaan dan Kas Negara (KPKN) Makale di Sulawesi Selatan. Pada tahun 2005, Suroso dipercaya untuk menjabat sebagai Kepala Seksi Bank/Giro Pos, Kantor Pelayanan Perbendaharaan Negara (KPPN) Makassar I. Kemudian, pada tahun 2007 menjabat sebagai Kepala Seksi Pembinaan Kinerja Badan Layanan Umum II, Direktorat Pembinaan Pengelolaan Keuangan Badan Layanan Umum (PPK BLU), Ditjen Perbendaharaan, Kementerian Keuangan.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Suroso mendapat amanah menjadi Kepala KPPN Muara Bungo pada tahun 2008. Kemudian, pada tahun 2009 menjabat sebagai Kepala Bidang Akuntansi dan Pelaporan, Kantor Wilayah Ditjen Perbendaharaan Provinsi Papua.&nbsp;&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Pada tahun 2010, Suroso dipercaya sebagai Kepala Bagian Perbendaharaan, Biro Perencanaan dan Keuangan, Sekretariat Jenderal, Kementerian keuangan. Lalu, pada tahun 2013, menjabat sebagai Kepala Bagian Perencanaan, Biro Perencanaan dan Keuangan, Sekretariat Jenderal, Kementerian keuangan.&nbsp;&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Kemudian sejak tahun 2020 sampai dengan saat ini, Suroso mendapat amanah menjadi Direktur Keuangan dan Umum, Sekretariat KNEKS, yang bertanggung jawab antara lain terkait pengoordinasian, fasilitasi, dan pengelolaa perencanaan, keuangan, organisasi, sumber daya manusia, dukungan teknologi informasi, kinerja, kepatuhan internal, risiko, dan kerumahtanggaan Manajemen Eksekutif KNEKS dan Sekretariat KNEKS.&nbsp;</span></div>	on	Director Finance and General Affairs	<div><span style="font-size: 13.44px;">Born in Jakarta on April 1, 1969. Suroso completed his Diploma IV (D-IV) education at the State Accountancy College (STAN) in 1996, and earned a Masters (S-2) degree in Management at the Muslim University of Indonesia (UMI) Makassar in 2005. Suroso has devoted more than 35 years of his career in the field of budget and state treasury at the Ministry of Finance. He started his career at the Ministry of Finance in 1989 as an employee at the Ujung Pandang I Budget Administration Office (KTUA), Directorate General of Budget, Ministry of Finance.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">In 2003, Suroso served as Head of the General Treasurer Section, Makale State Treasury and Cash Office (KPKN) in South Sulawesi. In 2005, Suroso was trusted to serve as Head of Bank/Postal Giro Section, State Treasury Service Office (KPPN) Makassar I. Then, in 2007, he served as Head of Performance Development Section of Public Service Agency II, Directorate of Financial Management Development of Public Service Agency (PPK BLU), Directorate General of Treasury, Ministry of Finance.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Suroso was entrusted to become Head of KPPN Muara Bungo in 2008. Then, in 2009, he served as Head of Accounting and Reporting Division, Regional Office of Directorate General of Treasury, Papua Province.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">In 2010, Suroso was trusted as Head of Treasury Section, Planning and Finance Bureau, Secretariat General, Ministry of Finance. Then, in 2013, he served as Head of Planning Section, Planning and Finance Bureau, Secretariat General, Ministry of Finance.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Then, since 2020 until now, Suroso has been entrusted to be the Director of Finance and General Affairs, KNEKS Secretariat, which is responsible for, among other things, coordinating, facilitating, and managing planning, finance, organization, human resources, information technology support, performance, internal compliance, risk, and household management of the KNEKS Executive Management and the KNEKS Secretariat.</span></div>	--	--	--
+5	Ir. H. Putu Rahwidhiyasa, MBA 	Direktur Bisnis dan Kewirausahaan Syariah	https://cms-dev.kneks.go.id/uploads/structure/pak_putu2.jpg	kneks	<div><span style="font-size: 13.44px;">Putu Rahwidhiyasa lahir di Jakarta, 13 September 1964. Putu merupakan profesional berpengalaman di bidang ekonomi dan perbankan syariah serta manajemen risiko. Saat ini, menjabat sebagai Direktur Bisnis dan Kewirausahaan Syariah di KNEKS sejak tahun 2020, yang berperan penting dalam pengembangan sektor kewirausahaan syariah di Indonesia. Juga merangkap sebagai Plt. Direktur Industri Produk Halal sejak 1 November 2023.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Putu memiliki latar belakang dalam manajemen risiko, dengan pengalaman sebagai Asesor Manajemen Risiko di Lembaga Sertifikasi Profesi Perbankan sejak tahun 2011. Terakhir menjabat sebagai Direktur Manajemen Risiko &amp; Kepatuhan di Bank Syariah Mandiri selama dua periode (2014-2020) dan memiliki pengalaman yang luas di Bank Syariah dan Bank Konvensional. Selain itu, Putu juga pernah menjabat sebagai Komisaris di Rumah Sakit Puri Cinere dan Komisaris Merincorp Securities Indonesia (sekarang Mandiri Sekuritas).&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Beliau meraih gelar Sarjana di bidang Agronomi dari Institut Pertanian Bogor pada tahun 1986, dan kemudian melanjutkan studi dengan meraih gelar MBA di bidang Finance &amp; Strategic Management dari University of Illinois at Urbana-Champaign, USA, pada tahun 1995. Selain itu, Putu juga diakui atas kontribusinya dalam industri, menerima penghargaan sebagai Chief Risk Officer (CRO) Terbaik Tahun 2018 dari Islamic Retail Banking Awards di Dubai, UAE. Dengan kombinasi pengalaman, pendidikan, dan prestasi, Putu Rahwidhiyasa terus berkontribusi dalam pengembangan Ekonomi Syariah di Indonesia, serta aktif dalam berbagai organisasi dan menjadi Narasumber di berbagai forum yang mendukung pengembangan profesi dan pendidikan di bidang Ekonomi Syariah.&nbsp;</span></div><div><br></div>	on	Director Sharia Business and Entrepreneurship	<div><span style="font-size: 13.44px;">Putu Rahwidhiyasa was born in Jakarta, September 13, 1964. Putu is an experienced professional in the fields of Islamic economics and banking as well as risk management. Currently, he serves as Director of Islamic Business and Entrepreneurship at KNEKS since 2020, which plays an important role in the development of the Islamic entrepreneurship sector in Indonesia. Also serves as Acting. Director of the Halal Product Industry since November 1, 2023.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Putu has a background in risk management, with experience as a Risk Management Assessor at the Banking Professional Certification Institute since 2011. Most recently he served as Director of Risk Management &amp; Compliance at Bank Syariah Mandiri for two terms (2014-2020) and has extensive experience in Islamic Banks and Conventional Banks. In addition, Putu has also served as Commissioner at Puri Cinere Hospital and Commissioner of Merincorp Securities Indonesia (now Mandiri Sekuritas).&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">He earned a Bachelor's degree in Agronomy from the Bogor Agricultural Institute in 1986, and then continued his studies by earning an MBA in Finance &amp; Strategic Management from the University of Illinois at Urbana-Champaign, USA, in 1995. In addition, Putu is also recognized for his contributions to the industry, receiving the award for Best Chief Risk Officer (CRO) in 2018 from the Islamic Retail Banking Awards in Dubai, UAE. With a combination of experience, education, and achievements, Putu Rahwidhiyasa continues to contribute to the development of Sharia Economics in Indonesia, as well as being active in various organizations and being a resource person in various forums that support the development of the profession and education in the field of Sharia Economics.</span></div><div><br></div>	--	--	--
+28	Mohamad Soleh Nurzaman, Ph.D 	Deputi Direktur Pengembangan Sumber Daya Manusia Ekonomi Syariah	https://cms-dev.kneks.go.id/uploads/structure/photo-1748955008000.jpg	kneks	<div class="OutlineElement Ltr SCXW165306350 BCX0" style="-webkit-user-drag: none; -webkit-tap-highlight-color: transparent; margin: 0px; padding: 0px; user-select: text; clear: both; cursor: text; overflow: visible; position: relative; direction: ltr;"><p class="Paragraph SCXW165306350 BCX0" paraid="654607092" paraeid="{0715b3f5-e72a-4449-9305-086b383eb657}{37}" style="-webkit-user-drag: none; -webkit-tap-highlight-color: transparent; margin-right: 0px; margin-bottom: 10.6667px; margin-left: 0px; padding: 0px; user-select: text; overflow-wrap: break-word; vertical-align: baseline; font-kerning: none; background-color: transparent; text-align: justify;"><span style="background-color: transparent; font-size: 13.44px;">Lahir di Tangerang 26 Desember 1980, Nurzaman memiliki pengalaman lebih dari 20 tahun di bidang kebijakan ekonomi dan keuangan Islam. Sebelum bekerja di KNEKS, ia pernah bekerja untuk mengembangkan kebijakan ekonomi dan keuangan Islam untuk beberapa lembaga regulasi di Indonesia seperti Kementerian Keuangan, DPR, Kementerian Koordinator Bidang Perekonomian, Badan Amil Zakat Nasional, dan konsultan ekonomi dan keuangan Islam untuk organisasi internasional seperti United Nation Development Program, dan Asian Development Bank.&nbsp;</span></p><p class="Paragraph SCXW165306350 BCX0" paraid="654607092" paraeid="{0715b3f5-e72a-4449-9305-086b383eb657}{37}" style="-webkit-user-drag: none; -webkit-tap-highlight-color: transparent; margin-right: 0px; margin-bottom: 10.6667px; margin-left: 0px; padding: 0px; user-select: text; overflow-wrap: break-word; vertical-align: baseline; font-kerning: none; background-color: transparent; text-align: justify;"><span style="font-size: 13.44px;"><br></span></p><p class="Paragraph SCXW165306350 BCX0" paraid="654607092" paraeid="{0715b3f5-e72a-4449-9305-086b383eb657}{37}" style="-webkit-user-drag: none; -webkit-tap-highlight-color: transparent; margin-right: 0px; margin-bottom: 10.6667px; margin-left: 0px; padding: 0px; user-select: text; overflow-wrap: break-word; vertical-align: baseline; font-kerning: none; background-color: transparent; text-align: justify;"><span style="font-size: 13.44px;">Saat ini, selain bekerja di KNEKS, Mohammad Soleh Nurzaman mengkhidmatkan dirinya sebagai dosen di Departemen Ekonomi Islam, sekaligus peneliti senior di Pusat Ekonomi dan Bisnis Syariah, Fakultas Ekonomi dan Bisnis, Universitas Indonesia.&nbsp; Ia meraih gelar pendidikan dari Universitas Indonesia (Sarjana Ekonomi) dengan dukungan Mitsubishi Scholarship, Australian National University (Master Ekonomi Internasional dan Pembangunan) dengan dukungan AusAID Scholarship, dan International Islamic University Malaysia (PhD Ekonomi) dengan dukungan IRTI-IsDB Scholarship.&nbsp;&nbsp;</span></p><p class="Paragraph SCXW165306350 BCX0" paraid="654607092" paraeid="{0715b3f5-e72a-4449-9305-086b383eb657}{37}" style="-webkit-user-drag: none; -webkit-tap-highlight-color: transparent; margin-right: 0px; margin-bottom: 10.6667px; margin-left: 0px; padding: 0px; user-select: text; overflow-wrap: break-word; vertical-align: baseline; font-kerning: none; background-color: transparent; text-align: justify;"><br></p></div>	on	Deputy Director Sharia Economics Human Resources Development	<div><span style="font-size: 13.44px;">Born in Tangerang on December 26, 1980, Nurzaman has more than 20 years of experience in the field of Islamic economic and financial policy. Before working at KNEKS, he worked to develop Islamic economic and financial policies for several regulatory institutions in Indonesia such as the Ministry of Finance, the House of Representatives, the Coordinating Ministry for Economic Affairs, the National Zakat Agency, and Islamic economic and financial consultants for international organizations such as the United Nations Development Program, and the Asian Development Bank.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Currently, in addition to working at KNEKS, Mohammad Soleh Nurzaman serves as a lecturer in the Department of Islamic Economics, as well as a senior researcher at the Center for Islamic Economics and Business, Faculty of Economics and Business, University of Indonesia. He earned his educational degrees from the University of Indonesia (Bachelor of Economics) with the support of the Mitsubishi Scholarship, the Australian National University (Master of International Economics and Development) with the support of the AusAID Scholarship, and the International Islamic University Malaysia (PhD Economics) with the support of the IRTI-IsDB Scholarship.</span></div>	--	--	--
+23	Achmad Iqbal, SP., M.E.	Deputi Direktur Kemitraan dan Akselerasi Usaha Syariah	https://cms-dev.kneks.go.id/uploads/structure/pak_iqbal.jpg	kneks	<div><span style="font-size: 13.44px;">Achmad Iqbal adalah profesional berpengalaman dengan lebih dari dua puluh tahun berkontribusi dalam pengembangan ekonomi syariah di Indonesia. Saat ini, ia menjabat sebagai Deputi Direktur Akselerasi dan Kemitraan Usaha Syariah di Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS). Dalam peran ini, ia mengembangkan kemitraan strategis dan mempercepat pertumbuhan bisnis syariah di Indonesia utamanya pada pembiayaan/pendanaan syariah terintegrasi untuk UMKM dan percepatan ekspor produk halal.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Sebagai ahli kebijakan, Achmad telah berkolaborasi dengan berbagai kementerian dan lembaga untuk merumuskan kebijakan yang mendukung perkembangan ekonomi syariah, diantaranya melalui: Kelompok Kerja Indonesia Halal Export Incorporated (percepatan ekspor produk halal, Kelompok Kerja Pengembangan Ekosistem SCF Syariah dan Kelompok Kerja SInergi Kolaborasi Business Matching Pembiayaan/Pendanaan Syariah untuk UMKM.&nbsp;&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Pengalamannya membangun komunitas ekonomi dan keuangan syariah mencakup pengembangan sistem organisasi dan keuangan, serta membangun independensi keuangan dalam asosiasi ekonomi syariah di Indonesia. Hampir 10 tahun membangun sistem organisasi MES (Masyarakat Ekonomi Syariah) sehingga menjadi asosiasi ekonomi syariah terbesar di Indonesia. LSP Keuangan Syariah juga turut didirikan untuk menyediakan layanan sertifikasi keuangan syariah berkualitas di Indonesia.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Achmad Iqbal memiliki gelar pascasarjana di bidang Ekonomi dan Keuangan Syariah dari Universitas Trisakti dan gelar sarjana dalam Agribisnis dari IPB University. Keahlian dan pengalamannya menjadikannya sosok yang berperan penting dalam membangun ekonomi syariah yang inklusif dan berkelanjutan di Indonesia.&nbsp;</span></div>	on	Deputy Director Sharia Business Partnership and Acceleration	<div><span style="font-size: 13.44px;">Achmad Iqbal is an experienced professional with more than twenty years of contribution to the development of sharia economy in Indonesia. Currently, he serves as Deputy Director of Acceleration and Partnership of Sharia Business at the National Committee of Sharia Economy and Finance (KNEKS). In this role, he develops strategic partnerships and accelerates the growth of sharia business in Indonesia, especially in integrated sharia financing/funding for MSMEs and acceleration of halal product exports. As a policy expert, Achmad has collaborated with various ministries and institutions to formulate policies that support the development of the sharia economy, including through: the Indonesia Halal Export Incorporated Working Group (accelerating halal product exports, the SCF Sharia Ecosystem Development Working Group and the Synergy Collaboration Working Group for Sharia Financing/Funding for MSMEs.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">His experience in building a sharia economic and financial community includes developing organizational and financial systems, as well as building financial independence in sharia economic associations in Indonesia. Almost 10 years of building the MES (Sharia Economic Society) organizational system to become the largest sharia economic association in Indonesia. The Sharia Financial LSP was also established to provide quality sharia financial certification services in Indonesia.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Achmad Iqbal holds a postgraduate degree in Sharia Economics and Finance from Trisakti University and a bachelor's degree in Agribusiness from IPB University. His expertise and experience make him an important figure in building an inclusive and sustainable sharia economy in Indonesia.</span></div>	--	--	--
+21	Bagus Aryo, PhD 	Deputi Direktur Lembaga Keuangan Mikro Syariah	https://cms-dev.kneks.go.id/uploads/structure/pak_bagus.jpg	kneks	<div><span style="font-size: 13.44px;">Bagus Aryo, Ph.D., adalah seorang profesional yang memiliki latar belakang pendidikan dan pengalaman luas di bidang policy, development, dan microfinance (keuangan mikro syariah). Bagus Aryo menyelesaikan gelar Doktor di University of Melbourne, Australia, dengan spesialisasi dalam Policy, Development, and Microfinance. Sebelumnya, ia meraih gelar Master of Social Work fokus pada 2 program studi yaitu Community Economic Development dan Social Policy dari University of Queensland, Australia.&nbsp;&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Dalam perjalanan kariernya, Bagus Aryo telah mengemban berbagai peran penting di tingkat nasional dan internasional. Saat ini, beliau menjabat sebagai Deputi Direktur Lembaga Keuangan Mikro Syariah pada Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) dengan tanggung jawab mengkoordinasikan, menganalisis, dan merumuskan rekomendasi kebijakan publik yang berfokus pada pengembangan dan sustainabilitas dari institusi keuangan mikro syariah (BMT, KSPPS, LKMS, BWM, BTM dan BPRS) bagi pemberdayaan dan kesejahteraan masyarakat. Disamping itu juga diamanahi sebagai Sekretaris Jenderal Indonesia Microfinance Expert Assosciation (IMFEA), ia aktif mendorong pengembangan ekonomi berbasis komunitas (close loop economy system). Sebelumnya, ia pernah menjadi Senior Lecturer di University of Melbourne dan konsultan di berbagai lembaga bisnis, sosial, zakat dan kementerian/lembaga. Sampai saat ini masih aktif membantu pengembangan yayasan atau NGO’s yang bergerak di bidang pemberdayaan dan menjadi Dewan Pengawas Syariah (DPS) bagi koperasi.&nbsp;&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Keahlian Bagus Aryo mencakup microfinance, community economic development, corporate social responsibility serta social innovation. Berkat pengalamannya yang mendalam, beliau kerap terlibat dalam penyusunan undang-undang, strategi kebijakan, evaluasi program, dan pemberdayaan usaha mikro, kecil, dan menengah. Dengan kombinasi pendidikan yang diraih, pengalaman profesional, serta dedikasi terhadap pemberdayaan sosial-ekonomi, Bagus Aryo terus memberikan kontribusi dan mendukung inisiatif keuangan mikro dan pengembangan ekonomi komunitas yang berkelanjutan.&nbsp;</span></div>	on	Deputy Director Shariah Microfinance Institution	<div><span style="font-size: 13.44px;">Bagus Aryo, Ph.D., is a professional with extensive educational background and experience in the fields of policy, development, and microfinance (Islamic microfinance). Bagus Aryo completed his Doctorate at the University of Melbourne, Australia, specializing in Policy, Development, and Microfinance. Previously, he earned a Master of Social Work degree focusing on 2 study programs, namely Community Economic Development and Social Policy from the University of Queensland, Australia.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">In his career, Bagus Aryo has held various important roles at the national and international levels. Currently, he serves as Deputy Director of Islamic Microfinance Institutions at the National Committee for Islamic Economics and Finance (KNEKS) with the responsibility to coordinate, analyze, and formulate public policy recommendations that focus on the development and sustainability of Islamic microfinance institutions (BMT, KSPPS, LKMS, BWM, BTM and BPRS) for community empowerment and welfare. In addition to being entrusted as Secretary General of the Indonesian Microfinance Expert Association (IMFEA), he actively encourages the development of a community-based economy (closed loop economy system). Previously, he was a Senior Lecturer at the University of Melbourne and a consultant at various business, social, zakat institutions and ministries/agencies. Until now, he is still actively helping to develop foundations or NGOs engaged in empowerment and becoming the Sharia Supervisory Board (DPS) for cooperatives.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Bagus Aryo's expertise includes microfinance, community economic development, corporate social responsibility and social innovation. Thanks to his in-depth experience, he is often involved in the preparation of laws, policy strategies, program evaluations, and empowerment of micro, small and medium enterprises. With a combination of education, professional experience, and dedication to socio-economic empowerment, Bagus Aryo continues to contribute and support sustainable microfinance initiatives and community economic development.</span></div>	--	--	--
+24	Helma Agustiawan	Deputi Direktur Inkubasi Bisnis Syariah	https://cms-dev.kneks.go.id/uploads/structure/pak_helma.jpg	kneks	<div><span style="font-size: 13.44px;">Helma Agustiawan lahir di bulan kemerdekaan Indonesia di Bandung, Jawa Barat. Rekan-rekannya menjulukinya Network Emulator. Beliau berlatar belakang pendidikan Manajemen Bisnis Telekomunikasi dan Informatika dan Ekonomi Islam. Helma memiliki pengalaman luas dalam bidang pengembangan UMKM, startup, kewirausahaan dan kewirausahaan sosial juga ekspor, terutama dalam mengelola bisnis yang berfokus pada produk halal, kreatif dan berkelanjutan. Beliau berpengalaman usaha yang bergerak disektor agrobisnis, perikanan, fashion muslim, travel, inkubator/akselerator bisnis, penyedia perlengkapan kematian dan makanan. Dalam bidang kewirausahaan sosial beliau aktif di PUPUK (Perkumpulan Untuk Peningkatan Usaha Kecil), Yayasan Futurist Ventura Indonesia yang konsern dalam pengembangan UMKM dan Yayasan Amani Peduli Insan yang konsern dalam pengembangan umat islam. Beliau juga aktif menjadi anggota maupun pengurus dibeberapa koperasi syariah.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Dalam bidang organisasi dan jejaring usaha, Helma aktif dalam berbagai organisasi yang berfokus pada ekonomi syariah, kepemudaan, UMKM, kewirausahaan, pesantren, bisnis, ekspor dan hubungan internasional, diantaranya : MUI (Majelis Ulama Indonesia) Kota Bandung, MES (Masyarakat Ekonomi Syariah) Jawa Barat, JCI (Junior Chamber Internasional) Indonesia, HIPMI (Himpunan Pengusaha Muda Indonesia) Jawa Barat, KADIN (Kamar Dagang dan Industri) Jawa Barat, Hebitren (Himpunan Ekonomi dan Bisnis Pesantren), dan ABDSI (Asosiasi Business Development Services Indonesia).&nbsp;&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Saat ini, Helma menjabat sebagai Deputi Direktur Inkubasi Bisnis Syariah di KNEKS, di mana beliau memimpin inisiatif untuk mengembangkan halal startup, ekosistem inkubasi bisnis syariah yang berkelanjutan, inovatif dan bernilai tambah, mendukung sertifikasi halal untuk pengusaha UMKM disektor makanan dan minuman, dan menjadi bagian dalam tim kerjasama ekonomi antar Indonesia dengan negara sahabat.&nbsp;</span></div>	on	Deputy Director Sharia Business Incubation	<div><span style="font-size: 13.44px;">Helma Agustiawan was born in the month of Indonesian independence in Bandung, West Java. Her colleagues nicknamed her Network Emulator. She has a background in Telecommunication and Informatics Business Management and Islamic Economics. Helma has extensive experience in the fields of UMKM development, startups, entrepreneurship and social entrepreneurship as well as exports, especially in managing businesses that focus on halal, creative and sustainable products. She has business experience in the agribusiness, fisheries, Muslim fashion, travel, business incubator/accelerator sectors, providers of death equipment and food. In the field of social entrepreneurship, she is active in PUPUK (Association for the Improvement of Small Businesses), the Futurist Ventura Indonesia Foundation which is concerned with the development of UMKM and the Amani Peduli Insan Foundation which is concerned with the development of Muslims. She is also active as a member and administrator of several sharia cooperatives. In the field of organization and business networks, Helma is active in various organizations that focus on sharia economics, youth, UMKM, entrepreneurship, Islamic boarding schools, business, exports and international relations, including: MUI (Indonesian Ulema Council) Bandung City, MES (Islamic Economic Society) West Java, JCI (Junior Chamber International) Indonesia, HIPMI (Indonesian Young Entrepreneurs Association) West Java, KADIN (Chamber of Commerce and Industry) West Java, Hebitren (Islamic Boarding School Economic and Business Association), and ABDSI (Indonesian Business Development Services Association).</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Currently, Helma serves as Deputy Director of Sharia Business Incubation at KNEKS, where she leads initiatives to develop halal startups, a sustainable, innovative and value-added sharia business incubation ecosystem, supports halal certification for UMKM entrepreneurs in the food and beverage sector, and is part of the economic cooperation team between Indonesia and friendly countries.</span></div>	--	--	--
+33	Agus Rudiarto, S. AP., M.M.	Kepala Divisi Dukungan Teknologi dan Rumah Tangga	https://cms-dev.kneks.go.id/uploads/structure/Foto_Crop(2) (1).jpg	kneks	-	on	Head of Technology and Household Support Division	-	--	--	--
+30	Edi Trianto, S.Sos., S.S.T AKT, M.B.A.	Kepala Divisi Pemantauan Program dan Kinerja Bisnis dan Kewirausahaan Syariah	https://cms-dev.kneks.go.id/uploads/structure/0dd5bbd6-fe69-467e-adcf-0bef132bc5ba-min.jpg	kneks	<br>	on	Division Head Program Monitoring and Shariah Business and Entrepreneurship Performance	<br>	set	kadiv	direktur
+34	Slamet Prayitno, S.E., S.S.T., Ak., M.B.A.	Kepala Divisi Pemantauan Program dan Industri Produk Halal	https://cms-dev.kneks.go.id/uploads/structure/foto_crop(3) (2).jpg	kneks	-	on	Head of Halal Product Industry and Program Monitoring Division	-	--	--	--
+22	Eka Jati Rahayu Firmansyah, S.H.I., M.E.I.	Deputi Direktur Inklusi Keuangan Syariah	https://cms-dev.kneks.go.id/uploads/structure/pak_eka.jpg	kneks	<div><span style="font-size: 13.44px;">Eka Jati Rahayu Firmansyah adalah seorang profesional muda yang memiliki dedikasi tinggi di bidang ekonomi dan keuangan syariah. Saat ini, ia menjabat sebagai Deputi Direktur Inklusi Keuangan Syariah di Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS). Dalam peran ini, Eka menginisiasi berbagai program strategis yang bertujuan untuk memperluas akses layanan keuangan syariah, memberdayakan Islamic ecosystem, serta mendorong pertumbuhan ekonomi dan keuangan syariah yang lebih inklusif di Indonesia. Ia juga berperan aktif dalam membangun sinergi antara kementerian, lembaga, dan pemangku kepentingan agar kebijakan serta program yang dijalankan sesuai kebutuhan masyarakat. Dengan pengalaman akademis dan praktis yang kaya, Eka memanfaatkan keahliannya untuk menyusun rekomendasi kebijakan yang aplikatif.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Minat Eka terhadap ekonomi syariah sudah tumbuh sejak masa pendidikannya di Pesantren Persatuan Islam 99 Rancabango Garut. Ketertarikan itu mendorongnya memilih studi S1 Muamalat (Hukum Bisnis Syariah), kemudian melanjutkan studi S2 Keuangan dan Perbankan Syariah di UIN Sunan Kalijaga Yogyakarta. Tak hanya dari pendidikan formal, Eka telah mendapatkan sertifikasi di bidang manajemen risiko perbankan syariah, generale banking perbankan syariah, dan mendapatkan lisensi sebagai advokat. Kombinasi pendidikan ini memberinya pemahaman baik dalam aspek syariah maupun ekonomi dan keuangan syariah modern.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Sebelum berkarier di KNEKS, Eka berkarier di salah satu perbankan syariah milik BUMN. Ia betugas sebagai Pemimpin Cabang sehingga dituntut mengaplikasikan teori-teori yang ia pelajari untuk mengembangkan produk dan layanan syariah yang relevan dengan kebutuhan masyarakat. Upaya dan inovasinya mendapatkan apresiasi dengan penghargaan "The Best Innovation" dan "The Best Financing pada Ekosistem Haji".&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Tak hanya di dunia professional, Eka banyak berkiprah di berbagai organisasi Islam dan ekonomi syariah. Ia aktif di Persatuan Islam (PERSIS), Ikatan Ahli Ekonomi Islam (IAEI), dan Masyarakat Ekonomi Syariah (MES), serta berbagi ilmu sebagai dosen tamu di berbagai universitas. Semua perjalanan ini menjadikan Eka figur inspiratif di bidang ekonomi dan keuangan syariah yang selalu siap memberikan kontribusi terbaik bagi Indonesia.</span></div>	on	Deputy Director Sharia Financial Inclusion	<div><span style="font-size: 13.44px;">Eka Jati Rahayu Firmansyah is a young professional who has high dedication in the field of Islamic economics and finance. Currently, he serves as Deputy Director of Islamic Financial Inclusion at the National Committee for Islamic Economics and Finance (KNEKS). In this role, Eka initiates various strategic programs aimed at expanding access to Islamic financial services, empowering the Islamic ecosystem, and encouraging more inclusive Islamic economic and financial growth in Indonesia. He also plays an active role in building synergy between ministries, institutions, and stakeholders so that the policies and programs implemented are in accordance with the needs of the community. With rich academic and practical experience, Eka utilizes his expertise to develop applicable policy recommendations.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Eka's interest in Islamic economics has grown since his education at the Islamic Association 99 Ranbidango Garut Islamic Boarding School. This interest encouraged him to choose to study for a Bachelor's degree in Muamalat (Islamic Business Law), then continue his Master's degree in Islamic Finance and Banking at UIN Sunan Kalijaga Yogyakarta. Not only from formal education, Eka has received certification in the field of Islamic banking risk management, general banking of Islamic banking, and obtained a license as an advocate. This combination of education gives him a good understanding in both sharia aspects and modern Islamic economics and finance.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Before his career at KNEKS, Eka had a career at one of the state-owned Islamic banks. He served as a Branch Manager so he was required to apply the theories he learned to develop sharia products and services that were relevant to the needs of the community. His efforts and innovations received appreciation with the awards "The Best Innovation" and "The Best Financing in the Hajj Ecosystem".</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Not only in the professional world, Eka is also active in various Islamic organizations and Islamic economics. He is active in the Islamic Association (PERSIS), the Association of Islamic Economists (IAEI), and the Islamic Economic Community (MES), as well as sharing knowledge as a guest lecturer at various universities. All of these journeys make Eka an inspiring figure in the field of Islamic economics and finance who is always ready to provide the best contribution to Indonesia.</span></div>	--	--	--
+36	Anggoro Pridityo, S.E.I.	Kepala Divisi Pemantauan Program dan Keuangan Sosial Syariah	https://cms-dev.kneks.go.id/uploads/structure/Foto_Crop(4) (2).jpg	kneks	-	on	Head of the Division of Monitoring of Sharia Social Finance and Programs	-	--	--	--
+37	Edi Trianto, S.Sos., S.S.T., AKT, M.B.A.	Kepala Divisi Pemantauan Program dan Bisnis dan Kewirausahaan Syariah	https://cms-dev.kneks.go.id/uploads/structure/0dd5bbd6-fe69-467e-adcf-0bef132bc5ba-min.jpg	kneks	-	on	Head of Program Monitoring and Sharia Business and Entrepreneurship Division	-	--	--	--
+31	Moch. Asep Kurniawan, S.E., S.S.T., Ak, M.M	Kepala Divisi Perencanaan dan Keuangan	https://cms-dev.kneks.go.id/uploads/structure/Foto_Crop(1).jpg	kneks	-	on	Head of Planning and Finance Division	-	--	--	--
+35	Riza Azmi Ak., M.A., M.Sc.	Kepala Divisi Pemantauan Program dan Industri Jasa Keuangan Syariah	https://cms-dev.kneks.go.id/uploads/structure/foto_crop(1).jpg	kneks	-	on	Head of the Division of Monitoring of Islamic Financial Services Programs and Industry	-	--	--	--
+32	Siti Muslimah Rohaniyatun, S.Psi.	Kepala Divisi SDM dan Kepatuhan Internal	https://cms-dev.kneks.go.id/uploads/structure/WhatsAppImage 2025-05-22 at 11.28.33_829e05e2-cropped.jpg	kneks	-	on	Head of HR and Internal Compliance Division	-	--	--	--
+26	Dr. Dece Kurniadi, SH., MM.	Deputi Direktur Hukum Pengembangan Ekonomi Syariah	https://cms-dev.kneks.go.id/uploads/structure/pak_dece.jpg	kneks	<div><span style="font-size: 13.44px;">Dece Kurniadi saat ini menjabat sebagai Kepala Divisi Hukum Pengembangan Ekonomi Syariah KNEKS. Dece adalah seorang profesional berpengalaman dengan latar belakang akademik yang kuat, termasuk gelar Doktor Ilmu Hukum dari Universitas Sebelas Maret dan Magister Manajemen Keuangan Syariah dari Universitas Indonesia. Dengan pendidikan di bidang hukum dan keuangan syariah, Dece telah membangun karier yang mengesankan di sektor perbankan syariah, hukum, dan pengembangan ekonomi syariah. Beliau juga telah memperoleh berbagai sertifikasi kompetensi, seperti Komisaris BPRS, Direktur BPRS, Manajemen Risiko Jenjang 5, serta Dewan Pengawas Syariah untuk koperasi dari DSN-MUI.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Dece memiliki pengalaman profesional yang luas di berbagai bidang, termasuk sebagai Komisaris Independen di beberapa perusahaan, seperti PT Trimitra Prawara Goldland dan PT BPRS Bhakti Sumekar. Beliau juga berkontribusi sebagai tenaga ahli dalam berbagai proyek pemerintah, diantaranya di Kemenag, BPKH, Kementerian LHK untuk menyusun peraturan dana bergulir berbasis syariah dan juga menyusun kajian pemberdayaan ekonomi umat di Kemenko Perekonomian. Dece juga pernah menjadi anggota Pokja IPMP KEIN (Komite Ekonomi dan Industri Nasional). Sebagai seorang pendidik, Dece mengajar di Universitas Indonesia dan Politeknik Negeri Jakarta, berbagi keahliannya di bidang keuangan dan perbankan syariah.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Selain peran profesionalnya, Dece aktif sebagai instruktur di berbagai pelatihan yang diselenggarakan oleh Bank Indonesia dan Muamalat Institute. Latar belaknganya sebagai bankers, beliau memiliki keahlian dalam analisis pembiayaan, pengelolaan risiko, dan pengembangan modul sertifikasi untuk perbankan syariah.&nbsp;</span></div>	on	Deputy Director of Legal Division of Sharia Economic Development	<div><span style="font-size: 13.44px;">Dece Kurniadi currently serves as the Head of the Sharia Economic Development Legal Division of KNEKS. Dece is an experienced professional with a strong academic background, including a Doctorate in Law from Sebelas Maret University and a Masters in Sharia Financial Management from the University of Indonesia. With education in sharia law and finance, Dece has built an impressive career in the sharia banking, law, and sharia economic development sectors. He has also obtained various competency certifications, such as BPRS Commissioner, BPRS Director, Level 5 Risk Management, and Sharia Supervisory Board for cooperatives from DSN-MUI.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Dece has extensive professional experience in various fields, including as an Independent Commissioner in several companies, such as PT Trimitra Prawara Goldland and PT BPRS Bhakti Sumekar. He also contributed as an expert in various government projects, including at the Ministry of Religion, BPKH, Ministry of Environment and Forestry to prepare sharia-based revolving fund regulations and also compile studies on the empowerment of the people's economy at the Coordinating Ministry for the Economy. Dece was also a member of the IPMP KEIN (National Economic and Industrial Committee) Working Group. As an educator, Dece teaches at the University of Indonesia and the Jakarta State Polytechnic, sharing his expertise in Islamic finance and banking.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">In addition to his professional role, Dece is active as an instructor in various trainings organized by Bank Indonesia and the Muamalat Institute. His background as a banker, he has expertise in financing analysis, risk management, and development of certification modules for Islamic banking.</span></div>	--	--	--
+11	Binsar Agung Hartanto Sitompul	Deputi Direktur Infrastruktur Industri Halal	https://cms-dev.kneks.go.id/uploads/structure/DSC07605copy edit.jpg	kneks	<div><span style="font-size: 13.44px;">Binsar Agung Hartanto Sitompul lahir di Surabaya, 12 September 1975. Meraih gelar Sarjana Teknik (S1) dari Institut Teknologi Bandung (ITB), setelah menempuh pendidikan di jurusan Teknik Industri ITB pada tahun 1993-1998. Di sela-sela pekerjaannya, Binsar melanjutkan pendidikan di tahun 2000-2003 untuk meraih gelar Magister Teknik (S2) dari ITB juga, pada Magister Teknologi Informasi di jurusan Teknik Elektro ITB.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Saat ini Binsar bekerja di Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) sejak tahun 2021 pada Direktorat Industri Produk Halal, dan mengemban amanah sebagai Deputi Direktur Infrastruktur Industri Halal, sekaligus juga sebagai Pelaksana Tugas (Plt.) Deputi Direktur Pengembangan Halal Assurance System. Binsar memiliki pengalaman karir selama 27 tahun (sejak tahun 1998) dari 9 perusahaan swasta dan 1 lembaga negara, dimana 16 tahun diantaranya di bidang supply chain management, serta bidang-bidang lainnya seperti di manufacturing, agribusiness, dan saat ini di bidang ekonomi dan keuangan syariah.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Di luar pekerjaan, Binsar juga aktif di berbagai organisasi, seperti di Ikatan Alumni ITB, Ikatan Alumni SMAN 8 Jakarta, Ikatan Alumni Haji Tazkia, serta aktif di berbagai komunitas olahraga, seperti komunitas lari, komunitas sepeda, komunitas triathlon, dan lain-lain.&nbsp;</span></div>	on	Deputy Director Halal Industry Infrastructure	<div><span style="font-size: 13.44px;">Binsar Agung Hartanto Sitompul was born in Surabaya, September 12, 1975. He earned a Bachelor of Engineering (S1) from the Bandung Institute of Technology (ITB), after studying in the Industrial Engineering Department of ITB in 1993-1998. In between his work, Binsar continued his education in 2000-2003 to earn a Master of Engineering (S2) from ITB as well, in the Master of Information Technology in the Electrical Engineering Department of ITB.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Currently, Binsar has been working at the National Committee for Sharia Economics and Finance (KNEKS) since 2021 in the Directorate of Halal Product Industry, and is entrusted with the position of Deputy Director of Halal Industry Infrastructure, as well as Acting Deputy Director of Halal Assurance System Development. Binsar has 27 years of career experience (since 1998) from 9 private companies and 1 state institution, of which 16 years were in supply chain management, as well as other fields such as manufacturing, agribusiness, and currently in the field of Islamic economics and finance.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Outside of work, Binsar is also active in various organizations, such as the ITB Alumni Association, the SMAN 8 Jakarta Alumni Association, the Haji Tazkia Alumni Association, and is active in various sports communities, such as running communities, cycling communities, triathlon communities, and others.</span></div>	--	--	--
+3	Yosita Nur Wirdayanti, S.T., MBA, MIFP 	Plt Direktur Jasa Keuangan Syariah	https://cms-dev.kneks.go.id/uploads/structure/bu_yos.jpg	kneks	<div><span style="font-size: 13.44px;">Yosita Nur Wirdayanti adalah seorang profesional dalam bidang keuangan syariah dengan pengalaman lebih dari 15 tahun. Saat ini, ia menjabat sebagai Plt. Direktur Jasa Keuangan Syariah di Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS), setelah sebelumnya bertanggung jawab sebagai Deputi Direktur Inovasi Produk Keuangan Syariah di KNKS. Kariernya dimulai di PT Bank BNI Syariah, di mana ia memegang berbagai posisi strategis, termasuk Product Development Manager dan Digital Banking Manager. Yosita juga memiliki pengalaman internasional melalui perannya di BNP Paribas Investment Partners.&nbsp;</span></div>	on	Acting Director Sharia Financial Services	<div><span style="font-size: 13.44px;">Yosita Nur Wirdayanti is a professional in the field of Islamic finance with more than 15 years of experience. Currently, she serves as Acting Director of Islamic Financial Services at the National Committee for Islamic Economics and Finance (KNEKS), after previously being responsible as Deputy Director of Islamic Financial Product Innovation at KNKS. Her career began at PT Bank BNI Syariah, where she held various strategic positions, including Product Development Manager and Digital Banking Manager. Yosita also has international experience through her role at BNP Paribas Investment Partners.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Yosita holds an MBA in Islamic Banking and Finance from the International Islamic University Malaysia (IIUM) and a Master in Islamic Finance Practice (MFP) from INCEIF, Malaysia. Yosita holds a Bachelor's degree in Industrial Engineering, University of Indonesia. In addition, she has received a full scholarship award and became a delegate for the Australia Indonesia Muslim Exchange Program (AIMEP) in 2022. Her dedication to the development of the Islamic finance ecosystem is reflected through her publications and involvement in various related initiatives. His areas of interest and expertise include Islamic Banking and Finance, Public Policy, Product Development, and Public-Private Partnership.</span></div>	--	--	--
+12	Umar Aditiawarman, PhD	Deputi Direktur Rantai Nilai Produk Halal	https://cms-dev.kneks.go.id/uploads/structure/photo-1748849118038.jpg	kneks	<div><span style="font-size: 13.44px;">Umar Aditiawarman, PhD adalah seorang profesional di bidang industri Halal dan teknologi informasi yang saat ini bekerja di Komite Nasional Ekonomi dan Keuangan Syariah (KNEKS) sebagai Deputi Direktur Rantai Nilai Produk Halal dan tergabung dalam anggota Ikatan Ahli Ekonomi Islam Indonesia (IAEI) di bidang Pengembangan Ekonomi Digital dan IEEE Indonesia Section. Umar bertanggung jawab dalam merumuskan kebijakan afirmatif dan kerangka strategis pengembangan ekonomi Syariah dan industri Halal menggunakan pendekatan rantai nilai melalui pemanfaatan teknologi digital termasuk terlibat dalam pembangunan layanan pembayaran digital nasional Syariah pertama di Indonesia dan juga mendorong pengembangan sistem ketertelusuran pada sektor industri Halal serta mempromosikan gaya hidup halal melalui platform e-commerce seperti Tokopedia Salam, Shopee Barokah, Blibi Hasanah, Bukalapak dan platform digital lainnya.&nbsp;&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Sebelum bergabung dengan KNEKS, dia adalah Head of Centre for IT Advancement-IIUM Malaysia (2017-2018) yang menawarkan program eksekutif pascasarjana di bidang Big Data Analytics dan Protective Security Management. Selain itu, dia pernah juga bekerja sebagai Senior Manajer IT Services and Business Development di IAT Sdn. Bhd. (2012-2017), salah satu perusahaan BUMN di Malaysia, bertanggung jawab membantu beberapa Kementerian dan Lembaga serta industri seperti operator pelabuhan, farmasi, universitas, untuk mendapatkan standar internasional ISO 27001 (Information Security Management System). Disamping itu, dia juga memimpin beberapa proyek pengembangan sistem dan aplikasi mobile. Proyek terakhir yang dikerjakan adalah proyek nasional Kementerian Pendidikan Malaysia, yaitu sistem validasi ijazah perguruan-perguruan tinggi Malaysia menggunakan QR code berbasis teknologi Blockchain.&nbsp;&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Umar mendapatkan gelar Doctor of Philosophy dan Master di bidang Teknologi Informasi dan Komunikasi dari International Islamic University Malaysia, Kuala Lumpur. Selama studinya, dia terlibat di beberapa research cluster seperti IT governance, cyber security, blockchain and islamic finance, dan Big Data Analytics and AI.</span></div>	on	Deputy Director Halal Product Value Chain 	<div><span style="font-size: 13.44px;">Umar Aditiawarman, PhD is a professional in the Halal industry and information technology who currently works at the National Committee for Islamic Economics and Finance (KNEKS) as Deputy Director of the Halal Product Value Chain and is a member of the Indonesian Islamic Economists Association (IAEI) in the field of Digital Economic Development and the IEEE Indonesia Section. Umar is responsible for formulating affirmative policies and strategic frameworks for the development of the Islamic economy and Halal industry using a value chain approach through the utilization of digital technology including being involved in the development of the first national Sharia digital payment service in Indonesia and also encouraging the development of a traceability system in the Halal industry sector and promoting a halal lifestyle through e-commerce platforms such as Tokopedia Salam, Shopee Barokah, Blibi Hasanah, Bukalapak and other digital platforms.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Prior to joining KNEKS, he was the Head of the Center for IT Advancement-IIUM Malaysia (2017-2018) which offers postgraduate executive programs in Big Data Analytics and Protective Security Management. In addition, he has also worked as a Senior Manager of IT Services and Business Development at IAT Sdn. Bhd. (2012-2017), one of the state-owned companies in Malaysia, is responsible for assisting several Ministries and Institutions and industries such as port operators, pharmaceuticals, universities, to obtain the international standard ISO 27001 (Information Security Management System). In addition, he also led several mobile system and application development projects. The last project worked on was a national project of the Malaysian Ministry of Education, namely a diploma validation system for Malaysian universities using QR codes based on Blockchain technology.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Umar received his Doctor of Philosophy and Master's degrees in Information and Communication Technology from the International Islamic University Malaysia, Kuala Lumpur. During his studies, he was involved in several research clusters such as IT governance, cyber security, blockchain and Islamic finance, and Big Data Analytics and AI.</span></div>	--	--	--
+29	Mohamad Soleh Nurzaman, Ph.D	Plt Deputi Direktur Riset Ekonomi Syariah	https://cms-dev.kneks.go.id/uploads/structure/photo-1748954348994.jpg	kneks	<div><span style="font-size: 13.44px;">Lahir di Tangerang 26 Desember 1980, Nurzaman memiliki pengalaman lebih dari 20 tahun di bidang kebijakan ekonomi dan keuangan Islam. Sebelum bekerja di KNEKS, ia pernah bekerja untuk mengembangkan kebijakan ekonomi dan keuangan Islam untuk beberapa lembaga regulasi di Indonesia seperti Kementerian Keuangan, DPR, Kementerian Koordinator Bidang Perekonomian, Badan Amil Zakat Nasional, dan konsultan ekonomi dan keuangan Islam untuk organisasi internasional seperti United Nation Development Program, dan Asian Development Bank.&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Saat ini, selain bekerja di KNEKS, Mohammad Soleh Nurzaman mengkhidmatkan dirinya sebagai dosen di Departemen Ekonomi Islam, sekaligus peneliti senior di Pusat Ekonomi dan Bisnis Syariah, Fakultas Ekonomi dan Bisnis, Universitas Indonesia.&nbsp; Ia meraih gelar pendidikan dari Universitas Indonesia (Sarjana Ekonomi) dengan dukungan Mitsubishi Scholarship, Australian National University (Master Ekonomi Internasional dan Pembangunan) dengan dukungan AusAID Scholarship, dan International Islamic University Malaysia (PhD Ekonomi) dengan dukungan IRTI-IsDB Scholarship.&nbsp;&nbsp;</span></div>	on	Acting Deputy Director Sharia Economic Research 	<div><span style="font-size: 13.44px;">Born in Tangerang on December 26, 1980, Nurzaman has more than 20 years of experience in the field of Islamic economic and financial policy. Before working at KNEKS, he worked to develop Islamic economic and financial policies for several regulatory institutions in Indonesia such as the Ministry of Finance, the House of Representatives, the Coordinating Ministry for Economic Affairs, the National Zakat Agency, and Islamic economic and financial consultants for international organizations such as the United Nations Development Program, and the Asian Development Bank.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Currently, in addition to working at KNEKS, Mohammad Soleh Nurzaman serves as a lecturer in the Department of Islamic Economics, as well as a senior researcher at the Center for Islamic Economics and Business, Faculty of Economics and Business, University of Indonesia. He earned his educational degrees from the University of Indonesia (Bachelor of Economics) with the support of the Mitsubishi Scholarship, the Australian National University (Master of International Economics and Development) with the support of the AusAID Scholarship, and the International Islamic University Malaysia (PhD Economics) with the support of the IRTI-IsDB Scholarship.</span></div>	--	--	--
+6	Sutan Emir Hidayat, M.B.A., Ph.D.	Direktur Infrastruktur Ekosistem Syariah	https://cms-dev.kneks.go.id/uploads/structure/pak_emir.jpg	kneks	<div><div><span style="font-size: 13.44px;"><b>Sutan Emir Hidayat saat ini menjabat sebagai Direktur Infrastruktur Ekosistem Syariah. Ia memperoleh gelar PhD dan MBA di bidang Perbankan dan Keuangan Syariah dari International Islamic University Malaysia (IIUM) dan gelar Sarjana Manajemen Agribisnis dari Institut Pertanian Bogor (IPB) University. Ia pernah menjadi Kepala Sekolah Bisnis (Dekan) di University College of Bahrain (UCB) dengan jabatan fungsional akademik Associate Professor (Lektor Kepala). Emir adalah seorang ahli ekonomi dan keuangan syariah dengan pengaruh global yang diakui. Ia terdaftar dalam Islamica 500 yang dirilia oleh IsFIN sebagai salah satu dari Top 50 individu yang mempengaruhi ekonomi syariah dunia pada tahun 2015 dan 2020, dan terus meraih pengakuan dengan masuk dalam Top 500 kepribadian di tahun 2016, 2017, 2018 dan 2019. Selain itu, Emir juga tercatat dalam Direktori 1001 Orang Minangkabau di tingkat dunia dan menerima penghargaan dari BSI Maslahat sebagai tokoh pendukung gerakan pemuda ekonomi syariah pada tahun 2023.&nbsp;</b></span></div><div><span style="font-size: 13.44px;"><b><br></b></span></div><div><span style="font-size: 13.44px;"><b>Emir juga seorang konsultan ekonomi dan keuangan syariah untuk World Bank Group dengan memberikan pelatihan kepada anggota parlemen dan pejabat eksekutif pemerintahan Bangsamoro Autonomous Region in Muslim Mindanao (BARMM), dimana dampak (outcome) dari pelatihan tersebut Pemerintah BARMM telah menerbitkan Roadmap Pengembangan Keuangan Syariah 2024-2028, yang menjadi arah pengembangan ekonomi dan keuangan syariah di BARMM. Selain itu, Ia pernah berperan sebagai konsultan Accounting and Auditing Organization for Islamic Financial Institutions (AAOIFI) untuk revisi modul CIPA BRE dan membuat soal ujian CIPA BRE , hal ini menunjukkan komitmennya dalam meningkatkan standar sertifikasi internasional dalam sektor ini. Selain itu, Emir adalah anggota kelompok kerja dari beberapa lembaga berikut: a) Sustainability Working Group, General Council for Islamic Banks and Financial Institutions (CIBAFI), dimana sejak Mei&nbsp; 2023 sampai sekarang Ia menjadi Co-Chair dalam working group tersebut; b) Working Group FAS 1, AAOIFI; c) Working Group SMEs, AAOIFI; d) Editorial Advisory Board, IFN Red-Money; e) Editorial Advisory Board, International Journal of Islamic and Middle Eastern Finance and Management, Emerald (Terindeks Scopus); dan f) Editorial Advisory Board, Journal of Economic Cooperation and Development, SESRIC (Terindeks Scopus) dan berbagai jurnal ilmiah terakreditasi Sinta 2, 3 dan 4 di Indonesia.&nbsp;</b></span></div></div><div><span style="font-size: 13.44px;"><b><br></b></span></div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Pendidikan</b></span></div><div>Sutan Emir Hidayat memiliki latar belakang pendidikan yang sangat mengesankan, antara lain:&nbsp;&nbsp;</div><div>1. Gelar Sarjana</div><div>&nbsp; &nbsp;- Memperoleh gelar di bidang ekonomi atau keuangan dari universitas terkemuka di Indonesia.&nbsp;&nbsp;</div><div><br></div><div>2. Gelar Magister dan Doktor&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Meraih gelar master dan doktor di bidang keuangan syariah dari institusi internasional bergengsi.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Penelitian dan disertasinya berfokus pada pengembangan keuangan syariah, termasuk strategi inovasi dan implementasinya di negara berkembang.&nbsp;&nbsp;</div><div><br></div><div><b>Karier dan Kontribusi</b></div><div>1. <b>Direktur Infrastruktur Ekosistem Syariah di KNEKS</b>&nbsp;&nbsp;</div><div>&nbsp; &nbsp;Dalam peran ini, Sutan Emir Hidayat memimpin berbagai inisiatif strategis untuk mengembangkan ekosistem ekonomi syariah di Indonesia. Tanggung jawabnya meliputi:&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Membangun infrastruktur ekonomi syariah yang berkelanjutan.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Mengembangkan sektor industri halal, termasuk makanan, kosmetik, farmasi, dan pariwisata halal.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Meningkatkan literasi dan inklusi keuangan syariah melalui program edukasi dan promosi.&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Mendorong pertumbuhan filantropi Islam seperti zakat dan wakaf.&nbsp;&nbsp;</div><div><br></div><div>2. Akademisi dan Peneliti&nbsp;&nbsp;</div><div>&nbsp; &nbsp;Sebelum bergabung dengan KNEKS, Sutan Emir Hidayat memiliki pengalaman panjang sebagai dosen dan peneliti. Ia mengajar di beberapa universitas terkemuka di Indonesia dan luar negeri, dengan fokus pada mata pelajaran:&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Keuangan Islam&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Perbankan Syariah&nbsp;&nbsp;</div><div>&nbsp; &nbsp;- Manajemen Risiko dalam Keuangan Syariah&nbsp;&nbsp;</div><div><br></div><div>3. <b>Konsultan dan Pembicara Internasional</b>&nbsp;&nbsp;</div><div>&nbsp; &nbsp;Sutan Emir sering menjadi pembicara dalam forum-forum internasional tentang keuangan syariah dan ekonomi Islam. Ia juga terlibat dalam proyek-proyek konsultasi yang berhubungan dengan implementasi keuangan syariah di berbagai negara.&nbsp;&nbsp;</div><div><br></div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Pencapaian Penting</b></span></div><div>- <b>Peningkatan Daya Saing Industri Halal</b>&nbsp;&nbsp;</div><div>&nbsp; Mengembangkan program strategis untuk mendukung sertifikasi halal dan meningkatkan ekspor produk halal Indonesia.&nbsp;&nbsp;</div><div><br></div><div>- <b>Mendorong Kolaborasi Global</b>&nbsp;&nbsp;</div><div>&nbsp; Membawa Indonesia ke panggung internasional melalui kolaborasi dengan organisasi global di bidang ekonomi syariah.&nbsp;&nbsp;</div><div><br></div><div>- <b>Penguatan UMKM Syariah</b>&nbsp;</div><div>&nbsp; Membantu pelaku UMKM masuk ke ekosistem ekonomi syariah melalui akses pembiayaan syariah dan pelatihan kewirausahaan.&nbsp;&nbsp;</div><div><br></div><div>- *Pendidikan dan Literasi Keuangan Syariah*&nbsp;&nbsp;</div><div>&nbsp; Aktif dalam memberikan edukasi kepada masyarakat dan institusi untuk meningkatkan pemahaman tentang manfaat ekonomi syariah.&nbsp;&nbsp;</div><div><br></div><div><span style="color: var(--bs-card-color); background-color: var(--bs-card-bg); font-size: 0.84rem; text-align: var(--bs-body-text-align);"><b>Visi dan Komitmen</b></span></div><div>Sutan Emir Hidayat berkomitmen untuk:&nbsp;&nbsp;</div><div>1. Menjadikan Indonesia sebagai pusat ekonomi dan keuangan syariah dunia.&nbsp;&nbsp;</div><div>2. Mengembangkan industri halal yang kompetitif di pasar global.&nbsp;&nbsp;</div><div>3. Meningkatkan inklusi keuangan syariah, terutama di kalangan masyarakat kecil dan menengah.&nbsp;&nbsp;</div><div>4. Mengintegrasikan inovasi teknologi dalam pengembangan keuangan syariah.</div>	on	Director Sharia Ecosystem Infrastructure	<div><span style="font-size: 13.44px;">Sutan Emir Hidayat currently serves as the Director of Sharia Ecosystem Infrastructure. He earned his PhD and MBA in Islamic Banking and Finance from the International Islamic University Malaysia (IIUM) and a Bachelor's degree in Agribusiness Management from the Bogor Agricultural University (IPB) University. He was once the Head of Business School (Dean) at the University College of Bahrain (UCB) with the academic functional position of Associate Professor (Associate Lecturer). Emir is an expert in Islamic economics and finance with recognized global influence. He was listed in the Islamica 500 released by IsFIN as one of the Top 50 individuals influencing the world's Islamic economy in 2015 and 2020, and continued to gain recognition by being included in the Top 500 personalities in 2016, 2017, 2018 and 2019. In addition, Emir is also listed in the 1001 Minangkabau People Directory at the world level and received an award from BSI Maslahat as a supporting figure for the Islamic economic youth movement in 2023.</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Emir is also a consultant for Islamic economics and finance for the World Bank Group by providing training to members of parliament and executive officials of the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM) government, where the impact (outcome) of the training The BARMM government has issued the 2024-2028 Islamic Finance Development Roadmap, which is the direction for the development of Islamic economics and finance in BARMM. In addition, he has acted as a consultant for the Accounting and Auditing Organization for Islamic Financial Institutions (AAOIFI) for the revision of the CIPA BRE module and creating CIPA BRE exam questions, this shows his commitment to improving international certification standards in this sector. In addition, Emir is a member of the working group of the following institutions: a) Sustainability Working Group, General Council for Islamic Banks and Financial Institutions (CIBAFI), where since May 2023 until now he has been the Co-Chair of the working group; b) Working Group FAS 1, AAOIFI; c) Working Group SMEs, AAOIFI; d) Editorial Advisory Board, IFN Red-Money; e) Editorial Advisory Board, International Journal of Islamic and Middle Eastern Finance and Management, Emerald (Scopus Indexed); and f) Editorial Advisory Board, Journal of Economic Cooperation and Development, SESRIC (Scopus Indexed) and various scientific journals accredited by Sinta 2, 3 and 4 in Indonesia.</span></div>	--	--	--
+25	Dedi Wibowo, Ph.D	Deputi Direktur Bisnis Digital dan Pusat Data Ekonomi Syariah	https://cms-dev.kneks.go.id/uploads/structure/Dedi.jpg	kneks	<div><span style="font-size: 13.44px;">Dedi Wibowo, kelahiran Bandung 15 Oktober 1971. Menyandang gelar Sarjana Ekonomi jurusan Akuntansi dari STIE Perbanas (Perbanas Institute) Jakarta pada tahun 1995. Kemudian Dedi melanjutkan Pendidikan Magister Manajemen Universitas Mercubuana Jakarta pada tahun 2009 dan menyelesaikan Doctor of Philosophy pada tahun 2024 di Universiti Teknikal Malaysia Melaka dengan judul desertasi “Determinants of Behavior Intention Islamic FinTech in Indonesia: The Integration of UTAUT2 and Service Quality”. Beliau memulai karir di Astra Agro Niaga pada tahun 1993 sebagai Audit dan Tax Section Head.&nbsp;&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Saat ini Dedi menjabat sebagai Deputy Director Bisnis Digital dan Pusat Data Ekonomi Syariah pada Manajemen Eksekutif KNEKS sejak 16 Agustus 2021. Sebelumnya beliau menjabat sebagai Manajer Bank Danamon Indonesia dan Bank Danamon Syariah (1995-2004), Kepala Departemen Pengembangan Layanan Bank Syariah Mandiri (2004), Project Manager Corebanking Syariah PT Sigma Cipta Caraka (2005-2006), Indonesia Country Manager Microlink Sdn. Bhd. (2006-2008), Director PT Microlink Indonesia (2008-2009), Kepala Departemen Business Process Improvement Bank BRISyariah (2009-2013), Technology Growth Platform-Financial Services Manager PT Accenture Indonesia (2013-2015), Engagement Lead PT Tdata Indonesia (2015-2018), dan Indonesia Service Director Aciworldwide (Asia) PTE. Ltd. (2018-2020).&nbsp;</span></div><div><span style="font-size: 13.44px;"><br></span></div><div><span style="font-size: 13.44px;">Selain itu Dedi masih aktif atau pernah tercatat sebagai pengajar/Faculty bidang Ekonomi Syariah dan Bisnis Digital pada Program Magister Manajemen dan Program Studi Kajian Timur Tengah dan Islam Universitas Indonesia, Fakultas Ekonomi dan Bisnis Universitas DIrgantara Marsekal Suryadarma, Fakultas Ekonomi dan Bisnis Perbanas Institute, Tazkia Indstitute,&nbsp; Program Pasca Sarjana Indonesia Banking School (IBS) serta Lembaga Pengembangan Perbankan Indonesia (LPPI).&nbsp;</span></div>	on	Deputy Director Digital Business and Sharia Economic Data Center	<div><span style="font-size: 13.44px;">Dedi Wibowo, born in Bandung on October 15, 1971. He holds a Bachelor of Economics majoring in Accounting from STIE Perbanas (Perbanas Institute) Jakarta in 1995. Then Dedi continued his Masters in Management Education at Mercubuana University Jakarta in 2009 and completed his Doctor of Philosophy in 2024 at Universiti Teknikal Malaysia Melaka with a dissertation title "Determinants of Behavior Intention Islamic FinTech in Indonesia: The Integration of UTAUT2 and Service Quality". He started his career at Astra Agro Niaga in 1993 as Audit and Tax Section Head. Currently, Dedi serves as Deputy Director of Digital Business and Sharia Economic Data Center at KNEKS Executive Management since August 16, 2021. Previously, he served as Manager of Bank Danamon Indonesia and Bank Danamon Syariah (1995-2004), Head of Service Development Department of Bank Syariah Mandiri (2004), Project Manager of Corebanking Syariah PT Sigma Cipta Caraka (2005-2006), Indonesia Country Manager of Microlink Sdn. Bhd. (2006-2008), Director of PT Microlink Indonesia (2008-2009), Head of Business Process Improvement Department of Bank BRISyariah (2009-2013), Technology Growth Platform-Financial Services Manager of PT Accenture Indonesia (2013-2015), Engagement Lead of PT Tdata Indonesia (2015-2018), and Indonesia Service Director of Aciworldwide (Asia) PTE. Ltd. (2018-2020).</span><span style="font-size: 0.84rem;">In addition, Dedi is still active or has been registered as a lecturer/Faculty in the field of Sharia Economics and Digital Business at the Masters Program in Management and the Middle Eastern and Islamic Studies Study Program at the University of Indonesia, the Faculty of Economics and Business at the Marshal Suryadarma Aerospace University, the Faculty of Economics and Business at the Perbanas Institute, Tazkia Institute, the Postgraduate Program at the Indonesia Banking School (IBS) and the Indonesian Banking Development Institute (LPPI).</span></div>	--	--	--
+38	tes	tes	https://cms-dev.kneks.go.id/uploads/structure/photo-1753924583599.php	kneks	No	on	tes	No	--	--	--
 \.
 
 
 --
--- Data for Name: province; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: province; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.province (id, province_name, code) FROM stdin;
@@ -2962,19 +3007,24 @@ COPY public.province (id, province_name, code) FROM stdin;
 27	Sulawesi Barat	76
 29	Gorontalo	75
 30	Maluku 	81
+32	Maluku Utara	82
+33	Papua Barat	91
+34	Papua	94
+35	KEPULAUAN RIAU	21
 \.
 
 
 --
--- Data for Name: questbook; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: questbook; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.questbook (id, name, email, phone_number, subjek, pesan) FROM stdin;
+12	Oscscscssc	dwc@gmail.com	98899988989	scknsicns	scxxscssscscs
 \.
 
 
 --
--- Data for Name: roles; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: roles; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.roles (id, title, created_at, updated_at, web_identity) FROM stdin;
@@ -2989,7 +3039,7 @@ COPY public.roles (id, title, created_at, updated_at, web_identity) FROM stdin;
 
 
 --
--- Data for Name: scopes; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: scopes; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.scopes (id, title, icon, image, description, created_at, updated_at, deleted_at, title_en, "description_en	", web_identity) FROM stdin;
@@ -3001,7 +3051,7 @@ COPY public.scopes (id, title, icon, image, description, created_at, updated_at,
 
 
 --
--- Data for Name: sk; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: sk; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.sk (id, title, title_en, content, content_en, doc_link) FROM stdin;
@@ -3011,17 +3061,18 @@ COPY public.sk (id, title, title_en, content, content_en, doc_link) FROM stdin;
 
 
 --
--- Data for Name: slideshow; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: slideshow; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.slideshow (id, image, title, title_en, content, content_en, web_identity, status, date_created) FROM stdin;
 2	https://webdev.rifhandi.com/assets/images/banner/def.jpg	Mencapai Kesejahteraan dan Maqashid Syariah	Achieve Welfare and Maqashid Syariah	<p>Dengan mengembangkan ekonomi dan keuangan syariah yang kuat, sehat dan berkelanjutan serta sesuai maqashid syariah</p>	<p>by developing a strong, healthy and sustainable sharia economy and finance and in accordance with maqashid sharia.</p>	kneks	on	2025-12-12
 1	https://webdev.rifhandi.com/assets/images/banner/asb.jpg	Menyatukan langkah, Memajukan Negeri Kita	Uniting steps, Advancing the Country	\N	\N	kneks	on	2025-12-12
+3	https://webdev.rifhandi.com/uploads/slideshow/slide3.jpg	Menyatukan langkah, Memajukan Negeri	Uniting steps, Advancing the Country	<span style="color: rgb(51, 51, 51); font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px;">dengan mempercepat, memperluas dan memajukan pengembangan ekonomi dan keuangan syariah dalam rangka memperkuat ketahanan ekonomi nasional&nbsp;</span>	<span style="color: rgb(51, 51, 51); font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(249, 249, 249);">by accelerating, expanding and advancing sharia economic and financial development in order to support national economic resilience</span>	kneks	on	2025-02-13
 \.
 
 
 --
--- Data for Name: social_medias; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: social_medias; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.social_medias (id, name, logo, link, created_at, "updated_at	", deleted_at, web_identity) FROM stdin;
@@ -3034,16 +3085,16 @@ COPY public.social_medias (id, name, logo, link, created_at, "updated_at	", dele
 
 
 --
--- Data for Name: sourcedata; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: sourcedata; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
-COPY public.sourcedata (id, dataset, source, date_created, dataset_en, description, produsen_data, tanggal_update, api_data) FROM stdin;
-6	Data Set G	OJK	2025-01-01 00:00:00	Data Set G	Ini Deskripsi	OJK	2025-02-13	https://dashboard-dev.kneks.go.id/api/aus/indikator-aus
+COPY public.sourcedata (id, dataset, source, date_created, dataset_en, description, produsen_data, tanggal_update, api_data, id_data_menu, id_data_submenu) FROM stdin;
+6	Data Set G	OJK	2025-01-01 00:00:00	Data Set G	Ini Deskripsi	OJK	2025-02-13	https://dashboard-dev.kneks.go.id/api/aus/indikator-aus	0	0
 \.
 
 
 --
--- Data for Name: tagging; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: tagging; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.tagging (id, tagging) FROM stdin;
@@ -3055,7 +3106,7 @@ COPY public.tagging (id, tagging) FROM stdin;
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.users (id, name, email, email_verified_at, password, remember_token, created_at, updated_at, role_id, web_identity, roles_user, active, approve, ip_address, directorat_id, id_province, approve_by, approve_date) FROM stdin;
@@ -3075,12 +3126,21 @@ COPY public.users (id, name, email, email_verified_at, password, remember_token,
 10	Hafied Rum	hafied.rum@kneks.go.id	\N	827ccb0eea8a706c4c34a16891f84e7b	CMDFiUSE64nGAhkcFBogylHD4yLCuiziKCuqNDBSNJltonDbAd1okFU20ZRl	2022-07-11 07:49:13	2024-07-31 21:34:55	1	kneks	\N	\N	Y	36.93.93.156	0	0	null	\N
 5	admin2	admin2@kneks.go.id	\N	827ccb0eea8a706c4c34a16891f84e7b	1TsyqOEsdl7vFXcH9ug6JTQn9zGqUF64XjRcTIoiic5gUl2AO2ErTECTbq7o	2019-06-14 01:17:04	2024-07-31 21:04:48	1	kneks	\N	\N	Y	140.213.139.217	2	14	null	\N
 17	RifqiMuhammad	muhammad45rifqi@gmail.com	\N	827ccb0eea8a706c4c34a16891f84e7b	\N	2024-12-24 02:53:17	2024-12-24 02:53:17	1	kneks	1	1	Y	112.215.146.93	0	0	null	\N
-1	Administrator	admin@kneks.go.id	NULL	827ccb0eea8a706c4c34a16891f84e7b		2019-05-09 08:05:42	2024-08-12 13:30:00	1	kneks	1	1	Y	110.138.84.193	0	0	null	\N
+19	AnggotaBaru	anggotabaru@kneks.go.id	\N	827ccb0eea8a706c4c34a16891f84e7b	\N	2025-02-13 03:42:30	2025-02-13 03:42:30	7	kneks	1	1	Y	0.0.0.0	0	0	SuperAdmin	2025-02-13 03:44:17
+25	sumiyuanast	stevano.coprino@gmail.com	\N	827ccb0eea8a706c4c34a16891f84e7b	\N	\N	\N	\N	kneks	1	1	N	null	\N	\N	null	\N
+26	coprinos	stevano.coprino@gmail.com	\N	3d30c3431e076fc9c08ed5b5313644a1	\N	\N	\N	\N	kneks	1	1	N	null	\N	\N	null	\N
+28	wawan50	suryaheck@gmail.com	\N	c68acc0ee0f89ca360c6566a72b45dc3	\N	\N	\N	\N	kneks	1	1	N	null	\N	\N	null	\N
+29	SulthanFalah	smtpinboxdi@gmail.com	\N	5f3cd25af47ef524397f60c09e87caa8	\N	\N	\N	\N	kneks	1	1	N	null	\N	\N	null	\N
+1	Administrator	admin@kneks.go.id	NULL	94e70baa6e7a8cf658c4fdb402cdb50e		2019-05-09 08:05:42	2024-08-12 13:30:00	1	kneks	1	1	Y	110.138.84.193	0	0	null	\N
+30	BSSN1	bssn1@kneks.go.id	\N	25d55ad283aa400af464c76d713c07ad	\N	2025-07-30 06:24:22	2025-07-30 06:24:22	2	kneks	1	1	Y	0.0.0.0	1	11	null	\N
+31	BSSN3	bssn3@kneks.go.id	\N	25d55ad283aa400af464c76d713c07ad	\N	2025-07-30 06:25:52	2025-07-30 06:25:52	2	kneks	1	1	Y	0.0.0.0	1	11	null	\N
+24	BSSN2	bssn2@kneks.go.id	\N	25d55ad283aa400af464c76d713c07ad	\N	\N	\N	2	kneks	1	1	Y	0.0.0.0	0	11	SuperAdmin	2025-03-05 04:02:36
+32	andi	andicahyono995@gmail.com	\N	d7cacfb4060cc56022e9275e3a6634b3	\N	\N	\N	\N	kneks	1	1	N	null	\N	\N	null	\N
 \.
 
 
 --
--- Data for Name: web_identity; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: web_identity; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.web_identity (id, name, active, created_at, updated_at, deleted_at) FROM stdin;
@@ -3088,7 +3148,7 @@ COPY public.web_identity (id, name, active, created_at, updated_at, deleted_at) 
 
 
 --
--- Data for Name: web_profile; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: web_profile; Type: TABLE DATA; Schema: public; Owner: kneks
 --
 
 COPY public.web_profile (id, web_title, web_logo, web_header, web_color) FROM stdin;
@@ -3097,343 +3157,343 @@ COPY public.web_profile (id, web_title, web_logo, web_header, web_color) FROM st
 
 
 --
--- Name: abouts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: abouts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.abouts_id_seq', 75, true);
 
 
 --
--- Name: agendas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: agendas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.agendas_id_seq', 178, true);
 
 
 --
--- Name: api_meta_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: api_meta_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.api_meta_id_seq', 3, true);
 
 
 --
--- Name: banners_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: banners_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.banners_id_seq', 2, true);
+SELECT pg_catalog.setval('public.banners_id_seq', 7, true);
 
 
 --
--- Name: contacts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: contacts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.contacts_id_seq', 1, true);
 
 
 --
--- Name: custom_page_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: custom_page_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.custom_page_id_seq', 3, true);
+SELECT pg_catalog.setval('public.custom_page_id_seq', 11, true);
 
 
 --
--- Name: db_event_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: db_event_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.db_event_id_seq', 17, true);
 
 
 --
--- Name: devisi_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: devisi_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.devisi_id_seq', 2, true);
+SELECT pg_catalog.setval('public.devisi_id_seq', 16, true);
 
 
 --
--- Name: directorats_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: directorats_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.directorats_id_seq', 7, true);
 
 
 --
--- Name: hot_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: hot_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.hot_categories_id_seq', 7, true);
+SELECT pg_catalog.setval('public.hot_categories_id_seq', 8, true);
 
 
 --
--- Name: hot_issues_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: hot_issues_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.hot_issues_id_seq', 40, true);
 
 
 --
--- Name: hot_subcategories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: hot_subcategories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.hot_subcategories_id_seq', 16, true);
 
 
 --
--- Name: institutions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: institutions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.institutions_id_seq', 16, true);
-
-
---
--- Name: ip_address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.ip_address_id_seq', 81, true);
+SELECT pg_catalog.setval('public.institutions_id_seq', 17, true);
 
 
 --
--- Name: kdeks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: ip_address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.kdeks_id_seq', 58, true);
+SELECT pg_catalog.setval('public.ip_address_id_seq', 2985, true);
 
 
 --
--- Name: khas_zone_city_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: kdeks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
+--
+
+SELECT pg_catalog.setval('public.kdeks_id_seq', 70, true);
+
+
+--
+-- Name: khas_zone_city_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.khas_zone_city_seq', 1, false);
 
 
 --
--- Name: khas_zone_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: khas_zone_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.khas_zone_id_seq', 21, true);
 
 
 --
--- Name: khas_zone_inaugurated_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: khas_zone_inaugurated_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.khas_zone_inaugurated_seq', 1, false);
 
 
 --
--- Name: khas_zone_inauguration_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: khas_zone_inauguration_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.khas_zone_inauguration_seq', 1, false);
 
 
 --
--- Name: khas_zone_khas_zone_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: khas_zone_khas_zone_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.khas_zone_khas_zone_seq', 1, false);
 
 
 --
--- Name: khas_zone_province_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: khas_zone_province_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.khas_zone_province_seq', 1, false);
 
 
 --
--- Name: khas_zone_tenant_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: khas_zone_tenant_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.khas_zone_tenant_seq', 1, false);
 
 
 --
--- Name: map_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: map_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.map_id_seq', 1, true);
 
 
 --
--- Name: menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: menu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.menu_id_seq', 9, true);
 
 
 --
--- Name: menu_sub_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: menu_sub_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.menu_sub_id_seq', 15, true);
 
 
 --
--- Name: naration_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: naration_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.naration_id_seq', 6, true);
+SELECT pg_catalog.setval('public.naration_id_seq', 7, true);
 
 
 --
--- Name: news_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: news_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.news_categories_id_seq', 5, true);
 
 
 --
--- Name: news_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: news_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.news_id_seq', 182, true);
-
-
---
--- Name: news_photos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.news_photos_id_seq', 121, true);
+SELECT pg_catalog.setval('public.news_id_seq', 193, true);
 
 
 --
--- Name: news_videos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: news_photos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.news_videos_id_seq', 12, true);
-
-
---
--- Name: opini_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.opini_id_seq', 8, true);
+SELECT pg_catalog.setval('public.news_photos_id_seq', 127, true);
 
 
 --
--- Name: province_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: news_videos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.province_id_seq', 31, true);
-
-
---
--- Name: questbook_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.questbook_id_seq', 1, false);
+SELECT pg_catalog.setval('public.news_videos_id_seq', 15, true);
 
 
 --
--- Name: report_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: opini_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.report_categories_id_seq', 10, true);
-
-
---
--- Name: reports_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.reports_id_seq', 223, true);
+SELECT pg_catalog.setval('public.opini_id_seq', 11, true);
 
 
 --
--- Name: roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: province_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
+--
+
+SELECT pg_catalog.setval('public.province_id_seq', 35, true);
+
+
+--
+-- Name: questbook_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
+--
+
+SELECT pg_catalog.setval('public.questbook_id_seq', 12, true);
+
+
+--
+-- Name: report_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
+--
+
+SELECT pg_catalog.setval('public.report_categories_id_seq', 11, true);
+
+
+--
+-- Name: reports_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
+--
+
+SELECT pg_catalog.setval('public.reports_id_seq', 225, true);
+
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.roles_id_seq', 7, true);
 
 
 --
--- Name: scopes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: scopes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.scopes_id_seq', 4, true);
 
 
 --
--- Name: sk_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: sk_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.sk_id_seq', 2, true);
 
 
 --
--- Name: social_medias_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: social_medias_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.social_medias_id_seq', 5, true);
 
 
 --
--- Name: sourcedata_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: sourcedata_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.sourcedata_id_seq', 6, true);
 
 
 --
--- Name: statistic_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: statistic_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.statistic_id_seq', 7, true);
-
-
---
--- Name: statistic_slide_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.statistic_slide_id_seq', 5, true);
+SELECT pg_catalog.setval('public.statistic_id_seq', 13, true);
 
 
 --
--- Name: structure_assets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: statistic_slide_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.structure_assets_id_seq', 16, true);
-
-
---
--- Name: sub_slide_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.sub_slide_id_seq', 3, true);
+SELECT pg_catalog.setval('public.statistic_slide_id_seq', 9, true);
 
 
 --
--- Name: tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: structure_assets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
+--
+
+SELECT pg_catalog.setval('public.structure_assets_id_seq', 38, true);
+
+
+--
+-- Name: sub_slide_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
+--
+
+SELECT pg_catalog.setval('public.sub_slide_id_seq', 53, true);
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.tags_id_seq', 6, true);
 
 
 --
--- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 18, true);
+SELECT pg_catalog.setval('public.users_id_seq', 32, true);
 
 
 --
--- Name: web_identity_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: web_identity_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.web_identity_id_seq', 1, false);
 
 
 --
--- Name: web_profile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: web_profile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kneks
 --
 
 SELECT pg_catalog.setval('public.web_profile_id_seq', 1, true);
 
 
 --
--- Name: abouts abouts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: abouts abouts_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.abouts
@@ -3441,7 +3501,7 @@ ALTER TABLE ONLY public.abouts
 
 
 --
--- Name: agendas agendas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: agendas agendas_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.agendas
@@ -3449,7 +3509,7 @@ ALTER TABLE ONLY public.agendas
 
 
 --
--- Name: data_dashboard api_meta_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: data_dashboard api_meta_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.data_dashboard
@@ -3457,7 +3517,7 @@ ALTER TABLE ONLY public.data_dashboard
 
 
 --
--- Name: slideshow banners_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: slideshow banners_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.slideshow
@@ -3465,7 +3525,7 @@ ALTER TABLE ONLY public.slideshow
 
 
 --
--- Name: contacts contacts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: contacts contacts_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.contacts
@@ -3473,7 +3533,7 @@ ALTER TABLE ONLY public.contacts
 
 
 --
--- Name: banner custom_page_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: banner custom_page_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.banner
@@ -3481,7 +3541,7 @@ ALTER TABLE ONLY public.banner
 
 
 --
--- Name: db_event db_event_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: db_event db_event_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.db_event
@@ -3489,7 +3549,7 @@ ALTER TABLE ONLY public.db_event
 
 
 --
--- Name: devisi devisi_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: devisi devisi_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.devisi
@@ -3497,7 +3557,7 @@ ALTER TABLE ONLY public.devisi
 
 
 --
--- Name: directorats directorats_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: directorats directorats_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.directorats
@@ -3505,7 +3565,7 @@ ALTER TABLE ONLY public.directorats
 
 
 --
--- Name: hot_categories hot_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: hot_categories hot_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.hot_categories
@@ -3513,7 +3573,7 @@ ALTER TABLE ONLY public.hot_categories
 
 
 --
--- Name: hot_issues hot_issues_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: hot_issues hot_issues_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.hot_issues
@@ -3521,7 +3581,7 @@ ALTER TABLE ONLY public.hot_issues
 
 
 --
--- Name: hot_subcategories hot_subcategories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: hot_subcategories hot_subcategories_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.hot_subcategories
@@ -3529,7 +3589,7 @@ ALTER TABLE ONLY public.hot_subcategories
 
 
 --
--- Name: khas_zone id; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: khas_zone id; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.khas_zone
@@ -3537,7 +3597,7 @@ ALTER TABLE ONLY public.khas_zone
 
 
 --
--- Name: opini id_opini; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: opini id_opini; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.opini
@@ -3545,7 +3605,7 @@ ALTER TABLE ONLY public.opini
 
 
 --
--- Name: sk id_sk; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: sk id_sk; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.sk
@@ -3553,7 +3613,7 @@ ALTER TABLE ONLY public.sk
 
 
 --
--- Name: institutions institutions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: institutions institutions_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.institutions
@@ -3561,7 +3621,7 @@ ALTER TABLE ONLY public.institutions
 
 
 --
--- Name: ip_address ip_address_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: ip_address ip_address_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.ip_address
@@ -3569,7 +3629,7 @@ ALTER TABLE ONLY public.ip_address
 
 
 --
--- Name: kdeks kdeks_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: kdeks kdeks_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.kdeks
@@ -3577,7 +3637,7 @@ ALTER TABLE ONLY public.kdeks
 
 
 --
--- Name: map map_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: map map_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.map
@@ -3585,7 +3645,7 @@ ALTER TABLE ONLY public.map
 
 
 --
--- Name: menu menu_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: menu menu_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.menu
@@ -3593,7 +3653,7 @@ ALTER TABLE ONLY public.menu
 
 
 --
--- Name: menu_sub menu_sub_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: menu_sub menu_sub_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.menu_sub
@@ -3601,7 +3661,7 @@ ALTER TABLE ONLY public.menu_sub
 
 
 --
--- Name: naration naration_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: naration naration_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.naration
@@ -3609,7 +3669,7 @@ ALTER TABLE ONLY public.naration
 
 
 --
--- Name: news_categories news_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: news_categories news_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.news_categories
@@ -3617,7 +3677,7 @@ ALTER TABLE ONLY public.news_categories
 
 
 --
--- Name: news_photos news_photos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: news_photos news_photos_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.news_photos
@@ -3625,7 +3685,7 @@ ALTER TABLE ONLY public.news_photos
 
 
 --
--- Name: news news_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: news news_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.news
@@ -3633,7 +3693,7 @@ ALTER TABLE ONLY public.news
 
 
 --
--- Name: news_videos news_videos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: news_videos news_videos_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.news_videos
@@ -3641,7 +3701,7 @@ ALTER TABLE ONLY public.news_videos
 
 
 --
--- Name: province province_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: province province_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.province
@@ -3649,7 +3709,15 @@ ALTER TABLE ONLY public.province
 
 
 --
--- Name: files_categories report_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: questbook questbook_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
+--
+
+ALTER TABLE ONLY public.questbook
+    ADD CONSTRAINT questbook_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: files_categories report_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.files_categories
@@ -3657,7 +3725,7 @@ ALTER TABLE ONLY public.files_categories
 
 
 --
--- Name: files reports_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: files reports_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.files
@@ -3665,7 +3733,7 @@ ALTER TABLE ONLY public.files
 
 
 --
--- Name: roles roles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: roles roles_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.roles
@@ -3673,7 +3741,7 @@ ALTER TABLE ONLY public.roles
 
 
 --
--- Name: scopes scopes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: scopes scopes_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.scopes
@@ -3681,7 +3749,7 @@ ALTER TABLE ONLY public.scopes
 
 
 --
--- Name: social_medias social_medias_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: social_medias social_medias_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.social_medias
@@ -3689,7 +3757,7 @@ ALTER TABLE ONLY public.social_medias
 
 
 --
--- Name: sourcedata sourcedata_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: sourcedata sourcedata_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.sourcedata
@@ -3697,7 +3765,7 @@ ALTER TABLE ONLY public.sourcedata
 
 
 --
--- Name: data_menu statistic_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: data_menu statistic_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.data_menu
@@ -3705,7 +3773,7 @@ ALTER TABLE ONLY public.data_menu
 
 
 --
--- Name: data_slider statistic_slide_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: data_slider statistic_slide_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.data_slider
@@ -3713,7 +3781,7 @@ ALTER TABLE ONLY public.data_slider
 
 
 --
--- Name: pejabat structure_assets_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: pejabat structure_assets_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.pejabat
@@ -3721,7 +3789,7 @@ ALTER TABLE ONLY public.pejabat
 
 
 --
--- Name: data_submenu sub_slide_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: data_submenu sub_slide_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.data_submenu
@@ -3729,7 +3797,7 @@ ALTER TABLE ONLY public.data_submenu
 
 
 --
--- Name: tagging tags_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: tagging tags_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.tagging
@@ -3737,7 +3805,7 @@ ALTER TABLE ONLY public.tagging
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.users
@@ -3745,7 +3813,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: web_identity web_identity_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: web_identity web_identity_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.web_identity
@@ -3753,7 +3821,7 @@ ALTER TABLE ONLY public.web_identity
 
 
 --
--- Name: web_profile web_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: web_profile web_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: kneks
 --
 
 ALTER TABLE ONLY public.web_profile

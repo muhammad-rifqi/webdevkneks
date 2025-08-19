@@ -1381,6 +1381,7 @@ apps.get('/submenu_edit/:id', (req, res) => {
 apps.get('/register', (req, res) => {
     res.sendFile(path.resolve('./views/register.html'));
 })
+
 // ::::::::::::::::::::::::::: Ekonomi Syariah :::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/es_abouts', db.es_abouts);
 
@@ -1941,5 +1942,5 @@ apps.post('/acts_login', db.api_login);
 apps.get("/acts_logout", db.api_logout);
 
 //::::::::::::::::: End Of KDEKS ::::::::::::::::::::::::::
-
-apps.listen(28789);
+//28789
+apps.listen(4001);
