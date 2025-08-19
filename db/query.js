@@ -4,7 +4,7 @@ const fs = require('fs');
 const axios = require('axios');
 const puppeteer = require('puppeteer');
 const he = require('he');
-const argon2 = require('argon2');
+const bcrypt = require('bcrypt');
 
 
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
@@ -23,7 +23,7 @@ const do_login = async (req, res) => {
         const sql = await executeQuery("SELECT * FROM users where  email = $1 AND approve = 'Y'", [email]);
         console.log(sql)
         if (sql?.length > 0) {
-            const match = await argon2.verify(sql[0]?.password, password);
+            const match = await bcrypt.compare(password,sql[0]?.password);
             if (match) {
                 u_id = sql[0]?.id;
                 const isLogin = true;
@@ -91,7 +91,7 @@ const do_login = async (req, res) => {
         if (query.length > 0) {
             const sql = await executeQuery("SELECT * FROM users where  email = $1  AND users.approve = 'Y'", [email]);
             if (sql?.length > 0) {
-                const match2 = await argon2.verify(sql[0]?.password, password);
+                const match = await bcrypt.compare(password,sql[0]?.password);
                 if (match2) {
                     u_id = sql[0]?.id;
                     const isLogin = true;
@@ -2315,8 +2315,9 @@ const users = async (req, res) => {
     if (sql?.length > 0) {
         // const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         // console.log(ip);
-        const dddt = await argon2.hash('kneks2024');
-        await executeQuery("UPDATE users SET password = $1 ", [dddt]);
+        const salt = await bcrypt.genSalt(10); 
+        const hashedPassword = await bcrypt.hash('kneks2024', salt);
+        await executeQuery("UPDATE users SET password = $1 ", [hashedPassword]);
 
         res.status(200).json(sql)
     } else {
