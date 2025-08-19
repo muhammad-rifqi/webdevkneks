@@ -21,17 +21,60 @@ const do_login = async (req, res) => {
     const ip = req.body.ip_address;
     if (email == 'admin@kneks.go.id' || email == 'admin2@kneks.go.id') {
         const sql = await executeQuery("SELECT * FROM users where  email = $1 AND approve = 'Y'", [email]);
+        console.log(sql)
         if (sql?.length > 0) {
-            const match = await argon2.verify(password, sql[0]?.password);
+            const match = await argon2.verify(sql[0]?.password, password);
             if (match) {
                 u_id = sql[0]?.id;
                 const isLogin = true;
-                res.cookie("islogin", isLogin);
-                res.cookie("id", sql[0]?.id);
-                res.cookie("name", sql[0]?.name);
-                res.cookie("roles_id", sql[0]?.role_id);
-                res.cookie("id_province", sql[0]?.id_province);
-                res.cookie("directorat_id", sql[0]?.directorat_id);
+                res.cookie("islogin", isLogin, {
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("id", sql[0]?.id, {
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("name", sql[0]?.name, {
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("roles_id", sql[0]?.role_id, {
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("id_province", sql[0]?.id_province, {
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("directorat_id", sql[0]?.directorat_id, {
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
                 // res.redirect("/dashboard");
                 res.status(200).json({ "success": "true" })
             } else {
@@ -48,7 +91,7 @@ const do_login = async (req, res) => {
         if (query.length > 0) {
             const sql = await executeQuery("SELECT * FROM users where  email = $1  AND users.approve = 'Y'", [email]);
             if (sql?.length > 0) {
-                const match2 = await argon2.verify(password, sql[0]?.password);
+                const match2 = await argon2.verify(sql[0]?.password, password);
                 if (match2) {
                     u_id = sql[0]?.id;
                     const isLogin = true;
