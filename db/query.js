@@ -2492,7 +2492,7 @@ const changespassword = async (req, res) => {
     if (match) {
         if (req.body.new_password == req.body.verify_password) {
             const salts = await bcrypt.genSalt(10);
-            const pw = await bcrypt.hash(req.body.password, salts);
+            const pw = await bcrypt.hash(req.body.new_password, salts);
             await executeQuery("UPDATE users SET name=$1 , password=$2 WHERE id=$3 ", [req.body.names, pw, req.body.id_user]);
             // console.log('success');
             res.redirect('/logout');
