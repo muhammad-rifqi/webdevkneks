@@ -24,17 +24,17 @@ apps.use(
     })
 )
 
-// const allowedOrigins = ["https://cms-demo.kneks.go.id/","https://cms-dev.kneks.go.id/","https://fonts.googleapis.com"];
-// apps.use(cors({
-//     origin: function (origin, callback) {
-//         if (!origin || allowedOrigins.includes(origin)) {
-//             callback(null, true);
-//         } else {
-//             callback(new Error("Not allowed by CORS"));
-//         }
-//     },
-//     credentials: false,
-// }));
+const allowedOrigins = ["https://cms-demo.kneks.go.id/","https://cms-dev.kneks.go.id/"];
+apps.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: false,
+}));
 
 apps.use(express.static('public'));
 
