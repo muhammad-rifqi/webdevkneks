@@ -24,18 +24,20 @@ apps.use(
     })
 )
 
-const allowedOrigins = ["https://cms-demo.kneks.go.id","https://cms-dev.kneks.go.id"];
-apps.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    credentials: true,
-    methods: 'GET,HEAD',
-}));
+// const allowedOrigins = ["https://cms-demo.kneks.go.id","https://cms-dev.kneks.go.id"];
+// apps.use(cors({
+//     origin: function (origin, callback) {
+//         if (!origin || allowedOrigins.includes(origin)) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error("Not allowed by CORS"));
+//         }
+//     },
+//     credentials: true,
+//     methods: 'GET,HEAD',
+// }));
+
+apps.use(cors());
 
 apps.use(express.static('public'));
 
