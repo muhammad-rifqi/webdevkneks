@@ -24,7 +24,7 @@ apps.use(
     })
 )
 
-const allowedOrigins = ["https://cms-demo.kneks.go.id/","https://cms-dev.kneks.go.id/"];
+const allowedOrigins = ["https://cms-demo.kneks.go.id/","https://cms-dev.kneks.go.id/","https://fonts.gstatic.com/","https://fonts.googleapis.com/"];
 apps.use(cors({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
