@@ -23,7 +23,19 @@ apps.use(
         extended: true,
     })
 )
-apps.use(cors());
+
+const allowedOrigins = ["https://cms-demo.kneks.go.id/","https://cms-dev.kneks.go.id/"];
+apps.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: false,
+}));
+
 apps.use(express.static('public'));
 
 const multer = require('multer')
@@ -199,8 +211,8 @@ function checkFileType(file, cb) {
     // const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     // const mimetype = filetypes.test(file.mimetype);
     // if (mimetype && extname) {
-    
-    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/gif' || file.mimetype === 'application/pdf' || file.mimetype === 'image/svg+xml'){    
+
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/gif' || file.mimetype === 'application/pdf' || file.mimetype === 'image/svg+xml') {
         return cb(null, true);
     } else {
         // console.log(mimetype,extname)
@@ -1925,7 +1937,7 @@ apps.post('/insertsubmenu', db.insertsubmenu);
 
 apps.post('/updatesubmenu', db.updatesubmenu);
 
-apps.post('/post_puppeteer',db.download_image_base64);
+apps.post('/post_puppeteer', db.download_image_base64);
 
 //::::::::::::::: Api & Query CUSTOM DATA NARATION PAGE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
