@@ -33,7 +33,8 @@ apps.use(cors({
             callback(new Error("Not allowed by CORS"));
         }
     },
-    credentials: false,
+    credentials: true,
+    methods: 'GET,HEAD',
 }));
 
 apps.use(express.static('public'));
