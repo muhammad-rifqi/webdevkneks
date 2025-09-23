@@ -23,21 +23,21 @@ apps.use(
         extended: true,
     })
 )
+// apps.use(cors());
+const allowedOrigins = ["https://cms-demo.kneks.go.id","https://cms-dev.kneks.go.id","https://webdev.rifhandi.com","https://metabase.kneks.go.id"];
+apps.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true,
+    methods: 'GET,HEAD,POST,OPTIONS',
+}));
 
-// const allowedOrigins = ["https://cms-demo.kneks.go.id","https://cms-dev.kneks.go.id"];
-// apps.use(cors({
-//     origin: function (origin, callback) {
-//         if (!origin || allowedOrigins.includes(origin)) {
-//             callback(null, true);
-//         } else {
-//             callback(new Error("Not allowed by CORS"));
-//         }
-//     },
-//     credentials: true,
-//     methods: 'GET,HEAD',
-// }));
-
-apps.use(cors());
+apps.options("*",cors());
 
 apps.use(express.static('public'));
 
