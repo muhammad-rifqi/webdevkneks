@@ -34,8 +34,7 @@ apps.use(cors({
         }
     },
     credentials: true,
-    methods: ["GET", "POST", "HEAD", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
+    methods: 'GET,HEAD,POST,OPTIONS',
 }));
 
 apps.options("*",cors());
