@@ -15,6 +15,8 @@ const negara = require('./db/data_negara.json');
 const kbli = require('./db/data_kbli.json');
 const gender = require('./db/data_gender.json');
 const area = require('./db/data_area.json');
+const helmet = require("helmet");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 apps.use(cookieParser());
 apps.use(bodyParser.json())
@@ -46,6 +48,16 @@ apps.use((req, res, next) => {
     res.setHeader('X-XSS-Protection', '1; mode=block'); 
     next();
 });
+
+
+apps.use(helmet.frameguard({ action: "sameorigin" }));
+apps.use(
+  "/",
+  createProxyMiddleware({
+    target: "https://demo.kneks.go.id", 
+    changeOrigin: true
+  })
+);
 
 apps.use(express.static('public'));
 
