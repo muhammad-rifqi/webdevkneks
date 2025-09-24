@@ -37,7 +37,7 @@ apps.use(cors({
     methods: 'GET,HEAD,POST,OPTIONS',
 }));
 
-apps.options("*",cors());
+// apps.options("*",cors());
 
 apps.use((req, res, next) => {
     res.setHeader('X-Frame-Options', 'DENY'); 
