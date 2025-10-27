@@ -3093,8 +3093,8 @@ const detail_submenus_edit = async (req, res) => {
 
 const insert_submenus = async (req, res) => {
     const ddd = req.body.menu_id.split('-');
-    const sql = await executeQuery("INSERT INTO data_submenu (id_statistic,short_name,long_name,short_name_en,long_name_en,statistic_name,link_data,sub_narations,sub_narations_en)values($1,$2,$3,$4,$5,$6,$7,$8,$9)",
-        [ddd[0], req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en, ddd[1], req.body.link_data, req.body.narations_submenu, req.body.narations_submenu_en]);
+    const sql = await executeQuery("INSERT INTO data_submenu (id_statistic,short_name,long_name,short_name_en,long_name_en,statistic_name,link_data,link_image,sub_narations,sub_narations_en)values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
+        [ddd[0], req.body.short_name, req.body.long_name, req.body.short_name_en, req.body.long_name_en, ddd[1], req.body.link_data, req.body.link_image, req.body.narations_submenu, req.body.narations_submenu_en]);
     if (sql) {
         res.redirect('/submenu_data');
     } else {
@@ -3103,7 +3103,7 @@ const insert_submenus = async (req, res) => {
 }
 
 const update_submenus = async (req, res) => {
-    const sql = await executeQuery('UPDATE data_submenu set short_name = $1, short_name_en = $2, long_name = $3, long_name_en = $4, link_data = $5, sub_narations= $6, sub_narations_en = $7  where id = $8', [req.body.short_name, req.body.short_name_en, req.body.long_name, req.body.long_name_en, req.body.link_data, req.body.narations_submenu, req.body.narations_submenu_en, req.body.id]);
+    const sql = await executeQuery('UPDATE data_submenu set short_name = $1, short_name_en = $2, long_name = $3, long_name_en = $4, link_data = $5, link_image = $6, sub_narations= $7, sub_narations_en = $8  where id = $9', [req.body.short_name, req.body.short_name_en, req.body.long_name, req.body.long_name_en, req.body.link_data, req.body.link_image, req.body.narations_submenu, req.body.narations_submenu_en, req.body.id]);
     if (sql) {
         res.redirect('/submenu_data');
     } else {
