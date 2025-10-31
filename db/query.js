@@ -10,7 +10,8 @@ const bcrypt = require('bcrypt');
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
 let fileslinux = '/var/www/html/webdevkneks/public/uploads/';
 // let site_url = "https://cms-demo.kneks.go.id";
-let site_url = "https://cms-dev.kneks.go.id";
+// let site_url = "https://cms-dev.kneks.go.id";
+let site_url = "https://cms.kneks.go.id";
 // const decodeHex = (encodedStr) => Buffer.from(encodedStr, 'hex').toString('utf8');
 // const encodeHex = (str) => Buffer.from(str).toString('hex');
 //::::::::::::::::::::::::::::::Start Of LOGIN LOGOUT :::::::::::::::::::::::::::::::::::::::::::::::::::::
