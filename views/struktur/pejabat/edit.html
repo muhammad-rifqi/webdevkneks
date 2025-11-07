@@ -173,7 +173,10 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
-        $('#editor1, #editor2').trumbowyg();  
+        $(document).ready(function () {
+            $('#editor1, #editor2').trumbowyg();
+        });
+    </script>
     </script>
     <script>
         window.addEventListener("load", async () => {
