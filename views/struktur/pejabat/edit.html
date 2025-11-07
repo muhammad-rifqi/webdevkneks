@@ -194,6 +194,8 @@
                     document.getElementById("position").value = rows[0]?.position;
                     document.getElementById("position_en").value = rows[0]?.position_en;
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.photo}" width="180">`;
+                    document.getElementById("editor1").value = rows[0]?.description;
+                    document.getElementById("editor2").value = rows[0]?.description_en;
                     // nicEditors.findEditor("editor1").setContent(rows[0]?.description);
                     // nicEditors.findEditor("editor2").setContent(rows[0]?.description_en);
                     if (rows[0]?.is_publish == 'on') {
