@@ -207,8 +207,8 @@
                     // nicEditors.findEditor("editor3").setContent(rows[0]?.content);
                     // nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
                     if (tinymce.get('editor1') && tinymce.get('editor2')) {
-                        tinymce.get('editor1').setContent(rows[0]?.content || '');
-                        tinymce.get('editor2').setContent(rows[0]?.content_en || '');
+                        tinymce.get('editor1').setContent(rows[0]?.content);
+                        tinymce.get('editor2').setContent(rows[0]?.content_en);
                     } else {
                         // tunggu sampai TinyMCE siap
                         tinymce.on('AddEditor', () => {
