@@ -15,13 +15,18 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
-    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
+    <!-- <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
             new nicEditor({ maxHeight: 100 }).panelInstance('editor1');
             new nicEditor({ maxHeight: 100 }).panelInstance('editor2');
         });
-    </script>
+    </script> -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/trumbowyg@2.27.3/dist/ui/trumbowyg.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/trumbowyg@2.27.3/dist/trumbowyg.min.js"></script>
+    
 </head>
 
 <body>
@@ -166,6 +171,10 @@
     <script src="/assets/js/common-init.min.js"></script>
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        $('#editor1, #editor2').trumbowyg();  // langsung aktif di semua textarea
+    </script>
     <script>
         window.addEventListener("load", async () => {
             await getUrlById();
@@ -224,7 +233,7 @@
                     document.getElementById("head").append(opt3);
                 }
             } else {
-                
+
             }
         }
 
