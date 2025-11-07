@@ -16,11 +16,22 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/tagify.min.css" />
-    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
+    <!-- <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
             new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
             new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
+        });
+    </script> -->
+    <script src="/assets/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',  // semua textarea akan diubah jadi TinyMCE
+            height: 300,
+            menubar: false,
+            plugins: 'lists link image table code',
+            toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist | code',
+            readonly: false,
         });
     </script>
 </head>
@@ -193,8 +204,10 @@
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    nicEditors.findEditor("editor3").setContent(rows[0]?.content);
-                    nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
+                    // nicEditors.findEditor("editor3").setContent(rows[0]?.content);
+                    // nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
+                    tinymce.get('editor3')?.setContent(rows[0]?.content || '');
+                    tinymce.get('editor4')?.setContent(rows[0]?.content_en || '');
                     document.getElementById("photo_datetimes").value = rows[0]?.photos_datetime.split('.')[0];
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.photo}" width="180"/>`;
                     localStorage.setItem("object_dir_photos", rows[0]?.directorat)

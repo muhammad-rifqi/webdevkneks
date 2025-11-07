@@ -16,11 +16,22 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/tagify.min.css" />
-    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
+    <!-- <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
             new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
             new nicEditor({ maxHeight: 100 }).panelInstance('editor4');
+        });
+    </script> -->
+    <script src="/assets/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',  // semua textarea akan diubah jadi TinyMCE
+            height: 300,
+            menubar: false,
+            plugins: 'lists link image table code',
+            toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist | code',
+            readonly: false,
         });
     </script>
 </head>
@@ -74,11 +85,11 @@
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Gambar/Foto )* </label>
                                             <input class="form-control" name="photo" id="photo" type="file"
-                                                accept="image/*" onchange="upload_check()" required> 
-                                                <p>Masukkan dengan tipe file jpg, jpeg, png. </p>
-                                                <p>Min. Size: width 400px & height 300px.</p>
-                                                <p>Max. Size: width 800px & height 600px.</p>
-                                                <p>Max Upload 1 MB</p>
+                                                accept="image/*" onchange="upload_check()" required>
+                                            <p>Masukkan dengan tipe file jpg, jpeg, png. </p>
+                                            <p>Min. Size: width 400px & height 300px.</p>
+                                            <p>Max. Size: width 800px & height 600px.</p>
+                                            <p>Max Upload 1 MB</p>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
@@ -177,10 +188,10 @@
         });
     </script>
     <script>
-       
-       document.getElementById("users_name").value = `${cookie['name']}`;
-       document.getElementById("users_id").value = `${cookie['id']}`;
-       
+
+        document.getElementById("users_name").value = `${cookie['name']}`;
+        document.getElementById("users_id").value = `${cookie['id']}`;
+
         window.addEventListener("load", async () => {
             const inputElm = document.querySelector('input.tagify');
             new Tagify(inputElm);

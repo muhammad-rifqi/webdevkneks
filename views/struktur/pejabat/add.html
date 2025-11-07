@@ -15,11 +15,22 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
-    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
+    <!-- <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
             new nicEditor({ maxHeight: 100 }).panelInstance('editor1');
             new nicEditor({ maxHeight: 100 }).panelInstance('editor2');
+        });
+    </script> -->
+    <script src="/assets/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',  // semua textarea akan diubah jadi TinyMCE
+            height: 300,
+            menubar: false,
+            plugins: 'lists link image table code',
+            toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist | code',
+            readonly: false,
         });
     </script>
 </head>
@@ -190,7 +201,7 @@
                 //         });
                 //         document.getElementById("head").innerHTML = aaa;
                 //     })
-                document.getElementById("head").innerHTML = `<option value="kadiv">Head</option>`;  
+                document.getElementById("head").innerHTML = `<option value="kadiv">Head</option>`;
             } else {
                 document.getElementById("head").innerHTML = `<option value="null">-Head-</option>`;
             }
