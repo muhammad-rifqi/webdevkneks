@@ -26,7 +26,7 @@
     <script src="/assets/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
-            selector: 'textarea', 
+            selector: 'textarea',
             height: 300,
             menubar: false,
             plugins: 'lists link image table code',
@@ -206,8 +206,16 @@
                     document.getElementById("title_en").value = rows[0]?.title_en;
                     // nicEditors.findEditor("editor3").setContent(rows[0]?.content);
                     // nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
-                    tinymce.get('editor1')?.setContent(rows[0]?.content || '');
-                    tinymce.get('editor2')?.setContent(rows[0]?.content_en || '');
+                    if (tinymce.get('editor1') && tinymce.get('editor2')) {
+                        tinymce.get('editor1').setContent(rows[0]?.content || '');
+                        tinymce.get('editor2').setContent(rows[0]?.content_en || '');
+                    } else {
+                        // tunggu sampai TinyMCE siap
+                        tinymce.on('AddEditor', () => {
+                            tinymce.get('editor1')?.setContent(rows[0]?.content || '');
+                            tinymce.get('editor2')?.setContent(rows[0]?.content_en || '');
+                        });
+                    }
                     document.getElementById("photo_datetimes").value = rows[0]?.photos_datetime.split('.')[0];
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.photo}" width="180"/>`;
                     localStorage.setItem("object_dir_photos", rows[0]?.directorat)
