@@ -199,7 +199,7 @@
             fetch('/photodetail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
-                    console.log(rows)
+                    console.log(rows[0].content_en)
                     provinces_id = rows[0]?.id_province;
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
@@ -330,7 +330,7 @@
             getTagging();
             getDirectorats()
             getProvinces();
-            // upload_check();
+            upload_check();
         });
 
 
