@@ -643,11 +643,11 @@ const structure = async (req, res) => {
     }
 
 }
-
+// he.encode(req.body.description)
 const inserstructure = async (req, res) => {
     const fileuploads = site_url + "/uploads/structure/" + req.file.filename;
     const sql = await executeQuery("insert into pejabat(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
-        [req.body.name, req.body.position, req.body.position_en, fileuploads, he.encode(req.body.description), he.encode(req.body.description_en), req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? ""]);
+        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? ""]);
     if (sql) {
         res.redirect('/s');
     } else {
@@ -695,7 +695,7 @@ const detailstructure = async (req, res) => {
 const updatestructure = async (req, res) => {
     if (!req.file || req.file == "" || req.file == undefined) {
         const sql = await executeQuery("update pejabat set name=$1,position=$2,position_en=$3,description=$4,description_en=$5,is_publish=$6,organization=$7,directorat=$8,head=$9 where id = $10",
-            [req.body.name, req.body.position, req.body.position_en, he.encode(req.body.description), he.encode(req.body.description_en), req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id]);
+            [req.body.name, req.body.position, req.body.position_en, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id]);
         if (sql) {
             res.redirect('/s');
         } else {
