@@ -173,12 +173,12 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
-        $(document).ready(function () {
+
+        $(function () {
+            console.log("Trumbowyg available?", typeof $.fn.trumbowyg); 
             $('#editor1, #editor2').trumbowyg();
         });
-    </script>
-    </script>
-    <script>
+
         window.addEventListener("load", async () => {
             await getUrlById();
             orgs();
