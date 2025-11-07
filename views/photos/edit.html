@@ -207,8 +207,8 @@
                     // nicEditors.findEditor("editor3").setContent(rows[0]?.content);
                     // nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
                     if (tinymce.get('editor1') && tinymce.get('editor2')) {
-                        tinymce.get('editor1').setContent(rows[0]?.content);
-                        tinymce.get('editor2').setContent(rows[0]?.content_en);
+                        tinymce.get('editor1').setContent('Group photo before the Indonesia Shariah Finance 2025 discussion, which focuses on exploring the role of sustainable economy and its compliance with sharia principles. Organized by Republika together with KNEKS at the Shangri-La Hotel.');
+                        tinymce.get('editor2').setContent(rows[0]?.content_en || 'tes');
                     } else {
                         // tunggu sampai TinyMCE siap
                         tinymce.on('AddEditor', () => {
