@@ -173,7 +173,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
-        $('#editor1, #editor2').trumbowyg();  // langsung aktif di semua textarea
+        $('#editor1, #editor2').trumbowyg();  
     </script>
     <script>
         window.addEventListener("load", async () => {
@@ -193,8 +193,8 @@
                     document.getElementById("position").value = rows[0]?.position;
                     document.getElementById("position_en").value = rows[0]?.position_en;
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.photo}" width="180">`;
-                    nicEditors.findEditor("editor1").setContent(rows[0]?.description);
-                    nicEditors.findEditor("editor2").setContent(rows[0]?.description_en);
+                    // nicEditors.findEditor("editor1").setContent(rows[0]?.description);
+                    // nicEditors.findEditor("editor2").setContent(rows[0]?.description_en);
                     if (rows[0]?.is_publish == 'on') {
                         document.getElementById("publish_pejabat").innerHTML = `<div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="is_published" id="publish" checked> <label class="form-check-label" for="publish"></label></div>`;
                     } else {
