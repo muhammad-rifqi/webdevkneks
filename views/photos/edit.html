@@ -100,15 +100,13 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Konten [IN] )*</label>
-                                            <textarea class="form-control" name="content"
-                                                id="editor1"></textarea>
-                                                <p id="val3"></p>
+                                            <textarea class="form-control" name="content" id="editor1"></textarea>
+                                            <p id="val3"></p>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Konten [EN] )*</label>
-                                            <textarea class="form-control" name="content_en"
-                                                id="editor2"></textarea>
-                                                <!-- <p id="val4"></p> -->
+                                            <textarea class="form-control" name="content_en" id="editor2"></textarea>
+                                            <!-- <p id="val4"></p> -->
                                         </div>
 
 
@@ -201,23 +199,30 @@
             fetch('/photodetail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
-                   console.log(tinymce.get('editor1'));
+                    const datas = rows[0];
+
+                    // Tunggu editor siap sebelum set konten
+                    const editor1 = tinymce.get('editor1');
+                    const editor2 = tinymce.get('editor2');
+
+                    if (editor1 && editor2) {
+                        if (editor1.initialized) {
+                            editor1.setContent(datas?.content || '');
+                        } else {
+                            editor1.on('init', () => editor1.setContent(datas?.content || ''));
+                        }
+
+                        if (editor2.initialized) {
+                            editor2.setContent(datas?.content_en || '');
+                        } else {
+                            editor2.on('init', () => editor2.setContent(datas?.content_en || ''));
+                        }
+                    }
+
                     provinces_id = rows[0]?.id_province;
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("title").value = rows[0]?.title;
                     document.getElementById("title_en").value = rows[0]?.title_en;
-                    // nicEditors.findEditor("editor3").setContent(rows[0]?.content);
-                    // nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
-                    if (tinymce.get('editor1') && tinymce.get('editor2')) {
-                        tinymce.get('editor1').setContent(rows[0]?.content || '');
-                        tinymce.get('editor2').setContent(rows[0]?.content_en || '');
-                    } else {
-                        // tunggu sampai TinyMCE siap
-                        tinymce.on('AddEditor', () => {
-                            tinymce.get('editor1')?.setContent(rows[0]?.content || '');
-                            tinymce.get('editor2')?.setContent(rows[0]?.content_en || '');
-                        });
-                    }
                     document.getElementById("photo_datetimes").value = rows[0]?.photos_datetime.split('.')[0];
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.photo}" width="180"/>`;
                     localStorage.setItem("object_dir_photos", rows[0]?.directorat)
