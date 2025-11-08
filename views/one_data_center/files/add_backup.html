@@ -14,9 +14,9 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/tagify.min.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
-    <script type="text/javascript" src="https://js.nicedit.com/nicEdit-latest.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/vendors/css/tagify.min.css" />
+    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
             new nicEditor({ maxHeight: 100 }).panelInstance('editor3');
@@ -47,53 +47,56 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/updatefileupload" method="post" enctype="multipart/form-data">
+                        <form action="/insertfiles" method="post" enctype="multipart/form-data">
                             <input type="hidden" id="max_id" name="MAX_FILE_SIZE" value="50971520" />
-                            <input type="hidden" name="id" id="id" value="">
                             <input type="hidden" id="users_name" name="users_name">
                             <input type="hidden" id="users_id" name="users_id">
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
                                         <h5 class="fw-bold mb-0 me-4">
-                                            <span class="d-block mb-2">Ubah e-Pustaka :</span>
+                                            <span class="d-block mb-2">Tambah e-Pustaka :</span>
                                             <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
-                                                Ubah
+                                                Tambah
                                                 e-Pustaka Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Judul [ID] )*</label>
-                                            <input class="form-control" type="text" name="title" id="title" required>
+                                            <label class="form-label">Judul [ID])*</label>
+                                            <input class="form-control" type="text" name="title" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Judul [EN] )*</label>
-                                            <input class="form-control" type="text" name="title_en" id="title_en"
-                                                required>
+                                            <label class="form-label">Judul [EN])*</label>
+                                            <input class="form-control" type="text" name="title_en" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Kategori )*</label>
+                                            <label class="form-label">Kategori)*</label>
                                             <select class="form-control" name="file_category_id" id="file_category_id"
                                                 required>
-                                                <option value="0"> Pilih </option>
+                                                <option value="0"> -- </option>
                                             </select>
-                                        </div>
-                                        <div class="col-lg-12 mb-4">
-                                            <label class="form-label">View Berkas</label>
-                                            <p id="previews"></p>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Upload Berkas )*</label>
+                                            <label class="form-label">Berkas)*</label>
                                             <input class="form-control" name="file_data" id="file_data" type="file"
                                                 accept="application/pdf,application/vnd.ms-excel.doc,.docx"
-                                                onchange="upload_check()">
+                                                onchange="upload_check()" required> 
                                             <p>Masukkan dengan tipe file pdf , xls, .doc, .docx </p>
                                             <p>Max Upload 50 MB</p>
                                         </div>
+
+                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Cover)*</label>
+                                            <input class="form-control" name="cover_file" id="cover_file" type="file"
+                                                accept="image/jpeg,image/png,image/jpg," required> 
+                                            <p>Masukkan dengan tipe file jpg , jpeg, .png, </p>
+                                            <p>Max Upload 1 MB</p>
+                                        </div>
+
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Konten [ID] )* </label>
+                                            <label class="form-label">Konten [ID] )*</label>
                                             <textarea class="form-control" name="content" id="editor3"></textarea>
                                         </div>
                                         <div class="col-lg-12 mb-4">
@@ -102,59 +105,57 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Tanggal Publish )*</label>
-                                            <input class="form-control" name="date" id="date" type="datetime-local"
-                                                required>
+                                            <label class="form-label">Tanggal</label>
+                                            <input class="form-control" name="date" id="date" type="date" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Publish</label>
+                                            <label class="form-label">Tayang</label>
                                             <!-- <input name="is_publish" id="is_publish" type="checkbox" value="1" required>
                                             Publish -->
-                                            <div class="col-lg-12 mb-4">
-                                                <label class="form-label">Tayang</label>
-                                                <span id="publish_files"></span>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    name="is_publish" id="is_publish">
+                                                <label class="form-check-label" for="publish"></label>
                                             </div>
                                         </div>
 
-
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Penulis )*</label>
-                                            <input class="form-control" name="writer" id="writers" type="text" required>
+                                            <input class="form-control" name="writer" id="writer" type="text" required>
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Penerbit )*</label>
-                                            <input class="form-control" name="publisher" id="publishers" type="text"
+                                            <input class="form-control" name="publisher" id="publisher" type="text"
                                                 required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Sinopsis )*</label>
-                                            <input class="form-control" name="synopsis" id="synopsist" type="text"
+                                            <input class="form-control" name="synopsis" id="synopsis" type="text"
                                                 required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Isbn )*</label>
-                                            <input class="form-control" name="isbn" id="isbns" type="text" required>
+                                            <input class="form-control" name="isbn" id="isbn" type="text" required>
                                         </div>
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Jumlah Halaman )*</label>
-                                            <input class="form-control" name="number_of_pages" id="number_of_pagest"
-                                                type="number" >
+                                            <label class="form-label">Jumlah Halaman</label>
+                                            <input class="form-control" name="number_of_pages" id="number_of_pages"
+                                                type="number" value="0">
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Lebar</label>
-                                            <input class="form-control" name="width" id="widths" type="number" >
+                                            <input class="form-control" name="width" id="width" type="number" value="0">
                                         </div>
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Tinggi</label>
-                                            <input class="form-control" name="height" id="heights" type="number"
-                                                >
+                                            <input class="form-control" name="height" id="height" type="number" value="0">
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Direktorat</label>
-                                            <select class="form-control" name="directorat" id="mySelect2" multiple
+                                            <label class="form-label">Direktorat )*</label>
+                                            <select class="form-control" name="directorat" id="mySelect" multiple
                                                 required>
                                             </select>
                                         </div>
@@ -164,7 +165,8 @@
                                             <!-- <select class="form-control" name="kdeks" id="provinces" required>
                                                 <option value="0"></option>
                                             </select> -->
-                                            <select class="form-control" name="kdeks" id="mySelect3" multiple>
+                                            <select class="form-control" name="kdeks" id="mySelect2" multiple>
+                                                <option value="0"></option>
                                             </select>
                                         </div>
 
@@ -178,19 +180,17 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Passcode</label>
-                                            <input class="form-control" name="passcode" id="passcode" type="text"
-                                                required>
+                                            <input class="form-control" name="passcode" id="passcode" type="text" value="">
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Downloadable</label>
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" role="switch"
-                                                    name="downloadable" id="downloadable" checked>
+                                                    name="downloadable" id="downloadable">
                                                 <label class="form-check-label" for="downloadable"></label>
                                             </div>
                                         </div>
-
 
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
@@ -231,154 +231,54 @@
     <script src="/assets/vendors/js/tagify.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-
-        function getProvinces() {
-            fetch('/provinces')
-                .then(response => response.json())
-                .then((data) => {
-                    const getArrays = localStorage.getItem("prov_idfiles");
-                    let arrays = [];
-                    if (getArrays.length <= 1) {
-                        arrays.push(getArrays);
-                    } else {
-                        const str = getArrays.replace(/[{}"]/g, "").split(",")
-                            .map(Number)
-                            .join(",");
-                        let chars = str.split(",").map(Number);
-                        arrays.push(chars)
-                    }
-                    var opt = [];
-                    data.forEach(element => {
-                        opt.push('<option value="' + element?.id + '">' + element?.province_name + '</option>');
-                    });
-                    $('#mySelect3').empty().append(opt).trigger('change');
-                    $('#mySelect3').val(arrays[0]).trigger('change');
-
-                })
-        }
-
-        function getDirectorats() {
-            $.ajax({
-                url: '/directorat_fe',
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    const getArray = localStorage.getItem("object_dir_files");
-                    let array = [];
-                    if (getArray.length <= 1) {
-                        array.push(getArray[0]);
-                    } else {
-                        const strings = getArray.replace(/[{}"]/g, "").split(",")
-                            .map(Number)
-                            .join(",");
-                        for (let char of strings) {
-                            if (char !== ',') {
-                                array.push(char);
-                            }
-                        }
-                    }
-                    var options = [];
-                    $.each(data, function (index, value) {
-                        options.push('<option value="' + value.id + '">' + value.title + '</option>');
-                    });
-                    $('#mySelect2').empty().append(options).trigger('change');
-                    $('#mySelect2').val(array).trigger('change');
-                }
-            });
-        }
-
         $(document).ready(function () {
-            const inputElm = document.querySelector('input.tagify');
-            new Tagify(inputElm);
+            $('#mySelect').select2();
             $('#mySelect2').select2();
-            $('#mySelect3').select2();
-            getProvinces();
-            getDirectorats();
-
         });
     </script>
     <script>
+
         document.getElementById("users_name").value = `${cookie['name']}`;
         document.getElementById("users_id").value = `${cookie['id']}`;
 
         window.addEventListener("load", async () => {
-            let file_category_id;
-            let prove_id;
-            await getUrlById();
-            await getCategory();
+            const inputElm = document.querySelector('input.tagify');
+            new Tagify(inputElm);
+            await fileCategory();
+            await getDirectorat();
             await getTagging();
+            await getProvinces();
+            await getDates();
             await upload_check();
         })
 
-        function getUrlById() {
-            const URLS = new URL(window.location.href);
-            fetch('/filesdetails/' + URLS.pathname.split('/')[2])
-                .then(data => data.json())
-                .then((rows) => {
-                    document.getElementById("id").value = rows[0]?.id;
-                    document.getElementById("title").value = rows[0]?.title;
-                    document.getElementById("title_en").value = rows[0]?.title_en;
-                    nicEditors.findEditor("editor3").setContent(rows[0]?.content);
-                    nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
-                    file_category_id = rows[0]?.report_category_id;
-                    prove_id = rows[0]?.id_province;
-                    // if (rows?.is_publish == 1) {
-                    //     document.getElementById("is_publish").setAttribute('checked', true);
-                    // } else {
-                    //     document.getElementById("is_publish").setAttribute('checked', false);
-                    // }
-                    localStorage.setItem("object_dir_files", rows[0]?.directorat)
-                    localStorage.setItem("prov_idfiles", rows[0]?.id_province);
-                    if (rows?.is_publish == 'on') {
-                        document.getElementById("publish_files").innerHTML = `
-                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" role="switch" name="is_publish" id="id_publish" checked>
-                                                <label class="form-check-label" for="publish"></label>
-                                              </div>`;
-                    } else {
-                        document.getElementById("publish_files").innerHTML = `
-                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" role="switch" name="is_publish" id="id_publish">
-                                                <label class="form-check-label" for="publish"></label>
-                                              </div>`;
-                    }
-                    document.getElementById("date").value = rows[0]?.date.split('.')[0];
-                    document.getElementById("previews").innerHTML = `${rows[0]?.file}`;
-                    document.getElementById("writers").value = rows[0]?.writer;
-                    document.getElementById("publishers").value = rows[0]?.publisher;
-                    document.getElementById("synopsist").value = rows[0]?.synopsis;
-                    document.getElementById("isbns").value = rows[0]?.isbn;
-                    document.getElementById("number_of_pagest").value = rows[0]?.number_of_pages;
-                    document.getElementById("widths").value = rows[0]?.width;
-                    document.getElementById("heights").value = rows[0]?.height;
-                    document.getElementById("passcode").value = rows[0]?.passcode;
-                    if (rows?.is_publish == 'on') {
-                        document.getElementById("downloadable").innerHTML = `
-                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" role="switch" name="downloadable" id="downloadable" checked>
-                                                <label class="form-check-label" for="downloadable"></label>
-                                              </div>`;
-                    } else {
-                        document.getElementById("downloadable").innerHTML = `
-                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" role="switch" name="downloadable" id="downloadable">
-                                                <label class="form-check-label" for="downloadable"></label>
-                                              </div>`;
-                    }
-                })
+        function getDates() {
+            var today = new Date();
+            document.getElementById("date").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2) + "T00:00";
         }
 
-        function getCategory() {
+        function fileCategory() {
             fetch('/files_category')
                 .then(response => response.json())
                 .then((data) => {
                     data.forEach(element => {
-                        const choosed = (element?.id == file_category_id) ? true : false;
                         const ddd = document.createElement('option')
                         ddd.value = `${element?.id}-${element?.title}`;
                         ddd.text = `${element?.title}`;
-                        ddd.selected = choosed
                         document.getElementById("file_category_id").append(ddd);
+                    });
+                })
+        }
+
+        function getDirectorat() {
+            fetch('/directorat_fe')
+                .then(res => res.json())
+                .then((qqq) => {
+                    qqq.forEach(items => {
+                        const aaa = document.createElement('option')
+                        aaa.value = `${items?.id}`;
+                        aaa.text = `${items?.title}`;
+                        document.getElementById("mySelect").append(aaa);
                     });
                 })
         }
@@ -396,6 +296,19 @@
                 })
         }
 
+        function getProvinces() {
+            fetch('/provinces')
+                .then(response => response.json())
+                .then((data) => {
+                    data.forEach(element => {
+                        const ddd = document.createElement('option')
+                        ddd.value = `${element?.id}`;
+                        ddd.text = `${element?.province_name}`;
+                        document.getElementById("mySelect2").append(ddd);
+                    });
+                })
+        }
+
         function upload_check() {
             var upl = document.getElementById("file_data");
             var max = document.getElementById("max_id").value;
@@ -407,7 +320,6 @@
 
             return true;
         };
-
     </script>
 </body>
 
