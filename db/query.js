@@ -952,6 +952,16 @@ const multi_structure = async (req, res) => {
     }
 }
 
+
+const detail_multi_structure = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM  " + req.query.tbl + " where id = $1", [req.query.keyid]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
 //::::::::::::::::::::::::::::::End Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of DIREKTORAT :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const directorat = async (req, res) => {
@@ -4003,6 +4013,7 @@ module.exports = {
     updateanggota,
     subanggota,
     multi_structure,
+    detail_multi_structure,
     deletesubanggota,
     detailsubanggota,
     insertsubanggota,

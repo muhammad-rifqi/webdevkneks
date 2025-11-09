@@ -1699,6 +1699,8 @@ apps.post('/updatesubanggota', structure_path.single('photo'), db.updatesubanggo
 
 apps.get('/multistructure', db.multi_structure);
 
+apps.get('/detailmultistructure', db.detail_multi_structure);
+
 //::::::::::::::: Api & Query DB HOT ISSUE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/directorat', db.directorat);
