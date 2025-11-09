@@ -907,6 +907,51 @@ const updatesubanggota = async (req, res) => {
     }
 }
 
+const multi_structure = async (req, res) => {
+    try {
+        const og = await executeQuery("SELECT * FROM pejabat WHERE id = 1 OR id = 7");
+        const ag = await executeQuery("SELECT * FROM anggota");
+        const sag = await executeQuery("SELECT * FROM sub_anggota");
+
+        const result = og.map(ogs => ({
+            id: ogs.id,
+            name: ogs.name,
+            position: ogs.position,
+            photo: ogs.photo,
+            web_identity: ogs.web_identity,
+            description: ogs.description,
+            is_publish: ogs.is_publish,
+            position_en: ogs.position_en,
+            description_en: ogs.description_en,
+            organization: ogs.organization,
+            directorat: ogs.directorat,
+            head: ogs.head,
+            ag: ag
+                .filter(ags => ags.id_pejabat === ogs.id)
+                .map(ags => ({
+                    id: ags.id,
+                    name: ags.name,
+                    position: ogs.position,
+                    photo: ogs.photo,
+                    web_identity: ogs.web_identity,
+                    description: ogs.description,
+                    is_publish: ogs.is_publish,
+                    position_en: ogs.position_en,
+                    description_en: ogs.description_en,
+                    organization: ogs.organization,
+                    directorat: ogs.directorat,
+                    head: ogs.head,
+                    sag: sag.filter(t => t.id_anggota === ags.id)
+                }))
+        }));
+
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Terjadi kesalahan server" });
+    }
+}
+
 //::::::::::::::::::::::::::::::End Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of DIREKTORAT :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const directorat = async (req, res) => {
@@ -3957,6 +4002,7 @@ module.exports = {
     insertanggota,
     updateanggota,
     subanggota,
+    multi_structure,
     deletesubanggota,
     detailsubanggota,
     insertsubanggota,
