@@ -203,7 +203,7 @@ if(path == 'nc_edit'){
 //--------------------------------Start Of Struktur----------------------
 if(path == 's'){
     breadcrumb0 = "Struktur";
-    breadcrumb1 = "Pejabat";
+    breadcrumb1 = "Organisasi";
     breadcrumb2 = "";
     linkto = "/s";
 
@@ -211,15 +211,15 @@ if(path == 's'){
 
 if(path == 's_add'){
     breadcrumb0 = "Struktur";
-    breadcrumb1 = "Pejabat";
-    breadcrumb2 = "Tambah Pejabat";
+    breadcrumb1 = "Organisasi";
+    breadcrumb2 = "Tambah Organisasi";
     linkto = "/s";
 }
 
 if(path == 's_edit'){
     breadcrumb0 = "Struktur";
-    breadcrumb1 = "Pejabat";
-    breadcrumb2 = "Ubah Pejabat";
+    breadcrumb1 = "Organisasi";
+    breadcrumb2 = "Ubah Organisasi";
     linkto = "/s";
 }
 
@@ -241,6 +241,46 @@ if(path == 's_logo_add'){
     breadcrumb1 = "Struktur";
     breadcrumb2 = "Tambah Struktur";
     linkto = "/s_logo";
+}
+
+if(path == 'anggota'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Anggota";
+    breadcrumb2 = "";
+    linkto = "#";
+}
+
+if(path == 'anggota_edit'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Anggota";
+    breadcrumb2 = "Ubah Anggota";
+    linkto = "/anggota";
+}
+if(path == 'anggota_add'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Anggota";
+    breadcrumb2 = "Tambah Anggota";
+    linkto = "/anggota";
+}
+
+if(path == 'sub_anggota'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Head";
+    breadcrumb2 = "";
+    linkto = "#";
+}
+
+if(path == 'sub_anggota_edit'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Head";
+    breadcrumb2 = "Ubah Head";
+    linkto = "/sub_anggota";
+}
+if(path == 'sub_anggota_add'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Head";
+    breadcrumb2 = "Tambah Head";
+    linkto = "/sub_anggota";
 }
 //------------------------------- End Of Struktur -----------------------------
 //-------------------------------- Start Of Opini ----------------------

@@ -92,70 +92,70 @@ const do_login = async (req, res) => {
     } else {
         const query = await executeQuery("SELECT * FROM ip_address where  ip = $1 AND ip_address.approve = $2", [ip, 'Y']);
         if (query.length > 0) {
-        const sql = await executeQuery("SELECT * FROM users where  email = $1  AND users.approve = 'Y'", [email]);
-        if (sql?.length > 0) {
-            const match2 = await bcrypt.compare(password, sql[0]?.password);
-            if (match2) {
-                u_id = sql[0]?.id;
-                const isLogin = true;
-                res.cookie("islogin", isLogin, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("id", sql[0]?.id, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("name", sql[0]?.name, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("roles_id", sql[0]?.role_id, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("id_province", sql[0]?.id_province, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("directorat_id", sql[0]?.directorat_id, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                // res.redirect("/dashboard");
-                res.status(200).json({ "success": "true" })
+            const sql = await executeQuery("SELECT * FROM users where  email = $1  AND users.approve = 'Y'", [email]);
+            if (sql?.length > 0) {
+                const match2 = await bcrypt.compare(password, sql[0]?.password);
+                if (match2) {
+                    u_id = sql[0]?.id;
+                    const isLogin = true;
+                    res.cookie("islogin", isLogin, {
+                        maxAge: 900000,
+                        domain: '.kneks.go.id',
+                        secure: true,
+                        httpOnly: false,
+                        sameSite: 'None',
+                        overwrite: true,
+                    });
+                    res.cookie("id", sql[0]?.id, {
+                        maxAge: 900000,
+                        domain: '.kneks.go.id',
+                        secure: true,
+                        httpOnly: false,
+                        sameSite: 'None',
+                        overwrite: true,
+                    });
+                    res.cookie("name", sql[0]?.name, {
+                        maxAge: 900000,
+                        domain: '.kneks.go.id',
+                        secure: true,
+                        httpOnly: false,
+                        sameSite: 'None',
+                        overwrite: true,
+                    });
+                    res.cookie("roles_id", sql[0]?.role_id, {
+                        maxAge: 900000,
+                        domain: '.kneks.go.id',
+                        secure: true,
+                        httpOnly: false,
+                        sameSite: 'None',
+                        overwrite: true,
+                    });
+                    res.cookie("id_province", sql[0]?.id_province, {
+                        maxAge: 900000,
+                        domain: '.kneks.go.id',
+                        secure: true,
+                        httpOnly: false,
+                        sameSite: 'None',
+                        overwrite: true,
+                    });
+                    res.cookie("directorat_id", sql[0]?.directorat_id, {
+                        maxAge: 900000,
+                        domain: '.kneks.go.id',
+                        secure: true,
+                        httpOnly: false,
+                        sameSite: 'None',
+                        overwrite: true,
+                    });
+                    // res.redirect("/dashboard");
+                    res.status(200).json({ "success": "true" })
+                } else {
+                    res.status(200).json({ "success": "false" })
+                }
+
             } else {
+                // res.redirect("/");
                 res.status(200).json({ "success": "false" })
             }
-
-        } else {
-            // res.redirect("/");
-            res.status(200).json({ "success": "false" })
-        }
         } else {
             const insert = await executeQuery("INSERT INTO ip_address(ip,email) VALUES ($1,$2)", [ip, email]);
             if (insert) {
@@ -712,6 +712,201 @@ const updatestructure = async (req, res) => {
         }
     }
 }
+
+//::::::::::::::::::::::::::::::::: Start Anggota ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+const anggota = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM  anggota order by id ASC");
+    if (sql?.length > 0) {
+        const array = [];
+        sql?.forEach((items, index) => {
+            const bbb = {
+                "id": items?.id,
+                "name": items?.name,
+                "position": items?.position,
+                "position_en": items?.position_en,
+                "photo": items?.photo,
+                "pht": items?.photo?.split('/')[5],
+                "description": items?.description,
+                "description_en": items?.description_en,
+                "is_publish": items?.is_publish,
+                "level": items?.level
+            };
+            array.push(bbb);
+        })
+        res.status(200).json(array)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
+}
+// he.encode(req.body.description)
+const insertanggota = async (req, res) => {
+    const fileuploads = site_url + "/uploads/structure/" + req.file.filename;
+    const sql = await executeQuery("insert into anggota(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head, id_pejabat) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
+        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id_pejabat]);
+    if (sql) {
+        res.redirect('/anggota');
+    } else {
+        console.log(sql);
+        res.redirect('/anggota');
+    }
+}
+
+const deleteanggota = async (req, res) => {
+    const id_pejabat = req.params.id;
+    const foto_pejabat = req.params.foto;
+
+    if (fs.existsSync(fileslinux + 'structure/' + foto_pejabat)) {
+        fs.unlink(fileslinux + 'structure/' + foto_pejabat, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery("DELETE FROM  anggota where id=$1", [id_pejabat]);
+            if (sql) {
+                res.redirect('/anggota');
+            } else {
+                console.log(sql)
+                res.redirect('/anggota');
+            }
+        });
+    } else {
+        const sql = await executeQuery("DELETE FROM  anggota where id=$1", [id_pejabat]);
+        if (sql) {
+            res.redirect('/anggota');
+        } else {
+            console.log(sql);
+        }
+    }
+
+}
+
+const detailanggota = async (req, res) => {
+    const id_abouts = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  anggota where id=$1', [id_abouts]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const updateanggota = async (req, res) => {
+    if (!req.file || req.file == "" || req.file == undefined) {
+        const sql = await executeQuery("update anggota set name=$1,position=$2,position_en=$3,description=$4,description_en=$5,is_publish=$6,organization=$7,directorat=$8,head=$9,id_pejabat=$10 where id = $11",
+            [req.body.name, req.body.position, req.body.position_en, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id_pejabat, req.body.id]);
+        if (sql) {
+            res.redirect('/anggota');
+        } else {
+            res.redirect('/anggota');
+        }
+    } else {
+        const fileuploads = site_url + "/uploads/structure/" + req.file.filename;
+        const sql = await executeQuery("update anggota set name=$1,position=$2,position_en=$3,photo=$4,description=$5, description_en=$6,is_publish=$7,organization=$8,directorat=$9,head=$10,id_pejabat=$11  where id=$12",
+            [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id_pejabat, req.body.id]);
+        if (sql) {
+            res.redirect('/anggota');
+        } else {
+            res.redirect('/anggota');
+        }
+    }
+}
+
+//::::::::::::::::::::::::::::::::: Start Sub Anggota ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+const subanggota = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM  sub_anggota order by id ASC");
+    if (sql?.length > 0) {
+        const array = [];
+        sql?.forEach((items, index) => {
+            const bbb = {
+                "id": items?.id,
+                "name": items?.name,
+                "position": items?.position,
+                "position_en": items?.position_en,
+                "photo": items?.photo,
+                "pht": items?.photo?.split('/')[5],
+                "description": items?.description,
+                "description_en": items?.description_en,
+                "is_publish": items?.is_publish,
+                "level": items?.level
+            };
+            array.push(bbb);
+        })
+        res.status(200).json(array)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
+}
+// he.encode(req.body.description)
+const insertsubanggota = async (req, res) => {
+    const fileuploads = site_url + "/uploads/structure/" + req.file.filename;
+    const sql = await executeQuery("insert into sub_anggota(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head, id_anggota) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
+        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id_anggota]);
+    if (sql) {
+        res.redirect('/sub_anggota');
+    } else {
+        console.log(sql);
+        res.redirect('/sub_anggota');
+    }
+}
+
+const deletesubanggota = async (req, res) => {
+    const id_pejabat = req.params.id;
+    const foto_pejabat = req.params.foto;
+
+    if (fs.existsSync(fileslinux + 'structure/' + foto_pejabat)) {
+        fs.unlink(fileslinux + 'structure/' + foto_pejabat, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery("DELETE FROM  sub_anggota where id=$1", [id_pejabat]);
+            if (sql) {
+                res.redirect('/sub_anggota');
+            } else {
+                console.log(sql)
+                res.redirect('/sub_anggota');
+            }
+        });
+    } else {
+        const sql = await executeQuery("DELETE FROM  sub_anggota where id=$1", [id_pejabat]);
+        if (sql) {
+            res.redirect('/sub_anggota');
+        } else {
+            console.log(sql);
+        }
+    }
+
+}
+
+const detailsubanggota = async (req, res) => {
+    const id_abouts = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  sub_anggota where id=$1', [id_abouts]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const updatesubanggota = async (req, res) => {
+    if (!req.file || req.file == "" || req.file == undefined) {
+        const sql = await executeQuery("update sub_anggota set name=$1,position=$2,position_en=$3,description=$4,description_en=$5,is_publish=$6,organization=$7,directorat=$8,head=$9,id_anggota=$10 where id = $11",
+            [req.body.name, req.body.position, req.body.position_en, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id_anggota, req.body.id]);
+        if (sql) {
+            res.redirect('/sub_anggota');
+        } else {
+            res.redirect('/sub_anggota');
+        }
+    } else {
+        const fileuploads = site_url + "/uploads/structure/" + req.file.filename;
+        const sql = await executeQuery("update sub_anggota set name=$1,position=$2,position_en=$3,photo=$4,description=$5, description_en=$6,is_publish=$7,organization=$8,directorat=$9,head=$10,id_anggota=$11  where id=$12",
+            [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id_anggota, req.body.id]);
+        if (sql) {
+            res.redirect('/sub_anggota');
+        } else {
+            res.redirect('/sub_anggota');
+        }
+    }
+}
+
 //::::::::::::::::::::::::::::::End Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of DIREKTORAT :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const directorat = async (req, res) => {
@@ -2498,7 +2693,7 @@ const changespassword = async (req, res) => {
             // console.log('success');
             res.redirect('/logout');
         } else {
-             res.redirect('/changespassword');
+            res.redirect('/changespassword');
             console.log('new password and password confirm not match !');
         }
     } else {
@@ -3756,6 +3951,16 @@ module.exports = {
     detailstructure,
     inserstructure,
     updatestructure,
+    anggota,
+    deleteanggota,
+    detailanggota,
+    insertanggota,
+    updateanggota,
+    subanggota,
+    deletesubanggota,
+    detailsubanggota,
+    insertsubanggota,
+    updatesubanggota,
     hotissue,
     hotissue_detail,
     hotissuecategory,

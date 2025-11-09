@@ -15,14 +15,14 @@
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/vendors/css/select2-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme.min.css" />
-    <!-- <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
+    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script>
     <script type="text/javascript">
         bkLib.onDomLoaded(function () {
             new nicEditor({ maxHeight: 100 }).panelInstance('editor1');
             new nicEditor({ maxHeight: 100 }).panelInstance('editor2');
         });
-    </script> -->
-    <script src="/assets/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    </script>
+    <!-- <script src="/assets/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
             selector: 'textarea',  // semua textarea akan diubah jadi TinyMCE
@@ -32,7 +32,7 @@
             toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist | code',
             readonly: false,
         });
-    </script>
+    </script> -->
 </head>
 
 <body>
@@ -57,7 +57,7 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/updatestructure" method="post" enctype="multipart/form-data">
+                        <form action="/updatesubanggota" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" id="id" value="">
                             <input type="hidden" id="max_id" name="MAX_FILE_SIZE" value="1048000" />
                             <div class="card stretch stretch-full">
@@ -116,11 +116,18 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label">-Direktorat-</label>
+                                            <select name="id_anggota" id="id_anggota" class="form-control">
+                                                <option value="--">-Pilih Pejabat-</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
                                             <label class="form-label">Tayang</label>
                                             <span id="publish_pejabat"></span>
                                         </div>
 
-                                        <div class="col-lg-12 mb-4">
+                                        <!-- <div class="col-lg-12 mb-4">
                                             <label class="form-label">Level</label>
                                             <p> <br>
                                                 <select name="organization" id="organization" class="form-control">
@@ -139,7 +146,7 @@
 
                                                 </select>
                                             </p>
-                                        </div>
+                                        </div> -->
 
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
@@ -179,7 +186,9 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         window.addEventListener("load", async () => {
+            let get_pejabat_dir;
             await getUrlById();
+            await getPejabatdirs();
             orgs();
             dir();
             // upload_check();
@@ -187,18 +196,19 @@
 
         function getUrlById() {
             const URLS = new URL(window.location.href);
-            fetch('/detailstructure/' + URLS.pathname.split('/')[2])
+            fetch('/detailsubanggota/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
+                    get_pejabat_dir = rows[0]?.id_anggota;
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("nama_pejabat").value = rows[0]?.name;
                     document.getElementById("position").value = rows[0]?.position;
                     document.getElementById("position_en").value = rows[0]?.position_en;
                     document.getElementById("preview").innerHTML = `<img src="${rows[0]?.photo}" width="180">`;
-                    tinymce.get('editor1')?.setContent(rows[0]?.description || '');
-                    tinymce.get('editor2')?.setContent(rows[0]?.description_en || '');
-                    // nicEditors.findEditor("editor1").setContent(rows[0]?.description);
-                    // nicEditors.findEditor("editor2").setContent(rows[0]?.description_en);
+                    // tinymce.get('editor1')?.setContent(rows[0]?.description || '');
+                    // tinymce.get('editor2')?.setContent(rows[0]?.description_en || '');
+                    nicEditors.findEditor("editor1").setContent(rows[0]?.description);
+                    nicEditors.findEditor("editor2").setContent(rows[0]?.description_en);
                     if (rows[0]?.is_publish == 'on') {
                         document.getElementById("publish_pejabat").innerHTML = `<div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="is_published" id="publish" checked> <label class="form-check-label" for="publish"></label></div>`;
                     } else {
@@ -207,38 +217,52 @@
                 })
         }
 
-        function orgs() {
-            var array1 = ["me", "set"];
-            for (let i = 0; i < array1.length; i++) {
-                const opt1 = document.createElement('option');
-                opt1.value = array1[i];
-                opt1.text = array1[i];;
-                document.getElementById("organization").append(opt1);
-            }
-        }
+        // function orgs() {
+        //     var array1 = ["me", "set"];
+        //     for (let i = 0; i < array1.length; i++) {
+        //         const opt1 = document.createElement('option');
+        //         opt1.value = array1[i];
+        //         opt1.text = array1[i];;
+        //         document.getElementById("organization").append(opt1);
+        //     }
+        // }
 
-        function dir() {
-            var array2 = ["kepala", "direktur", "kadiv"];
-            for (let index = 0; index < array2.length; index++) {
-                const opt2 = document.createElement('option');
-                opt2.value = array2[index];
-                opt2.text = array2[index];;
-                document.getElementById("directorat").append(opt2);
-            }
-        }
+        // function dir() {
+        //     var array2 = ["kepala", "direktur", "kadiv"];
+        //     for (let index = 0; index < array2.length; index++) {
+        //         const opt2 = document.createElement('option');
+        //         opt2.value = array2[index];
+        //         opt2.text = array2[index];;
+        //         document.getElementById("directorat").append(opt2);
+        //     }
+        // }
 
-        function pilihdir(e) {
-            if (e == 'kadiv') {
-                var array3 = ["kepala", "direktur", "kadiv"];
-                for (let indexs = 0; indexs < array3.length; indexs++) {
-                    const opt3 = document.createElement('option');
-                    opt3.value = array3[indexs];
-                    opt3.text = array3[indexs];;
-                    document.getElementById("head").append(opt3);
-                }
-            } else {
+        // function pilihdir(e) {
+        //     if (e == 'kadiv') {
+        //         var array3 = ["kepala", "direktur", "kadiv"];
+        //         for (let indexs = 0; indexs < array3.length; indexs++) {
+        //             const opt3 = document.createElement('option');
+        //             opt3.value = array3[indexs];
+        //             opt3.text = array3[indexs];;
+        //             document.getElementById("head").append(opt3);
+        //         }
+        //     } else {
 
-            }
+        //     }
+        // }
+
+           function getPejabatdirs() {
+            fetch('/anggotas')
+                .then(rf => rf.json())
+                .then((rfq) => {
+                    var htm = '';
+                    htm += `<option value="--">--Pilih Pejabat--</option>`;
+                    rfq.forEach(element => {
+                        var chs = (element?.id == get_pejabat_dir) ? "selected" : "";
+                        htm += `<option value="${element?.id}" ${chs}>${element?.name}</option>`;
+                    });
+                    document.getElementById("id_anggota").innerHTML = htm;
+                })
         }
 
         function upload_check() {

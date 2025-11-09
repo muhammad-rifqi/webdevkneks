@@ -61,7 +61,9 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                         </a>
                         <ul class="nxl-submenu">
                             <li class="nxl-item"><a class="nxl-link" href="/s_logo">Struktur</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/s">Pejabat</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/s">Organisasi</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/anggota">Direktorat</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/sub_anggota">Head</a></li>
                          </ul>
                     </li>`);
 }
@@ -70,7 +72,7 @@ if (cookie["roles_id"] == 3 || cookie["roles_id"] == 4) {
     document.write(`<li class="nxl-item nxl-hasmenu">
                         <a href="/s" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-bookmark"></i></span>
-                            Pejabat
+                            Organisasi
                         </a>
                     </li>`);
 }

@@ -42,7 +42,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/s_add'"> Tambah Pejabat
+                            <button class="btn btn-primary" onclick="window.location.href = '/anggota_add'"> Tambah Struktur Direktorat
                             </button>
                         </p>
                         <div class="card stretch stretch-full">
@@ -105,7 +105,7 @@
             // 2. Inisialisasi DataTable
             $('#structure').DataTable({
                 "ajax": {
-                    "url": "/structure",
+                    "url": "/anggotas",
                     "dataSrc": ""
                 },
                 "columns": [
@@ -161,7 +161,7 @@
             // 3. Event Listener untuk Tombol Edit
             $('#structure').on('click', '.edit-btn-structure', function () {
                 var id = $(this).data('id');
-                window.location.href = '/s_edit/' + id;
+                window.location.href = '/anggota_edit/' + id;
             });
 
             // 4. Event Listener untuk Tombol Hapus
@@ -177,7 +177,7 @@
                 })
                     .then((willOut) => {
                         if (willOut) {
-                            window.location = '/deletestructure/' + id + '/' + foto;
+                            window.location = '/deleteanggota/' + id + '/' + foto;
                         } else {
                             console.log('NaN')
                         }

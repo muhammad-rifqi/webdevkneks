@@ -456,6 +456,60 @@ apps.get('/s_logo_edit/:id', (req, res) => {
     }
 })
 
+apps.get('/anggota', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/struktur/anggota/list.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+apps.get('/anggota_add', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/struktur/anggota/add.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+apps.get('/anggota_edit/:id', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/struktur/anggota/edit.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+
+apps.get('/sub_anggota', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/struktur/sub_anggota/list.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+apps.get('/sub_anggota_add', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/struktur/sub_anggota/add.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+apps.get('/sub_anggota_edit/:id', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/struktur/sub_anggota/edit.html'));
+    } else {
+        res.redirect('/');
+    }
+})
 //:::::::::::::::::::::::::::: End Of Struktur ::::::::::::::::::::::::::::::::::::::::::::::
 //:::::::::::::::::::::::::::::Start Of Berita ::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/n', (req, res) => {
@@ -1621,6 +1675,27 @@ apps.get('/deletestructure/:id/:foto', db.deletestructure);
 apps.post('/insertstructure', structure_path.single('photo'), db.inserstructure);
 
 apps.post('/updatestructure', structure_path.single('photo'), db.updatestructure);
+
+apps.get('/anggotas', db.anggota);
+
+apps.get('/detailanggota/:id', db.detailanggota);
+
+apps.get('/deleteanggota/:id/:foto', db.deleteanggota);
+
+apps.post('/insertanggota', structure_path.single('photo'), db.insertanggota);
+
+apps.post('/updateanggota', structure_path.single('photo'), db.updateanggota);
+
+
+apps.get('/subanggotas', db.subanggota);
+
+apps.get('/detailsubanggota/:id', db.detailsubanggota);
+
+apps.get('/deletesubanggota/:id/:foto', db.deletesubanggota);
+
+apps.post('/insertsubanggota', structure_path.single('photo'), db.insertsubanggota);
+
+apps.post('/updatesubanggota', structure_path.single('photo'), db.updatesubanggota);
 
 //::::::::::::::: Api & Query DB HOT ISSUE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
