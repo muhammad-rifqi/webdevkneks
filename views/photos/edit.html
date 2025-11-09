@@ -199,25 +199,22 @@
             fetch('/photodetail/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
-                    const datas = rows[0];
+                    // const editor1 = tinymce.get('editor1');
+                    // const editor2 = tinymce.get('editor2');
 
-                    // Tunggu editor siap sebelum set konten
-                    const editor1 = tinymce.get('editor1');
-                    const editor2 = tinymce.get('editor2');
+                    // if (editor1 && editor2) {
+                    //     if (editor1.initialized) {
+                    //         editor1.setContent(datas?.content || '');
+                    //     } else {
+                    //         editor1.on('init', () => editor1.setContent(datas?.content || ''));
+                    //     }
 
-                    if (editor1 && editor2) {
-                        if (editor1.initialized) {
-                            editor1.setContent(datas?.content || '');
-                        } else {
-                            editor1.on('init', () => editor1.setContent(datas?.content || ''));
-                        }
-
-                        if (editor2.initialized) {
-                            editor2.setContent(datas?.content_en || '');
-                        } else {
-                            editor2.on('init', () => editor2.setContent(datas?.content_en || ''));
-                        }
-                    }
+                    //     if (editor2.initialized) {
+                    //         editor2.setContent(datas?.content_en || '');
+                    //     } else {
+                    //         editor2.on('init', () => editor2.setContent(datas?.content_en || ''));
+                    //     }
+                    // }
 
                     provinces_id = rows[0]?.id_province;
                     document.getElementById("id").value = rows[0]?.id;
@@ -228,6 +225,8 @@
                     localStorage.setItem("object_dir_photos", rows[0]?.directorat)
                     localStorage.setItem("prov_idphotos", rows[0]?.id_province);
                     // if (rows[0]?.is_publish == 1) {
+                    nicEditors.findEditor("editor3").setContent(rows[0]?.content);
+                    nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
                     if (rows[0]?.is_publish == 'on') {
                         document.getElementById("publish_photo").innerHTML = `
                                              <div class="form-check form-switch">
