@@ -931,16 +931,16 @@ const multi_structure = async (req, res) => {
                 .map(ags => ({
                     id: ags.id,
                     name: ags.name,
-                    position: ogs.position,
-                    photo: ogs.photo,
-                    web_identity: ogs.web_identity,
-                    description: ogs.description,
-                    is_publish: ogs.is_publish,
-                    position_en: ogs.position_en,
-                    description_en: ogs.description_en,
-                    organization: ogs.organization,
-                    directorat: ogs.directorat,
-                    head: ogs.head,
+                    position: ags.position,
+                    photo: ags.photo,
+                    web_identity: ags.web_identity,
+                    description: ags.description,
+                    is_publish: ags.is_publish,
+                    position_en: ags.position_en,
+                    description_en: ags.description_en,
+                    organization: ags.organization,
+                    directorat: ags.directorat,
+                    head: ags.head,
                     sag: sag.filter(t => t.id_anggota === ags.id)
                 }))
         }));
