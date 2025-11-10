@@ -910,7 +910,7 @@ const updatesubanggota = async (req, res) => {
 const multi_structure = async (req, res) => {
     try {
         const og = await executeQuery("SELECT * FROM pejabat WHERE id = 1 OR id = 7");
-        const ag = await executeQuery("SELECT * FROM anggota");
+        const ag = await executeQuery("SELECT * FROM anggota order by id ASC");
         const sag = await executeQuery("SELECT * FROM sub_anggota");
 
         const result = og.map(ogs => ({
