@@ -116,6 +116,28 @@
                                         </div>
 
                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> X (Sosmed)</label>
+                                            <input class="form-control" type="text" id="x" name="x">
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Facebook (Sosmed)</label>
+                                            <input class="form-control" type="text" id="facebook" name="facebook">
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Linkedin (Sosmed)</label>
+                                            <input class="form-control" type="text" id="linkedin" name="linkedin">
+                                        </div>
+
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Instagram (Sosmed)</label>
+                                            <input class="form-control" type="text" id="instagram" name="instagram">
+                                        </div>
+
+
+
+                                        <div class="col-lg-12 mb-4">
                                             <label class="form-label">Tayang</label>
                                             <span id="publish_pejabat"></span>
                                         </div>
@@ -199,6 +221,10 @@
                     // tinymce.get('editor2')?.setContent(rows[0]?.description_en || '');
                     nicEditors.findEditor("editor1").setContent(rows[0]?.description);
                     nicEditors.findEditor("editor2").setContent(rows[0]?.description_en);
+                    document.getElementById("x").value = rows[0]?.x;
+                    document.getElementById("facebook").value = rows[0]?.facebook;
+                    document.getElementById("linkedin").value = rows[0]?.linkedin;
+                    document.getElementById("instagram").value = rows[0]?.instagram;
                     if (rows[0]?.is_publish == 'on') {
                         document.getElementById("publish_pejabat").innerHTML = `<div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" name="is_published" id="publish" checked> <label class="form-check-label" for="publish"></label></div>`;
                     } else {
