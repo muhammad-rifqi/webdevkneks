@@ -2051,6 +2051,8 @@ apps.post('/updateprovince', db.updateprovinces);
 
 apps.get('/province_delete/:id', db.deleteprovinces);
 
+apps.post('/visits', db.pengunjung);
+
 apps.post('/acts_login', db.api_login);
 
 apps.get("/acts_logout", db.api_logout);

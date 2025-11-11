@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
 
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
 let fileslinux = '/var/www/html/webdevkneks/public/uploads/';
+let filepengunjung = '/var/www/html/webdevkneks/db/';
 // let site_url = "https://cms-demo.kneks.go.id";
 // let site_url = "https://cms-dev.kneks.go.id";
 let site_url = "https://cms.kneks.go.id";
@@ -3944,6 +3945,18 @@ const download_image_base64 = async (req, res) => {
     }
 }
 
+const pengunjung = (req, res) => {
+ let count = 0;
+  if (fs.existsSync(filepengunjung+"visits.json")) {
+    count = JSON.parse(fs.readFileSync("visits.json", "utf8")).count;
+  }
+  count += 1;
+  fs.writeFileSync("visits.json", JSON.stringify({ count }));
+  res.json({ totalVisits: count });
+}
+
+
+
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
 module.exports = {
     do_login,
@@ -4190,6 +4203,7 @@ module.exports = {
     menu_detail,
     submenu_detail,
     download_image_base64,
+    pengunjung,
     api_login,
     api_logout,
 }
