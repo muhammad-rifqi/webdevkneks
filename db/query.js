@@ -2008,7 +2008,7 @@ const updatefilescategory = async (req, res) => {
 const posts = async (req, res) => {
     const role_id_users = req.cookies.roles_id;
     if (role_id_users == '6') {
-        const result = await executeQuery("SELECT * FROM news where web_identity = 'kdeks' ORDER BY id ASC ");
+        const result = await executeQuery("SELECT * FROM news where web_identity = 'kdeks' ORDER BY news_datetime DESC");
         let promises = result.map(async (item) => {
             return new Promise(async (resolve, reject) => {
                 let r = await executeQuery("SELECT * FROM news_categories WHERE id = $1", [item.category_id]);
@@ -2044,7 +2044,7 @@ const posts = async (req, res) => {
             });
 
     } else {
-        const result = await executeQuery("SELECT * FROM news  where web_identity = 'kneks'  ORDER BY id ASC");
+        const result = await executeQuery("SELECT * FROM news  where web_identity = 'kneks'  ORDER BY news_datetime DESC");
         let promises = result.map(async (item) => {
             return new Promise(async (resolve, reject) => {
                 const parse = '[{"value":"kneks"},{"value":"kdeks"},{"value":"syariah"},{"value":"indonesia"}]';
@@ -2389,7 +2389,7 @@ const deletenewscategory = async (req, res) => {
 //::::::::::::::::::::::::::::::Start Of Photos:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const categories = async (req, res) => {
     const names = req.params.name;
-    const sql = await executeQuery('SELECT * FROM news_' + names + '')
+    const sql = await executeQuery('SELECT * FROM news_' + names + 'ORDER BY id DESC')
     if (sql?.length > 0) {
         if (names == 'photos') {
             const array = [];
