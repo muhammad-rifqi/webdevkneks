@@ -3951,7 +3951,7 @@ const pengunjung = (req, res) => {
     count = JSON.parse(fs.readFileSync("visits.json", "utf8")).count;
   }
   count += 1;
-  fs.writeFileSync("visits.json", JSON.stringify({ count }));
+  fs.writeFileSync(filepengunjung+"visits.json", JSON.stringify({ count }));
   res.json({ totalVisits: count });
 }
 
