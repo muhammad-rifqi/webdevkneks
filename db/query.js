@@ -2228,7 +2228,7 @@ const news_detailnewscategory_kdeks = async (req, res) => {
 
 const news_categories_menu = async (req, res) => {
     const id_cnm = req.params.id;
-    const sql = await executeQuery('SELECT * FROM  news where category_id=$1', [id_cnm]);
+    const sql = await executeQuery('SELECT * FROM  news where category_id=$1 ORDER BY news_datetime DESC', [id_cnm]);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
