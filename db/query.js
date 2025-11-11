@@ -3947,11 +3947,11 @@ const download_image_base64 = async (req, res) => {
 
 const pengunjung = (req, res) => {
  let count = 0;
-  if (fs.existsSync(filepengunjung+"visits.json")) {
+  if (fs.existsSync("visits.json")) {
     count = JSON.parse(fs.readFileSync("visits.json", "utf8")).count;
   }
   count += 1;
-  fs.writeFileSync(filepengunjung+"visits.json", JSON.stringify({ count }));
+  fs.writeFileSync("visits.json", JSON.stringify({ count }));
   res.json({ totalVisits: count });
 }
 
