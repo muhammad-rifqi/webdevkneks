@@ -2390,7 +2390,7 @@ const deletenewscategory = async (req, res) => {
 //::::::::::::::::::::::::::::::Start Of Photos:::::::::::::::::::::::::::::::::::::::::::::::::::::
 const categories = async (req, res) => {
     const names = req.params.name;
-    const sql = await executeQuery('SELECT * FROM news_' + names + 'ORDER BY id DESC')
+    const sql = await executeQuery('SELECT * FROM news_' + names)
     if (sql?.length > 0) {
         if (names == 'photos') {
             const array = [];
