@@ -26,7 +26,7 @@ apps.use(
     })
 )
 // apps.use(cors());
-const allowedOrigins = ["https://cms-demo.kneks.go.id","https://demo.kneks.go.id","https://cms-dev.kneks.go.id","https://dev.kneks.go.id","https://webdev.rifhandi.com","https://metabase.kneks.go.id","http://10.106.0.42:14061","http://10.106.0.42:4000","https://tes.kneks.go.id","http://10.106.0.40:21943","http://10.106.0.43:10371","http://10.106.0.45:13249","https://cms.kneks.go.id","https://kneks.go.id","http://www.kneks.go.id","https://kneks.go.id","http://localhost:3000"];
+const allowedOrigins = ["https://cms-demo.kneks.go.id","https://demo.kneks.go.id","https://cms-dev.kneks.go.id","https://dev.kneks.go.id","https://webdev.rifhandi.com","https://metabase.kneks.go.id","http://10.106.0.42:14061","http://10.106.0.42:4000","https://tes.kneks.go.id","http://10.106.0.40:21943","http://10.106.0.43:10371","http://10.106.0.45:13249","https://cms.kneks.go.id","https://kneks.go.id","https://www.kneks.go.id","https://kneks.go.id","http://localhost:3000"];
 apps.use(cors({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
