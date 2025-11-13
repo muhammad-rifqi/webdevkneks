@@ -997,7 +997,7 @@ const directorats_fe = async (req, res) => {
 
 const directorats_fe_news = async (req, res) => {
     const id_dirs = req.params.id;
-    const sql = await executeQuery("SELECT * FROM news where directorat LIKE '%" + id_dirs + "%' order by id ASC");
+    const sql = await executeQuery("SELECT * FROM news where directorat LIKE '%" + id_dirs + "%' ORDER news_datetime DESC");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1007,7 +1007,7 @@ const directorats_fe_news = async (req, res) => {
 
 const directorats_fe_photos = async (req, res) => {
     const id_dirs = req.params.id;
-    const sql = await executeQuery("SELECT * FROM news_photos where directorat LIKE '%" + id_dirs + "%' order by id ASC");
+    const sql = await executeQuery("SELECT * FROM news_photos where directorat LIKE '%" + id_dirs + "%' order by id DESC");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1017,7 +1017,7 @@ const directorats_fe_photos = async (req, res) => {
 
 const directorats_fe_videos = async (req, res) => {
     const id_dirs = req.params.id;
-    const sql = await executeQuery("SELECT * FROM news_videos where directorat LIKE '%" + id_dirs + "%' order by id ASC");
+    const sql = await executeQuery("SELECT * FROM news_videos where directorat LIKE '%" + id_dirs + "%' order by id DESC");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1027,7 +1027,7 @@ const directorats_fe_videos = async (req, res) => {
 
 const directorats_fe_opini = async (req, res) => {
     const id_dirs = req.params.id;
-    const sql = await executeQuery("SELECT * FROM opini where directorat LIKE '%" + id_dirs + "%' order by id ASC");
+    const sql = await executeQuery("SELECT * FROM opini where directorat LIKE '%" + id_dirs + "%' order by id DESC");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1037,7 +1037,7 @@ const directorats_fe_opini = async (req, res) => {
 
 const directorats_fe_files = async (req, res) => {
     const id_dirs = req.params.id;
-    const sql = await executeQuery("SELECT * FROM files where directorat LIKE '%" + id_dirs + "%' order by id ASC");
+    const sql = await executeQuery("SELECT * FROM files where directorat LIKE '%" + id_dirs + "%' order by id DESC");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
