@@ -997,7 +997,7 @@ const directorats_fe = async (req, res) => {
 
 const directorats_fe_news = async (req, res) => {
     const id_dirs = req.params.id;
-    const sql = await executeQuery("SELECT * FROM news where directorat LIKE '%" + id_dirs + "%' ORDER news_datetime DESC");
+    const sql = await executeQuery("SELECT * FROM news where directorat LIKE '%" + id_dirs + "%' ORDER by news_datetime DESC");
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
