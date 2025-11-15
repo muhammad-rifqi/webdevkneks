@@ -57,16 +57,16 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/insertsubanggota" method="post" enctype="multipart/form-data">
+                        <form action="/insertsubanggotakdeks" method="post" enctype="multipart/form-data">
                             <input type="hidden" id="max_id" name="MAX_FILE_SIZE" value="1048000" />
                             <div class="card stretch stretch-full">
                                 <div class="card-body lead-status">
                                     <div class="mb-5 d-flex align-items-center justify-content-between">
                                         <h5 class="fw-bold mb-0 me-4">
-                                            <span class="d-block mb-2">Tambah Pejabat :</span>
+                                            <span class="d-block mb-2">Tambah Pejabat KDEKS :</span>
                                             <span class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
                                                 Tambah
-                                                Pejabat Di Bawah Ini</span>
+                                                Pejabat KDEKS Di Bawah Ini</span>
                                         </h5>
                                     </div>
                                     <div class="row">
@@ -124,30 +124,6 @@
                                             </div>
                                         </div>
 
-                                        <!-- <div class="col-lg-12 mb-4">
-                                            <label class="form-label">Level</label>
-                                            <p> <br>
-                                                <select name="organization" id="organization" class="form-control"
-                                                    onchange="pilihdirektorat()">
-                                                    <option value="--">-Organisasi-</option>
-                                                    <option value="me">ME</option>
-                                                    <option value="set">SET</option>
-                                                </select>
-                                            </p>
-                                            <p>
-                                                <select name="directorat" id="directorat" class="form-control"
-                                                    onchange="pilihhead(this.value)">
-                                                    <option value="--">-Direktorat-</option>
-                                                </select>
-                                            <p>
-                                            <p>
-                                                <select name="head" id="head" class="form-control">
-                                                    <option value="--">-Head-</option>
-                                                </select>
-                                            </p>
-                                        </div> -->
-
-
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <input class="btn btn-primary" type="submit" value="Simpan">
@@ -190,34 +166,9 @@
             await upload_check();
         })
 
-        // function pilihdirektorat() {
-        //     document.getElementById("directorat").innerHTML = `
-        //         <option value="null">-Direktorat-</option>
-        //         <option value="kepala">Kepala</option>
-        //         <option value="direktur">Direktur</option>
-        //         <option value="kadiv">Kadiv</option>`;
-        // }
-
-        // function pilihhead(e) {
-        //     if (e == 'kadiv') {
-        //         // fetch('/structure')
-        //         //     .then(response => response.json())
-        //         //     .then((data) => {
-        //         //         var aaa = '';
-        //         //         data.forEach(element => {
-        //         //             aaa += '<option value=' + element?.name + '>' + element?.name + '</option>';
-        //         //         });
-        //         //         document.getElementById("head").innerHTML = aaa;
-        //         //     })
-        //         document.getElementById("head").innerHTML = `<option value="kadiv">Head</option>`;
-        //     } else {
-        //         document.getElementById("head").innerHTML = `<option value="null">-Head-</option>`;
-        //     }
-        // }
-
-
+    
           function getPejabatdir() {
-            fetch('/anggotas')
+            fetch('/anggotaskdeks')
                 .then(rf => rf.json())
                 .then((rfq) => {
                     var htm = '';

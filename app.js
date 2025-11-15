@@ -1655,7 +1655,7 @@ apps.post('/insertsubanggotakdeks', structure_path_kdeks.single('photo'), db.ins
 
 apps.post('/updatesubanggotakdeks', structure_path_kdeks.single('photo'), db.updatesubanggotakdeks);
 
-apps.get('/multistructurekdeks', db.multi_structure_kdeks);
+apps.get('/multistructurekdeks/:id', db.multi_structure_kdeks);
 
 apps.get('/detailmultistructurekdeks', db.detail_multi_structure_kdeks);
 //:::::::::::::::::::::::::::::::: End Of Kdeks Structure :::::::::::::::::::::::::::::::::::::
@@ -2197,4 +2197,4 @@ apps.get("/acts_logout", db.api_logout);
 //50567 stag
 //10371 prod
 //13249 prod admin
-apps.listen(3000);
+apps.listen(10371);

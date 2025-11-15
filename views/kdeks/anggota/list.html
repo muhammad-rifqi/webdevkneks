@@ -42,7 +42,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/anggota_add'"> Tambah Struktur Direktorat
+                            <button class="btn btn-primary" onclick="window.location.href = '/anggota_kdeks_add'"> Tambah Struktur Direktorat KDEKS
                             </button>
                         </p>
                         <div class="card stretch stretch-full">
@@ -105,7 +105,7 @@
             // 2. Inisialisasi DataTable
             $('#structure').DataTable({
                 "ajax": {
-                    "url": "/anggotas",
+                    "url": "/anggotaskdeks",
                     "dataSrc": ""
                 },
                 "columns": [
@@ -161,7 +161,7 @@
             // 3. Event Listener untuk Tombol Edit
             $('#structure').on('click', '.edit-btn-structure', function () {
                 var id = $(this).data('id');
-                window.location.href = '/anggota_edit/' + id;
+                window.location.href = '/anggota_kdeks_edit/' + id;
             });
 
             // 4. Event Listener untuk Tombol Hapus
@@ -177,7 +177,7 @@
                 })
                     .then((willOut) => {
                         if (willOut) {
-                            window.location = '/deleteanggota/' + id + '/' + foto;
+                            window.location = '/deleteanggotakdeks/' + id + '/' + foto;
                         } else {
                             console.log('NaN')
                         }
