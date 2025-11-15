@@ -107,7 +107,7 @@
 
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label">Provisi )*</label>
-                                            <select class="form-control" name="id_province" id="id_prov" required>
+                                            <select class="form-control" name="id_provincet" id="id_prov" required>
                                                 <option value="0">Pilih Provinsi</option>
                                             </select>
                                         </div>
@@ -196,7 +196,7 @@
                 .then((data) => {
                     data.forEach(element => {
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}-${element?.province_name}`;
+                        ddd.value = `${element?.id}`;
                         ddd.text = `${element?.province_name}`;
                         document.getElementById("id_prov").append(ddd);
                     });

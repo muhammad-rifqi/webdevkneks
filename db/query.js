@@ -607,8 +607,8 @@ const structurekdeks = async (req, res) => {
 // he.encode(req.body.description)
 const inserstructurekdeks = async (req, res) => {
     const fileuploads = site_url + "/uploads/structure_kdeks/" + req.file.filename;
-    const sql = await executeQuery("insert into pejabat_kdeks(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
-        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? ""]);
+    const sql = await executeQuery("insert into pejabat_kdeks(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head, id_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
+        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "" , req.body.id_province]);
     if (sql) {
         res.redirect('/s_kdeks');
     } else {
@@ -655,8 +655,8 @@ const detailstructurekdeks = async (req, res) => {
 
 const updatestructurekdeks = async (req, res) => {
     if (!req.file || req.file == "" || req.file == undefined) {
-        const sql = await executeQuery("update pejabat_kdeks set name=$1,position=$2,position_en=$3,description=$4,description_en=$5,is_publish=$6,organization=$7,directorat=$8,head=$9,x=$10,facebook=$11,linkedin=$12,instagram=$13 where id = $14",
-            [req.body.name, req.body.position, req.body.position_en, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", req.body.id]);
+        const sql = await executeQuery("update pejabat_kdeks set name=$1,position=$2,position_en=$3,description=$4,description_en=$5,is_publish=$6,organization=$7,directorat=$8,head=$9,x=$10,facebook=$11,linkedin=$12,instagram=$13,id_province=$14 where id = $15",
+            [req.body.name, req.body.position, req.body.position_en, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", req.body.id_province ?? "0", req.body.id]);
         if (sql) {
             res.redirect('/s_kdeks');
         } else {
@@ -664,8 +664,8 @@ const updatestructurekdeks = async (req, res) => {
         }
     } else {
         const fileuploads = site_url + "/uploads/structure_kdeks/" + req.file.filename;
-        const sql = await executeQuery("update pejabat_kdeks set name=$1,position=$2,position_en=$3,photo=$4,description=$5, description_en=$6,is_publish=$7,organization=$8,directorat=$9,head=$10,x=$11,facebook=$12,linkedin=$13,instagram=$14  where id=$15",
-            [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", req.body.id]);
+        const sql = await executeQuery("update pejabat_kdeks set name=$1,position=$2,position_en=$3,photo=$4,description=$5, description_en=$6,is_publish=$7,organization=$8,directorat=$9,head=$10,x=$11,facebook=$12,linkedin=$13,instagram=$14,id_province=$15  where id=$16",
+            [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", req.body.id_province ?? "0", req.body.id]);
         if (sql) {
             res.redirect('/s_kdeks');
         } else {
