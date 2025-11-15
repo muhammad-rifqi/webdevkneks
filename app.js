@@ -118,6 +118,20 @@ let structure_path = multer({
         checkFileType(file, cb);
     }
 });
+//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+let drive_kdeks = multer.diskStorage(
+    {
+        destination: './public/uploads/structure_kdeks/',
+        filename: function (req, file, cb) {
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+        }
+    }
+);
+let structure_path_kdeks = multer({
+    storage: drive_kdeks, fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+});
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 let drives = multer.diskStorage(
@@ -1609,6 +1623,42 @@ apps.get('/api_kdeks_list', db.abouts_kdeks_list);
 apps.post('/updateaboutkdeks', db.updateaboutskdeks);
 
 apps.get('/delete_about_kdeks/:id', db.deleteaboutkdeks);
+
+//:::::::::::::::::::::::::::::: Start Of Kdeks Structure ::::::::::::::::::::::::::::::::::::::
+apps.get('/structurekdeks', db.structurekdeks);
+
+apps.get('/detailstructurekdeks/:id', db.detailstructurekdeks);
+
+apps.get('/deletestructurekdeks/:id/:foto', db.deletestructurekdeks);
+
+apps.post('/insertstructurekdeks', structure_path_kdeks.single('photo'), db.inserstructurekdeks);
+
+apps.post('/updatestructurekdeks', structure_path_kdeks.single('photo'), db.updatestructurekdeks);
+
+apps.get('/anggotaskdeks', db.anggotakdeks);
+
+apps.get('/detailanggotakdeks/:id', db.detailanggotakdeks);
+
+apps.get('/deleteanggotakdeks/:id/:foto', db.deleteanggotakdeks);
+
+apps.post('/insertanggotakdeks', structure_path_kdeks.single('photo'), db.insertanggotakdeks);
+
+apps.post('/updateanggotakdeks', structure_path_kdeks.single('photo'), db.updateanggotakdeks);
+
+apps.get('/subanggotaskdeks', db.subanggotakdeks);
+
+apps.get('/detailsubanggotakdeks/:id', db.detailsubanggotakdeks);
+
+apps.get('/deletesubanggotakdeks/:id/:foto', db.deletesubanggotakdeks);
+
+apps.post('/insertsubanggotakdeks', structure_path_kdeks.single('photo'), db.insertsubanggotakdeks);
+
+apps.post('/updatesubanggotakdeks', structure_path_kdeks.single('photo'), db.updatesubanggotakdeks);
+
+apps.get('/multistructurekdeks', db.multi_structure_kdeks);
+
+apps.get('/detailmultistructurekdeks', db.detail_multi_structure_kdeks);
+//:::::::::::::::::::::::::::::::: End Of Kdeks Structure :::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::: KDEKS :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/api_dashboard', db.data_dashboard);
@@ -1771,7 +1821,6 @@ apps.get('/deleteanggota/:id/:foto', db.deleteanggota);
 apps.post('/insertanggota', structure_path.single('photo'), db.insertanggota);
 
 apps.post('/updateanggota', structure_path.single('photo'), db.updateanggota);
-
 
 apps.get('/subanggotas', db.subanggota);
 
