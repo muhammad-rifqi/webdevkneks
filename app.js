@@ -1037,6 +1037,92 @@ apps.get('/province_edit/:id', (req, res) => {
     }
 })
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::End Of Province Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::::::::::::::::::::::::: Struktur Organisasi KDEKS ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.get('/s_kdeks', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/pejabat/list.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+apps.get('/s_kdeks_add', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/pejabat/list.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+apps.get('/s_kdeks_edit/:id', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/pejabat/edit.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+apps.get('/anggota_kdeks', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/anggota/list.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+apps.get('/anggota_kdeks_add', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/anggota/add.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+apps.get('/anggota_kdeks_edit/:id', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/anggota/edit.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+
+apps.get('/sub_anggota_kdeks', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/sub_anggota/list.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+apps.get('/sub_anggota_kdeks_add', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/sub_anggota/add.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+apps.get('/sub_anggota_kdeks_edit/:id', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 3 || role_id_users == 4) { // kondisi.
+        res.sendFile(path.resolve('./views/kdeks/sub_anggota/edit.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::: End Of Struktur Organiasi :::::::::::::::::::::::::::::::::::::::::::::::
 // :::::::::::::::::::::::::::::::::::::::::::::::::::: Start Of Zona Khas :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/zk', (req, res) => {
     const role_id_users = req.cookies.roles_id;

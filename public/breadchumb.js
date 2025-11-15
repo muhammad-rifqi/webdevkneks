@@ -575,6 +575,67 @@ if(path == 'province_edit'){
     breadcrumb2 = "Ubah Provinsi";
     linkto = "/province";
 }
+
+if(path == 's_kdeks_edit'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Organisasi";
+    breadcrumb2 = "Ubah Organisasi";
+    linkto = "/s_kdeks";
+}
+if(path == 'anggota_kdeks_add'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Organisasi";
+    breadcrumb2 = "Tambah Organisasi";
+    linkto = "/s_kdeks";
+}
+
+if(path == 's_kdeks'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Organisasi";
+    breadcrumb2 = "";
+    linkto = "#";
+}
+
+if(path == 'anggota_kdeks_edit'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Anggota";
+    breadcrumb2 = "Ubah Anggota";
+    linkto = "/anggota_kdeks";
+}
+if(path == 'anggota_kdeks_add'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Anggota";
+    breadcrumb2 = "Tambah Anggota";
+    linkto = "/anggota_kdeks";
+}
+
+if(path == 'anggota_kdeks'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Anggota";
+    breadcrumb2 = "";
+    linkto = "#";
+}
+
+if(path == 'sub_anggota_kdeks'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Head";
+    breadcrumb2 = "";
+    linkto = "#";
+}
+
+if(path == 'sub_anggota_kdeks_edit'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Head";
+    breadcrumb2 = "Ubah Head";
+    linkto = "/sub_anggota_kdeks";
+}
+if(path == 'sub_anggota_kdeks_add'){
+    breadcrumb0 = "Struktur";
+    breadcrumb1 = "Head";
+    breadcrumb2 = "Tambah Head";
+    linkto = "/sub_anggota_kdeks";
+}
+
 //-----------------------End Of KDEKS Master-----------------------------
 //------------------------ Zona Khas----------------------
 if(path == 'zk'){

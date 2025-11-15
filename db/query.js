@@ -617,6 +617,355 @@ const history_province_kdeks = async (req, res) => {
         res.status(200).json([])
     }
 }
+
+// :::::::::::::::::::::::::::::::::::::::: Star Of Pejabat Anggota dan Sub Anggota KDEKS :::::::::::::::::::::::::::::::::::::
+
+//::::::::::::::::::::::::::::::Start Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
+const structurekdeks = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM  pejabat_kdeks order by id ASC");
+    if (sql?.length > 0) {
+        const array = [];
+        sql?.forEach((items, index) => {
+            const bbb = {
+                "id": items?.id,
+                "name": items?.name,
+                "position": items?.position,
+                "position_en": items?.position_en,
+                "photo": items?.photo,
+                "pht": items?.photo?.split('/')[5],
+                "description": items?.description,
+                "description_en": items?.description_en,
+                "is_publish": items?.is_publish,
+                "level": items?.level
+            };
+            array.push(bbb);
+        })
+        res.status(200).json(array)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
+}
+// he.encode(req.body.description)
+const inserstructurekdeks = async (req, res) => {
+    const fileuploads = site_url + "/uploads/structure_kdeks/" + req.file.filename;
+    const sql = await executeQuery("insert into pejabat_kdeks(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
+        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? ""]);
+    if (sql) {
+        res.redirect('/s_kdeks');
+    } else {
+        console.log(sql);
+        res.redirect('/s_kdeks');
+    }
+}
+
+const deletestructurekdeks = async (req, res) => {
+    const id_pejabat = req.params.id;
+    const foto_pejabat = req.params.foto;
+
+    if (fs.existsSync(fileslinux + 'structure_kdeks/' + foto_pejabat)) {
+        fs.unlink(fileslinux + 'structure_kdeks/' + foto_pejabat, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery("DELETE FROM  pejabat_kdeks where id=$1", [id_pejabat]);
+            if (sql) {
+                res.redirect('/s_kdeks');
+            } else {
+                console.log(sql)
+                res.redirect('/s_kdeks');
+            }
+        });
+    } else {
+        const sql = await executeQuery("DELETE FROM  pejabat_kdeks where id=$1", [id_pejabat]);
+        if (sql) {
+            res.redirect('/s_kdeks');
+        } else {
+            console.log(sql);
+        }
+    }
+
+}
+
+const detailstructurekdeks = async (req, res) => {
+    const id_kd = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  pejabat_kdeks where id=$1', [id_kd]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const updatestructurekdeks = async (req, res) => {
+    if (!req.file || req.file == "" || req.file == undefined) {
+        const sql = await executeQuery("update pejabat_kdeks set name=$1,position=$2,position_en=$3,description=$4,description_en=$5,is_publish=$6,organization=$7,directorat=$8,head=$9,x=$10,facebook=$11,linkedin=$12,instagram=$13 where id = $14",
+            [req.body.name, req.body.position, req.body.position_en, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", req.body.id]);
+        if (sql) {
+            res.redirect('/s_kdeks');
+        } else {
+            res.redirect('/s_kdeks');
+        }
+    } else {
+        const fileuploads = site_url + "/uploads/structure_kdeks/" + req.file.filename;
+        const sql = await executeQuery("update pejabat_kdeks set name=$1,position=$2,position_en=$3,photo=$4,description=$5, description_en=$6,is_publish=$7,organization=$8,directorat=$9,head=$10,x=$11,facebook=$12,linkedin=$13,instagram=$14  where id=$15",
+            [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", req.body.id]);
+        if (sql) {
+            res.redirect('/s_kdeks');
+        } else {
+            res.redirect('/s_kdeks');
+        }
+    }
+}
+
+//::::::::::::::::::::::::::::::::: Start Anggota ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+const anggotakdeks = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM  anggota_kdeks order by id ASC");
+    if (sql?.length > 0) {
+        const array = [];
+        sql?.forEach((items, index) => {
+            const bbb = {
+                "id": items?.id,
+                "name": items?.name,
+                "position": items?.position,
+                "position_en": items?.position_en,
+                "photo": items?.photo,
+                "pht": items?.photo?.split('/')[5],
+                "description": items?.description,
+                "description_en": items?.description_en,
+                "is_publish": items?.is_publish,
+                "level": items?.level
+            };
+            array.push(bbb);
+        })
+        res.status(200).json(array)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
+}
+// he.encode(req.body.description)
+const insertanggotakdeks = async (req, res) => {
+    const fileuploads = site_url + "/uploads/structure_kdeks/" + req.file.filename;
+    const sql = await executeQuery("insert into anggota_kdeks(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head, id_pejabat) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
+        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id_pejabat]);
+    if (sql) {
+        res.redirect('/anggota_kdeks');
+    } else {
+        console.log(sql);
+        res.redirect('/anggota_kdeks');
+    }
+}
+
+const deleteanggotakdeks = async (req, res) => {
+    const id_pejabat = req.params.id;
+    const foto_pejabat = req.params.foto;
+
+    if (fs.existsSync(fileslinux + 'structure_kdeks/' + foto_pejabat)) {
+        fs.unlink(fileslinux + 'structure_kdeks/' + foto_pejabat, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery("DELETE FROM  anggota_kdeks where id=$1", [id_pejabat]);
+            if (sql) {
+                res.redirect('/anggota_kdeks');
+            } else {
+                console.log(sql)
+                res.redirect('/anggota_kdeks');
+            }
+        });
+    } else {
+        const sql = await executeQuery("DELETE FROM  anggota_kdeks where id=$1", [id_pejabat]);
+        if (sql) {
+            res.redirect('/anggota_kdeks');
+        } else {
+            console.log(sql);
+        }
+    }
+
+}
+
+const detailanggotakdeks = async (req, res) => {
+    const id_abouts = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  anggota_kdeks where id=$1', [id_abouts]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const updateanggotakdeks = async (req, res) => {
+    if (!req.file || req.file == "" || req.file == undefined) {
+        const sql = await executeQuery("update anggota_kdeks set name=$1,position=$2,position_en=$3,description=$4,description_en=$5,is_publish=$6,organization=$7,directorat=$8,head=$9,id_pejabat=$10,x=$11,facebook=$12,linkedin=$13,instagram=$14 where id = $15",
+            [req.body.name, req.body.position, req.body.position_en, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id_pejabat, req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", req.body.id]);
+        if (sql) {
+            res.redirect('/anggota_kdeks');
+        } else {
+            res.redirect('/anggota_kdeks');
+        }
+    } else {
+        const fileuploads = site_url + "/uploads/structure_kdeks/" + req.file.filename;
+        const sql = await executeQuery("update anggota_kdeks set name=$1,position=$2,position_en=$3,photo=$4,description=$5, description_en=$6,is_publish=$7,organization=$8,directorat=$9,head=$10,id_pejabat=$11,x=$12,facebook=$13,linkedin=$14,instagram=$15  where id=$16",
+            [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id_pejabat, req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", req.body.id]);
+        if (sql) {
+            res.redirect('/anggota_kdeks');
+        } else {
+            res.redirect('/anggota_kdeks');
+        }
+    }
+}
+
+//::::::::::::::::::::::::::::::::: Start Sub Anggota ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+const subanggotakdeks = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM  sub_anggota_kdeks order by id ASC");
+    if (sql?.length > 0) {
+        const array = [];
+        sql?.forEach((items, index) => {
+            const bbb = {
+                "id": items?.id,
+                "name": items?.name,
+                "position": items?.position,
+                "position_en": items?.position_en,
+                "photo": items?.photo,
+                "pht": items?.photo?.split('/')[5],
+                "description": items?.description,
+                "description_en": items?.description_en,
+                "is_publish": items?.is_publish,
+                "level": items?.level
+            };
+            array.push(bbb);
+        })
+        res.status(200).json(array)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
+}
+// he.encode(req.body.description)
+const insertsubanggotakdeks = async (req, res) => {
+    const fileuploads = site_url + "/uploads/structure_kdeks/" + req.file.filename;
+    const sql = await executeQuery("insert into sub_anggota_kdeks(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head, id_anggota) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
+        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id_anggota]);
+    if (sql) {
+        res.redirect('/sub_anggota_kdeks');
+    } else {
+        console.log(sql);
+        res.redirect('/sub_anggota_kdeks');
+    }
+}
+
+const deletesubanggotakdeks = async (req, res) => {
+    const id_pejabat = req.params.id;
+    const foto_pejabat = req.params.foto;
+
+    if (fs.existsSync(fileslinux + 'structure_kdeks/' + foto_pejabat)) {
+        fs.unlink(fileslinux + 'structure_kdeks/' + foto_pejabat, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery("DELETE FROM  sub_anggota_kdeks where id=$1", [id_pejabat]);
+            if (sql) {
+                res.redirect('/sub_anggota');
+            } else {
+                console.log(sql)
+                res.redirect('/sub_anggota');
+            }
+        });
+    } else {
+        const sql = await executeQuery("DELETE FROM  sub_anggota_kdeks where id=$1", [id_pejabat]);
+        if (sql) {
+            res.redirect('/sub_anggota_kdeks');
+        } else {
+            console.log(sql);
+        }
+    }
+
+}
+
+const detailsubanggotakdeks = async (req, res) => {
+    const id_sb = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  sub_anggota_kdeks where id=$1', [id_sb]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const updatesubanggotakdeks = async (req, res) => {
+    if (!req.file || req.file == "" || req.file == undefined) {
+        const sql = await executeQuery("update sub_anggota_kdeks set name=$1,position=$2,position_en=$3,description=$4,description_en=$5,is_publish=$6,organization=$7,directorat=$8,head=$9,id_anggota=$10,x=$11,facebook=$12,linkedin=$13,instagram=$14 where id = $15",
+            [req.body.name, req.body.position, req.body.position_en, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id_anggota, req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", req.body.id]);
+        if (sql) {
+            res.redirect('/sub_anggota_kdeks');
+        } else {
+            res.redirect('/sub_anggota_kdeks');
+        }
+    } else {
+        const fileuploads = site_url + "/uploads/structure_kdeks/" + req.file.filename;
+        const sql = await executeQuery("update sub_anggota_kdeks set name=$1,position=$2,position_en=$3,photo=$4,description=$5, description_en=$6,is_publish=$7,organization=$8,directorat=$9,head=$10,id_anggota=$11,x=$12,facebook=$13,linkedin=$14,instagram=$15  where id=$16",
+            [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.id_anggota, req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", req.body.id]);
+        if (sql) {
+            res.redirect('/sub_anggota_kdeks');
+        } else {
+            res.redirect('/sub_anggota_kdeks');
+        }
+    }
+}
+
+const multi_structure_kdeks = async (req, res) => {
+    try {
+        const og = await executeQuery("SELECT * FROM pejabat_kdeks where id_province = $1 ORDER BY id ASC", [req.params.id]);
+        const ag = await executeQuery("SELECT * FROM anggota_kdeks order by id ASC");
+        const sag = await executeQuery("SELECT * FROM sub_anggota_kdeks");
+
+        const result = og.map(ogs => ({
+            id: ogs.id,
+            name: ogs.name,
+            position: ogs.position,
+            photo: ogs.photo,
+            web_identity: ogs.web_identity,
+            description: ogs.description,
+            is_publish: ogs.is_publish,
+            position_en: ogs.position_en,
+            description_en: ogs.description_en,
+            organization: ogs.organization,
+            directorat: ogs.directorat,
+            head: ogs.head,
+            ag: ag
+                .filter(ags => ags.id_pejabat === ogs.id)
+                .map(ags => ({
+                    id: ags.id,
+                    name: ags.name,
+                    position: ags.position,
+                    photo: ags.photo,
+                    web_identity: ags.web_identity,
+                    description: ags.description,
+                    is_publish: ags.is_publish,
+                    position_en: ags.position_en,
+                    description_en: ags.description_en,
+                    organization: ags.organization,
+                    directorat: ags.directorat,
+                    head: ags.head,
+                    sag: sag.filter(t => t.id_anggota === ags.id)
+                }))
+        }));
+
+        res.json(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Terjadi kesalahan server" });
+    }
+}
+
+
+const detail_multi_structure_kdeks = async (req, res) => {
+    const sql = await executeQuery("SELECT * FROM  " + req.query.tbl + " where id = $1", [req.query.keyid]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+
 //::::::::::::::::::::::::::::::End Of Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Structure :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const structure = async (req, res) => {
@@ -3946,13 +4295,13 @@ const download_image_base64 = async (req, res) => {
 }
 
 const pengunjung = (req, res) => {
- let count = 0;
-  if (fs.existsSync("visits.json")) {
-    count = JSON.parse(fs.readFileSync("visits.json", "utf8")).count;
-  }
-  count += 1;
-  fs.writeFileSync("visits.json", JSON.stringify({ count }));
-  res.json({ totalVisits: count });
+    let count = 0;
+    if (fs.existsSync("visits.json")) {
+        count = JSON.parse(fs.readFileSync("visits.json", "utf8")).count;
+    }
+    count += 1;
+    fs.writeFileSync("visits.json", JSON.stringify({ count }));
+    res.json({ totalVisits: count });
 }
 
 
@@ -3999,6 +4348,23 @@ module.exports = {
     es_detailabouts,
     es_updateabouts,
     abouts,
+    structurekdeks,
+    deletestructurekdeks,
+    detailstructurekdeks,
+    inserstructurekdeks,
+    updatestructurekdeks,
+    anggotakdeks,
+    deleteanggotakdeks,
+    detailanggotakdeks,
+    insertanggotakdeks,
+    updateanggotakdeks,
+    subanggotakdeks,
+    deletesubanggotakdeks,
+    detailsubanggotakdeks,
+    insertsubanggotakdeks,
+    updatesubanggotakdeks,
+    multi_structure_kdeks,
+    detail_multi_structure_kdeks,
     abouts_kdeks,
     abouts_kdeks_list,
     history_kdeks,
@@ -4013,8 +4379,8 @@ module.exports = {
     deletekdeks,
     updateaboutskdeks,
     deleteaboutkdeks,
-    structure,
     kdeks,
+    structure,
     deletestructure,
     detailstructure,
     inserstructure,
@@ -4025,12 +4391,12 @@ module.exports = {
     insertanggota,
     updateanggota,
     subanggota,
-    multi_structure,
-    detail_multi_structure,
     deletesubanggota,
     detailsubanggota,
     insertsubanggota,
     updatesubanggota,
+    multi_structure,
+    detail_multi_structure,
     hotissue,
     hotissue_detail,
     hotissuecategory,

@@ -230,7 +230,10 @@ if (cookie["roles_id"] == 1 || cookie["roles_id"] == 2) {
                         <ul class="nxl-submenu">
                             <li class="nxl-item"><a class="nxl-link" href="/kdeks">Profil</a></li>
                             <li class="nxl-item"><a class="nxl-link" href="/master">KDEKS</a></li>
-                            <li class="nxl-item"><a class="nxl-link" href="/province">Master Provinsi</a></li>     
+                            <li class="nxl-item"><a class="nxl-link" href="/province">Master Provinsi</a></li>  
+                            <li class="nxl-item"><a class="nxl-link" href="/s_kdeks">Organisasi</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/anggota_kdeks">Direktorat</a></li>
+                            <li class="nxl-item"><a class="nxl-link" href="/sub_anggota_kdeks">Head</a></li>   
                             </ul>
                     </li>`);
 }
