@@ -582,7 +582,7 @@ if(path == 's_kdeks_edit'){
     breadcrumb2 = "Ubah Organisasi";
     linkto = "/s_kdeks";
 }
-if(path == 'anggota_kdeks_add'){
+if(path == 's_kdeks_add'){
     breadcrumb0 = "Struktur";
     breadcrumb1 = "Organisasi";
     breadcrumb2 = "Tambah Organisasi";

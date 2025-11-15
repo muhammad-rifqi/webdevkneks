@@ -1065,7 +1065,7 @@ apps.get('/s_kdeks', (req, res) => {
 apps.get('/s_kdeks_add', (req, res) => {
     const role_id_users = req.cookies.roles_id;
     if (role_id_users == 1 || role_id_users == 2) { // kondisi.
-        res.sendFile(path.resolve('./views/kdeks/pejabat/list.html'));
+        res.sendFile(path.resolve('./views/kdeks/pejabat/add.html'));
     } else {
         res.redirect('/');
     }
@@ -2197,4 +2197,4 @@ apps.get("/acts_logout", db.api_logout);
 //50567 stag
 //10371 prod
 //13249 prod admin
-apps.listen(10371);
+apps.listen(3000);
