@@ -652,7 +652,7 @@ const inserstructurekdeks = async (req, res) => {
     const splitprov = req.body.id_provincet.split('-');
     const fileuploads = site_url + "/uploads/structure_kdeks/" + req.file.filename;
     const sql = await executeQuery("insert into pejabat_kdeks(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head, id_province, name_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
-        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "" , splitprov[0], req.body.id_provincet]);
+        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "" , splitprov[0], splitprov[1]]);
     if (sql) {
         res.redirect('/s_kdeks');
     } else {
