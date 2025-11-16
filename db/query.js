@@ -5,7 +5,7 @@ const axios = require('axios');
 const puppeteer = require('puppeteer');
 const he = require('he');
 const bcrypt = require('bcrypt');
-
+const { getProvinceName } = require("./helper");
 
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
 let fileslinux = '/var/www/html/webdevkneks/public/uploads/';
@@ -626,6 +626,7 @@ const structurekdeks = async (req, res) => {
     if (sql?.length > 0) {
         const array = [];
         sql?.forEach((items, index) => {
+        const provinceName = getProvinceName(items?.id_province);
             const bbb = {
                 "id": items?.id,
                 "name": items?.name,
@@ -637,7 +638,8 @@ const structurekdeks = async (req, res) => {
                 "description_en": items?.description_en,
                 "is_publish": items?.is_publish,
                 "level": items?.level,
-                "id_prov": items?.id_province
+                "id_prov": items?.id_province,
+                "prov_name" : provinceName
             };
             array.push(bbb);
         })
