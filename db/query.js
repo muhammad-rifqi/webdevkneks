@@ -636,7 +636,8 @@ const structurekdeks = async (req, res) => {
                 "description": items?.description,
                 "description_en": items?.description_en,
                 "is_publish": items?.is_publish,
-                "level": items?.level
+                "level": items?.level,
+                "id_prov": items?.id_province
             };
             array.push(bbb);
         })
