@@ -3,12 +3,12 @@ const { executeQuery } = require('./postgres');
 async function getProvinceName(id) {
     try {
         const result = await executeQuery(
-            "SELECT name FROM provinces WHERE id = ? LIMIT 1",
+            "SELECT name FROM province WHERE id = ? LIMIT 1",
             [id]
         );
 
         if (result.length > 0) {
-            return result[0].name;
+            return result[0].province_name;
         }
 
         return null;
