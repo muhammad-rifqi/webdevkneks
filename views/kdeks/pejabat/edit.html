@@ -228,7 +228,7 @@
                     data.forEach(element => {
                         const choosed = (element?.id == id_prop) ? true : false;
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
+                        ddd.value = `${element?.id}-${element?.province_name}`;
                         ddd.text = `${element?.province_name}`;
                         ddd.selected = choosed
                         document.getElementById("provincesss").append(ddd);

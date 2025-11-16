@@ -196,7 +196,7 @@
                 .then((data) => {
                     data.forEach(element => {
                         const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
+                        ddd.value = `${element?.id}-${element?.province_name}`;
                         ddd.text = `${element?.province_name}`;
                         document.getElementById("id_prov").append(ddd);
                     });

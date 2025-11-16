@@ -5,7 +5,7 @@ const axios = require('axios');
 const puppeteer = require('puppeteer');
 const he = require('he');
 const bcrypt = require('bcrypt');
-const { getProvinceName } = require("./helper");
+
 
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
 let fileslinux = '/var/www/html/webdevkneks/public/uploads/';
@@ -626,7 +626,6 @@ const structurekdeks = async (req, res) => {
     if (sql?.length > 0) {
         const array = [];
         sql?.forEach((items, index) => {
-        const provinceName = getProvinceName(items?.id_province);
             const bbb = {
                 "id": items?.id,
                 "name": items?.name,
@@ -638,8 +637,7 @@ const structurekdeks = async (req, res) => {
                 "description_en": items?.description_en,
                 "is_publish": items?.is_publish,
                 "level": items?.level,
-                "id_prov": items?.id_province,
-                "prov_name" : provinceName
+                "id_prov": items?.id_province
             };
             array.push(bbb);
         })
@@ -651,9 +649,10 @@ const structurekdeks = async (req, res) => {
 }
 // he.encode(req.body.description)
 const inserstructurekdeks = async (req, res) => {
+    const splitprov = req.body.id_provincet.split('-');
     const fileuploads = site_url + "/uploads/structure_kdeks/" + req.file.filename;
-    const sql = await executeQuery("insert into pejabat_kdeks(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head, id_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
-        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "" , req.body.id_provincet]);
+    const sql = await executeQuery("insert into pejabat_kdeks(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head, id_province, name_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
+        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "" , splitprov[0], splitprov[1]]);
     if (sql) {
         res.redirect('/s_kdeks');
     } else {
@@ -699,9 +698,10 @@ const detailstructurekdeks = async (req, res) => {
 }
 
 const updatestructurekdeks = async (req, res) => {
+    const splitprov = req.body.id_province.split('-');
     if (!req.file || req.file == "" || req.file == undefined) {
-        const sql = await executeQuery("update pejabat_kdeks set name=$1,position=$2,position_en=$3,description=$4,description_en=$5,is_publish=$6,organization=$7,directorat=$8,head=$9,x=$10,facebook=$11,linkedin=$12,instagram=$13,id_province=$14 where id = $15",
-            [req.body.name, req.body.position, req.body.position_en, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", req.body.id_province ?? "0", req.body.id]);
+        const sql = await executeQuery("update pejabat_kdeks set name=$1,position=$2,position_en=$3,description=$4,description_en=$5,is_publish=$6,organization=$7,directorat=$8,head=$9,x=$10,facebook=$11,linkedin=$12,instagram=$13,id_province=$14,name_province=$15 where id = $16",
+            [req.body.name, req.body.position, req.body.position_en, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", splitprov[0] ?? "0", splitprov[1] ?? "0", req.body.id]);
         if (sql) {
             res.redirect('/s_kdeks');
         } else {
@@ -709,8 +709,8 @@ const updatestructurekdeks = async (req, res) => {
         }
     } else {
         const fileuploads = site_url + "/uploads/structure_kdeks/" + req.file.filename;
-        const sql = await executeQuery("update pejabat_kdeks set name=$1,position=$2,position_en=$3,photo=$4,description=$5, description_en=$6,is_publish=$7,organization=$8,directorat=$9,head=$10,x=$11,facebook=$12,linkedin=$13,instagram=$14,id_province=$15  where id=$16",
-            [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", req.body.id_province ?? "0", req.body.id]);
+        const sql = await executeQuery("update pejabat_kdeks set name=$1,position=$2,position_en=$3,photo=$4,description=$5, description_en=$6,is_publish=$7,organization=$8,directorat=$9,head=$10,x=$11,facebook=$12,linkedin=$13,instagram=$14,id_province=$15, name_province=$16  where id=$17",
+            [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-",  splitprov[0] ?? "0", splitprov[1] ?? "0", req.body.id]);
         if (sql) {
             res.redirect('/s_kdeks');
         } else {
