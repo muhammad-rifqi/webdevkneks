@@ -103,19 +103,18 @@
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        let provinsiMap = {};
-        async function loadProvinsi() {
-            const response = await fetch('/provinces');
-            const list = await response.json();
-
-            list.forEach(p => {
-                provinsiMap[p.id] = p.province_name;
-            });
+      async  function gantiNamaProv(id) {
+            return await fetch('/provinces')
+                .then(response => response.json())
+                .then((data) => {
+                    const provinsi = data.find(item => item.id === id);
+                    if (!provinsi) return 'Provinsi tidak ditemukan';
+                    return provinsi.name;
+                });
         }
     </script>
     <script>
         $(document).ready(function () {
-            loadProvinsi(); //
             // 2. Inisialisasi DataTable
             $('#structure').DataTable({
                 "ajax": {
@@ -140,7 +139,7 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return provinsiMap[data?.id_province] || '-';
+                           return gantiNamaProv(data?.id_province)
                         }
                     },
                     {
