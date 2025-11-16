@@ -42,7 +42,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>
-                            <button class="btn btn-primary" onclick="window.location.href = '/s_kdeks_add'"> Tambah Organisasi KDEKS
+                            <button class="btn btn-primary" onclick="window.location.href = '/s_kdeks_add'"> Tambah
+                                Organisasi KDEKS
                             </button>
                         </p>
                         <div class="card stretch stretch-full">
@@ -55,6 +56,7 @@
                                                 <th>Foto</th>
                                                 <th>Nama</th>
                                                 <th>Jabatan</th>
+                                                <th>Provinsi</th>
                                                 <th>Tayang</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -101,6 +103,17 @@
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
+        function gantiNamaProv(id) {
+            return fetch('/provinces')
+                .then(response => response.json())
+                .then((data) => {
+                    const provinsi = data.find(item => item.id === id);
+                    if (!provinsi) return 'Provinsi tidak ditemukan';
+                    return provinsi.name;
+                });
+        }
+    </script>
+    <script>
         $(document).ready(function () {
             // 2. Inisialisasi DataTable
             $('#structure').DataTable({
@@ -123,6 +136,12 @@
                     },
                     { "data": "name" },
                     { "data": "position" },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                           return gantiNamaProv(data?.id_province)
+                        }
+                    },
                     {
                         "data": null,
                         "render": function (data, type, row) {
