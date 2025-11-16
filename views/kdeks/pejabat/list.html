@@ -103,21 +103,19 @@
     <script src="/assets/js/theme-customizer-init.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        let daftarProvinsi = [];
-
-        async function loadProvinsi() {
-            const res = await fetch('/provinces');
-            daftarProvinsi = await res.json();
-        }
-
-        function getNamaProvinsi(id) {
-            const p = daftarProvinsi.find(x => x.id == id);
-            return p ? p.province_name : 'Tidak ditemukan';
+        function gantiNamaProv(id) {
+            return fetch('/provinces')
+                .then(response => response.json())
+                .then((data) => {
+                    const provinsi = data.find(item => item.id === id);
+                    if (!provinsi) return 'Provinsi tidak ditemukan';
+                    return provinsi.province_name;
+                });
         }
     </script>
     <script>
-        $(document).ready(async  function () {
-            await loadProvinsi();
+        $(document).ready(async function () {
+            console.log(gantiNamaProv(2));
             $('#structure').DataTable({
                 "ajax": {
                     "url": "/structurekdeks",
@@ -141,7 +139,7 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return getNamaProvinsi(data);
+                           return gantiNamaProv(data?.id_province)
                         }
                     },
                     {
