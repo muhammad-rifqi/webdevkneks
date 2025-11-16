@@ -109,7 +109,7 @@
                 .then((data) => {
                     const provinsi = data.find(item => item.id === id);
                     if (!provinsi) return 'Provinsi tidak ditemukan';
-                    return provinsi.name;
+                    return provinsi.province_name;
                 });
         }
     </script>
