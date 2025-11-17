@@ -4310,20 +4310,17 @@ const download_image_base64 = async (req, res) => {
 // }
 
 const pengunjung = async (req, res) => {
-    const query = `ALTER TABLE visitor_stats ADD CONSTRAINT unique_year_month UNIQUE (year, month);`;
-    await executeQuery(query, [year, month]);
-    res.json({ status: "ok" });
-    // try {
-    //     const now = new Date();
-    //     const year = now.getFullYear();
-    //     const month = now.getMonth() + 1;
-    //     const query = `INSERT INTO visitor_stats (year, month, visitor_count)VALUES ($1, $2, 1) ON CONFLICT (year, month) DO UPDATE SET visitor_count = visitor_stats.visitor_count + 1`;
-    //     await executeQuery(query, [year, month]);
-    //     res.json({ status: "ok" });
-    // } catch (err) {
-    //     console.error(err);
-    //     res.status(500).json({ error: "Server error" });
-    // }
+    try {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const query = `INSERT INTO visitor_stats (year, month, visitor_count)VALUES ($1, $2, 1) ON CONFLICT (year, month) DO UPDATE SET visitor_count = visitor_stats.visitor_count + 1`;
+        await executeQuery(query, [year, month]);
+        res.json({ status: "ok" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
 };
 
 const ambil_pengunjung = async (req, res) => {
