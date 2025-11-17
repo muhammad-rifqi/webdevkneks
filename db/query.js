@@ -5,6 +5,7 @@ const axios = require('axios');
 const puppeteer = require('puppeteer');
 const he = require('he');
 const bcrypt = require('bcrypt');
+const { exitCode } = require('process');
 
 
 // let fileswindows = 'D:/kneksbe/webdevkneks/public/uploads/';
@@ -32,53 +33,53 @@ const do_login = async (req, res) => {
                 u_id = sql[0]?.id;
                 const isLogin = true;
                 res.cookie("islogin", isLogin, {
-                        maxAge: 900000,
-                        domain: '.kneks.go.id',
-                        secure: true,
-                        httpOnly: false,
-                        sameSite: 'None',
-                        overwrite: true,
-                    });
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
                 res.cookie("id", sql[0]?.id, {
-                        maxAge: 900000,
-                        domain: '.kneks.go.id',
-                        secure: true,
-                        httpOnly: false,
-                        sameSite: 'None',
-                        overwrite: true,
-                    });
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
                 res.cookie("name", sql[0]?.name, {
-                        maxAge: 900000,
-                        domain: '.kneks.go.id',
-                        secure: true,
-                        httpOnly: false,
-                        sameSite: 'None',
-                        overwrite: true,
-                    });
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
                 res.cookie("roles_id", sql[0]?.role_id, {
-                        maxAge: 900000,
-                        domain: '.kneks.go.id',
-                        secure: true,
-                        httpOnly: false,
-                        sameSite: 'None',
-                        overwrite: true,
-                    });
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
                 res.cookie("id_province", sql[0]?.id_province, {
-                        maxAge: 900000,
-                        domain: '.kneks.go.id',
-                        secure: true,
-                        httpOnly: false,
-                        sameSite: 'None',
-                        overwrite: true,
-                    });
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
                 res.cookie("directorat_id", sql[0]?.directorat_id, {
-                        maxAge: 900000,
-                        domain: '.kneks.go.id',
-                        secure: true,
-                        httpOnly: false,
-                        sameSite: 'None',
-                        overwrite: true,
-                    });
+                    maxAge: 900000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
                 // res.redirect("/dashboard");
                 res.status(200).json({ "success": "true" })
             } else {
@@ -644,7 +645,7 @@ const structurekdeks = async (req, res) => {
         })
         res.status(200).json(array)
     } else {
-        res.status(200).json({ "success": false, "data" : [] })
+        res.status(200).json({ "success": false, "data": [] })
     }
 
 }
@@ -653,7 +654,7 @@ const inserstructurekdeks = async (req, res) => {
     const splitprov = req.body.id_provincet.split('-');
     const fileuploads = site_url + "/uploads/structure_kdeks/" + req.file.filename;
     const sql = await executeQuery("insert into pejabat_kdeks(name,position,position_en,photo,description,description_en,is_publish, organization, directorat, head, id_province, name_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
-        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "" , splitprov[0], splitprov[1]]);
+        [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", splitprov[0], splitprov[1]]);
     if (sql) {
         res.redirect('/s_kdeks');
     } else {
@@ -711,7 +712,7 @@ const updatestructurekdeks = async (req, res) => {
     } else {
         const fileuploads = site_url + "/uploads/structure_kdeks/" + req.file.filename;
         const sql = await executeQuery("update pejabat_kdeks set name=$1,position=$2,position_en=$3,photo=$4,description=$5, description_en=$6,is_publish=$7,organization=$8,directorat=$9,head=$10,x=$11,facebook=$12,linkedin=$13,instagram=$14,id_province=$15, name_province=$16  where id=$17",
-            [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-",  splitprov[0] ?? "0", splitprov[1] ?? "0", req.body.id]);
+            [req.body.name, req.body.position, req.body.position_en, fileuploads, req.body.description, req.body.description_en, req.body.is_published, req.body.organization ?? "", req.body.directorat ?? "", req.body.head ?? "", req.body.x ?? "-", req.body.facebook ?? "-", req.body.linkedin ?? "-", req.body.instagram ?? "-", splitprov[0] ?? "0", splitprov[1] ?? "0", req.body.id]);
         if (sql) {
             res.redirect('/s_kdeks');
         } else {
@@ -4298,14 +4299,33 @@ const download_image_base64 = async (req, res) => {
     }
 }
 
-const pengunjung = (req, res) => {
-    let count = 0;
-    if (fs.existsSync("visits.json")) {
-        count = JSON.parse(fs.readFileSync("visits.json", "utf8")).count;
+// const pengunjung = (req, res) => {
+//     let count = 0;
+//     if (fs.existsSync("visits.json")) {
+//         count = JSON.parse(fs.readFileSync("visits.json", "utf8")).count;
+//     }
+//     count += 1;
+//     fs.writeFileSync("visits.json", JSON.stringify({ count }));
+//     res.json({ totalVisits: count });
+// }
+
+const pengunjung = async (req, res) => {
+    try {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const query = `INSERT INTO visitor_stats (year, month, visitor_count)VALUES ($1, $2, 1) ON CONFLICT (year, month) DO UPDATE SET visitor_count = visitor_stats.visitor_count + 1`;
+        await executeQuery(query, [year, month]);
+        res.json({ status: "ok" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
     }
-    count += 1;
-    fs.writeFileSync("visits.json", JSON.stringify({ count }));
-    res.json({ totalVisits: count });
+};
+
+const ambil_pengunjung = async (req, res) => {
+    const [rows] = await executeQuery("SELECT * FROM visitor_stats ORDER BY year, month");
+    res.status(200).json(rows)
 }
 
 
@@ -4574,6 +4594,7 @@ module.exports = {
     submenu_detail,
     download_image_base64,
     pengunjung,
+    ambil_pengunjung,
     api_login,
     api_logout,
 }

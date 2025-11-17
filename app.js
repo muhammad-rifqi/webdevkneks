@@ -2186,7 +2186,9 @@ apps.post('/updateprovince', db.updateprovinces);
 
 apps.get('/province_delete/:id', db.deleteprovinces);
 
-apps.get('/visits', db.pengunjung);
+apps.post('/visits', db.pengunjung);
+
+apps.get('/visitors',db.ambil_pengunjung);
 
 apps.post('/acts_login', db.api_login);
 
