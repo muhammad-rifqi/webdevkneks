@@ -4319,7 +4319,7 @@ const pengunjung = async (req, res) => {
         res.json({ status: "ok" });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: err});
+        res.status(500).json({ error: err });
     }
 };
 
@@ -4339,7 +4339,12 @@ const pengunjung_tahunan = async (req, res) => {
 }
 
 const ambil_pengunjung = async (req, res) => {
-    const [rows] = await executeQuery("SELECT * FROM visitor_stats ORDER BY year, month");
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+
+    const query = "SELECT * FROM visitor_stats WHERE year = $1 AND month = $2";
+    const [rows] = await executeQuery(query, [year, month]);
     res.status(200).json(rows)
 }
 
