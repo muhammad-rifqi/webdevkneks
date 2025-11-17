@@ -4319,7 +4319,7 @@ const pengunjung = async (req, res) => {
         res.json({ status: "ok" });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Server error" });
+        res.status(500).json({ error: err});
     }
 };
 
