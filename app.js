@@ -2190,6 +2190,8 @@ apps.post('/visits', db.pengunjung);
 
 apps.get('/visitors',db.ambil_pengunjung);
 
+apps.get('/visitors_year',db.pengunjung_tahunan);
+
 apps.post('/acts_login', db.api_login);
 
 apps.get("/acts_logout", db.api_logout);

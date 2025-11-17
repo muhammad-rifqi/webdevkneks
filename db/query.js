@@ -4323,6 +4323,21 @@ const pengunjung = async (req, res) => {
     }
 };
 
+const pengunjung_tahunan = async (req, res) => {
+    try {
+        const query = `
+            SELECT year, SUM(visitor_count) AS total_visitor
+            FROM visitor_stats
+            GROUP BY year
+            ORDER BY year ASC;
+        `;
+        const result = await executeQuery(query);
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
+
 const ambil_pengunjung = async (req, res) => {
     const [rows] = await executeQuery("SELECT * FROM visitor_stats ORDER BY year, month");
     res.status(200).json(rows)
@@ -4595,6 +4610,7 @@ module.exports = {
     download_image_base64,
     pengunjung,
     ambil_pengunjung,
+    pengunjung_tahunan,
     api_login,
     api_logout,
 }
