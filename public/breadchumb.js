@@ -763,6 +763,27 @@ if(path == 'sm_edit'){
     linkto = "/sm";
 }
 //-----------------------End Of sosmed-----------------------------
+if(path == 'psm'){
+    breadcrumb0 = "Post";
+    breadcrumb1 = "Sosial Media";
+    breadcrumb2 = "";
+    linkto = "#";
+}
+
+if(path == 'psm_add' ){
+    breadcrumb0 = "Post";
+    breadcrumb1 = "Sosial Media";
+    breadcrumb2 = "Tambah Post Sosial Media";
+    linkto = "/psm";
+}
+
+if(path == 'psm_edit'){
+    breadcrumb0 = "Post";
+    breadcrumb1 = "Sosial Media";
+    breadcrumb2 = "Ubah Post Sosial Media";
+    linkto = "/psm";
+}
+
 //------------------------ KOntak----------------------
 if(path == 'c'){
     breadcrumb0 = "Profil";
