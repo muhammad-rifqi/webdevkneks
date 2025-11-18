@@ -1380,6 +1380,35 @@ apps.get('/sm_edit/:id', (req, res) => {
 })
 
 //::::::::::::::::::::::::::::::::::::::::::: End Of Social Media ::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::::::::::::::: Start Of Post Social Media ::::::::::::::::::::::::::::::::::::::::::::
+apps.get('/psm', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/post_sosmed/list.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+apps.get('/psm_add', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/post_sosmed/add.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+apps.get('/psm_edit/:id', (req, res) => {
+    const role_id_users = req.cookies.roles_id;
+    if (role_id_users == 1) { // kondisi.
+        res.sendFile(path.resolve('./views/profile/sosmed/edit.html'));
+    } else {
+        res.redirect('/');
+    }
+})
+
+//::::::::::::::::::::::::::::::::::::::::::: End Of Post Social Media ::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::::::::::::::: Contact ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 apps.get('/c', (req, res) => {
@@ -1936,6 +1965,18 @@ apps.get('/detailsosmed/:id', db.detailsosmed);
 apps.get('/deletesosmed/:id', db.deletesosmed);
 
 apps.post('/updatesosmed', db.updatesosmed);
+
+//:::::::::::: APi POst Sosmed :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+apps.get('/postsosmed', db.postsosmed);
+
+apps.post('/insertpostsosmed', db.insertpostsosmed);
+
+apps.get('/postdetailsosmed/:id', db.detailpostsosmed);
+
+apps.get('/postdeletesosmed/:id', db.deletepostsosmed);
+
+apps.post('/updatepostsosmed', db.updatepostsosmed);
 
 //::::::::::::::: Api & Query DB SCOPES ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

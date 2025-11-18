@@ -1946,6 +1946,58 @@ const updatesosmed = async (req, res) => {
     }
 }
 //::::::::::::::::::::::::::::::End Of Sosmed :::::::::::::::::::::::::::::::::::::::::::::::::::::
+//::::::::::::::::::::::::::::::Start Of Post Sosmed :::::::::::::::::::::::::::::::::::::::::::::::::::::
+const postsosmed = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  post_social_medias');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
+}
+
+const insertpostsosmed = async (req, res) => {
+    const sql = await executeQuery('INSERT into post_social_medias(link_post)values($1)', [req.body.link_post]);
+    if (sql) {
+         res.redirect('/psm');
+    } else {
+         res.redirect('/psm');
+    }
+}
+
+const detailpostsosmed = async (req, res) => {
+    const id_sosmed = req.params.id;
+    const sql = await executeQuery('SELECT *  FROM  post_social_medias where id=$1', [id_sosmed]);
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+}
+
+const deletepostsosmed = async (req, res) => {
+    const id_sosmed = req.params.id;
+    const sql = await executeQuery('DELETE FROM  post_social_medias where id = $1 ', [id_sosmed]);
+    if (sql) {
+        res.redirect('/psm');
+    } else {
+        console.log(sql);
+        res.redirect('/psm');
+    }
+}
+
+const updatepostsosmed = async (req, res) => {
+    const id_sosmed = req.body.id;
+    const sql = await executeQuery('UPDATE post_social_medias set link_post=$1 where id = $2 ', [req.body.link_post, id_sosmed]);
+    if (sql) {
+        res.redirect('/psm');
+    } else {
+        console.log(sql);
+        res.redirect('/psm');
+    }
+}
+//::::::::::::::::::::::::::::::: End Post SOsmed :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Scope :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const scopes = async (req, res) => {
     const sql = await executeQuery('SELECT * FROM  scopes');
@@ -4486,6 +4538,11 @@ module.exports = {
     detailsosmed,
     deletesosmed,
     updatesosmed,
+    postsosmed,
+    insertpostsosmed,
+    detailpostsosmed,
+    deletepostsosmed,
+    updatepostsosmed,
     scopes,
     detailscopes,
     deletescopes,
