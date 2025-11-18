@@ -52,7 +52,7 @@
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Link Post Instagram )*</label>
-                                            <input class="form-control" name="link_post" id="link_post"
+                                            <input class="form-control" name="link_post" id="link_posts"
                                                 required>
                                         </div>
 
@@ -101,7 +101,7 @@
                 .then(data => data.json())
                 .then((rows) => {
                     document.getElementById("id").value = rows[0]?.id;
-                    document.getElementById("link_post").value = rows[0]?.tagging;
+                    document.getElementById("link_posts").value = rows[0]?.link_post;
                 })
         }
 
