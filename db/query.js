@@ -1948,7 +1948,7 @@ const updatesosmed = async (req, res) => {
 //::::::::::::::::::::::::::::::End Of Sosmed :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Post Sosmed :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const postsosmed = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  post_social_medias');
+    const sql = await executeQuery('SELECT * FROM  post_social_medias order by id desc');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
