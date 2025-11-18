@@ -1402,7 +1402,7 @@ apps.get('/psm_add', (req, res) => {
 apps.get('/psm_edit/:id', (req, res) => {
     const role_id_users = req.cookies.roles_id;
     if (role_id_users == 1) { // kondisi.
-        res.sendFile(path.resolve('./views/profile/sosmed/edit.html'));
+        res.sendFile(path.resolve('./views/profile/post_sosmed/edit.html'));
     } else {
         res.redirect('/');
     }
