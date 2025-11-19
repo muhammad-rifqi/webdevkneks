@@ -1958,7 +1958,7 @@ const postsosmed = async (req, res) => {
 }
 
 const postsosmedfe = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  post_social_medias where flag = "kneks" order by id desc');
+    const sql = await executeQuery('SELECT * FROM  post_social_medias where flag = $1 order by id desc', ['kneks']);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
