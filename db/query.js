@@ -1957,6 +1957,16 @@ const postsosmed = async (req, res) => {
 
 }
 
+const postsosmedfe = async (req, res) => {
+    const sql = await executeQuery('SELECT * FROM  post_social_medias where flag = "kneks" order by id desc');
+    if (sql?.length > 0) {
+        res.status(200).json(sql)
+    } else {
+        res.status(200).json({ "success": false })
+    }
+
+}
+
 const insertpostsosmed = async (req, res) => {
     const sql = await executeQuery('INSERT into post_social_medias(link_post,id_sosmed)values($1,$2)', [req.body.link_post,req.body.id_sosmed]);
     if (sql) {
@@ -4539,6 +4549,7 @@ module.exports = {
     deletesosmed,
     updatesosmed,
     postsosmed,
+    postsosmedfe,
     insertpostsosmed,
     detailpostsosmed,
     deletepostsosmed,

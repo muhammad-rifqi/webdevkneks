@@ -1968,7 +1968,9 @@ apps.post('/updatesosmed', db.updatesosmed);
 
 //:::::::::::: APi POst Sosmed :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-apps.get('/postsosmed', db.postsosmed);
+apps.get('/postsosmedfe', db.postsosmed);
+
+apps.get('/postsosmed', db.postsosmedfe);
 
 apps.post('/insertpostsosmed', db.insertpostsosmed);
 
