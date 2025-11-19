@@ -52,8 +52,14 @@
                                     <div class="row">
                                         <div class="col-lg-12 mb-4">
                                             <label class="form-label"> Link Post Instagram )*</label>
-                                            <input class="form-control" name="link_post" id="link_posts"
-                                                required>
+                                            <input class="form-control" name="link_post" id="link_posts" required>
+                                        </div>
+
+                                         <div class="col-lg-12 mb-4">
+                                            <label class="form-label"> Sosmed )*</label>
+                                            <select class="form-control" name="id_sosmed" id="id_sosmeds" required>
+                                                <option value="0">Pilih Sosmed</option>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-12 mb-4 text-left">
@@ -92,7 +98,9 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         window.addEventListener("load", async () => {
+            let sosmed_id;
             await getUrlById();
+            await getSosmed()
         })
 
         function getUrlById() {
@@ -100,10 +108,27 @@
             fetch('/postdetailsosmed/' + URLS.pathname.split('/')[2])
                 .then(data => data.json())
                 .then((rows) => {
+                    sosmed_id = rows[0]?.id_sosmed;
                     document.getElementById("id").value = rows[0]?.id;
                     document.getElementById("link_posts").value = rows[0]?.link_post;
                 })
         }
+
+        function getSosmed() {
+            fetch('/sosmed')
+                .then(response => response.json())
+                .then((data) => {
+                    data.forEach(element => {
+                        const choosed = (element?.id == sosmed_id) ? true : false;
+                        const ddd = document.createElement('option')
+                        ddd.value = `${element?.id}`;
+                        ddd.text = `${element?.name}`;
+                        ddd.selected = choosed
+                        document.getElementById("id_sosmeds").append(ddd);
+                    });
+                })
+        }
+
 
     </script>
 </body>

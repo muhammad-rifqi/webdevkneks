@@ -1958,7 +1958,7 @@ const postsosmed = async (req, res) => {
 }
 
 const insertpostsosmed = async (req, res) => {
-    const sql = await executeQuery('INSERT into post_social_medias(link_post)values($1)', [req.body.link_post]);
+    const sql = await executeQuery('INSERT into post_social_medias(link_post,id_sosmed)values($1,$2)', [req.body.link_post,req.body.id_sosmed]);
     if (sql) {
          res.redirect('/psm');
     } else {
@@ -1989,7 +1989,7 @@ const deletepostsosmed = async (req, res) => {
 
 const updatepostsosmed = async (req, res) => {
     const id_sosmed = req.body.id;
-    const sql = await executeQuery('UPDATE post_social_medias set link_post=$1 where id = $2 ', [req.body.link_post, id_sosmed]);
+    const sql = await executeQuery('UPDATE post_social_medias set link_post=$1,id_sosmed=$2 where id = $3 ', [req.body.link_post, req.body.id_sosmed, id_sosmed]);
     if (sql) {
         res.redirect('/psm');
     } else {
