@@ -998,7 +998,7 @@ apps.get('/kdeks_edit/:id', (req, res) => {
 //::::::::::::::::::::::::::::::::::::::::::::::::::Start Of Master  Kdeks ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 apps.get('/master', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4 || role_id_users == 6) { // kondisi.
         res.sendFile(path.resolve('./views/kdeks/master/master.html'));
     } else {
         res.redirect('/');
@@ -1007,7 +1007,7 @@ apps.get('/master', (req, res) => {
 
 apps.get('/master_add', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4 || role_id_users == 6) { // kondisi.
         res.sendFile(path.resolve('./views/kdeks/master/master_add.html'));
     } else {
         res.redirect('/');
@@ -1016,7 +1016,7 @@ apps.get('/master_add', (req, res) => {
 
 apps.get('/master_edit/:id', (req, res) => {
     const role_id_users = req.cookies.roles_id;
-    if (role_id_users == 1) { // kondisi.
+    if (role_id_users == 1 || role_id_users == 2 || role_id_users == 4 || role_id_users == 6) { // kondisi.
         res.sendFile(path.resolve('./views/kdeks/master/master_edit.html'));
     } else {
         res.redirect('/');

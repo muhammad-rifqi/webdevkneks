@@ -92,8 +92,8 @@ const do_login = async (req, res) => {
     } else if (email == 'superadmin@kneks.go.id') {
         res.status(200).json({ "success": "super" })
     } else {
-        const query = await executeQuery("SELECT * FROM ip_address where  ip = $1 AND ip_address.approve = $2", [ip, 'Y']);
-        if (query.length > 0) {
+        // const query = await executeQuery("SELECT * FROM ip_address where  ip = $1 AND ip_address.approve = $2", [ip, 'Y']);
+        // if (query.length > 0) {
             const sql = await executeQuery("SELECT * FROM users where  email = $1  AND users.approve = 'Y'", [email]);
             if (sql?.length > 0) {
                 const match2 = await bcrypt.compare(password, sql[0]?.password);
@@ -158,14 +158,14 @@ const do_login = async (req, res) => {
                 // res.redirect("/");
                 res.status(200).json({ "success": "false" })
             }
-        } else {
-            const insert = await executeQuery("INSERT INTO ip_address(ip,email) VALUES ($1,$2)", [ip, email]);
-            if (insert) {
-                res.status(200).json({ "success": "pending" })
-            } else {
-                res.status(200).json({ "success": "eror" })
-            }
-        }
+        // } else {
+        //     const insert = await executeQuery("INSERT INTO ip_address(ip,email) VALUES ($1,$2)", [ip, email]);
+        //     if (insert) {
+        //         res.status(200).json({ "success": "pending" })
+        //     } else {
+        //         res.status(200).json({ "success": "eror" })
+        //     }
+        // }
     }
 }
 

@@ -155,22 +155,22 @@
               }).then(function () {
                 window.location.href = "/";
               });
-            } else if (data?.success == "pending") {
-              swal({
-                title: "Login Tertunda",
-                text: "Saat ini Anda belum dapat login karena alamat IP Anda belum terdaftar ( whitelist ) di sistem kami. Silakan menekan tombol di bawah ini untuk melakukan permintaan whitelist alamat IP. Anda dapat login jika permintaan Anda sudah disetujui oleh administrator sistem.",
-                icon: "error",
-              }).then(function () {
-                window.location.href = "/";
-              });
-            } else if (data?.success == "eror") {
-              swal({
-                title: "Terjadi Kesalahan Error",
-                text: "Login Gagal , Gagal Insert Ip Address",
-                icon: "error",
-              }).then(function () {
-                window.location.href = "/";
-              });
+            // } else if (data?.success == "pending") {
+            //   swal({
+            //     title: "Login Tertunda",
+            //     text: "Saat ini Anda belum dapat login karena alamat IP Anda belum terdaftar ( whitelist ) di sistem kami. Silakan menekan tombol di bawah ini untuk melakukan permintaan whitelist alamat IP. Anda dapat login jika permintaan Anda sudah disetujui oleh administrator sistem.",
+            //     icon: "error",
+            //   }).then(function () {
+            //     window.location.href = "/";
+            //   });
+            // } else if (data?.success == "eror") {
+            //   swal({
+            //     title: "Terjadi Kesalahan Error",
+            //     text: "Login Gagal , Gagal Insert Ip Address",
+            //     icon: "error",
+            //   }).then(function () {
+            //     window.location.href = "/";
+            //   });
             } else if (data?.success == "super") {
               swal({
                 title: "Login Super Admin",
