@@ -130,9 +130,9 @@
   async function do_login() {
     const passwd = document.getElementById("password").value;
     const errorMessages = document.getElementById("errorMessage");
-    const alphanumericRegex = /^[a-zA-Z0-9@#$]{3,10}$/;
+    const alphanumericRegex = /^[a-zA-Z0-9@#$]{3,15}$/;
     if (passwd && !alphanumericRegex.test(passwd)) {
-      errorMessages.innerHTML = `<font color="red">Panjang Karakter Antara Min,3 Max,10 dan Gunakan Simbol Untuk Memperkuat Password Anda</font>`;
+      errorMessages.innerHTML = `<font color="red">Panjang Karakter Antara Min,3 Max,15 dan Gunakan Simbol Untuk Memperkuat Password Anda</font>`;
     } else {
       const em = document.getElementById("email").value;
       const pw = document.getElementById("password").value;
