@@ -4158,7 +4158,7 @@ const insertopini = async (req, res) => {
 
 const deleteopini = async (req, res) => {
     const id_opini = req.params.id;
-    const image = req.params.photo;
+    const image = req.params.photo.split("/").pop();
     if (fs.existsSync(fileslinux + 'opini/' + image)) {
         fs.unlink(fileslinux + 'opini/' + image, async function (err) {
             if (err) return console.log(err);
