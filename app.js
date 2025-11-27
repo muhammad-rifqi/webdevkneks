@@ -204,6 +204,20 @@ let data_slide_path = multer({
         checkFileType(file, cb);
     }
 });
+//:::::::::::::::::::::::::::::::::::Opini:::::::::::::::::::::::::::::::::::::::::::::::::::::
+let opini_image = multer.diskStorage(
+    {
+        destination: './public/uploads/opini/',
+        filename: function (req, file, cb) {
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+        }
+    }
+);
+let opini_path = multer({
+    storage: opini_image, fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+});
 //:::::::::::::::::::::::::: Kdeks :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 let kdeks_logo = multer.diskStorage(
     {
@@ -2193,11 +2207,11 @@ apps.post('/updatesourcedata', db.updatesourcedata);
 apps.get('/sourcesdatadetaillist/:id', db.sourcesdatadetail);
 //::::::::::::::::::::::::::: APi Opini ::::::::::::::::::::::::::::::::::::
 
-apps.post('/insertopini', db.insertopini);
+apps.post('/insertopini', opini_path.single('image'),db.insertopini);
 
-apps.post('/updateopini', db.updateopini);
+apps.post('/updateopini', opini_path.single('image'), db.updateopini);
 
-apps.get('/deleteopini/:id', db.deleteopini);
+apps.get('/deleteopini/:id/:photo', db.deleteopini);
 
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::: Api & Setting ::::::::::::::::::::::::::::::::::::::::::::::::
 

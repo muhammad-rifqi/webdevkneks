@@ -47,7 +47,7 @@
             <div class="main-content">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="/updateopini" method="post">
+                        <form action="/updateopini" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" id="id" value="">
                             <input type="hidden" id="users_name" name="users_name">
                             <input type="hidden" id="users_id" name="users_id">
@@ -117,6 +117,16 @@
                                             <input name="taggings" type="text" class="tagify" id="tagify" required>
                                         </div>
 
+                                        
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Photo</label>
+                                            <div id="image_opini"></div>
+                                        </div>
+                                        <div class="col-lg-12 mb-4">
+                                            <label class="form-label">Photo</label>
+                                            <input type="file" class="form-control" name="image" id="image">
+                                        </div>
+
                                         <div class="col-lg-12 mb-4 text-left">
                                             <label class="form-label"></label>
                                             <button class="btn btn-primary" type="submit">Simpan</button>
@@ -169,6 +179,7 @@
                     document.getElementById("title_en").value = rows[0]?.title_en;
                     nicEditors.findEditor("editor3").setContent(rows[0]?.content);
                     nicEditors.findEditor("editor4").setContent(rows[0]?.content_en);
+                    document.getElementById("image_opini").innerHTML=`<img src="${rows[0]?.images}" width="100">`;
                     document.getElementById("tanggal_opini").value = rows[0]?.date_created.split('T')[0];
                     localStorage.setItem("object_dir", rows[0]?.directorat)
                     localStorage.setItem("prov_idkdeks", rows[0]?.id_province);

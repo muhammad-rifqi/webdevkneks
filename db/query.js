@@ -94,70 +94,70 @@ const do_login = async (req, res) => {
     } else {
         // const query = await executeQuery("SELECT * FROM ip_address where  ip = $1 AND ip_address.approve = $2", [ip, 'Y']);
         // if (query.length > 0) {
-            const sql = await executeQuery("SELECT * FROM users where  email = $1  AND users.approve = 'Y'", [email]);
-            if (sql?.length > 0) {
-                const match2 = await bcrypt.compare(password, sql[0]?.password);
-                if (match2) {
-                    u_id = sql[0]?.id;
-                    const isLogin = true;
-                    res.cookie("islogin", isLogin, {
-                        maxAge: 1800000,
-                        domain: '.kneks.go.id',
-                        secure: true,
-                        httpOnly: false,
-                        sameSite: 'None',
-                        overwrite: true,
-                    });
-                    res.cookie("id", sql[0]?.id, {
-                        maxAge: 1800000,
-                        domain: '.kneks.go.id',
-                        secure: true,
-                        httpOnly: false,
-                        sameSite: 'None',
-                        overwrite: true,
-                    });
-                    res.cookie("name", sql[0]?.name, {
-                        maxAge: 1800000,
-                        domain: '.kneks.go.id',
-                        secure: true,
-                        httpOnly: false,
-                        sameSite: 'None',
-                        overwrite: true,
-                    });
-                    res.cookie("roles_id", sql[0]?.role_id, {
-                        maxAge: 1800000,
-                        domain: '.kneks.go.id',
-                        secure: true,
-                        httpOnly: false,
-                        sameSite: 'None',
-                        overwrite: true,
-                    });
-                    res.cookie("id_province", sql[0]?.id_province, {
-                        maxAge: 1800000,
-                        domain: '.kneks.go.id',
-                        secure: true,
-                        httpOnly: false,
-                        sameSite: 'None',
-                        overwrite: true,
-                    });
-                    res.cookie("directorat_id", sql[0]?.directorat_id, {
-                        maxAge: 1800000,
-                        domain: '.kneks.go.id',
-                        secure: true,
-                        httpOnly: false,
-                        sameSite: 'None',
-                        overwrite: true,
-                    });
-                    // res.redirect("/dashboard");
-                    res.status(200).json({ "success": "true" })
-                } else {
-                    res.status(200).json({ "success": "false" })
-                }
-
+        const sql = await executeQuery("SELECT * FROM users where  email = $1  AND users.approve = 'Y'", [email]);
+        if (sql?.length > 0) {
+            const match2 = await bcrypt.compare(password, sql[0]?.password);
+            if (match2) {
+                u_id = sql[0]?.id;
+                const isLogin = true;
+                res.cookie("islogin", isLogin, {
+                    maxAge: 1800000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("id", sql[0]?.id, {
+                    maxAge: 1800000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("name", sql[0]?.name, {
+                    maxAge: 1800000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("roles_id", sql[0]?.role_id, {
+                    maxAge: 1800000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("id_province", sql[0]?.id_province, {
+                    maxAge: 1800000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                res.cookie("directorat_id", sql[0]?.directorat_id, {
+                    maxAge: 1800000,
+                    domain: '.kneks.go.id',
+                    secure: true,
+                    httpOnly: false,
+                    sameSite: 'None',
+                    overwrite: true,
+                });
+                // res.redirect("/dashboard");
+                res.status(200).json({ "success": "true" })
             } else {
-                // res.redirect("/");
                 res.status(200).json({ "success": "false" })
             }
+
+        } else {
+            // res.redirect("/");
+            res.status(200).json({ "success": "false" })
+        }
         // } else {
         //     const insert = await executeQuery("INSERT INTO ip_address(ip,email) VALUES ($1,$2)", [ip, email]);
         //     if (insert) {
@@ -1958,7 +1958,7 @@ const postsosmed = async (req, res) => {
 }
 
 const postsosmedfe = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  post_social_medias where id_sosmed = $1 AND flag = $2 order by id asc', ['1','kneks']);
+    const sql = await executeQuery('SELECT * FROM  post_social_medias where id_sosmed = $1 AND flag = $2 order by id asc', ['1', 'kneks']);
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
@@ -1968,11 +1968,11 @@ const postsosmedfe = async (req, res) => {
 }
 
 const insertpostsosmed = async (req, res) => {
-    const sql = await executeQuery('INSERT into post_social_medias(link_post,id_sosmed)values($1,$2)', [req.body.link_post,req.body.id_sosmed]);
+    const sql = await executeQuery('INSERT into post_social_medias(link_post,id_sosmed)values($1,$2)', [req.body.link_post, req.body.id_sosmed]);
     if (sql) {
-         res.redirect('/psm');
+        res.redirect('/psm');
     } else {
-         res.redirect('/psm');
+        res.redirect('/psm');
     }
 }
 
@@ -4145,8 +4145,9 @@ const opini_detail = async (req, res) => {
 }
 
 const insertopini = async (req, res) => {
-    const sql = await executeQuery("insert into opini(title,title_en,content,content_en,web_identity,tagging,directorat,is_publish,date_created,users_id,users_name,id_province) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.web_identity, req.body.taggings, req.body.directorat, req.body.is_published, req.body.tanggal_opini, req.body.users_id, req.body.users_name, req.body.kdeks,]);
+    const fileuploads = site_url + "/uploads/opini/" + req.file.filename;
+    const sql = await executeQuery("insert into opini(title,title_en,content,content_en,web_identity,tagging,directorat,is_publish,date_created,users_id,users_name,id_province,images) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)",
+        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.web_identity, req.body.taggings, req.body.directorat, req.body.is_published, req.body.tanggal_opini, req.body.users_id, req.body.users_name, req.body.kdeks, fileuploads]);
     if (sql) {
         res.redirect('/opini');
     } else {
@@ -4157,24 +4158,51 @@ const insertopini = async (req, res) => {
 
 const deleteopini = async (req, res) => {
     const id_opini = req.params.id;
-    const sql = await executeQuery('DELETE FROM  opini where id = $1', [id_opini]);
-    if (sql) {
-        res.redirect('/opini');
+    const image = req.params.photo;
+    if (fs.existsSync(fileslinux + 'opini/' + image)) {
+        fs.unlink(fileslinux + 'opini/' + image, async function (err) {
+            if (err) return console.log(err);
+            const sql = await executeQuery('DELETE FROM  opini where id = $1', [id_opini]);
+            if (sql) {
+                res.redirect('/opini');
+            } else {
+                console.log(sql)
+                res.redirect('/opini');
+            }
+        });
+        console.log("ada")
     } else {
-        console.log(sql)
-        res.redirect('/opini');
+        const sql = await executeQuery('DELETE FROM  opini where id = $1', [id_opini]);
+        if (sql) {
+            res.redirect('/opini');
+        } else {
+            console.log(sql)
+            res.redirect('/opini');
+        }
     }
 }
 
 
 const updateopini = async (req, res) => {
-    const sql = await executeQuery("UPDATE opini SET title=$1,title_en=$2,content=$3,content_en=$4,tagging=$5,directorat=$6,is_publish=$7,date_created=$8,users_id=$9,users_name=$10,id_province=$11 where id = $12",
-        [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.taggings, req.body.directorat, req.body.is_published, req.body.tanggal_opini, req.body.users_id, req.body.users_name, req.body.kdeks, req.body.id]);
-    if (sql) {
-        res.redirect('/opini');
+    if (!req.file || req.file == undefined || req.file == "") {
+        const sql = await executeQuery("UPDATE opini SET title=$1,title_en=$2,content=$3,content_en=$4,tagging=$5,directorat=$6,is_publish=$7,date_created=$8,users_id=$9,users_name=$10,id_province=$11 where id = $12",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.taggings, req.body.directorat, req.body.is_published, req.body.tanggal_opini, req.body.users_id, req.body.users_name, req.body.kdeks, req.body.id]);
+        if (sql) {
+            res.redirect('/opini');
+        } else {
+            console.log(sql)
+            res.redirect('/opini');
+        }
     } else {
-        console.log(sql)
-        res.redirect('/opini');
+        const fileuploads = site_url + "/uploads/opini/" + req.file.filename;
+        const sql = await executeQuery("UPDATE opini SET title=$1,title_en=$2,content=$3,content_en=$4,tagging=$5,directorat=$6,is_publish=$7,date_created=$8,users_id=$9,users_name=$10,id_province=$11,images=$12 where id = $13",
+            [req.body.title, req.body.title_en, req.body.content, req.body.content_en, req.body.taggings, req.body.directorat, req.body.is_published, req.body.tanggal_opini, req.body.users_id, req.body.users_name, req.body.kdeks, fileuploads, req.body.id]);
+        if (sql) {
+            res.redirect('/opini');
+        } else {
+            console.log(sql)
+            res.redirect('/opini');
+        }
     }
 }
 //::::::::::::::::::::::::::::::::::: END OF CUSTOM DATA NARATION PAGE
