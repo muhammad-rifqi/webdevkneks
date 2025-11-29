@@ -2369,7 +2369,7 @@ const deletefileupload = async (req, res) => {
 }
 
 const files_category = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  files_categories');
+    const sql = await executeQuery('SELECT * FROM  files_categories order by id asc');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
