@@ -7,7 +7,7 @@ const pool = new pgsql.Pool({
     password: '',
     port: 5432,
 })
-
+//backup u=kneks,db=kneks_new,p=Barlok15@
 // live : Barlok15@ localhost : 123
 // prod : barlok15@
 pool.query = util.promisify(pool.query);
