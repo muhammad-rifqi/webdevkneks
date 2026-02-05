@@ -2031,7 +2031,7 @@ const questbook = async (req, res) => {
 //::::::::::::::::::::::::::::::End Of Contacts :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Agenda :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const agendas = async (req, res) => {
-    const sql = await executeQuery('SELECT * FROM  agendas');
+    const sql = await executeQuery('SELECT * FROM  agendas order by agenda_datetime desc');
     if (sql?.length > 0) {
         res.status(200).json(sql)
     } else {
