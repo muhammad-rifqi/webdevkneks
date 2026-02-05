@@ -32,54 +32,12 @@ const do_login = async (req, res) => {
             if (match) {
                 u_id = sql[0]?.id;
                 const isLogin = true;
-                res.cookie("islogin", isLogin, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("id", sql[0]?.id, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("name", sql[0]?.name, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("roles_id", sql[0]?.role_id, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("id_province", sql[0]?.id_province, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("directorat_id", sql[0]?.directorat_id, {
-                    maxAge: 900000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
+                res.cookie("islogin", isLogin);
+                res.cookie("id", sql[0]?.id);
+                res.cookie("name", sql[0]?.name);
+                res.cookie("roles_id", sql[0]?.role_id);
+                res.cookie("id_province", sql[0]?.id_province);
+                res.cookie("directorat_id", sql[0]?.directorat_id);
                 // res.redirect("/dashboard");
                 res.status(200).json({ "success": "true" })
             } else {
@@ -100,54 +58,12 @@ const do_login = async (req, res) => {
             if (match2) {
                 u_id = sql[0]?.id;
                 const isLogin = true;
-                res.cookie("islogin", isLogin, {
-                    maxAge: 1800000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("id", sql[0]?.id, {
-                    maxAge: 1800000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("name", sql[0]?.name, {
-                    maxAge: 1800000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("roles_id", sql[0]?.role_id, {
-                    maxAge: 1800000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("id_province", sql[0]?.id_province, {
-                    maxAge: 1800000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
-                res.cookie("directorat_id", sql[0]?.directorat_id, {
-                    maxAge: 1800000,
-                    domain: '.kneks.go.id',
-                    secure: true,
-                    httpOnly: false,
-                    sameSite: 'None',
-                    overwrite: true,
-                });
+                res.cookie("islogin", isLogin);
+                res.cookie("id", sql[0]?.id);
+                res.cookie("name", sql[0]?.name);
+                res.cookie("roles_id", sql[0]?.role_id);
+                res.cookie("id_province", sql[0]?.id_province);
+                res.cookie("directorat_id", sql[0]?.directorat_id);
                 // res.redirect("/dashboard");
                 res.status(200).json({ "success": "true" })
             } else {
@@ -184,12 +100,12 @@ const user_register = async (req, res) => {
 }
 
 const do_logout = (req, res) => {
-    res.clearCookie("islogin", { domain: ".kneks.go.id" });
-    res.clearCookie("name", { domain: ".kneks.go.id" });
-    res.clearCookie("id", { domain: ".kneks.go.id" });
-    res.clearCookie("roles_id", { domain: ".kneks.go.id" });
-    res.clearCookie("id_province", { domain: ".kneks.go.id" });
-    res.clearCookie("directorat_id", { domain: ".kneks.go.id" });
+    res.clearCookie("islogin");
+    res.clearCookie("name");
+    res.clearCookie("id");
+    res.clearCookie("roles_id");
+    res.clearCookie("id_province");
+    res.clearCookie("directorat_id");
     res.redirect("/");
 }
 

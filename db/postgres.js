@@ -1,10 +1,10 @@
 const util = require('util');
 const pgsql = require('pg');
 const pool = new pgsql.Pool({
-    user: 'postgres',
-    host: 'localhost',
+    user: 'kneks',
+    host: '127.0.0.1',
     database: 'kneks_new',
-    password: '',
+    password: 'Barlok15@',
     port: 5432,
 })
 //backup u=kneks,db=kneks_new,p=Barlok15@
